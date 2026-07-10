@@ -2,15 +2,975 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LC Soluciones Tecnológicas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LC Soluciones Tecnológicas - Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; }
-        h1 { color: #0056b3; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #020b18; 
+            color: #333;
+        }
+        /* ==================== COLORES Y COMPONENTES ==================== */
+        .bg-brand-dark { background-color: #020b18; }
+        .bg-brand-blue { background-color: #0056ff; }
+        .text-brand-blue { color: #0056ff; }
+        .border-brand-blue { border-color: #0056ff; }
+        
+        .btn-primary {
+            background-color: #0056ff;
+            color: #fff;
+            transition: 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0045cc;
+            box-shadow: 0 4px 15px rgba(0, 86, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* ==================== NAVEGACIÓN ==================== */
+        .nav-link {
+            color: #a0aec0;
+            transition: 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+            white-space: nowrap;
+        }
+        .nav-link:hover { color: #fff; }
+        .nav-active {
+            color: #fff !important;
+            border-bottom: 2px solid #0056ff;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* ==================== TARJETAS Y FORMULARIOS ==================== */
+        .service-card {
+            background: rgba(255, 255, 255, 0.85); /* Fondo blanco semitransparente */
+            backdrop-filter: blur(10px); /* Efecto cristal */
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: 0.3s ease;
+            border-top: 4px solid transparent;
+            height: 100%;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-top-color: #0056ff;
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .input-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e2e8f0;
+            color: #1a202c;
+            border-radius: 8px;
+            padding: 12px 16px;
+            outline: none;
+            transition: 0.25s;
+        }
+        .input-field:focus {
+            border-color: #0056ff;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(0, 86, 255, 0.1);
+        }
+		.text-brand-orange {
+    color: #FF8C00; /* Puedes cambiar este código por el naranja que prefieras */
+}
+        
+        /* Modal Backgrounds */
+        .modal-bg { background: rgba(2, 11, 24, 0.85); backdrop-filter: blur(5px); }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body>
-    <h1>Bienvenido a LC Soluciones Tecnológicas</h1>
-    <p>Estamos trabajando en nuestra plataforma de servicios técnicos y monitoreo de red.</p>
+<body class="flex flex-col min-h-screen">
+
+    <input type="hidden" id="mt-ip" value="$(ip)">
+    <input type="hidden" id="mt-mac" value="$(mac)">
+    <input type="hidden" id="mt-link-login-only" value="$(link-login-only)">
+    <input type="hidden" id="mt-link-orig" value="$(link-orig)">
+    <input type="hidden" id="mt-trial" value="$(trial)">
+    <input type="hidden" id="mt-link-login" value="$(link-login)">
+
+    <header class="bg-brand-dark sticky top-0 z-40 border-b border-gray-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-row justify-between items-center h-20 gap-4">
+                
+                <div class="flex items-center gap-3 cursor-pointer shrink-0" onclick="switchTab('wifi')">
+                    <img src="img/logo2.png" alt="LC Soluciones" class="h-10 md:h-12 w-auto object-contain">
+                </div>
+
+                <nav class="flex gap-4 sm:gap-6 md:gap-8 text-[10px] sm:text-xs font-bold tracking-widest uppercase overflow-x-auto hide-scrollbar pt-1">
+                    <button id="btn-wifi" onclick="switchTab('wifi')" class="nav-link nav-active">Inicio</button>
+                    <button id="btn-planes" onclick="switchTab('planes')" class="nav-link">Planes</button>
+                    <button id="btn-trabajos" onclick="switchTab('trabajos')" class="nav-link">Portafolios</button>
+                    <button id="btn-pagos" onclick="switchTab('pagos')" class="nav-link">Pagos</button>
+                    <button id="btn-reclamos" onclick="switchTab('reclamos')" class="nav-link">Soporte</button>
+                </nav>
+
+                <div class="hidden lg:flex items-center gap-4 shrink-0">
+                    <a href="https://wa.me/584245134562" target="_blank" class="bg-brand-blue text-white px-5 py-2 rounded-md text-xs font-bold flex items-center gap-2 hover:bg-blue-700 transition">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> +58 424 513 4562
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col relative" style="background-image: url('img/red.webp'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <div class="absolute inset-0 bg-[#020b18]/80 z-0"></div>
+
+        <section id="tab-wifi" class="flex-grow flex flex-col relative z-10">
+            <div class="flex-grow flex items-center py-10 md:py-16 lg:py-0 min-h-[85vh]">
+                
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row items-center justify-between gap-10">
+                    
+                    <div class="flex-1 text-center lg:text-left mt-4 lg:mt-0">
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
+                            ARQUITECTURA DE REDES, <br class="hidden lg:block">
+                            PARA EL <span class="text-brand-blue">FUTURO DIGITAL</span>
+                        </h2>
+                        <p class="text-gray-300 text-sm md:text-base max-w-xl mx-auto lg:mx-0 mb-8">
+                            En <span class="text-brand-orange"><strong>LC SOLUCIONES</strong></span>, transformamos la complejidad técnica en valor operativo. Ofrecemos una integración completa entre infraestructura física de telecomunicaciones y plataformas digitales personalizadas, asegurando la máxima estabilidad, seguridad y eficiencia en la transmisión de datos para su empresa.
+                        </p>
+                        
+                        <div class="hidden sm:flex flex-wrap justify-center lg:justify-start gap-6 text-white text-xs font-semibold">
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-brand-blue text-lg"></i> Soluciones Confiables</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-gauge-high text-brand-blue text-lg"></i> Alto Rendimiento</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-headset text-brand-blue text-lg"></i> Soporte 24/7</div>
+                        </div>
+                    </div>
+
+                    <div class="w-full max-w-sm md:max-w-md bg-white/85 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden transform lg:scale-105 border-t-4 border-brand-blue shrink-0 mb-10 lg:mb-0">
+                        <div class="p-6 md:p-8">
+                            <h3 class="text-center font-black text-gray-800 text-lg uppercase tracking-wide mb-1">Acceso a la Red</h3>
+                            <p class="text-center text-gray-700 text-xs mb-6">Ingresa tus credenciales para navegar</p>
+
+                            <div class="flex bg-white/50 backdrop-blur-sm rounded-lg p-1 mb-5">
+                                <button id="tab-log-pin" onclick="switchLoginMethod('pin')" class="flex-1 py-2 text-xs font-bold rounded-md bg-white shadow text-brand-blue transition-all">PIN / TELÉFONO</button>
+                                <button id="tab-log-userpass" onclick="switchLoginMethod('userpass')" class="flex-1 py-2 text-xs font-bold rounded-md text-gray-600 hover:text-gray-800 transition-all">USUARIO</button>
+                            </div>
+
+                            <form id="loginForm" method="post" action="$(link-login-only)" onsubmit="return validarLogin()">
+                                <input type="hidden" name="dst" value="$(link-orig)">
+                                <input type="hidden" name="popup" value="true">
+
+                                <div id="wrapper-login-pin" class="space-y-4">
+                                    <input type="text" id="username" inputmode="numeric" placeholder="Ingresa tu PIN" class="input-field text-center font-bold tracking-widest text-lg md:text-xl shadow-inner">
+                                </div>
+
+                                <div id="wrapper-login-userpass" class="hidden space-y-4">
+                                    <input type="text" id="display-username" name="username" placeholder="Nombre de Usuario" class="input-field text-sm md:text-base shadow-inner">
+                                    <input type="password" id="display-password" name="password" placeholder="Contraseña" class="input-field text-sm md:text-base shadow-inner">
+                                </div>
+
+                                <button type="submit" class="btn-primary w-full py-3 md:py-3.5 rounded-lg font-bold text-sm uppercase tracking-wider mt-5 shadow-lg">
+                                    Conectar Ahora
+                                </button>
+                            </form>
+
+                            <div class="mt-6 pt-5 border-t border-gray-300 flex items-center justify-between">
+                                <div>
+                                    <h4 class="text-xs font-bold text-gray-800"><i class="fa-solid fa-gift text-brand-blue mr-1"></i> Acceso a la red Gratis</h4>
+                                    <p class="text-[10px] text-gray-600">5 minutos sin costo</p>
+                                </div>
+                                <button onclick="document.getElementById('modal-confirmacion-trial').classList.remove('hidden')" class="px-4 py-2 bg-gray-200/80 hover:bg-gray-300 text-gray-800 rounded-md text-xs font-bold transition shadow-sm">
+                                    Activar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            $(if error)
+            <div id="modal-error-hotspot" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                <div class="bg-white border-t-4 border-red-500 rounded-xl p-6 max-w-sm w-full shadow-2xl text-center">
+                    <i class="fa-solid fa-triangle-exclamation text-red-500 text-4xl mb-3"></i>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">Acceso Denegado</h3>
+                    <p id="error-message" class="text-gray-600 text-sm mb-5">$(error)</p>
+                    <button onclick="document.getElementById('modal-error-hotspot').remove()" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-6 rounded-lg transition-all w-full">Cerrar</button>
+                </div>
+            </div>
+            <script>
+                (function() {
+                    const errorTranslations = {
+                        "invalid username or password": "El Pin o Usuario son incorrectos, valida e intenta de nuevo.",
+                        "user is already logged in": "Este PIN/Usuario ya tiene una sesión activa.",
+                        "user $(username) is already logged in": "El usuario $(username) ya está conectado.",
+                        "user $(username) has reached traffic limit": "Al usuario $(username) se le agotó su paquete de datos.",
+                        "user $(username) has reached uptime limit": "Tu conexión ha finalizado. Puedes adquirir un plan en la sección PLANES.",
+                        "simultaneous session limit reached": "Has alcanzado el límite de dispositivos permitidos.",
+                        "uptime limit reached": "Has agotado tu tiempo de navegación disponible.",
+                        "download limit reached": "Has agotado tus megas de descarga disponibles.",
+                        "data limit reached": "Has agotado tus megas disponibles.",
+                        "profile not found": "El perfil de este PIN no fue encontrado.",
+                        "no more sessions are allowed for user": "No se permiten más conexiones simultaneas.",
+                        "session timeout": "Tu tiempo de sesión ha expirado.",
+                        "radius server is not responding": "Error de comunicación con el servidor.",
+                        "internal error": "Ocurrió un error interno en el HotSpot."
+                    };
+                    const errorElement = document.getElementById("error-message");
+                    if (errorElement) {
+                        const rawError = errorElement.textContent.trim().toLowerCase();
+                        for (const key in errorTranslations) {
+                            if (rawError.includes(key.toLowerCase())) {
+                                errorElement.textContent = errorTranslations[key];
+                                break;
+                            }
+                        }
+                    }
+                })();
+            </script>
+            $(endif)
+        </section>
+
+        <section id="tab-planes" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-brand-blue text-xs font-bold tracking-widest uppercase mb-2">Nuestros Servicios</h2>
+                    <h3 class="text-2xl md:text-3xl font-black text-white drop-shadow-md">Planes a la medida de tus necesidades</h3>
+                    <p class="text-gray-300 mt-2 text-sm">Selecciona el paquete que mejor se adapte a tu consumo.</p>
+                </div>
+
+                <h4 class="text-sm font-bold text-white border-l-4 border-brand-blue pl-2 mb-4 uppercase drop-shadow-md">Planes Ilimitados</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
+                    <div class="service-card p-6 flex flex-col items-center text-center">
+                        <i class="fa-regular fa-clock text-brand-blue text-3xl mb-3"></i>
+                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Hora</h4>
+                        <p class="text-gray-600 text-xs md:text-sm mb-3">Conexión libre</p>
+                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">500 Bs</p>
+                        <button onclick="verDetalles('1h')" class="text-brand-blue font-bold text-xs uppercase hover:underline mt-auto">Ver más <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                    </div>
+                    <div class="service-card p-6 flex flex-col items-center text-center">
+                        <i class="fa-solid fa-calendar-day text-brand-blue text-3xl mb-3"></i>
+                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Día</h4>
+                        <p class="text-gray-600 text-xs md:text-sm mb-3">24Hrs continuas</p>
+                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">1500 Bs</p>
+                        <button onclick="verDetalles('1d')" class="text-brand-blue font-bold text-xs uppercase hover:underline mt-auto">Ver más <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                    </div>
+                    <div class="service-card p-6 flex flex-col items-center text-center">
+                        <i class="fa-solid fa-calendar-week text-brand-blue text-3xl mb-3"></i>
+                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Semana</h4>
+                        <p class="text-gray-600 text-xs md:text-sm mb-3">7 días libres</p>
+                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">5000 Bs</p>
+                        <button onclick="verDetalles('1w')" class="text-brand-blue font-bold text-xs uppercase hover:underline mt-auto">Ver más <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                    </div>
+                    <div class="service-card p-6 flex flex-col items-center text-center">
+                        <i class="fa-solid fa-infinity text-brand-blue text-3xl mb-3"></i>
+                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Mes</h4>
+                        <p class="text-gray-600 text-xs md:text-sm mb-3">30 días continuos</p>
+                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">15000 Bs</p>
+                        <button onclick="verDetalles('1m')" class="text-brand-blue font-bold text-xs uppercase hover:underline mt-auto">Ver más <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                    </div>
+                </div>
+
+                <h4 class="text-sm font-bold text-white border-l-4 border-brand-blue pl-2 mb-4 uppercase drop-shadow-md">Planes por Consumo</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    <div class="service-card p-6 flex flex-col items-center text-center">
+                        <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
+                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 GB Datos</h4>
+                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">250 Bs</p>
+                        <button onclick="verDetalles('1gb')" class="text-gray-600 font-bold text-xs uppercase hover:text-brand-blue mt-auto">Ver más <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                    </div>
+                    <div class="service-card p-6 flex flex-col items-center text-center">
+                        <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
+                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">3 GB Datos</h4>
+                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">1000 Bs</p>
+                        <button onclick="verDetalles('3gb')" class="text-gray-600 font-bold text-xs uppercase hover:text-brand-blue mt-auto">Ver más <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                    </div>
+                    <div class="service-card p-6 flex flex-col items-center text-center">
+                        <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
+                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">5 GB Datos</h4>
+                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">2500 Bs</p>
+                        <button onclick="verDetalles('5gb')" class="text-gray-600 font-bold text-xs uppercase hover:text-brand-blue mt-auto">Ver más <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                    </div>
+                    <div class="service-card p-6 flex flex-col items-center text-center">
+                        <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
+                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">10 GB Datos</h4>
+                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">8750 Bs</p>
+                        <button onclick="verDetalles('10gb')" class="text-gray-600 font-bold text-xs uppercase hover:text-brand-blue mt-auto">Ver más <i class="fa-solid fa-arrow-right text-[10px]"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-trabajos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-10">
+                    <h2 class="text-brand-blue text-xs font-bold tracking-widest uppercase mb-2">Nuestro Portafolio</h2>
+                    <h3 class="text-2xl md:text-3xl font-black text-white drop-shadow-md">Experiencia de Campo</h3>
+                    <p class="text-gray-300 mt-2 text-sm">Conoce la calidad de nuestros servicios e instalaciones.</p>
+                </div>
+
+                <div class="relative group">
+                    <button onclick="scrollCarrusel(-320)" class="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-20 bg-brand-blue text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full shadow-lg hover:bg-blue-700 transition">
+                        <i class="fa-solid fa-chevron-left text-lg"></i>
+                    </button>
+
+                    <div id="carrusel-trabajos" class="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar p-2 scroll-smooth">
+                        
+                        <div class="min-w-[280px] md:min-w-[320px] snap-center service-card overflow-hidden flex flex-col">
+                            <img src="img/torre.webp" alt="Torres de Comunicación" class="w-full h-48 object-cover">
+                            <div class="p-5 flex-grow bg-white/95">
+                                <h4 class="font-black text-gray-900 text-lg mb-2">Torres de Comunicación</h4>
+                                <p class="text-gray-600 text-sm">Diseño, montaje y mantenimiento de estructuras metálicas de alta resistencia para enlaces de telecomunicaciones a largas distancias.</p>
+                            </div>
+                        </div>
+
+                        <div class="min-w-[280px] md:min-w-[320px] snap-center service-card overflow-hidden flex flex-col">
+                            <img src="img/fibra.webp" alt="Redes de Fibra Óptica" class="w-full h-48 object-cover">
+                            <div class="p-5 flex-grow bg-white/95">
+                                <h4 class="font-black text-gray-900 text-lg mb-2">Redes de Fibra Óptica</h4>
+                                <p class="text-gray-600 text-sm">Implementación de redes FTTH, empalmes profesionales por fusión y tendido de fibra óptica garantizando máxima velocidad y estabilidad.</p>
+                            </div>
+                        </div>
+
+                        <div class="min-w-[280px] md:min-w-[320px] snap-center service-card overflow-hidden flex flex-col">
+                            <img src="img/servidores.webp" alt="Servidores y Redes" class="w-full h-48 object-cover">
+                            <div class="p-5 flex-grow bg-white/95">
+                                <h4 class="font-black text-gray-900 text-lg mb-2">Servidores MikroTik</h4>
+                                <p class="text-gray-600 text-sm">Configuración avanzada de equipos de enrutamiento, balanceo de cargas, firewall corporativo y gestión inteligente de ancho de banda.</p>
+                            </div>
+                        </div>
+
+                        <div class="min-w-[280px] md:min-w-[320px] snap-center service-card overflow-hidden flex flex-col">
+                            <img src="img/enlaces.webp" alt="Enlaces Inalámbricos" class="w-full h-48 object-cover">
+                            <div class="p-5 flex-grow bg-white/95">
+                                <h4 class="font-black text-gray-900 text-lg mb-2">Enlaces Inalámbricos</h4>
+                                <p class="text-gray-600 text-sm">Despliegue de radioenlaces Punto a Punto y Multipunto de alta capacidad para zonas de difícil acceso sin cobertura tradicional.</p>
+                            </div>
+                        </div>
+						
+						<div class="min-w-[280px] md:min-w-[320px] snap-center service-card overflow-hidden flex flex-col">
+                            <img src="img/accesspoint.webp" alt="Enlaces Inalámbricos" class="w-full h-48 object-cover">
+                            <div class="p-5 flex-grow bg-white/95">
+                                <h4 class="font-black text-gray-900 text-lg mb-2">Routers y Access Point</h4>
+                                <p class="text-gray-600 text-sm">Disponemos de routers y puntos de acceso de última generación, diseñados para cubrir cada rincón de tu hogar u oficina.</p>
+                            </div>
+                        </div>
+						
+						<div class="min-w-[280px] md:min-w-[320px] snap-center service-card overflow-hidden flex flex-col">
+                            <img src="img/onus.webp" alt="Enlaces Inalámbricos" class="w-full h-48 object-cover">
+                            <div class="p-5 flex-grow bg-white/95">
+                                <h4 class="font-black text-gray-900 text-lg mb-2">ONU´S (Fibra Óptica)</h4>
+                                <p class="text-gray-600 text-sm">El corazón de tu conexión de fibra óptica. Las ONUs garantizan compatibilidad total y el máximo aprovechamiento del ancho de banda contratado. Tecnología eficiente para entornos residenciales y comerciales..</p>
+                            </div>
+                        </div>
+						
+						<div class="min-w-[280px] md:min-w-[320px] snap-center service-card overflow-hidden flex flex-col">
+                            <img src="img/monitor.webp" alt="Enlaces Inalámbricos" class="w-full h-48 object-cover">
+                            <div class="p-5 flex-grow bg-white/95">
+                                <h4 class="font-black text-gray-900 text-lg mb-2">Monitoreo de redes</h4>
+                                <p class="text-gray-600 text-sm">Identificación proactiva de ruido en el espectro radioeléctrico, permitiéndonos realizar ajustes de frecuencia antes de que la calidad del enlace se degrade.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button onclick="scrollCarrusel(320)" class="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-20 bg-brand-blue text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full shadow-lg hover:bg-blue-700 transition">
+                        <i class="fa-solid fa-chevron-right text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section id="tab-pagos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                
+                <div class="bg-[#020b18]/85 backdrop-blur-md text-white p-6 md:p-8 rounded-2xl shadow-lg h-fit border-t-4 border-brand-blue">
+                    <h3 class="text-base md:text-lg font-black tracking-wide mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-building-columns text-brand-blue"></i> Datos de Pago Móvil
+                    </h3>
+                    <div class="space-y-4 text-sm md:text-base text-gray-300">
+                        <p class="flex justify-between border-b border-gray-700 pb-2">
+                            <span>Banco:</span> <strong class="text-white text-right">Venezuela / Provincial</strong>
+                        </p>
+                        <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                            <span>Teléfono:</span> 
+                            <div class="flex items-center gap-2">
+                                <strong class="text-white">04245134562</strong>
+                                <button onclick="copiarTexto('04245134562')" class="text-brand-blue hover:text-white"><i class="fa-regular fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                            <span>Cédula:</span> 
+                            <div class="flex items-center gap-2">
+                                <strong class="text-white">V-18192548</strong>
+                                <button onclick="copiarTexto('V-18192548')" class="text-brand-blue hover:text-white"><i class="fa-regular fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 bg-blue-900/40 backdrop-blur-sm p-3 rounded-lg border border-blue-800/50 text-xs md:text-sm text-blue-200">
+                        <i class="fa-solid fa-circle-info mr-1"></i> Recuerda guardar tu número de referencia para llenar el formulario.
+                    </div>
+                </div>
+
+                <div class="bg-white/85 backdrop-blur-md p-6 md:p-8 rounded-2xl shadow-lg border-t-4 border-brand-blue">
+                    <h3 class="text-lg md:text-xl font-black text-gray-900 mb-6 drop-shadow-sm">Reportar Pago</h3>
+                    <form id="formReportePago" onsubmit="return ejecutarAuditoriaPago(event)" class="space-y-4 md:space-y-5">
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-gray-800 mb-1">Número Móvil (Será tu PIN)</label>
+                            <input type="text" id="txt_telefono_pin" maxlength="11" inputmode="numeric" placeholder="Ej. 04241234567" required class="input-field text-sm md:text-base shadow-inner">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-800 mb-1">Fecha</label>
+                                <input type="date" id="txt_fecha" required class="input-field text-gray-700 text-sm md:text-base shadow-inner">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-800 mb-1">Referencia</label>
+                                <input type="text" id="txt_referencia" placeholder="Últimos 6 dígitos" required class="input-field text-sm md:text-base shadow-inner">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-800 mb-1">Plan a activar</label>
+
+                            <select id="txt_plan" required class="input-field text-sm md:text-base shadow-inner">
+                                <option value="" disabled selected>Seleccione Plan...</option>
+                                <option value="1h">1 Hora Ilimitada</option>
+                                <option value="1d">1 Día Ilimitado</option>
+                                <option value="1gb">1 GB Datos</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-800 mb-1">Banco Emisor</label>
+                                <select id="txt_banco_emisor" required class="input-field text-sm md:text-base shadow-inner">
+                                    <option value="">Seleccione Banco...</option>
+                                    <option value="0102 - Banco de Venezuela">0102 - Banco de Venezuela</option>
+<option value="0104 - Banco Venezolano de Crédito">0104 - Banco Venezolano de Crédito</option>
+<option value="0105 - Mercantil Banco">0105 - Mercantil Banco</option>
+<option value="0108 - BBVA Provincial">0108 - BBVA Provincial</option>
+<option value="0114 - Bancaribe">0114 - Bancaribe</option>
+<option value="0115 - Banco Exterior">0115 - Banco Exterior</option>
+<option value="0128 - Banco Caroní">0128 - Banco Caroní</option>
+<option value="0134 - Banesco">0134 - Banesco</option>
+<option value="0137 - Banco Sofitasa">0137 - Banco Sofitasa</option>
+<option value="0138 - Banco Plaza">0138 - Banco Plaza</option>
+<option value="0146 - Bangente">0146 - Bangente</option>
+<option value="0151 - BFC Banco Fondo Común">0151 - BFC Banco Fondo Común</option>
+<option value="0156 - 100% Banco">0156 - 100% Banco</option>
+<option value="0157 - DelSur Banco Universal">0157 - DelSur Banco Universal</option>
+<option value="0163 - Banco del Tesoro">0163 - Banco del Tesoro</option>
+<option value="0166 - Banco Agrícola de Venezuela">0166 - Banco Agrícola de Venezuela</option>
+<option value="0168 - Bancrecer">0168 - Bancrecer</option>
+<option value="0169 - R4 Banco Microfinanciero">0169 - R4 Banco Microfinanciero</option>
+<option value="0171 - Banco Activo">0171 - Banco Activo</option>
+<option value="0172 - Bancamiga">0172 - Bancamiga</option>
+<option value="0173 - Banco Internacional de Desarrollo">0173 - Banco Internacional de Desarrollo</option>
+<option value="0174 - Banplus">0174 - Banplus</option>
+<option value="0175 - Banco Digital de los Trabajadores">0175 - Banco Digital de los Trabajadores</option>
+<option value="0177 - Banco de la Fuerza Armada Nacional Bolivariana (BANFANB)">0177 - Banco de la Fuerza Armada Nacional Bolivariana (BANFANB)</option>
+<option value="0178 - N58 Banco Digital">0178 - N58 Banco Digital</option>
+<option value="0191 - Banco Nacional de Crédito (BNC)">0191 - Banco Nacional de Crédito (BNC)</option>
+<option value="0601 - Instituto Municipal de Crédito Popular">0601 - Instituto Municipal de Crédito Popular</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-800 mb-1">Banco Destino</label>
+                                <select id="txt_banco_receptor" required onchange="verificarCedula()" class="input-field text-sm md:text-base shadow-inner">
+                                    <option value="">Seleccione Banco...</option>
+                                    <option value="0102 - Banco de Venezuela">0102 - Banco de Venezuela</option>
+                                    <option value="0108 - Banco Provincial">0108 - Banco Provincial</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <input type="text" id="txt_cedula" placeholder="Cédula Titular (Obligatorio si es Provincial)" class="input-field text-sm md:text-base hidden shadow-inner">
+
+                        <button type="submit" class="btn-primary w-full py-3.5 rounded-lg uppercase text-sm font-bold tracking-widest mt-4">
+                            Procesar Reporte
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="tab-reclamos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white/85 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-lg border-t-4 border-brand-blue">
+                    <div class="text-center mb-8">
+                        <i class="fa-solid fa-headset text-4xl text-brand-blue mb-3"></i>
+                        <h3 class="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-wide drop-shadow-sm">Centro de Soporte</h3>
+                        <p class="text-gray-700 text-sm md:text-base mt-2">Remita fallas o consultas directamente a nuestro centro técnico.</p>
+                    </div>
+
+                    <form id="formReclamo" class="space-y-4 md:space-y-5" onsubmit="return enviarFormularioReclamo(event)">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="text" id="rec_nombre" placeholder="Nombre completo" required class="input-field text-sm md:text-base shadow-inner">
+                            <input type="text" id="rec_telefono" maxlength="11" inputmode="numeric" placeholder="Teléfono de contacto" required class="input-field text-sm md:text-base shadow-inner">
+                        </div>
+                        
+                        <select id="rec_tipo" class="input-field text-sm md:text-base shadow-inner" required>
+                            <option value="">Clasificación del reporte...</option>
+                            <option value="Reclamo">Falla Técnica / Reclamo</option>
+                            <option value="Sugerencia">Sugerencia</option>
+                            <option value="Consulta">Consulta Comercial</option>
+                        </select>
+
+                        <textarea id="rec_mensaje" placeholder="Describa los pormenores de su caso detalladamente..." required class="input-field text-sm md:text-base min-h-[150px] resize-none shadow-inner"></textarea>
+                        
+                        <button type="submit" class="btn-primary w-full py-3.5 rounded-lg uppercase text-sm font-bold tracking-widest">
+                            Enviar Solicitud
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-brand-dark text-gray-300 pt-12 pb-6 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+                
+                <div>
+                    <img src="img/logo2.png" alt="LC Soluciones" class="h-10 md:h-12 w-auto object-contain mb-4">
+                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
+                        En LC Soluciones Tecnológicas ofrecemos soluciones profesionales en redes, telecomunicaciones y desarrollo tecnológico, con calidad, innovación y compromiso.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Enlaces Rápidos</h4>
+                    <ul class="space-y-2 text-xs md:text-sm text-gray-400">
+                        <li><button onclick="switchTab('wifi')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Inicio</button></li>
+                        <li><button onclick="switchTab('planes')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Planes</button></li>
+                        <li><button onclick="switchTab('trabajos')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Potafolios</button></li>
+                        <li><button onclick="switchTab('pagos')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Pagos</button></li>
+                        <li><button onclick="switchTab('reclamos')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Soporte</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Contáctanos</h4>
+                    <ul class="space-y-3 text-xs md:text-sm text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone mt-1 text-brand-blue"></i>
+                            <span>+58 424 513 4562</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-envelope mt-1 text-brand-blue"></i>
+                            <span class="break-all">lcsolucionestec@hotmail.com</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-brand-blue"></i>
+                            <span>La Grita, Estado Táchira, Venezuela</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Síguenos</h4>
+                    <div class="flex flex-col gap-3 text-xs md:text-sm text-gray-400 mb-6">
+                        <a href="#" class="flex items-center gap-2 hover:text-white transition"><i class="fa-brands fa-instagram text-brand-blue text-lg w-5 text-center"></i> @lcso.lucionestec</a>
+                        <a href="#" class="flex items-center gap-2 hover:text-white transition"><i class="fa-brands fa-x-twitter text-brand-blue text-lg w-5 text-center"></i> @lcsolucionestec</a>
+                    </div>
+                    <button onclick="document.getElementById('modal-publicidad').classList.remove('hidden')" class="bg-gray-800 hover:bg-gray-700 text-white text-[10px] font-bold px-4 py-2 rounded transition w-full sm:w-auto uppercase tracking-wider">
+                        <i class="fa-solid fa-bullhorn mr-1"></i> Ver Servicios
+                    </button>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 text-center md:flex md:justify-between md:items-center">
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-2 md:mb-0">
+                    Desarrollado por: <span class="font-bold text-gray-400">Ing. Jose Cordero</span>
+                </p>
+                <p class="text-[10px] text-gray-500 font-bold tracking-[2px]">VERSION 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/584245134562" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:scale-110 transition-transform z-50">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div id="modal-confirmacion-trial" class="hidden fixed inset-0 modal-bg flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl text-center border-t-4 border-brand-blue animate-fade-in">
+            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-blue text-2xl">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+            <h3 class="text-gray-800 font-black text-lg mb-2">Sesión Gratuita</h3>
+            <p class="text-gray-500 text-sm mb-6">Se activará el servicio por 5 minutos, Puedes adquirir un plan disponible que se adapte a ti para mantenerte conectado al finalizar.</p>
+            <div class="flex gap-3">
+                <button onclick="document.getElementById('modal-confirmacion-trial').classList.add('hidden')" class="flex-1 py-2.5 rounded-lg text-sm font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition">Cancelar</button>
+                <button onclick="activarTrial(); document.getElementById('modal-confirmacion-trial').classList.add('hidden')" class="flex-1 py-2.5 rounded-lg text-sm font-bold text-white bg-brand-blue hover:bg-blue-700 transition">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalDetalles" class="hidden fixed inset-0 z-50 modal-bg items-center justify-center p-4">
+        <div class="bg-white/95 backdrop-blur-md p-6 md:p-8 rounded-2xl w-full max-w-sm text-center relative overflow-hidden shadow-2xl border-t-4 border-brand-blue animate-fade-in">
+            <h3 id="modal-titulo" class="text-gray-900 font-black text-base md:text-lg uppercase tracking-wide mt-2"></h3>
+            
+            <div class="my-6 bg-blue-50 py-5 rounded-xl border border-blue-100">
+                <p id="modal-precio" class="text-3xl md:text-4xl font-black text-brand-blue"></p>
+            </div>
+
+            <p id="modal-descripcion" class="text-gray-700 text-sm leading-relaxed mb-6"></p>
+            
+            <button type="button" id="btn-compra-modal" onclick="procederACompra()" class="btn-primary w-full py-3.5 rounded-lg uppercase font-bold text-sm tracking-wider">
+                Comprar Plan
+            </button>
+
+            <div id="modal-badge-nodisponible" class="w-full py-3.5 bg-gray-200 text-gray-600 rounded-lg text-sm font-bold uppercase tracking-wider hidden">
+                <i class="fa-solid fa-ban mr-1"></i> No Disponible
+            </div>
+            
+            <button type="button" onclick="cerrarModal()" class="text-gray-500 hover:text-gray-800 text-xs font-bold uppercase tracking-wide mt-4 block mx-auto transition">
+                Regresar
+            </button>
+        </div>
+    </div>
+
+    <div id="modalAuditoriaPago" class="hidden fixed inset-0 z-50 modal-bg items-center justify-center p-4">
+        <div class="bg-white p-6 rounded-2xl w-full max-w-md shadow-2xl border-t-4 border-brand-blue animate-fade-in">
+            <h3 class="text-gray-900 font-black text-center mb-4 uppercase text-sm md:text-base">Resumen del Pago</h3>
+            
+            <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-center mb-5">
+                <p class="text-[10px] text-gray-500 font-bold uppercase mb-1">Tu PIN de acceso será:</p>
+                <span id="aud-pin" class="text-2xl md:text-3xl text-brand-blue font-black tracking-widest"></span>
+            </div>
+
+            <div class="text-xs md:text-sm text-gray-700 space-y-3 mb-6 p-4 rounded-xl border border-gray-200 bg-white shadow-sm">
+                <p class="flex justify-between"><span class="font-bold">Fecha:</span> <span id="aud-fecha"></span></p>
+                <p class="flex justify-between"><span class="font-bold">Referencia:</span> <span id="aud-ref" class="text-gray-900 font-black"></span></p>
+                <p class="flex justify-between"><span class="font-bold">Plan:</span> <span id="aud-plan" class="text-right"></span></p>
+                <p class="flex justify-between"><span class="font-bold">Monto:</span> <span id="aud-monto" class="text-brand-blue font-black"></span></p>
+                <p class="flex justify-between items-center"><span class="font-bold">Origen:</span> <span id="aud-emisor" class="text-right max-w-[150px] truncate"></span></p>
+                <p class="flex justify-between items-center"><span class="font-bold">Destino:</span> <span id="aud-receptor" class="text-right max-w-[150px] truncate"></span></p>
+                <p id="aud-cedula-container" class="hidden flex justify-between"><span class="font-bold">Cédula:</span> <span id="aud-cedula"></span></p>
+            </div>
+            
+            <button type="button" onclick="confirmarYEnviarFormulario()" class="btn-primary w-full py-3.5 rounded-lg uppercase font-bold text-sm tracking-wider mb-2">Confirmar Envío</button>
+            <button type="button" onclick="cerrarAuditoria()" class="w-full py-2.5 text-gray-500 hover:text-gray-800 uppercase text-xs tracking-wide font-bold transition">Modificar</button>
+        </div>
+    </div>
+
+    <div id="modalExito" class="hidden fixed inset-0 z-50 modal-bg items-center justify-center p-4">
+        <div class="bg-white p-6 md:p-8 rounded-2xl w-full max-w-sm text-center border-t-4 border-green-500 animate-fade-in">
+            <i class="fa-solid fa-circle-check text-green-500 text-5xl mb-4"></i>
+            <h3 id="exito-titulo" class="text-gray-900 font-black text-lg uppercase tracking-wide mb-2">Envío Exitoso</h3>
+            <p id="exito-desc" class="text-gray-700 text-sm mb-6 leading-relaxed"></p>
+            <button type="button" onclick="cerrarModalExito()" class="bg-green-500 hover:bg-green-600 text-white w-full py-3 rounded-lg uppercase font-bold text-sm transition">Aceptar</button>
+        </div>
+    </div>
+
+    <div id="modalError" class="hidden fixed inset-0 z-50 modal-bg items-center justify-center p-4">
+        <div class="bg-white p-6 md:p-8 rounded-2xl w-full max-w-sm text-center border-t-4 border-red-500 animate-fade-in">
+            <i class="fa-solid fa-circle-xmark text-red-500 text-5xl mb-4"></i>
+            <h3 class="text-gray-900 font-black text-lg uppercase tracking-wide mb-2">Atención</h3>
+            <p id="msg-error" class="text-gray-700 text-sm mb-6 leading-relaxed"></p>
+            <button type="button" onclick="cerrarModalError()" class="bg-gray-800 hover:bg-gray-900 text-white w-full py-3 rounded-lg uppercase font-bold text-sm transition">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="modal-publicidad" class="hidden fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
+        <div class="bg-white/95 backdrop-blur-md rounded-2xl p-6 md:p-8 max-w-md w-full shadow-2xl border-t-4 border-brand-blue animate-fade-in">
+            <h3 class="text-xl md:text-2xl font-black mb-6 text-gray-900 text-center">Nuestros Servicios</h3>
+            <ul class="text-left space-y-4 mb-8">
+               <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                    <i class="fa-solid fa-map-marked-alt text-brand-blue mt-1"></i>
+                    <span>Gestión de redes FTTH y planificación geográfica con <b>OZmap</b> para optimización de despliegue.</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                    <i class="fa-solid fa-server text-brand-blue mt-1"></i>
+                    <span>Administración avanzada de servidores <b>MikroTik</b>, balanceo de carga y control de ancho de banda.</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                    <i class="fa-solid fa-microchip text-brand-blue mt-1"></i>
+                    <span>Diseño e implementación de <b>infraestructura de fibra óptica</b> y redes PON de alta disponibilidad.</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                    <i class="fa-solid fa-lock text-brand-blue mt-1"></i>
+                    <span>Soluciones de ciberseguridad perimetral y segmentación de redes corporativas (VLANs).</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                    <i class="fa-solid fa-tower-broadcast text-brand-blue mt-1"></i>
+                    <span>Ingeniería en enlaces inalámbricos de larga distancia (punto a punto y multipunto).</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                    <i class="fa-solid fa-code-branch text-brand-blue mt-1"></i>
+                    <span>Desarrollo de portales cautivos personalizados, automatización y reportería vía API.</span>
+                </li>
+                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                    <i class="fa-solid fa-globe text-brand-blue mt-1"></i>
+                    <span>Próximamente: Lanzamiento de nuestro portal web corporativo y despliegue de <b>Servidor VPN</b> de alta seguridad para acceso remoto.</span>
+                </li>
+            </ul>
+            <button onclick="document.getElementById('modal-publicidad').classList.add('hidden')" class="w-full py-3 bg-gray-800 text-white text-xs font-bold uppercase rounded-lg hover:bg-gray-900 transition tracking-widest">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        /* Desplazamiento del Carrusel de Trabajos */
+        function scrollCarrusel(offset) {
+            const container = document.getElementById('carrusel-trabajos');
+            container.scrollBy({ left: offset, behavior: 'smooth' });
+        }
+
+        function copiarTexto(texto){ navigator.clipboard.writeText(texto); alert("Copiado: " + texto); }
+        function verificarCedula(){
+            const b = document.getElementById('txt_banco_receptor').value;
+            const c = document.getElementById('txt_cedula');
+            if(b === '0108 - Banco Provincial'){ c.classList.remove('hidden'); c.setAttribute('required', 'required');
+            } else { c.classList.add('hidden'); c.removeAttribute('required'); }
+        }
+        function mostrarError(msg){
+            document.getElementById('msg-error').innerText = msg;
+            document.getElementById('modalError').classList.remove('hidden');
+            document.getElementById('modalError').classList.add('flex');
+        }
+        function cerrarModalError(){
+            document.getElementById('modalError').classList.add('hidden');
+            document.getElementById('modalError').classList.remove('flex');
+        }
+
+        document.addEventListener("input", function(e){
+            if(e.target.id === "txt_telefono_pin" || e.target.id === "username" || e.target.id === "rec_telefono"){
+                e.target.value = e.target.value.replace(/\D/g,'');
+            }
+        });
+
+        /* Login Lógica */
+        let metodoLoginActual = "pin";
+        function switchLoginMethod(method){
+            metodoLoginActual = method;
+            document.getElementById('tab-log-userpass').classList.remove('bg-white', 'shadow', 'text-brand-blue');
+            document.getElementById('tab-log-pin').classList.remove('bg-white', 'shadow', 'text-brand-blue');
+            document.getElementById('tab-log-userpass').classList.add('text-gray-600');
+            document.getElementById('tab-log-pin').classList.add('text-gray-600');
+            
+            document.getElementById('wrapper-login-userpass').classList.add('hidden');
+            document.getElementById('wrapper-login-pin').classList.add('hidden');
+            
+            if(method === 'userpass'){
+                document.getElementById('tab-log-userpass').classList.add('bg-white', 'shadow', 'text-brand-blue');
+                document.getElementById('tab-log-userpass').classList.remove('text-gray-600');
+                document.getElementById('wrapper-login-userpass').classList.remove('hidden');
+            }else{
+                document.getElementById('tab-log-pin').classList.add('bg-white', 'shadow', 'text-brand-blue');
+                document.getElementById('tab-log-pin').classList.remove('text-gray-600');
+                document.getElementById('wrapper-login-pin').classList.remove('hidden');
+            }
+        }
+
+        function validarLogin(){
+            if(metodoLoginActual === "pin"){
+                const pin = document.getElementById('username').value.trim();
+                if(pin === ""){ mostrarError("Por favor, ingrese un identificador PIN válido."); return false; }
+                document.getElementById('display-username').value = pin;
+                document.getElementById('display-password').value = pin;
+            }
+            return true; 
+        }
+
+        /* Pestañas de Navegación */
+        function switchTab(tab){
+            const sections = ['wifi', 'planes', 'trabajos', 'pagos', 'reclamos'];
+            sections.forEach(s => {
+                document.getElementById('tab-' + s).classList.add('hidden');
+                document.getElementById('tab-' + s).classList.remove('flex-grow', 'flex', 'flex-col');
+                document.getElementById('btn-' + s).classList.remove('nav-active');
+            });
+            
+            const activeSec = document.getElementById('tab-' + tab);
+            activeSec.classList.remove('hidden');
+            if(tab === 'wifi') { activeSec.classList.add('flex-grow', 'flex', 'flex-col'); }
+            else { activeSec.classList.add('block'); }
+            
+            document.getElementById('btn-' + tab).classList.add('nav-active');
+            window.scrollTo(0, 0);
+        }
+
+        function activarTrial(){
+            const login = document.getElementById("mt-link-login-only").value;
+            const dst = document.getElementById("mt-link-orig").value;
+            const mac = document.getElementById("mt-mac").value;
+            window.location.href = login + "?dst=" + encodeURIComponent(dst) + "&username=T-" + encodeURIComponent(mac);
+        }
+
+        /* Planes y Modal */
+        const infoPlanes = {
+            "1h":{ titulo:"1 Hora Ilimitada", precio:"500 Bs", desc:"Acceso a velocidad simétrica e ilimitada durante 60 minutos continuos.", activo:true },
+            "1d":{ titulo:"1 Día Ilimitado", precio:"1500 Bs", desc:"24 horas completas de conectividad sin tope de consumo de datos.", activo:true },
+            "1w":{ titulo:"1 Semana Ilimitada", precio:"5000 Bs", desc:"7 días de navegación continua para múltiples dispositivos.", activo:false },
+            "1m":{ titulo:"1 Mes Ilimitado", precio:"15000 Bs", desc:"Suscripción premium por 30 días correlativos.", activo:false },
+            "1gb":{ titulo:"Plan 1 GB Consumo", precio:"250 Bs", desc:"Bolsa dedicada de 1 Gigabyte completo de navegación móvil.", activo:true },
+            "3gb":{ titulo:"Plan 3 GB Consumo", precio:"1000 Bs", desc:"Bolsa intermedia de 3 Gigabytes de transferencia libre.", activo:false },
+            "5gb":{ titulo:"Plan 5 GB Consumo", precio:"2500 Bs", desc:"Bolsa avanzada de 5 Gigabytes de alta velocidad.", activo:false },
+            "10gb":{ titulo:"Plan 10 GB Consumo", precio:"8750 Bs", desc:"Paquete premium de 10 Gigabytes para usuarios de alto tráfico.", activo:false }
+        };
+        let planActualSeleccionado = "";
+
+        function verDetalles(id){
+            planActualSeleccionado = id;
+            const data = infoPlanes[id];
+            document.getElementById('modal-titulo').innerText = data.titulo;
+            document.getElementById('modal-precio').innerText = data.precio;
+            document.getElementById('modal-descripcion').innerText = data.desc;
+
+            if(data.activo){
+                document.getElementById('btn-compra-modal').classList.remove('hidden');
+                document.getElementById('modal-badge-nodisponible').classList.add('hidden');
+            } else {
+                document.getElementById('btn-compra-modal').classList.add('hidden');
+                document.getElementById('modal-badge-nodisponible').classList.remove('hidden');
+            }
+            
+            document.getElementById('modalDetalles').classList.remove('hidden');
+            document.getElementById('modalDetalles').classList.add('flex');
+        }
+
+        function cerrarModal(){ document.getElementById('modalDetalles').classList.add('hidden'); }
+        function procederACompra(){
+            cerrarModal();
+            switchTab('pagos');
+            const selectPlan = document.getElementById('txt_plan');
+            if (selectPlan.querySelector(`option[value="${planActualSeleccionado}"]`)) {
+                selectPlan.value = planActualSeleccionado;
+            }
+        }
+
+        /* Pagos (Telegram Auth) */
+        function ejecutarAuditoriaPago(event){
+            event.preventDefault();
+            const tel = document.getElementById('txt_telefono_pin').value;
+            const b = document.getElementById('txt_banco_receptor').value;
+            const emisor = document.getElementById('txt_banco_emisor').value;
+            const cedula = document.getElementById('txt_cedula').value;
+            const planId = document.getElementById('txt_plan').value;
+
+            if(tel.length !== 11){ mostrarError("El número de teléfono debe constar de 11 dígitos numéricos."); return false; }
+            if(planId === "") { mostrarError("Debe seleccionar el plan que desea adquirir."); return false; }
+
+            document.getElementById('aud-pin').innerText = tel;
+            document.getElementById('aud-fecha').innerText = document.getElementById('txt_fecha').value;
+            document.getElementById('aud-ref').innerText = document.getElementById('txt_referencia').value;
+            
+            const selectPlan = document.getElementById('txt_plan');
+            document.getElementById('aud-plan').innerText = selectPlan.options[selectPlan.selectedIndex].text;
+            document.getElementById('aud-monto').innerText = infoPlanes[planId].precio;
+            document.getElementById('aud-emisor').innerText = emisor;
+            document.getElementById('aud-receptor').innerText = b;
+
+            if(b === "0108 - Banco Provincial"){
+                document.getElementById('aud-cedula').innerText = cedula;
+                document.getElementById('aud-cedula-container').classList.remove('hidden');
+            } else {
+                document.getElementById('aud-cedula-container').classList.add('hidden');
+            }
+            
+            document.getElementById('modalAuditoriaPago').classList.remove('hidden');
+            document.getElementById('modalAuditoriaPago').classList.add('flex');
+            return false;
+        }
+
+        function cerrarAuditoria(){ document.getElementById('modalAuditoriaPago').classList.add('hidden'); }
+
+        function obtenerInfo(){
+            const ua = navigator.userAgent;
+            return {
+                ip: document.getElementById('mt-ip').value || "127.0.0.1",
+                mac: document.getElementById('mt-mac').value || "00:00:00",
+                fabricante: /Samsung/i.test(ua) ? "Samsung" : (/iPhone/i.test(ua) ? "Apple" : "Dispositivo Móvil"),
+                modelo: ua, dispositivo: navigator.platform
+            };
+        }
+
+        async function enviarReporteTelegram(datos, tipo){
+            const token = "7798276985:AAH3GkNgfRFOa3lApS3xQk5skodbJyAqmqo"; 
+            const chat_id = "-1003737821268"; 
+            let msg = "";
+
+            if (tipo === "pago") {
+                msg += `💰 <b>REPORTE DE PAGO RB LA GRITA</b> 💰\n\n`;
+                msg += `📋 <b>DETALLES DEL PAGO</b>\n`;
+                msg += `🔑 <b>PIN:</b> ${datos.pin}\n`;
+                msg += `📅 <b>Fecha:</b> ${datos.fechaFormateada}, <b>Hora:</b> ${datos.hora}\n`;
+                msg += `🧾 <b>Ref:</b> ${datos.referencia}\n`;
+                msg += `🏦 <b>Banco emisor:</b> ${datos.banco_emisor}\n`;
+                msg += `📥 <b>Banco receptor:</b> ${datos.banco_receptor}\n`;
+                if (datos.banco_receptor === "0108 - Banco Provincial" && datos.cedula) { msg += `🪪 <b>Cédula:</b> ${datos.cedula}\n`; }
+                msg += `📦 <b>Plan seleccionado:</b> ${datos.plan}\n`;
+                msg += `💵 <b>Monto:</b> ${datos.monto}\n\n`;
+                msg += `📱 <b>DETALLES DISPOSITIVO</b>\n`;
+                msg += `🌐 <b>IP:</b> ${datos.ip}\n🔗 <b>MAC:</b> ${datos.mac}\n`;
+            } else {
+                msg += `🚨 <b>REPORTE DE SOPORTE RB LA GRITA</b> 🚨\n\n`;
+                for(const key in datos){
+                    if(datos[key] && datos[key] !== "") msg += `🔹 <b>${key.toUpperCase()}:</b> ${datos[key]}\n`;
+                }
+            }
+            msg += `\n🤖 <i>Portal Web LC Soluciones</i>`;
+            try {
+                await fetch(`https://api.telegram.org/bot${token}/sendMessage`,{
+                    method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({chat_id: chat_id, text: msg, parse_mode: 'HTML'})
+                });
+            } catch(e) { console.error(e); }
+        }
+
+        function confirmarYEnviarFormulario(){
+            const d = obtenerInfo();
+            const planSelect = document.getElementById('txt_plan');
+            const dateParts = document.getElementById('txt_fecha').value.split('-');
+            const datos = {
+                ...d,
+                pin: document.getElementById('txt_telefono_pin').value,
+                fechaFormateada: `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`,
+                hora: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }),
+                referencia: document.getElementById('txt_referencia').value,
+                plan: planSelect.options[planSelect.selectedIndex].text,
+                monto: infoPlanes[planSelect.value].precio,
+                banco_emisor: document.getElementById('txt_banco_emisor').value,
+                banco_receptor: document.getElementById('txt_banco_receptor').value,
+                cedula: document.getElementById('txt_cedula').value
+            };
+            
+            enviarReporteTelegram(datos, "pago");
+            cerrarAuditoria();
+            document.getElementById('exito-titulo').innerText = "Envío Exitoso";
+            document.getElementById('exito-desc').innerText = "Su reporte fue enviado al departamento de validación. Su PIN se activará al confirmar el fondo.";
+            document.getElementById('modalExito').classList.remove('hidden');
+            document.getElementById('modalExito').classList.add('flex');
+            document.getElementById('formReportePago').reset();
+        }
+
+        function enviarFormularioReclamo(event) {
+            event.preventDefault();
+            const d = obtenerInfo();
+            const datos = {
+                ...d,
+                nombre: document.getElementById('rec_nombre').value,
+                telefono: document.getElementById('rec_telefono').value,
+                tipo: document.getElementById('rec_tipo').value,
+                mensaje: document.getElementById('rec_mensaje').value
+            };
+            enviarReporteTelegram(datos, "soporte");
+            document.getElementById('exito-titulo').innerText = "Envío Exitoso";
+            document.getElementById('exito-desc').innerText = "Su solicitud ha sido remitida con éxito a nuestro sistema interno.";
+            document.getElementById('modalExito').classList.remove('hidden');
+            document.getElementById('modalExito').classList.add('flex');
+            document.getElementById('formReclamo').reset();
+            return false;
+        }
+
+        function cerrarModalExito(){ document.getElementById('modalExito').classList.add('hidden'); }
+        window.onload = ()=>{ document.getElementById('txt_fecha').value = new Date().toISOString().split('T')[0]; };
+    </script>
 </body>
 </html>
