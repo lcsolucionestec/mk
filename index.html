@@ -53,8 +53,8 @@
 
         /* ==================== TARJETAS Y FORMULARIOS ==================== */
         .service-card {
-            background: rgba(255, 255, 255, 0.85); /* Fondo blanco semitransparente */
-            backdrop-filter: blur(10px); /* Efecto cristal */
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(10px); 
             -webkit-backdrop-filter: blur(10px);
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -87,7 +87,6 @@
             color: #FF8C00;
         }
         
-        /* Modal Backgrounds */
         .modal-bg { background: rgba(2, 11, 24, 0.85); backdrop-filter: blur(5px); }
         .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -114,7 +113,7 @@
                     <button id="btn-wifi" onclick="switchTab('wifi')" class="nav-link nav-active">Inicio</button>
                     <button id="btn-planes" onclick="switchTab('planes')" class="nav-link">Planes</button>
                     <button id="btn-trabajos" onclick="switchTab('trabajos')" class="nav-link">Portafolios</button>
-                    <button id="btn-reclamos" onclick="switchTab('reclamos')" class="nav-link">Soporte</button>
+                    <button id="btn-reclamos" onclick="switchTab('reclamos')" class="nav-link">Comercial</button>
                 </nav>
 
                 <div class="hidden lg:flex items-center gap-4 shrink-0">
@@ -131,9 +130,7 @@
 
         <section id="tab-wifi" class="flex-grow flex flex-col relative z-10">
             <div class="flex-grow flex items-center py-10 md:py-16 lg:py-0 min-h-[85vh]">
-                
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row items-center justify-between gap-10">
-                    
                     <div class="flex-1 text-center lg:text-left mt-4 lg:mt-0">
                         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
                             ARQUITECTURA DE REDES, <br class="hidden lg:block">
@@ -150,37 +147,36 @@
                         </div>
                     </div>
 
-                    <!-- REEMPLAZO DE FORMULARIO POR INFORMACIÓN PROFESIONAL -->
                     <div class="w-full max-w-sm md:max-w-md bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-8 border-t-4 border-brand-blue">
-    <div class="text-center">
-        <i class="fa-solid fa-briefcase text-brand-blue text-4xl mb-4"></i>
-        <h3 class="font-black text-gray-800 text-lg uppercase mb-3">SERVICIOS QUE DESEMPEÑAMOS</h3>
+                        <div class="text-center">
+                            <i class="fa-solid fa-briefcase text-brand-blue text-4xl mb-4"></i>
+                            <h3 class="font-black text-gray-800 text-lg uppercase mb-3">SERVICIOS QUE DESEMPEÑAMOS</h3>
                             <ul class="text-left text-xs text-gray-500 space-y-2 mt-4">
                                 <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                    <i class="fa-solid fa-map-marked-alt text-brand-blue mt-1"></i>
-                    <span>Gestión de redes FTTH y planificación geográfica con <b>OZmap</b> para optimización de despliegue.</span>
-                </li>
-                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                    <i class="fa-solid fa-server text-brand-blue mt-1"></i>
-                    <span>Administración avanzada de servidores <b>MikroTik</b>, balanceo de carga y control de ancho de banda.</span>
-                </li>
-                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                    <i class="fa-solid fa-microchip text-brand-blue mt-1"></i>
-                    <span>Diseño e implementación de <b>infraestructura de fibra óptica</b> y redes PON de alta disponibilidad.</span>
-                </li>
-                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                    <i class="fa-solid fa-lock text-brand-blue mt-1"></i>
-                    <span>Soluciones de ciberseguridad perimetral y segmentación de redes corporativas (VLANs).</span>
-                </li>
-                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                    <i class="fa-solid fa-tower-broadcast text-brand-blue mt-1"></i>
-                    <span>Ingeniería en enlaces inalámbricos de larga distancia (punto a punto y multipunto).</span>
-                </li>
-                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                    <i class="fa-solid fa-code-branch text-brand-blue mt-1"></i>
-                    <span>Desarrollo de portales cautivos personalizados, automatización y reportería vía API.</span>
-                </li>
-                		   </ul>
+                                    <i class="fa-solid fa-map-marked-alt text-brand-blue mt-1"></i>
+                                    <span>Gestión de redes FTTH y planificación geográfica con <b>OZmap</b> para optimización de despliegue.</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                                    <i class="fa-solid fa-server text-brand-blue mt-1"></i>
+                                    <span>Administración avanzada de servidores <b>MikroTik</b>, balanceo de carga y control de ancho de banda.</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                                    <i class="fa-solid fa-microchip text-brand-blue mt-1"></i>
+                                    <span>Diseño e implementación de <b>infraestructura de fibra óptica</b> y redes PON de alta disponibilidad.</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                                    <i class="fa-solid fa-lock text-brand-blue mt-1"></i>
+                                    <span>Soluciones de ciberseguridad perimetral y segmentación de redes corporativas (VLANs).</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                                    <i class="fa-solid fa-tower-broadcast text-brand-blue mt-1"></i>
+                                    <span>Ingeniería en enlaces inalámbricos de larga distancia (punto a punto y multipunto).</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+                                    <i class="fa-solid fa-code-branch text-brand-blue mt-1"></i>
+                                    <span>Desarrollo de portales cautivos personalizados, automatización y reportería vía API.</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -307,26 +303,51 @@
         </section>
 
         <section id="tab-reclamos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="max-w-3xl mx-auto">
-                <div class="bg-white/85 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-lg border-t-4 border-brand-blue">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-lg border-t-4 border-brand-blue">
                     <div class="text-center mb-8">
-                        <i class="fa-solid fa-headset text-4xl text-brand-blue mb-3"></i>
-                        <h3 class="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-wide drop-shadow-sm">Centro de Soporte</h3>
-                        <p class="text-gray-700 text-sm md:text-base mt-2">Remita fallas o consultas directamente a nuestro centro técnico.</p>
+                        <i class="fa-solid fa-file-contract text-4xl text-brand-blue mb-3"></i>
+                        <h3 class="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-wide drop-shadow-sm">Solicitud de Oferta Comercial</h3>
+                        <p class="text-gray-700 text-sm md:text-base mt-2">Solicita presupuestos, trabajos, asesorías y más llenando el siguiente formulario.</p>
                     </div>
-                    <form id="formReclamo" class="space-y-4 md:space-y-5" onsubmit="return enviarFormularioReclamo(event)">
+                    <form id="formComercial" class="space-y-4 md:space-y-5" onsubmit="return enviarPorTelegram(event)">
+                        
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <input type="text" id="rec_nombre" placeholder="Nombre completo" required class="input-field text-sm md:text-base shadow-inner">
-                            <input type="text" id="rec_telefono" maxlength="11" inputmode="numeric" placeholder="Teléfono de contacto" required class="input-field text-sm md:text-base shadow-inner">
+                            <input type="text" id="soc_nombre" placeholder="Nombres y Apellidos" required class="input-field text-sm md:text-base shadow-inner">
+                            <input type="text" id="soc_empresa" placeholder="Empresa (Opcional)" class="input-field text-sm md:text-base shadow-inner">
                         </div>
-                        <select id="rec_tipo" class="input-field text-sm md:text-base shadow-inner" required>
-                            <option value="">Clasificación del reporte...</option>
-                            <option value="Reclamo">Falla Técnica / Reclamo</option>
-                            <option value="Sugerencia">Sugerencia</option>
-                            <option value="Consulta">Consulta Comercial</option>
-                        </select>
-                        <textarea id="rec_mensaje" placeholder="Describa los pormenores de su caso detalladamente..." required class="input-field text-sm md:text-base min-h-[150px] resize-none shadow-inner"></textarea>
-                        <button type="submit" class="btn-primary w-full py-3.5 rounded-lg uppercase text-sm font-bold tracking-widest">
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="text" id="soc_telefono" maxlength="15" inputmode="numeric" placeholder="Nro Telefónico" required class="input-field text-sm md:text-base shadow-inner">
+                            
+                            <select id="soc_tipo" class="input-field text-sm md:text-base shadow-inner" required>
+                                <option value="">Tipo de Solicitud...</option>
+                                <option value="Asesoria">Asesoría</option>
+                                <option value="Cotizacion">Cotización</option>
+                                <option value="Asistencia Local">Asistencia Local</option>
+                                <option value="Asistencia Remota">Asistencia Remota</option>
+                                <option value="Oferta Comercial">Oferta Comercial</option>
+                                <option value="Oferta Laboral">Oferta Laboral</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <select id="soc_estado" class="input-field text-sm md:text-base shadow-inner" onchange="cargarMunicipios()" required>
+                                <option value="">Estado...</option>
+                                </select>
+                            
+                            <select id="soc_municipio" class="input-field text-sm md:text-base shadow-inner" onchange="cargarParroquias()" required disabled>
+                                <option value="">Municipio...</option>
+                            </select>
+                            
+                            <select id="soc_parroquia" class="input-field text-sm md:text-base shadow-inner" required disabled>
+                                <option value="">Parroquia...</option>
+                            </select>
+                        </div>
+
+                        <textarea id="soc_descripcion" placeholder="Descripción detallada de la solicitud..." required class="input-field text-sm md:text-base min-h-[120px] resize-none shadow-inner"></textarea>
+                        
+                        <button type="submit" id="btn_submit_form" class="btn-primary w-full py-3.5 rounded-lg uppercase text-sm font-bold tracking-widest">
                             Enviar Solicitud
                         </button>
                     </form>
@@ -350,7 +371,7 @@
                         <li><button onclick="switchTab('wifi')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Inicio</button></li>
                         <li><button onclick="switchTab('planes')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Planes</button></li>
                         <li><button onclick="switchTab('trabajos')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Portafolios</button></li>
-                        <li><button onclick="switchTab('reclamos')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Soporte</button></li>
+                        <li><button onclick="switchTab('reclamos')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Comercial</button></li>
                     </ul>
                 </div>
                 <div>
@@ -377,9 +398,10 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
+        // Lógica de Tabs y Carrusel (se mantienen)
         function scrollCarrusel(offset) { const container = document.getElementById('carrusel-trabajos'); container.scrollBy({ left: offset, behavior: 'smooth' }); }
+
         function switchTab(tab){
             const sections = ['wifi', 'planes', 'trabajos', 'reclamos'];
             sections.forEach(s => {
@@ -390,10 +412,495 @@
             document.getElementById('btn-' + tab).classList.add('nav-active');
             window.scrollTo(0, 0);
         }
-        function enviarFormularioReclamo(event) {
+
+        // ==========================================
+        // LÓGICA DE GEOGRAFÍA (VENEZUELA)
+        // ==========================================
+        // Estructura de ejemplo. Para no sobrecargar el HTML, aquí se incluyen algunos 
+        // estados, municipios y parroquias principales (incluyendo Táchira y La Grita).
+        // Puedes extender este objeto JSON con el resto de la base de datos nacional.
+        const geoVenezuela = {
+            "Táchira": {
+                "Andrés Bello": ["Cordero", "Sucre"],
+    "Antonio Rómulo Costa": ["Las Mesas"],
+    "Ayacucho": ["San Juan de Colón", "San Félix", "San Pedro del Río"],
+    "Bolívar": ["San Antonio del Táchira", "Isaías Medina Angarita", "Palotal", "General Juan Vicente Gómez", "El Palotal"],
+    "Cárdenas": ["Táriba", "Amenodoro Rangel Lamús", "La Florida"],
+    "Córdoba": ["Santa Ana del Táchira", "Santa Lucia"],
+    "Fernández Feo": ["San Rafael del Piñal", "Alberto Adriani", "Santo Domingo"],
+    "Francisco de Miranda": ["San José de Bolívar"],
+    "García de Hevia": ["La Fría", "Boca de Grita", "José Antonio Páez"],
+    "Guásimos": ["Palmira"],
+    "Independencia": ["Capacho Nuevo", "Juan Germán Roscio", "Román Cárdenas"],
+    "Jáuregui": ["La Grita", "Emilio Constantino Guerrero", "Monseñor Miguel Antonio Salas"],
+    "José María Vargas": ["El Cobre"],
+    "Junín": ["Rubio", "Bramón", "La Petrólea", "Quinimarí"],
+    "Libertad": ["Capacho Viejo", "Cipriano Castro", "Manuel Felipe Rugeles"],
+    "Libertador": ["Abejales", "Doradas", "Emeterio Ochoa", "San Joaquín de Navay"],
+    "Lobatera": ["Lobatera", "Constitución"],
+    "Michelena": ["Michelena"],
+    "Panamericano": ["Coloncito", "La Palmita"],
+    "Pedro María Ureña": ["Ureña", "Nueva Arcadia"],
+    "Rafael Urdaneta": ["Delicias"],
+    "Samuel Darío Maldonado": ["La Tendida", "Boconó", "Hernández"],
+    "San Cristóbal": ["La Concordia", "San Juan Bautista", "Pedro María Morantes", "San Sebastián", "Francisco Romero Lobo"],
+    "Seboruco": ["Seboruco"],
+    "Simón Rodríguez": ["San Simón"],
+    "Sucre": ["Queniquea", "San Pablo", "Eleazar López Contreras"],
+    "Torbes": ["San Josecito"],
+    "Uribante": ["Pregonero", "Cárdenas", "Juan Pablo Peñaloza", "Potosí"],
+    "San Judas Tadeo": ["Umuquena"]
+            },
+            "Barinas": {
+                "Alberto Arvelo Torrealba": ["Sabaneta", "Rodríguez Domínguez"],
+                "Andrés Eloy Blanco": ["El Cantón", "Santa Bárbara", "Puerto Vivas"],
+                "Antonio José de Sucre": ["Socopó", "Ticoporo", "Nicolás Pulido"],
+                "Arismendi": ["Arismendi", "Guadarrama", "La Unión", "San Antonio"],
+                "Barinas": ["Barinas", "Alberto Arvelo Larriva", "San Silvestre", "Santa Inés", "Santa Lucía", "Torunos", "El Carmen", "Rómulo Betancourt", "Corazón de Jesús", "Ramón Ignacio Méndez", "Alto Barinas", "Manuel Palacio Fajardo"],
+                "Bolívar": ["Barinitas", "Altamira", "Calderas"],
+                "Cruz Paredes": ["Barrancas", "El Socorro", "Masparrito"],
+                "Ezequiel Zamora": ["Santa Bárbara", "José Ignacio del Pumar", "Pedro Briceño Méndez", "Ramón Ignacio Méndez"],
+                "Obispos": ["Obispos", "El Real", "Zaragoza"],
+                "Pedraza": ["Ciudad Bolivia", "José Félix Ribas", "Ignacio Briceño", "Páez"],
+                "Rojas": ["Libertad", "Dolores", "Santa Rosa", "Palacio Fajardo"],
+                "Sosa": ["Ciudad de Nutrias", "El Regalo", "Puerto Nutrias", "Santa Catalina"]
+            },
+            "Mérida": {
+                "Alberto Adriani": ["Presidente Betancourt", "Presidente Páez", "Presidente Salas", "Gabriel Picón González", "Héctor Amable Mora", "José Nucete Sardi", "Pulido Méndez"],
+                "Andrés Bello": ["La Azulita"],
+                "Antonio Pinto Salinas": ["Santa Cruz de Mora", "Mesa Bolívar", "Mesa de las Palmas"],
+                "Aricagua": ["Aricagua", "San Antonio"],
+                "Arzobispo Chacón": ["Canagua", "Capurí", "Chacantá", "El Molino", "Guaimaral", "Mucutuy", "Mucuchachí"],
+                "Campo Elías": ["Fernández Peña", "Matriz", "Montalbán", "Acequias", "Jají", "La Mesa", "San José del Sur"],
+                "Caracciolo Parra Olmedo": ["Tucaní", "Florencio Ramírez"],
+                "Cardenal Quintero": ["Santo Domingo", "Las Piedras"],
+                "Guaraque": ["Guaraque", "Mesa de Quintero"],
+                "Julio César Salas": ["Arapuey", "Palmira"],
+                "Justo Briceño": ["Torondoy", "San Cristóbal de Torondoy"],
+                "Libertador": ["Antonio Spinetti Dini", "Arias", "Caracciolo Parra Pérez", "Domingo Peña", "Gonzalo Picón Febres", "Jacinto Plaza", "Juan Rodríguez Suárez", "Lasso de la Vega", "Mariano Picón Salas", "Milla", "Osuna Rodríguez", "Sagrario", "El Morro", "Los Nevados"],
+                "Miranda": ["Timotes", "La Venta", "Piñango", "Andrés Eloy Blanco"],
+                "Obispo Ramos de Lora": ["Santa Elena de Arenales", "Eloy Paredes"],
+                "Padre Noguera": ["Santa María de Caparo"],
+                "Pueblo Llano": ["Pueblo Llano"],
+                "Rangel": ["Mucuchíes", "Cacute", "La Toma", "Mucurubá", "San Rafael"],
+                "Rivas Dávila": ["Bailadores", "Gerónimo Maldonado"],
+                "Santos Marquina": ["Tabay"],
+                "Sucre": ["Lagunillas", "Chachopo", "Estanques", "La Trampa", "Pueblo Nuevo del Sur", "San Juan"],
+                "Tovar": ["Tovar", "El Amparo", "El Llano", "San Francisco"],
+                "Tulio Febres Cordero": ["Nueva Bolivia", "Independencia", "Santa Apolonia"],
+                "Zea": ["Zea", "Caño El Tigre"]
+            },
+            "Zulia": {
+                "Maracaibo": ["Bolívar", "Coquivacoa", "Olegario Villalobos", "Santa Lucía"],
+                "San Francisco": ["San Francisco", "El Bajo", "Domitila Flores"]
+            },
+			"Amazonas": {
+                "Atures": ["Luis Alberto Gómez", "Pahueña", "Platanillal"],
+                "Atabapo": ["Ucata", "Yapacana", "Caname"],
+                "Autana": ["Samariapo", "Sipapo", "Munduapo", "Guayapo"],
+                "Manapiare": ["Alto Ventuari", "Alto Orinoco", "Cerro Yaví", "Gavilán"],
+                "Maroa": ["Victorino", "Cárdenas"],
+                "Río Negro": ["Casiquiare", "Cocuy", "San Carlos de Río Negro", "Solano"]
+            },
+            "Anzoátegui": {
+                "Anaco": ["Anaco", "San Joaquín"],
+                "Aragua": ["Cachipo", "Aragua de Barcelona"],
+                "Bolívar": ["Barcelona", "El Pilar"],
+                "Bruzual": ["Clarines", "Guanape", "Sabana de Uchire"],
+                "Cajigal": ["Onoto", "San Pablo"],
+                "Carvajal": ["Valle de Guanape", "Santa Bárbara"],
+                "Diego Bautista Urbaneja": ["Lechería", "El Morro"],
+                "Guanta": ["Guanta", "Chorrerón"],
+                "Independencia": ["Soledad", "Mamo"],
+                "Libertad": ["San Mateo", "El Chaparro", "Tiguanito"],
+                "Miranda": ["Pariaguán", "Atapirire", "Boca del Pao", "El Pao"],
+                "Monagas": ["Mapire", "Piar"],
+                "Peñalver": ["Puerto Píritu", "San Miguel", "Sucre"],
+                "Píritu": ["Píritu", "San Francisco"],
+                "San Juan de Capistrano": ["Boca de Uchire", "Boca de Chávez"],
+                "Santa Ana": ["Santa Ana", "Pueblo Nuevo"],
+                "Simón Rodríguez": ["El Tigre", "Edmundo Barrios"],
+                "Sotillo": ["Puerto La Cruz", "Pozuelos"],
+                "Sucre": ["Aragua de Barcelona", "Cariaco"],
+                "Turístico Diego Bautista Urbaneja": ["Lechería"]
+            },
+            "Apure": {
+                "Achaguas": ["Achaguas", "Apurito", "El Yagual", "Guachara", "Mucuritas", "Queseras del Medio"],
+                "Biruaca": ["Biruaca"],
+                "Muñoz": ["Bruzual", "Mantecal", "Quintero", "Rincón Hondo", "San Vicente"],
+                "Páez": ["Guasdualito", "Aramendi", "El Amparo", "San Camilo", "Urdaneta"],
+                "Pedro Camejo": ["San Juan de Payara", "Codazzi", "San Rafael de Atamaica"],
+                "Rómulo Gallegos": ["Elorza", "La Trinidad"],
+                "San Fernando": ["San Fernando", "El Recreo", "Peñalver", "San Rafael de Atamaica"]
+            },
+            "Aragua": {
+                "Bolívar": ["San Mateo"],
+                "Camatagua": ["Camatagua", "Carmen de Cura"],
+                "Francisco Linares Alcántara": ["Santa Rita", "Francisco Miranda", "Moseñor Feliciano González"],
+                "Girardot": ["Maracay", "Choroni", "Las Delicias", "Madre María de San José", "Joaquín Crespo", "Pedro José Ovalles", "José Casanova Godoy", "Andrés Eloy Blanco"],
+                "José Ángel Lamas": ["Santa Cruz"],
+                "José Félix Ribas": ["La Victoria", "Zuata", "Castor Nieves Ríos", "Las Guacamayas", "Pao de Zárate"],
+                "José Rafael Revenga": ["El Consejo"],
+                "Libertador": ["Palo Negro", "San Martín de Porres"],
+                "Mario Briceño Iragorry": ["El Limón", "Caña de Azúcar"],
+                "Ocumare de la Costa de Oro": ["Ocumare de la Costa"],
+                "San Casimiro": ["San Casimiro", "Güiripa", "Ollas de Caramacate", "Valle Morín"],
+                "San Sebastián": ["San Sebastián"],
+                "Santiago Mariño": ["Turmero", "Arevalo Aponte", "Chuao", "Samán de Güere", "Pedro Arévalo Aponte"],
+                "Santos Michelena": ["Las Tejerías", "Tiara"],
+                "Sucre": ["Cagua", "Bella Vista"],
+                "Tovar": ["Colonia Tovar"],
+                "Urdaneta": ["Barbacoas", "San Francisco de Cara", "Taguay"],
+                "Zamora": ["Villa de Cura", "Magdaleno", "San Francisco de Asís", "Valles de Tucutunemo"]
+            },
+            "Bolívar": {
+                "Angostura del Orinoco": ["Ciudad Bolívar", "Agua Salada", "Catedral", "José Antonio Páez", "Marhuanta", "Panapana", "Orinoco", "Zea"],
+                "Caroní": ["Puerto Ordaz", "San Félix", "Cachamay", "Chirica", "Dalla Costa", "Pozo Verde", "Unare", "Yocoima"],
+                "Cedeño": ["Caicara del Orinoco", "Ascensión Farreras", "Guaniamo", "La Urbana", "Pijiguaos"],
+                "El Callao": ["El Callao"],
+                "Gran Sabana": ["Santa Elena de Uairén", "Ikabarú"],
+                "Heres": ["Ciudad Bolívar"],
+                "Piar": ["Upata", "Andrés Eloy Blanco", "Pedro Cova"],
+                "Roscio": ["Guasipati", "Salóm"],
+                "Sifontes": ["Tumeremo", "Dalla Costa", "San Isidro"],
+                "Sucre": ["Maripa", "Aripao", "Guarataro", "Las Majadas", "Moitaco"],
+                "Padre Pedro Chien": ["El Palmar"]
+            },
+            "Carabobo": {
+                "Bejuma": ["Bejuma", "Canoabo", "Simón Bolívar"],
+                "Carlos Arvelo": ["Güigüe", "Belén", "Tacarigua"],
+                "Diego Ibarra": ["Mariara", "Aguas Calientes"],
+                "Guacara": ["Guacara", "Ciudad Alianza", "Yagua"],
+                "Juan José Mora": ["Morón", "Urama"],
+                "Libertador": ["Tocuyito", "Independencia"],
+                "Los Guayos": ["Los Guayos"],
+                "Miranda": ["Miranda"],
+                "Montalbán": ["Montalbán"],
+                "Naguanagua": ["Naguanagua"],
+                "Puerto Cabello": ["Puerto Cabello", "Bartolomé Salom", "Democracia", "Fraternidad", "Goaigoaza", "Juan José Flores", "Unión"],
+                "San Diego": ["San Diego"],
+                "San Joaquín": ["San Joaquín"],
+                "Valencia": ["Valencia", "Candelaria", "Catedral", "El Socorro", "Miguel Peña", "Rafael Urdaneta", "San Blas", "San José", "Santa Rosa"]
+            },
+            "Cojedes": {
+                "Anzoátegui": ["Cojeditos"],
+                "Ezequiel Zamora": ["San Carlos", "Juan Ángel Bravo", "Manuel Manrique"],
+                "Girardot": ["El Baúl", "Sucre"],
+                "Lima Blanco": ["Macapo", "La Sierra"],
+                "Pao de San Juan Bautista": ["El Pao"],
+                "Ricaurte": ["Libertad"],
+                "Rómulo Gallegos": ["Las Vegas"],
+                "Tinaco": ["Tinaco"],
+                "Tinaquillo": ["Tinaquillo"]
+            },
+            "Delta Amacuro": {
+                "Antonio Díaz": ["Alegria", "Araguaimujo", "Curiapo", "Joaquín de Nabasanuka"],
+                "Casacoima": ["Sierra Imataca", "Almirante Luis Brión", "Manuel Piar", "Rómulo Gallegos"],
+                "Pedernales": ["Pedernales", "Luis Beltrán Prieto Figueroa"],
+                "Tucupita": ["Tucupita", "Arbelaez", "Juan Millán", "Mariscal Antonio José de Sucre", "Monseñor Argimiro García"]
+            },
+            "Falcón": {
+                "Acosta": ["San Juan de los Cayos", "Capadare", "La Pastora", "Libertador"],
+                "Bolívar": ["San Luis", "Aracua", "La Peña"],
+                "Buchivacoa": ["Capatárida", "Bariro", "Borojó", "Seque", "Valle de Ero"],
+                "Carirubana": ["Punta Cardón", "Santa Ana", "Carirubana", "Norte", "Sabanino"],
+                "Colina": ["La Vela de Coro", "Acurigua", "Guaibacoa", "Las Calderas"],
+                "Dabajuro": ["Dabajuro"],
+                "Democracia": ["Pedregal", "Agua Clara", "Avaria", "Guajira"],
+                "Falcón": ["Pueblo Nuevo", "Adícora", "Baraived", "Buena Vista", "Jadacaquiva"],
+                "Federación": ["Churuguara", "Agua Larga", "El Paují", "Independencia"],
+                "Jacura": ["Jacura", "Agua Linda"],
+                "Los Taques": ["Santa Cruz de Los Taques", "Judibana"],
+                "Manaure": ["Yaracal", "San Félix"],
+                "Miranda": ["Coro", "San Antonio", "San Gabriel", "Santa Ana"],
+                "Monseñor Iturriza": ["Chichiriviche", "Boca de Tocuyo", "Tocuyo de la Costa"],
+                "Palmasola": ["Palmasola"],
+                "Petit": ["Cabure", "Curimagua", "La Peña"],
+                "Píritu": ["Píritu", "San José de la Costa"],
+                "San Francisco": ["Mirimire"],
+                "Silva": ["Tucacas", "Boca de Aroa"],
+                "Sucre": ["La Cruz de Taratara", "Araurima"],
+                "Tocópero": ["Tocópero"],
+                "Unión": ["Santa Cruz de Bucaral", "El Charal", "Las Vegas"],
+                "Urumaco": ["Urumaco", "Bruzual"],
+                "Zamora": ["Puerto Cumarebo", "La Ciénaga", "La Soledad", "Pueblo Cumarebo"]
+            },
+            "Guárico": {
+                "Camaguán": ["Camaguán", "Puerto Miranda", "Uverito"],
+                "Chaguaramas": ["Chaguaramas"],
+                "El Socorro": ["El Socorro"],
+                "Leonardo Infante": ["Valle de la Pascua", "Espino"],
+                "Las Mercedes": ["Las Mercedes", "Cabruta", "Santa Rita"],
+                "Juan Germán Roscio": ["San Juan de los Morros", "Cantagallo", "Parapara"],
+                "Julián Mellado": ["El Sombrero", "Sosa"],
+                "Miranda": ["Calabozo", "El Calvario", "El Rastro", "Guardatinajas"],
+                "Monagas": ["Altagracia de Orituco", "Libertad", "Paso Real de Macaira", "San Rafael de Orituco"],
+                "Ortiz": ["Ortiz", "San José de Tiznados", "San Lorenzo de Tiznados"],
+                "San Gerónimo de Guayabal": ["Guayabal", "Cazorla"],
+                "San José de Guaribe": ["San José de Guaribe"],
+                "Santa María de Ipire": ["Santa María de Ipire", "Altamira"],
+                "Pedro Zaraza": ["Zaraza", "San José de Unare"]
+            },
+            "Lara": {
+                "Andrés Eloy Blanco": ["Sanare", "Pío Tamayo", "Yacambú"],
+                "Crespo": ["Duaca", "Freitez", "José María Blanco"],
+                "Iribarren": ["Barquisimeto", "Aguedo Felipe Alvarado", "Buena Vista", "Juárez", "Juan de Villegas", "Tamaca", "Unión"],
+                "Jiménez": ["Quíbor", "Cabo José Bernardo Dorante", "Coronel Mariano Peraza", "Cuara", "Diego de Lozada"],
+                "Morán": ["El Tocuyo", "Anzoátegui", "Bolívar", "Guárico", "Hilario Luna y Luna"],
+                "Palavecino": ["Cabudare", "Agua Viva", "José Gregorio Bastidas"],
+                "Simón Planas": ["Sarare", "Buría", "Gustavo Vegas León"],
+                "Torres": ["Carora", "Altagracia", "Antonio Díaz", "Camacaro", "Cecilio Zubillaga"],
+                "Urdaneta": ["Siquisique", "Moroturo", "San Miguel"]
+            },
+            "Miranda": {
+                "Acevedo": ["Caucagua", "Aragüita", "Arévalo González", "Capaya", "Panaquire"],
+                "Andrés Bello": ["San José de Barlovento"],
+                "Baruta": ["Baruta", "El Cafetal", "Las Minas de Baruta"],
+                "Brión": ["Higuerote", "Curiepe", "Tacarigua"],
+                "Buroz": ["Mamporal"],
+                "Carrizal": ["Carrizal"],
+                "Chacao": ["Chacao"],
+                "Cristóbal Rojas": ["Charallave", "Las Brisas"],
+                "El Hatillo": ["El Hatillo"],
+                "Guaicaipuro": ["Los Teques", "Altagracia de la Montaña", "Cecilio Acosta", "Paracotos", "San Pedro"],
+                "Independencia": ["Santa Teresa del Tuy", "Cartanal"],
+                " Lander": ["Ocumare del Tuy", "La Democracia", "Santa Bárbara"],
+                "Los Salias": ["San Antonio de los Altos"],
+                "Páez": ["Río Chico", "El Guapo", "Tacarigua de la Laguna"],
+                "Paz Castillo": ["Santa Lucía"],
+                "Pedro Gual": ["Cúpira", "Machurucuto"],
+                "Plaza": ["Guarenas"],
+                "Simón Bolívar": ["San Francisco de Yare"],
+                "Sucre": ["Petare", "Caucagüita", "Filas de Mariche", "La Dolorita", "Leoncio Martínez"],
+                "Urdaneta": ["Cúa", "Nueva Cúa"],
+                "Zamora": ["Guatire", "Bolívar"]
+            },
+            "Monagas": {
+                "Acosta": ["San Antonio", "San Francisco"],
+                "Aguasay": ["Aguasay"],
+                "Bolívar": ["Caripito"],
+                "Caripe": ["Caripe", "El Guácharo", "La Guanota", "Teresen"],
+                "Cedeño": ["Caicara de Maturín", "Areo", "San Félix"],
+                "Ezequiel Zamora": ["Punta de Mata", "El Tejero"],
+                "Libertador": ["Temblador", "Chaguaramas", "Las Alhuacas"],
+                "Maturín": ["Maturín", "Alto de Los Godos", "Boquerón", "Las Cocuizas", "San Simón", "Santa Cruz"],
+                "Piar": ["Aragua de Maturín", "Chaguaramal", "Guanaguana", "Taguaya"],
+                "Punceres": ["Quiriquire", "Caño de los Bueyes"],
+                "Santa Bárbara": ["Santa Bárbara"],
+                "Uracoa": ["Uracoa"]
+            },
+            "Nueva Esparta": {
+                "Antolín del Campo": ["La Plaza de Paraguachí"],
+                "Arismendi": ["La Asunción"],
+                "Díaz": ["San Juan Bautista", "Zabala"],
+                "García": ["El Valle del Espíritu Santo", "Francisco Fajardo"],
+                "Gómez": ["Santa Ana", "Bolívar", "Sucre"],
+                "Maneiro": ["Pampatar", "Aguirre"],
+                "Marcano": ["Juan Griego", "Adrián"],
+                "Mariño": ["Porlamar"],
+                "Península de Macanao": ["Boca de Río", "San Francisco"],
+                "Tubores": ["Punta de Piedras", "Los Barales"],
+                "Villalba": ["San Pedro de Coche"]
+            },
+            "Portuguesa": {
+                "Agua Blanca": ["Agua Blanca"],
+                "Araure": ["Araure", "Rio Acarigua"],
+                "Esteller": ["Píritu", "Uveral"],
+                "Guanare": ["Guanare", "Córdoba", "San José de la Montaña"],
+                "Guanarito": ["Guanarito", "Divina Pastora", "La Trinidad"],
+                "Monseñor José Vicente de Unda": ["Paraíso de Chabasquén"],
+                "Ospino": ["Ospino", "Aparición"],
+                "Páez": ["Acarigua", "Payara"],
+                "Papelón": ["Papelón", "Caño Delgadito"],
+                "San Genaro de Boconoíto": ["Boconoíto", "Antolín Tovar"],
+                "San Rafael de Onoto": ["San Rafael de Onoto", "Santa Fe"],
+                "Santa Rosalía": ["El Playón", "Florida"],
+                "Sucre": ["Biscucuy", "Chabasquén"],
+                "Turén": ["Villa Bruzual", "Santa Cruz"]
+            },
+            "Sucre": {
+                "Andrés Eloy Blanco": ["Casanay", "Mariño"],
+                "Andrés Mata": ["San José de Aerocuar", "Tavera"],
+                "Arismendi": ["Río Caribe", "Puerto Santo", "San Juan de las Galdonas"],
+                "Benítez": ["El Pilar", "El Rincón"],
+                "Bermúdez": ["Carúpano", "Santa Catalina", "Santa Rosa"],
+                "Bolívar": ["Marigüitar"],
+                "Cajigal": ["Yaguaraparo", "El Paujil"],
+                "Cruz Salmerón Acosta": ["Araya", "Chacopata", "Manicuare"],
+                "Libertador": ["Tunapuy", "Campo Elías"],
+                "Mariño": ["Irapa", "Campo Elías"],
+                "Mejía": ["San Antonio del Golfo"],
+                "Montes": ["Cumanacoa", "Arenas"],
+                "Ribero": ["Cariaco", "Catuaro"],
+                "Sucre": ["Cumaná", "Ayacucho", "Santa Inés"],
+                "Valdez": ["Güiria", "Bideau", "Cristóbal Colón"]
+            },
+            "Vargas (La Guaira)": {
+                "Vargas": ["La Guaira", "Carayaca", "Catia La Mar", "Caraballeda", "Macuto", "Maiquetía", "Naiguatá"]
+            },
+            "Yaracuy": {
+                "Aristides Bastidas": ["San Pablo"],
+                "Bolívar": ["Aroa"],
+                "Bruzual": ["Chivacoa", "Campo Elías"],
+                "Cocorote": ["Cocorote"],
+                "Independencia": ["Independencia"],
+                "José Antonio Páez": ["Sabana de Parra"],
+                "La Trinidad": ["Boraure"],
+                "Manuel Monge": ["Yumare"],
+                "Nirgua": ["Nirgua", "Salóm", "Temerla"],
+                "Peña": ["Yaritagua", "San Andrés"],
+                "San Felipe": ["San Felipe", "Albarico", "San Javier"],
+                "Sucre": ["Guama"],
+                "Urachiche": ["Urachiche"],
+                "Veroes": ["Farriar", "El Diez de Noviembre"]
+            },
+            "Zulia": {
+                "Almirante Padilla": ["El Toro", "Monagas", "San Carlos"],
+                "Baralt": ["San Timoteo", "Marcelino Briceño", "Pueblo Nuevo"],
+                "Cabimas": ["Cabimas", "Ambrosio", "La Rosa", "Punta Gorda"],
+                "Catatumbo": ["Encontrados", "Udón Pérez"],
+                "Colón": ["San Carlos del Zulia", "Santa Cruz del Zulia"],
+                "Francisco Javier Pulgar": ["Pueblo Nuevo", "Agustín Codazzi"],
+                "Guajira": ["Sinamaica", "Alta Guajira", "Elías Sánchez Rubio"],
+                "Jesús Enrique Lossada": ["La Concepción", "Mariano Parra León"],
+                "Jesús María Semprún": ["Casigua el Cubo", "Barí"],
+                "La Cañada de Urdaneta": ["Concepción", "Andrés Bello"],
+                "Lagunillas": ["Ciudad Ojeda", "Campo Lara", "Libertad"],
+                "Machiques de Perijá": ["Machiques", "San José", "Bartolomé de las Casas"],
+                "Mara": ["San Rafael de El Moján", "La Sierrita", "Las Parcelas"],
+                "Maracaibo": ["Bolívar", "Coquivacoa", "Olegario Villalobos", "Santa Lucía", "Juana de Ávila", "Chiquinquirá"],
+                "Miranda": ["Los Puertos de Altagracia", "Ana María Campos", "Faría"],
+                "Rosario de Perijá": ["La Villa del Rosario", "Donaldo García"],
+                "San Francisco": ["San Francisco", "El Bajo", "Domitila Flores"],
+                "Santa Rita": ["Santa Rita", "El Mene", "Pedro Lucas Urribarrí"],
+                "Simón Bolívar": ["Tía Juana", "Manuel Manrique"],
+                "Sucre": ["Bobures", "El Batey", "Gibraltar"],
+                "Valmore Rodríguez": ["Bachaquero", "La Victoria"]
+            }
+        };
+
+        // Inicializar Estados al cargar la página
+        document.addEventListener("DOMContentLoaded", () => {
+            const selectEstado = document.getElementById("soc_estado");
+            for (let estado in geoVenezuela) {
+                let option = document.createElement("option");
+                option.value = estado;
+                option.text = estado;
+                selectEstado.add(option);
+            }
+        });
+
+        function cargarMunicipios() {
+            const selectEstado = document.getElementById("soc_estado");
+            const selectMunicipio = document.getElementById("soc_municipio");
+            const selectParroquia = document.getElementById("soc_parroquia");
+            const estadoSeleccionado = selectEstado.value;
+
+            // Resetear Municipio y Parroquia
+            selectMunicipio.innerHTML = '<option value="">Municipio...</option>';
+            selectParroquia.innerHTML = '<option value="">Parroquia...</option>';
+            
+            if (estadoSeleccionado && geoVenezuela[estadoSeleccionado]) {
+                selectMunicipio.disabled = false;
+                for (let municipio in geoVenezuela[estadoSeleccionado]) {
+                    let option = document.createElement("option");
+                    option.value = municipio;
+                    option.text = municipio;
+                    selectMunicipio.add(option);
+                }
+            } else {
+                selectMunicipio.disabled = true;
+                selectParroquia.disabled = true;
+            }
+        }
+
+        function cargarParroquias() {
+            const selectEstado = document.getElementById("soc_estado").value;
+            const selectMunicipio = document.getElementById("soc_municipio").value;
+            const selectParroquia = document.getElementById("soc_parroquia");
+
+            // Resetear Parroquia
+            selectParroquia.innerHTML = '<option value="">Parroquia...</option>';
+
+            if (selectEstado && selectMunicipio && geoVenezuela[selectEstado][selectMunicipio]) {
+                selectParroquia.disabled = false;
+                let parroquias = geoVenezuela[selectEstado][selectMunicipio];
+                parroquias.forEach(parroquia => {
+                    let option = document.createElement("option");
+                    option.value = parroquia;
+                    option.text = parroquia;
+                    selectParroquia.add(option);
+                });
+            } else {
+                selectParroquia.disabled = true;
+            }
+        }
+
+        // ==========================================
+        // LÓGICA DE ENVÍO A TELEGRAM
+        // ==========================================
+        async function enviarPorTelegram(event) {
             event.preventDefault();
-            alert("Formulario enviado correctamente."); 
-            document.getElementById('formReclamo').reset();
+            
+            const btn = document.getElementById('btn_submit_form');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "Enviando...";
+            btn.disabled = true;
+
+            // Recolectar datos
+            const nombre = document.getElementById('soc_nombre').value;
+            const empresa = document.getElementById('soc_empresa').value || 'No especificada';
+            const telefono = document.getElementById('soc_telefono').value;
+            const estado = document.getElementById('soc_estado').value;
+            const municipio = document.getElementById('soc_municipio').value;
+            const parroquia = document.getElementById('soc_parroquia').value;
+            const tipo = document.getElementById('soc_tipo').value;
+            const descripcion = document.getElementById('soc_descripcion').value;
+
+            // Construir el mensaje formateado para Telegram
+            const mensaje = `🔔 *NUEVA SOLICITUD COMERCIAL*\n\n` +
+                            `*👤 Cliente:* ${nombre}\n` +
+                            `*🏢 Empresa:* ${empresa}\n` +
+                            `*📱 Teléfono:* ${telefono}\n` +
+                            `*📍 Ubicación:* ${estado}, ${municipio}, ${parroquia}\n` +
+                            `*📋 Tipo de Solicitud:* ${tipo}\n\n` +
+                            `*📝 Descripción:*\n${descripcion}`;
+
+           // ! IMPORTANTE: REEMPLAZA ESTOS VALORES CON LOS DE TU BOT
+            const BOT_TOKEN = "7798276985:AAH3GkNgfRFOa3lApS3xQk5skodbJyAqmqo"; 
+            const CHAT_ID = "-1003737821268";
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+            try {
+                // Petición a la API de Telegram directa
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: mensaje,
+                        parse_mode: 'Markdown'
+                    })
+                });
+
+                if (!response.ok) throw new Error("Fallo en la API de Telegram");
+                
+                alert("¡Su solicitud comercial ha sido enviada con éxito!");
+                
+                // Limpiar formulario y resetear estados
+                document.getElementById('formComercial').reset();
+                document.getElementById('soc_municipio').innerHTML = '<option value="">Municipio...</option>';
+                document.getElementById('soc_parroquia').innerHTML = '<option value="">Parroquia...</option>';
+                document.getElementById('soc_municipio').disabled = true;
+                document.getElementById('soc_parroquia').disabled = true;
+
+            } catch (error) {
+                console.error("Error al enviar a Telegram:", error);
+                alert("Hubo un error de conexión intentando enviar la solicitud. Inténtalo de nuevo más tarde.");
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
             return false;
         }
     </script>
