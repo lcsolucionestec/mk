@@ -152,50 +152,53 @@
     <input type="hidden" id="mt-trial" value="$(trial)">
     <input type="hidden" id="mt-link-login" value="$(link-login)">
 
-    <div class="bg-gray-900 text-gray-400 text-[10px] md:text-xs py-1.5 px-4 flex justify-between items-center border-b border-gray-800 z-50 relative">
-        <div class="flex items-center gap-2">
-            <i class="fa-regular fa-calendar-days text-brand-blue"></i>
-            <span id="info-datetime">Cargando fecha y hora...</span>
-        </div>
-        <div class="flex items-center gap-4">
-            <div class="hidden sm:flex items-center gap-1" title="Tu IP Local">
-                <i class="fa-solid fa-network-wired text-brand-blue"></i>
-                <span id="info-private-ip">Detectando...</span>
+    <!-- CONTENEDOR STICKY PARA MANTENER LA BARRA SUPERIOR Y EL HEADER SIEMPRE VISIBLES -->
+    <div class="sticky top-0 z-50 w-full shadow-lg">
+        <div class="bg-gray-900 text-gray-400 text-[10px] md:text-xs py-1.5 px-4 flex justify-between items-center border-b border-gray-800 relative z-50">
+            <div class="flex items-center gap-2">
+                <i class="fa-regular fa-calendar-days text-brand-blue"></i>
+                <span id="info-datetime">Cargando fecha y hora...</span>
             </div>
-            <div class="flex items-center gap-1" title="Tu IP Pública">
-                <i class="fa-solid fa-globe text-brand-blue"></i>
-                <span id="info-public-ip">Detectando...</span>
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-1" title="Tu IP Local">
+                    <i class="fa-solid fa-network-wired text-brand-blue"></i>
+                    <span id="info-private-ip">Detectando...</span>
+                </div>
+                <div class="flex items-center gap-1" title="Tu IP Pública">
+                    <i class="fa-solid fa-globe text-brand-blue"></i>
+                    <span id="info-public-ip">Detectando...</span>
+                </div>
+                <button onclick="openSpeedtest()" class="bg-brand-blue/20 text-brand-blue hover:bg-brand-blue hover:text-white px-3 py-0.5 rounded-full transition font-bold flex items-center gap-1">
+                    <i class="fa-solid fa-gauge-high"></i> <span class="hidden sm:inline">Speedtest</span>
+                </button>
             </div>
-            <button onclick="openSpeedtest()" class="bg-brand-blue/20 text-brand-blue hover:bg-brand-blue hover:text-white px-3 py-0.5 rounded-full transition font-bold flex items-center gap-1">
-                <i class="fa-solid fa-gauge-high"></i> <span class="hidden sm:inline">Speedtest</span>
-            </button>
         </div>
+
+        <header class="bg-brand-dark border-b border-gray-800 relative z-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-row justify-between items-center h-20 gap-4">
+                    
+                    <div class="flex items-center gap-3 cursor-pointer shrink-0" onclick="switchTab('wifi')">
+                        <img src="img/logo2.png" alt="LC Soluciones" class="h-10 md:h-12 w-auto object-contain">
+                    </div>
+
+                    <nav class="flex gap-4 sm:gap-6 md:gap-8 text-[10px] sm:text-xs font-bold tracking-widest uppercase overflow-x-auto hide-scrollbar pt-1">
+                        <button id="btn-wifi" onclick="switchTab('wifi')" class="nav-link nav-active">Inicio</button>
+                        <button id="btn-planes" onclick="switchTab('planes')" class="nav-link">Planes</button>
+					    <button id="btn-automatizacion" onclick="switchTab('automatizacion')" class="nav-link">Automatización</button>
+                        <button id="btn-trabajos" onclick="switchTab('trabajos')" class="nav-link">Portafolios</button>
+                        <button id="btn-reclamos" onclick="switchTab('reclamos')" class="nav-link">Comercial</button>
+                    </nav>
+
+                    <div class="hidden lg:flex items-center gap-4 shrink-0">
+                        <a href="https://wa.me/584245134562" target="_blank" class="bg-brand-blue text-white px-5 py-2 rounded-md text-xs font-bold flex items-center gap-2 hover:bg-blue-700 transition">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> +58 424 513 4562
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
     </div>
-
-    <header class="bg-brand-dark sticky top-0 z-40 border-b border-gray-800 shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-row justify-between items-center h-20 gap-4">
-                
-                <div class="flex items-center gap-3 cursor-pointer shrink-0" onclick="switchTab('wifi')">
-                    <img src="img/logo2.png" alt="LC Soluciones" class="h-10 md:h-12 w-auto object-contain">
-                </div>
-
-                <nav class="flex gap-4 sm:gap-6 md:gap-8 text-[10px] sm:text-xs font-bold tracking-widest uppercase overflow-x-auto hide-scrollbar pt-1">
-                    <button id="btn-wifi" onclick="switchTab('wifi')" class="nav-link nav-active">Inicio</button>
-                    <button id="btn-planes" onclick="switchTab('planes')" class="nav-link">Planes</button>
-					<button id="btn-automatizacion" onclick="switchTab('automatizacion')" class="nav-link">Automatización</button>
-                    <button id="btn-trabajos" onclick="switchTab('trabajos')" class="nav-link">Portafolios</button>
-                    <button id="btn-reclamos" onclick="switchTab('reclamos')" class="nav-link">Comercial</button>
-                </nav>
-
-                <div class="hidden lg:flex items-center gap-4 shrink-0">
-                    <a href="https://wa.me/584245134562" target="_blank" class="bg-brand-blue text-white px-5 py-2 rounded-md text-xs font-bold flex items-center gap-2 hover:bg-blue-700 transition">
-                        <i class="fa-brands fa-whatsapp text-lg"></i> +58 424 513 4562
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
 
     <main class="flex-grow flex flex-col relative" style="background-image: url('img/red.webp'); background-size: cover; background-position: center; background-attachment: fixed;">
         <div class="absolute inset-0 bg-[#020b18]/80 z-0"></div>
