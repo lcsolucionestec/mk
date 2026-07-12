@@ -166,10 +166,6 @@
                 <i class="fa-solid fa-globe text-brand-blue"></i>
                 <span id="info-public-ip">Detectando...</span>
             </div>
-            <div class="flex items-center gap-1" title="Tu Proveedor de Internet (ISP)">
-                <i class="fa-solid fa-tower-broadcast text-brand-blue"></i>
-                <span id="info-isp" class="truncate max-w-[110px] sm:max-w-[180px] md:max-w-none">Detectando ISP...</span>
-            </div>
             <button onclick="openSpeedtest()" class="bg-brand-blue/20 text-brand-blue hover:bg-brand-blue hover:text-white px-3 py-0.5 rounded-full transition font-bold flex items-center gap-1">
                 <i class="fa-solid fa-gauge-high"></i> <span class="hidden sm:inline">Speedtest</span>
             </button>
@@ -716,34 +712,11 @@
         updateDateTime();
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Obtener IP Pública e ISP (API Externa - Funciona bien en GH Pages)
-            fetch('https://ipwhois.app/json/')
+            // Obtener IP Pública (API Externa - Funciona bien en GH Pages)
+            fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
-                .then(data => {
-                    document.getElementById('info-public-ip').innerText = data.ip || "No disponible";
-                    const isp = data.isp || data.org || "ISP no disponible";
-                    document.getElementById('info-isp').innerText = isp;
-                    document.getElementById('info-isp').parentElement.title = "ISP: " + isp;
-                })
-                .catch(() => {
-                    // Fallback en caso de que la primera API falle
-                    fetch('https://ipapi.co/json/')
-                        .then(response => response.json())
-                        .then(data => {
-                            document.getElementById('info-public-ip').innerText = data.ip || "No disponible";
-                            const isp = data.org || "ISP no disponible";
-                            document.getElementById('info-isp').innerText = isp;
-                            document.getElementById('info-isp').parentElement.title = "ISP: " + isp;
-                        })
-                        .catch(() => {
-                            // Segundo fallback a ipify solo para IP
-                            fetch('https://api.ipify.org?format=json')
-                                .then(response => response.json())
-                                .then(data => { document.getElementById('info-public-ip').innerText = data.ip; })
-                                .catch(() => { document.getElementById('info-public-ip').innerText = "No disponible"; });
-                            document.getElementById('info-isp').innerText = "No disponible";
-                        });
-                });
+                .then(data => { document.getElementById('info-public-ip').innerText = data.ip; })
+                .catch(() => { document.getElementById('info-public-ip').innerText = "No disponible"; });
 
             // Obtener IP Privada del Navegador, posiblemente funcione
             document.getElementById('info-private-ip').innerText = "Protegida";
