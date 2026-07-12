@@ -39,21 +39,39 @@
     		transition: transform 0.3s ease;
 		}
 
-        /* ==================== NAVEGACIÓN ==================== */
+        /* ==================== NAVEGACIÓN Y EFECTOS ==================== */
         .nav-link {
             color: #a0aec0;
-            transition: 0.3s;
+            transition: all 0.3s ease-in-out;
             border-bottom: 2px solid transparent;
             padding-bottom: 4px;
             white-space: nowrap;
         }
-        .nav-link:hover { color: #fff; }
+        
+        /* NUEVO: Efecto de iluminación y escala en el menú de navegación */
+        .nav-link:hover { 
+            color: #fff; 
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(0, 86, 255, 0.8);
+        }
+        
         .nav-active {
             color: #fff !important;
             border-bottom: 2px solid #0056ff;
         }
+        
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* NUEVO: Efecto de iluminación y escala en los títulos de cada sección */
+        .title-glow {
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
+        }
+        .title-glow:hover {
+            transform: scale(1.02);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(0, 86, 255, 0.9);
+        }
 
         /* ==================== TARJETAS Y FORMULARIOS ==================== */
         .service-card {
@@ -94,6 +112,31 @@
         .modal-bg { background: rgba(2, 11, 24, 0.85); backdrop-filter: blur(5px); }
         .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* ==================== ANIMACIONES MODERNAS DE TEXTO ==================== */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes slideInLeft {
+            0% { opacity: 0; transform: translateX(-40px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        .animate-slide-in-left {
+            animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes slideInRight {
+            0% { opacity: 0; transform: translateX(40px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -116,6 +159,7 @@
                 <nav class="flex gap-4 sm:gap-6 md:gap-8 text-[10px] sm:text-xs font-bold tracking-widest uppercase overflow-x-auto hide-scrollbar pt-1">
                     <button id="btn-wifi" onclick="switchTab('wifi')" class="nav-link nav-active">Inicio</button>
                     <button id="btn-planes" onclick="switchTab('planes')" class="nav-link">Planes</button>
+					<button id="btn-automatizacion" onclick="switchTab('automatizacion')" class="nav-link">Automatización</button>
                     <button id="btn-trabajos" onclick="switchTab('trabajos')" class="nav-link">Portafolios</button>
                     <button id="btn-reclamos" onclick="switchTab('reclamos')" class="nav-link">Comercial</button>
                 </nav>
@@ -132,142 +176,267 @@
     <main class="flex-grow flex flex-col relative" style="background-image: url('img/red.webp'); background-size: cover; background-position: center; background-attachment: fixed;">
         <div class="absolute inset-0 bg-[#020b18]/80 z-0"></div>
 
+        <!-- ========================================================================= -->
+        <!-- SECCIÓN 1: INICIO (WIFI)                                                  -->
+        <!-- ========================================================================= -->
         <section id="tab-wifi" class="flex-grow flex flex-col relative z-10">
             <div class="flex-grow flex items-center py-10 md:py-16 lg:py-0 min-h-[85vh]">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row items-center justify-between gap-10">
-                    <div class="flex-1 text-center lg:text-left mt-4 lg:mt-0">
-                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
-                            ARQUITECTURA DE REDES, <br class="hidden lg:block">
-                            PARA EL <span class="text-brand-blue">FUTURO DIGITAL</span>
+                    
+                    <!-- Lado Izquierdo: Textos e Información Expandida -->
+                    <div class="flex-1 text-center lg:text-left mt-4 lg:mt-0 animate-slide-in-left">
+                        <h2 class="title-glow text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
+                            ARQUITECTURA DE REDES PARA EL, <span class="text-brand-blue">FUTURO DIGITAL</span>
                         </h2>
-                        <p class="text-gray-300 text-sm md:text-base max-w-xl mx-auto lg:mx-0 mb-8">
+                        
+                        <p class="text-gray-300 text-sm md:text-base max-w-xl mx-auto lg:mx-0 mb-4">
                             En <span class="text-brand-orange"><strong>LC SOLUCIONES TECNOLÓGICAS</strong></span>, transformamos la complejidad técnica en valor operativo. Ofrecemos una integración completa entre infraestructura física de telecomunicaciones y plataformas digitales personalizadas, asegurando la máxima estabilidad, seguridad y eficiencia en la transmisión de datos para su empresa.
                         </p>
                         
-                        <div class="hidden sm:flex flex-wrap justify-center lg:justify-start gap-6 text-white text-xs font-semibold">
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-brand-blue text-lg"></i> Soluciones Confiables</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-gauge-high text-brand-blue text-lg"></i> Alto Rendimiento</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-headset text-brand-blue text-lg"></i> Soporte 24/7</div>
+                        <p class="text-gray-300 text-sm md:text-base max-w-xl mx-auto lg:mx-0 mb-4">
+                            Nuestro compromiso va más allá de conectar equipos; diseñamos ecosistemas digitales escalables adaptados a sus requerimientos. Contamos con un equipo de especialistas listos para enfrentar los desafíos de conectividad más exigentes, garantizando una red robusta que impulse la productividad minimizando las interrupciones.
+                        </p>
+
+                        <p class="text-gray-300 text-sm md:text-base max-w-xl mx-auto lg:mx-0 mb-8">
+                            Descubra una experiencia de navegación superior con tecnología de vanguardia y un monitoreo preventivo. Tu tranquilidad y el crecimiento de tu proyecto digital son nuestra principal prioridad.
+                        </p>
+                        
+                        <!-- Contenedor de Insignias ampliado para lucir más lleno -->
+                        <div class="hidden sm:flex flex-wrap justify-center lg:justify-start gap-4 text-white text-xs font-semibold">
+                            <div class="flex items-center gap-2 bg-white/10 px-4 py-2.5 rounded-lg border border-white/20 hover:bg-white/20 transition cursor-default">
+                                <i class="fa-solid fa-shield-halved text-brand-blue text-lg"></i> Soluciones Confiables
+                            </div>
+                            <div class="flex items-center gap-2 bg-white/10 px-4 py-2.5 rounded-lg border border-white/20 hover:bg-white/20 transition cursor-default">
+                                <i class="fa-solid fa-gauge-high text-brand-blue text-lg"></i> Alto Rendimiento
+                            </div>
+                            <div class="flex items-center gap-2 bg-white/10 px-4 py-2.5 rounded-lg border border-white/20 hover:bg-white/20 transition cursor-default">
+                                <i class="fa-solid fa-headset text-brand-blue text-lg"></i> Soporte 24/7
+                            </div>
+                            <div class="flex items-center gap-2 bg-white/10 px-4 py-2.5 rounded-lg border border-white/20 hover:bg-white/20 transition cursor-default">
+                                <i class="fa-solid fa-network-wired text-brand-blue text-lg"></i> Escalabilidad
+                            </div>
+                            <div class="flex items-center gap-2 bg-white/10 px-4 py-2.5 rounded-lg border border-white/20 hover:bg-white/20 transition cursor-default">
+                                <i class="fa-solid fa-lightbulb text-brand-blue text-lg"></i> Innovación
+                            </div>
+                            <div class="flex items-center gap-2 bg-white/10 px-4 py-2.5 rounded-lg border border-white/20 hover:bg-white/20 transition cursor-default">
+                                <i class="fa-solid fa-satellite-dish text-brand-blue text-lg"></i> Amplia Cobertura
+                            </div>
                         </div>
                     </div>
 
-                    <div class="w-full max-w-sm md:max-w-md bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-8 border-t-4 border-brand-blue">
+                    <!-- Lado Derecho: Tarjeta de Servicios -->
+                    <div class="w-full max-w-2xl md:max-w-2xl bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-8 border-t-4 border-brand-blue animate-slide-in-right" style="animation-delay: 0.1s;">
                         <div class="text-center">
-                            <i class="fa-solid fa-briefcase text-brand-blue text-4xl mb-4"></i>
-                            <h3 class="font-black text-gray-800 text-lg uppercase mb-3">SERVICIOS QUE DESEMPEÑAMOS</h3>
+                            <i class="fa-solid fa-medal text-brand-blue text-4xl mb-4"></i>
+                            <h3 class="font-black text-gray-800 text-lg uppercase mb-3">EXPERIENCIA</h3>
                             <ul class="text-left text-xs text-gray-500 space-y-2 mt-4">
                                 <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                                    <i class="fa-solid fa-map-marked-alt text-brand-blue mt-1"></i>
-                                    <span>Gestión de redes FTTH y planificación geográfica con <b>OZmap</b> para optimización de despliegue.</span>
-                                </li>
-                                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                                    <i class="fa-solid fa-server text-brand-blue mt-1"></i>
-                                    <span>Administración avanzada de servidores <b>MikroTik</b>, balanceo de carga y control de ancho de banda.</span>
-                                </li>
-                                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                                    <i class="fa-solid fa-microchip text-brand-blue mt-1"></i>
-                                    <span>Diseño e implementación de <b>infraestructura de fibra óptica</b> y redes PON de alta disponibilidad.</span>
-                                </li>
-                                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                                    <i class="fa-solid fa-lock text-brand-blue mt-1"></i>
-                                    <span>Soluciones de ciberseguridad perimetral y segmentación de redes corporativas (VLANs).</span>
-                                </li>
-                                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                                    <i class="fa-solid fa-tower-broadcast text-brand-blue mt-1"></i>
-                                    <span>Ingeniería en enlaces inalámbricos de larga distancia (punto a punto y multipunto).</span>
-                                </li>
-                                <li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
-                                    <i class="fa-solid fa-code-branch text-brand-blue mt-1"></i>
-                                    <span>Desarrollo de portales cautivos personalizados, automatización y reportería vía API.</span>
-                                </li>
+									<i class="fa-solid fa-map-marked-alt text-brand-blue mt-1"></i>
+									<span><b>Planificación Geo-estratégica:</b> Optimizamos el despliegue de tu red FTTH usando <b>OZmap</b>, reduciendo costos operativos y garantizando la mayor cobertura con mínima inversión.</span>
+								</li>
+								<li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+									<i class="fa-solid fa-layer-group text-brand-blue mt-1"></i>
+									<span><b>Análisis Geoespacial Avanzado:</b> Dominio experto en <b>QGIS</b> para la creación de cartografía técnica, levantamiento de capas de infraestructura y modelado de datos espaciales, facilitando la toma de decisiones basada en información precisa.</span>
+								</li>
+								<li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+									<i class="fa-solid fa-server text-brand-blue mt-1"></i>
+									<span><b>Gestión de Redes Inteligentes:</b> Administración avanzada <b>MikroTik</b>. Garantizamos estabilidad absoluta mediante balanceo de carga, failover automático y control preciso de ancho de banda.</span>
+								</li>
+								<li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+									<i class="fa-solid fa-microchip text-brand-blue mt-1"></i>
+									<span><b>Infraestructura de Alto Rendimiento:</b> Diseño de redes PON y fibra óptica bajo estándares internacionales, construidas para soportar tráfico masivo sin degradación de señal.</span>
+								</li>
+								<li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+									<i class="fa-solid fa-shield-halved text-brand-blue mt-1"></i>
+									<span><b>Ciberseguridad Perimetral:</b> Blindamos tu operación. Implementamos segmentación (VLANs) y firewalls robustos para proteger tus datos críticos contra accesos no autorizados.</span>
+								</li>
+								<li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+									<i class="fa-solid fa-tower-broadcast text-brand-blue mt-1"></i>
+									<span><b>Ingeniería en Enlaces Inalámbricos:</b> Conectamos lo imposible. Enlaces de larga distancia (PtP/PtMP) con tecnología de vanguardia para garantizar latencia mínima en entornos rurales o industriales.</span>
+								</li>
+								<li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+									<i class="fa-solid fa-code-branch text-brand-blue mt-1"></i>
+									<span><b>Soluciones Digitales a Medida:</b> Desarrollo de portales cautivos profesionales, automatización de procesos y reportería vía API para que gestiones tu negocio con visión analítica.</span>
+								</li>
+								<li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
+									<i class="fa-solid fa-headset text-brand-blue mt-1"></i>
+									<span><b>Soporte Técnico Especializado:</b> Acompañamiento preventivo y correctivo. Estamos comprometidos con la continuity de tu servicio, 24/7.</span>
+								</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
+	
+        <!-- ========================================================================= -->
+        <!-- SECCIÓN 2: PLANES                                                         -->
+        <!-- ========================================================================= -->
         <section id="tab-planes" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-10">
-                    <span class="text-brand-orange"><strong>SERVICIOS DE INTERNET MÓVIL EN ZONAS WIFI</strong></span>
-                    <h3 class="text-2xl md:text-3xl font-black text-white drop-shadow-md">Planes a la medida de tus necesidades</h3>
+                <div class="text-center mb-10 animate-fade-in-up">
+					<h2 class="title-glow text-3xl sm:text-4xl lg:text-4xl font-black text-white leading-tight mb-4 tracking-tight">
+                            PLANES A LA MEDIDA DE <span class="text-brand-blue">TUS NECESIDADES</span><div
+                    <span class="text-brand-orange"><strong>SERVICIOS DE INTERNET MÓVIL EN ZONAS WIFI</strong></span></div</span>
+                    
+                    </h2>
                     <p class="text-gray-300 mt-2 text-sm">Planes disponibles solo en zonas con cobertura <span class="text-brand-orange"><strong>LC SOLUCIONES TECNOLÓGICAS.</strong></span></p>
+				</div>
+
+                <div class="animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <h4 class="text-sm font-bold text-white border-l-4 border-brand-blue pl-2 mb-4 uppercase drop-shadow-md">Planes Ilimitados</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
+                        <div class="service-card p-6 flex flex-col items-center text-center">
+                            <i class="fa-regular fa-clock text-brand-blue text-3xl mb-3"></i>
+                            <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Hora</h4>
+                            <p class="text-gray-600 text-xs md:text-sm mb-3">Conexión libre</p>
+                            <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">500,00 Bs</p>
+                            <button onclick="openPlanModal('Plan 1 Hora', 'Recomendado para una conexión rápida: ideal para realizar transferencias bancarias, revisar correos urgentes o enviar mensajes cortos sin preocuparse por los datos consumidos.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
+                        </div>
+                        <div class="service-card p-6 flex flex-col items-center text-center">
+                            <i class="fa-solid fa-calendar-day text-brand-blue text-3xl mb-3"></i>
+                            <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Día</h4>
+                            <p class="text-gray-600 text-xs md:text-sm mb-3">24Hrs continuas</p>
+                            <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">1.500,00 Bs</p>
+                            <button onclick="openPlanModal('Plan 1 Día', 'Ideal para uso moderado durante una jornada completa. Te permite mantenerte conectado a tus redes sociales, navegación y videos cortos sin interrupciones durante 24 horas.')" 
+            				class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer flex items-center justify-center gap-1">
+        					Ver detalles</button>
+                        </div>
+                        <div class="service-card p-6 flex flex-col items-center text-center">
+                            <i class="fa-solid fa-calendar-week text-brand-blue text-3xl mb-3"></i>
+                            <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Semana</h4>
+                            <p class="text-gray-600 text-xs md:text-sm mb-3">7 días libres</p>
+                            <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">5.000,00 Bs</p>
+                            <button onclick="openPlanModal('Plan 1 Semana', 'Excelente opción para turistas, trabajadores temporales o para quienes buscan un uso equilibrado y conexión constante de datos libres durante toda la semana.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
+                        </div>
+                        <div class="service-card p-6 flex flex-col items-center text-center">
+                            <i class="fa-solid fa-infinity text-brand-blue text-3xl mb-3"></i>
+                            <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Mes</h4>
+                            <p class="text-gray-600 text-xs md:text-sm mb-3">30 días continuos</p>
+                            <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">15.000,00 Bs</p>
+                            <button onclick="openPlanModal('Plan 1 Mes', 'La mejor alternativa para residentes locales. Creado para mantenerte siempre conectado, ofreciendo disponibilidad 24/7 sin preocuparte por recargar o contar GB.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
+                        </div>
+                    </div>
                 </div>
 
-                <h4 class="text-sm font-bold text-white border-l-4 border-brand-blue pl-2 mb-4 uppercase drop-shadow-md">Planes Ilimitados</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
-                    <div class="service-card p-6 flex flex-col items-center text-center">
-                        <i class="fa-regular fa-clock text-brand-blue text-3xl mb-3"></i>
-                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Hora</h4>
-                        <p class="text-gray-600 text-xs md:text-sm mb-3">Conexión libre</p>
-                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">500,00 Bs</p>
-                        <button onclick="openPlanModal('Plan 1 Hora', 'Recomendado para una conexión rápida: ideal para realizar transferencias bancarias, revisar correos urgentes o enviar mensajes cortos sin preocuparse por los datos consumidos.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
-                    </div>
-                    <div class="service-card p-6 flex flex-col items-center text-center">
-                        <i class="fa-solid fa-calendar-day text-brand-blue text-3xl mb-3"></i>
-                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Día</h4>
-                        <p class="text-gray-600 text-xs md:text-sm mb-3">24Hrs continuas</p>
-                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">1.500,00 Bs</p>
-                        <button onclick="openPlanModal('Plan 1 Día', 'Ideal para uso moderado durante una jornada completa. Te permite mantenerte conectado a tus redes sociales, navegación y videos cortos sin interrupciones durante 24 horas.')" 
-        				class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer flex items-center justify-center gap-1">
-    					Ver detalles</button>
-                    </div>
-                    <div class="service-card p-6 flex flex-col items-center text-center">
-                        <i class="fa-solid fa-calendar-week text-brand-blue text-3xl mb-3"></i>
-                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Semana</h4>
-                        <p class="text-gray-600 text-xs md:text-sm mb-3">7 días libres</p>
-                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">5.000,00 Bs</p>
-                        <button onclick="openPlanModal('Plan 1 Semana', 'Excelente opción para turistas, trabajadores temporales o para quienes buscan un uso equilibrado y conexión constante de datos libres durante toda la semana.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
-                    </div>
-                    <div class="service-card p-6 flex flex-col items-center text-center">
-                        <i class="fa-solid fa-infinity text-brand-blue text-3xl mb-3"></i>
-                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Mes</h4>
-                        <p class="text-gray-600 text-xs md:text-sm mb-3">30 días continuos</p>
-                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">15.000,00 Bs</p>
-                        <button onclick="openPlanModal('Plan 1 Mes', 'La mejor alternativa para residentes locales. Creado para mantenerte siempre conectado, ofreciendo disponibilidad 24/7 sin preocuparte por recargar o contar GB.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
-                    </div>
-                </div>
-
-                <h4 class="text-sm font-bold text-white border-l-4 border-brand-blue pl-2 mb-4 uppercase drop-shadow-md">Planes por Consumo</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                    <div class="service-card p-6 flex flex-col items-center text-center">
-                        <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
-                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 GB Datos</h4>
-                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">250,00 Bs</p>
-                        <button onclick="openPlanModal('Plan 1 GB', 'Recomendado para uso ligero: mensajería de texto básica (WhatsApp), consultas sencillas por internet y correos sin archivos adjuntos pesados.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
-                    </div>
-                    <div class="service-card p-6 flex flex-col items-center text-center">
-                        <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
-                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">3 GB Datos</h4>
-                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">1.000,00 Bs</p>
-                        <button onclick="openPlanModal('Plan 3 GB', 'Ideal para uso intermedio: te permite navegar en la web de forma fluida, revisar tus redes sociales e incluso escuchar música en línea.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
-                    </div>
-                    <div class="service-card p-6 flex flex-col items-center text-center">
-                        <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
-                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">5 GB Datos</h4>
-                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">2.500,00 Bs</p>
-                        <button onclick="openPlanModal('Plan 5 GB', 'Perfecto para usuarios más activos que requieren realizar videollamadas, navegar por redes sociales constantemente o visualizar videos con calidad estándar.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
-                    </div>
-                    <div class="service-card p-6 flex flex-col items-center text-center">
-                        <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
-                        <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">10 GB Datos</h4>
-                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">8.750,00 Bs</p>
-                        <button onclick="openPlanModal('Plan 10 GB', 'Diseñado para los usuarios más exigentes. Apto para alto consumo multimedia, descargas frecuentes y herramientas de trabajo o educación remota que consumen muchos datos.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
+                <div class="animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <h4 class="text-sm font-bold text-white border-l-4 border-brand-blue pl-2 mb-4 uppercase drop-shadow-md">Planes por Consumo</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                        <div class="service-card p-6 flex flex-col items-center text-center">
+                            <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
+                            <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 GB Datos</h4>
+                            <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">250,00 Bs</p>
+                            <button onclick="openPlanModal('Plan 1 GB', 'Recomendado para uso ligero: mensajería de texto básica (WhatsApp), consultas sencillas por internet y correos sin archivos adjuntos pesados.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
+                        </div>
+                        <div class="service-card p-6 flex flex-col items-center text-center">
+                            <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
+                            <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">3 GB Datos</h4>
+                            <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">1.000,00 Bs</p>
+                            <button onclick="openPlanModal('Plan 3 GB', 'Ideal para uso intermedio: te permite navegar en la web de forma fluida, revisar tus redes sociales e incluso escuchar música en línea.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
+                        </div>
+                        <div class="service-card p-6 flex flex-col items-center text-center">
+                            <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
+                            <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">5 GB Datos</h4>
+                            <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">2.500,00 Bs</p>
+                            <button onclick="openPlanModal('Plan 5 GB', 'Perfecto para usuarios más activos que requieren realizar videollamadas, navegar por redes sociales constantemente o visualizar videos con calidad estándar.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
+                        </div>
+                        <div class="service-card p-6 flex flex-col items-center text-center">
+                            <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
+                            <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">10 GB Datos</h4>
+                            <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">8.750,00 Bs</p>
+                            <button onclick="openPlanModal('Plan 10 GB', 'Diseñado para los usuarios más exigentes. Apto para alto consumo multimedia, descargas frecuentes y herramientas de trabajo o educación remota que consumen muchos datos.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+	
+	    <!-- ========================================================================= -->
+        <!-- SECCIÓN: AUTOMATIZACIÓN                                                   -->
+        <!-- ========================================================================= -->
+	<section id="tab-automatizacion" class="tab-section hidden flex-grow py-16 px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10 animate-fade-in-up">
+   <h2 class="title-glow text-3xl sm:text-4xl lg:text-4xl font-black leading-tight tracking-tight">
+       <span class="block text-white">
+        AUTOMATIZACIÓN & <span class="text-brand-blue">GESTIÓN DE ISP'S</span>
+    </span>
+           <span class="block mb-2 text-brand-orange">
+        ESTAMOS TRABAJANDO PARA EL DESARROLLO DE NUESTRAS APP'S
+    </span>
+</h2>
+</div>
 
-        <section id="tab-trabajos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="max-w-5xl mx-auto">
-                <div class="text-center mb-10">
-                    <span class="text-brand-orange"><strong>NUESTRO PORTAFOLIOS</strong></span>
-                    <h3 class="text-2xl md:text-3xl font-black text-white drop-shadow-md">Experiencia de Campo</h3>
+       
+<div class="text-center -mt-4">
+    <p class="text-gray-300 max-w-3xl mx-auto text-lg font-normal">
+        Desarrollamos herramientas de infraestructura inteligente para que tu ISP opere con autonomía total, desde el despliegue físico hasta la facturación automatizada.
+    </p>
+</div>
+			
+        <!-- Grid extendido -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- TARJETA 1 -->
+            <div class="p-8 bg-white/100 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg hover:border-brand-blue transition-all relative group">
+                <span class="absolute top-4 right-4 text-[10px] bg-white/10 text-brand-orange border border-brand-orange/50 px-2 py-1 rounded-full animate-pulse uppercase font-bold shadow-sm"><i class="fa-solid fa-code mr-1"></i> <b>EN DESARROLLO</b>
+                </span>
+                <i class="fa-solid fa-microchip text-4xl text-brand-blue mb-6"></i>
+                <h4 class="text-xl font-bold text-gray-900 mb-4">Núcleo de Red y OLT</h4>
+                <p class="text-gray-700 text-sm leading-relaxed mb-4">Arquitectura de red escalable. Estamos integrando drivers de comunicación directa con OLTs de marcas líderes (Huawei, ZTE, C-Data) para control granular.</p>
+                <ul class="text-xs text-gray-600 space-y-2">
+                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Provisioning Zero-Touch</li>
+                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Gestión de perfiles DBA</li>
+                </ul>
+            </div>
+
+            <!-- TARJETA 2 -->
+            <div class="p-8 bg-white/100 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg hover:border-brand-blue transition-all relative group">
+                	<span class="absolute top-4 right-4 text-[10px] bg-white/10 text-brand-orange border border-brand-orange/50 px-2 py-1 rounded-full animate-pulse uppercase font-bold shadow-sm"><i class="fa-solid fa-code mr-1"></i> <b>EN DESARROLLO</b>
+                </span>
+                <i class="fa-solid fa-wallet text-4xl text-brand-blue mb-6"></i>
+                <h4 class="text-xl font-bold text-gray-900 mb-4">Motor de Billing (OSS/BSS)</h4>
+                <p class="text-gray-700 text-sm leading-relaxed mb-4">Sistema administrativo inteligente diseñado para automatizar el ciclo completo de vida del cliente, reduciendo drásticamente la carga operativa.</p>
+                <ul class="text-xs text-gray-600 space-y-2">
+                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Cortes automáticos por mora</li>
+                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Portal del cliente en la nube</li>
+                </ul>
+            </div>
+
+            <!-- TARJETA 3 -->
+            <div class="p-8 bg-white/100 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg hover:border-brand-blue transition-all relative group">
+                <span class="absolute top-4 right-4 text-[10px] bg-brand-blue text-white px-2 py-1 rounded-full uppercase font-bold shadow-sm">
+                    <i class="fa-solid fa-check mr-1"></i> Estable
+                </span>
+                <i class="fa-solid fa-map-location-dot text-4xl text-brand-blue mb-6"></i>
+                <h4 class="text-xl font-bold text-gray-900 mb-4">Cartografía de Red</h4>
+                <p class="text-gray-700 text-sm leading-relaxed mb-4">Visibilidad total de tu planta externa. Mapeo inteligente con integración de capas GIS para la gestión precisa de cajas NAP y terminales.</p>
+                <ul class="text-xs text-gray-600 space-y-2">
+                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Planificación con OZmap/QGIS</li>
+                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Optimización de tendido</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+        
+        <!-- ========================================================================= -->
+        <!-- SECCIÓN 3: PORTAFOLIOS                                                    -->
+        <!-- ========================================================================= -->
+       <section id="tab-trabajos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-10 animate-fade-in-up">
+            
+            <!-- Ambos textos ahora comparten las mismas clases de estilo -->
+            <h2 class="title-glow text-3xl sm:text-4xl lg:text-4xl font-black text-white leading-tight tracking-tight">
+                <span class="block mb-2">NUESTRO <span class="text-brand-blue">PORTAFOLIO</span></span>
+                <span class="block text-brand-orange">TRABAJOS DE CAMPO</span>
+            </h2>
+					
                     <p class="text-gray-300 mt-2 text-sm">Conoce la calidad de nuestros servicios e instalaciones.</p>
                 </div>
 
-                <div class="relative group">
+                <div class="relative group animate-fade-in-up" style="animation-delay: 0.1s;">
                     <button onclick="scrollCarrusel(-320)" class="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-20 bg-brand-blue text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full shadow-lg hover:bg-blue-700 transition">
                         <i class="fa-solid fa-chevron-left text-lg"></i>
                     </button>
@@ -316,15 +485,18 @@
             </div>
         </section>
 
+        <!-- ========================================================================= -->
+        <!-- SECCIÓN 4: COMERCIAL                                                      -->
+        <!-- ========================================================================= -->
         <section id="tab-reclamos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-6xl mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     
                     <!-- LADO IZQUIERDO: Contenido Profesional -->
-                    <div class="text-white space-y-6 lg:mt-6">
+                    <div class="text-white space-y-6 lg:mt-6 animate-slide-in-left">
                         <div>
                             <span class="text-brand-orange"><strong>SOLUCIONES INTEGRALES</strong></span>
-                            <h3 class="text-3xl md:text-4xl font-black drop-shadow-md leading-tight">Impulsamos la conectividad de tu negocio</h3>
+                            <h2 class="title-glow text-3xl sm:text-4xl lg:text-4xl font-black text-white leading-tight mb-4 tracking-tight">IMPULSANDO LA CONECTIVIDAD <span class="text-brand-blue">DE TU NEGOCIO </span></h2>
                         </div>
                         <p class="text-gray-300 text-sm md:text-base leading-relaxed">
                             En <span class="text-brand-orange font-bold">LC SOLUCIONES TECNOLÓGICAS</span>, no solo conectamos dispositivos, conectamos oportunidades. Nuestra área comercial está diseñada para atender desde solicitudes residenciales hasta requerimientos de infraestructura corporativa a gran escala.
@@ -364,12 +536,13 @@
                             </div>
                         </div>
                     </div>
+					
 
                     <!-- LADO DERECHO: Formulario de Solicitud -->
-                    <div class="bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-lg border-t-4 border-brand-blue">
+                    <div class="bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-lg border-t-4 border-brand-blue animate-slide-in-right" style="animation-delay: 0.1s;">
                         <div class="text-center mb-8">
                             <i class="fa-solid fa-file-contract text-4xl text-brand-blue mb-3"></i>
-                            <h3 class="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-wide drop-shadow-sm">Solicitud de Oferta Comercial</h3>
+                            <h3 class="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-wide drop-shadow-sm">Solicitud de Información</h3>
                             <p class="text-gray-700 text-sm md:text-base mt-2">Solicita presupuestos, trabajos, asesorías y más llenando el siguiente formulario.</p>
                         </div>
                         <form id="formComercial" class="space-y-4 md:space-y-5" onsubmit="return enviarPorTelegram(event)">
@@ -434,6 +607,7 @@
                     <ul class="space-y-2 text-xs md:text-sm text-gray-400">
                         <li><button onclick="switchTab('wifi')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Inicio</button></li>
                         <li><button onclick="switchTab('planes')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Planes</button></li>
+						<li><button onclick="switchTab('automatizacion')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Automatización</button></li>
                         <li><button onclick="switchTab('trabajos')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Portafolios</button></li>
                         <li><button onclick="switchTab('reclamos')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Comercial</button></li>
                     </ul>
@@ -457,7 +631,7 @@
             </div>
             <div class="border-t border-gray-800 pt-6 text-center md:flex md:justify-between md:items-center">
                 <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-2 md:mb-0">Desarrollado por: <span class="font-bold text-gray-400">Ing. Jose Cordero</span></p>
-                <p class="text-[10px] text-gray-500 font-bold tracking-[2px]">VERSION 2026</p>
+                <p class="text-[10px] text-gray-500 font-bold tracking-[2px]">V.2026.1.0</p>
             </div>
         </div>
     </footer>
@@ -473,7 +647,7 @@
                 <h3 id="modalPlanTitle" class="text-lg font-black text-gray-900 mb-3 uppercase tracking-wide"></h3>
                 <p id="modalPlanDesc" class="text-gray-600 text-sm leading-relaxed mb-6"></p>
             </div>
-            <button onclick="closePlanModal()" class="w-full btn-primary py-2.5 rounded-lg font-bold text-sm tracking-widest uppercase cursor-pointer">VOLVER</button>
+            <button onclick="closePlanModal()" class="w-full btn-primary py-2.5 rounded-lg font-bold text-sm tracking-widest uppercase cursor-pointer">ACEPTAR</button>
         </div>
     </div>
 
@@ -482,7 +656,7 @@
         function scrollCarrusel(offset) { const container = document.getElementById('carrusel-trabajos'); container.scrollBy({ left: offset, behavior: 'smooth' }); }
 
         function switchTab(tab){
-            const sections = ['wifi', 'planes', 'trabajos', 'reclamos'];
+            const sections = ['wifi', 'planes', 'automatizacion', 'trabajos', 'reclamos'];
             sections.forEach(s => {
                 document.getElementById('tab-' + s).classList.add('hidden');
                 document.getElementById('btn-' + s).classList.remove('nav-active');
@@ -508,9 +682,6 @@
         // ==========================================
         // LÓGICA DE GEOGRAFÍA (VENEZUELA)
         // ==========================================
-        // Estructura de ejemplo. Para no sobrecargar el HTML, aquí se incluyen algunos 
-        // estados, municipios y parroquias principales (incluyendo Táchira y La Grita).
-        // Puedes extender este objeto JSON con el resto de la base de datos nacional.
         const geoVenezuela = {
             "Táchira": {
                 "Andrés Bello": ["Cordero", "Sucre"],
@@ -950,7 +1121,7 @@
             const descripcion = document.getElementById('soc_descripcion').value;
 
             // Construir el mensaje formateado para Telegram
-            const mensaje = `🔔 *NUEVA SOLICITUD PORTAL LC SOLUCIONES*\n\n` +
+            const mensaje = `🔔 *NUEVA SOLICITUD COMERCIAL*\n\n` +
                             `*👤 Cliente:* ${nombre}\n` +
                             `*🏢 Empresa:* ${empresa}\n` +
                             `*📱 Teléfono:* ${telefono}\n` +
@@ -958,7 +1129,7 @@
                             `*📋 Tipo de Solicitud:* ${tipo}\n\n` +
                             `*📝 Descripción:*\n${descripcion}`;
 
-           // ! IMPORTANTE: TOKEN Y CHAT ID
+           // ! IMPORTANTE: REEMPLAZA ESTOS VALORES CON LOS DE TU BOT
             const BOT_TOKEN = "7798276985:AAH3GkNgfRFOa3lApS3xQk5skodbJyAqmqo"; 
             const CHAT_ID = "-1003737821268";
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
