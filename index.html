@@ -34,6 +34,10 @@
             box-shadow: 0 4px 15px rgba(0, 86, 255, 0.3);
             transform: translateY(-1px);
         }
+		.btn-arrow-hover:hover i {
+    		transform: translateX(4px);
+    		transition: transform 0.3s ease;
+		}
 
         /* ==================== NAVEGACIÓN ==================== */
         .nav-link {
@@ -137,7 +141,7 @@
                             PARA EL <span class="text-brand-blue">FUTURO DIGITAL</span>
                         </h2>
                         <p class="text-gray-300 text-sm md:text-base max-w-xl mx-auto lg:mx-0 mb-8">
-                            En <span class="text-brand-orange"><strong>LC SOLUCIONES</strong></span>, transformamos la complejidad técnica en valor operativo. Ofrecemos una integración completa entre infraestructura física de telecomunicaciones y plataformas digitales personalizadas, asegurando la máxima estabilidad, seguridad y eficiencia en la transmisión de datos para su empresa.
+                            En <span class="text-brand-orange"><strong>LC SOLUCIONES TECNOLÓGICAS</strong></span>, transformamos la complejidad técnica en valor operativo. Ofrecemos una integración completa entre infraestructura física de telecomunicaciones y plataformas digitales personalizadas, asegurando la máxima estabilidad, seguridad y eficiencia en la transmisión de datos para su empresa.
                         </p>
                         
                         <div class="hidden sm:flex flex-wrap justify-center lg:justify-start gap-6 text-white text-xs font-semibold">
@@ -186,9 +190,9 @@
         <section id="tab-planes" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-10">
-                    <h2 class="text-brand-blue text-xs font-bold tracking-widest uppercase mb-2">Servicios Móviles</h2>
+                    <span class="text-brand-orange"><strong>SERVICIOS DE INTERNET MÓVIL EN ZONAS WIFI</strong></span>
                     <h3 class="text-2xl md:text-3xl font-black text-white drop-shadow-md">Planes a la medida de tus necesidades</h3>
-                    <p class="text-gray-300 mt-2 text-sm">Planes disponibles solo en zonas con cobertura <span class="text-brand-orange"><strong>LC SOLUCIONES.</strong></span></p>
+                    <p class="text-gray-300 mt-2 text-sm">Planes disponibles solo en zonas con cobertura <span class="text-brand-orange"><strong>LC SOLUCIONES TECNOLÓGICAS.</strong></span></p>
                 </div>
 
                 <h4 class="text-sm font-bold text-white border-l-4 border-brand-blue pl-2 mb-4 uppercase drop-shadow-md">Planes Ilimitados</h4>
@@ -197,25 +201,31 @@
                         <i class="fa-regular fa-clock text-brand-blue text-3xl mb-3"></i>
                         <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Hora</h4>
                         <p class="text-gray-600 text-xs md:text-sm mb-3">Conexión libre</p>
-                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">500 Bs</p>
+                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">500,00 Bs</p>
+                        <button onclick="openPlanModal('Plan 1 Hora', 'Recomendado para una conexión rápida: ideal para realizar transferencias bancarias, revisar correos urgentes o enviar mensajes cortos sin preocuparse por los datos consumidos.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
                     </div>
                     <div class="service-card p-6 flex flex-col items-center text-center">
                         <i class="fa-solid fa-calendar-day text-brand-blue text-3xl mb-3"></i>
                         <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Día</h4>
                         <p class="text-gray-600 text-xs md:text-sm mb-3">24Hrs continuas</p>
-                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">1500 Bs</p>
+                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">1.500,00 Bs</p>
+                        <button onclick="openPlanModal('Plan 1 Día', 'Ideal para uso moderado durante una jornada completa. Te permite mantenerte conectado a tus redes sociales, navegación y videos cortos sin interrupciones durante 24 horas.')" 
+        				class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer flex items-center justify-center gap-1">
+    					Ver detalles</button>
                     </div>
                     <div class="service-card p-6 flex flex-col items-center text-center">
                         <i class="fa-solid fa-calendar-week text-brand-blue text-3xl mb-3"></i>
                         <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Semana</h4>
                         <p class="text-gray-600 text-xs md:text-sm mb-3">7 días libres</p>
-                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">5000 Bs</p>
+                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">5.000,00 Bs</p>
+                        <button onclick="openPlanModal('Plan 1 Semana', 'Excelente opción para turistas, trabajadores temporales o para quienes buscan un uso equilibrado y conexión constante de datos libres durante toda la semana.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
                     </div>
                     <div class="service-card p-6 flex flex-col items-center text-center">
                         <i class="fa-solid fa-infinity text-brand-blue text-3xl mb-3"></i>
                         <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 Mes</h4>
                         <p class="text-gray-600 text-xs md:text-sm mb-3">30 días continuos</p>
-                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">15000 Bs</p>
+                        <p class="font-bold text-brand-blue text-lg md:text-xl mb-4">15.000,00 Bs</p>
+                        <button onclick="openPlanModal('Plan 1 Mes', 'La mejor alternativa para residentes locales. Creado para mantenerte siempre conectado, ofreciendo disponibilidad 24/7 sin preocuparte por recargar o contar GB.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
                     </div>
                 </div>
 
@@ -224,22 +234,26 @@
                     <div class="service-card p-6 flex flex-col items-center text-center">
                         <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
                         <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">1 GB Datos</h4>
-                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">250 Bs</p>
+                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">250,00 Bs</p>
+                        <button onclick="openPlanModal('Plan 1 GB', 'Recomendado para uso ligero: mensajería de texto básica (WhatsApp), consultas sencillas por internet y correos sin archivos adjuntos pesados.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
                     </div>
                     <div class="service-card p-6 flex flex-col items-center text-center">
                         <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
                         <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">3 GB Datos</h4>
-                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">1000 Bs</p>
+                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">1.000,00 Bs</p>
+                        <button onclick="openPlanModal('Plan 3 GB', 'Ideal para uso intermedio: te permite navegar en la web de forma fluida, revisar tus redes sociales e incluso escuchar música en línea.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
                     </div>
                     <div class="service-card p-6 flex flex-col items-center text-center">
                         <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
                         <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">5 GB Datos</h4>
-                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">2500 Bs</p>
+                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">2.500,00 Bs</p>
+                        <button onclick="openPlanModal('Plan 5 GB', 'Perfecto para usuarios más activos que requieren realizar videollamadas, navegar por redes sociales constantemente o visualizar videos con calidad estándar.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
                     </div>
                     <div class="service-card p-6 flex flex-col items-center text-center">
                         <i class="fa-solid fa-chart-pie text-gray-500 text-3xl mb-3"></i>
                         <h4 class="font-black text-gray-900 text-sm md:text-base uppercase">10 GB Datos</h4>
-                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">8750 Bs</p>
+                        <p class="font-bold text-gray-700 text-lg md:text-xl mb-4 mt-2">8.750,00 Bs</p>
+                        <button onclick="openPlanModal('Plan 10 GB', 'Diseñado para los usuarios más exigentes. Apto para alto consumo multimedia, descargas frecuentes y herramientas de trabajo o educación remota que consumen muchos datos.')" class="mt-auto text-xs font-bold text-brand-orange hover:text-orange-600 transition underline decoration-transparent hover:decoration-brand-orange cursor-pointer">Ver detalles</button>
                     </div>
                 </div>
             </div>
@@ -248,7 +262,7 @@
         <section id="tab-trabajos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-10">
-                    <h2 class="text-brand-blue text-xs font-bold tracking-widest uppercase mb-2">Nuestro Portafolio</h2>
+                    <span class="text-brand-orange"><strong>NUESTRO PORTAFOLIOS</strong></span>
                     <h3 class="text-2xl md:text-3xl font-black text-white drop-shadow-md">Experiencia de Campo</h3>
                     <p class="text-gray-300 mt-2 text-sm">Conoce la calidad de nuestros servicios e instalaciones.</p>
                 </div>
@@ -303,54 +317,104 @@
         </section>
 
         <section id="tab-reclamos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-lg border-t-4 border-brand-blue">
-                    <div class="text-center mb-8">
-                        <i class="fa-solid fa-file-contract text-4xl text-brand-blue mb-3"></i>
-                        <h3 class="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-wide drop-shadow-sm">Solicitud de Oferta Comercial</h3>
-                        <p class="text-gray-700 text-sm md:text-base mt-2">Solicita presupuestos, trabajos, asesorías y más llenando el siguiente formulario.</p>
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                    
+                    <!-- LADO IZQUIERDO: Contenido Profesional -->
+                    <div class="text-white space-y-6 lg:mt-6">
+                        <div>
+                            <span class="text-brand-orange"><strong>SOLUCIONES INTEGRALES</strong></span>
+                            <h3 class="text-3xl md:text-4xl font-black drop-shadow-md leading-tight">Impulsamos la conectividad de tu negocio</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                            En <span class="text-brand-orange font-bold">LC SOLUCIONES TECNOLÓGICAS</span>, no solo conectamos dispositivos, conectamos oportunidades. Nuestra área comercial está diseñada para atender desde solicitudes residenciales hasta requerimientos de infraestructura corporativa a gran escala.
+                        </p>
+                        
+                        <div class="space-y-6 mt-6">
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center shrink-0 border border-brand-blue/30 mt-1">
+                                    <i class="fa-solid fa-network-wired text-brand-blue text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Redes Inalámbricas y Fibra Óptica</h4>
+                                    <p class="text-gray-400 text-xs md:text-sm mt-1 leading-relaxed">Despliegue de infraestructura sólida. Realizamos tendidos FTTH, fusiones profesionales y planificación de radioenlaces para zonas residenciales y empresariales con máxima capacidad de transferencia.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center shrink-0 border border-brand-blue/30 mt-1">
+                                    <i class="fa-solid fa-rocket text-brand-blue text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">¡Digitaliza tu Negocio Hoy!</h4>
+        							<p class="text-gray-400 text-xs md:text-sm mt-1 leading-relaxed">
+           							 ¿Tienes un local comercial o una zona con alta afluencia? Nosotros te proveemos la tecnología. Creamos portales cautivos profesionales, sistemas de venta de internet por tickets, gestión de ancho de banda y toda la infraestructura necesaria para que monetices tu conexión WiFi de forma segura y automática.
+        						</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center shrink-0 border border-brand-blue/30 mt-1">
+                                    <i class="fa-solid fa-handshake text-brand-blue text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Asistencia Técnica y Presupuestos</h4>
+                                    <p class="text-gray-400 text-xs md:text-sm mt-1 leading-relaxed">Diseñamos ofertas a la medida de tu proyecto. Realizamos mantenimiento preventivo, soporte IT avanzado (local y remoto) y administración de servidores garantizando la operatividad de tus equipos.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <form id="formComercial" class="space-y-4 md:space-y-5" onsubmit="return enviarPorTelegram(event)">
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <input type="text" id="soc_nombre" placeholder="Nombres y Apellidos" required class="input-field text-sm md:text-base shadow-inner">
-                            <input type="text" id="soc_empresa" placeholder="Empresa (Opcional)" class="input-field text-sm md:text-base shadow-inner">
-                        </div>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <input type="text" id="soc_telefono" maxlength="15" inputmode="numeric" placeholder="Nro Telefónico" required class="input-field text-sm md:text-base shadow-inner">
-                            
-                            <select id="soc_tipo" class="input-field text-sm md:text-base shadow-inner" required>
-                                <option value="">Tipo de Solicitud...</option>
-                                <option value="Asesoria">Asesoría</option>
-                                <option value="Cotizacion">Cotización</option>
-                                <option value="Asistencia Local">Asistencia Local</option>
-                                <option value="Asistencia Remota">Asistencia Remota</option>
-                                <option value="Oferta Comercial">Oferta Comercial</option>
-                                <option value="Oferta Laboral">Oferta Laboral</option>
-                            </select>
-                        </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <select id="soc_estado" class="input-field text-sm md:text-base shadow-inner" onchange="cargarMunicipios()" required>
-                                <option value="">Estado...</option>
+                    <!-- LADO DERECHO: Formulario de Solicitud -->
+                    <div class="bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-lg border-t-4 border-brand-blue">
+                        <div class="text-center mb-8">
+                            <i class="fa-solid fa-file-contract text-4xl text-brand-blue mb-3"></i>
+                            <h3 class="text-xl md:text-2xl font-black text-gray-900 uppercase tracking-wide drop-shadow-sm">Solicitud de Oferta Comercial</h3>
+                            <p class="text-gray-700 text-sm md:text-base mt-2">Solicita presupuestos, trabajos, asesorías y más llenando el siguiente formulario.</p>
+                        </div>
+                        <form id="formComercial" class="space-y-4 md:space-y-5" onsubmit="return enviarPorTelegram(event)">
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <input type="text" id="soc_nombre" placeholder="Nombres y Apellidos" required class="input-field text-sm md:text-base shadow-inner">
+                                <input type="text" id="soc_empresa" placeholder="Empresa (Opcional)" class="input-field text-sm md:text-base shadow-inner">
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <input type="text" id="soc_telefono" maxlength="15" inputmode="numeric" placeholder="Nro Telefónico" required class="input-field text-sm md:text-base shadow-inner">
+                                
+                                <select id="soc_tipo" class="input-field text-sm md:text-base shadow-inner" required>
+                                    <option value="">Tipo de Solicitud...</option>
+                                    <option value="Asesoria">Asesoría</option>
+                                    <option value="Cotizacion">Cotización de portales</option>
+                                    <option value="Asistencia Local">Cotización Web</option>
+                                    <option value="Asistencia Remota">Asistencia Remota</option>
+                                    <option value="Oferta Comercial">Oferta Comercial</option>
+                                    <option value="Oferta Laboral">Contacto Laboral</option>
                                 </select>
-                            
-                            <select id="soc_municipio" class="input-field text-sm md:text-base shadow-inner" onchange="cargarParroquias()" required disabled>
-                                <option value="">Municipio...</option>
-                            </select>
-                            
-                            <select id="soc_parroquia" class="input-field text-sm md:text-base shadow-inner" required disabled>
-                                <option value="">Parroquia...</option>
-                            </select>
-                        </div>
+                            </div>
 
-                        <textarea id="soc_descripcion" placeholder="Descripción detallada de la solicitud..." required class="input-field text-sm md:text-base min-h-[120px] resize-none shadow-inner"></textarea>
-                        
-                        <button type="submit" id="btn_submit_form" class="btn-primary w-full py-3.5 rounded-lg uppercase text-sm font-bold tracking-widest">
-                            Enviar Solicitud
-                        </button>
-                    </form>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <select id="soc_estado" class="input-field text-sm md:text-base shadow-inner" onchange="cargarMunicipios()" required>
+                                    <option value="">Estado...</option>
+                                    </select>
+                                
+                                <select id="soc_municipio" class="input-field text-sm md:text-base shadow-inner" onchange="cargarParroquias()" required disabled>
+                                    <option value="">Municipio...</option>
+                                </select>
+                                
+                                <select id="soc_parroquia" class="input-field text-sm md:text-base shadow-inner" required disabled>
+                                    <option value="">Parroquia...</option>
+                                </select>
+                            </div>
+
+                            <textarea id="soc_descripcion" placeholder="Descripción detallada de la solicitud..." required class="input-field text-sm md:text-base min-h-[120px] resize-none shadow-inner"></textarea>
+                            
+                            <button type="submit" id="btn_submit_form" class="btn-primary w-full py-3.5 rounded-lg uppercase text-sm font-bold tracking-widest">
+                                Enviar Solicitud
+                            </button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -398,6 +462,21 @@
         </div>
     </footer>
 
+    <!-- MODAL DE DETALLES DE PLANES -->
+    <div id="planModal" class="fixed inset-0 z-50 hidden flex items-center justify-center modal-bg px-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 animate-fade-in relative border-t-4 border-brand-blue">
+            <button onclick="closePlanModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition cursor-pointer">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center">
+                <i class="fa-solid fa-circle-info text-brand-blue text-3xl mb-3"></i>
+                <h3 id="modalPlanTitle" class="text-lg font-black text-gray-900 mb-3 uppercase tracking-wide"></h3>
+                <p id="modalPlanDesc" class="text-gray-600 text-sm leading-relaxed mb-6"></p>
+            </div>
+            <button onclick="closePlanModal()" class="w-full btn-primary py-2.5 rounded-lg font-bold text-sm tracking-widest uppercase cursor-pointer">Entendido</button>
+        </div>
+    </div>
+
     <script>
         // Lógica de Tabs y Carrusel (se mantienen)
         function scrollCarrusel(offset) { const container = document.getElementById('carrusel-trabajos'); container.scrollBy({ left: offset, behavior: 'smooth' }); }
@@ -411,6 +490,19 @@
             document.getElementById('tab-' + tab).classList.remove('hidden');
             document.getElementById('btn-' + tab).classList.add('nav-active');
             window.scrollTo(0, 0);
+        }
+
+        // ==========================================
+        // LÓGICA DEL MODAL DE PLANES
+        // ==========================================
+        function openPlanModal(title, description) {
+            document.getElementById('modalPlanTitle').innerText = title;
+            document.getElementById('modalPlanDesc').innerText = description;
+            document.getElementById('planModal').classList.remove('hidden');
+        }
+
+        function closePlanModal() {
+            document.getElementById('planModal').classList.add('hidden');
         }
 
         // ==========================================
@@ -858,7 +950,7 @@
             const descripcion = document.getElementById('soc_descripcion').value;
 
             // Construir el mensaje formateado para Telegram
-            const mensaje = `🔔 *NUEVA SOLICITUD COMERCIAL*\n\n` +
+            const mensaje = `🔔 *NUEVA SOLICITUD PORTAL LC SOLUCIONES*\n\n` +
                             `*👤 Cliente:* ${nombre}\n` +
                             `*🏢 Empresa:* ${empresa}\n` +
                             `*📱 Teléfono:* ${telefono}\n` +
@@ -866,7 +958,7 @@
                             `*📋 Tipo de Solicitud:* ${tipo}\n\n` +
                             `*📝 Descripción:*\n${descripcion}`;
 
-           // ! IMPORTANTE: REEMPLAZA ESTOS VALORES CON LOS DE TU BOT
+           // ! IMPORTANTE: TOKEN Y CHAT ID
             const BOT_TOKEN = "7798276985:AAH3GkNgfRFOa3lApS3xQk5skodbJyAqmqo"; 
             const CHAT_ID = "-1003737821268";
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
