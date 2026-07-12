@@ -137,6 +137,10 @@
         .animate-slide-in-right {
             animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
+        
+        /* Ajuste para el scroll del Chat de ROBOTEC */
+        #chat-messages::-webkit-scrollbar { width: 4px; }
+        #chat-messages::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -147,6 +151,30 @@
     <input type="hidden" id="mt-link-orig" value="$(link-orig)">
     <input type="hidden" id="mt-trial" value="$(trial)">
     <input type="hidden" id="mt-link-login" value="$(link-login)">
+
+    <div class="bg-gray-900 text-gray-400 text-[10px] md:text-xs py-1.5 px-4 flex justify-between items-center border-b border-gray-800 z-50 relative">
+        <div class="flex items-center gap-2">
+            <i class="fa-regular fa-calendar-days text-brand-blue"></i>
+            <span id="info-datetime">Cargando fecha y hora...</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="hidden sm:flex items-center gap-1" title="Tu IP Local">
+                <i class="fa-solid fa-network-wired text-brand-blue"></i>
+                <span id="info-private-ip">Detectando...</span>
+            </div>
+            <div class="flex items-center gap-1" title="Tu IP Pública">
+                <i class="fa-solid fa-globe text-brand-blue"></i>
+                <span id="info-public-ip">Detectando...</span>
+            </div>
+            <div class="flex items-center gap-1" title="Tu Proveedor de Internet (ISP)">
+                <i class="fa-solid fa-tower-broadcast text-brand-blue"></i>
+                <span id="info-isp" class="truncate max-w-[110px] sm:max-w-[180px] md:max-w-none">Detectando ISP...</span>
+            </div>
+            <button onclick="openSpeedtest()" class="bg-brand-blue/20 text-brand-blue hover:bg-brand-blue hover:text-white px-3 py-0.5 rounded-full transition font-bold flex items-center gap-1">
+                <i class="fa-solid fa-gauge-high"></i> <span class="hidden sm:inline">Speedtest</span>
+            </button>
+        </div>
+    </div>
 
     <header class="bg-brand-dark sticky top-0 z-40 border-b border-gray-800 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -176,14 +204,10 @@
     <main class="flex-grow flex flex-col relative" style="background-image: url('img/red.webp'); background-size: cover; background-position: center; background-attachment: fixed;">
         <div class="absolute inset-0 bg-[#020b18]/80 z-0"></div>
 
-        <!-- ========================================================================= -->
-        <!-- SECCIÓN 1: INICIO (WIFI)                                                  -->
-        <!-- ========================================================================= -->
         <section id="tab-wifi" class="flex-grow flex flex-col relative z-10">
             <div class="flex-grow flex items-center py-10 md:py-16 lg:py-0 min-h-[85vh]">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row items-center justify-between gap-10">
                     
-                    <!-- Lado Izquierdo: Textos e Información Expandida -->
                     <div class="flex-1 text-center lg:text-left mt-4 lg:mt-0 animate-slide-in-left">
                         <h2 class="title-glow text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
                             ARQUITECTURA DE REDES PARA EL, <span class="text-brand-blue">FUTURO DIGITAL</span>
@@ -201,7 +225,6 @@
                             Descubra una experiencia de navegación superior con tecnología de vanguardia y un monitoreo preventivo. Tu tranquilidad y el crecimiento de tu proyecto digital son nuestra principal prioridad.
                         </p>
                         
-                        <!-- Contenedor de Insignias ampliado para lucir más lleno -->
                         <div class="hidden sm:flex flex-wrap justify-center lg:justify-start gap-4 text-white text-xs font-semibold">
                             <div class="flex items-center gap-2 bg-white/10 px-4 py-2.5 rounded-lg border border-white/20 hover:bg-white/20 transition cursor-default">
                                 <i class="fa-solid fa-shield-halved text-brand-blue text-lg"></i> Soluciones Confiables
@@ -224,7 +247,6 @@
                         </div>
                     </div>
 
-                    <!-- Lado Derecho: Tarjeta de Servicios -->
                     <div class="w-full max-w-2xl md:max-w-2xl bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-8 border-t-4 border-brand-blue animate-slide-in-right" style="animation-delay: 0.1s;">
                         <div class="text-center">
                             <i class="fa-solid fa-medal text-brand-blue text-4xl mb-4"></i>
@@ -269,16 +291,14 @@
             </div>
         </section>
 	
-        <!-- ========================================================================= -->
-        <!-- SECCIÓN 2: PLANES                                                         -->
-        <!-- ========================================================================= -->
         <section id="tab-planes" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-10 animate-fade-in-up">
 					<h2 class="title-glow text-3xl sm:text-4xl lg:text-4xl font-black text-white leading-tight mb-4 tracking-tight">
-                            PLANES A LA MEDIDA DE <span class="text-brand-blue">TUS NECESIDADES</span><div
-                    <span class="text-brand-orange"><strong>SERVICIOS DE INTERNET MÓVIL EN ZONAS WIFI</strong></span></div</span>
-                    
+                        PLANES A LA MEDIDA DE <span class="text-brand-blue">TUS NECESIDADES</span>
+                        <div class="mt-2">
+                            <span class="text-brand-orange"><strong>SERVICIOS DE INTERNET MÓVIL EN ZONAS WIFI</strong></span>
+                        </div>
                     </h2>
                     <p class="text-gray-300 mt-2 text-sm">Planes disponibles solo en zonas con cobertura <span class="text-brand-orange"><strong>LC SOLUCIONES TECNOLÓGICAS.</strong></span></p>
 				</div>
@@ -351,88 +371,72 @@
             </div>
         </section>
 	
-	    <!-- ========================================================================= -->
-        <!-- SECCIÓN: AUTOMATIZACIÓN                                                   -->
-        <!-- ========================================================================= -->
-	<section id="tab-automatizacion" class="tab-section hidden flex-grow py-16 px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-10 animate-fade-in-up">
-   <h2 class="title-glow text-3xl sm:text-4xl lg:text-4xl font-black leading-tight tracking-tight">
-       <span class="block text-white">
-        AUTOMATIZACIÓN & <span class="text-brand-blue">GESTIÓN DE ISP'S</span>
-    </span>
-           <span class="block mb-2 text-brand-orange">
-        ESTAMOS TRABAJANDO PARA EL DESARROLLO DE NUESTRAS APP'S
-    </span>
-</h2>
-</div>
+	    <section id="tab-automatizacion" class="tab-section hidden flex-grow py-16 px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-10 animate-fade-in-up">
+                    <h2 class="title-glow text-3xl sm:text-4xl lg:text-4xl font-black leading-tight tracking-tight">
+                        <span class="block text-white">
+                            AUTOMATIZACIÓN & <span class="text-brand-blue">GESTIÓN DE ISP'S</span>
+                        </span>
+                        <span class="block mb-2 text-brand-orange">
+                            ESTAMOS TRABAJANDO PARA EL DESARROLLO DE NUESTRAS APP'S
+                        </span>
+                    </h2>
+                </div>
 
-       
-<div class="text-center -mt-4">
-    <p class="text-gray-300 max-w-3xl mx-auto text-lg font-normal">
-        Desarrollamos herramientas de infraestructura inteligente para que tu ISP opere con autonomía total, desde el despliegue físico hasta la facturación automatizada.
-    </p>
-</div>
+                <div class="text-center -mt-4">
+                    <p class="text-gray-300 max-w-3xl mx-auto text-lg font-normal">
+                        Desarrollamos herramientas de infraestructura inteligente para que tu ISP opere con autonomía total, desde el despliegue físico hasta la facturación automatizada.
+                    </p>
+                </div>
 			
-        <!-- Grid extendido -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- TARJETA 1 -->
-            <div class="p-8 bg-white/100 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg hover:border-brand-blue transition-all relative group">
-                <span class="absolute top-4 right-4 text-[10px] bg-white/10 text-brand-orange border border-brand-orange/50 px-2 py-1 rounded-full animate-pulse uppercase font-bold shadow-sm"><i class="fa-solid fa-code mr-1"></i> <b>EN DESARROLLO</b>
-                </span>
-                <i class="fa-solid fa-microchip text-4xl text-brand-blue mb-6"></i>
-                <h4 class="text-xl font-bold text-gray-900 mb-4">Núcleo de Red y OLT</h4>
-                <p class="text-gray-700 text-sm leading-relaxed mb-4">Arquitectura de red escalable. Estamos integrando drivers de comunicación directa con OLTs de marcas líderes (Huawei, ZTE, C-Data) para control granular.</p>
-                <ul class="text-xs text-gray-600 space-y-2">
-                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Provisioning Zero-Touch</li>
-                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Gestión de perfiles DBA</li>
-                </ul>
-            </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                    
+                    <div class="p-8 bg-white/100 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg hover:border-brand-blue transition-all relative group">
+                        <span class="absolute top-4 right-4 text-[10px] bg-white/10 text-brand-orange border border-brand-orange/50 px-2 py-1 rounded-full animate-pulse uppercase font-bold shadow-sm"><i class="fa-solid fa-code mr-1"></i> <b>EN DESARROLLO</b></span>
+                        <i class="fa-solid fa-microchip text-4xl text-brand-blue mb-6"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">Núcleo de Red y OLT</h4>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-4">Arquitectura de red escalable. Estamos integrando drivers de comunicación directa con OLTs de marcas líderes (Huawei, ZTE, C-Data) para control granular.</p>
+                        <ul class="text-xs text-gray-600 space-y-2">
+                            <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Provisioning Zero-Touch</li>
+                            <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Gestión de perfiles DBA</li>
+                        </ul>
+                    </div>
 
-            <!-- TARJETA 2 -->
-            <div class="p-8 bg-white/100 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg hover:border-brand-blue transition-all relative group">
-                	<span class="absolute top-4 right-4 text-[10px] bg-white/10 text-brand-orange border border-brand-orange/50 px-2 py-1 rounded-full animate-pulse uppercase font-bold shadow-sm"><i class="fa-solid fa-code mr-1"></i> <b>EN DESARROLLO</b>
-                </span>
-                <i class="fa-solid fa-wallet text-4xl text-brand-blue mb-6"></i>
-                <h4 class="text-xl font-bold text-gray-900 mb-4">Motor de Billing (OSS/BSS)</h4>
-                <p class="text-gray-700 text-sm leading-relaxed mb-4">Sistema administrativo inteligente diseñado para automatizar el ciclo completo de vida del cliente, reduciendo drásticamente la carga operativa.</p>
-                <ul class="text-xs text-gray-600 space-y-2">
-                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Cortes automáticos por mora</li>
-                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Portal del cliente en la nube</li>
-                </ul>
-            </div>
+                    <div class="p-8 bg-white/100 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg hover:border-brand-blue transition-all relative group">
+                        <span class="absolute top-4 right-4 text-[10px] bg-white/10 text-brand-orange border border-brand-orange/50 px-2 py-1 rounded-full animate-pulse uppercase font-bold shadow-sm"><i class="fa-solid fa-code mr-1"></i> <b>EN DESARROLLO</b></span>
+                        <i class="fa-solid fa-wallet text-4xl text-brand-blue mb-6"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">Motor de Billing (OSS/BSS)</h4>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-4">Sistema administrativo inteligente diseñado para automatizar el ciclo completo de vida del cliente, reduciendo drásticamente la carga operativa.</p>
+                        <ul class="text-xs text-gray-600 space-y-2">
+                            <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Cortes automáticos por mora</li>
+                            <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Portal del cliente en la nube</li>
+                        </ul>
+                    </div>
 
-            <!-- TARJETA 3 -->
-            <div class="p-8 bg-white/100 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg hover:border-brand-blue transition-all relative group">
-                <span class="absolute top-4 right-4 text-[10px] bg-brand-blue text-white px-2 py-1 rounded-full uppercase font-bold shadow-sm">
-                    <i class="fa-solid fa-check mr-1"></i> Estable
-                </span>
-                <i class="fa-solid fa-map-location-dot text-4xl text-brand-blue mb-6"></i>
-                <h4 class="text-xl font-bold text-gray-900 mb-4">Cartografía de Red</h4>
-                <p class="text-gray-700 text-sm leading-relaxed mb-4">Visibilidad total de tu planta externa. Mapeo inteligente con integración de capas GIS para la gestión precisa de cajas NAP y terminales.</p>
-                <ul class="text-xs text-gray-600 space-y-2">
-                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Planificación con OZmap/QGIS</li>
-                    <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Optimización de tendido</li>
-                </ul>
+                    <div class="p-8 bg-white/100 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg hover:border-brand-blue transition-all relative group">
+                        <span class="absolute top-4 right-4 text-[10px] bg-brand-blue text-white px-2 py-1 rounded-full uppercase font-bold shadow-sm">
+                            <i class="fa-solid fa-check mr-1"></i> Estable
+                        </span>
+                        <i class="fa-solid fa-map-location-dot text-4xl text-brand-blue mb-6"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">Cartografía de Red</h4>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-4">Visibilidad total de tu planta externa. Mapeo inteligente con integración de capas GIS para la gestión precisa de cajas NAP y terminales.</p>
+                        <ul class="text-xs text-gray-600 space-y-2">
+                            <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Planificación con OZmap/QGIS</li>
+                            <li><i class="fa-solid fa-check text-brand-blue mr-2"></i>Optimización de tendido</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
         
-        <!-- ========================================================================= -->
-        <!-- SECCIÓN 3: PORTAFOLIOS                                                    -->
-        <!-- ========================================================================= -->
-       <section id="tab-trabajos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="max-w-5xl mx-auto">
-        <div class="text-center mb-10 animate-fade-in-up">
-            
-            <!-- Ambos textos ahora comparten las mismas clases de estilo -->
-            <h2 class="title-glow text-3xl sm:text-4xl lg:text-4xl font-black text-white leading-tight tracking-tight">
-                <span class="block mb-2">NUESTRO <span class="text-brand-blue">PORTAFOLIO</span></span>
-                <span class="block text-brand-orange">TRABAJOS DE CAMPO</span>
-            </h2>
-					
+        <section id="tab-trabajos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-10 animate-fade-in-up">
+                    <h2 class="title-glow text-3xl sm:text-4xl lg:text-4xl font-black text-white leading-tight tracking-tight">
+                        <span class="block mb-2">NUESTRO <span class="text-brand-blue">PORTAFOLIO</span></span>
+                        <span class="block text-brand-orange">TRABAJOS DE CAMPO</span>
+                    </h2>
                     <p class="text-gray-300 mt-2 text-sm">Conoce la calidad de nuestros servicios e instalaciones.</p>
                 </div>
 
@@ -485,14 +489,10 @@
             </div>
         </section>
 
-        <!-- ========================================================================= -->
-        <!-- SECCIÓN 4: COMERCIAL                                                      -->
-        <!-- ========================================================================= -->
         <section id="tab-reclamos" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-6xl mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     
-                    <!-- LADO IZQUIERDO: Contenido Profesional -->
                     <div class="text-white space-y-6 lg:mt-6 animate-slide-in-left">
                         <div>
                             <span class="text-brand-orange"><strong>SOLUCIONES INTEGRALES</strong></span>
@@ -537,8 +537,6 @@
                         </div>
                     </div>
 					
-
-                    <!-- LADO DERECHO: Formulario de Solicitud -->
                     <div class="bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-lg border-t-4 border-brand-blue animate-slide-in-right" style="animation-delay: 0.1s;">
                         <div class="text-center mb-8">
                             <i class="fa-solid fa-file-contract text-4xl text-brand-blue mb-3"></i>
@@ -636,7 +634,6 @@
         </div>
     </footer>
 
-    <!-- MODAL DE DETALLES DE PLANES -->
     <div id="planModal" class="fixed inset-0 z-50 hidden flex items-center justify-center modal-bg px-4">
         <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 animate-fade-in relative border-t-4 border-brand-blue">
             <button onclick="closePlanModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition cursor-pointer">
@@ -651,8 +648,49 @@
         </div>
     </div>
 
+    <div id="speedtestModal" class="fixed inset-0 z-[60] hidden flex items-center justify-center modal-bg px-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-3xl w-full p-2 animate-fade-in relative border-t-4 border-brand-blue h-[450px]">
+            <button onclick="closeSpeedtest()" class="absolute -top-3 -right-3 text-white bg-red-500 hover:bg-red-700 transition cursor-pointer z-10 rounded-full w-8 h-8 flex items-center justify-center shadow-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <iframe src="https://fast.com/es/" class="w-full h-full rounded-lg border-0"></iframe>
+        </div>
+    </div>
+
+    <div id="robotec-widget" class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleChat()" id="btn-robotec" class="bg-brand-blue text-white w-14 h-14 rounded-full shadow-[0_0_15px_rgba(0,86,255,0.5)] hover:scale-105 transition flex items-center justify-center animate-bounce">
+            <i class="fa-solid fa-user-astronaut text-2xl"></i>
+        </button>
+        
+        <div id="robotec-chat" class="hidden absolute bottom-16 right-0 w-[300px] sm:w-[350px] bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col h-[400px] animate-fade-in-up">
+            <div class="bg-brand-dark text-white p-3 flex justify-between items-center border-b-[3px] border-brand-blue">
+                <div class="flex items-center gap-2">
+                    <div class="bg-brand-blue p-2 rounded-full"><i class="fa-solid fa-user-astronaut text-white text-lg"></i></div>
+                    <div>
+                        <span class="font-bold block text-sm">ROBOTEC</span>
+                        <span class="text-[10px] text-green-400 flex items-center gap-1"><span class="w-2 h-2 bg-green-400 rounded-full inline-block animate-pulse"></span> En línea</span>
+                    </div>
+                </div>
+                <button onclick="toggleChat()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-user-astronaut text-lg"></i></button>
+            </div>
+            
+            <div id="chat-messages" class="flex-grow p-4 overflow-y-auto text-sm space-y-4 bg-gray-50 flex flex-col">
+                <div class="bg-white border border-gray-200 text-gray-800 p-3 rounded-2xl rounded-tl-none w-5/6 shadow-sm self-start">
+                    ¡Hola! Soy <b>ROBOTEC</b> 🤖, tu asistente virtual en <b>LC SOLUCIONES TECNOLÓGICAS.</b> Mis respuestas son limitadas ya que estoy en desarrollo. 
+                </div>
+            </div>
+            
+            <div class="p-3 bg-white border-t flex gap-2 items-center">
+                <input type="text" id="chat-input" class="flex-grow border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-brand-blue transition" placeholder="Escribe tu consulta..." onkeypress="if(event.key === 'Enter') sendRobotecMessage()">
+                <button onclick="sendRobotecMessage()" class="bg-brand-blue text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition shadow-md">
+                    <i class="fa-solid fa-paper-plane text-sm"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Lógica de Tabs y Carrusel (se mantienen)
+        // Lógica de Tabs y Carrusel
         function scrollCarrusel(offset) { const container = document.getElementById('carrusel-trabajos'); container.scrollBy({ left: offset, behavior: 'smooth' }); }
 
         function switchTab(tab){
@@ -667,6 +705,55 @@
         }
 
         // ==========================================
+        // LÓGICA DE BARRA SUPERIOR (FECHA, IP, SPEEDTEST)
+        // ==========================================
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit', second:'2-digit' };
+            document.getElementById('info-datetime').innerText = now.toLocaleDateString('es-VE', options);
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Obtener IP Pública e ISP (API Externa - Funciona bien en GH Pages)
+            fetch('https://ipwhois.app/json/')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('info-public-ip').innerText = data.ip || "No disponible";
+                    const isp = data.isp || data.org || "ISP no disponible";
+                    document.getElementById('info-isp').innerText = isp;
+                    document.getElementById('info-isp').parentElement.title = "ISP: " + isp;
+                })
+                .catch(() => {
+                    // Fallback en caso de que la primera API falle
+                    fetch('https://ipapi.co/json/')
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('info-public-ip').innerText = data.ip || "No disponible";
+                            const isp = data.org || "ISP no disponible";
+                            document.getElementById('info-isp').innerText = isp;
+                            document.getElementById('info-isp').parentElement.title = "ISP: " + isp;
+                        })
+                        .catch(() => {
+                            // Segundo fallback a ipify solo para IP
+                            fetch('https://api.ipify.org?format=json')
+                                .then(response => response.json())
+                                .then(data => { document.getElementById('info-public-ip').innerText = data.ip; })
+                                .catch(() => { document.getElementById('info-public-ip').innerText = "No disponible"; });
+                            document.getElementById('info-isp').innerText = "No disponible";
+                        });
+                });
+
+            // Obtener IP Privada del Navegador, posiblemente funcione
+            document.getElementById('info-private-ip').innerText = "Protegida";
+        });
+
+        // Speedtest Modal
+        function openSpeedtest() { document.getElementById('speedtestModal').classList.remove('hidden'); }
+        function closeSpeedtest() { document.getElementById('speedtestModal').classList.add('hidden'); }
+
+        // ==========================================
         // LÓGICA DEL MODAL DE PLANES
         // ==========================================
         function openPlanModal(title, description) {
@@ -677,6 +764,66 @@
 
         function closePlanModal() {
             document.getElementById('planModal').classList.add('hidden');
+        }
+
+        // ==========================================
+        // LÓGICA DE ROBOTEC (ASISTENTE BÁSICO)
+        // ==========================================
+        function toggleChat() {
+            const chat = document.getElementById('robotec-chat');
+            const btn = document.getElementById('btn-robotec');
+            if (chat.classList.contains('hidden')) {
+                chat.classList.remove('hidden');
+                btn.classList.remove('animate-bounce');
+            } else {
+                chat.classList.add('hidden');
+            }
+        }
+
+        function sendRobotecMessage() {
+            const inputField = document.getElementById('chat-input');
+            const text = inputField.value.trim();
+            if (text === "") return;
+
+            addChatMessage(text, 'user');
+            inputField.value = "";
+
+            setTimeout(() => {
+                const response = getRobotecResponse(text.toLowerCase());
+                addChatMessage(response, 'bot');
+            }, 800);
+        }
+
+        function addChatMessage(text, sender) {
+            const chatBox = document.getElementById('chat-messages');
+            const msgDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                msgDiv.className = "bg-brand-blue text-white p-3 rounded-2xl rounded-tr-none w-5/6 shadow-sm self-end animate-fade-in";
+                msgDiv.innerHTML = text;
+            } else {
+                msgDiv.className = "bg-white border border-gray-200 text-gray-800 p-3 rounded-2xl rounded-tl-none w-5/6 shadow-sm self-start animate-fade-in";
+                msgDiv.innerHTML = text;
+            }
+            
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function getRobotecResponse(query) {
+            if (query.includes("plan") || query.includes("precio") || query.includes("costo") || query.includes("gb") || query.includes("ilimitado")) {
+                return "Tenemos planes ilimitados (desde 1 Hora por 500 Bs) y por consumo (desde 1GB). <a href='#' onclick='switchTab(\"planes\"); toggleChat();' class='text-brand-blue font-bold underline'>Ver Planes Aquí</a>.";
+            } else if (query.includes("ubicacion") || query.includes("donde") || query.includes("direccion") || query.includes("grita")) {
+                return "Nuestra oficina principal está en La Grita, Estado Táchira, Venezuela. 📍";
+            } else if (query.includes("contacto") || query.includes("telefono") || query.includes("whatsapp") || query.includes("escribir")) {
+                return "Comunícate directo por WhatsApp al <a href='https://wa.me/584245134562' target='_blank' class='text-brand-blue font-bold'>+58 424 513 4562</a> o envíanos un correo a lcsolucionestec@hotmail.com.";
+            } else if (query.includes("automatizacion") || query.includes("isp") || query.includes("mikrotik") || query.includes("olt") || query.includes("fibra")) {
+                return "Ofrecemos sistemas OSS/BSS, integración con OLTs, MikroTik y cartografía de redes. Revisa nuestra sección de <a href='#' onclick='switchTab(\"automatizacion\"); toggleChat();' class='text-brand-blue font-bold underline'>Automatización</a>.";
+            } else if (query.includes("hola") || query.includes("saludos") || query.includes("buen dia") || query.includes("buenas")) {
+                return "¡Hola! Bienvenido a LC Soluciones. ¿En qué te puedo asesorar hoy?";
+            } else {
+                return "Soy un asistente automatizado. Para consultas técnicas o presupuestos formales, visita nuestra sección <a href='#' onclick='switchTab(\"reclamos\"); toggleChat();' class='text-brand-blue font-bold underline'>Comercial</a> o contáctanos por WhatsApp.";
+            }
         }
 
         // ==========================================
@@ -1042,7 +1189,6 @@
             }
         };
 
-        // Inicializar Estados al cargar la página
         document.addEventListener("DOMContentLoaded", () => {
             const selectEstado = document.getElementById("soc_estado");
             for (let estado in geoVenezuela) {
@@ -1059,7 +1205,6 @@
             const selectParroquia = document.getElementById("soc_parroquia");
             const estadoSeleccionado = selectEstado.value;
 
-            // Resetear Municipio y Parroquia
             selectMunicipio.innerHTML = '<option value="">Municipio...</option>';
             selectParroquia.innerHTML = '<option value="">Parroquia...</option>';
             
@@ -1082,7 +1227,6 @@
             const selectMunicipio = document.getElementById("soc_municipio").value;
             const selectParroquia = document.getElementById("soc_parroquia");
 
-            // Resetear Parroquia
             selectParroquia.innerHTML = '<option value="">Parroquia...</option>';
 
             if (selectEstado && selectMunicipio && geoVenezuela[selectEstado][selectMunicipio]) {
@@ -1110,7 +1254,6 @@
             btn.innerHTML = "Enviando...";
             btn.disabled = true;
 
-            // Recolectar datos
             const nombre = document.getElementById('soc_nombre').value;
             const empresa = document.getElementById('soc_empresa').value || 'No especificada';
             const telefono = document.getElementById('soc_telefono').value;
@@ -1120,7 +1263,6 @@
             const tipo = document.getElementById('soc_tipo').value;
             const descripcion = document.getElementById('soc_descripcion').value;
 
-            // Construir el mensaje formateado para Telegram
             const mensaje = `🔔 *NUEVA SOLICITUD COMERCIAL*\n\n` +
                             `*👤 Cliente:* ${nombre}\n` +
                             `*🏢 Empresa:* ${empresa}\n` +
@@ -1129,13 +1271,11 @@
                             `*📋 Tipo de Solicitud:* ${tipo}\n\n` +
                             `*📝 Descripción:*\n${descripcion}`;
 
-           // ! IMPORTANTE: REEMPLAZA ESTOS VALORES CON LOS DE TU BOT
             const BOT_TOKEN = "7798276985:AAH3GkNgfRFOa3lApS3xQk5skodbJyAqmqo"; 
             const CHAT_ID = "-1003737821268";
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
             try {
-                // Petición a la API de Telegram directa
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -1150,7 +1290,6 @@
                 
                 alert("¡Su solicitud comercial ha sido enviada con éxito!");
                 
-                // Limpiar formulario y resetear estados
                 document.getElementById('formComercial').reset();
                 document.getElementById('soc_municipio').innerHTML = '<option value="">Municipio...</option>';
                 document.getElementById('soc_parroquia').innerHTML = '<option value="">Parroquia...</option>';
