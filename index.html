@@ -185,6 +185,7 @@
                     <nav class="flex gap-4 sm:gap-6 md:gap-8 text-[10px] sm:text-xs font-bold tracking-widest uppercase overflow-x-auto hide-scrollbar pt-1">
                         <button id="btn-wifi" onclick="switchTab('wifi')" class="nav-link nav-active">Inicio</button>
                         <button id="btn-planes" onclick="switchTab('planes')" class="nav-link">Planes</button>
+                        <button id="btn-hotspot" onclick="switchTab('hotspot')" class="nav-link">Hotspot</button>
 					    <button id="btn-automatizacion" onclick="switchTab('automatizacion')" class="nav-link">Automatización</button>
                         <button id="btn-trabajos" onclick="switchTab('trabajos')" class="nav-link">Portafolios</button>
                         <button id="btn-reclamos" onclick="switchTab('reclamos')" class="nav-link">Comercial</button>
@@ -269,7 +270,7 @@
 								</li>
 								<li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
 									<i class="fa-solid fa-shield-halved text-brand-blue mt-1"></i>
-									<span><b>Ciberseguridad Perimetral:</b> Blindamos tu operación. Implementamos segmentación (VLANs) y firewalls robustos para proteger tus datos críticos contra accesos no autorizados.</span>
+									<span><b>Ciberseguridad Perimetral:</b> Blindamos tu operation. Implementamos segmentación (VLANs) y firewalls robustos para proteger tus datos críticos contra accesos no autorizados.</span>
 								</li>
 								<li class="flex items-start gap-3 text-sm md:text-base text-gray-700">
 									<i class="fa-solid fa-tower-broadcast text-brand-blue mt-1"></i>
@@ -370,7 +371,260 @@
             </div>
         </section>
 	
-	    <section id="tab-automatizacion" class="tab-section hidden flex-grow py-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <section id="tab-hotspot" class="hidden flex-grow py-10 px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-10 animate-fade-in-up">
+                    <h2 class="title-glow text-3xl sm:text-4xl lg:text-4xl font-black text-white leading-tight mb-4 tracking-tight uppercase">
+                        desarrollamos tus portales <span class="text-brand-blue">hostpot para ti</span>
+                        <div class="mt-2">
+                            <span class="text-brand-orange"><strong>TENEMOS LOS MEJORES PRECIOS DE LA WEB</strong></span>
+                        </div>
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 px-4 w-full items-stretch">
+                    <!-- PLAN BÁSICO -->
+<div class="service-card p-6 md:p-8 flex flex-col justify-between border-t-4 border-gray-400">
+    <div>
+        <div class="text-center mb-4">
+            <i class="fa-solid fa-rocket text-gray-500 text-4xl mb-2"></i>
+            <h4 class="font-black text-gray-900 text-lg uppercase">PROYECTO STARTER</h4>
+            <p class="font-bold text-brand-blue text-2xl mt-2">25$ <span class="text-xs text-gray-500 font-normal">a BCV</span></p>
+        </div>
+        <hr class="my-4 border-gray-200">
+        
+        <!-- Lista de beneficios con iconos -->
+        <ul class="text-sm text-gray-700 space-y-3 mb-6 leading-relaxed">
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-globe text-gray-600 mt-1 shrink-0"></i>
+                <span><strong>Salida a Internet:</strong> Configuración completa de WAN y NAT para garantizar la navegación estable en tu red.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-list-check text-gray-600 mt-1 shrink-0"></i>
+                <span><strong>Address List:</strong> Segmentación inteligente de tráfico para un control organizado de tus dispositivos y servicios.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-diagram-project text-gray-600 mt-1 shrink-0"></i>
+                <span><strong>Bridge & Puertos:</strong> Configuración de puentes (Bridge) para unificar la comunicación entre los puertos de tu equipo.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-network-wired text-gray-600 mt-1 shrink-0"></i>
+                <span><strong>Servidor DHCP:</strong> Asignación automática y eficiente de direcciones IP para todos los dispositivos conectados a tu red.</span>
+            </li>
+			<li class="flex items-start gap-2">
+                <i class="fa-solid fa-cart-shopping text-brand-blue mt-1 shrink-0"></i>
+                <span><strong>Hardware:</strong> No incluye equipo. Si lo deseas, podemos gestionar la compra y anexar el costo al proyecto.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-headset text-red-500 mt-1 shrink-0"></i>
+                <span><strong>Soporte:</strong> Configuración técnica puntual; no incluye asistencia remota continua ni personalización de portales.</span>
+            </li>
+			<li class="flex items-start gap-2">
+    		<i class="fa-solid fa-headset text-brand-blue mt-1 shrink-0"></i>
+    		<span><strong>Soporte Adicional:</strong> Asesoría técnica, ajustes posteriores o mantenimiento requieren contratación de horas de soporte con costo adicional.</span>
+			</li>
+        </ul>
+
+        <!-- Preguntas Frecuentes -->
+        <div class="mt-8 border-t border-gray-100 pt-6">
+            <h5 class="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider">
+                <i class="fa-solid fa-circle-question mr-2"></i>Preguntas Frecuentes
+            </h5>
+            <div class="space-y-4">
+                <div>
+                    <p class="font-semibold text-gray-800 text-xs">¿Este plan incluye Hotspot?</p>
+                    <p class="text-[10px] sm:text-xs text-gray-600">No, este plan es puramente de conectividad técnica (infraestructura). No incluye portal de inicio de sesión.</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-gray-800 text-xs">¿Es ideal para mi hogar o pequeña oficina?</p>
+                    <p class="text-[10px] sm:text-xs text-gray-600">Sí, es perfecto si solo necesitas poner en marcha tu router MikroTik de forma profesional y estable.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+					<!-- PLAN BRONCE -->
+<div class="service-card p-6 md:p-8 flex flex-col justify-between border-t-4 border-[#cd7f32]">
+    <div>
+        <div class="text-center mb-4">
+            <i class="fa-solid fa-chart-line text-[#cd7f32] text-4xl mb-2"></i>
+            <h4 class="font-black text-gray-900 text-lg uppercase">PROYECTO GROWTH</h4>
+            <p class="font-bold text-brand-blue text-2xl mt-2">100$ <span class="text-xs text-gray-500 font-normal">a BCV</span></p>
+        </div>
+        <hr class="my-4 border-gray-200">
+        
+        <!-- Lista de beneficios con iconos -->
+        <ul class="text-sm text-gray-700 space-y-3 mb-6 leading-relaxed">
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-paintbrush text-[#cd7f32] mt-1 shrink-0"></i>
+                <span><strong>Portal Hotspot Personalizado:</strong> Diseño profesional con el logo de tu empresa para una imagen de marca sólida y confiable.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-users-gear text-[#cd7f32] mt-1 shrink-0"></i>
+                <span><strong>Gestión Eficiente:</strong> Creación inicial de hasta 50 perfiles de usuario por ticket, configurados según tus planes de velocidad.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-microchip text-[#cd7f32] mt-1 shrink-0"></i>
+                <span><strong>Compatibilidad Optimizada:</strong> Especial para equipos MikroTik (v6 y v7) con puerto de 100 Mbps y almacenamiento eficiente.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-mobile-screen-button text-[#cd7f32] mt-1 shrink-0"></i>
+                <span><strong>Experiencia Adaptativa:</strong> Interfaz optimizada para móviles (UX/UI) que facilita la conexión de tus clientes desde cualquier dispositivo.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-cart-shopping text-brand-blue mt-1 shrink-0"></i>
+                <span><strong>Hardware:</strong> No incluye equipo. Si lo deseas, podemos gestionar la compra y anexar el costo al proyecto.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-headset text-red-500 mt-1 shrink-0"></i>
+                <span><strong>Soporte:</strong> Solución "Self-Service"; no incluye asistencia técnica remota ni mantenimiento posterior.</span>
+            </li>
+			<li class="flex items-start gap-2">
+    		<i class="fa-solid fa-headset text-brand-blue mt-1 shrink-0"></i>
+    		<span><strong>Soporte Adicional:</strong> Asesoría técnica, ajustes posteriores o mantenimiento requieren contratación de horas de soporte con costo adicional.</span>
+			</li>
+        </ul>
+
+        <!-- Preguntas Frecuentes -->
+        <div class="mt-8 border-t border-gray-100 pt-6">
+            <h5 class="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider">
+                <i class="fa-solid fa-circle-question mr-2"></i>Preguntas Frecuentes
+            </h5>
+            <div class="space-y-4">
+                <div>
+                    <p class="font-semibold text-gray-800 text-xs">¿Qué necesito para contratar este plan?</p>
+                    <p class="text-[10px] sm:text-xs text-gray-600">Solo contar con un MikroTik compatible y enviarnos tu logo en formato digital.</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-gray-800 text-xs">¿Puedo crear más de 50 usuarios?</p>
+                    <p class="text-[10px] sm:text-xs text-gray-600">Sí, entregamos una guía básica para que gestiones nuevos tickets tú mismo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    <!-- PLAN PLATA -->
+<div class="service-card p-6 md:p-8 flex flex-col justify-between border-t-4 border-[#94a3b8] relative transform md:-translate-y-2 shadow-2xl">
+    <div>
+        <div class="text-center mb-4">
+            <i class="fa-solid fa-briefcase text-[#64748b] text-4xl mb-2"></i>
+            <h4 class="font-black text-gray-900 text-lg uppercase">PROYECTO BUSINESS</h4>
+            <p class="font-bold text-brand-blue text-2xl mt-2">150$ <span class="text-xs text-gray-500 font-normal">a BCV</span></p>
+        </div>
+        <hr class="my-4 border-gray-200">
+        
+        <!-- Lista de beneficios con iconos -->
+        <ul class="text-sm text-gray-700 space-y-3 mb-6 leading-relaxed">
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-palette text-[#64748b] mt-1 shrink-0"></i>
+                <span><strong>Portal Hotspot Avanzado:</strong> Diseño premium con logo, esquema de colores de tu marca y una estructura de navegación intuitiva.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-bullhorn text-[#64748b] mt-1 shrink-0"></i>
+                <span><strong>Publicidad y Marketing:</strong> Integración de banners promocionales y anuncios dinámicos para destacar tus productos o servicios al iniciar sesión.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-sliders text-[#64748b] mt-1 shrink-0"></i>
+                <span><strong>Gestión Premium:</strong> Configuración de hasta 50 usuarios por ticket con control avanzado de tiempo, velocidad y cuotas de descarga.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-network-wired text-[#64748b] mt-1 shrink-0"></i>
+                <span><strong>Compatibilidad Extendida:</strong> Optimizado para MikroTik v6/v7 (puertos 100 Mbps o Gigabit) con gestión eficiente de archivos y mayor capacidad de almacenamiento.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-cart-shopping text-brand-blue mt-1 shrink-0"></i>
+                <span><strong>Hardware:</strong> No incluye equipo. Si lo deseas, podemos gestionar la compra y anexar el costo al proyecto.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-headset text-red-500 mt-1 shrink-0"></i>
+                <span><strong>Soporte:</strong> Plan "Self-Service"; no incluye asistencia técnica remota ni mantenimiento post-entrega.</span>
+            </li>
+			<li class="flex items-start gap-2">
+    		<i class="fa-solid fa-headset text-brand-blue mt-1 shrink-0"></i>
+    		<span><strong>Soporte Adicional:</strong> Asesoría técnica, ajustes posteriores o mantenimiento requieren contratación de horas de soporte con costo adicional.</span>
+			</li>
+        </ul>
+
+        <!-- Preguntas Frecuentes con icono -->
+        <div class="mt-8 border-t border-gray-100 pt-6">
+            <h5 class="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider">
+                <i class="fa-solid fa-circle-question mr-2"></i>Preguntas Frecuentes
+            </h5>
+            <div class="space-y-4">
+                <div>
+                    <p class="font-semibold text-gray-800 text-xs">¿Qué tipo de anuncios puedo poner?</p>
+                    <p class="text-[10px] sm:text-xs text-gray-600">Puedes incluir banners estáticos o promociones destacadas (imágenes) de los productos de tu negocio.</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-gray-800 text-xs">¿Es más rápido que el plan anterior?</p>
+                    <p class="text-[10px] sm:text-xs text-gray-600">Este plan aprovecha mejor el hardware de equipos Gigabit y optimiza el almacenamiento para una carga más ágil del portal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    <!-- PLAN ORO -->
+<div class="service-card p-6 md:p-8 flex flex-col justify-between border-t-4 border-[#eab308]">
+    <div>
+        <div class="text-center mb-4">
+            <i class="fa-solid fa-crown text-[#eab308] text-4xl mb-2"></i>
+            <h4 class="font-black text-gray-900 text-lg uppercase">PROYECTO PROFESSIONAL</h4>
+            <p class="font-bold text-brand-blue text-2xl mt-2">250$ <span class="text-xs text-gray-500 font-normal">a BCV</span></p>
+        </div>
+        <hr class="my-4 border-gray-200">
+        
+        <ul class="text-sm text-gray-700 space-y-3 mb-6 leading-relaxed">
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-rocket text-[#eab308] mt-1 shrink-0"></i>
+                <span><strong>Portal Hotspot Enterprise:</strong> Experiencia de usuario de alto nivel con marca blanca, publicidad dinámica y banners publicitarios avanzados.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-users-viewfinder text-[#eab308] mt-1 shrink-0"></i>
+                <span><strong>Gestión User Manager:</strong> Control total centralizado para usuarios ilimitados, ideal para suscripciones recurrentes (7, 15 y 30 días).</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-server text-[#eab308] mt-1 shrink-0"></i>
+                <span><strong>Arquitectura de Alto Rendimiento:</strong> Optimizado para equipos ARM/ARM64 (v6 y v7) con soporte para interfaces Gigabit y alta carga de procesamiento.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-shield-halved text-[#eab308] mt-1 shrink-0"></i>
+                <span><strong>Seguridad y Conectividad:</strong> Implementación de túneles VPN, acceso remoto seguro y hardening de seguridad en tu infraestructura.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-headset text-[#eab308] mt-1 shrink-0"></i>
+                <span><strong>Soporte VIP:</strong> Incluye asistencia técnica remota, asesoría continua y acompañamiento estratégico para la gestión de tu red.</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <i class="fa-solid fa-cart-shopping text-brand-blue mt-1 shrink-0"></i>
+                <span><strong>Hardware:</strong> No incluye equipo. Si lo deseas, podemos gestionar la compra y anexar el costo al proyecto.</span>
+            </li>
+        </ul>
+
+        <!-- Preguntas Frecuentes -->
+        <div class="mt-8 border-t border-gray-100 pt-6">
+            <h5 class="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider">
+                <i class="fa-solid fa-circle-question mr-2"></i>Preguntas Frecuentes
+            </h5>
+            <div class="space-y-4">
+                <div>
+                    <p class="font-semibold text-gray-800 text-xs">¿Qué diferencia al User Manager?</p>
+                    <p class="text-[10px] sm:text-xs text-gray-600">Permite una gestión profesional y escalable de usuarios, ideal para negocios con gran rotación y modelos de suscripción.</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-gray-800 text-xs">¿El soporte es ilimitado?</p>
+                    <p class="text-[10px] sm:text-xs text-gray-600">Ofrecemos asistencia remota prioritaria y asesoría para que tu operación nunca se detenga.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+					
+            <section id="tab-automatizacion" class="hidden flex-grow py-16 px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-6xl mx-auto">
                 <div class="text-center mb-10 animate-fade-in-up">
                     <h2 class="title-glow text-3xl sm:text-4xl lg:text-4xl font-black leading-tight tracking-tight">
@@ -604,6 +858,7 @@
                     <ul class="space-y-2 text-xs md:text-sm text-gray-400">
                         <li><button onclick="switchTab('wifi')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Inicio</button></li>
                         <li><button onclick="switchTab('planes')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Planes</button></li>
+                        <li><button onclick="switchTab('hotspot')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Hotspot</button></li>
 						<li><button onclick="switchTab('automatizacion')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Automatización</button></li>
                         <li><button onclick="switchTab('trabajos')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Portafolios</button></li>
                         <li><button onclick="switchTab('reclamos')" class="hover:text-brand-blue transition flex items-center"><i class="fa-solid fa-chevron-right text-[10px] mr-2"></i> Comercial</button></li>
@@ -670,12 +925,12 @@
                         <span class="text-[10px] text-green-400 flex items-center gap-1"><span class="w-2 h-2 bg-green-400 rounded-full inline-block animate-pulse"></span> En línea</span>
                     </div>
                 </div>
-                <button onclick="toggleChat()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-user-astronaut text-lg"></i></button>
+                <button onclick="toggleChat()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
             
             <div id="chat-messages" class="flex-grow p-4 overflow-y-auto text-sm space-y-4 bg-gray-50 flex flex-col">
                 <div class="bg-white border border-gray-200 text-gray-800 p-3 rounded-2xl rounded-tl-none w-5/6 shadow-sm self-start">
-                    ¡Hola! Soy <b>ROBOTEC</b> 🤖, tu asistente virtual en <b>LC SOLUCIONES TECNOLÓGICAS.</b> Mis respuestas son limitadas ya que estoy en desarrollo. 
+                    ¡Hola! Soy <b>ROBOTEC</b> 🤖, tu asistente virtual en <b>LC SOLUCIONES TECNOLÓGICAS.</b> ¿En qué te puedo colaborar hoy? Puedes consultarme sobre nuestros planes, portafolios, automatizaciones, hotspot o contacto comercial.
                 </div>
             </div>
             
@@ -693,7 +948,7 @@
         function scrollCarrusel(offset) { const container = document.getElementById('carrusel-trabajos'); container.scrollBy({ left: offset, behavior: 'smooth' }); }
 
         function switchTab(tab){
-            const sections = ['wifi', 'planes', 'automatizacion', 'trabajos', 'reclamos'];
+            const sections = ['wifi', 'planes', 'hotspot', 'automatizacion', 'trabajos', 'reclamos'];
             sections.forEach(s => {
                 document.getElementById('tab-' + s).classList.add('hidden');
                 document.getElementById('btn-' + s).classList.remove('nav-active');
@@ -743,7 +998,7 @@
         }
 
         // ==========================================
-        // LÓGICA DE ROBOTEC (ASISTENTE BÁSICO)
+        // LÓGICA DE ROBOTEC (ASISTENTE MEJORADO Y DETALLADO)
         // ==========================================
         function toggleChat() {
             const chat = document.getElementById('robotec-chat');
@@ -787,19 +1042,53 @@
         }
 
         function getRobotecResponse(query) {
-            if (query.includes("plan") || query.includes("precio") || query.includes("costo") || query.includes("gb") || query.includes("ilimitado")) {
-                return "Tenemos planes ilimitados (desde 1 Hora por 500 Bs) y por consumo (desde 1GB). <a href='#' onclick='switchTab(\"planes\"); toggleChat();' class='text-brand-blue font-bold underline'>Ver Planes Aquí</a>.";
-            } else if (query.includes("ubicacion") || query.includes("donde") || query.includes("direccion") || query.includes("grita")) {
-                return "Nuestra oficina principal está en La Grita, Estado Táchira, Venezuela. 📍";
-            } else if (query.includes("contacto") || query.includes("telefono") || query.includes("whatsapp") || query.includes("escribir")) {
-                return "Comunícate directo por WhatsApp al <a href='https://wa.me/584245134562' target='_blank' class='text-brand-blue font-bold'>+58 424 513 4562</a> o envíanos un correo a lcsolucionestec@hotmail.com.";
-            } else if (query.includes("automatizacion") || query.includes("isp") || query.includes("mikrotik") || query.includes("olt") || query.includes("fibra")) {
-                return "Ofrecemos sistemas OSS/BSS, integración con OLTs, MikroTik y cartografía de redes. Revisa nuestra sección de <a href='#' onclick='switchTab(\"automatizacion\"); toggleChat();' class='text-brand-blue font-bold underline'>Automatización</a>.";
-            } else if (query.includes("hola") || query.includes("saludos") || query.includes("buen dia") || query.includes("buenas")) {
-                return "¡Hola! Bienvenido a LC Soluciones. ¿En qué te puedo asesorar hoy?";
-            } else {
-                return "Soy un asistente automatizado. Para consultas técnicas o presupuestos formales, visita nuestra sección <a href='#' onclick='switchTab(\"reclamos\"); toggleChat();' class='text-brand-blue font-bold underline'>Comercial</a> o contáctanos por WhatsApp.";
+            // General / Saludos
+            if (query.includes("hola") || query.includes("saludos") || query.includes("buen dia") || query.includes("buenas")) {
+                return "¡Hola! Bienvenido a LC Soluciones Tecnológicas. Soy ROBOTEC 🤖. ¿En qué puedo ayudarte hoy? Consultas sobre: planes, hotspot, automatización, portafolio, ubicación, etc.";
             }
+            
+            // Planes de Internet
+            if (query.includes("plan") || query.includes("precio") || query.includes("costo") || query.includes("gb") || query.includes("ilimitado") || query.includes("tarifa") || query.includes("recarga") || query.includes("bs")) {
+                return "Ofrecemos dos modalidades de navegación:<br><br><b>Planes Ilimitados:</b><br>• 1 Hora: 500,00 Bs<br>• 1 Día: 1.500,00 Bs<br>• 1 Semana: 5.000,00 Bs<br>• 1 Mes: 15.000,00 Bs<br><br><b>Planes por Consumo:</b><br>• 1 GB: 250,00 Bs<br>• 3 GB: 1.000,00 Bs<br>• 5 GB: 2.500,00 Bs<br>• 10 GB: 8.750,00 Bs<br><a href='#' onclick='switchTab(\"planes\"); toggleChat();' class='text-brand-blue font-bold underline'>Ver Planes detallados aquí</a>.";
+            }
+            
+            // Hotspot / Desarrollo de portales
+            if (query.includes("hotspot") || query.includes("portal") || query.includes("ticket") || query.includes("vender internet") || query.includes("mikrotik") || query.includes("proyecto")) {
+                return "Desarrollamos portales Hotspot a los mejores precios de la web:<br><br>• <b>Starter (25$):</b> Conectabilidad técnica básica (WAN, NAT, DHCP, Bridge, Address List). No incluye portal.<br>• <b>Growth (100$):</b> Portal personalizado con logo, hasta 50 perfiles iniciales, optimizado para MikroTik 100 Mbps.<br>• <b>Business (150$):</b> Diseño Premium, banners publicitarios y marketing dinámico, optimizado para equipos Gigabit.<br>• <b>Professional (250$):</b> Control centralizado User Manager para usuarios ilimitados, ideal para suscripciones de 7, 15 y 30 días, VPN y Soporte VIP.<br><a href='#' onclick='switchTab(\"hotspot\"); toggleChat();' class='text-brand-blue font-bold underline'>Revisar Proyectos Hotspot aquí</a>.";
+            }
+            
+            // Automatización / ISP
+            if (query.includes("automatizacion") || query.includes("isp") || query.includes("olt") || query.includes("billing") || query.includes("cartografia") || query.includes("ozmap") || query.includes("qgis") || query.includes("aplicacion") || query.includes("app")) {
+                return "Actualmente estamos desarrollando nuestras aplicaciones de infraestructura inteligente para ISPs:<br><br>• <b>Núcleo de Red y OLT:</b> (En Desarrollo) Integración directa con marcas líderes (Huawei, ZTE, C-Data) y Provisioning Zero-Touch.<br>• <b>Motor de Billing (OSS/BSS):</b> (En Desarrollo) Automatización de facturación y cortes automáticos por mora con portal en la nube.<br>• <b>Cartografía de Red:</b> (Estable) Mapeo inteligente de planta externa mediante OZmap y QGIS para optimizar tendidos y cajas NAP.<br><a href='#' onclick='switchTab(\"automatizacion\"); toggleChat();' class='text-brand-blue font-bold underline'>Ir a la sección de Automatización</a>.";
+            }
+            
+            // Portafolios / Trabajos
+            if (query.includes("trabajo") || query.includes("portafolio") || query.includes("campo") || query.includes("torre") || query.includes("fibra") || query.includes("servidor") || query.includes("enlace") || query.includes("router")) {
+                return "Contamos con amplia experiencia comprobable en trabajos de campo:<br><br>• <b>Torres de Comunicación:</b> Diseño, montaje y mantenimiento.<br>• <b>Redes de Fibra Óptica:</b> Despliegue FTTH y empalmes profesionales por fusión.<br>• <b>Servidores MikroTik:</b> Balanceo de carga y firewall corporativo.<br>• <b>Enlaces Inalámbricos:</b> Enlaces PtP y PtMP de larga distancia.<br>• <b>Routers y Access Point:</b> Instalación de equipos de última generación.<br><a href='#' onclick='switchTab(\"trabajos\"); toggleChat();' class='text-brand-blue font-bold underline'>Ver Galería de Portafolios</a>.";
+            }
+            
+            // Comercial / Formulario / Contacto
+            if (query.includes("comercial") || query.includes("formulario") || query.includes("solicitud") || query.includes("cotizacion") || query.includes("presupuesto") || query.includes("asesoria")) {
+                return "Nuestra área comercial procesa solicitudes de presupuestos y asesorías. Puedes rellenar el formulario interactivo indicando tu Estado, Municipio y Parroquia en Venezuela para enviarnos tu solicitud técnica o comercial vía Telegram.<br><a href='#' onclick='switchTab(\"reclamos\"); toggleChat();' class='text-brand-blue font-bold underline'>Ir al Formulario Comercial aquí</a>.";
+            }
+            
+            // Ubicación / Dirección
+            if (query.includes("ubicacion") || query.includes("donde") || query.includes("direccion") || query.includes("grita") || query.includes("tachira") || query.includes("venezuela") || query.includes("oficina")) {
+                return "Nuestra ubicación principal se encuentra en <b>La Grita, Estado Táchira, Venezuela.</b> 📍";
+            }
+            
+            // Contacto Directo / WhatsApp
+            if (query.includes("contacto") || query.includes("telefono") || query.includes("whatsapp") || query.includes("correo") || query.includes("email") || query.includes("celular")) {
+                return "Puedes contactarnos de forma inmediata a través de:<br><br>• <b>WhatsApp:</b> <a href='https://wa.me/584245134562' target='_blank' class='text-brand-blue font-bold underline'>+58 424 513 4562</a><br>• <b>Correo Electrónico:</b> lcsolucionestec@hotmail.com<br>• <b>Web Oficial:</b> lcsolucionestec.github.io/mk";
+            }
+
+            // Experiencia General de la Empresa
+            if (query.includes("experiencia") || query.includes("conocimiento") || query.includes("ingeniero") || query.includes("jose cordero")) {
+                return "LC Soluciones Tecnológicas es liderada por el <b>Ing. Jose Cordero</b>. Contamos con dominio experto en Planificación Geo-estratégica (OZmap, QGIS), administración avanzada MikroTik, redes PON y fibra óptica, ciberseguridad perimetral y enlaces inalámbricos de larga distancia.";
+            }
+
+            // Respuesta por Defecto
+            return "Disculpa, no entendí bien tu consulta. Soy el asistente virtual de la página. ¿Deseas información sobre nuestros <b>planes</b> de internet, desarrollo de portales <b>hotspot</b>, <b>automatización</b> para ISPs, ver nuestro <b>portafolio</b> o ir al formulario <b>comercial</b>?";
         }
 
         // ==========================================
