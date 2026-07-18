@@ -137,7 +137,7 @@
         .animate-slide-in-right {
             animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
-        
+		
         /* Ajuste para el scroll del Chat de JOSYBETH */
         #chat-messages::-webkit-scrollbar { width: 4px; }
         #chat-messages::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
@@ -154,26 +154,31 @@
 
     <!-- CONTENEDOR STICKY PARA MANTENER LA BARRA SUPERIOR Y EL HEADER SIEMPRE VISIBLES -->
     <div class="sticky top-0 z-50 w-full shadow-lg">
-        <div class="bg-gray-900 text-gray-400 text-[10px] md:text-xs py-1.5 px-4 flex justify-between items-center border-b border-gray-800 relative z-50">
-            <div class="flex items-center gap-2">
-                <i class="fa-regular fa-calendar-days text-brand-blue"></i>
-                <span id="info-datetime">Cargando fecha y hora...</span>
-            </div>
-            <div class="flex items-center gap-4">
-                <div class="hidden sm:flex items-center gap-1" title="Tu IP Local">
-                    <i class="fa-solid fa-network-wired text-brand-blue"></i>
-                    <span id="info-private-ip">Detectando...</span>
-                </div>
-                <div class="flex items-center gap-1" title="Tu IP Pública">
-                    <i class="fa-solid fa-globe text-brand-blue"></i>
-                    <span id="info-public-ip">Detectando...</span>
-                </div>
-                <button onclick="openSpeedtest()" class="bg-brand-blue/20 text-brand-blue hover:bg-brand-blue hover:text-white px-3 py-0.5 rounded-full transition font-bold flex items-center gap-1">
-                    <i class="fa-solid fa-gauge-high"></i> <span class="hidden sm:inline">Speedtest</span>
-                </button>
-            </div>
+    <div class="bg-gray-900 text-gray-400 text-[10px] md:text-xs py-1.5 px-4 flex justify-between items-center border-b border-gray-800 relative z-50">
+        <div class="flex items-center gap-2">
+            <i class="fa-regular fa-calendar-days text-brand-blue"></i>
+            <span id="info-datetime">Cargando fecha y hora...</span>
+            <span class="mx-1 text-gray-600 hidden sm:inline">|</span>
+            <i class="fa-solid fa-wifi text-brand-blue hidden sm:inline"></i>
+            <span id="isp-name" style="visibility: hidden;">Buscando...</span>
         </div>
-
+        <div class="flex items-center gap-4">
+            <div class="hidden sm:flex items-center gap-1" title="Tu IP Local">
+                <i class="fa-solid fa-network-wired text-brand-blue"></i>
+                <span id="info-private-ip">Detectando...</span>
+            </div>
+            <div class="flex items-center gap-1" title="Tu IP Pública y Proveedor">
+                <i class="fa-solid fa-globe text-brand-blue"></i>
+                <span id="info-public-ip">Detectando...</span>
+                <!-- Aquí se inyectará el ISP -->
+                <span id="info-isp" class="ml-1 text-gray-300 font-bold truncate max-w-[100px] sm:max-w-none"></span>
+            </div>
+            <button onclick="openSpeedtest()" class="bg-brand-blue/20 text-brand-blue hover:bg-brand-blue hover:text-white px-3 py-0.5 rounded-full transition font-bold flex items-center gap-1">
+                <i class="fa-solid fa-gauge-high"></i> <span class="hidden sm:inline">Speedtest</span>
+            </button>
+        </div>
+    </div>
+</div>
         <header class="bg-brand-dark border-b border-gray-800 relative z-40">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-row justify-between items-center h-20 gap-4">
@@ -959,7 +964,7 @@
         }
 
         // ==========================================
-        // LÓGICA DE BARRA SUPERIOR (FECHA, IP, SPEEDTEST)
+        // LÓGICA DE BARRA SUPERIOR (FECHA, IP, SPEEDTEST Y PROVEEDOR)
         // ==========================================
         function updateDateTime() {
             const now = new Date();
@@ -970,14 +975,55 @@
         updateDateTime();
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Obtener IP Pública (API Externa - Funciona bien en GH Pages)
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => { document.getElementById('info-public-ip').innerText = data.ip; })
-                .catch(() => { document.getElementById('info-public-ip').innerText = "No disponible"; });
-
-            // Obtener IP Privada del Navegador, posiblemente funcione
-            document.getElementById('info-private-ip').innerText = "Protegida";
+            // Obtener IP Pública y Proveedor (API Externa) de forma más robusta
+            async function fetchIPAndISP() {
+                try {
+                    // Intento 1: API Principal
+                    const response = await fetch('https://ipwho.is/');
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        document.getElementById('info-public-ip').innerText = data.ip;
+                        document.getElementById('info-isp').innerText = "- " + data.connection.isp;
+                        // CORRECCIÓN: Apuntando al ID correcto en el HTML
+                        document.getElementById('isp-name').innerText = data.connection.isp;
+                    } else {
+                        throw new Error("La API principal falló");
+                    }
+                } catch (error) {
+                    try {
+                        // Intento 2: Fallback (Respaldo) a otra API si la primera falla o limita peticiones
+                        const fallbackResponse = await fetch('https://ipapi.co/json/');
+                        const fallbackData = await fallbackResponse.json();
+                        
+                        if (fallbackData.ip) {
+                            document.getElementById('info-public-ip').innerText = fallbackData.ip;
+                            document.getElementById('info-isp').innerText = "- " + (fallbackData.org || 'Desconocido');
+                            document.getElementById('isp-name').innerText = fallbackData.org || 'Desconocido';
+                        } else {
+                            throw new Error("Fallback falló");
+                        }
+                    } catch (fallbackError) {
+                        // Intento 3: Último recurso, obtenemos solo la IP si los proveedores de ISP están bloqueados
+                        fetch('https://api.ipify.org?format=json')
+                            .then(res => res.json())
+                            .then(d => { 
+                                document.getElementById('info-public-ip').innerText = d.ip; 
+                                document.getElementById('info-isp').innerText = "";
+                                document.getElementById('isp-name').innerText = "Desconocido";
+                            })
+                            .catch(() => { 
+                                document.getElementById('info-public-ip').innerText = "No disponible"; 
+                                document.getElementById('isp-name').innerText = "Desconocido";
+                            });
+                    }
+                }
+                
+                // IP Privada
+                document.getElementById('info-private-ip').innerText = "Protegida";
+            }
+            
+            fetchIPAndISP();
         });
 
         // Speedtest Modal
@@ -1446,73 +1492,90 @@
                 "Maracaibo": ["Bolívar", "Coquivacoa", "Olegario Villalobos", "Santa Lucía", "Juana de Ávila", "Chiquinquirá"],
                 "Miranda": ["Los Puertos de Altagracia", "Ana María Campos", "Faría"],
                 "Rosario de Perijá": ["La Villa del Rosario", "Donaldo García"],
-                "San Francisco": ["San Francisco", "El Bajo", "Domitila Flores"],
-                "Santa Rita": ["Santa Rita", "El Mene", "Pedro Lucas Urribarrí"],
-                "Simón Bolívar": ["Tía Juana", "Manuel Manrique"],
-                "Sucre": ["Bobures", "El Batey", "Gibraltar"],
-                "Valmore Rodríguez": ["Bachaquero", "La Victoria"]
+                "San Francisco": ["San Francisco", "El Bajo", "Domitila Flores"]
             }
         };
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const selectEstado = document.getElementById("soc_estado");
-            for (let estado in geoVenezuela) {
-                let option = document.createElement("option");
-                option.value = estado;
-                option.text = estado;
-                selectEstado.add(option);
+        // Lógica de llenado de selectores para el formulario
+        window.addEventListener('DOMContentLoaded', () => {
+            const estadoSelect = document.getElementById('soc_estado');
+            if (estadoSelect) {
+                for (let estado in geoVenezuela) {
+                    let option = document.createElement('option');
+                    option.value = estado;
+                    option.textContent = estado;
+                    estadoSelect.appendChild(option);
+                }
             }
         });
 
         function cargarMunicipios() {
-            const selectEstado = document.getElementById("soc_estado");
-            const selectMunicipio = document.getElementById("soc_municipio");
-            const selectParroquia = document.getElementById("soc_parroquia");
-            const estadoSeleccionado = selectEstado.value;
-
-            selectMunicipio.innerHTML = '<option value="">Municipio...</option>';
-            selectParroquia.innerHTML = '<option value="">Parroquia...</option>';
+            const estado = document.getElementById('soc_estado').value;
+            const municipioSelect = document.getElementById('soc_municipio');
+            const parroquiaSelect = document.getElementById('soc_parroquia');
             
-            if (estadoSeleccionado && geoVenezuela[estadoSeleccionado]) {
-                selectMunicipio.disabled = false;
-                for (let municipio in geoVenezuela[estadoSeleccionado]) {
-                    let option = document.createElement("option");
+            municipioSelect.innerHTML = '<option value="">Municipio...</option>';
+            parroquiaSelect.innerHTML = '<option value="">Parroquia...</option>';
+            parroquiaSelect.disabled = true;
+
+            if (estado) {
+                municipioSelect.disabled = false;
+                for (let municipio in geoVenezuela[estado]) {
+                    let option = document.createElement('option');
                     option.value = municipio;
-                    option.text = municipio;
-                    selectMunicipio.add(option);
+                    option.textContent = municipio;
+                    municipioSelect.appendChild(option);
                 }
             } else {
-                selectMunicipio.disabled = true;
-                selectParroquia.disabled = true;
+                municipioSelect.disabled = true;
             }
         }
 
         function cargarParroquias() {
-            const selectEstado = document.getElementById("soc_estado");
-            const selectMunicipio = document.getElementById("soc_municipio");
-            const selectParroquia = document.getElementById("soc_parroquia");
-            const estadoSeleccionado = selectEstado.value;
-            const municipioSeleccionado = selectMunicipio.value;
-
-            selectParroquia.innerHTML = '<option value="">Parroquia...</option>';
+            const estado = document.getElementById('soc_estado').value;
+            const municipio = document.getElementById('soc_municipio').value;
+            const parroquiaSelect = document.getElementById('soc_parroquia');
             
-            if (estadoSeleccionado && municipioSeleccionado && geoVenezuela[estadoSeleccionado][municipioSeleccionado]) {
-                selectParroquia.disabled = false;
-                let parroquias = geoVenezuela[estadoSeleccionado][municipioSeleccionado];
-                parroquias.forEach(parroquia => {
-                    let option = document.createElement("option");
+            parroquiaSelect.innerHTML = '<option value="">Parroquia...</option>';
+
+            if (estado && municipio) {
+                parroquiaSelect.disabled = false;
+                geoVenezuela[estado][municipio].forEach(parroquia => {
+                    let option = document.createElement('option');
                     option.value = parroquia;
-                    option.text = parroquia;
-                    selectParroquia.add(option);
+                    option.textContent = parroquia;
+                    parroquiaSelect.appendChild(option);
                 });
             } else {
-                selectParroquia.disabled = true;
+                parroquiaSelect.disabled = true;
             }
         }
-        
+
         function enviarPorTelegram(event) {
             event.preventDefault();
-            alert("Solicitud enviada con éxito.");
+            
+            // Reemplaza esto con tu número
+            const telefonoDestino = "584245134562";
+            
+            const nombre = document.getElementById('soc_nombre').value;
+            const empresa = document.getElementById('soc_empresa').value || "No especificada";
+            const telefono = document.getElementById('soc_telefono').value;
+            const tipo = document.getElementById('soc_tipo').value;
+            const estado = document.getElementById('soc_estado').value;
+            const municipio = document.getElementById('soc_municipio').value;
+            const parroquia = document.getElementById('soc_parroquia').value;
+            const descripcion = document.getElementById('soc_descripcion').value;
+
+            const mensaje = `*NUEVA SOLICITUD COMERCIAL*\n\n` +
+                            `*Nombre:* ${nombre}\n` +
+                            `*Empresa:* ${empresa}\n` +
+                            `*Teléfono:* ${telefono}\n` +
+                            `*Tipo:* ${tipo}\n` +
+                            `*Ubicación:* ${estado}, ${municipio}, ${parroquia}\n\n` +
+                            `*Descripción:*\n${descripcion}`;
+
+            const url = `https://wa.me/${telefonoDestino}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
             return false;
         }
     </script>
