@@ -12,6 +12,140 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+		:root {
+    --primary: #0284c7;
+    --primary-light: #38bdf8;
+    --accent: #f97316;
+    --primary-glow: rgba(2, 132, 199, 0.35);
+    --bg-modal: rgba(13, 19, 32, 0.95);
+    --border-modal: rgba(56, 189, 248, 0.25);
+}
+
+/* Fondo Oscuro con Desenfoque */
+.portal-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(6, 9, 17, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.portal-modal-overlay.hidden {
+    display: none !important;
+    opacity: 0;
+}
+
+/* Contenedor Principal Amplio y Elegante */
+.portal-modal-container {
+    background-color: var(--bg-modal);
+    border: 1px solid var(--border-modal);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 1200px; /* Ancho máximo grande para aprovechar pantallas */
+    height: 90vh;      /* Ocupa el 90% de la altura de la pantalla */
+    max-height: 850px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 40px var(--primary-glow);
+    position: relative;
+    animation: modalScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    overflow: hidden;
+}
+
+@keyframes modalScaleUp {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Cabecera del Modal */
+.portal-modal-header {
+    background: rgba(6, 9, 17, 0.95);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-modal);
+}
+
+.portal-modal-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.portal-emblem {
+    width: 30px;
+    height: 30px;
+    background: #060911;
+    border: 2px solid var(--primary-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 900;
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* Botón de Cierre Estilizado */
+.portal-modal-close {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.portal-modal-close:hover {
+    background: #ef4444;
+    color: #ffffff;
+    transform: rotate(90deg);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+}
+
+/* Cuerpo y Ajuste del Iframe */
+.portal-modal-body {
+    flex: 1;
+    width: 100%;
+    background: #030712;
+    position: relative;
+}
+
+.portal-modal-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+}
+
+/* Adaptabilidad para móviles */
+@media (max-width: 768px) {
+    .portal-modal-overlay { padding: 8px; }
+    .portal-modal-container { height: 95vh; max-height: none; border-radius: 14px; }
+    .portal-modal-title { font-size: 11px; }
+}
         * {
             margin: 0;
             padding: 0;
@@ -141,6 +275,8 @@
             animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 		
+		
+		
         #chat-messages::-webkit-scrollbar { width: 4px; }
         #chat-messages::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     </style>
@@ -257,11 +393,36 @@
                         </button>
                     </nav>
 
-                    <div class="hidden lg:flex items-center gap-4 shrink-0">
-                        <button onclick="switchTab('reclamos')" class="bg-brand-blue text-white px-5 py-2 rounded-md text-xs font-bold flex items-center gap-2 hover:bg-blue-700 transition cursor-pointer shadow-md">
-                            <i class="fa-solid fa-envelope text-lg"></i> Escríbeme
-                        </button>
-                    </div>
+        
+    <!-- Botón Portal de Clientes con diseño ejecutivo -->
+<div class="hidden lg:flex items-center gap-4 shrink-0">
+    <button onclick="openPortalClientes()" class="group relative inline-flex items-center gap-3.5 px-6 py-3 rounded-2xl text-xs font-semibold tracking-wider text-slate-100 bg-slate-950/70 backdrop-blur-xl border border-white/10 hover:border-indigo-500/50 shadow-2xl shadow-indigo-950/40 hover:shadow-indigo-500/25 transition-all duration-500 cursor-pointer overflow-hidden">
+        <!-- Brillo dinámico de fondo en hover -->
+        <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/10 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-sm"></div>
+        
+        <!-- Línea de reflejo superior sutil -->
+        <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent"></div>
+
+        <!-- Contenedor del ícono con efecto tridimensional -->
+        <div class="relative w-7 h-7 rounded-xl bg-gradient-to-br from-indigo-500/20 to-blue-600/20 border border-indigo-400/30 flex items-center justify-center text-indigo-400 group-hover:text-indigo-200 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-inner">
+            <i class="fa-solid fa-user-shield text-xs"></i>
+        </div>
+
+        <!-- Texto y flecha con contenedor circular animado -->
+        <span class="relative z-10 flex items-center gap-2.5 font-medium text-slate-200 group-hover:text-white transition-colors">
+            Portal Clientes
+            <div class="w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-indigo-600 group-hover:border-indigo-500 transition-all duration-300 shadow-sm">
+                <i class="fa-solid fa-arrow-right text-[9px] text-slate-400 group-hover:text-white group-hover:translate-x-0.5 transition-all"></i>
+            </div>
+        </span>
+    </button>
+</div>
+
+    <!-- Botón Escríbeme -->
+    <button onclick="switchTab('reclamos')" class="bg-brand-blue text-white px-5 py-2 rounded-md text-xs font-bold flex items-center gap-2 hover:bg-blue-700 transition cursor-pointer shadow-md">
+        <i class="fa-solid fa-envelope text-lg"></i> Escríbeme
+    </button>
+</div>
                 </div>
             </div>
         </header>
@@ -1289,6 +1450,14 @@
             <iframe id="speedtestIframe" src="" class="w-full h-full rounded-lg border-0"></iframe>
         </div>
     </div>
+	
+	<!-- MODAL DE PORTAL DE CLIENTES -->
+<div class="hidden lg:flex items-center gap-4 shrink-0">
+    <button onclick="openPortalClientes()" class="group inline-flex items-center gap-2.5 px-4.5 py-2.5 rounded-xl text-xs font-medium text-slate-200 bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-indigo-500/40 shadow-lg shadow-slate-950/20 hover:text-white transition-all duration-300 cursor-pointer">
+        <i class="fa-solid fa-user-shield text-indigo-400 group-hover:text-indigo-300 transition-colors"></i>
+        Portal Clientes
+    </button>
+</div>
 
     <!-- MODAL DE PERMISO DE UBICACIÓN PARA TELEGRAM -->
     <div id="modalUbicacionPermiso" class="fixed inset-0 z-50 hidden flex items-center justify-center modal-bg px-4">
@@ -1401,6 +1570,27 @@
     </div>
 
     <script>
+		 // IFRAME FUNCION PORTAL
+		function openPortalClientes() {
+    const modal = document.getElementById('portalClientesModal');
+    const iframe = document.getElementById('portalClientesIframe');
+    
+    // Cambia 'cliente.html' por la ruta real de tu archivo o enlace independiente
+    if (!iframe.src || iframe.src === "" || iframe.src === window.location.href) {
+        iframe.src = "cliente.html"; 
+    }
+    
+    modal.classList.remove('hidden');
+}
+
+		function openPortalClientes() {
+    window.open('cliente.html', '_blank', 'noopener,noreferrer');
+}
+		
+function closePortalClientes() {
+    const modal = document.getElementById('portalClientesModal');
+    modal.classList.add('hidden');
+}
         // Lógica de Tabs y Carrusel
         function scrollCarrusel(offset) { 
             const container = document.getElementById('carrusel-trabajos'); 
