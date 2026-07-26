@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIENTES - LC SOLUCIONES</title>
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="img/favicon2.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon2.ico" type="image/x-icon">
+    <!-- FONTS & ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-light: #0ea5e9;
+            --primary-dark: #0369a1;
+            --accent: #d97706;
+            --accent-glow: rgba(217, 119, 6, 0.3);
+            --primary-glow: rgba(2, 132, 199, 0.2);
+            --bg-main: #f8fafc;
+            --bg-card: rgba(255, 255, 255, 0.9);
+            --bg-input: rgba(241, 245, 249, 0.95);
+            --border: rgba(203, 213, 225, 0.8);
+            --border-hover: rgba(2, 132, 199, 0.5);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --danger: #dc2626;
+            --success: #059669;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            background-image: url('img/red2.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* AMBIENT BACKGROUND WITH IMAGE OVERLAY */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: rgba(248, 250, 252, 0.82);
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary-light);
+            top: -10%;
+            left: -10%;
+        }
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            bottom: -10%;
+            right: -5%;
+            animation-delay: -10s;
+            opacity: 0.15;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* STATUS BADGE FOR LOGIN CONTAINER */
+        .login-status-badge {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(5, 150, 105, 0.1);
+            border: 1px solid rgba(5, 150, 105, 0.3);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--success);
+            letter-spacing: 0.5px;
+            z-index: 10;
+        }
+        .status-dot { width: 8px; height: 8px; background-color: var(--success); border-radius: 50%; box-shadow: 0 0 10px var(--success); animation: pulse 2s infinite; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(5, 150, 105, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+            padding: 32px 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* CARDS & GLASSMORPHISM */
+        .card {
+            background-color: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--border);
+            width: 100%;
+            position: relative;
+        }
+
+        /* SPLIT LOGIN DESIGN */
+        #login-section {
+            max-width: 850px;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .login-inner-grid {
+            display: flex;
+            width: 100%;
+        }
+
+        .login-brand-panel {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(217, 119, 6, 0.05));
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid var(--border);
+        }
+
+        .login-form-panel {
+            flex: 1;
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-hero-icon {
+            font-size: 48px;
+            background: -webkit-linear-gradient(45deg, var(--primary-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+        }
+
+        /* LOGIN CARD FOOTER */
+        .login-card-footer {
+            border-top: 1px solid var(--border);
+            padding: 16px 24px;
+            background: rgba(241, 245, 249, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .login-footer-text {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .login-footer-text span {
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        .login-footer-version {
+            font-weight: 800;
+            color: var(--text-main);
+            margin-left: 6px;
+            letter-spacing: 1px;
+        }
+
+        .login-footer-socials {
+            display: flex;
+            gap: 18px;
+            font-size: 15px;
+        }
+
+        .login-footer-socials a {
+            color: var(--text-muted);
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .login-footer-socials a:hover {
+            color: var(--primary-light);
+            transform: scale(1.1);
+        }
+
+        /* FORMS & INPUTS */
+        .form-group { margin-bottom: 20px; position: relative; }
+        
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .input-icon-container { position: relative; display: flex; align-items: center; }
+        .input-icon-container i.field-icon {
+            position: absolute;
+            left: 16px;
+            color: var(--primary-light);
+            font-size: 14px;
+            pointer-events: none;
+            transition: 0.3s;
+        }
+        .input-icon-container i.field-icon-right {
+            position: absolute;
+            right: 16px;
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 5;
+        }
+        .input-icon-container i.field-icon-right:hover {
+            color: var(--primary-light);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 44px 14px 44px;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 500;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-control.no-icon { padding-left: 16px; padding-right: 44px; }
+        .form-control::placeholder { color: rgba(100, 116, 139, 0.5); font-weight: 300; }
+
+        .form-control:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.15);
+            background-color: #ffffff;
+            transform: translateY(-1px);
+        }
+        
+        .form-control:focus + i.field-icon,
+        .input-icon-container:focus-within i.field-icon {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* BUTTONS */
+        .btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 25px var(--primary-glow); 
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+        }
+        .btn:active { transform: translateY(0); }
+        
+        .btn-secondary { 
+            background: rgba(100, 116, 139, 0.1); 
+            border: 1px solid var(--border); 
+            color: var(--text-main); 
+        }
+        .btn-secondary:hover { 
+            background: rgba(100, 116, 139, 0.2); 
+            border-color: var(--text-muted); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .btn-danger { 
+            background: linear-gradient(135deg, #ef4444, #dc2626); 
+        }
+        .btn-danger:hover {
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
+        }
+        .btn-success { 
+            background: linear-gradient(135deg, #059669, #047857); 
+        }
+        .btn-success:hover {
+            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
+        }
+
+        /* DASHBOARD LAYOUTS */
+        #dashboard-section, #admin-section { display: none; }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .dashboard-header h2 { font-size: 24px; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .dashboard-header span { font-size: 12px; color: var(--primary-light); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
+        .header-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .section-title i { color: var(--primary-light); font-size: 16px; }
+
+        /* DYNAMIC GRID SYSTEM */
+        .grid-dynamic {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        .span-2 { grid-column: span 2; }
+        .span-3 { grid-column: span 3; }
+        .span-4 { grid-column: span 4; }
+        .span-full { grid-column: 1 / -1; }
+
+        /* WIDGET BOXES */
+        .widget-box {
+            background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(241,245,249,0.5) 100%);
+            border: 1px solid var(--border);
+            padding: 16px;
+            border-radius: 16px;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .widget-box:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+        .widget-box span { font-size: 10px; color: var(--text-muted); margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;}
+        .widget-box strong { font-size: 14px; color: var(--text-main); word-break: break-word; font-weight: 700; }
+        .widget-box input { margin-top: 8px; }
+
+        /* CLIENT DASHBOARD SPECIFICS */
+        .selectors-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .selector-card {
+            background: rgba(241, 245, 249, 0.7);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .data-panel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .data-panel {
+            background: rgba(241, 245, 249, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .data-panel::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+        .data-panel h4 { font-size: 14px; color: var(--text-main); margin-bottom: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;}
+        .data-panel h4 i { color: var(--primary-light); }
+
+        .row-item { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(0,0,0,0.05); gap: 16px; align-items: center;}
+        .row-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0;}
+        .row-item span { color: var(--text-muted); font-weight: 500; }
+        .row-item strong { text-align: right; color: var(--text-main); font-weight: 700; }
+
+        .detalles-box {
+            background: rgba(241, 245, 249, 0.8);
+            border: 1px solid var(--border);
+            padding: 24px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+        .detalles-content { font-size: 13px; color: var(--text-muted); line-height: 1.7; white-space: pre-wrap; font-weight: 400;}
+
+        /* ALERTS */
+        .alert {
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 20px;
+            display: none;
+            font-weight: 600;
+            animation: fadeInUp 0.3s ease;
+        }
+        .alert-error { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #991b1b; border-left: 4px solid var(--danger);}
+        .alert-success { background: rgba(5, 150, 105, 0.1); border: 1px solid rgba(5, 150, 105, 0.3); color: #065f46; border-left: 4px solid var(--success);}
+
+        /* ADMIN TABS & LIST */
+        .admin-tabs { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+        .tab-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 14px;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .tab-btn:hover { background: rgba(255,255,255,0.9); color: var(--text-main); }
+        .tab-btn.active { background: var(--primary-dark); color: white; border-color: var(--primary-light); box-shadow: 0 8px 20px rgba(3, 105, 161, 0.2); }
+        
+        .admin-form-container { display: none; animation: fadeInUp 0.4s ease; }
+        .admin-form-container.active { display: block; }
+
+        .client-list-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: rgba(241, 245, 249, 0.7);
+        }
+        .client-list-container::-webkit-scrollbar { width: 8px; }
+        .client-list-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+        .client-item-row {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .client-item-row:hover { background: rgba(14, 165, 233, 0.1); padding-left: 24px; }
+        .client-item-row:last-child { border-bottom: none; }
+
+        /* SERVICE CARDS (Admin) */
+        .service-card-item {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .service-card-header {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            padding-bottom: 12px;
+            text-transform: uppercase;
+        }
+        .service-card-header span { display: flex; align-items: center; gap: 8px; color: var(--accent); }
+
+        /* MODALS */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .modal-card {
+            background-color: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2), 0 0 40px rgba(14, 165, 233, 0.1);
+        }
+        .modal-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: var(--text-main); }
+        .modal-card.success-border { border-top: 4px solid var(--success); }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .login-inner-grid { flex-direction: column; }
+            .login-brand-panel { border-right: none; border-bottom: 1px solid var(--border); text-align: center; padding: 32px; }
+            .login-form-panel { padding: 32px; }
+            .grid-dynamic { grid-template-columns: 1fr; }
+            .span-2, .span-3, .span-4 { grid-column: span 1; }
+            .data-panel-grid { grid-template-columns: 1fr; }
+            .dashboard-header { flex-direction: column; align-items: flex-start; }
+            .header-actions { width: 100%; }
+            .header-actions .btn { flex: 1; }
+        }
+        
+        /* UTIL CLASSES */
+        .text-orange { color: var(--accent); }
+        .text-white { color: var(--text-main); }
+        .text-cyan { color: var(--primary-light); }
+    </style>
+</head>
+<body>
+
+    <!-- AMBIENT BACKGROUND ANIMATION -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="container">
+        
+        <!-- LOGIN SECTION -->
+        <div id="login-section" class="card">
+            <div class="login-status-badge">
+                <span class="status-dot"></span> SISTEMA EN LÍNEA
+            </div>
+
+            <div class="login-inner-grid">
+                <div class="login-brand-panel">
+                    <i class="fa-solid fa-network-wired login-hero-icon"></i>
+                    <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 8px; letter-spacing: -1px;">
+                        <span class="text-orange">LC</span> SOLUCIONES
+                    </h1>
+                    <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; font-weight: 400;">
+                        Plataforma integral para la gestión de arquitectura de redes, enlaces de fibra y soluciones digitales avanzadas.
+                    </p>
+                </div>
+
+                <div class="login-form-panel">
+                    <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 24px; text-align: center;">Cliente Registrado</h2>
+                    <div id="login-alert" class="alert alert-error"></div>
+
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-id-card"></i> ID de Usuario</label>
+                            <div class="input-icon-container">
+                                <i class="fa-solid fa-user field-icon"></i>
+                                <input type="text" id="usuario" class="form-control" required placeholder="" style="text-transform: none; padding-right: 16px;">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 32px;">
+                            <label><i class="fa-solid fa-key"></i> Contraseña de Acceso</label>
+                            <div class="input-icon-container">
+                                <i class="fa-solid fa-lock field-icon"></i>
+                                <input type="password" id="password" class="form-control" required placeholder="">
+                                <i class="fa-solid fa-eye field-icon-right" id="toggle-login-pass" onclick="togglePasswordVisibility('password', 'toggle-login-pass')"></i>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn" id="btn-login">
+                            Ingresar al Sistema <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- LOGIN CARD FOOTER -->
+            <div class="login-card-footer">
+                <div class="login-footer-text">
+                    <span>LC SOLUCIONES TECNOLÓGICAS,</span> ES UNA MARCA CREADA PARA LA PUBLICACION DE SERVICIOS Y TRABAJOS DE MI PROPIEDAD, LO CUAL QUEDA PROHIBIDA SU REPRUCCIÓN TOTAL O PARCIAL DEL HOTS
+                </div>
+				<div class="login-footer-text">
+                    Desarrollado por: <span>Ing. Jose Cordero</span> <span class="login-footer-version">V.2026.1.0</span>
+                </div>
+                <div class="login-footer-socials">
+                    <a href="#" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL MASTER -->
+        <div id="admin-section" class="card">
+            <div class="dashboard-header">
+                <div>
+                    <h2>Panel de Administración</h2>
+                    <span>LC Soluciones Tecnológicas - ING. CORDERO</span>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-danger" style="padding: 10px 20px;" onclick="cerrarSesion()"><i class="fa-solid fa-power-off"></i> Cerrar Sesión</button>
+                </div>
+            </div>
+
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="cambiarTabAdmin('gestionar-clientes')"><i class="fa-solid fa-users-viewfinder"></i> Directorio de Clientes</button>
+                <button class="tab-btn" onclick="abrirFormularioNuevoCliente()"><i class="fa-solid fa-user-plus"></i> Registrar Nuevo Cliente</button>
+            </div>
+
+            <!-- SECCIÓN BÚSQUEDA Y LISTADO -->
+            <div id="tab-gestionar-clientes" class="admin-form-container active">
+                <div class="section-title"><i class="fa-solid fa-magnifying-glass"></i> Búsqueda y Gestión</div>
+                <div id="admin-search-alert" class="alert"></div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <div class="input-icon-container">
+                        <i class="fa-solid fa-search field-icon"></i>
+                        <input type="text" id="input-filtro-global" class="form-control" placeholder="Buscar por usuario, nombre, cédula o correo..." oninput="filtrarClientesLista()" style="text-transform: none; padding-right: 16px;">
+                    </div>
+                </div>
+
+                <div id="lista-clientes-admin" class="client-list-container">
+                    <!-- Se llena dinámicamente -->
+                </div>
+            </div>
+
+            <!-- FORMULARIO DE PERFIL Y TODOS LOS SERVICIOS PARA EL MASTER -->
+            <div id="tab-form-perfil-admin" class="admin-form-container">
+                <div class="dashboard-header" style="border-bottom: none; padding-bottom: 0;">
+                    <div>
+                        <h2 id="admin-form-titulo" style="color: var(--primary-light);">Gestión de Cliente y Servicios</h2>
+                        <span style="color: var(--text-muted); text-transform: none; font-size: 13px;">Complete la información del perfil y registre las facturaciones correspondientes.</span>
+                    </div>
+                    <button type="button" class="btn btn-secondary" style="padding: 10px 20px;" onclick="cambiarTabAdmin('gestionar-clientes')"><i class="fa-solid fa-arrow-left"></i> Volver al Listado</button>
+                </div>
+
+                <div id="admin-unified-alert" class="alert" style="margin-top: 20px;"></div>
+
+                <form id="form-unified-client" onsubmit="guardarClienteUnificado(event)" style="margin-top: 24px;">
+                    
+                    <div class="section-title"><i class="fa-solid fa-address-card"></i> Información Personal y Credenciales</div>
+                    
+                    <div class="grid-dynamic">
+                        <div class="widget-box"><label class="text-muted" style="font-size: 10px; font-weight:700;">USUARIO (ID ÚNICO)</label><input type="text" name="usuario" id="u-usuario" class="form-control no-icon" required placeholder="Ej: demo" style="text-transform: none; padding-right: 16px;"></div>
+                        <div class="widget-box"><label class="text-muted" style="font-size: 10px; font-weight:700;">CONTRASEÑA</label><input type="text" name="password" id="u-password" class="form-control no-icon" required placeholder="Contraseña" style="text-transform: none; padding-right: 16px;"></div>
+                        <div class="widget-box span-2"><label class="text-muted" style="font-size: 10px; font-weight:700;">NOMBRES</label><input type="text" name="nombres" id="u-nombres" class="form-control no-icon" required placeholder="Nombres" style="padding-right: 16px;"></div>
+                        <div class="widget-box span-2"><label class="text-muted" style="font-size: 10px; font-weight:700;">APELLIDOS</label><input type="text" name="apellidos" id="u-apellidos" class="form-control no-icon" required placeholder="Apellidos" style="padding-right: 16px;"></div>
+                        
+                        <div class="widget-box"><label class="text-muted" style="font-size: 10px; font-weight:700;">CÉDULA DE IDENTIDAD</label><input type="text" name="cedula" id="u-cedula" class="form-control no-icon" required placeholder="V-12345678" style="padding-right: 16px;"></div>
+                        <div class="widget-box"><label class="text-muted" style="font-size: 10px; font-weight:700;">TELÉFONO DE CONTACTO</label><input type="text" name="telefono" id="u-telefono" class="form-control no-icon" placeholder="584121234567" style="padding-right: 16px;"></div>
+                        <div class="widget-box span-2"><label class="text-muted" style="font-size: 10px; font-weight:700;">CORREO ELECTRÓNICO</label><input type="email" name="correo" id="u-correo" class="form-control no-icon" required placeholder="correo@domain.com" style="text-transform: none; padding-right: 16px;"></div>
+                        
+                        <div class="widget-box"><label class="text-muted" style="font-size: 10px; font-weight:700;">PAÍS</label><input type="text" name="pais" id="u-pais" class="form-control no-icon" value="VENEZUELA" style="padding-right: 16px;"></div>
+                        <div class="widget-box"><label class="text-muted" style="font-size: 10px; font-weight:700;">ESTADO</label><input type="text" name="estado" id="u-estado" class="form-control no-icon" value="BARINAS" style="padding-right: 16px;"></div>
+                        <div class="widget-box"><label class="text-muted" style="font-size: 10px; font-weight:700;">MUNICIPIO</label><input type="text" name="municipio" id="u-municipio" class="form-control no-icon" placeholder="Municipio" style="padding-right: 16px;"></div>
+                        <div class="widget-box"><label class="text-muted" style="font-size: 10px; font-weight:700;">PARROQUIA</label><input type="text" name="parroquia" id="u-parroquia" class="form-control no-icon" placeholder="Parroquia" style="padding-right: 16px;"></div>
+                        
+                        <div class="widget-box span-full"><label class="text-muted" style="font-size: 10px; font-weight:700;">DIRECCIÓN PRINCIPAL EXACTA</label><input type="text" name="direccion" id="u-direccion" class="form-control no-icon" placeholder="Dirección completa" style="padding-right: 16px;"></div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; margin-bottom: 20px; flex-wrap: wrap; gap: 16px;">
+                        <div class="section-title" style="margin-bottom: 0;"><i class="fa-solid fa-file-invoice-dollar"></i> Historial de Planes y Facturaciones</div>
+                        <button type="button" class="btn btn-secondary" style="width: auto; padding: 10px 20px;" onclick="agregarBloqueServicio()"><i class="fa-solid fa-plus"></i> Añadir Nuevo Registro</button>
+                    </div>
+
+                    <div id="servicios-admin-container">
+                        <!-- Se llenarán dinámicamente con JS -->
+                    </div>
+
+                    <button type="submit" class="btn btn-success" style="margin-top: 24px; padding: 16px; font-size: 15px;"><i class="fa-solid fa-cloud-arrow-up"></i> Guardar Los Cambios</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- DASHBOARD CLIENTE -->
+        <div id="dashboard-section" class="card">
+            <div class="dashboard-header">
+                <div id="saludo-container" style="display: flex; flex-direction: column; gap: 4px;">
+                    <h2 id="saludo-hora" style="font-size: 22px; font-weight: 800; color: var(--text-main);">Portal de Cliente</h2>
+                    <span id="saludo-bienvenido" style="font-size: 13px; color: var(--primary-light); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Resumen Operativo y Financiero</span>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" style="padding: 10px 16px;" onclick="abrirModalPassword()"><i class="fa-solid fa-shield-halved"></i> Seguridad</button>
+                    <button class="btn btn-danger" style="padding: 10px 16px;" onclick="cerrarSesion()"><i class="fa-solid fa-power-off"></i> Salir</button>
+                </div>
+            </div>
+
+            <div class="section-title"><i class="fa-solid fa-user-astronaut"></i> Perfil del Contratante</div>
+            
+            <div class="grid-dynamic">
+                <div class="widget-box span-2"><span>Nombres</span><strong id="p-nombres">-</strong></div>
+                <div class="widget-box span-2"><span>Apellidos</span><strong id="p-apellidos">-</strong></div>
+                <div class="widget-box"><span>Cédula de Identidad</span><strong id="p-cedula">-</strong></div>
+                
+                <div class="widget-box span-2"><span>Teléfono de Contacto</span><strong id="p-telefono">-</strong></div>
+                <div class="widget-box span-3"><span>Correo Electrónico</span><strong id="p-correo" style="text-transform: none;">-</strong></div>
+
+                <div class="widget-box"><span>País</span><strong id="p-pais">-</strong></div>
+                <div class="widget-box"><span>Estado</span><strong id="p-estado">-</strong></div>
+                <div class="widget-box"><span>Municipio</span><strong id="p-municipio">-</strong></div>
+                <div class="widget-box"><span>Parroquia</span><strong id="p-parroquia">-</strong></div>
+                <div class="widget-box span-full"><span>Dirección Principal Localizada</span><strong id="p-direccion">-</strong></div>
+            </div>
+
+            <div class="section-title"><i class="fa-solid fa-server"></i> Gestión de Servicios Activos</div>
+            
+            <div class="selectors-container">
+                <div class="selector-card">
+                    <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;"><i class="fa-solid fa-layer-group text-cyan"></i> Seleccione el Servicio a Consultar</label>
+                    <select id="select-plan" class="form-control no-icon" onchange="cambiarPlanSeleccionado()" style="font-weight: 700; color: var(--primary-light); cursor: pointer; padding-right: 16px;"></select>
+                </div>
+                <div class="selector-card">
+                    <label style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;"><i class="fa-solid fa-receipt text-orange"></i> Seleccione Factura del Servicio Seleccionado</label>
+                    <select id="select-factura" class="form-control no-icon" onchange="cambiarFacturaSeleccionada()" style="font-weight: 700; color: var(--accent); cursor: pointer; padding-right: 16px;"></select>
+                </div>
+            </div>
+
+            <div class="data-panel-grid">
+                <div class="data-panel">
+                    <h4><i class="fa-solid fa-chart-line"></i> Estado Técnico del Servicio</h4>
+                    <div class="row-item"><span>Servicio Seleccionado</span> <strong id="s-plan">-</strong></div>
+                    <div class="row-item"><span>Estatus del Servicio</span> <strong id="s-estatus" style="color: var(--success);">-</strong></div>
+                    <div class="row-item"><span>Fecha de Inicio</span> <strong id="s-inicio">-</strong></div>
+                    <div class="row-item"><span>Fecha de Vencimiento</span> <strong id="s-fin">-</strong></div>
+                    <div class="row-item"><span>Registro en Sistema</span> <strong id="s-hora-registro" style="color: var(--text-muted); font-size: 11px;">-</strong></div>
+                    <div class="row-item"><span>Última Actualización</span> <strong id="s-ultima-actualizacion" class="text-cyan" style="font-size: 11px;">-</strong></div>
+                    
+                    <div style="margin-top: 16px; padding-top: 16px; border-top: 1px dashed rgba(0,0,0,0.1);">
+                        <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Reseña específica del servicio:</span>
+                        <p id="s-avance" style="color: var(--primary-light); font-size: 14px; margin-top: 6px; font-weight: 800; line-height: 1.4;">-</p>
+                    </div>
+                </div>
+
+                <div class="data-panel">
+                    <h4><i class="fa-solid fa-money-check-dollar"></i> Resumen Financiero</h4>
+                    <div class="row-item"><span>Nro. de Control Interno</span> <strong id="s-factura" class="text-cyan">-</strong></div>
+                    <div class="row-item"><span>Monto en Divisas ($)</span> <strong id="s-costo">-</strong></div>
+                    <div class="row-item"><span>Tasa de Cambio a la Fecha (B.C.V.)</span> <strong id="s-tasa-bcv">-</strong></div>
+                    <div class="row-item"><span>Método de Pago</span> <strong id="s-tipo-pago">-</strong></div>
+                    <div class="row-item"><span>Código de Referencia</span> <strong id="s-referencia">-</strong></div>
+                    <div class="row-item"><span>Banco Emisor</span> <strong id="s-banco-emisor">-</strong></div>
+                    <div class="row-item"><span>Banco Receptor</span> <strong id="s-banco-receptor">-</strong></div>
+                    <div class="row-item"><span>Monto Pagado en (Bs)</span> <strong id="s-monto-bs" style="color: var(--success); font-size: 15px;">-</strong></div>
+                    <div class="row-item"><span>Fecha de Transacción</span> <strong id="s-fecha-trans">-</strong></div>
+                </div>
+            </div>
+
+            <div class="detalles-box">
+                <h4 style="font-size: 14px; color: var(--text-main); margin-bottom: 16px; font-weight: 800; text-transform: uppercase;"><i class="fa-solid fa-laptop-code text-cyan"></i> Bitácora de Proyecto y Observaciones</h4>
+                <div id="s-detalles-completos" class="detalles-content">-</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CAMBIO DE CONTRASEÑA -->
+    <div id="modal-password" class="modal-overlay">
+        <div class="modal-card">
+            <i class="fa-solid fa-shield-halved text-cyan" style="font-size: 40px; margin-bottom: 16px;"></i>
+            <h3 class="text-cyan">Actualizar Contraseña</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Por seguridad, le recomendamos utilizar contraseñas alfanuméricas.</p>
+            
+            <div id="modal-pass-alert" class="alert alert-error"></div>
+            
+            <div class="form-group" style="text-align: left;">
+                <label>Contraseña Vigente</label>
+                <div class="input-icon-container">
+                    <i class="fa-solid fa-lock field-icon"></i>
+                    <input type="password" id="pass-actual" class="form-control" placeholder="••••••••">
+                    <i class="fa-solid fa-eye field-icon-right" id="toggle-pass-actual" onclick="togglePasswordVisibility('pass-actual', 'toggle-pass-actual')"></i>
+                </div>
+            </div>
+            <div class="form-group" style="text-align: left;">
+                <label>Nueva Contraseña</label>
+                <div class="input-icon-container">
+                    <i class="fa-solid fa-lock field-icon"></i>
+                    <input type="password" id="pass-nueva" class="form-control" placeholder="••••••••">
+                    <i class="fa-solid fa-eye field-icon-right" id="toggle-pass-nueva" onclick="togglePasswordVisibility('pass-nueva', 'toggle-pass-nueva')"></i>
+                </div>
+            </div>
+            <div class="form-group" style="text-align: left;">
+                <label>Verificar Nueva Contraseña</label>
+                <div class="input-icon-container">
+                    <i class="fa-solid fa-lock field-icon"></i>
+                    <input type="password" id="pass-confirmacion" class="form-control" placeholder="••••••••">
+                    <i class="fa-solid fa-eye field-icon-right" id="toggle-pass-confirmacion" onclick="togglePasswordVisibility('pass-confirmacion', 'toggle-pass-confirmacion')"></i>
+                </div>
+            </div>
+            <div style="display: flex; gap: 12px; margin-top: 24px;">
+                <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="cerrarModalPassword()">Cancelar</button>
+                <button type="button" class="btn btn-success" style="flex: 1;" onclick="solicitarAplicarPassword()">Procesar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN -->
+    <div id="modal-confirmar" class="modal-overlay">
+        <div class="modal-card">
+            <i class="fa-solid fa-triangle-exclamation text-orange" style="font-size: 48px; margin-bottom: 20px;"></i>
+            <h3>Confirmación Requerida</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">¿Está absolutamente seguro de que desea modificar sus credenciales de acceso? La sesión actual requerirá la nueva clave en su próximo ingreso.</p>
+            <div style="display: flex; gap: 12px;">
+                <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="cerrarModalConfirmar()">Abortar</button>
+                <button type="button" class="btn btn-danger" style="flex: 1;" onclick="ejecutarCambioPassword()">Confirmar Cambio</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE ÉXITO (ÚLTIMO MODAL DESPUÉS DE LA CONFIRMACIÓN) -->
+    <div id="modal-exito" class="modal-overlay">
+        <div class="modal-card success-border">
+            <i class="fa-regular fa-circle-check" style="font-size: 56px; color: var(--success); margin-bottom: 20px;"></i>
+            <h3>¡Operación Completada!</h3>
+            <p id="modal-texto" style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">La transacción se ha procesado con éxito en los servidores.</p>
+            <button type="button" class="btn btn-success" onclick="cerrarModalYVolver()"><i class="fa-solid fa-check-double"></i> Continuar</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE DESPIDA / CIERRE DE SESIÓN -->
+    <div id="modal-despedida" class="modal-overlay">
+        <div class="modal-card success-border">
+            <i class="fa-solid fa-hand-wave text-cyan" style="font-size: 56px; color: var(--accent); margin-bottom: 20px;"></i>
+            <h3 id="despedida-titulo">¡Vuelve pronto!</h3>
+            <p id="despedida-texto" style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">Cerrando sesión de forma segura...</p>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        const URL_APP = "https://script.google.com/macros/s/AKfycbwh6Wmm06mzAzrRlgZOefXjfS9UPJ7xiqL6FuU7zHlALLT0FyRGOOS_OwqWVng081kb3g/exec";
+
+        let usuarioActual = "";
+        let serviciosGlobales = [];
+        let clienteGlobal = {};
+        let listaClientesGlobal = [];
+        let planesMapGlobal = {};
+        let facturasDelPlanActual = [];
+        let modoFormularioAdmin = "nuevo";
+        let inactividadTimeout = null;
+        let nuevaPasswordTemp = ""; // Variable global para almacenar temporalmente la nueva contraseña
+
+        function toUpper(val) { return val ? String(val).toUpperCase() : "-"; }
+
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.className = "fa-solid fa-eye-slash field-icon-right";
+            } else {
+                input.type = "password";
+                icon.className = "fa-solid fa-eye field-icon-right";
+            }
+        }
+
+        function limpiarFecha(fechaStr) {
+            if (!fechaStr) return "-";
+            let cad = String(fechaStr).trim();
+            
+            if (cad.includes('T') && (cad.endsWith('Z') || cad.includes('+') || cad.includes('-'))) {
+                try {
+                    const d = new Date(cad);
+                    if (!isNaN(d.getTime())) {
+                        const dia = String(d.getUTCDate()).padStart(2, '0');
+                        const mes = String(d.getUTCMonth() + 1).padStart(2, '0');
+                        const anio = d.getUTCFullYear();
+                        return `${dia}/${mes}/${anio}`;
+                    }
+                } catch(e) {}
+            }
+
+            if (cad.includes('GMT')) {
+                cad = cad.split('GMT')[0].trim();
+            }
+            if (cad.includes('(')) {
+                cad = cad.split('(')[0].trim();
+            }
+            return cad;
+        }
+
+        function formatearFechaHoraDispositivo() {
+            const ahora = new Date();
+            const dia = String(ahora.getDate()).padStart(2, '0');
+            const mes = String(ahora.getMonth() + 1).padStart(2, '0');
+            const anio = ahora.getFullYear();
+            
+            let horas = ahora.getHours();
+            const minutos = String(ahora.getMinutes()).padStart(2, '0');
+            const segundos = String(ahora.getSeconds()).padStart(2, '0');
+            
+            const tt = horas >= 12 ? 'PM' : 'AM';
+            horas = horas % 12;
+            horas = horas ? horas : 12;
+            const horaStr = String(horas).padStart(2, '0');
+            
+            return `${dia}/${mes}/${anio}, ${horaStr}:${minutos}:${segundos} ${tt}`;
+        }
+
+        function reiniciarTemporizadorInactividad() {
+            clearTimeout(inactividadTimeout);
+            if (usuarioActual) {
+                inactividadTimeout = setTimeout(() => {
+                    alert("Su sesión ha expirado por 10 minutos de inactividad.");
+                    cerrarSesion();
+                }, 10 * 60 * 1000);
+            }
+        }
+
+        ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(evento => {
+            window.addEventListener(evento, reiniciarTemporizadorInactividad);
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const guardadoUsuario = sessionStorage.getItem("lc_usuario_actual");
+            const guardadoCliente = sessionStorage.getItem("lc_cliente_global");
+            const guardadoServicios = sessionStorage.getItem("lc_servicios_globales");
+
+            if (guardadoUsuario) {
+                usuarioActual = guardadoUsuario;
+                if (usuarioActual === "cordero") {
+                    mostrarAdminDashboard();
+                } else if (guardadoCliente && guardadoServicios) {
+                    clienteGlobal = JSON.parse(guardadoCliente);
+                    serviciosGlobales = JSON.parse(guardadoServicios);
+                    mostrarDashboardCliente();
+                }
+            }
+        });
+
+
+        document.getElementById("login-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const usuario = document.getElementById("usuario").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const btnLogin = document.getElementById("btn-login");
+            const alertBox = document.getElementById("login-alert");
+
+            alertBox.style.display = "none";
+
+            if (usuario.toLowerCase() === "cordero" && password === "1090450496") {
+                usuarioActual = "cordero";
+                sessionStorage.setItem("lc_usuario_actual", "cordero");
+                mostrarAdminDashboard();
+                return;
+            }
+
+            btnLogin.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Autenticando...`;
+            btnLogin.disabled = true;
+
+            fetch(URL_APP, {
+                method: "POST",
+                body: JSON.stringify({ action: "login", usuario: usuario, password: password })
+            })
+            .then(res => res.json())
+            .then(data => {
+                btnLogin.innerHTML = `Ingresar al Sistema <i class="fa-solid fa-arrow-right"></i>`;
+                btnLogin.disabled = false;
+                if (data.status === "success") {
+                    usuarioActual = usuario;
+                    clienteGlobal = data.cliente;
+                    serviciosGlobales = data.servicios;
+
+                    sessionStorage.setItem("lc_usuario_actual", usuario);
+                    sessionStorage.setItem("lc_cliente_global", JSON.stringify(clienteGlobal));
+                    sessionStorage.setItem("lc_servicios_globales", JSON.stringify(serviciosGlobales));
+
+                    mostrarDashboardCliente();
+                } else {
+                    alertBox.innerText = data.message || "Credenciales incorrectas.";
+                    alertBox.style.display = "block";
+                }
+            })
+            .catch(() => {
+                btnLogin.innerHTML = `Ingresar al Sistema <i class="fa-solid fa-arrow-right"></i>`;
+                btnLogin.disabled = false;
+                alertBox.innerText = "Error de conexión con el servidor principal.";
+                alertBox.style.display = "block";
+            });
+        });
+
+        function mostrarAdminDashboard() {
+            document.getElementById("login-section").style.display = "none";
+            document.getElementById("admin-section").style.display = "block";
+            cambiarTabAdmin('gestionar-clientes');
+            reiniciarTemporizadorInactividad();
+        }
+
+        function cambiarTabAdmin(tabName) {
+            document.querySelectorAll('.admin-form-container').forEach(cont => cont.classList.remove('active'));
+            document.querySelectorAll('.admin-tabs .tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            if (tabName === 'gestionar-clientes') {
+                document.getElementById('tab-gestionar-clientes').classList.add('active');
+                document.querySelectorAll('.admin-tabs .tab-btn')[0].classList.add('active');
+                cargarListaClientesAdmin();
+            } else if (tabName === 'form-perfil') {
+                document.getElementById('tab-form-perfil-admin').classList.add('active');
+            }
+        }
+
+        function cargarListaClientesAdmin() {
+            fetch(URL_APP, {
+                method: "POST",
+                body: JSON.stringify({ action: "listClients" })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    listaClientesGlobal = data.clientes || [];
+                    renderizarListaClientes(listaClientesGlobal);
+                } else {
+                    document.getElementById("admin-search-alert").className = "alert alert-error";
+                    document.getElementById("admin-search-alert").innerText = data.message || "No se pudieron cargar los clientes.";
+                    document.getElementById("admin-search-alert").style.display = "block";
+                }
+            })
+            .catch(() => {
+                document.getElementById("admin-search-alert").className = "alert alert-error";
+                document.getElementById("admin-search-alert").innerText = "Error de conexión al listar clientes.";
+                document.getElementById("admin-search-alert").style.display = "block";
+            });
+        }
+
+        function renderizarListaClientes(clientes) {
+            const contenedor = document.getElementById("lista-clientes-admin");
+            contenedor.innerHTML = "";
+
+            if (!clientes || clientes.length === 0) {
+                contenedor.innerHTML = `<div style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 13px;">No se encontraron registros en la base de datos.</div>`;
+                return;
+            }
+
+            clientes.forEach(c => {
+                const item = document.createElement("div");
+                item.className = "client-item-row";
+                item.innerHTML = `
+                    <div>
+                        <strong style="color: var(--text-main); font-size: 14px;"><i class="fa-solid fa-user-check text-cyan" style="margin-right: 8px;"></i>${toUpper(c.usuario)} | ${toUpper(c.nombres)} ${toUpper(c.apellidos)}</strong>
+                        <span style="display: block; color: var(--text-muted); font-size: 11px; margin-top: 6px; font-weight: 500;">C.I: ${toUpper(c.cedula)} &bull; EMAIL: ${toUpper(c.correo)}</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color: var(--primary-light);"></i>
+                `;
+                item.onclick = () => seleccionarClienteParaEditar(c.usuario);
+                contenedor.appendChild(item);
+            });
+        }
+
+        function filtrarClientesLista() {
+            const filtro = document.getElementById("input-filtro-global").value.trim().toLowerCase();
+            if (!filtro) {
+                renderizarListaClientes(listaClientesGlobal);
+                return;
+            }
+
+            const filtrados = listaClientesGlobal.filter(c => {
+                const cadena = `${c.usuario || ''} ${c.nombres || ''} ${c.apellidos || ''} ${c.cedula || ''} ${c.correo || ''}`.toLowerCase();
+                return cadena.includes(filtro);
+            });
+            renderizarListaClientes(filtrados);
+        }
+
+        function abrirFormularioNuevoCliente() {
+            modoFormularioAdmin = "nuevo";
+            document.getElementById("admin-form-titulo").innerText = "Apertura de Nuevo Expediente";
+            document.getElementById("form-unified-client").reset();
+            document.getElementById("u-usuario").readOnly = false;
+            document.getElementById("u-usuario").style.opacity = "1";
+            document.getElementById("admin-unified-alert").style.display = "none";
+            document.getElementById("servicios-admin-container").innerHTML = "";
+            agregarBloqueServicio();
+            cambiarTabAdmin('form-perfil');
+            document.querySelectorAll('.admin-tabs .tab-btn')[1].classList.add('active');
+            document.querySelectorAll('.admin-tabs .tab-btn')[0].classList.remove('active');
+        }
+
+        function seleccionarClienteParaEditar(usuarioKey) {
+            modoFormularioAdmin = "editar";
+            document.getElementById("admin-form-titulo").innerText = "Modificar Perfil y Facturas del Cliente";
+            document.getElementById("admin-unified-alert").style.display = "none";
+
+            fetch(URL_APP, {
+                method: "POST",
+                body: JSON.stringify({ action: "getClientFull", usuario: usuarioKey })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    const c = data.cliente || {};
+                    const servicios = data.servicios || [];
+
+                    document.getElementById("u-usuario").value = c.usuario || "";
+                    document.getElementById("u-usuario").readOnly = true;
+                    document.getElementById("u-usuario").style.opacity = "0.5";
+                    document.getElementById("u-password").value = c.password || "";
+                    document.getElementById("u-nombres").value = c.nombres || "";
+                    document.getElementById("u-apellidos").value = c.apellidos || "";
+                    document.getElementById("u-cedula").value = c.cedula || "";
+                    document.getElementById("u-telefono").value = c.telefono || "";
+                    document.getElementById("u-correo").value = c.correo || "";
+                    document.getElementById("u-pais").value = c.pais || "";
+                    document.getElementById("u-estado").value = c.estado || "";
+                    document.getElementById("u-municipio").value = c.municipio || "";
+                    document.getElementById("u-parroquia").value = c.parroquia || "";
+                    document.getElementById("u-direccion").value = c.direccion || "";
+
+                    const contenedorServ = document.getElementById("servicios-admin-container");
+                    contenedorServ.innerHTML = "";
+
+                    if (servicios.length === 0) {
+                        agregarBloqueServicio();
+                    } else {
+                        servicios.forEach(s => agregarBloqueServicio(s));
+                    }
+
+                    cambiarTabAdmin('form-perfil');
+                } else {
+                    alert(data.message || "Error al cargar datos del cliente.");
+                }
+            })
+            .catch(() => {
+                alert("Error de conexión al extraer la data del servidor.");
+            });
+        }
+
+        function agregarBloqueServicio(s = {}) {
+            const contenedor = document.getElementById("servicios-admin-container");
+            const index = contenedor.children.length + 1;
+            const card = document.createElement("div");
+            card.className = "service-card-item";
+            card.dataset.rowindex = s.rowIndex || "";
+
+            const horaReg = s.hora_registro || formatearFechaHoraDispositivo();
+
+            card.innerHTML = `
+                <div class="service-card-header">
+                    <span><i class="fa-solid fa-file-invoice"></i> Módulo de Facturación #${index}</span>
+                    <button type="button" class="btn btn-danger" style="width: auto; padding: 6px 12px; font-size: 11px;" onclick="this.closest('.service-card-item').remove()"><i class="fa-solid fa-trash-can"></i> Eliminar Registro</button>
+                </div>
+                <div class="grid-dynamic">
+                    <div class="widget-box span-2"><label class="text-muted" style="font-size:10px;">PLAN / SERVICIO TÉCNICO</label><input type="text" class="form-control no-icon serv-plan" value="${s.plan || ''}" placeholder="Ej: ENLACE FIBRA 100 Mbps" style="padding-right:16px;"></div>
+                    <div class="widget-box"><label class="text-muted" style="font-size:10px;">FECHA INICIO (DD/MM/AAAA)</label><input type="text" class="form-control no-icon serv-inicio" value="${limpiarFecha(s.fecha_inicio) !== '-' ? limpiarFecha(s.fecha_inicio) : (s.fecha_inicio || '')}" placeholder="dd/mm/aaaa" style="padding-right:16px;"></div>
+                    <div class="widget-box"><label class="text-muted" style="font-size:10px;">FECHA CORTE (DD/MM/AAAA)</label><input type="text" class="form-control no-icon serv-fin" value="${limpiarFecha(s.fecha_fin) !== '-' ? limpiarFecha(s.fecha_fin) : (s.fecha_fin || '')}" placeholder="dd/mm/aaaa" style="padding-right:16px;"></div>
+                    <div class="widget-box"><label class="text-muted" style="font-size:10px;">ESTADO OPERATIVO</label><input type="text" class="form-control no-icon serv-estatus" value="${s.estatus || 'ACTIVO'}" style="padding-right:16px;"></div>
+                    
+                    <div class="widget-box span-3"><label class="text-muted" style="font-size:10px;">PROGRESO DE DESPLIEGUE</label><input type="text" class="form-control no-icon serv-avance" value="${s.avance || ''}" placeholder="Ej: Nodo principal configurado y enlazado" style="padding-right:16px;"></div>
+                    
+                    <div class="widget-box span-2"><label class="text-muted" style="font-size:10px;">NÚMERO DE FACTURA</label><input type="text" class="form-control no-icon serv-factura" value="${s.nro_factura || ''}" placeholder="FAC-2026-001" style="padding-right:16px;"></div>
+                    <div class="widget-box"><label class="text-muted" style="font-size:10px;">TARIFA APLICADA ($)</label><input type="text" class="form-control no-icon serv-costo" value="${s.costo || ''}" placeholder="$40.00" style="padding-right:16px;"></div>
+                    <div class="widget-box"><label class="text-muted" style="font-size:10px;">TASA DE CAMBIO (B.C.V.)</label><input type="text" class="form-control no-icon serv-tasabcv" value="${s.tasa_bcv || ''}" placeholder="36.50" style="padding-right:16px;"></div>
+                    
+                    <div class="widget-box"><label class="text-muted" style="font-size:10px;">CANAL DE PAGO</label><input type="text" class="form-control no-icon serv-pago" value="${s.tipo_pago || ''}" placeholder="Binance / Zelle" style="padding-right:16px;"></div>
+                    <div class="widget-box"><label class="text-muted" style="font-size:10px;">REF. TRANSACCIÓN</label><input type="text" class="form-control no-icon serv-ref" value="${s.referencia || ''}" placeholder="Ref..." style="padding-right:16px;"></div>
+                    <div class="widget-box"><label class="text-muted" style="font-size:10px;">ENTIDAD ORIGEN</label><input type="text" class="form-control no-icon serv-emisor" value="${s.banco_emisor || ''}" placeholder="Banco origen" style="padding-right:16px;"></div>
+                    <div class="widget-box"><label class="text-muted" style="font-size:10px;">ENTIDAD DESTINO</label><input type="text" class="form-control no-icon serv-receptor" value="${s.banco_receptor || ''}" placeholder="Banco destino" style="padding-right:16px;"></div>
+                    
+                    <div class="widget-box span-2"><label class="text-muted" style="font-size:10px;">EQUIVALENTE MONEDA LOCAL</label><input type="text" class="form-control no-icon serv-montobs" value="${s.monto_bs || ''}" placeholder="0.00 Bs" style="padding-right:16px;"></div>
+
+                    <div class="widget-box span-2"><label class="text-muted" style="font-size:10px;">FECHA LIQUIDACIÓN</label><input type="text" class="form-control no-icon serv-fecadmin" value="${limpiarFecha(s.fecha_transaccion) !== '-' ? limpiarFecha(s.fecha_transaccion) : (s.fecha_transaccion || '')}" placeholder="dd/mm/aaaa" style="padding-right:16px;"></div>
+                    
+                    <div class="widget-box span-full"><label class="text-muted" style="font-size:10px;">BITÁCORA TÉCNICA Y ESPECIFICACIONES</label><textarea class="form-control no-icon serv-detalles" rows="3" style="text-transform: none; margin-top: 8px; padding-right:16px;" placeholder="Documentación de la arquitectura aplicada...">${s.detalles_completos || ''}</textarea></div>
+                    
+                    <input type="hidden" class="serv-hora-registro" value="${horaReg}">
+                </div>
+            `;
+            contenedor.appendChild(card);
+        }
+
+        function guardarClienteUnificado(e) {
+            e.preventDefault();
+            const alertBox = document.getElementById("admin-unified-alert");
+            alertBox.style.display = "none";
+
+            const timestampActualizacion = formatearFechaHoraDispositivo();
+
+            const payload = {
+                action: modoFormularioAdmin === "nuevo" ? "registerClientFull" : "updateClientFull",
+                usuario: document.getElementById("u-usuario").value.trim(),
+                password: document.getElementById("u-password").value.trim(),
+                nombres: document.getElementById("u-nombres").value.trim(),
+                apellidos: document.getElementById("u-apellidos").value.trim(),
+                cedula: document.getElementById("u-cedula").value.trim(),
+                telefono: document.getElementById("u-telefono").value.trim(),
+                correo: document.getElementById("u-correo").value.trim(),
+                pais: document.getElementById("u-pais").value.trim(),
+                estado: document.getElementById("u-estado").value.trim(),
+                municipio: document.getElementById("u-municipio").value.trim(),
+                parroquia: document.getElementById("u-parroquia").value.trim(),
+                direccion: document.getElementById("u-direccion").value.trim(),
+                servicios: []
+            };
+
+            const bloques = document.querySelectorAll(".service-card-item");
+            bloques.forEach(bloque => {
+                payload.servicios.push({
+                    rowIndex: bloque.dataset.rowindex || "",
+                    plan: bloque.querySelector(".serv-plan").value.trim(),
+                    fecha_inicio: bloque.querySelector(".serv-inicio").value.trim(),
+                    fecha_fin: bloque.querySelector(".serv-fin").value.trim(),
+                    estatus: bloque.querySelector(".serv-estatus").value.trim(),
+                    avance: bloque.querySelector(".serv-avance").value.trim(),
+                    nro_factura: bloque.querySelector(".serv-factura").value.trim(),
+                    costo: bloque.querySelector(".serv-costo").value.trim(),
+                    tasa_bcv: bloque.querySelector(".serv-tasabcv").value.trim(),
+                    tipo_pago: bloque.querySelector(".serv-pago").value.trim(),
+                    referencia: bloque.querySelector(".serv-ref").value.trim(),
+                    banco_emisor: bloque.querySelector(".serv-emisor").value.trim(),
+                    banco_receptor: bloque.querySelector(".serv-receptor").value.trim(),
+                    monto_bs: bloque.querySelector(".serv-montobs").value.trim(),
+                    fecha_transaccion: bloque.querySelector(".serv-fecadmin").value.trim(),
+                    detalles_completos: bloque.querySelector(".serv-detalles").value.trim(),
+                    hora_registro: bloque.querySelector(".serv-hora-registro").value || timestampActualizacion,
+                    ultima_actualizacion: timestampActualizacion
+                });
+            });
+
+            fetch(URL_APP, {
+                method: "POST",
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    document.getElementById("modal-texto").innerText = data.message || "Estructura de datos sincronizada con éxito.";
+                    document.getElementById("modal-exito").style.display = "flex";
+                } else {
+                    alertBox.className = "alert alert-error";
+                    alertBox.innerText = data.message || "Excepción del sistema al procesar.";
+                    alertBox.style.display = "block";
+                }
+            })
+            .catch(() => {
+                alertBox.className = "alert alert-error";
+                alertBox.innerText = "Problema de enlace con la API.";
+                alertBox.style.display = "block";
+            });
+        }
+
+        function cerrarModalYVolver() {
+            document.getElementById("modal-exito").style.display = "none";
+            if (usuarioActual === "cordero") {
+                cambiarTabAdmin('gestionar-clientes');
+            } else {
+                mostrarDashboardCliente();
+            }
+        }
+
+        function mostrarDashboardCliente() {
+            document.getElementById("login-section").style.display = "none";
+            document.getElementById("admin-section").style.display = "none";
+            document.getElementById("dashboard-section").style.display = "block";
+
+            const hora = new Date().getHours();
+            let saludo = "Buenos días";
+            if (hora >= 12 && hora < 18) saludo = "Buenas tardes";
+            else if (hora >= 18) saludo = "Buenas noches";
+            
+            const primerNombre = (clienteGlobal.nombres || "Cliente").split(" ")[0];
+            
+            document.getElementById("saludo-hora").innerText = `${saludo}`;
+            document.getElementById("saludo-bienvenido").innerText = `Bienvenido ${toUpper(primerNombre)}`;
+
+            document.getElementById("p-nombres").innerText = toUpper(clienteGlobal.nombres);
+            document.getElementById("p-apellidos").innerText = toUpper(clienteGlobal.apellidos);
+            document.getElementById("p-cedula").innerText = toUpper(clienteGlobal.cedula);
+            document.getElementById("p-telefono").innerText = clienteGlobal.telefono || "-";
+            document.getElementById("p-correo").innerText = clienteGlobal.correo || "-";
+            document.getElementById("p-pais").innerText = toUpper(clienteGlobal.pais);
+            document.getElementById("p-estado").innerText = toUpper(clienteGlobal.estado);
+            document.getElementById("p-municipio").innerText = toUpper(clienteGlobal.municipio);
+            document.getElementById("p-parroquia").innerText = toUpper(clienteGlobal.parroquia);
+            document.getElementById("p-direccion").innerText = toUpper(clienteGlobal.direccion);
+
+            planesMapGlobal = {};
+            serviciosGlobales.forEach(serv => {
+                const nombrePlan = toUpper(serv.plan || "ARQUITECTURA GENERAL");
+                if (!planesMapGlobal[nombrePlan]) planesMapGlobal[nombrePlan] = [];
+                planesMapGlobal[nombrePlan].push(serv);
+            });
+
+            const selectPlan = document.getElementById("select-plan");
+            selectPlan.innerHTML = "";
+            Object.keys(planesMapGlobal).forEach(planNombre => {
+                const opt = document.createElement("option");
+                opt.value = planNombre;
+                opt.text = planNombre;
+                selectPlan.appendChild(opt);
+            });
+
+            const primerPlan = Object.keys(planesMapGlobal)[0];
+            if (primerPlan) actualizarFacturasDelPlan(primerPlan);
+            reiniciarTemporizadorInactividad();
+        }
+
+        function abrirModalPassword() {
+            document.getElementById("pass-actual").value = "";
+            document.getElementById("pass-nueva").value = "";
+            document.getElementById("pass-confirmacion").value = "";
+            document.getElementById("modal-pass-alert").style.display = "none";
+            document.getElementById("modal-password").style.display = "flex";
+        }
+
+        function cerrarModalPassword() {
+            document.getElementById("modal-password").style.display = "none";
+        }
+
+        function solicitarAplicarPassword() {
+            const actual = document.getElementById("pass-actual").value.trim();
+            const nueva = document.getElementById("pass-nueva").value.trim();
+            const confirmacion = document.getElementById("pass-confirmacion").value.trim();
+            const alertBox = document.getElementById("modal-pass-alert");
+            alertBox.style.display = "none";
+
+            if (!actual || !nueva || !confirmacion) {
+                alertBox.innerText = "Por favor, llene todos los campos requeridos.";
+                alertBox.style.display = "block";
+                return;
+            }
+
+            if (actual !== String(clienteGlobal.password || "").trim()) {
+                alertBox.innerText = "La contraseña actual no coincide.";
+                alertBox.style.display = "block";
+                return;
+            }
+
+            if (nueva === actual) {
+                alertBox.innerText = "La nueva contraseña debe ser diferente a la anterior.";
+                alertBox.style.display = "block";
+                return;
+            }
+
+            if (nueva !== confirmacion) {
+                alertBox.innerText = "La confirmación no coincide con la nueva clave.";
+                alertBox.style.display = "block";
+                return;
+            }
+
+            nuevaPasswordTemp = nueva; // Guardamos en la variable global
+            cerrarModalPassword();
+            document.getElementById("modal-confirmar").style.display = "flex";
+        }
+
+        function cerrarModalConfirmar() {
+            document.getElementById("modal-confirmar").style.display = "none";
+        }
+
+        function ejecutarCambioPassword() {
+            document.getElementById("modal-confirmar").style.display = "none";
+            const timestampActualizacion = formatearFechaHoraDispositivo();
+
+            var usuarioVal = (clienteGlobal && clienteGlobal.usuario) ? String(clienteGlobal.usuario).toLowerCase() : "";
+            
+            if (!usuarioVal) {
+                alert("Error: No se encontró la sesión del usuario. Por favor, vuelve a iniciar sesión.");
+                return;
+            }
+
+            clienteGlobal.password = nuevaPasswordTemp;
+            serviciosGlobales.forEach(s => { s.ultima_actualizacion = timestampActualizacion; });
+
+            const payload = {
+                action: "updateClientFull",
+                usuario: clienteGlobal.usuario,
+                password: nuevaPasswordTemp,
+                nombres: clienteGlobal.nombres,
+                apellidos: clienteGlobal.apellidos,
+                cedula: clienteGlobal.cedula,
+                telefono: clienteGlobal.telefono,
+                correo: clienteGlobal.correo,
+                pais: clienteGlobal.pais,
+                estado: clienteGlobal.estado,
+                municipio: clienteGlobal.municipio,
+                parroquia: clienteGlobal.parroquia,
+                direccion: clienteGlobal.direccion,
+                servicios: serviciosGlobales
+            };
+
+            fetch(URL_APP, {
+                method: "POST",
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    sessionStorage.setItem("lc_cliente_global", JSON.stringify(clienteGlobal));
+                    document.getElementById("modal-texto").innerText = "Credenciales renovadas exitosamente.";
+                    document.getElementById("modal-exito").style.display = "flex";
+                } else {
+                    alert(data.message || "Error en el servidor al intentar cambiar la contraseña.");
+                }
+            })
+            .catch(() => {
+                alert("Error de conexión, intente más tarde.");
+            });
+        }
+
+        function cambiarPlanSeleccionado() {
+            actualizarFacturasDelPlan(document.getElementById("select-plan").value);
+        }
+
+        function actualizarFacturasDelPlan(planNombre) {
+            const selectFactura = document.getElementById("select-factura");
+            selectFactura.innerHTML = "";
+            facturasDelPlanActual = planesMapGlobal[planNombre] || [];
+
+            facturasDelPlanActual.forEach((serv, index) => {
+                const opt = document.createElement("option");
+                opt.value = index;
+                opt.text = `ID: ${toUpper(serv.nro_factura || 'S/N')} — EMISIÓN: ${toUpper(limpiarFecha(serv.fecha_transaccion) || 'N/A')}`;
+                selectFactura.appendChild(opt);
+            });
+
+            if (facturasDelPlanActual.length > 0) actualizarDetalleServicio(0);
+        }
+
+        function cambiarFacturaSeleccionada() {
+            actualizarDetalleServicio(document.getElementById("select-factura").value);
+        }
+
+        function actualizarDetalleServicio(index) {
+            const serv = facturasDelPlanActual[index];
+            if (!serv) return;
+
+            document.getElementById("s-plan").innerText = toUpper(serv.plan);
+            document.getElementById("s-estatus").innerText = toUpper(serv.estatus);
+            document.getElementById("s-inicio").innerText = toUpper(limpiarFecha(serv.fecha_inicio));
+            document.getElementById("s-fin").innerText = toUpper(limpiarFecha(serv.fecha_fin));
+            document.getElementById("s-hora-registro").innerText = toUpper(serv.hora_registro || formatearFechaHoraDispositivo());
+            document.getElementById("s-ultima-actualizacion").innerText = toUpper(serv.ultima_actualizacion || formatearFechaHoraDispositivo());
+            document.getElementById("s-avance").innerText = toUpper(serv.avance);
+            document.getElementById("s-factura").innerText = toUpper(serv.nro_factura);
+            document.getElementById("s-costo").innerText = toUpper(serv.costo);
+            document.getElementById("s-tasa-bcv").innerText = toUpper(serv.tasa_bcv);
+            document.getElementById("s-tipo-pago").innerText = toUpper(serv.tipo_pago);
+            document.getElementById("s-referencia").innerText = toUpper(serv.referencia);
+            document.getElementById("s-banco-emisor").innerText = toUpper(serv.banco_emisor);
+            document.getElementById("s-banco-receptor").innerText = toUpper(serv.banco_receptor);
+            document.getElementById("s-monto-bs").innerText = toUpper(serv.monto_bs);
+            document.getElementById("s-fecha-trans").innerText = toUpper(limpiarFecha(serv.fecha_transaccion));
+            document.getElementById("s-detalles-completos").innerText = toUpper(serv.detalles_completos || "SIN ESPECIFICACIONES TÉCNICAS AÑADIDAS.");
+        }
+
+        function cerrarSesion() {
+            const primerNombre = usuarioActual === "cordero" ? "Cordero" : ((clienteGlobal.nombres || "Cliente").split(" ")[0]);
+            
+            document.getElementById("despedida-titulo").innerText = `¡Vuelve pronto, ${toUpper(primerNombre)}!`;
+            document.getElementById("despedida-texto").innerText = "Cerrando sesión de forma segura y regresando al portal...";
+            document.getElementById("modal-despedida").style.display = "flex";
+
+            setTimeout(() => {
+                document.getElementById("modal-despedida").style.display = "none";
+                usuarioActual = "";
+                serviciosGlobales = [];
+                clienteGlobal = {};
+                sessionStorage.clear();
+                clearTimeout(inactividadTimeout);
+                document.getElementById("dashboard-section").style.display = "none";
+                document.getElementById("admin-section").style.display = "none";
+                document.getElementById("login-section").style.display = "flex";
+                document.getElementById("login-form").reset();
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
