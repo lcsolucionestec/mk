@@ -226,7 +226,6 @@
             border-right: 1px solid var(--border);
 
 
-
         }
 
         .login-form-panel {
@@ -245,37 +244,38 @@
             margin-bottom: 24px;
         }
 
-        /* LOGIN FOOTER CON REDES SOCIALES Y AUTORÍA */
+        /* LOGIN FOOTER CON REDES SOCIALES Y AUTORÍA (REDUCIDO DE TAMAÑO) */
         .login-footer {
             background: var(--login-footer-bg);
             border-top: 1px solid var(--border);
-            padding: 20px 24px;
+            padding: 14px 20px;
             text-align: center;
             width: 100%;
         }
         .login-footer-text {
-            font-size: 11px;
+            font-size: 9px;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
+            letter-spacing: 0.4px;
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
         .login-social-icons {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 10px;
         }
         .login-social-icons a {
-            width: 36px;
-            height: 36px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             background: rgba(2, 132, 199, 0.1);
             color: var(--primary-light);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 15px;
+            font-size: 12px;
             transition: all 0.3s ease;
             text-decoration: none;
             border: 1px solid var(--border);
@@ -284,7 +284,7 @@
             background: var(--primary);
             color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px var(--primary-glow);
+            box-shadow: 0 4px 10px var(--primary-glow);
         }
 
         /* FORMS & INPUTS */
@@ -861,12 +861,12 @@
                 </div>
             </div>
 
-            <!-- FOOTER DEL LOGIN CON TEXTO DE AUTORÍA Y REDES SOCIALES -->
+            <!-- FOOTER DEL LOGIN CON TEXTO DE AUTORÍA Y REDES SOCIALES (MÁS PEQUEÑOS) -->
             <div class="login-footer">
-				<div class="login-footer-text">
-    &copy; 2026 LC SOLUCIONES TECNOLÓGICAS. UNA PRODUCCIÓN Y OBRA TÉCNICA DE ING. JOSÉ CORDERO. TODOS LOS DERECHOS RESERVADOS. MARCA Y NOMBRE COMERCIAL DESTINADOS EXCLUSIVAMENTE A LA DIFUSIÓN DE TRABAJOS Y EXPERIENCIA PROFESIONAL.
-</div>
                 <div class="login-footer-text">
+                    &copy; 2026 LC SOLUCIONES TECNOLÓGICAS. UNA PRODUCCIÓN Y OBRA TÉCNICA DE ING. JOSÉ CORDERO. TODOS LOS DERECHOS RESERVADOS. MARCA Y NOMBRE COMERCIAL DESTINADOS EXCLUSIVAMENTE A LA DIFUSIÓN DE TRABAJOS Y EXPERIENCIA PROFESIONAL.
+                </div>
+                <div class="login-footer-text" style="font-size: 8px;">
                     Desarrollado por: Ing. José Cordero &bull; Versión 2026.1.0
                 </div>
                 <div class="login-social-icons">
@@ -1151,7 +1151,6 @@
                             <div class="widget-box"><label class="text-muted" style="font-size:10px;">FECHA CORTE (DD/MM/AAAA)</label><input type="text" id="adm-fin" class="form-control no-icon" placeholder="dd/mm/aaaa" style="padding-right:16px;" oninput="adminSincronizarCampoActual()"></div>
                             <div class="widget-box"><label class="text-muted" style="font-size:10px;">ESTADO OPERATIVO</label><input type="text" id="adm-estatus" class="form-control no-icon" value="ACTIVO" style="padding-right:16px;" oninput="adminSincronizarCampoActual()"></div>
 
-                            
                             <div class="widget-box span-3"><label class="text-muted" style="font-size:10px;">PROGRESO DE DESPLIEGUE</label><input type="text" id="adm-avance" class="form-control no-icon" placeholder="Ej: Nodo principal configurado y enlazado" style="padding-right:16px;" oninput="adminSincronizarCampoActual()"></div>
                             
                             <div class="widget-box span-2"><label class="text-muted" style="font-size:10px;">NÚMERO DE FACTURA</label><input type="text" id="adm-factura" class="form-control no-icon" placeholder="FAC-2026-001" style="padding-right:16px;" oninput="adminSincronizarCampoActual()"></div>
@@ -1873,6 +1872,8 @@
                     if (data.status === "success" || data.status !== "error") {
                         cerrarModalFormularioCliente();
                         cargarEstadisticasFinancierasYClientes();
+                        document.getElementById("modal-texto").innerText = "El cliente y su expediente se han eliminado e actualizado exitosamente.";
+                        document.getElementById("modal-exito").style.display = "flex";
                     } else {
                         alert(data.message || "Error al eliminar el cliente.");
                     }
@@ -1919,6 +1920,8 @@
                 if (data.status === "success") {
                     cerrarModalFormularioCliente();
                     cargarEstadisticasFinancierasYClientes();
+                    document.getElementById("modal-texto").innerText = "La información del perfil y sus servicios se han actualizado y sincronizado exitosamente.";
+                    document.getElementById("modal-exito").style.display = "flex";
                 } else {
                     alertBox.className = "alert alert-error";
                     alertBox.innerText = data.message || "Excepción del sistema al procesar.";
@@ -2070,7 +2073,8 @@
             .then(data => {
                 if (data.status === "success") {
                     sessionStorage.setItem("lc_cliente_global", JSON.stringify(clienteGlobal));
-                    alert("Credenciales renovadas exitosamente.");
+                    document.getElementById("modal-texto").innerText = "Credenciales renovadas exitosamente.";
+                    document.getElementById("modal-exito").style.display = "flex";
                 } else {
                     alert(data.message || "Error en el servidor al intentar cambiar la contraseña.");
                 }
@@ -2111,20 +2115,20 @@
             document.getElementById("s-estatus").innerText = toUpper(serv.estatus);
             document.getElementById("s-inicio").innerText = toUpper(limpiarFecha(serv.fecha_inicio));
             document.getElementById("s-fin").innerText = toUpper(limpiarFecha(serv.fecha_fin));
-            document.getElementById("s-hora-registro").innerText = toUpper(serv.hora_registro || formatearFechaHoraDispositivo());
-            document.getElementById("s-ultima-actualizacion").innerText = toUpper(serv.ultima_actualizacion || formatearFechaHoraDispositivo());
-            document.getElementById("s-avance").innerText = toUpper(serv.avance);
+            document.getElementById("s-hora-registro").innerText = toUpper(serv.hora_registro);
+            document.getElementById("s-ultima-actualizacion").innerText = toUpper(serv.ultima_actualizacion);
+            document.getElementById("s-avance").innerText = serv.avance || "-";
 
             document.getElementById("s-factura").innerText = toUpper(serv.nro_factura);
-            document.getElementById("s-costo").innerText = `$${parseFloat(serv.costo || 0).toFixed(2)}`;
-            document.getElementById("s-tasa-bcv").innerText = serv.tasa_bcv ? `${serv.tasa_bcv} Bs` : "-";
+            document.getElementById("s-costo").innerText = serv.costo ? `$${serv.costo}` : "-";
+            document.getElementById("s-tasa-bcv").innerText = serv.tasa_bcv || "-";
             document.getElementById("s-tipo-pago").innerText = toUpper(serv.tipo_pago);
             document.getElementById("s-referencia").innerText = toUpper(serv.referencia);
             document.getElementById("s-banco-emisor").innerText = toUpper(serv.banco_emisor);
             document.getElementById("s-banco-receptor").innerText = toUpper(serv.banco_receptor);
             document.getElementById("s-monto-bs").innerText = serv.monto_bs ? `${serv.monto_bs} Bs` : "-";
             document.getElementById("s-fecha-trans").innerText = toUpper(limpiarFecha(serv.fecha_transaccion));
-            document.getElementById("s-detalles-completos").innerText = serv.detalles_completos || "Sin observaciones registradas en bitácora.";
+            document.getElementById("s-detalles-completos").innerText = serv.detalles_completos || "-";
         }
 
         function cerrarSesion() {
@@ -2141,15 +2145,8 @@
         }
 
         function finalizarSalidaApp() {
-            document.getElementById("modal-vuelve-pronto").style.display = "none";
             sessionStorage.clear();
-            usuarioActual = "";
-            serviciosGlobales = [];
-            clienteGlobal = {};
-            document.getElementById("admin-section").style.display = "none";
-            document.getElementById("dashboard-section").style.display = "none";
-            document.getElementById("login-section").style.display = "block";
-            document.getElementById("login-form").reset();
+            window.location.reload();
         }
 
         function cerrarModalYVolver() {
