@@ -290,94 +290,213 @@
     <input type="hidden" id="mt-link-login" value="$(link-login)">
 
     <div class="sticky top-0 z-50 w-full shadow-lg">
-        <div class="bg-gray-900 text-gray-400 text-[10px] md:text-xs py-1.5 px-4 flex justify-between items-center border-b border-gray-800 relative z-50">
-            <div class="flex items-center gap-2 flex-wrap">
-                <i class="fa-regular fa-calendar-days text-brand-blue"></i>
-                
-                <!-- Versión para Móviles (Más compacta) -->
-                <span id="info-datetime-mobile" class="sm:hidden">Cargando...</span>
-                
-                <!-- Versión para PC / Tablets (Completa) -->
-                <span id="info-datetime" class="hidden sm:inline">Cargando fecha y hora...</span>
-                
-                <span class="mx-1 text-gray-600 hidden sm:inline">|</span>
-                
-                <!-- Wrapper para ocultar GPS y separador en dispositivos móviles -->
-                <div class="hidden md:flex items-center gap-1">
-                    <div id="info-location-container" class="hidden items-center gap-1">
-                        <i class="fa-solid fa-location-dot text-brand-blue"></i>
-                        <span id="info-location">Detectando ubicación...</span>
-                    </div>
-                    <span id="location-separator" class="mx-1 text-gray-600 hidden">|</span>
+    <div class="bg-gray-900 text-gray-400 text-[10px] md:text-xs py-1.5 px-4 flex justify-between items-center border-b border-gray-800 relative z-50">
+        <!-- Lado Izquierdo: Fecha, Hora y Ubicación -->
+        <div class="flex items-center gap-2 flex-wrap">
+            <i class="fa-regular fa-calendar-days text-brand-blue"></i>
+            
+            <!-- Versión para Móviles (Más compacta) -->
+            <span id="info-datetime-mobile" class="sm:hidden">Cargando...</span>
+            
+            <!-- Versión para PC / Tablets (Completa) -->
+            <span id="info-datetime" class="hidden sm:inline">Cargando fecha y hora...</span>
+            
+            <span class="mx-1 text-gray-600 hidden sm:inline">|</span>
+            
+<!-- Contenedor de Ubicación -->
+<div class="flex items-center gap-1">
+    <div id="info-location-container" class="hidden items-center gap-1 cursor-pointer relative" onclick="toggleLocationModal(event)" title="Ubicación">
+        <i class="fa-solid fa-location-dot text-brand-blue"></i>
+        <!-- Solo icono en móvil, texto completo visible a partir de pantallas medianas (md) -->
+        <span id="info-location" class="hidden md:inline">Detectando ubicación...</span>
+
+        <!-- Modal: Exclusivo para versión móvil (centrado con fondo oscuro) -->
+        <div id="location-modal" class="hidden fixed inset-0 md:hidden flex items-center justify-center p-4 bg-black/60 z-50">
+            <div id="location-modal-content" class="bg-gray-900 border border-gray-700 rounded-xl p-4 shadow-2xl text-xs text-gray-200 w-full max-w-xs">
+                <div class="font-bold text-brand-blue mb-1.5 border-b border-gray-800 pb-1 flex justify-between items-center">
+                    <span>Ubicación</span>
+                    <span class="text-gray-400 text-[10px] font-normal">(Clic fuera para cerrar)</span>
                 </div>
-
-                <i class="fa-solid fa-wifi text-brand-blue hidden sm:hidden"></i>
-                <span id="isp-name" style="visibility: hidden;">Buscando...</span>
-            </div>
-
-            <div class="flex items-center gap-4">
-				
-                <div class="flex items-center gap-1" title="Tu IP Pública y Proveedor">
-                    <i class="fa-solid fa-globe text-brand-blue"></i>
-                    <span id="info-public-ip">Detectando...</span>
-                    <span id="info-isp" class="ml-1 text-gray-300 font-bold truncate max-w-[100px] sm:max-w-none"></span>
-					
-					<span class="mx-1 text-gray-600">|</span>
-					
-			<!-- Indicador de Dispositivo (Móvil / Tablet / PC) -->
-				<div class="flex items-center gap-1" title="Tipo de Dispositivo">
-					<!-- Móvil (< 640px) -->
-					<i class="fa-solid fa-mobile-screen text-brand-blue sm:hidden" title="Teléfono / Móvil"></i>
-					<!-- Tablet (640px a 1023px) -->
-					<i class="fa-solid fa-tablet-screen-button text-brand-blue hidden sm:inline lg:hidden" title="Tablet"></i>
-					<!-- PC (>= 1024px) -->
-					<i class="fa-solid fa-desktop text-brand-blue hidden lg:inline" title="Computadora de Escritorio"></i>
-				</div>
-
-            <span class="mx-1 text-gray-600">|</span>
-
-            <!-- Indicador de Conexión (Wi-Fi / Cable) -->
-            <div class="flex items-center gap-1" title="Tipo de Conexión">
-   			 <i id="conn-icon" class="fa-solid fa-wifi text-brand-blue"></i>
-			</div>
-					
-					<span class="mx-1 text-gray-600">|</span>
-					
-                </div>
-                <button onclick="openSpeedtest()" class="bg-brand-blue/20 text-brand-blue hover:bg-brand-blue hover:text-white px-3 py-0.5 rounded-full transition font-bold flex items-center gap-1 cursor-pointer">
-                    <i class="fa-solid fa-gauge-high"></i> <span class="hidden sm:inline">Speedtest</span>
-                </button>
+                <div class="mt-1"><strong>Lugar:</strong> <span id="modal-location">Detectando ubicación...</span></div>
             </div>
         </div>
-		
-		<!-- Script para detectar automáticamente el tipo de conexión -->
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-        const connIcon = document.getElementById('conn-icon');
-        const connTypeText = document.getElementById('conn-type-text');
+    </div>
+    <span id="location-separator" class="mx-1 text-gray-600 hidden">|</span>
+</div>
 
-        if (connection && connIcon && connTypeText) {
-            if (connection.type === 'ethernet' || connection.type === 'wired') {
-                connIcon.className = "fa-solid fa-network-wired text-brand-blue";
-                connTypeText.innerText = "Cable";
-            } else if (connection.type === 'cellular') {
-                connIcon.className = "fa-solid fa-tower-cell text-brand-blue";
-                connTypeText.innerText = "Móvil";
-            } else {
-                connIcon.className = "fa-solid fa-wifi text-brand-blue";
-                connTypeText.innerText = "Wi-Fi";
+<!-- Script para controlar la apertura y el cierre táctil del modal -->
+<script>
+    function toggleLocationModal(event) {
+        if (window.innerWidth >= 768) return;
+
+        const modal = document.getElementById('location-modal');
+        const locElement = document.getElementById('info-location');
+        
+        // Sincronizar datos actuales de ubicación
+        const locText = locElement ? locElement.innerText : 'Detectando ubicación...';
+        document.getElementById('modal-location').innerText = locText;
+        
+        // Mostrar modal
+        modal.classList.toggle('hidden');
+        event.stopPropagation();
+    }
+
+    // Escuchar clics/toques en la pantalla para cerrar el modal si se presiona fuera
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth >= 768) return;
+
+        const modal = document.getElementById('location-modal');
+        const modalContent = document.getElementById('location-modal-content');
+        const container = document.getElementById('info-location-container');
+
+        if (modal && !modal.classList.contains('hidden')) {
+            // Si el toque fue fuera de la caja de contenido y fuera del icono principal, se cierra
+            if (modalContent && !modalContent.contains(e.target) && container && !container.contains(e.target)) {
+                modal.classList.add('hidden');
             }
         }
     });
 </script>
+
+            <span id="isp-name" style="visibility: hidden; display: none;">Buscando...</span>
+        </div>
+
+        <!-- Lado Derecho: IP, Dispositivo, Speedtest y Conexión -->
+        <div class="flex items-center gap-1 sm:gap-2">
+           <!-- IP Pública y Proveedor (Modal exclusivo para móvil) -->
+<div id="ip-container" class="relative flex items-center gap-1 cursor-pointer sm:cursor-default" onclick="toggleIpModal(event)" title="Tu IP Pública y Proveedor">
+    <i class="fa-solid fa-globe text-brand-blue"></i>
+    <span id="info-public-ip" class="hidden sm:inline">Detectando...</span>
+    <span id="info-isp" class="ml-1 text-gray-300 font-bold truncate hidden sm:inline max-w-[100px] sm:max-w-none"></span>
+
+    <!-- Modal: Exclusivo para versión móvil (centrado con fondo oscuro) -->
+    <div id="ip-modal" class="hidden fixed inset-0 flex items-center justify-center p-4 bg-black/60 z-50">
+        <div id="ip-modal-content" class="bg-gray-900 border border-gray-700 rounded-xl p-4 shadow-2xl text-xs text-gray-200 w-full max-w-xs">
+            <div class="font-bold text-brand-blue mb-1.5 border-b border-gray-800 pb-1 flex justify-between items-center">
+                <span>Información de Red</span>
+                <span class="text-gray-400 text-[10px] font-normal">(Clic fuera para cerrar)</span>
+            </div>
+            <div class="mt-1"><strong>IP:</strong> <span id="modal-ip">Detectando...</span></div>
+            <div><strong>ISP:</strong> <span id="modal-isp">Detectando...</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para controlar el modal exclusivamente en móviles con cierre seguro -->
+<script>
+    function toggleIpModal(event) {
+        // Validación estricta: Si la pantalla es de escritorio, se ignora por completo
+        if (window.innerWidth >= 640) return;
+
+        const modal = document.getElementById('ip-modal');
+        const ipElement = document.getElementById('info-public-ip');
+        const ispElement = document.getElementById('info-isp');
+        
+        // Sincronizar datos actuales
+        const ipText = ipElement ? ipElement.innerText : 'Detectando...';
+        const ispText = ispElement ? ispElement.innerText : '';
+        
+        document.getElementById('modal-ip').innerText = ipText;
+        document.getElementById('modal-isp').innerText = ispText || 'No disponible';
+        
+        // Alternar visibilidad solo en móvil
+        modal.classList.toggle('hidden');
+        if (event) event.stopPropagation();
+    }
+
+    // Cierre global seguro al tocar fuera del modal en dispositivos móviles
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth >= 640) return;
+
+        const modal = document.getElementById('ip-modal');
+        const modalContent = document.getElementById('ip-modal-content');
+        const container = document.getElementById('ip-container');
+
+        if (modal && !modal.classList.contains('hidden')) {
+            if (modalContent && !modalContent.contains(e.target) && container && !container.contains(e.target)) {
+                modal.classList.add('hidden');
+            }
+        }
+    });
+</script>
+
+            <span class="mx-0.5 text-gray-600">|</span>
+
+            <!-- Indicador de Dispositivo (Móvil / Tablet / PC) -->
+            <div class="flex items-center gap-1" title="Tipo de Dispositivo">
+                <!-- Móvil (< 640px) -->
+                <i class="fa-solid fa-mobile-screen text-brand-blue sm:hidden" title="Teléfono / Móvil"></i>
+                <!-- Tablet (640px a 1023px) -->
+                <i class="fa-solid fa-tablet-screen-button text-brand-blue hidden sm:inline lg:hidden" title="Tablet"></i>
+                <!-- PC (>= 1024px) -->
+                <i class="fa-solid fa-desktop text-brand-blue hidden lg:inline" title="Computadora de Escritorio"></i>
+            </div>
+
+            <span class="mx-0.5 text-gray-600">|</span>
+
+<button onclick="openSpeedtest()" class="bg-brand-blue/20 text-brand-blue hover:bg-brand-blue hover:text-white p-1.5 rounded-full transition font-bold flex items-center justify-center cursor-pointer" title="Speedtest">
+                <i class="fa-solid fa-gauge-high"></i>
+            </button>
+
+            <span class="mx-0.5 text-gray-600">|</span>
+			</div>
+        </div>
+    </div>
+</div>
+
+          <!-- Script para gestionar el estado de la conexión en tiempo real -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        const connIcon = document.getElementById('conn-icon');
+        const connContainer = document.getElementById('conn-container');
+
+        function updateConnectionStatus() {
+            if (!connIcon) return;
+
+            // 1. Verificar si el equipo perdió la conexión por completo
+            if (!navigator.onLine) {
+                connIcon.className = "fa-solid fa-triangle-exclamation text-red-500";
+                if (connContainer) connContainer.title = "Sin conexión a internet";
+                return;
+            }
+
+            // 2. Gestionar estado y calidad de red disponible en el navegador
+            if (connection && connection.effectiveType) {
+                const speed = connection.effectiveType; // Ej: '4g', '3g', etc.
+                
+                if (speed === '4g' || speed === '3g') {
+                    connIcon.className = "fa-solid fa-globe text-brand-blue";
+                    if (connContainer) connContainer.title = `Conectado (Red Óptima - ${speed.toUpperCase()})`;
+                } else {
+                    connIcon.className = "fa-solid fa-signal text-yellow-500";
+                    if (connContainer) connContainer.title = `Conexión Lenta (${speed})`;
+                }
+            } else {
+                // Fallback estándar
+                connIcon.className = "fa-solid fa-globe text-brand-blue";
+                if (connContainer) connContainer.title = "Conectado a la red";
+            }
+        }
+
+        // Ejecutar al cargar
+        updateConnectionStatus();
+
+        // Escuchar cambios de red dinámicamente
+        if (connection) {
+            connection.addEventListener('change', updateConnectionStatus);
+        }
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+    });
+</script>
         <!-- Cabecera Principal -->
-        <header class="bg-brand-dark border-b border-gray-800 relative z-40">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-row justify-between items-center h-20 gap-4">
+        <header class="bg-brand-dark border-b border-gray-800 relative z-40 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+                <div class="flex flex-row justify-between items-center h-20 gap-2 sm:gap-4">
                     
 					<!-- Logo -->
-                    <div class="flex items-center gap-2 cursor-pointer shrink-0 select-none py-1" onclick="switchTab('wifi')">
+                    <div class="flex items-center gap-2 cursor-pointer shrink-0 select-none py-1 min-w-0" onclick="switchTab('wifi')">
                         <div class="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center shrink-0">
                             <svg width="40" height="40" style="width: 40px; height: 40px; min-width: 40px; min-height: 40px;" class="drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
@@ -403,28 +522,28 @@
                             </svg>
                         </div>
 
-                        <div class="flex flex-col justify-center">
+                        <div class="flex flex-col justify-center min-w-0">
                             <div class="flex flex-col leading-none">
-                                <div class="flex justify-between items-center w-full uppercase text-xs md:text-sm font-black tracking-[0.15em] font-sans">
+                                <div class="flex justify-between items-center w-full uppercase text-[10px] sm:text-xs md:text-sm font-black tracking-[0.1em] sm:tracking-[0.15em] font-sans">
                                     <span class="text-brand-orange">L</span><span class="text-brand-orange">C</span>
                                     <span class="text-white">S</span><span class="text-white">O</span><span class="text-white">L</span><span class="text-white">U</span><span class="text-white">C</span><span class="text-white">I</span><span class="text-white">O</span><span class="text-white">N</span><span class="text-white">E</span><span class="text-white">S</span>
                                 </div>
-                                <div class="flex justify-between items-center w-full uppercase -mt-0.5 text-xs md:text-sm font-black tracking-[0.2em] text-white font-sans">
+                                <div class="flex justify-between items-center w-full uppercase -mt-0.5 text-[10px] sm:text-xs md:text-sm font-black tracking-[0.15em] sm:tracking-[0.2em] text-white font-sans">
                                     <span>T</span><span>E</span><span>C</span><span>N</span><span>O</span><span>L</span><span>Ó</span><span>G</span><span>I</span><span>C</span><span>A</span><span>S</span>
                                 </div>
                             </div>
                             
                             <div class="h-[1px] w-full bg-gradient-to-r from-cyan-500 via-blue-400 to-transparent my-0.5 shadow-[0_0_4px_rgba(56,189,248,0.8)]"></div>
-                            <span class="text-[7px] md:text-[8px] font-semibold text-brand-orange tracking-wide font-sans block w-full text-justify">Arquitectura de Redes y Soluciones Digitales</span>
+                            <span class="text-[6px] sm:text-[7px] md:text-[8px] font-semibold text-brand-orange tracking-wide font-sans block w-full truncate">Arquitectura de Redes y Soluciones Digitales</span>
                         </div>
                     </div>
 
                     <!-- Contenedor central con navegación y botones integrados -->
-                    <div class="relative w-full flex items-center group max-w-[200px] sm:max-w-none mx-auto">
+                    <div class="relative w-full flex items-center group max-w-[140px] sm:max-w-[220px] lg:max-w-none mx-auto overflow-hidden">
                         
-                        <!-- Botón Izquierdo (ajustado en píxeles) -->
-                        <button onclick="slideNav('left')" class="absolute left-[20px] sm:-left-4 z-20 flex sm:hidden items-center justify-center w-7 h-7 sm:w-8 sm:h-8 bg-slate-900/90 text-indigo-400 border border-white/20 rounded-full shadow-lg hover:bg-indigo-600 hover:text-white transition-all cursor-pointer">
-                            <i class="fa-solid fa-chevron-left text-[10px] sm:text-xs"></i>
+                        <!-- Botón Izquierdo -->
+                        <button onclick="slideNav('left')" class="absolute left-1 sm:-left-4 z-20 flex sm:hidden items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-slate-900/90 text-indigo-400 border border-white/20 rounded-full shadow-lg hover:bg-indigo-600 hover:text-white transition-all cursor-pointer">
+                            <i class="fa-solid fa-chevron-left text-[9px] sm:text-xs"></i>
                         </button>
 
                         <!-- Contenedor de Navegación -->
@@ -459,31 +578,35 @@
 								<i class="fa-solid fa-headset text-sm"></i>
 								<span>Comercial</span>
 							</button>
-
-                             <!-- Botón Portal de Clientes -->
-                    <div class="flex items-center gap-4 shrink-0 fixed bottom-5 left-5 z-50 lg:static lg:bottom-auto lg:left-auto lg:right-auto lg:z-auto bg-slate-950/80 lg:bg-transparent p-2 lg:p-0 rounded-full lg:rounded-2xl backdrop-blur-md lg:backdrop-blur-none shadow-2xl lg:shadow-none border border-white/10 lg:border-none">
-                        <button onclick="openPortalClientes()" class="group relative inline-flex items-center justify-center gap-3.5 p-3 lg:px-6 lg:py-3 rounded-full lg:rounded-2xl text-xs font-semibold tracking-wider text-slate-100 bg-slate-950/90 lg:bg-slate-950/70 backdrop-blur-xl border border-white/15 lg:border-white/10 hover:border-indigo-500/50 shadow-2xl shadow-indigo-950/40 hover:shadow-indigo-500/25 transition-all duration-500 cursor-pointer overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/10 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-sm"></div>
-                            <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent"></div>
-                            <div class="relative w-7 h-7 rounded-full lg:rounded-xl bg-gradient-to-br from-indigo-500/20 to-blue-600/20 border border-indigo-400/30 flex items-center justify-center text-indigo-400 group-hover:text-indigo-200 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-inner">
-                                <i class="fa-solid fa-user-shield text-sm lg:text-xs"></i>
-                            </div>
-                            <span class="relative z-10 hidden lg:flex items-center gap-2.5 font-medium text-slate-200 group-hover:text-white transition-colors">
-                                <span>Portal Clientes</span>
-                                <div class="w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-indigo-600 group-hover:border-indigo-500 transition-all duration-300 shadow-sm">
-                                    <i class="fa-solid fa-arrow-right text-[9px] text-slate-400 group-hover:text-white group-hover:translate-x-0.5 transition-all"></i>
-                                </div>
-                            </span>
-                        </button>
-
-                            
                         </nav>
 
-                        <!-- Botón Derecho (ajustado en píxeles) -->
-                        <button onclick="slideNav('right')" class="absolute right-[20px] sm:-right-4 z-20 flex sm:hidden items-center justify-center w-7 h-7 sm:w-8 sm:h-8 bg-slate-900/90 text-indigo-400 border border-white/20 rounded-full shadow-lg hover:bg-indigo-600 hover:text-white transition-all cursor-pointer">
-                            <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs"></i>
+                        <!-- Botón Derecho -->
+                        <button onclick="slideNav('right')" class="absolute right-1 sm:-right-4 z-20 flex sm:hidden items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-slate-900/90 text-indigo-400 border border-white/20 rounded-full shadow-lg hover:bg-indigo-600 hover:text-white transition-all cursor-pointer">
+                            <i class="fa-solid fa-chevron-right text-[9px] sm:text-xs"></i>
                         </button>
                     </div>
+
+                  <!-- Botón Portal de Clientes (Estilo Tecnológico / Cyber-Glow) -->
+<div class="fixed bottom-5 left-5 z-50 md:static flex items-center gap-2 shrink-0">
+    <button onclick="openPortalClientes()" class="group relative inline-flex items-center gap-3 p-3.5 lg:px-5 lg:py-2.5 rounded-full lg:rounded-xl text-xs font-medium text-slate-100 bg-slate-950/90 hover:bg-slate-900 backdrop-blur-xl border border-cyan-500/30 hover:border-cyan-400/80 shadow-[0_0_20px_rgba(6,182,212,0.15)] hover:shadow-[0_0_25px_rgba(6,182,212,0.35)] transition-all duration-300 cursor-pointer overflow-hidden">
+        
+        <!-- Línea superior brillante tipo láser -->
+        <div class="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-60 group-hover:opacity-100 transition-opacity"></div>
+        
+        <!-- Contenedor del Icono con destello cian -->
+        <div class="relative w-8 h-8 rounded-full lg:rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:text-white group-hover:bg-cyan-500 group-hover:border-cyan-400 transition-all duration-300 shadow-inner">
+            <i class="fa-solid fa-user-shield text-sm"></i>
+        </div>
+        
+        <!-- Texto y acción (Visible solo en escritorio) -->
+        <span class="relative z-10 hidden lg:flex items-center gap-2.5 font-semibold tracking-wider text-slate-200 group-hover:text-white transition-colors">
+            <span>Portal Clientes</span>
+            <div class="w-5 h-5 rounded-md bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:bg-cyan-500 group-hover:border-cyan-400 transition-all duration-300">
+                <i class="fa-solid fa-chevron-right text-[9px] text-cyan-400 group-hover:text-slate-950 group-hover:translate-x-0.5 transition-all"></i>
+            </div>
+        </span>
+    </button>
+</div>
 
                 </div>
             </div>
@@ -574,8 +697,8 @@
 </body>
 
 
-    <main class="flex-grow flex flex-col relative" style="background-image: url('img/red.webp'); background-size: cover; background-position: center; background-attachment: fixed;">
-        <div class="absolute inset-0 bg-[#020b18]/80 z-0"></div>
+    <main class="flex-grow flex flex-col relative" style="background-image: url('img/red6.webp'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <div class="absolute inset-0 bg-[#020b18]/70 z-0"></div>
 
         <!-- SECCIÓN INICIO -->
         <section id="tab-wifi" class="flex-grow flex flex-col relative z-10 py-8 md:py-12">
@@ -1509,6 +1632,7 @@
                     <p class="text-gray-400">Dado que es un servicio de configuración puntual, cualquier ajuste o soporte posterior requiere la contratación de horas de consultoría técnica adicional.</p>
                 </div>
             </div>
+
             <div class="mt-6 text-right">
                 <button onclick="closeModal('modal-starter')" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-lg border border-white/10 transition-all">Cerrar</button>
             </div>
@@ -2188,7 +2312,7 @@
                     </div>
 
                     <div class="font-bold tracking-[2px] text-gray-400 text-center md:text-right">
-                        V.2026.1.0
+                        V.2026.2.1
                     </div>
                 </div>
             </div>
@@ -2329,19 +2453,10 @@
     </div>
 
     <script>
-		 // IFRAME FUNCION PORTAL
-		function openPortalClientes() {
-    const modal = document.getElementById('portalClientesModal');
-    const iframe = document.getElementById('portalClientesIframe');
-    
-    // Cambia 'cliente.html' por la ruta real de tu archivo o enlace independiente
-    if (!iframe.src || iframe.src === "" || iframe.src === window.location.href) {
-        iframe.src = "cliente.html"; 
-    }
-    
-    modal.classList.remove('hidden');
-}
-
+	
+        // ==========================================
+        // FUNCION PARA VENTANA DE PORTAL CLIENTES
+        // ==========================================
 		function openPortalClientes() {
     window.open('cliente.html', '_blank', 'noopener,noreferrer');
 }
