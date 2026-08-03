@@ -181,6 +181,38 @@
             #sidebar.active + .sidebar-backdrop { display: block; }
             #main-content { margin-left: 0; padding: 16px; }
         }
+		
+		/* Utilidades tipográficas y microinteracciones */
+.fs-7 {
+    font-size: 0.75rem;
+}
+
+.tracking-wider {
+    letter-spacing: 0.05em;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* Efecto hover suave en tarjetas KPI */
+.hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Hover suave en el dropdown del perfil */
+.hover-bg {
+    transition: background-color 0.15s ease-in-out;
+}
+
+.hover-bg:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
     </style>
 </head>
 <body>
@@ -385,114 +417,192 @@
     </aside>
 
     <!-- MAIN CONTENT -->
-    <main id="main-content">
-        <!-- HEADER -->
-        <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
-            <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-outline-secondary d-lg-none" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
-                <h4 class="fw-bold m-0" id="page-title">Dashboard General</h4>
+<main id="main-content" class="px-3 px-md-4 py-3 bg-light min-vh-100">
+
+    <!-- HEADER -->
+    <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom bg-white p-3 rounded-3 shadow-sm">
+        <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-light btn-sm border d-lg-none" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+                <h4 class="fw-bold m-0 text-dark" id="page-title">Dashboard General</h4>
+                <small class="text-muted d-none d-sm-inline-block">Resumen general y métricas del sistema</small>
             </div>
+        </div>
 
-            <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-icon btn-outline-secondary rounded-circle" id="theme-toggle" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+        <div class="d-flex align-items-center gap-3">
+            <!-- Theme Toggle -->
+            <button class="btn btn-icon btn-light rounded-circle border shadow-sm" id="theme-toggle" onclick="toggleTheme()" title="Cambiar Tema">
+                <i class="fa-solid fa-moon text-secondary"></i>
+            </button>
 
-                <div class="dropdown">
-                    <div class="d-flex align-items-center gap-2 cursor-pointer" data-bs-toggle="dropdown">
-                        <img id="current-user-avatar" src="https://ui-avatars.com/api/?name=User" class="rounded-circle" width="38" height="38" alt="User">
-                        <div class="d-none d-md-block text-end">
-                            <span class="fw-semibold d-block fs-6 m-0" id="current-user-name">Usuario</span>
-                            <small class="text-muted" id="current-user-role">Perfil: -</small>
-                        </div>
-                        <i class="fa-solid fa-chevron-down text-muted small ms-1"></i>
+            <!-- User Dropdown -->
+            <div class="dropdown">
+                <div class="d-flex align-items-center gap-2 cursor-pointer p-1 rounded-3 hover-bg" data-bs-toggle="dropdown" role="button">
+                    <img id="current-user-avatar" src="https://ui-avatars.com/api/?name=User&background=0D6EFD&color=fff" class="rounded-circle shadow-sm" width="40" height="40" alt="User">
+                    <div class="d-none d-md-block text-start lh-1 me-1">
+                        <span class="fw-bold d-block fs-6 m-0 text-dark" id="current-user-name">Usuario</span>
+                        <small class="text-muted fs-7" id="current-user-role">Perfil: Admin</small>
                     </div>
-                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
-                        <li><h6 class="dropdown-header" id="dropdown-user-email">email@dominio.com</h6></li>
-                        <li><a class="dropdown-item fw-semibold" href="#" onclick="abrirModalCambiarPassword()"><i class="fa-solid fa-key me-2 text-primary"></i> Cambiar Contraseña</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger fw-semibold" href="#" onclick="abrirModalLogout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
-                    </ul>
+                    <i class="fa-solid fa-chevron-down text-muted small"></i>
                 </div>
+                <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2 fs-6">
+                    <li><h6 class="dropdown-header text-truncate" id="dropdown-user-email">email@dominio.com</h6></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item py-2 fw-medium" href="#" onclick="abrirModalCambiarPassword()"><i class="fa-solid fa-key me-2 text-primary"></i> Cambiar Contraseña</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item py-2 text-danger fw-semibold" href="#" onclick="abrirModalLogout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
+                </ul>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <!-- DASHBOARD GENERAL -->
-        <section id="sec-dashboard" class="tab-content active">
-            <div class="row g-3 mb-4" id="sec-dashboard-servicio">
-                <div class="col-12">
-                    <div class="card-stat">
-                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                            <div>
-                                <h6 class="fw-bold m-0"><i class="fa-solid fa-signal text-primary me-2"></i>Estado del Servicio</h6>
-                                <small class="text-muted">Estatus del servicio en el sistema</small>
+    <!-- DASHBOARD GENERAL -->
+    <section id="sec-dashboard" class="tab-content active">
+        
+        <!-- ESTADO DEL SERVICIO -->
+        <div class="row g-3 mb-4" id="sec-dashboard-servicio">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body p-3 p-md-4">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-primary-subtle text-primary p-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                    <i class="fa-solid fa-signal fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold m-0 fs-5 text-dark">Estado del Servicio</h6>
+                                    <small class="text-muted">Estatus global en la plataforma</small>
+                                </div>
                             </div>
+
+                            <!-- Estatus Cliente -->
                             <div id="box-estado-servicio-cliente" class="d-none">
-                                <span id="badge-estado-servicio-cliente" class="badge-status status-solvente fs-6 px-3 py-2">SOLVENTE</span>
+                                <span id="badge-estado-servicio-cliente" class="badge bg-success-subtle text-success border border-success-subtle rounded-pill fs-6 px-3 py-2 fw-bold">
+                                    <i class="fa-solid fa-circle-check me-1"></i> SOLVENTE
+                                </span>
                             </div>
-                            <div id="box-estado-servicio-admin" class="d-none d-flex align-items-center gap-2 flex-wrap">
-                                <select class="form-select form-select-sm" id="dashSelectClienteEstado" onchange="cargarEstadoClienteDashboard()" style="min-width: 220px;">
+
+                            <!-- Estatus Admin Control Panel -->
+                            <div id="box-estado-servicio-admin" class="d-none d-flex align-items-center gap-2 flex-wrap bg-light p-2 rounded-3 border">
+                                <select class="form-select form-select-sm border-0 shadow-sm" id="dashSelectClienteEstado" onchange="cargarEstadoClienteDashboard()" style="min-width: 200px;">
                                     <option value="">-- Seleccionar Cliente --</option>
                                 </select>
-                                <select class="form-select form-select-sm" id="dashSelectEstadoServicio" style="width: 160px;">
-                                    <option value="SOLVENTE">SOLVENTE</option>
-                                    <option value="EN MORA">EN MORA</option>
-                                    <option value="SUSPENDIDO">SUSPENDIDO</option>
+                                <select class="form-select form-select-sm border-0 shadow-sm fw-semibold" id="dashSelectEstadoServicio" style="width: 150px;">
+                                    <option value="SOLVENTE" class="text-success">SOLVENTE</option>
+                                    <option value="EN MORA" class="text-warning">EN MORA</option>
+                                    <option value="SUSPENDIDO" class="text-danger">SUSPENDIDO</option>
                                 </select>
-                                <button class="btn btn-sm btn-primary fw-semibold" onclick="actualizarEstadoServicioDashboard()"><i class="fa-solid fa-floppy-disk me-1"></i> Actualizar</button>
+                                <button class="btn btn-sm btn-primary fw-semibold px-3 shadow-sm" onclick="actualizarEstadoServicioDashboard()">
+                                    <i class="fa-solid fa-floppy-disk me-1"></i> Actualizar
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row g-3 mb-4">
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="card-stat">
-                        <small class="text-muted fw-semibold" id="lbl-kpi-1">Clientes Totales</small>
-                        <h3 class="fw-bold mt-1 m-0" id="kpi-clientes">0</h3>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="card-stat">
-                        <small class="text-muted fw-semibold" id="lbl-kpi-2">Facturación Confirmada</small>
-                        <h3 class="fw-bold mt-1 m-0 text-success" id="kpi-facturacion">$0.00</h3>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="card-stat">
-                        <small class="text-muted fw-semibold" id="lbl-kpi-3">Pagos Pendientes / Validación</small>
-                        <h3 class="fw-bold mt-1 m-0 text-danger" id="kpi-pendientes">$0.00</h3>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="card-stat">
-                        <small class="text-muted fw-semibold" id="lbl-kpi-4">Servicios Activos</small>
-                        <h3 class="fw-bold mt-1 m-0 text-info" id="kpi-servicios">0</h3>
+        <!-- TARJETAS METRICAS (KPIs) -->
+        <div class="row g-3 mb-4">
+            <!-- KPI 1 -->
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card border-0 shadow-sm rounded-3 h-100 hover-lift">
+                    <div class="card-body p-3 p-md-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted fw-semibold fs-7 text-uppercase tracking-wider" id="lbl-kpi-1">Clientes Totales</span>
+                            <div class="p-2 bg-primary-subtle text-primary rounded-3">
+                                <i class="fa-solid fa-users fs-6"></i>
+                            </div>
+                        </div>
+                        <h2 class="fw-bold m-0 text-dark" id="kpi-clientes">0</h2>
                     </div>
                 </div>
             </div>
 
-            <div class="row g-4 mb-4">
-                <div class="col-12 col-lg-8">
-                    <div class="card-stat h-100">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h6 class="fw-bold m-0"><i class="fa-solid fa-chart-column text-primary me-2"></i>Comportamiento de Facturación</h6>
-                            <small class="text-muted">Pagos vs Pendientes</small>
+            <!-- KPI 2 -->
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card border-0 shadow-sm rounded-3 h-100 hover-lift">
+                    <div class="card-body p-3 p-md-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted fw-semibold fs-7 text-uppercase tracking-wider" id="lbl-kpi-2">Facturación Confirmada</span>
+                            <div class="p-2 bg-success-subtle text-success rounded-3">
+                                <i class="fa-solid fa-circle-dollar-to-slot fs-6"></i>
+                            </div>
                         </div>
-                        <div style="position: relative; height: 260px;">
+                        <h2 class="fw-bold m-0 text-success" id="kpi-facturacion">$0.00</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI 3 -->
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card border-0 shadow-sm rounded-3 h-100 hover-lift">
+                    <div class="card-body p-3 p-md-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted fw-semibold fs-7 text-uppercase tracking-wider" id="lbl-kpi-3">Pagos Pendientes</span>
+                            <div class="p-2 bg-danger-subtle text-danger rounded-3">
+                                <i class="fa-solid fa-clock-rotate-left fs-6"></i>
+                            </div>
+                        </div>
+                        <h2 class="fw-bold m-0 text-danger" id="kpi-pendientes">$0.00</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI 4 -->
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card border-0 shadow-sm rounded-3 h-100 hover-lift">
+                    <div class="card-body p-3 p-md-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted fw-semibold fs-7 text-uppercase tracking-wider" id="lbl-kpi-4">Servicios Activos</span>
+                            <div class="p-2 bg-info-subtle text-info rounded-3">
+                                <i class="fa-solid fa-server fs-6"></i>
+                            </div>
+                        </div>
+                        <h2 class="fw-bold m-0 text-info" id="kpi-servicios">0</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GRÁFICOS -->
+        <div class="row g-4 mb-4">
+            <!-- Gráfico Barras -->
+            <div class="col-12 col-lg-8">
+                <div class="card border-0 shadow-sm rounded-3 h-100">
+                    <div class="card-body p-3 p-md-4 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h6 class="fw-bold m-0 text-dark"><i class="fa-solid fa-chart-column text-primary me-2"></i>Comportamiento de Facturación</h6>
+                                <small class="text-muted">Comparativa Pagos vs Pendientes</small>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 position-relative" style="min-height: 260px;">
                             <canvas id="chartFacturacion"></canvas>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4">
-                    <div class="card-stat h-100">
-                        <h6 class="fw-bold mb-3"><i class="fa-solid fa-chart-pie text-primary me-2"></i>Estado de Facturas</h6>
-                        <div style="position: relative; height: 220px;">
+            </div>
+
+            <!-- Gráfico Dona/Pie -->
+            <div class="col-12 col-lg-4">
+                <div class="card border-0 shadow-sm rounded-3 h-100">
+                    <div class="card-body p-3 p-md-4 d-flex flex-column">
+                        <div class="mb-3">
+                            <h6 class="fw-bold m-0 text-dark"><i class="fa-solid fa-chart-pie text-primary me-2"></i>Estado de Facturas</h6>
+                            <small class="text-muted">Distribución de estados actuales</small>
+                        </div>
+                        <div class="flex-grow-1 position-relative d-flex align-items-center justify-content-center" style="min-height: 220px;">
                             <canvas id="chartClientes"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+    </section>
 
         <!-- EMPRESAS -->
         <section id="sec-empresas" class="tab-content d-none">
@@ -2391,9 +2501,13 @@
         }
 
         function cargarFacturasPendientesDeCliente() {
-            const codCliente = document.getElementById('pagoSelectCliente').value;
+            const selectCli = document.getElementById('pagoSelectCliente');
             const selectFac = document.getElementById('pagoSelectFactura');
             const boxDetalle = document.getElementById('pagoDetalleFacturasPendientes');
+
+            if (!selectCli || !selectFac || !boxDetalle) return;
+
+            const codCliente = selectCli.value;
 
             if(!codCliente) {
                 selectFac.innerHTML = '<option value="">-- Seleccione Factura Pendiente --</option>';
@@ -2401,10 +2515,15 @@
                 return;
             }
 
-            const pendientes = db.facturas.filter(f => f.id_cliente === codCliente && f.estado_factura === 'Pendiente');
+            // Búsqueda tolerante a mayúsculas/minúsculas y espacios
+            const pendientes = db.facturas.filter(f => 
+                String(f.id_cliente).trim() === String(codCliente).trim() && 
+                f.estado_factura && 
+                f.estado_factura.trim().toLowerCase() === 'pendiente'
+            );
 
             selectFac.innerHTML = '<option value="">-- Seleccione Factura Pendiente --</option>' + 
-                pendientes.map(f => `<option value="${f.id_factura}" data-monto="${f.monto_total}">${f.id_factura} - $${Number(f.monto_total).toFixed(2)} (${f.tipo_servicio || 'Servicio'})</option>`).join('');
+                pendientes.map(f => `<option value="${f.id_factura}" data-monto="${f.monto_total}">${f.id_factura} - $${Number(f.monto_total || 0).toFixed(2)} (${f.tipo_servicio || 'Servicio'})</option>`).join('');
 
             if(pendientes.length > 0) {
                 boxDetalle.innerHTML = `
@@ -2420,6 +2539,15 @@
                 `;
             }
         }
+
+        // Asegurar que el evento esté enlazado al cargar el script
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectCli = document.getElementById('pagoSelectCliente');
+            if (selectCli) {
+                selectCli.removeEventListener('change', cargarFacturasPendientesDeCliente);
+                selectCli.addEventListener('change', cargarFacturasPendientesDeCliente);
+            }
+        });
 
         function autoCompletarMontoPago() {
             const selectFac = document.getElementById('pagoSelectFactura');
@@ -2522,76 +2650,207 @@
         }
 
         // NOTIFICACIONES
-        function renderNotificaciones() {
-            const container = document.getElementById('lista-notificaciones-global');
-            const badgeCount = document.getElementById('nav-notif-count');
-            if(!container) return;
+function formatearFechaNotificacion(dateObj = new Date()) {
+    const d = String(dateObj.getDate()).padStart(2, '0');
+    const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const y = dateObj.getFullYear();
+    
+    let hours = dateObj.getHours();
+    const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+    const seconds = String(dateObj.getSeconds()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'p. m.' : 'a. m.';
+    
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    
+    return `${d}/${m}/${y}, ${hours}:${minutes}:${seconds} ${ampm}`;
+}
 
-            const isClient = currentUser && currentUser.rol === 'Cliente';
-            const userCode = currentUser ? (currentUser.codigo_cliente || currentUser.id_usuario) : '';
+function renderNotificaciones() {
+    const container = document.getElementById('lista-notificaciones-global');
+    const badgeCount = document.getElementById('nav-notif-count');
+    if (!container) return;
 
-            const notifs = isClient
-                ? db.notificaciones.filter(n => n.id_usuario === userCode || n.rol_destino === 'Cliente')
-                : db.notificaciones;
+    const isClient = currentUser && currentUser.rol === 'Cliente';
+    const isMaster = currentUser && (currentUser.rol === 'Master' || currentUser.rol === 'Admin');
+    const userCode = currentUser ? (currentUser.codigo_cliente || currentUser.id_usuario) : '';
 
-            const unread = notifs.filter(n => n.leido === 'NO').length;
-            badgeCount.innerText = unread;
+    // Filtrado de notificaciones:
+    // - Cliente: ve las recibidas (id_usuario === userCode) y las que él ha enviado al Master
+    // - Master/Admin: ve todas las notificaciones del sistema (recibidas de clientes y enviadas)
+    const notifs = isClient
+        ? db.notificaciones.filter(n => n.id_usuario === userCode || n.emisor_id === userCode)
+        : db.notificaciones;
 
-            if(notifs.length === 0) {
-                container.innerHTML = '<div class="p-3 text-muted small text-center">No hay notificaciones recientes.</div>';
-                return;
-            }
+    // Conteo de no leídas (solo aplica para las notificaciones que el usuario RECIBIÓ)
+    const unread = notifs.filter(n => n.leido === 'NO' && n.id_usuario === userCode).length;
+    
+    if (badgeCount) {
+        badgeCount.innerText = unread;
+        badgeCount.classList.toggle('d-none', unread === 0);
+    }
 
-            container.innerHTML = notifs.map(n => `
-                <div class="list-group-item list-group-item-action border-0 border-bottom p-3">
-                    <div class="d-flex w-100 justify-content-between align-items-center mb-1">
-                        <h6 class="fw-bold m-0 text-primary"><i class="fa-solid fa-bell me-2"></i>${n.titulo}</h6>
-                        <small class="text-muted">${n.fecha}</small>
-                    </div>
-                    <p class="mb-1 small text-dark">${n.mensaje}</p>
-                    <div class="d-flex justify-content-between align-items-center mt-2">
-                        <small class="text-muted">Destino: <span class="fw-semibold">${n.id_usuario || n.rol_destino}</span></small>
-                        ${!isClient ? `<button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="eliminarNotificacion('${n.id_notificacion}')"><i class="fa-solid fa-trash"></i></button>` : ''}
-                    </div>
+    if (notifs.length === 0) {
+        container.innerHTML = '<div class="p-3 text-muted small text-center">No hay notificaciones ni mensajes.</div>';
+        return;
+    }
+
+    container.innerHTML = notifs.map(n => {
+        // Es no leída solo si el usuario actual es el destinatario (id_usuario) y no el emisor
+        const isUnread = n.leido === 'NO' && n.id_usuario === userCode;
+        const bgClass = isUnread ? 'bg-light-subtle fw-semibold border-start border-4 border-primary' : 'opacity-75';
+        const esMio = n.emisor_id === userCode;
+        
+        return `
+            <div class="list-group-item list-group-item-action border-0 border-bottom p-3 cursor-pointer ${bgClass}" 
+                 onclick="marcarNotificacionComoLeida('${n.id_notificacion}')">
+                <div class="d-flex w-100 justify-content-between align-items-center mb-1">
+                    <h6 class="fw-bold m-0 text-primary d-flex align-items-center gap-2 fs-6">
+                        <i class="fa-solid ${esMio ? 'fa-paper-plane text-success' : 'fa-bell'}"></i>
+                        ${n.titulo}
+                        ${isUnread ? '<span class="badge bg-primary rounded-circle p-1" style="width: 8px; height: 8px;" title="No leída"></span>' : ''}
+                    </h6>
+                    <small class="text-muted fs-7">${n.fecha}</small>
                 </div>
-            `).join('');
-        }
+                <p class="mb-1 small text-dark fs-7">${n.mensaje}</p>
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <small class="text-muted fs-7">
+                        ${isMaster ? `De: <span class="fw-bold text-dark">${n.emisor_id}</span> ➔ Para: <span class="fw-semibold text-primary">${n.id_usuario}</span>` : ''}
+                        ${isClient ? `<span>${esMio ? '📤 Enviado al Administrador' : '📥 Recibido del Administrador'}</span>` : ''}
+                    </small>
+                    ${isMaster ? `
+                        <button class="btn btn-sm btn-outline-danger py-0 px-2 fs-7" 
+                                onclick="event.stopPropagation(); eliminarNotificacion('${n.id_notificacion}')" 
+                                title="Eliminar mensaje">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    ` : ''}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
 
-        function abrirModalNuevaNotificacion() {
-            document.getElementById('formNotif').reset();
-            const selectCli = document.getElementById('notif_cliente');
-            selectCli.innerHTML = '<option value="TODOS">-- Todos los Clientes --</option>' + 
-                db.clientes.map(c => `<option value="${c.codigo_cliente}">${c.nombre_completo} (${c.codigo_cliente})</option>`).join('');
-            modalNotif.show();
-        }
+async function marcarNotificacionComoLeida(id) {
+    const userCode = currentUser ? (currentUser.codigo_cliente || currentUser.id_usuario) : '';
+    const notif = db.notificaciones.find(n => n.id_notificacion === id);
 
-        async function guardarNotificacion(e) {
-            e.preventDefault();
-            const payload = {
-                id_notificacion: 'NOT-' + Date.now(),
-                id_usuario: document.getElementById('notif_cliente').value,
-                emisor_id: currentUser ? currentUser.id_usuario : 'ADMIN',
-                rol_destino: 'Cliente',
-                tipo: 'General',
-                titulo: document.getElementById('notif_titulo').value,
-                mensaje: document.getElementById('notif_mensaje').value,
-                fecha: new Date().toISOString().split('T')[0],
-                leido: 'NO'
-            };
+    // Solo actualizar si la notificación no ha sido leída y va dirigida al usuario actual
+    if (notif && notif.leido === 'NO' && notif.id_usuario === userCode) {
+        notif.leido = 'SI';
+        renderNotificaciones();
 
-            db.notificaciones.unshift(payload);
-            modalNotif.hide();
-            renderNotificaciones();
-            showSystemNotification('Notificaciones', 'Notificación enviada correctamente.');
-            if(gasUrl) sendGasRequest('addNotificacion', payload);
+        // Llamada estándar a Apps Script utilizando updateFieldByKey
+        if (typeof gasUrl !== 'undefined' && gasUrl) {
+            sendGasRequest('updateFieldByKey', {
+                sheetName: 'notificaciones',
+                keyColumnName: 'id_notificacion',
+                keyValue: id,
+                targetFieldName: 'leido',
+                newValue: 'SI'
+            });
         }
+    }
+}
 
-        async function eliminarNotificacion(id) {
-            db.notificaciones = db.notificaciones.filter(x => x.id_notificacion !== id);
-            renderNotificaciones();
-            showSystemNotification('Notificaciones', 'Notificación eliminada.');
-            if(gasUrl) sendGasRequest('deleteNotificacion', { id_notificacion: id });
+function abrirModalNuevaNotificacion() {
+    const form = document.getElementById('formNotif');
+    if (form) form.reset();
+
+    const selectCli = document.getElementById('notif_cliente');
+    const selectContainer = selectCli ? selectCli.closest('.mb-3') : null;
+    const btnSubmit = document.querySelector('#formNotif button[type="submit"]');
+    const isClient = currentUser && currentUser.rol === 'Cliente';
+
+    if (isClient) {
+        // Configuración para CLIENTE: enviar al administrador
+        if (selectCli) {
+            selectCli.innerHTML = '<option value="MASTER" selected>Administración / Soporte</option>';
         }
+        if (selectContainer) selectContainer.classList.add('d-none'); // Ocultar selector
+        if (btnSubmit) btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane me-1"></i> Hablar con Administrador';
+    } else {
+        // Configuración para MASTER / ADMIN: enviar a clientes
+        if (selectCli) {
+            selectCli.innerHTML = '<option value="TODOS">📢 -- Enviar a Todos los Clientes --</option>' + 
+                (db.clientes || []).map(c => `<option value="${c.codigo_cliente}">👤 ${c.nombre_completo} (${c.codigo_cliente})</option>`).join('');
+        }
+        if (selectContainer) selectContainer.classList.remove('d-none');
+        if (btnSubmit) btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane me-1"></i> Enviar Notificación';
+    }
+
+    if (typeof modalNotif !== 'undefined' && modalNotif.show) {
+        modalNotif.show();
+    }
+}
+
+async function guardarNotificacion(e) {
+    e.preventDefault();
+
+    const isClient = currentUser && currentUser.rol === 'Cliente';
+    const clienteDestino = isClient ? 'MASTER' : document.getElementById('notif_cliente').value;
+    const titulo = document.getElementById('notif_titulo').value;
+    const mensaje = document.getElementById('notif_mensaje').value;
+    const fechaActual = formatearFechaNotificacion(new Date());
+    const emisor = currentUser ? (currentUser.codigo_cliente || currentUser.id_usuario || 'CLIENTE') : 'ANONIMO';
+
+    let nuevasNotificaciones = [];
+
+    if (!isClient && clienteDestino === 'TODOS') {
+        // Enviar por lote a cada cliente cuando el Master selecciona "TODOS"
+        nuevasNotificaciones = (db.clientes || []).map((c, index) => ({
+            id_notificacion: 'NOT-' + Date.now() + '-' + index,
+            id_usuario: c.codigo_cliente,
+            emisor_id: emisor,
+            rol_destino: 'Cliente',
+            tipo: 'Manual Master',
+            titulo: titulo,
+            mensaje: mensaje,
+            fecha: fechaActual,
+            leido: 'NO'
+        }));
+    } else {
+        // Enviar a un único receptor (Cliente -> Master o Master -> Cliente específico)
+        nuevasNotificaciones.push({
+            id_notificacion: 'NOT-' + Date.now(),
+            id_usuario: clienteDestino,
+            emisor_id: emisor,
+            rol_destino: isClient ? 'Master' : 'Cliente',
+            tipo: isClient ? 'Mensaje Cliente' : 'Manual Master',
+            titulo: titulo,
+            mensaje: mensaje,
+            fecha: fechaActual,
+            leido: 'NO'
+        });
+    }
+
+    // Insertar en la base de datos local
+    db.notificaciones.unshift(...nuevasNotificaciones);
+
+    if (typeof modalNotif !== 'undefined' && modalNotif.hide) {
+        modalNotif.hide();
+    }
+    
+    renderNotificaciones();
+    
+    const msgConfirmacion = isClient 
+        ? 'Mensaje enviado al Administrador.' 
+        : `Notificación enviada a ${nuevasNotificaciones.length} destinatario(s).`;
+        
+    showSystemNotification('Notificaciones', msgConfirmacion);
+
+    // Sincronizar con Google Sheets
+    if (gasUrl) {
+        nuevasNotificaciones.forEach(notif => sendGasRequest('addNotificacion', notif));
+    }
+}
+
+async function eliminarNotificacion(id) {
+    db.notificaciones = db.notificaciones.filter(x => x.id_notificacion !== id);
+    renderNotificaciones();
+    showSystemNotification('Notificaciones', 'Notificación eliminada.');
+    if (gasUrl) sendGasRequest('deleteNotificacion', { id_notificacion: id });
+}
     </script>
 </body>
 </html>
