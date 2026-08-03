@@ -7,7 +7,7 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js -->
@@ -219,7 +219,7 @@
 
     <div class="sidebar-backdrop" onclick="toggleSidebar()"></div>
 
-   <!-- ESTILOS AVANZADOS PARA DISEÑO SPLIT ESPECTACULAR -->
+   <!-- ESTILOS AVANZADOS PARA DISEÑO SPLIT ESPECTACULAR Y MODO OSCURO -->
 <style>
     .login-mesh-wrapper {
         background-color: #f1f5f9;
@@ -258,17 +258,67 @@
         box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3);
         background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
     }
+
+    /* ==========================================
+       CORRECCIONES Y ADAPTACIÓN PARA MODO OSCURO
+       ========================================== */
+    body.dark-mode, 
+    body.dark-mode #main-content, 
+    body.dark-mode .bg-light {
+        background-color: #0b0f19 !important;
+        color: #f1f5f9 !important;
+    }
+    body.dark-mode .card,
+    body.dark-mode header,
+    body.dark-mode #sidebar,
+    body.dark-mode .dropdown-menu {
+        background-color: #1e293b !important;
+        color: #f1f5f9 !important;
+        border-color: #334155 !important;
+    }
+    body.dark-mode .bg-white {
+        background-color: #1e293b !important;
+    }
+    body.dark-mode .text-dark,
+    body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode h5, body.dark-mode h6 {
+        color: #f8fafc !important;
+    }
+    body.dark-mode .text-muted {
+        color: #94a3b8 !important;
+    }
+    body.dark-mode .form-control,
+    body.dark-mode .form-select,
+    body.dark-mode .input-group-pro {
+        background-color: #0f172a !important;
+        color: #f1f5f9 !important;
+        border-color: #334155 !important;
+    }
+    body.dark-mode .form-control::placeholder {
+        color: #64748b !important;
+    }
+    body.dark-mode .dropdown-item {
+        color: #cbd5e1 !important;
+    }
+    body.dark-mode .dropdown-item:hover {
+        background-color: #334155 !important;
+        color: #ffffff !important;
+    }
+    body.dark-mode .border,
+    body.dark-mode .border-bottom,
+    body.dark-mode .border-top {
+        border-color: #334155 !important;
+    }
 </style>
 
 <!-- PANTALLA LOGIN MODO CLARO (SPLIT SCREEN ESPECTACULAR) -->
-<div id="login-overlay" class="login-mesh-wrapper d-flex align-items-center justify-content-center p-3 p-sm-4 position-relative overflow-hidden">
+<div id="login-overlay" class="login-mesh-wrapper d-flex align-items-center justify-content-center p-3 p-sm-4 overflow-hidden w-100" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background-color: #0f172a;">
     
     <!-- Contenedor Principal Mejorado -->
-    <div class="card login-split-card-pro rounded-4 overflow-hidden w-100 my-auto position-relative z-1" style="max-width: 980px;">
-        <div class="row g-0">
+    <div class="card login-split-card-pro rounded-4 overflow-hidden w-100 my-auto position-relative z-1 shadow-lg" style="max-width: 980px; max-height: 90vh;">
+        <div class="row g-0 h-100">
             
             <!-- SECCIÓN IZQUIERDA: LOGO Y BIENVENIDA (CORPORATIVO ESPECTACULAR) -->
-            <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-between p-5 text-white brand-section-spectacular">
+            <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-between p-5 text-white brand-section-spectacular position-relative overflow-hidden">
                 
                 <!-- Efectos visuales de iluminación de fondo -->
                 <div class="position-absolute rounded-circle opacity-30" style="top: -10%; left: -10%; width: 280px; height: 280px; background: rgba(37, 99, 235, 0.4); filter: blur(60px); pointer-events: none;"></div>
@@ -276,25 +326,25 @@
 
                 <!-- Cabecera de Marca -->
                 <div class="position-relative z-1 d-flex align-items-center gap-3">
-    <div class="p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-20 shadow-sm">
-        <i class="fa-solid fa-share-nodes fs-3 text-white"></i>
-    </div>
-    <div>
-        <h4 class="fw-bold mb-0 tracking-wide text-white" style="font-size: 1.15rem; letter-spacing: -0.3px;">
-            <span style="color: #ff851b;">LC</span> SOLUCIONES TECNOLÓGICAS
-        </h4>
-        <span class="small text-white-50">Enterprise Resource Planning</span>
-    </div>
-</div>
+                    <div class="p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-20 shadow-sm">
+                        <i class="fa-solid fa-share-nodes fs-3 text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-0 tracking-wide text-white" style="font-size: 1.15rem; letter-spacing: -0.3px;">
+                            <span style="color: #ff851b;">LC</span> SOLUCIONES TECNOLÓGICAS
+                        </h4>
+                        <span class="small text-white-50">Enterprise Resource Planning</span>
+                    </div>
+                </div>
 
                 <!-- Mensaje de Bienvenida -->
                 <div class="my-auto position-relative z-1 py-4">
                     <span class="badge bg-white bg-opacity-10 text-white border border-white border-opacity-15 px-3 py-2 rounded-pill mb-3">
                         <i class="fa-solid fa-shield-halved me-1 text-info"></i> Plataforma Segura
                     </span>
-                    <h2 class="display-6 fw-bold mb-3 text-white" style="font-size: 1.8rem;">Gestión inteligente para tu empresa</h2>
+                    <h2 class="display-6 fw-bold mb-3 text-white" style="font-size: 1.8rem;">Gestión inteligente para ti</h2>
                     <p class="text-white-50 fs-6 mb-4">
-                        Centraliza tus operaciones, inventarios y procesos corporativos con la máxima eficiencia y control en tiempo real.
+                        Centralización de operaciones, inventarios y procesos corporativos con la máxima eficiencia y control en tiempo real.
                     </p>
 
                     <!-- Lista de características -->
@@ -318,23 +368,23 @@
             </div>
 
             <!-- SECCIÓN DERECHA: FORMULARIO DE LOGIN -->
-            <div class="col-lg-6 p-4 p-sm-5 d-flex flex-column justify-content-between bg-white text-dark">
+            <div class="col-12 col-lg-6 p-4 p-sm-5 d-flex flex-column justify-content-between bg-white text-dark overflow-auto" style="max-height: 90vh;">
                 
                 <!-- Logo Visible solo en Móviles -->
-                <div class="d-lg-none text-center mb-4">
+                <div class="d-lg-none text-center mb-3">
                     <div class="p-3 bg-primary bg-opacity-10 rounded-circle d-inline-block text-primary mb-2 border border-primary border-opacity-25">
                         <i class="fa-solid fa-network-wired fs-2 text-primary"></i>
                     </div>
-                    <h4 class="fw-bold mb-0 text-dark">
+                    <h4 class="fw-bold mb-0 text-dark" style="font-size: 1.1rem;">
                         <span style="color: #ff851b;">LC</span> SOLUCIONES TECNOLÓGICAS
                     </h4>
-                    <p class="text-muted small">Sistema Integrado ERP</p>
+                    <p class="text-muted small mb-0">Sistema Integrado ERP</p>
                 </div>
 
                 <!-- Contenido Principal del Formulario -->
                 <div>
-                    <h4 class="fw-bold mb-1 text-dark">Iniciar Sesión</h4>
-                    <p class="text-muted small mb-4">Ingresa tus credenciales para continuar</p>
+                    <h4 class="fw-bold mb-1 text-dark">Ingresar al Dashboard</h4>
+                    <p class="text-muted small mb-3">Ingresa tus credenciales para continuar</p>
 
                     <!-- Alerta de Error -->
                     <div id="login-alert" class="alert alert-danger d-none small text-start py-2 mb-3 border-0 bg-danger bg-opacity-10 text-danger" role="alert"></div>
@@ -345,22 +395,22 @@
                         <!-- Campo Usuario -->
                         <div class="mb-3 text-start">
                             <label class="form-label small fw-semibold text-secondary">Usuario</label>
-                            <div class="input-group input-group-pro rounded-3 overflow-hidden">
+                            <div class="input-group input-group-pro rounded-3 overflow-hidden border">
                                 <span class="input-group-text bg-transparent border-0 text-muted ps-3">
                                     <i class="fa-solid fa-user"></i>
                                 </span>
-                                <input type="text" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2.5" id="loginUser" placeholder="Ej: admin" required>
+                                <input type="text" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2" id="loginUser" placeholder="" required>
                             </div>
                         </div>
 
                         <!-- Campo Contraseña -->
-                        <div class="mb-4 text-start">
+                        <div class="mb-3 text-start">
                             <label class="form-label small fw-semibold text-secondary">Contraseña</label>
-                            <div class="input-group input-group-pro rounded-3 overflow-hidden">
+                            <div class="input-group input-group-pro rounded-3 overflow-hidden border">
                                 <span class="input-group-text bg-transparent border-0 text-muted ps-3">
                                     <i class="fa-solid fa-lock"></i>
                                 </span>
-                                <input type="password" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2.5" id="loginPassword" placeholder="••••••••" required>
+                                <input type="password" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2" id="loginPassword" placeholder="" required>
                                 <button type="button" class="btn bg-transparent border-0 text-muted pe-3 shadow-none" onclick="togglePasswordVisibility('loginPassword', this)">
                                     <i class="fa-solid fa-eye"></i>
                                 </button>
@@ -368,23 +418,31 @@
                         </div>
 
                         <!-- Botón Iniciar Sesión -->
-                        <button type="submit" class="btn btn-pro-action w-100 py-3 fw-semibold rounded-3 text-white shadow-sm">
-                            <i class="fa-solid fa-right-to-bracket me-2"></i> Iniciar Sesión
+                        <button type="submit" class="btn btn-pro-action w-100 py-2.5 fw-semibold rounded-3 text-white shadow-sm mt-2">
+                            <i class="fa-solid fa-right-to-bracket me-2"></i> Ingresar
                         </button>
                     </form>
                 </div>
 
                 <!-- FOOTER DE DERECHOS RESERVADOS Y DESARROLLADOR -->
-                <div class="mt-5 pt-3 border-top border-light text-center text-muted" style="font-size: 0.8rem;">
-                    <p class="mb-1">© 2026 <strong><span style="color: #ff851b;">LC</span> SOLUCIONES TECNOLÓGICAS</strong>. Todos los derechos reservados. Prohibida su copia y/o reproducción parcial o total</p>
+                <div class="mt-4 pt-2 border-top border-light text-center text-muted" style="font-size: 0.75rem;">
+                    <p class="mb-1">© 2026 LC SOLUCIONES TECNOLÓGICAS.</p>
                     <p class="mb-0 text-secondary">Desarrollado por: <span class="text-dark fw-semibold">ING. JOSE CORDERO</span></p>
+                 
+                    <!-- Redes Sociales -->
+                    <div class="d-flex justify-content-center align-items-center gap-3 fs-6 mt-2">
+                        <a href="#" target="_blank" class="text-muted" style="transition: color 0.2s;" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='#6c757d'" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" target="_blank" class="text-muted" style="transition: color 0.2s;" onmouseover="this.style.color='#e4405f'" onmouseout="this.style.color='#6c757d'" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" target="_blank" class="text-muted" style="transition: color 0.2s;" onmouseover="this.style.color='#000000'" onmouseout="this.style.color='#6c757d'" title="X"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" target="_blank" class="text-muted" style="transition: color 0.2s;" onmouseover="this.style.color='#000000'" onmouseout="this.style.color='#6c757d'" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="https://wa.me/584245134562" target="_blank" class="text-muted" style="transition: color 0.2s;" onmouseover="this.style.color='#25d366'" onmouseout="this.style.color='#6c757d'" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
                 </div>
 
             </div>
 
         </div>
     </div>
-
 </div>
 
     <!-- SIDEBAR -->
@@ -420,43 +478,45 @@
 <main id="main-content" class="px-3 px-md-4 py-3 bg-light min-vh-100">
 
     <!-- HEADER -->
-    <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom bg-white p-3 rounded-3 shadow-sm">
-        <div class="d-flex align-items-center gap-3">
-            <button class="btn btn-light btn-sm border d-lg-none" onclick="toggleSidebar()">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <div>
-                <h4 class="fw-bold m-0 text-dark" id="page-title">Dashboard General</h4>
-                <small class="text-muted d-none d-sm-inline-block">Resumen general y métricas del sistema</small>
-            </div>
+<header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom bg-white p-3 rounded-3 shadow-sm">
+    <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-light btn-sm border d-lg-none" onclick="toggleSidebar()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div>
+            <h4 class="fw-bold m-0 text-dark" id="page-title">Dashboard General</h4>
+            <small class="text-muted d-none d-sm-inline-block">Resumen general y métricas del sistema</small>
         </div>
+    </div>
 
-        <div class="d-flex align-items-center gap-3">
-            <!-- Theme Toggle -->
-            <button class="btn btn-icon btn-light rounded-circle border shadow-sm" id="theme-toggle" onclick="toggleTheme()" title="Cambiar Tema">
-                <i class="fa-solid fa-moon text-secondary"></i>
-            </button>
+    <div class="d-flex align-items-center gap-3">
+        <!-- Theme Toggle -->
+        <button class="btn btn-icon btn-light rounded-circle border shadow-sm d-none" id="theme-toggle" onclick="toggleTheme()" title="Cambiar Tema">
+            <i class="fa-solid fa-moon text-secondary"></i>
+        </button>
 
-            <!-- User Dropdown -->
-            <div class="dropdown">
-                <div class="d-flex align-items-center gap-2 cursor-pointer p-1 rounded-3 hover-bg" data-bs-toggle="dropdown" role="button">
-                    <img id="current-user-avatar" src="https://ui-avatars.com/api/?name=User&background=0D6EFD&color=fff" class="rounded-circle shadow-sm" width="40" height="40" alt="User">
-                    <div class="d-none d-md-block text-start lh-1 me-1">
-                        <span class="fw-bold d-block fs-6 m-0 text-dark" id="current-user-name">Usuario</span>
-                        <small class="text-muted fs-7" id="current-user-role">Perfil: Admin</small>
-                    </div>
-                    <i class="fa-solid fa-chevron-down text-muted small"></i>
+        <!-- User Dropdown -->
+        <div class="dropdown">
+            <div class="d-flex align-items-center gap-2 cursor-pointer p-1 rounded-3 hover-bg" data-bs-toggle="dropdown" role="button">
+                <img id="current-user-avatar" src="https://ui-avatars.com/api/?name=User&background=0D6EFD&color=fff" class="rounded-circle shadow-sm" width="40" height="40" alt="User">
+                <div class="d-none d-md-block text-start lh-1 me-1">
+                    <span class="fw-bold d-block fs-6 m-0 text-dark" id="current-user-name">Usuario</span>
+                    <small class="text-muted fs-7" id="current-user-role">Perfil: Admin</small>
                 </div>
-                <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2 fs-6">
-                    <li><h6 class="dropdown-header text-truncate" id="dropdown-user-email">email@dominio.com</h6></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item py-2 fw-medium" href="#" onclick="abrirModalCambiarPassword()"><i class="fa-solid fa-key me-2 text-primary"></i> Cambiar Contraseña</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item py-2 text-danger fw-semibold" href="#" onclick="abrirModalLogout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
-                </ul>
+                <i class="fa-solid fa-chevron-down text-muted small"></i>
             </div>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2 fs-6">
+                <li><h6 class="dropdown-header text-truncate" id="dropdown-user-email">email@dominio.com</h6></li>
+                <li><hr class="dropdown-divider"></li>
+                <!-- Opción Perfil Nueva -->
+               <li><a class="dropdown-item py-2 fw-medium text-muted" href="#" onclick="return false;"><i class="fa-solid fa-user-pen me-2 text-success"></i> Perfil <span class="badge bg-secondary ms-1" style="font-size: 0.65rem;">Próximamente</span></a></li>
+                <li><a class="dropdown-item py-2 fw-medium" href="#" onclick="abrirModalCambiarPassword()"><i class="fa-solid fa-key me-2 text-primary"></i> Cambiar Contraseña</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item py-2 text-danger fw-semibold" href="#" onclick="abrirModalLogout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión</a></li>
+            </ul>
         </div>
-    </header>
+    </div>
+</header>
 
     <!-- DASHBOARD GENERAL -->
     <section id="sec-dashboard" class="tab-content active">
@@ -493,6 +553,7 @@
                                     <option value="SOLVENTE" class="text-success">SOLVENTE</option>
                                     <option value="EN MORA" class="text-warning">EN MORA</option>
                                     <option value="SUSPENDIDO" class="text-danger">SUSPENDIDO</option>
+                                    <option value="DEMO" class="text-danger">DEMO</option>
                                 </select>
                                 <button class="btn btn-sm btn-primary fw-semibold px-3 shadow-sm" onclick="actualizarEstadoServicioDashboard()">
                                     <i class="fa-solid fa-floppy-disk me-1"></i> Actualizar
@@ -944,6 +1005,7 @@
                                     <option value="SOLVENTE">SOLVENTE</option>
                                     <option value="EN MORA">EN MORA</option>
                                     <option value="SUSPENDIDO">SUSPENDIDO</option>
+									<option value="DEMO">DEMO</option>
                                 </select>
                             </div>
                             <div class="col-12">
@@ -994,7 +1056,7 @@
                                 <option value="PLAN HOTSPOT 1D">PLAN HOTSPOT 1D</option>
                                 <option value="PLAN HOTSPOT 7D">PLAN HOTSPOT 7D</option>
                                 <option value="PLAN HOTSPOT 15D">PLAN HOTSPOT 15D</option>
-                                <option value="PLAN HOTSPOT 30">PLAN HOTSPOT 30</option>
+                                <option value="PLAN HOTSPOT 30D">PLAN HOTSPOT 30D</option>
                                 <option value="PROYECTO STARTER">PROYECTO STARTER</option>
                                 <option value="PROYECTO GROWTH">PROYECTO GROWTH</option>
                                 <option value="PROYECTO BUSSINES">PROYECTO BUSSINES</option>
@@ -1581,13 +1643,47 @@
 
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
 
-        function toggleTheme() {
-            const html = document.documentElement;
-            const cur = html.getAttribute('data-bs-theme');
-            const next = cur === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-bs-theme', next);
-            setTimeout(renderDashboardCharts, 100);
+        // FUNCION PARA CAMBIAR A MODO OSCURO Y CLARO
+		function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    
+    // Cambiar icono del botón
+    const themeIcon = document.querySelector('#theme-toggle i');
+    if (themeIcon) {
+        themeIcon.className = isDarkMode ? 'fa-solid fa-sun text-warning' : 'fa-solid fa-moon text-secondary';
+    }
+
+    // Guardar preferencia
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+
+    // Actualizar colores de los gráficos Chart.js dinámicamente si ya están creados
+    actualizarColoresCharts(isDarkMode);
+}
+
+function actualizarColoresCharts(isDarkMode) {
+    const textColor = isDarkMode ? '#94a3b8' : '#64748b';
+    const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+
+    [chartFacturacion, chartClientes].forEach(chart => {
+        if (chart) {
+            if (chart.options.scales) {
+                if (chart.options.scales.x) {
+                    chart.options.scales.x.ticks.color = textColor;
+                    chart.options.scales.x.grid.color = gridColor;
+                }
+                if (chart.options.scales.y) {
+                    chart.options.scales.y.ticks.color = textColor;
+                    chart.options.scales.y.grid.color = gridColor;
+                }
+            }
+            if (chart.options.plugins && chart.options.plugins.legend) {
+                chart.options.plugins.legend.labels.color = textColor;
+            }
+            chart.update();
         }
+    });
+}
 
         function abrirModalCambiarPassword() {
             document.getElementById('formChangePassword').reset();
@@ -2555,7 +2651,7 @@
             const monto = opt ? opt.getAttribute('data-monto') : 0;
 
             document.getElementById('pagoMonto').value = monto;
-            document.getElementById('pagoMontoBs').value = (monto * 37.00).toFixed(2); // Tasa estimada Bs
+            document.getElementById('pagoMontoBs').value = (monto * 1.00).toFixed(2); // Tasa estimada Bs
         }
 
         async function procesarPagoModulo(e) {
@@ -2649,7 +2745,7 @@
             `).join('');
         }
 
-        // NOTIFICACIONES
+       // NOTIFICACIONES
 function formatearFechaNotificacion(dateObj = new Date()) {
     const d = String(dateObj.getDate()).padStart(2, '0');
     const m = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -2675,15 +2771,18 @@ function renderNotificaciones() {
     const isMaster = currentUser && (currentUser.rol === 'Master' || currentUser.rol === 'Admin');
     const userCode = currentUser ? (currentUser.codigo_cliente || currentUser.id_usuario) : '';
 
-    // Filtrado de notificaciones:
-    // - Cliente: ve las recibidas (id_usuario === userCode) y las que él ha enviado al Master
-    // - Master/Admin: ve todas las notificaciones del sistema (recibidas de clientes y enviadas)
+    // Filtrado de notificaciones según el rol
     const notifs = isClient
         ? db.notificaciones.filter(n => n.id_usuario === userCode || n.emisor_id === userCode)
         : db.notificaciones;
 
-    // Conteo de no leídas (solo aplica para las notificaciones que el usuario RECIBIÓ)
-    const unread = notifs.filter(n => n.leido === 'NO' && n.id_usuario === userCode).length;
+    // Conteo exacto de no leídas (El Master cuenta las dirigidas a 'MASTER' o su usuario; el cliente las dirigidas a su código)
+    const unread = notifs.filter(n => {
+        if (n.leido !== 'NO') return false;
+        if (isClient) return n.id_usuario === userCode;
+        if (isMaster) return n.id_usuario === 'MASTER' || n.id_usuario === userCode;
+        return false;
+    }).length;
     
     if (badgeCount) {
         badgeCount.innerText = unread;
@@ -2696,35 +2795,52 @@ function renderNotificaciones() {
     }
 
     container.innerHTML = notifs.map(n => {
-        // Es no leída solo si el usuario actual es el destinatario (id_usuario) y no el emisor
-        const isUnread = n.leido === 'NO' && n.id_usuario === userCode;
+        const destinatarioEsAdmin = n.id_usuario === 'MASTER' || n.id_usuario === userCode;
+        const isUnread = n.leido === 'NO' && ((isClient && n.id_usuario === userCode) || (isMaster && destinatarioEsAdmin));
+        
         const bgClass = isUnread ? 'bg-light-subtle fw-semibold border-start border-4 border-primary' : 'opacity-75';
         const esMio = n.emisor_id === userCode;
+        const esRespuesta = n.titulo.startsWith('Re:');
         
+        const destinatarioRespuesta = isClient ? 'MASTER' : (esMio ? n.id_usuario : n.emisor_id);
+
         return `
             <div class="list-group-item list-group-item-action border-0 border-bottom p-3 cursor-pointer ${bgClass}" 
                  onclick="marcarNotificacionComoLeida('${n.id_notificacion}')">
                 <div class="d-flex w-100 justify-content-between align-items-center mb-1">
                     <h6 class="fw-bold m-0 text-primary d-flex align-items-center gap-2 fs-6">
-                        <i class="fa-solid ${esMio ? 'fa-paper-plane text-success' : 'fa-bell'}"></i>
+                        <i class="fa-solid ${esRespuesta ? 'fa-reply text-warning' : (esMio ? 'fa-paper-plane text-success' : 'fa-bell')}"></i>
                         ${n.titulo}
                         ${isUnread ? '<span class="badge bg-primary rounded-circle p-1" style="width: 8px; height: 8px;" title="No leída"></span>' : ''}
                     </h6>
                     <small class="text-muted fs-7">${n.fecha}</small>
                 </div>
-                <p class="mb-1 small text-dark fs-7">${n.mensaje}</p>
+                
+                <!-- Cuerpo del mensaje o respuesta integrado en el texto -->
+                <div class="mb-1 small text-dark fs-7 ${esRespuesta ? 'p-2 bg-white rounded border border-warning border-opacity-50 mt-1' : ''}">
+                    ${esRespuesta ? '<div class="fw-bold text-muted fs-8 mb-1"><i class="fa-solid fa-arrow-turn-down-right me-1"></i> Respuesta integrada:</div>' : ''}
+                    <span>${n.mensaje}</span>
+                </div>
+
                 <div class="d-flex justify-content-between align-items-center mt-2">
                     <small class="text-muted fs-7">
                         ${isMaster ? `De: <span class="fw-bold text-dark">${n.emisor_id}</span> ➔ Para: <span class="fw-semibold text-primary">${n.id_usuario}</span>` : ''}
                         ${isClient ? `<span>${esMio ? '📤 Enviado al Administrador' : '📥 Recibido del Administrador'}</span>` : ''}
                     </small>
-                    ${isMaster ? `
-                        <button class="btn btn-sm btn-outline-danger py-0 px-2 fs-7" 
-                                onclick="event.stopPropagation(); eliminarNotificacion('${n.id_notificacion}')" 
-                                title="Eliminar mensaje">
-                            <i class="fa-solid fa-trash"></i>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary py-0 px-2 fs-7" 
+                                onclick="event.stopPropagation(); prepararRespuesta('${destinatarioRespuesta}', '${n.titulo}')" 
+                                title="Responder mensaje">
+                            <i class="fa-solid fa-reply"></i> Responder
                         </button>
-                    ` : ''}
+                        ${isMaster ? `
+                            <button class="btn btn-sm btn-outline-danger py-0 px-2 fs-7" 
+                                    onclick="event.stopPropagation(); eliminarNotificacion('${n.id_notificacion}')" 
+                                    title="Eliminar mensaje">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        ` : ''}
+                    </div>
                 </div>
             </div>
         `;
@@ -2733,14 +2849,15 @@ function renderNotificaciones() {
 
 async function marcarNotificacionComoLeida(id) {
     const userCode = currentUser ? (currentUser.codigo_cliente || currentUser.id_usuario) : '';
+    const isMaster = currentUser && (currentUser.rol === 'Master' || currentUser.rol === 'Admin');
     const notif = db.notificaciones.find(n => n.id_notificacion === id);
 
-    // Solo actualizar si la notificación no ha sido leída y va dirigida al usuario actual
-    if (notif && notif.leido === 'NO' && notif.id_usuario === userCode) {
+    const esDestinatario = notif && (notif.id_usuario === userCode || (isMaster && notif.id_usuario === 'MASTER'));
+
+    if (notif && notif.leido === 'NO' && esDestinatario) {
         notif.leido = 'SI';
         renderNotificaciones();
 
-        // Llamada estándar a Apps Script utilizando updateFieldByKey
         if (typeof gasUrl !== 'undefined' && gasUrl) {
             sendGasRequest('updateFieldByKey', {
                 sheetName: 'notificaciones',
@@ -2763,14 +2880,12 @@ function abrirModalNuevaNotificacion() {
     const isClient = currentUser && currentUser.rol === 'Cliente';
 
     if (isClient) {
-        // Configuración para CLIENTE: enviar al administrador
         if (selectCli) {
             selectCli.innerHTML = '<option value="MASTER" selected>Administración / Soporte</option>';
         }
-        if (selectContainer) selectContainer.classList.add('d-none'); // Ocultar selector
+        if (selectContainer) selectContainer.classList.add('d-none');
         if (btnSubmit) btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane me-1"></i> Hablar con Administrador';
     } else {
-        // Configuración para MASTER / ADMIN: enviar a clientes
         if (selectCli) {
             selectCli.innerHTML = '<option value="TODOS">📢 -- Enviar a Todos los Clientes --</option>' + 
                 (db.clientes || []).map(c => `<option value="${c.codigo_cliente}">👤 ${c.nombre_completo} (${c.codigo_cliente})</option>`).join('');
@@ -2784,6 +2899,21 @@ function abrirModalNuevaNotificacion() {
     }
 }
 
+function prepararRespuesta(destinatarioId, tituloOriginal) {
+    abrirModalNuevaNotificacion();
+
+    const selectCli = document.getElementById('notif_cliente');
+    if (selectCli) {
+        selectCli.value = destinatarioId;
+    }
+
+    const inputTitulo = document.getElementById('notif_titulo');
+    if (inputTitulo) {
+        inputTitulo.value = tituloOriginal.startsWith('Re:') ? tituloOriginal : `Re: ${tituloOriginal}`;
+    }
+}
+
+
 async function guardarNotificacion(e) {
     e.preventDefault();
 
@@ -2791,13 +2921,14 @@ async function guardarNotificacion(e) {
     const clienteDestino = isClient ? 'MASTER' : document.getElementById('notif_cliente').value;
     const titulo = document.getElementById('notif_titulo').value;
     const mensaje = document.getElementById('notif_mensaje').value;
+    
+    // Fecha y hora formateada estrictamente: dd/mm/aaaa, h:mm:ss tt
     const fechaActual = formatearFechaNotificacion(new Date());
     const emisor = currentUser ? (currentUser.codigo_cliente || currentUser.id_usuario || 'CLIENTE') : 'ANONIMO';
 
     let nuevasNotificaciones = [];
 
     if (!isClient && clienteDestino === 'TODOS') {
-        // Enviar por lote a cada cliente cuando el Master selecciona "TODOS"
         nuevasNotificaciones = (db.clientes || []).map((c, index) => ({
             id_notificacion: 'NOT-' + Date.now() + '-' + index,
             id_usuario: c.codigo_cliente,
@@ -2810,7 +2941,6 @@ async function guardarNotificacion(e) {
             leido: 'NO'
         }));
     } else {
-        // Enviar a un único receptor (Cliente -> Master o Master -> Cliente específico)
         nuevasNotificaciones.push({
             id_notificacion: 'NOT-' + Date.now(),
             id_usuario: clienteDestino,
@@ -2824,7 +2954,6 @@ async function guardarNotificacion(e) {
         });
     }
 
-    // Insertar en la base de datos local
     db.notificaciones.unshift(...nuevasNotificaciones);
 
     if (typeof modalNotif !== 'undefined' && modalNotif.hide) {
@@ -2834,12 +2963,11 @@ async function guardarNotificacion(e) {
     renderNotificaciones();
     
     const msgConfirmacion = isClient 
-        ? 'Mensaje enviado al Administrador.' 
+        ? 'Respuesta enviada al Administrador.' 
         : `Notificación enviada a ${nuevasNotificaciones.length} destinatario(s).`;
         
     showSystemNotification('Notificaciones', msgConfirmacion);
 
-    // Sincronizar con Google Sheets
     if (gasUrl) {
         nuevasNotificaciones.forEach(notif => sendGasRequest('addNotificacion', notif));
     }
