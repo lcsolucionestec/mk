@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERP - LC Soluciones Tecnológicas</title>
+    <title>ERP - LC SOLUCIONES TECNOLÓGICAS</title>
     <link rel="shortcut icon" href="img/favicon2.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css" rel="stylesheet">
@@ -50,13 +50,15 @@
            MODIFICAR AQUÍ PARA CAMBIAR EL DISEÑO DEL LOGIN
            ═══════════════════════════════════════════════════════════════ */
         #login-overlay {
-            position: fixed; top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.75)),
-                        url('img/red7.webp') no-repeat center center / cover;
-            display: flex; align-items: center; justify-content: center;
-            z-index: 99999; padding: 1.5rem;
-        }
+    position: fixed; top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.75)),
+                url('img/red7.webp') no-repeat center center / cover;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 99999; padding: 1.5rem;
+    user-select: none;
+    -webkit-user-select: none;
+}
 
         .login-split-card-pro {
             background: var(--glass-bg);
@@ -417,7 +419,7 @@
                     </div>
 
                     <div class="position-relative z-1 pt-3 border-top border-white border-opacity-10 text-white-50 small d-flex justify-content-between align-items-center">
-                        <span>Versión ERP 2026.3</span>
+                        <span>Versión ERP 2026.2.1</span>
                         <i class="fa-solid fa-microchip text-white-50"></i>
                     </div>
                 </div>
@@ -447,7 +449,7 @@
                                     <span class="input-group-text bg-transparent border-0 text-muted ps-3">
                                         <i class="fa-solid fa-user"></i>
                                     </span>
-                                    <input type="text" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2" id="loginUser" placeholder="" required>
+                                    <input type="text" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2" id="loginUser" placeholder="" required autocomplete="off" onpaste="return false" oncopy="return false" oncut="return false" ondrag="return false" ondrop="return false">
                                 </div>
                             </div>
                             <div class="mb-3 text-start">
@@ -456,7 +458,7 @@
                                     <span class="input-group-text bg-transparent border-0 text-muted ps-3">
                                         <i class="fa-solid fa-lock"></i>
                                     </span>
-                                    <input type="password" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2" id="loginPassword" placeholder="" required>
+                                    <input type="password" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2" id="loginPassword" placeholder="" required autocomplete="new-password" onpaste="return false" oncopy="return false" oncut="return false" ondrag="return false" ondrop="return false">
                                     <button type="button" class="btn bg-transparent border-0 text-muted pe-3 shadow-none" onclick="togglePasswordVisibility('loginPassword', this)">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
@@ -722,6 +724,7 @@
             <div class="row g-4 mb-4">
                 <!-- Gráfico Barras: Pagos en Bs por método -->
 
+
                 <div class="col-12 col-lg-8">
                     <div class="card border-0 shadow-sm rounded-3 h-100">
                         <div class="card-body p-3 p-md-4 d-flex flex-column">
@@ -824,47 +827,265 @@
              SECCIÓN: CLIENTES
              ═══════════════════════════════════════════════════════════════ -->
         <section id="sec-clientes" class="tab-content d-none">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="fw-bold m-0">Gestión de Clientes</h5>
-                <button class="btn btn-primary" onclick="abrirModalCliente()">
-                    <i class="fa-solid fa-plus me-1"></i> Registrar Cliente
-                </button>
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <h5 class="fw-bold m-0">Gestión de Clientes</h5>
+        <button class="btn btn-primary view-admin-master" onclick="abrirModalCliente()">
+            <i class="fa-solid fa-plus me-1"></i> Registrar Cliente
+        </button>
+    </div>
+
+    <!-- BUSCADOR INTELIGENTE -->
+    <div id="cli-buscador-area" class="text-center p-5 border border-dashed rounded-3 bg-light">
+        <div class="position-relative mx-auto" style="max-width: 480px;">
+            <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+            <input type="text" id="cli-input-cedula" class="form-control ps-5 pe-5" 
+                   placeholder="Ingrese cédula del cliente..." maxlength="20" autocomplete="off">
+            <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y me-1" 
+                    onclick="buscarClienteGestion()">Buscar</button>
+        </div>
+        <small class="text-muted d-block mt-2">Escribe la cédula y presiona Enter</small>
+    </div>
+
+    <!-- INFO DEL CLIENTE ENCONTRADO -->
+    <div id="cli-tarjeta-cliente" class="card mt-3 d-none">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" 
+                         style="width:48px;height:48px;">
+                        <i class="fa-solid fa-user text-primary fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-0" id="cli-cliente-nombre">—</h6>
+                        <small class="text-muted">Código: <span id="cli-cliente-codigo">—</span></small>
+                    </div>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary btn-sm" id="cli-btn-editar" onclick="">
+                        <i class="fa-solid fa-pen me-1"></i> Editar
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" id="cli-btn-eliminar" onclick="">
+                        <i class="fa-solid fa-trash me-1"></i> Eliminar
+                    </button>
+                </div>
             </div>
-            <div class="table-responsive table-custom">
-                <table class="table mb-0">
-                    <thead>
-                        <tr><th>Código / Nombre</th><th>Documento</th><th>Contacto</th><th>Dirección</th><th>Estado Servicio</th><th>Acciones</th></tr>
-                    </thead>
-                    <tbody id="tbl-clientes-body"></tbody>
-                </table>
+            <hr>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <p class="mb-1"><strong><i class="fa-solid fa-id-card text-muted me-2"></i>Documento:</strong> <span id="cli-info-documento">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-phone text-muted me-2"></i>Teléfono:</strong> <span id="cli-info-telefono">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-envelope text-muted me-2"></i>Correo:</strong> <span id="cli-info-correo">—</span></p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1"><strong><i class="fa-solid fa-location-dot text-muted me-2"></i>Dirección:</strong> <span id="cli-info-direccion">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-signal text-muted me-2"></i>Estado Servicio:</strong> <span id="cli-info-estado">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-file-invoice text-muted me-2"></i>Total Facturas:</strong> <span id="cli-info-facturas">0</span></p>
+                </div>
             </div>
-        </section>
+        </div>
+    </div>
+
+    <!-- ESTADO VACÍO -->
+    <div id="cli-estado-vacio" class="text-center p-5 text-muted d-none">
+        <i class="fa-regular fa-folder-open fa-3x mb-2 opacity-25"></i>
+        <p class="mb-0">No se encontró ningún cliente con esa cédula.</p>
+    </div>
+
+    <!-- TABLA COMPLETA (solo admin) -->
+    <div id="cli-tabla-completa" class="mt-3">
+        <div class="table-responsive table-custom">
+            <table class="table mb-0">
+                <thead>
+                    <tr><th>Código / Nombre</th><th>Documento</th><th>Contacto</th><th>Dirección</th><th>Estado Servicio</th><th>Acciones</th></tr>
+                </thead>
+                <tbody id="tbl-clientes-body"></tbody>
+            </table>
+        </div>
+    </div>
+</section>
 
         <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: FACTURACIÓN
              ═══════════════════════════════════════════════════════════════ -->
-        <section id="sec-facturacion" class="tab-content d-none">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="fw-bold m-0">Gestión de Facturación</h5>
-                <button class="btn btn-primary view-admin-master" onclick="abrirModalFactura()">
-                    <i class="fa-solid fa-file-circle-plus me-1"></i> Emitir Factura
-                </button>
+        <!-- ═══════════════════════════════════════════════════════════════
+     SECCIÓN: FACTURACIÓN REDISEÑADA
+     ═══════════════════════════════════════════════════════════════ -->
+<section id="sec-facturacion" class="tab-content d-none">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <h5 class="fw-bold m-0">Gestión de Facturación</h5>
+</div>
+
+    <!-- BUSCADOR INTELIGENTE -->
+    <div id="fac-buscador-area" class="text-center p-5 border border-dashed rounded-3 bg-light">
+        <div class="position-relative mx-auto" style="max-width: 480px;">
+            <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+            <input type="text" id="fac-input-cedula" class="form-control ps-5 pe-5" 
+                   placeholder="Ingrese cédula del cliente..." maxlength="20" autocomplete="off">
+            <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y me-1" 
+                    onclick="buscarClienteFacturacion()">Buscar</button>
+        </div>
+        <small class="text-muted d-block mt-2">Escribe la cédula y presiona Enter</small>
+    </div>
+
+    <!-- INFO DEL CLIENTE -->
+    <div id="fac-tarjeta-cliente" class="card mt-3 d-none">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+                <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" 
+                     style="width:48px;height:48px;">
+                    <i class="fa-solid fa-user text-primary fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-0" id="fac-cliente-nombre">—</h6>
+                    <small class="text-muted">Cédula: <span id="fac-cliente-cedula">—</span></small>
+                </div>
             </div>
-            <div id="container-facturas-agrupadas"></div>
-        </section>
+            <button class="btn btn-primary view-admin-master" id="btn-emitir-desde-cliente" onclick="abrirModalFacturaDesdeBusqueda()">
+                <i class="fa-solid fa-file-circle-plus me-1"></i> Emitir Factura
+            </button>
+        </div>
+        <div class="row g-2 text-center mt-3">
+            <div class="col-6 col-md-3">
+                <div class="p-2 border rounded bg-white">
+                    <div class="text-muted small">Total facturas</div>
+                    <div class="fw-bold fs-5" id="fac-stat-total">0</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-2 border rounded bg-white">
+                    <div class="text-muted small">Monto total</div>
+                    <div class="fw-bold fs-5" id="fac-stat-monto">$0.00</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-2 border rounded bg-white">
+                    <div class="text-muted small">Pendientes</div>
+                    <div class="fw-bold fs-5 text-warning" id="fac-stat-pendientes">0</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-2 border rounded bg-white">
+                    <div class="text-muted small">Vencidas</div>
+                    <div class="fw-bold fs-5 text-danger" id="fac-stat-vencidas">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- FACTURAS AGRUPADAS -->
+    <div id="fac-area-facturas" class="mt-3 d-none">
+        <h6 class="fw-bold mb-2"><i class="fa-solid fa-file-invoice me-1"></i> Facturas del cliente</h6>
+        <div id="fac-container-facturas"></div>
+    </div>
+
+    <!-- ESTADO VACÍO -->
+    <div id="fac-estado-vacio" class="text-center p-5 text-muted d-none">
+        <i class="fa-regular fa-folder-open fa-3x mb-2 opacity-25"></i>
+        <p class="mb-0">No se encontraron facturas para este cliente.</p>
+    </div>
+
+    <!-- ERROR -->
+    <div id="fac-alerta-error" class="alert alert-danger mt-3 d-none" role="alert">
+        <i class="fa-solid fa-circle-exclamation me-1"></i>
+        <span id="fac-alerta-mensaje">Ocurrió un error al buscar el cliente.</span>
+    </div>
+</section>
 
         <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: CRÉDITOS Y CUOTAS
              ═══════════════════════════════════════════════════════════════ -->
         <section id="sec-creditos" class="tab-content d-none">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="fw-bold m-0">Financiamientos y Créditos</h5>
-                <button class="btn btn-primary view-admin-master" onclick="abrirModalOtorgarCredito()">
-                    <i class="fa-solid fa-hand-holding-dollar me-1"></i> Otorgar Crédito
-                </button>
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <h5 class="fw-bold m-0">Financiamientos y Créditos</h5>
+    </div>
+
+    <!-- BUSCADOR INTELIGENTE -->
+    <div id="cred-buscador-area" class="text-center p-5 border border-dashed rounded-3 bg-light">
+        <div class="position-relative mx-auto" style="max-width: 480px;">
+            <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+            <input type="text" id="cred-input-cedula" class="form-control ps-5 pe-5" 
+                   placeholder="Ingrese cédula del cliente..." maxlength="20" autocomplete="off">
+            <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y me-1" 
+                    onclick="buscarClienteCreditos()">Buscar</button>
+        </div>
+        <small class="text-muted d-block mt-2">Escribe la cédula y presiona Enter</small>
+    </div>
+
+    <!-- INFO DEL CLIENTE -->
+    <div id="cred-tarjeta-cliente" class="card mt-3 d-none">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" 
+                         style="width:48px;height:48px;">
+                        <i class="fa-solid fa-user text-primary fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-0" id="cred-cliente-nombre">—</h6>
+                        <small class="text-muted">Cédula: <span id="cred-cliente-cedula">—</span></small>
+                    </div>
+                </div>
             </div>
-            <div id="container-creditos-agrupados"></div>
-        </section>
+            <div class="row g-2 text-center mt-3">
+                <div class="col-6 col-md-3">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">Total facturas</div>
+                        <div class="fw-bold fs-5" id="cred-stat-total">0</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">Pendientes</div>
+                        <div class="fw-bold fs-5 text-warning" id="cred-stat-pendientes">0</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">En Crédito</div>
+                        <div class="fw-bold fs-5 text-info" id="cred-stat-creditos">0</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">Cuotas Activas</div>
+                        <div class="fw-bold fs-5 text-danger" id="cred-stat-cuotas">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FACTURAS PENDIENTES PARA FINANCIAR -->
+    <div id="cred-area-facturas" class="mt-3 d-none">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="fw-bold mb-0"><i class="fa-solid fa-file-invoice me-1"></i> Facturas Pendientes por Financiar</h6>
+            <button class="btn btn-primary btn-sm view-admin-master" id="btn-otorgar-credito-desde-busqueda" onclick="abrirModalCreditoDesdeBusqueda()">
+                <i class="fa-solid fa-hand-holding-dollar me-1"></i> Otorgar Crédito
+            </button>
+        </div>
+        <div id="cred-container-facturas"></div>
+    </div>
+
+    <!-- CRÉDITOS EXISTENTES -->
+    <div id="cred-area-creditos-existentes" class="mt-3 d-none">
+        <h6 class="fw-bold mb-2"><i class="fa-solid fa-credit-card me-1"></i> Créditos y Cuotas Activas</h6>
+        <div id="cred-container-creditos-existentes"></div>
+    </div>
+
+    <!-- ESTADO VACÍO -->
+    <div id="cred-estado-vacio" class="text-center p-5 text-muted d-none">
+        <i class="fa-regular fa-folder-open fa-3x mb-2 opacity-25"></i>
+        <p class="mb-0">No se encontraron datos para este cliente.</p>
+    </div>
+
+    <!-- ERROR -->
+    <div id="cred-alerta-error" class="alert alert-danger mt-3 d-none" role="alert">
+        <i class="fa-solid fa-circle-exclamation me-1"></i>
+        <span id="cred-alerta-mensaje">Ocurrió un error al buscar el cliente.</span>
+    </div>
+</section>
 
         <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: MÓDULO DE PAGOS
@@ -1258,83 +1479,123 @@
         </div>
     </div>
 
-    <!-- MODAL 8: Factura -->
-    <div class="modal fade" id="modalFactura" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content modal-content-pro">
-                <div class="modal-header modal-header-pro">
-                    <h5 class="modal-title fw-bold" id="modalFacturaTitle"><i class="fa-solid fa-file-invoice text-primary me-2"></i>Nueva Factura</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <!-- MODAL 8: Factura - REDISEÑADO -->
+<div class="modal fade" id="modalFactura" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-content-pro">
+            <div class="modal-header modal-header-pro">
+                <div>
+                    <h5 class="modal-title fw-bold m-0" id="modalFacturaTitle">
+                        <i class="fa-solid fa-file-invoice text-primary me-2"></i>Emitir Factura
+                    </h5>
+                    <small class="text-muted" id="modalFacturaSubtitle">Nueva factura</small>
                 </div>
-                <div class="modal-body modal-body-pro">
-                    <form id="formFactura" onsubmit="guardarFactura(event)">
-                        <input type="hidden" id="fac_id">
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Cliente</label>
-                            <select class="form-select form-select-pro" id="fac_cliente" required></select>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body modal-body-pro">
+                <form id="formFactura" onsubmit="guardarFactura(event)">
+                    <input type="hidden" id="fac_id">
+                    
+                    <!-- CLIENTE (bloqueado cuando viene desde búsqueda) -->
+                    <div class="mb-3" id="fac_cliente_select_wrapper">
+                        <label class="form-label small fw-semibold">Cliente</label>
+                        <select class="form-select form-select-pro" id="fac_cliente" required>
+                            <option value="">-- Seleccione Cliente --</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3 d-none" id="fac_cliente_bloqueado_wrapper">
+                        <label class="form-label small fw-semibold">Cliente</label>
+                        <div class="d-flex align-items-center gap-2 p-2 rounded-3 bg-primary bg-opacity-10 border border-primary border-opacity-25">
+                            <i class="fa-solid fa-user text-primary"></i>
+                            <span class="fw-bold text-dark" id="fac_cliente_bloqueado_nombre">—</span>
+                            <span class="badge bg-primary ms-auto" id="fac_cliente_bloqueado_codigo">—</span>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Tipo de Servicio / Plan</label>
-                            <select class="form-select form-select-pro" id="fac_tipo_servicio" onchange="toggleEspecificarServicio(this.value, 'group_fac_especifique')" required>
-                                <option value="">-- Seleccione Plan --</option>
-                                <option value="PLAN HOTSPOT 1H">PLAN HOTSPOT 1H</option>
-                                <option value="PLAN HOTSPOT 1D">PLAN HOTSPOT 1D</option>
-                                <option value="PLAN HOTSPOT 7D">PLAN HOTSPOT 7D</option>
-                                <option value="PLAN HOTSPOT 15D">PLAN HOTSPOT 15D</option>
-                                <option value="PLAN HOTSPOT 30D">PLAN HOTSPOT 30D</option>
-                                <option value="PROYECTO STARTER">PROYECTO STARTER</option>
-                                <option value="PROYECTO GROWTH">PROYECTO GROWTH</option>
-                                <option value="PROYECTO BUSSINES">PROYECTO BUSSINES</option>
-                                <option value="PROYECTO PROFESSIONAL">PROYECTO PROFESSIONAL</option>
-                                <option value="Otro...">Otro...</option>
-                            </select>
+                        <input type="hidden" id="fac_cliente_bloqueado_valor">
+                    </div>
+
+                    <!-- NÚMERO DE FACTURA -->
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Número de Factura <small class="text-muted">(Auto-generado)</small></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="fa-solid fa-hashtag text-muted"></i>
+                            </span>
+                            <input type="text" class="form-control form-control-pro bg-light fw-bold text-primary" id="fac_numero" placeholder="FAC-LCS-XXXX" readonly>
+                            <button type="button" class="btn btn-outline-primary" onclick="generarNumeroFactura()">
+                                <i class="fa-solid fa-rotate"></i>
+                            </button>
                         </div>
-                        <div class="mb-3 d-none" id="group_fac_especifique">
-                            <label class="form-label small fw-semibold text-primary">Especifique el Servicio</label>
-                            <input type="text" class="form-control form-control-pro" id="fac_especifique_servicio" placeholder="Describa el servicio personalizado...">
+                    </div>
+
+                    <!-- SERVICIO -->
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Tipo de Servicio / Plan</label>
+                        <select class="form-select form-select-pro" id="fac_tipo_servicio" onchange="toggleEspecificarServicio(this.value, 'group_fac_especifique')" required>
+                            <option value="">-- Seleccione Plan --</option>
+                            <option value="PLAN HOTSPOT 1H">PLAN HOTSPOT 1H</option>
+                            <option value="PLAN HOTSPOT 1D">PLAN HOTSPOT 1D</option>
+                            <option value="PLAN HOTSPOT 7D">PLAN HOTSPOT 7D</option>
+                            <option value="PLAN HOTSPOT 15D">PLAN HOTSPOT 15D</option>
+                            <option value="PLAN HOTSPOT 30D">PLAN HOTSPOT 30D</option>
+                            <option value="PROYECTO STARTER">PROYECTO STARTER</option>
+                            <option value="PROYECTO GROWTH">PROYECTO GROWTH</option>
+                            <option value="PROYECTO BUSSINES">PROYECTO BUSSINES</option>
+                            <option value="PROYECTO PROFESSIONAL">PROYECTO PROFESSIONAL</option>
+                            <option value="Otro...">Otro...</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 d-none" id="group_fac_especifique">
+                        <label class="form-label small fw-semibold text-primary">Especifique el Servicio</label>
+                        <input type="text" class="form-control form-control-pro" id="fac_especifique_servicio" placeholder="Describa el servicio personalizado...">
+                    </div>
+
+                    <!-- FECHAS -->
+                    <div class="row g-2 mb-3">
+                        <div class="col-6">
+                            <label class="form-label small fw-semibold">Fecha Emisión</label>
+                            <input type="date" class="form-control form-control-pro" id="fac_emision" required>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Número de Factura <small class="text-muted">(Auto-generado)</small></label>
-                            <div class="input-group">
-                                <input type="text" class="form-control form-control-pro" id="fac_numero" placeholder="FAC-LCS-XXXX" readonly>
-                                <button type="button" class="btn btn-outline-primary" onclick="generarNumeroFactura()">
-                                    <i class="fa-solid fa-rotate"></i> Generar
-                                </button>
-                            </div>
+                        <div class="col-6">
+                            <label class="form-label small fw-semibold">Fecha Vencimiento</label>
+                            <input type="date" class="form-control form-control-pro" id="fac_vencimiento" required>
                         </div>
-                        <div class="row g-2 mb-3">
-                            <div class="col-6">
-                                <label class="form-label small fw-semibold">Fecha Emisión</label>
-                                <input type="date" class="form-control form-control-pro" id="fac_emision" required>
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label small fw-semibold">Fecha Vencimiento</label>
-                                <input type="date" class="form-control form-control-pro" id="fac_vencimiento" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
+                    </div>
+
+                    <!-- MONTO Y ESTADO -->
+                    <div class="row g-2 mb-3">
+                        <div class="col-7">
                             <label class="form-label small fw-semibold">Monto Total ($)</label>
-                            <input type="number" step="0.01" class="form-control form-control-pro" id="fac_monto" required>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-success fw-bold">$</span>
+                                <input type="number" step="0.01" class="form-control form-control-pro fw-bold text-success" id="fac_monto" placeholder="0.00" required>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Estatus / Estado</label>
+                        <div class="col-5">
+                            <label class="form-label small fw-semibold">Estado</label>
                             <select class="form-select form-select-pro" id="fac_estado">
-                                <option value="Pendiente">Pendiente</option>
+                                <option value="Pendiente" selected>Pendiente</option>
                                 <option value="En Validación">En Validación</option>
                                 <option value="Confirmado">Confirmado</option>
                                 <option value="Crédito">Crédito</option>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Notas / Observaciones</label>
-                            <textarea class="form-control form-control-pro" id="fac_notas" rows="2" placeholder="Escriba la descripción del trabajo..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100 fw-semibold rounded-3">Guardar Factura</button>
-                    </form>
-                </div>
+                    </div>
+
+                    <!-- NOTAS -->
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Notas / Observaciones</label>
+                        <textarea class="form-control form-control-pro" id="fac_notas" rows="2" placeholder="Descripción del trabajo o servicio..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 fw-semibold rounded-3 py-2">
+                        <i class="fa-solid fa-floppy-disk me-2"></i>Guardar Factura
+                    </button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
     <!-- MODAL 9: Crédito -->
     <div class="modal fade" id="modalCredito" tabindex="-1">
@@ -1597,12 +1858,12 @@
             const data = await res.json();
             if (data.success && data.usuarios) {
                 db = data;
-                showToast('Sincronización', 'Datos cargados desde Google Sheets.', 'success', 2000);
+                showToast('Sincronización', 'Datos cargados desde servidor.', 'success', 2000);
             }
             renderAllData();
         } catch (e) {
             console.warn("Error al sincronizar con Apps Script:", e);
-            showToast('Advertencia', 'No se pudo conectar con Google Sheets. Usando datos locales.', 'warning');
+            showToast('Advertencia', 'No se pudo conectar con servidor. Usando datos locales.', 'warning');
             renderAllData();
         }
     }
@@ -1624,7 +1885,7 @@
             setTimeout(sincronizarConGAS, 500);
         } catch (e) {
             console.error("Error al enviar solicitud GAS:", e);
-            showToast('Error de Red', 'No se pudo sincronizar con Google Sheets.', 'danger');
+            showToast('Error de Red', 'No se pudo sincronizar con servidor.', 'danger');
         }
     }
 
@@ -2170,6 +2431,7 @@
         actualizarColoresCharts(isDarkMode);
     }
 
+
     function actualizarColoresCharts(isDarkMode) {
         const textColor = isDarkMode ? '#94a3b8' : '#64748b';
         const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
@@ -2428,29 +2690,95 @@
     // ═══════════════════════════════════════════════════════════════════════════════
     // SECCIÓN: CLIENTES - CRUD COMPLETO
     // ═══════════════════════════════════════════════════════════════════════════════
-    function renderClientes() {
-        const tbody = document.getElementById('tbl-clientes-body');
-        tbody.innerHTML = db.clientes.map(c => {
-            const st = c.estado_servicio || 'SOLVENTE';
-            let classSt = 'status-solvente';
-            if (st === 'EN MORA') classSt = 'status-enmora';
-            if (st === 'SUSPENDIDO') classSt = 'status-suspendido';
-            if (st === 'DEMO') classSt = 'status-credito';
+    function buscarClienteGestion() {
+    const input = document.getElementById('cli-input-cedula');
+    const raw = input.value.trim().replace(/\D/g, '');
+    
+    if (!raw) { input.focus(); return; }
 
-            return `
-            <tr>
-                <td><div class="fw-bold">${c.nombre_completo}</div><small class="text-muted">${c.codigo_cliente}</small></td>
-                <td>${c.documento_id}</td>
-                <td>${c.telefono}<br><small class="text-muted">${c.correo}</small></td>
-                <td><small>${c.direccion || 'N/A'}</small></td>
-                <td><span class="badge-status ${classSt}">${st}</span></td>
-                <td>
-                    <button class="btn btn-sm btn-outline-primary me-1 rounded-2" onclick="abrirModalCliente('${c.id_cliente}')"><i class="fa-solid fa-pen"></i></button>
-                    <button class="btn btn-sm btn-outline-danger rounded-2" onclick="eliminarCliente('${c.id_cliente}')"><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
-        `}).join('');
+    document.getElementById('cli-tarjeta-cliente').classList.add('d-none');
+    document.getElementById('cli-estado-vacio').classList.add('d-none');
+    document.getElementById('cli-tabla-completa').classList.add('d-none');
+
+    const cliente = db.clientes.find(c => 
+        String(c.documento_id).replace(/\D/g, '') === raw
+    );
+
+    if (!cliente) {
+        document.getElementById('cli-estado-vacio').classList.remove('d-none');
+        document.getElementById('cli-tabla-completa').classList.remove('d-none');
+        return;
     }
+
+    document.getElementById('cli-cliente-nombre').innerText = cliente.nombre_completo;
+    document.getElementById('cli-cliente-codigo').innerText = cliente.codigo_cliente || 'N/A';
+    document.getElementById('cli-info-documento').innerText = cliente.documento_id || 'N/A';
+    document.getElementById('cli-info-telefono').innerText = cliente.telefono || 'N/A';
+    document.getElementById('cli-info-correo').innerText = cliente.correo || 'N/A';
+    document.getElementById('cli-info-direccion').innerText = cliente.direccion || 'N/A';
+    document.getElementById('cli-info-estado').innerText = cliente.estado_servicio || 'SOLVENTE';
+    
+    const totalFacturas = db.facturas.filter(f => 
+        f.id_cliente === cliente.codigo_cliente || f.id_cliente === cliente.id_cliente
+    ).length;
+    document.getElementById('cli-info-facturas').innerText = totalFacturas;
+
+    const btnEditar = document.getElementById('cli-btn-editar');
+    const btnEliminar = document.getElementById('cli-btn-eliminar');
+    if (btnEditar) btnEditar.setAttribute('onclick', `abrirModalCliente('${cliente.id_cliente}')`);
+    if (btnEliminar) btnEliminar.setAttribute('onclick', `eliminarCliente('${cliente.id_cliente}')`);
+
+    document.getElementById('cli-tarjeta-cliente').classList.remove('d-none');
+}
+		
+		function renderClientes() {
+    const isClient = currentUser && currentUser.rol === 'Cliente';
+    const tbody = document.getElementById('tbl-clientes-body');
+    const buscadorArea = document.getElementById('cli-buscador-area');
+    const tablaCompleta = document.getElementById('cli-tabla-completa');
+    
+    if (isClient) {
+        if (buscadorArea) buscadorArea.classList.add('d-none');
+        if (tablaCompleta) tablaCompleta.classList.add('d-none');
+        
+        const cliente = db.clientes.find(c => 
+            c.codigo_cliente === currentUser.codigo_cliente || 
+            c.correo === currentUser.email
+        );
+        
+        if (cliente) {
+            document.getElementById('cli-input-cedula').value = cliente.documento_id || '';
+            buscarClienteGestion();
+        }
+        return;
+    }
+    
+    if (buscadorArea) buscadorArea.classList.remove('d-none');
+    if (tablaCompleta) tablaCompleta.classList.remove('d-none');
+    document.getElementById('cli-tarjeta-cliente').classList.add('d-none');
+    document.getElementById('cli-estado-vacio').classList.add('d-none');
+    
+    tbody.innerHTML = db.clientes.map(c => {
+        const st = c.estado_servicio || 'SOLVENTE';
+        let classSt = 'status-solvente';
+        if (st === 'EN MORA') classSt = 'status-enmora';
+        if (st === 'SUSPENDIDO') classSt = 'status-suspendido';
+        if (st === 'DEMO') classSt = 'status-credito';
+
+        return `
+        <tr>
+            <td><div class="fw-bold">${c.nombre_completo}</div><small class="text-muted">${c.codigo_cliente}</small></td>
+            <td>${c.documento_id}</td>
+            <td>${c.telefono}<br><small class="text-muted">${c.correo}</small></td>
+            <td><small>${c.direccion || 'N/A'}</small></td>
+            <td><span class="badge-status ${classSt}">${st}</span></td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary me-1 rounded-2" onclick="abrirModalCliente('${c.id_cliente}')"><i class="fa-solid fa-pen"></i></button>
+                <button class="btn btn-sm btn-outline-danger rounded-2" onclick="eliminarCliente('${c.id_cliente}')"><i class="fa-solid fa-trash"></i></button>
+            </td>
+        </tr>
+    `}).join('');
+}
 
     function abrirModalCliente(id = null) {
         document.getElementById('formCliente').reset();
@@ -2565,195 +2893,52 @@
     // AL EMITIR FACTURA SE GENERA NÚMERO AUTOMÁTICO FAC-LCS-XXXX
     // ═══════════════════════════════════════════════════════════════════════════════
     function renderFacturacionAgrupada() {
-        const container = document.getElementById('container-facturas-agrupadas');
-        container.innerHTML = '';
-
-        const isClient = currentUser && currentUser.rol === 'Cliente';
-        const clientList = isClient
-            ? db.clientes.filter(c => c.codigo_cliente === currentUser.codigo_cliente || c.correo === currentUser.email)
-            : db.clientes;
-
-        if (clientList.length === 0) {
-            container.innerHTML = '<div class="alert alert-info rounded-3">No hay registros de facturación disponibles.</div>';
-            return;
+    const isClient = currentUser && currentUser.rol === 'Cliente';
+    
+    // ─── CLIENTE: auto-cargar sus facturas sin buscador ───
+    if (isClient) {
+        const areaBuscador = document.getElementById('fac-buscador-area');
+        if (areaBuscador) areaBuscador.classList.add('d-none');
+        
+        const cliente = db.clientes.find(c => 
+            c.codigo_cliente === currentUser.codigo_cliente || 
+            c.correo === currentUser.email
+        );
+        
+        if (cliente) {
+            window._facClienteSeleccionado = {
+                codigo: cliente.codigo_cliente,
+                nombre: cliente.nombre_completo,
+                documento: cliente.documento_id
+            };
+            buscarClienteFacturacion(cliente);
         }
-
-        clientList.forEach((c, idx) => {
-            const facs = db.facturas.filter(f => f.id_cliente === c.codigo_cliente || f.id_cliente === c.id_cliente);
-            const creds = db.creditos.filter(cr => cr.id_cliente === c.codigo_cliente || cr.id_cliente === c.id_cliente);
-
-            if (facs.length === 0 && creds.length === 0) return;
-
-            const accordionId = `acc-client-${idx}`;
-            const collapseId = `collapse-client-${idx}`;
-
-            const pagadas = facs.filter(f => f.estado_factura === 'Confirmado' || f.estado_factura === 'Pagada');
-            const pendientes = facs.filter(f => f.estado_factura === 'Pendiente');
-            const enValidacion = facs.filter(f => f.estado_factura === 'En Validación');
-            const enCredito = facs.filter(f => f.estado_factura === 'Crédito');
-
-            let html = `
-                <div class="card-stat mb-3 p-0 overflow-hidden rounded-3" id="${accordionId}">
-                    <div class="p-3 bg-body-tertiary d-flex justify-content-between align-items-center cursor-pointer"
-                         data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="false">
-                        <div class="d-flex align-items-center gap-2">
-                            <i class="fa-solid fa-chevron-down text-primary accordion-arrow"></i>
-                            <h6 class="fw-bold m-0 text-primary fs-5">${c.nombre_completo} <small class="text-muted fs-6">(${c.codigo_cliente})</small></h6>
-                        </div>
-                        <div class="d-flex align-items-center gap-2 flex-wrap">
-                            <span class="badge bg-success rounded-pill">${pagadas.length} Pagadas</span>
-                            <span class="badge bg-warning text-dark rounded-pill">${pendientes.length} Pendientes</span>
-                            <span class="badge bg-info text-dark rounded-pill">${enValidacion.length} Validación</span>
-                            <span class="badge bg-secondary rounded-pill">${enCredito.length + creds.length} Créditos</span>
-                        </div>
-                    </div>
-                    <div id="${collapseId}" class="collapse p-3 border-top">
-            `;
-
-            // FACTURAS PENDIENTES
-            html += `
-                <div class="mb-4">
-                    <h6 class="fw-bold text-danger border-bottom pb-2 mb-2">
-                        <i class="fa-solid fa-clock me-2"></i>Facturas Pendientes (${pendientes.length})
-                    </h6>
-                    ${pendientes.length === 0 ? '<small class="text-muted d-block mb-2">No posee facturas pendientes.</small>' : `
-                        <div class="table-responsive">
-                            <table class="table table-sm align-middle mb-0">
-                                <thead><tr><th>Factura N°</th><th>Servicio</th><th>Emisión</th><th>Vencimiento</th><th>Monto</th><th>Acciones</th></tr></thead>
-                                <tbody>
-                                    ${pendientes.map(f => `
-                                        <tr>
-                                            <td class="fw-bold">${f.id_factura}</td>
-                                            <td><span class="service-badge">${f.tipo_servicio === 'Otro...' ? f.especifique_servicio : f.tipo_servicio}</span></td>
-                                            <td>${f.fecha_emision}</td>
-                                            <td>${f.fecha_vencimiento}</td>
-                                            <td class="fw-bold text-danger">$${Number(f.monto_total).toFixed(2)}</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-outline-secondary py-0 px-2 me-1 rounded-2" onclick="verResumenFactura('${f.id_factura}')"><i class="fa-solid fa-eye"></i></button>
-                                                <button class="btn btn-sm btn-success py-0 px-2 me-1 fw-semibold rounded-2" onclick="irAPagarFactura('${f.id_cliente}', '${f.id_factura}')"><i class="fa-solid fa-dollar-sign me-1"></i>Pagar</button>
-                                                ${!isClient ? `
-                                                    <button class="btn btn-sm btn-outline-primary py-0 px-2 me-1 rounded-2" onclick="abrirModalFactura('${f.id_factura}')"><i class="fa-solid fa-pen"></i></button>
-                                                    <button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick="eliminarFactura('${f.id_factura}')"><i class="fa-solid fa-trash"></i></button>
-                                                ` : ''}
-                                            </td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                    `}
-                </div>
-            `;
-
-            // FACTURAS EN VALIDACIÓN
-            html += `
-                <div class="mb-4">
-                    <h6 class="fw-bold text-warning border-bottom pb-2 mb-2">
-                        <i class="fa-solid fa-spinner me-2"></i>En Validación (${enValidacion.length})
-                    </h6>
-                    ${enValidacion.length === 0 ? '<small class="text-muted d-block mb-2">No hay facturas en validación.</small>' : `
-                        <div class="table-responsive">
-                            <table class="table table-sm align-middle mb-0">
-                                <thead><tr><th>Factura N°</th><th>Servicio</th><th>Monto</th><th>Referencia</th><th>Acciones</th></tr></thead>
-                                <tbody>
-                                    ${enValidacion.map(f => `
-                                        <tr>
-                                            <td class="fw-bold">${f.id_factura}</td>
-                                            <td><span class="service-badge">${f.tipo_servicio === 'Otro...' ? f.especifique_servicio : f.tipo_servicio}</span></td>
-                                            <td class="fw-bold text-warning">$${Number(f.monto_total).toFixed(2)}</td>
-                                            <td><small>${f.referencia_pago || 'N/A'}</small></td>
-                                            <td>
-                                                <button class="btn btn-sm btn-outline-secondary py-0 px-2 me-1 rounded-2" onclick="verResumenFactura('${f.id_factura}')"><i class="fa-solid fa-eye"></i></button>
-                                                ${!isClient ? `
-                                                    <button class="btn btn-sm btn-outline-success py-0 px-2 me-1 fw-semibold rounded-2" onclick="validarPagoAdmin('${f.id_factura}', '${f.id_cliente}')"><i class="fa-solid fa-check-double me-1"></i>Confirmar</button>
-                                                ` : ''}
-                                            </td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                    `}
-                </div>
-            `;
-
-            // FACTURAS PAGADAS
-            html += `
-                <div class="mb-4">
-                    <h6 class="fw-bold text-success border-bottom pb-2 mb-2">
-                        <i class="fa-solid fa-circle-check me-2"></i>Facturas Pagadas / Confirmadas (${pagadas.length})
-                    </h6>
-                    ${pagadas.length === 0 ? '<small class="text-muted d-block mb-2">No posee facturas pagadas.</small>' : `
-                        <div class="table-responsive">
-                            <table class="table table-sm align-middle mb-0">
-                                <thead><tr><th>Factura N°</th><th>Servicio</th><th>Fecha Pago</th><th>Monto</th><th>Acciones</th></tr></thead>
-                                <tbody>
-                                    ${pagadas.map(f => `
-                                        <tr>
-                                            <td class="fw-bold">${f.id_factura}</td>
-                                            <td><span class="service-badge">${f.tipo_servicio === 'Otro...' ? f.especifique_servicio : f.tipo_servicio}</span></td>
-                                            <td>${f.fecha_pago || 'N/A'}</td>
-                                            <td class="fw-bold text-success">$${Number(f.monto_total).toFixed(2)}</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-outline-secondary py-0 px-2 me-1 rounded-2" onclick="verResumenFactura('${f.id_factura}')"><i class="fa-solid fa-eye"></i></button>
-                                                ${!isClient ? `
-                                                    <button class="btn btn-sm btn-outline-primary py-0 px-2 me-1 rounded-2" onclick="abrirModalFactura('${f.id_factura}')"><i class="fa-solid fa-pen"></i></button>
-                                                    <button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick="eliminarFactura('${f.id_factura}')"><i class="fa-solid fa-trash"></i></button>
-                                                ` : ''}
-                                            </td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                    `}
-                </div>
-            `;
-
-            // CRÉDITOS
-            html += `
-                <div>
-                    <h6 class="fw-bold text-info border-bottom pb-2 mb-2">
-                        <i class="fa-solid fa-credit-card me-2"></i>Financiamientos (${creds.length} Cuotas)
-                    </h6>
-                    ${enCredito.length === 0 && creds.length === 0 ? '<small class="text-muted d-block">No posee financiamientos activos.</small>' : `
-                        ${enCredito.length > 0 ? `
-                            <div class="mb-3">
-                                <small class="fw-semibold text-muted d-block mb-1">Facturas financiadas:</small>
-                                <div class="d-flex flex-wrap gap-2">
-                                    ${enCredito.map(f => `<span class="badge bg-light text-dark border">Factura ${f.id_factura} - $${Number(f.monto_total).toFixed(2)}</span>`).join('')}
-                                </div>
-                            </div>
-                        ` : ''}
-                        ${creds.length > 0 ? `
-                            <div class="table-responsive">
-                                <table class="table table-sm align-middle mb-0">
-                                    <thead><tr><th>Cuota N°</th><th>Factura Ref</th><th>Vencimiento</th><th>Monto</th><th>Estado</th><th>Acciones</th></tr></thead>
-                                    <tbody>
-                                        ${creds.map(q => `
-                                            <tr>
-                                                <td class="fw-bold">Cuota #${q.numero_cuota}</td>
-                                                <td>${q.id_factura || 'N/A'}</td>
-                                                <td>${q.fecha_vencimiento_cuota}</td>
-                                                <td class="fw-bold text-primary">$${Number(q.monto_cuota).toFixed(2)}</td>
-                                                <td><span class="badge-status ${q.estado_cuota === 'Pagada' ? 'status-confirmado' : 'status-pendiente'}">${q.estado_cuota}</span></td>
-                                                <td>
-                                                    ${!isClient ? `<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick="eliminarCredito('${q.id_cuota}')"><i class="fa-solid fa-trash"></i></button>` : ''}
-                                                </td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        ` : '<small class="text-muted">Sin cuotas detalladas.</small>'}
-                    `}
-                </div>
-            `;
-
-            html += `</div></div>`;
-            container.innerHTML += html;
-        });
+        return;
     }
+    
+    // ─── MASTER/ADMIN: mostrar buscador normal ───
+    const areaBuscador = document.getElementById('fac-buscador-area');
+    if (areaBuscador) {
+        areaBuscador.classList.remove('d-none');
+        areaBuscador.classList.add('p-5');
+        areaBuscador.classList.remove('p-3');
+    }
+    
+    const input = document.getElementById('fac-input-cedula');
+    if (input) input.value = '';
+    
+    const area = document.getElementById('fac-buscador-area');
+    if (area) {
+        area.classList.add('p-5');
+        area.classList.remove('p-3');
+    }
+    
+    const container = document.getElementById('fac-container-facturas');
+    if (container) container.innerHTML = '';
+    
+    window._facClienteSeleccionado = null;
+    ocultarResultadosFacturacion();
+}
 
     function abrirModalFactura(id = null) {
         document.getElementById('formFactura').reset();
@@ -2929,57 +3114,201 @@
     // ═══════════════════════════════════════════════════════════════════════════════
     // SECCIÓN: CRÉDITOS Y CUOTAS
     // ═══════════════════════════════════════════════════════════════════════════════
-    function renderCreditosAgrupados() {
-        const container = document.getElementById('container-creditos-agrupados');
-        container.innerHTML = '';
-        const isClient = currentUser && currentUser.rol === 'Cliente';
-        const clientList = isClient 
-            ? db.clientes.filter(c => c.codigo_cliente === currentUser.codigo_cliente)
-            : db.clientes;
+    function ocultarResultadosCreditos() {
+    const el = (id) => document.getElementById(id);
+    if (el('cred-tarjeta-cliente')) el('cred-tarjeta-cliente').classList.add('d-none');
+    if (el('cred-area-facturas')) el('cred-area-facturas').classList.add('d-none');
+    if (el('cred-area-creditos-existentes')) el('cred-area-creditos-existentes').classList.add('d-none');
+    if (el('cred-estado-vacio')) el('cred-estado-vacio').classList.add('d-none');
+    if (el('cred-alerta-error')) el('cred-alerta-error').classList.add('d-none');
+    if (el('cred-container-facturas')) el('cred-container-facturas').innerHTML = '';
+    if (el('cred-container-creditos-existentes')) el('cred-container-creditos-existentes').innerHTML = '';
+}
 
-        clientList.forEach(c => {
-            const cuotas = db.creditos.filter(cr => cr.id_cliente === c.codigo_cliente || cr.id_cliente === c.id_cliente);
-            if(cuotas.length === 0) return;
-            let html = `
-                <div class="card-stat mb-3 rounded-3">
-                    <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-credit-card me-2"></i>${c.nombre_completo} (${c.codigo_cliente})</h6>
-                    <div class="table-responsive">
-                        <table class="table table-sm align-middle mb-0">
-                            <thead>
-                                <tr><th>Cuota N°</th><th>Factura Ref</th><th>Vencimiento</th><th>Monto Cuota</th><th>Estado</th><th>Acciones</th></tr>
-                            </thead>
-                            <tbody>
-                                ${cuotas.map(q => `
-                                    <tr>
-                                        <td class="fw-bold">Cuota #${q.numero_cuota}</td>
-                                        <td>${q.id_factura || 'N/A'}</td>
-                                        <td>${q.fecha_vencimiento_cuota}</td>
-                                        <td class="fw-bold text-primary">$${Number(q.monto_cuota).toFixed(2)}</td>
-                                        <td><span class="badge-status ${q.estado_cuota === 'Pagada' ? 'status-confirmado' : 'status-pendiente'}">${q.estado_cuota}</span></td>
-                                        <td>
-                                            ${!isClient ? `<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick="eliminarCredito('${q.id_cuota}')"><i class="fa-solid fa-trash"></i></button>` : ''}
-                                        </td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>`;
-            container.innerHTML += html;
-        });
+function buscarClienteCreditos(clienteForzado = null) {
+    const input = document.getElementById('cred-input-cedula');
+    const areaBuscador = document.getElementById('cred-buscador-area');
+    
+    let raw = '';
+    let cliente = null;
+    
+    if (clienteForzado) {
+        cliente = clienteForzado;
+    } else {
+        if (input) raw = input.value.trim().replace(/\D/g, '');
+        if (!raw) { if(input) input.focus(); return; }
+        cliente = db.clientes.find(c => 
+            String(c.documento_id).replace(/\D/g, '') === raw
+        );
     }
 
-    function abrirModalOtorgarCredito() {
-        document.getElementById('formCredito').reset();
-        const selectCli = document.getElementById('cred_cliente');
+    ocultarResultadosCreditos();
+    if (areaBuscador && !clienteForzado) {
+        areaBuscador.classList.remove('p-5');
+        areaBuscador.classList.add('p-3');
+    }
+
+    if (!cliente) {
+        const vacio = document.getElementById('cred-estado-vacio');
+        if (vacio) {
+            vacio.classList.remove('d-none');
+            vacio.querySelector('p').innerText = 'No se encontró ningún cliente con esa cédula.';
+        }
+        return;
+    }
+
+    window._credClienteSeleccionado = {
+        codigo: cliente.codigo_cliente,
+        nombre: cliente.nombre_completo,
+        documento: cliente.documento_id,
+        id: cliente.id_cliente
+    };
+
+    document.getElementById('cred-cliente-nombre').innerText = cliente.nombre_completo;
+    document.getElementById('cred-cliente-cedula').innerText = cliente.documento_id || 'N/A';
+
+    const facturas = db.facturas.filter(f => 
+        f.id_cliente === cliente.codigo_cliente || 
+        f.id_cliente === cliente.id_cliente
+    );
+    const pendientes = facturas.filter(f => f.estado_factura === 'Pendiente');
+    const enCredito = facturas.filter(f => f.estado_factura === 'Crédito');
+    const cuotas = db.creditos.filter(cr => cr.id_cliente === cliente.codigo_cliente || cr.id_cliente === cliente.id_cliente);
+
+    document.getElementById('cred-stat-total').innerText = facturas.length;
+    document.getElementById('cred-stat-pendientes').innerText = pendientes.length;
+    document.getElementById('cred-stat-creditos').innerText = enCredito.length;
+    document.getElementById('cred-stat-cuotas').innerText = cuotas.length;
+
+    document.getElementById('cred-tarjeta-cliente').classList.remove('d-none');
+    
+    renderFacturasPendientesCredito(cliente, pendientes);
+    renderCreditosExistentes(cliente, cuotas);
+}
+
+function renderFacturasPendientesCredito(cliente, pendientes) {
+    const container = document.getElementById('cred-container-facturas');
+    const area = document.getElementById('cred-area-facturas');
+    
+    if (pendientes.length === 0) {
+        if (area) area.classList.add('d-none');
+        return;
+    }
+    
+    let html = '<div class="table-responsive"><table class="table table-sm align-middle mb-0">' +
+        '<thead class="table-light"><tr><th>Factura N°</th><th>Servicio</th><th>Emisión</th><th>Vencimiento</th><th>Monto</th></tr></thead><tbody>';
+    
+    pendientes.forEach(f => {
+        const servicio = f.tipo_servicio === 'Otro...' 
+            ? (f.especifique_servicio || 'Servicio personalizado') 
+            : (f.tipo_servicio || 'N/A');
+        html += '<tr>' +
+            '<td class="fw-bold">' + f.id_factura + '</td>' +
+            '<td><span class="service-badge">' + servicio + '</span></td>' +
+            '<td>' + (f.fecha_emision || 'N/A') + '</td>' +
+            '<td>' + (f.fecha_vencimiento || 'N/A') + '</td>' +
+            '<td class="fw-bold text-danger">' + formatoDineroFac(f.monto_total) + '</td>' +
+        '</tr>';
+    });
+    
+    html += '</tbody></table></div>';
+    container.innerHTML = html;
+    if (area) area.classList.remove('d-none');
+}
+
+function renderCreditosExistentes(cliente, cuotas) {
+    const container = document.getElementById('cred-container-creditos-existentes');
+    const area = document.getElementById('cred-area-creditos-existentes');
+    
+    if (cuotas.length === 0) {
+        if (area) area.classList.add('d-none');
+        return;
+    }
+    
+    let html = '<div class="table-responsive"><table class="table table-sm align-middle mb-0">' +
+        '<thead class="table-light"><tr><th>Cuota N°</th><th>Factura Ref</th><th>Vencimiento</th><th>Monto Cuota</th><th>Estado</th></tr></thead><tbody>';
+    
+    cuotas.forEach(q => {
+        html += '<tr>' +
+            '<td class="fw-bold">Cuota #' + q.numero_cuota + '</td>' +
+            '<td>' + (q.id_factura || 'N/A') + '</td>' +
+            '<td>' + (q.fecha_vencimiento_cuota || 'N/A') + '</td>' +
+            '<td class="fw-bold text-primary">$' + Number(q.monto_cuota).toFixed(2) + '</td>' +
+            '<td><span class="badge-status ' + (q.estado_cuota === 'Pagada' ? 'status-confirmado' : 'status-pendiente') + '">' + q.estado_cuota + '</span></td>' +
+        '</tr>';
+    });
+    
+    html += '</tbody></table></div>';
+    container.innerHTML = html;
+    if (area) area.classList.remove('d-none');
+}
+
+function abrirModalCreditoDesdeBusqueda() {
+    const cliente = window._credClienteSeleccionado;
+    if (!cliente) {
+        showToast('Error', 'Primero busque un cliente.', 'warning');
+        return;
+    }
+    abrirModalOtorgarCredito(cliente);
+}
+		
+		function renderCreditosAgrupados() {
+    const isClient = currentUser && currentUser.rol === 'Cliente';
+    
+    if (isClient) {
+        const areaBuscador = document.getElementById('cred-buscador-area');
+        if (areaBuscador) areaBuscador.classList.add('d-none');
+        
+        const cliente = db.clientes.find(c => 
+            c.codigo_cliente === currentUser.codigo_cliente || 
+            c.correo === currentUser.email
+        );
+        
+        if (cliente) {
+            window._credClienteSeleccionado = {
+                codigo: cliente.codigo_cliente,
+                nombre: cliente.nombre_completo,
+                documento: cliente.documento_id,
+                id: cliente.id_cliente
+            };
+            buscarClienteCreditos(cliente);
+        }
+        return;
+    }
+    
+    const areaBuscador = document.getElementById('cred-buscador-area');
+    if (areaBuscador) {
+        areaBuscador.classList.remove('d-none');
+        areaBuscador.classList.add('p-5');
+        areaBuscador.classList.remove('p-3');
+    }
+    
+    const input = document.getElementById('cred-input-cedula');
+    if (input) input.value = '';
+    
+    const container = document.getElementById('container-creditos-agrupados');
+    if (container) container.innerHTML = '';
+    
+    window._credClienteSeleccionado = null;
+    ocultarResultadosCreditos();
+}
+
+    function abrirModalOtorgarCredito(clienteForzado = null) {
+    document.getElementById('formCredito').reset();
+    const selectCli = document.getElementById('cred_cliente');
+    
+    if (clienteForzado) {
+        selectCli.innerHTML = `<option value="${clienteForzado.codigo}" selected>${clienteForzado.nombre} (${clienteForzado.codigo})</option>`;
+        cargarFacturasPendientesCredito();
+    } else {
         selectCli.innerHTML = '<option value="">-- Seleccione Cliente --</option>' + 
             db.clientes.map(c => `<option value="${c.codigo_cliente}">${c.nombre_completo} (${c.codigo_cliente})</option>`).join('');
         document.getElementById('container-facturas-credito').innerHTML = '<small class="text-muted">Seleccione un cliente para ver facturas pendientes.</small>';
-        document.getElementById('lbl-cred-monto-total').innerText = '$0.00';
-        document.getElementById('lbl-cred-monto-cuota').innerText = '$0.00';
-        modalCred.show();
     }
-
+    document.getElementById('lbl-cred-monto-total').innerText = '$0.00';
+    document.getElementById('lbl-cred-monto-cuota').innerText = '$0.00';
+    modalCred.show();
+}
     function cargarFacturasPendientesCredito() {
         const codCliente = document.getElementById('cred_cliente').value;
         const container = document.getElementById('container-facturas-credito');
@@ -3378,6 +3707,507 @@
         showToast('Notificaciones', 'Notificación eliminada.', 'success');
         if (gasUrl) sendGasRequest('deleteNotificacion', { id_notificacion: id });
     }
+// ═══════════════════════════════════════════════════════════════════════════════
+// SECCIÓN: FACTURACIÓN - FUNCIONES REDISEÑADAS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function formatoDineroFac(n) {
+    return '$' + Number(n || 0).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function ocultarResultadosFacturacion() {
+    const el = (id) => document.getElementById(id);
+    if (el('fac-tarjeta-cliente')) el('fac-tarjeta-cliente').classList.add('d-none');
+    if (el('fac-area-facturas')) el('fac-area-facturas').classList.add('d-none');
+    if (el('fac-estado-vacio')) el('fac-estado-vacio').classList.add('d-none');
+    if (el('fac-alerta-error')) el('fac-alerta-error').classList.add('d-none');
+    if (el('fac-container-facturas')) el('fac-container-facturas').innerHTML = '';
+}
+
+function buscarClienteFacturacion(clienteForzado = null) {
+    const input = document.getElementById('fac-input-cedula');
+    const areaBuscador = document.getElementById('fac-buscador-area');
+    
+    let raw = '';
+    let cliente = null;
+    
+    if (clienteForzado) {
+        cliente = clienteForzado;
+    } else {
+        if (input) raw = input.value.trim().replace(/\D/g, '');
+        if (!raw) { if(input) input.focus(); return; }
+        cliente = db.clientes.find(c => 
+            String(c.documento_id).replace(/\D/g, '') === raw
+        );
+    }
+
+    ocultarResultadosFacturacion();
+    if (areaBuscador && !clienteForzado) {
+        areaBuscador.classList.remove('p-5');
+        areaBuscador.classList.add('p-3');
+    }
+    
+    // Guardar cliente seleccionado para uso del modal
+    window._facClienteSeleccionado = {
+        codigo: cliente.codigo_cliente,
+        nombre: cliente.nombre_completo,
+        documento: cliente.documento_id
+    };
+
+    document.getElementById('fac-cliente-nombre').innerText = cliente.nombre_completo;
+    document.getElementById('fac-cliente-cedula').innerText = cliente.documento_id || 'N/A';
+
+    const facturas = db.facturas.filter(f => 
+        f.id_cliente === cliente.codigo_cliente || 
+        f.id_cliente === cliente.id_cliente
+    );
+
+    const total = facturas.length;
+    const montoTotal = facturas.reduce((s, f) => s + (Number(f.monto_total) || 0), 0);
+    const pendientes = facturas.filter(f => f.estado_factura === 'Pendiente').length;
+    
+    const hoy = new Date();
+    const vencidas = facturas.filter(f => {
+        if (f.estado_factura !== 'Pendiente') return false;
+        const venc = new Date(f.fecha_vencimiento);
+        return venc < hoy;
+    }).length;
+
+    document.getElementById('fac-stat-total').innerText = total;
+    document.getElementById('fac-stat-monto').innerText = formatoDineroFac(montoTotal);
+    document.getElementById('fac-stat-pendientes').innerText = pendientes;
+    document.getElementById('fac-stat-vencidas').innerText = vencidas;
+
+    document.getElementById('fac-tarjeta-cliente').classList.remove('d-none');
+    renderFacturasAgrupadasNuevo(cliente, facturas);
+}
+
+function renderFacturasAgrupadasNuevo(cliente, facturas) {
+    const container = document.getElementById('fac-container-facturas');
+    const areaFacturas = document.getElementById('fac-area-facturas');
+    const estadoVacio = document.getElementById('fac-estado-vacio');
+
+    if (!container) return;
+
+    if (facturas.length === 0) {
+        if (estadoVacio) estadoVacio.classList.remove('d-none');
+        if (areaFacturas) areaFacturas.classList.add('d-none');
+        return;
+    }
+
+    const grupos = { 'Pendiente': [], 'En Validación': [], 'Confirmado': [], 'Pagada': [], 'Crédito': [] };
+    facturas.forEach(f => {
+        const est = f.estado_factura || 'Pendiente';
+        if (grupos[est]) grupos[est].push(f);
+        else grupos['Pendiente'].push(f);
+    });
+
+    const config = {
+        'Pendiente':     { label: 'Pendientes de Pago',    icon: 'fa-clock',        badge: 'bg-danger',           text: 'text-danger' },
+        'En Validación': { label: 'En Validación',         icon: 'fa-spinner',      badge: 'bg-warning text-dark', text: 'text-warning' },
+        'Confirmado':    { label: 'Pagadas / Confirmadas', icon: 'fa-circle-check', badge: 'bg-success',          text: 'text-success' },
+        'Pagada':        { label: 'Pagadas / Confirmadas', icon: 'fa-circle-check', badge: 'bg-success',          text: 'text-success' },
+        'Crédito':       { label: 'En Financiamiento',     icon: 'fa-credit-card',  badge: 'bg-info text-dark',   text: 'text-info' }
+    };
+
+    const orden = ['Pendiente', 'En Validación', 'Crédito', 'Confirmado', 'Pagada'];
+    const isClient = currentUser && currentUser.rol === 'Cliente';
+
+    let html = '';
+    let hayFacturas = false;
+
+    orden.forEach(estado => {
+        const items = grupos[estado];
+        if (items.length === 0) return;
+        hayFacturas = true;
+        const cfg = config[estado];
+
+        let filas = '';
+        items.forEach(f => {
+            const servicio = f.tipo_servicio === 'Otro...' 
+                ? (f.especifique_servicio || 'Servicio personalizado') 
+                : (f.tipo_servicio || 'N/A');
+
+            let botones = '';
+            botones += '<button class="btn btn-sm btn-outline-secondary py-0 px-2 me-1 rounded-2" onclick="verResumenFactura(\'' + f.id_factura + '\')" title="Ver"><i class="fa-solid fa-eye"></i></button>';
+            
+            if (estado === 'Pendiente') {
+                botones += '<button class="btn btn-sm btn-success py-0 px-2 me-1 fw-semibold rounded-2" onclick="irAPagarFactura(\'' + f.id_cliente + '\', \'' + f.id_factura + '\')" title="Pagar"><i class="fa-solid fa-dollar-sign"></i></button>';
+            }
+            if (estado === 'En Validación' && !isClient) {
+                botones += '<button class="btn btn-sm btn-outline-success py-0 px-2 me-1 fw-semibold rounded-2" onclick="validarPagoAdmin(\'' + f.id_factura + '\', \'' + f.id_cliente + '\')" title="Confirmar"><i class="fa-solid fa-check-double"></i></button>';
+            }
+            if (!isClient) {
+                botones += '<button class="btn btn-sm btn-outline-primary py-0 px-2 me-1 rounded-2" onclick="abrirModalFactura(\'' + f.id_factura + '\')" title="Editar"><i class="fa-solid fa-pen"></i></button>';
+                botones += '<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick="eliminarFactura(\'' + f.id_factura + '\')" title="Eliminar"><i class="fa-solid fa-trash"></i></button>';
+            }
+
+            filas += '<tr>' +
+                '<td class="fw-bold">' + f.id_factura + '</td>' +
+                '<td><span class="service-badge">' + servicio + '</span></td>' +
+                '<td>' + (f.fecha_emision || 'N/A') + '</td>' +
+                '<td>' + (f.fecha_vencimiento || 'N/A') + '</td>' +
+                '<td class="fw-bold ' + cfg.text + '">' + formatoDineroFac(f.monto_total) + '</td>' +
+                '<td class="text-end">' + botones + '</td>' +
+            '</tr>';
+        });
+
+        html += '<div class="card mb-3 overflow-hidden border-0 shadow-sm">' +
+            '<div class="card-header bg-white d-flex justify-content-between align-items-center py-3 px-3 border-bottom" style="cursor:pointer;" onclick="toggleGrupoFacturas(this)" role="button" aria-expanded="true">' +
+                '<span class="fw-bold small d-flex align-items-center gap-2">' +
+                    '<i class="fa-solid ' + cfg.icon + ' ' + cfg.text + '"></i> ' + cfg.label +
+                    '<span class="badge ' + cfg.badge + ' rounded-pill ms-1">' + items.length + '</span>' +
+                '</span>' +
+                '<i class="fa-solid fa-chevron-down text-muted small fac-grupo-toggle" style="transition:transform 0.2s"></i>' +
+            '</div>' +
+            '<div class="collapse show">' +
+                '<div class="table-responsive">' +
+                    '<table class="table table-sm align-middle mb-0">' +
+                        '<thead class="table-light"><tr><th>Factura N°</th><th>Servicio</th><th>Emisión</th><th>Vencimiento</th><th>Monto</th><th class="text-end">Acciones</th></tr></thead>' +
+                        '<tbody>' + filas + '</tbody>' +
+                    '</table>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+    });
+
+    container.innerHTML = html;
+    if (areaFacturas) areaFacturas.classList.remove('d-none');
+}
+
+function toggleGrupoFacturas(header) {
+    const body = header.nextElementSibling;
+    const icon = header.querySelector('.fac-grupo-toggle');
+    const isOpen = body.classList.contains('show');
+    if (isOpen) {
+        body.classList.remove('show');
+        icon.style.transform = 'rotate(0deg)';
+        header.setAttribute('aria-expanded', 'false');
+    } else {
+        body.classList.add('show');
+        icon.style.transform = 'rotate(180deg)';
+        header.setAttribute('aria-expanded', 'true');
+    }
+}
+
+function abrirModalFacturaDesdeBusqueda() {
+    const cliente = window._facClienteSeleccionado;
+    if (!cliente) {
+        showToast('Error', 'Primero busque un cliente.', 'warning');
+        return;
+    }
+    abrirModalFactura(null, cliente);
+}
+
+function abrirModalFactura(id = null, clienteForzado = null) {
+    document.getElementById('formFactura').reset();
+    const selectWrapper = document.getElementById('fac_cliente_select_wrapper');
+    const bloqueadoWrapper = document.getElementById('fac_cliente_bloqueado_wrapper');
+    const selectCli = document.getElementById('fac_cliente');
+    const hiddenCli = document.getElementById('fac_cliente_bloqueado_valor');
+    
+    document.getElementById('group_fac_especifique').classList.add('d-none');
+
+    if (clienteForzado) {
+        // Modo: emitir desde búsqueda de cliente
+        if (selectWrapper) selectWrapper.classList.add('d-none');
+        if (bloqueadoWrapper) bloqueadoWrapper.classList.remove('d-none');
+        if (selectCli) selectCli.removeAttribute('required');
+        
+        const nombreEl = document.getElementById('fac_cliente_bloqueado_nombre');
+        const codigoEl = document.getElementById('fac_cliente_bloqueado_codigo');
+        if (nombreEl) nombreEl.innerText = clienteForzado.nombre;
+        if (codigoEl) codigoEl.innerText = clienteForzado.codigo;
+        if (hiddenCli) hiddenCli.value = clienteForzado.codigo;
+        
+        document.getElementById('modalFacturaSubtitle').innerText = 'Cliente: ' + clienteForzado.nombre;
+    } else {
+        // Modo normal (seleccionar cliente manualmente)
+        if (selectWrapper) selectWrapper.classList.remove('d-none');
+        if (bloqueadoWrapper) bloqueadoWrapper.classList.add('d-none');
+        if (selectCli) {
+            selectCli.setAttribute('required', 'required');
+            selectCli.innerHTML = '<option value="">-- Seleccione Cliente --</option>' + 
+                db.clientes.map(c => `<option value="${c.codigo_cliente}">${c.nombre_completo} (${c.codigo_cliente})</option>`).join('');
+        }
+        if (hiddenCli) hiddenCli.value = '';
+        document.getElementById('modalFacturaSubtitle').innerText = 'Nueva factura';
+    }
+
+    if (!id) {
+        generarNumeroFactura();
+        document.getElementById('fac_id').value = '';
+        document.getElementById('modalFacturaTitle').innerHTML = '<i class="fa-solid fa-file-invoice text-primary me-2"></i>Emitir Factura';
+    } else {
+        const f = db.facturas.find(x => x.id_factura === id);
+        if (f && f.estado_factura === 'En Validación' && currentUser.rol === 'Cliente') {
+            showSystemNotification('Bloqueado', 'Esta factura está en proceso de validación.', 'warning');
+            return;
+        }
+        document.getElementById('fac_id').value = f.id_factura;
+        
+        if (clienteForzado) {
+            if (hiddenCli) hiddenCli.value = f.id_cliente;
+        } else {
+            if (selectCli) selectCli.value = f.id_cliente;
+        }
+        
+        document.getElementById('fac_tipo_servicio').value = f.tipo_servicio || 'PROYECTO STARTER';
+        document.getElementById('fac_especifique_servicio').value = f.especifique_servicio || '';
+        toggleEspecificarServicio(f.tipo_servicio, 'group_fac_especifique');
+        document.getElementById('fac_numero').value = f.id_factura;
+        document.getElementById('fac_emision').value = f.fecha_emision;
+        document.getElementById('fac_vencimiento').value = f.fecha_vencimiento;
+        document.getElementById('fac_monto').value = f.monto_total;
+        document.getElementById('fac_estado').value = f.estado_factura;
+        document.getElementById('fac_notas').value = f.notas || '';
+        document.getElementById('modalFacturaTitle').innerHTML = '<i class="fa-solid fa-file-invoice text-primary me-2"></i>Modificar Factura';
+    }
+    modalFac.show();
+}
+
+async function guardarFactura(e) {
+    e.preventDefault();
+    const id = document.getElementById('fac_id').value;
+    const numFac = document.getElementById('fac_numero').value;
+    const monto = Number(document.getElementById('fac_monto').value);
+    
+    // Cliente: puede venir del select o del campo bloqueado
+    const cliId = document.getElementById('fac_cliente_bloqueado_valor').value 
+        || document.getElementById('fac_cliente').value;
+
+    if (!cliId) {
+        showSystemNotification('Error', 'Debe seleccionar un cliente.', 'danger');
+        return;
+    }
+
+    const payload = {
+        id_factura: numFac,
+        id_cliente: cliId,
+        tipo_servicio: document.getElementById('fac_tipo_servicio').value,
+        especifique_servicio: document.getElementById('fac_especifique_servicio').value,
+        fecha_emision: document.getElementById('fac_emision').value,
+        fecha_vencimiento: document.getElementById('fac_vencimiento').value,
+        subtotal: (monto * 0.84).toFixed(2),
+        impuestos: (monto * 0.16).toFixed(2),
+        monto_total: monto,
+        estado_factura: document.getElementById('fac_estado').value,
+        notas: document.getElementById('fac_notas').value
+    };
+
+    if (id) {
+        const idx = db.facturas.findIndex(x => x.id_factura === id);
+        db.facturas[idx] = payload;
+    } else {
+        db.facturas.push(payload);
+
+        const notifFac = {
+            id_notificacion: 'NOT-' + Date.now(),
+            id_usuario: cliId,
+            emisor_id: currentUser ? currentUser.id_usuario : 'ADMIN',
+            rol_destino: 'Cliente',
+            tipo: 'Facturación',
+            titulo: 'Nueva Factura Emitida',
+            mensaje: `Se ha emitido la Factura N° ${numFac} por un total de $${monto.toFixed(2)}.`,
+            fecha: new Date().toLocaleString('es-VE'),
+            leido: 'NO'
+        };
+        db.notificaciones.unshift(notifFac);
+        if (gasUrl) sendGasRequest('addNotificacion', notifFac);
+    }
+
+       modalFac.hide();
+    
+    // Si venimos desde búsqueda o es cliente, refrescar la vista del cliente
+    if (window._facClienteSeleccionado) {
+        buscarClienteFacturacion(window._facClienteSeleccionado);
+    } else {
+        renderFacturacionAgrupada();
+    }
+    
+    renderModuloPagosSelects();
+    renderNotificaciones();
+    updateKPIs();
+    renderDashboardCharts();
+    showToast('Facturación', 'Factura procesada correctamente.', 'success');
+    if (gasUrl) sendGasRequest(id ? 'updateFactura' : 'addFactura', payload);
+}
+
+async function eliminarFactura(id) {
+    const f = db.facturas.find(x => x.id_factura === id);
+    if (f && f.estado_factura === 'En Validación') {
+        showSystemNotification('Bloqueado', 'No se puede eliminar una factura en validación.', 'warning');
+        return;
+    }
+    if (!confirm('¿Eliminar esta factura?')) return;
+        db.facturas = db.facturas.filter(x => x.id_factura !== id);
+    
+    if (window._facClienteSeleccionado) {
+        buscarClienteFacturacion(window._facClienteSeleccionado);
+    } else {
+        renderFacturacionAgrupada();
+    }
+    
+    renderModuloPagosSelects();
+    updateKPIs();
+    renderDashboardCharts();
+    showToast('Facturación', 'Factura eliminada.', 'success');
+    if (gasUrl) sendGasRequest('deleteFactura', { id_factura: id });
+}
+
+function renderFacturacionAgrupada() {
+    const input = document.getElementById('fac-input-cedula');
+    if (input) input.value = '';
+    
+    const area = document.getElementById('fac-buscador-area');
+    if (area) {
+        area.classList.add('p-5');
+        area.classList.remove('p-3');
+    }
+    
+    const container = document.getElementById('fac-container-facturas');
+    if (container) container.innerHTML = '';
+    
+    window._facClienteSeleccionado = null;
+    ocultarResultadosFacturacion();
+}
+
+// Eventos del buscador
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('fac-input-cedula');
+    if (input) {
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') buscarClienteFacturacion();
+        });
+        input.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                const area = document.getElementById('fac-buscador-area');
+                if (area) {
+                    area.classList.add('p-5');
+                    area.classList.remove('p-3');
+                }
+                window._facClienteSeleccionado = null;
+                ocultarResultadosFacturacion();
+            }
+        });
+    }
+});
+		
+		// Eventos del buscador de CRÉDITOS
+document.addEventListener('DOMContentLoaded', function() {
+    const inputCred = document.getElementById('cred-input-cedula');
+    if (inputCred) {
+        inputCred.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') buscarClienteCreditos();
+        });
+        inputCred.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                const area = document.getElementById('cred-buscador-area');
+                if (area) {
+                    area.classList.add('p-5');
+                    area.classList.remove('p-3');
+                }
+                window._credClienteSeleccionado = null;
+                ocultarResultadosCreditos();
+            }
+        });
+    }
+    
+    const inputCli = document.getElementById('cli-input-cedula');
+    if (inputCli) {
+        inputCli.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') buscarClienteGestion();
+        });
+        inputCli.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                const area = document.getElementById('cli-buscador-area');
+                if (area) {
+                    area.classList.add('p-5');
+                    area.classList.remove('p-3');
+                }
+                document.getElementById('cli-tarjeta-cliente').classList.add('d-none');
+                document.getElementById('cli-estado-vacio').classList.add('d-none');
+                document.getElementById('cli-tabla-completa').classList.remove('d-none');
+            }
+        });
+    }
+});
+		
+function toggleGrupoFacturas(header) {
+    const body = header.nextElementSibling;
+    const icon = header.querySelector('.fac-grupo-toggle');
+    const isOpen = body.classList.contains('show');
+    if (isOpen) {
+        body.classList.remove('show');
+        icon.style.transform = 'rotate(0deg)';
+        header.setAttribute('aria-expanded', 'false');
+    } else {
+        body.classList.add('show');
+        icon.style.transform = 'rotate(180deg)';
+        header.setAttribute('aria-expanded', 'true');
+    }
+}
+
+// Eventos del buscador
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('fac-input-cedula');
+    if (input) {
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') buscarClienteFacturacion();
+        });
+        input.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                const area = document.getElementById('fac-buscador-area');
+                if (area) {
+                    area.classList.add('p-5');
+                    area.classList.remove('p-3');
+                }
+                ocultarResultadosFacturacion();
+            }
+        });
+    }
+});
+		function abrirModalFacturaDesdeBusqueda() {
+    // Obtener el código del cliente que está mostrado en la tarjeta
+    const codigoCliente = document.getElementById('fac-cliente-cedula').innerText;
+    
+    // Abrir el modal normal
+    abrirModalFactura();
+    
+    // Preseleccionar el cliente en el select
+    const selectCli = document.getElementById('fac_cliente');
+    if (selectCli) {
+        // Buscar la opción que corresponde al cliente mostrado
+        // Puede ser por código de cliente o por documento_id
+        const cliente = db.clientes.find(c => c.documento_id === codigoCliente);
+        if (cliente && selectCli.querySelector(`option[value="${cliente.codigo_cliente}"]`)) {
+            selectCli.value = cliente.codigo_cliente;
+        }
+    }
+}
     </script>
+	<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loginOverlay = document.getElementById('login-overlay');
+    if (loginOverlay) {
+        loginOverlay.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'PrintScreen' || e.keyCode === 44) {
+            e.preventDefault();
+            alert('Las capturas de pantalla no están permitidas.');
+            return false;
+        }
+    });
+    document.addEventListener('keyup', function(e) {
+        if (e.key === 'PrintScreen' || e.keyCode === 44) {
+            navigator.clipboard.writeText('');
+        }
+    });
+});
+</script>
 </body>
 </html>
