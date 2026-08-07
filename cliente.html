@@ -787,19 +787,80 @@
              SECCIÓN: EMPRESAS
              ═══════════════════════════════════════════════════════════════ -->
         <section id="sec-empresas" class="tab-content d-none">
-            <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <h5 class="fw-bold m-0">Gestión Multiempresa</h5>
-                <button class="btn btn-primary" onclick="abrirModalEmpresa()">
+                <button class="btn btn-primary view-admin-master" onclick="abrirModalEmpresa()">
                     <i class="fa-solid fa-plus me-1"></i> Registrar Empresa
                 </button>
             </div>
-            <div class="table-responsive table-custom">
-                <table class="table mb-0">
-                    <thead>
-                        <tr><th>ID</th><th>Empresa</th><th>RIF</th><th>Contacto</th><th>Dirección</th><th>Estado</th><th>Acciones</th></tr>
-                    </thead>
-                    <tbody id="tbl-empresas-body"></tbody>
-                </table>
+
+            <!-- BUSCADOR INTELIGENTE -->
+            <div id="emp-buscador-area" class="text-center p-5 border border-dashed rounded-3 bg-light">
+                <div class="position-relative mx-auto" style="max-width: 480px;">
+                    <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                    <input type="text" id="emp-input-busqueda" class="form-control ps-5 pe-5" 
+                           placeholder="Ingrese RIF o nombre de empresa..." maxlength="50" autocomplete="off">
+                    <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y me-1" 
+                            onclick="buscarEmpresaGestion()">Buscar</button>
+                </div>
+                <small class="text-muted d-block mt-2">Escribe y presiona Enter para buscar</small>
+            </div>
+
+            <!-- INFO DE LA EMPRESA ENCONTRADA -->
+            <div id="emp-tarjeta-empresa" class="card mt-3 d-none">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" 
+                                 style="width:48px;height:48px;">
+                                <i class="fa-solid fa-building text-primary fs-5"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0" id="emp-encontrada-nombre">—</h6>
+                                <small class="text-muted">ID: <span id="emp-encontrada-id">—</span></small>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-primary btn-sm" id="emp-btn-editar" onclick="">
+                                <i class="fa-solid fa-pen me-1"></i> Editar
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm" id="emp-btn-eliminar" onclick="">
+                                <i class="fa-solid fa-trash me-1"></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong><i class="fa-solid fa-hashtag text-muted me-2"></i>RIF:</strong> <span id="emp-info-rif">—</span></p>
+                            <p class="mb-1"><strong><i class="fa-solid fa-phone text-muted me-2"></i>Teléfono:</strong> <span id="emp-info-telefono">—</span></p>
+                            <p class="mb-1"><strong><i class="fa-solid fa-envelope text-muted me-2"></i>Correo:</strong> <span id="emp-info-correo">—</span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong><i class="fa-solid fa-location-dot text-muted me-2"></i>Dirección:</strong> <span id="emp-info-direccion">—</span></p>
+                            <p class="mb-1"><strong><i class="fa-solid fa-circle-check text-muted me-2"></i>Estado:</strong> <span id="emp-info-estado">—</span></p>
+                            <p class="mb-1"><strong><i class="fa-solid fa-users text-muted me-2"></i>Total Usuarios:</strong> <span id="emp-info-usuarios">0</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESTADO VACÍO -->
+            <div id="emp-estado-vacio" class="text-center p-5 text-muted d-none">
+                <i class="fa-regular fa-folder-open fa-3x mb-2 opacity-25"></i>
+                <p class="mb-0">No se encontró ninguna empresa con esos datos.</p>
+            </div>
+
+            <!-- TABLA COMPLETA -->
+            <div id="emp-tabla-completa" class="mt-3">
+                <div class="table-responsive table-custom">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr><th>ID</th><th>Empresa</th><th>RIF</th><th>Contacto</th><th>Dirección</th><th>Estado</th><th>Acciones</th></tr>
+                        </thead>
+                        <tbody id="tbl-empresas-body"></tbody>
+                    </table>
+                </div>
             </div>
         </section>
 
@@ -807,21 +868,85 @@
              SECCIÓN: USUARIOS
              ═══════════════════════════════════════════════════════════════ -->
         <section id="sec-usuarios" class="tab-content d-none">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="fw-bold m-0">Usuarios y Permisos</h5>
-                <button class="btn btn-primary btn-master-only" onclick="abrirModalCrearUsuario()">
-                    <i class="fa-solid fa-user-plus me-1"></i> Crear Usuario
-                </button>
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <h5 class="fw-bold m-0">Usuarios y Permisos</h5>
+        <button class="btn btn-primary btn-master-only" onclick="abrirModalCrearUsuario()">
+            <i class="fa-solid fa-user-plus me-1"></i> Crear Usuario
+        </button>
+    </div>
+
+    <!-- BUSCADOR INTELIGENTE -->
+    <div id="usr-buscador-area" class="text-center p-5 border border-dashed rounded-3 bg-light">
+        <div class="position-relative mx-auto" style="max-width: 480px;">
+            <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+            <input type="text" id="usr-input-busqueda" class="form-control ps-5 pe-5" 
+                   placeholder="Ingrese cédula, username, correo o ID..." maxlength="50" autocomplete="off">
+            <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y me-1" 
+                    onclick="buscarUsuarioGestion()">Buscar</button>
+        </div>
+        <small class="text-muted d-block mt-2">Escribe y presiona Enter para buscar</small>
+    </div>
+
+    <!-- INFO DEL USUARIO ENCONTRADO -->
+    <div id="usr-tarjeta-usuario" class="card mt-3 d-none">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" 
+                         style="width:48px;height:48px;">
+                        <i class="fa-solid fa-user-shield text-primary fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-0" id="usr-encontrado-nombre">—</h6>
+                        <small class="text-muted">ID: <span id="usr-encontrado-id">—</span></small>
+                    </div>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary btn-sm" id="usr-btn-ver" onclick="">
+                        <i class="fa-solid fa-eye me-1"></i> Ver Detalle
+                    </button>
+                    <button class="btn btn-outline-primary btn-sm view-admin-master" id="usr-btn-editar" onclick="">
+                        <i class="fa-solid fa-pen me-1"></i> Editar
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm view-admin-master" id="usr-btn-eliminar" onclick="">
+                        <i class="fa-solid fa-trash me-1"></i> Eliminar
+                    </button>
+                </div>
             </div>
-            <div class="table-responsive table-custom">
-                <table class="table mb-0">
-                    <thead>
-                        <tr><th>Usuario / ID</th><th>Username / Correo</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr>
-                    </thead>
-                    <tbody id="tbl-usuarios-body"></tbody>
-                </table>
+            <hr>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <p class="mb-1"><strong><i class="fa-solid fa-id-badge text-muted me-2"></i>Username:</strong> <span id="usr-info-username">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-envelope text-muted me-2"></i>Correo:</strong> <span id="usr-info-email">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-shield-halved text-muted me-2"></i>Rol:</strong> <span id="usr-info-rol">—</span></p>
+                </div>
+                <div class="col-md-6">
+                    <p class="mb-1"><strong><i class="fa-solid fa-fingerprint text-muted me-2"></i>Código Cliente:</strong> <span id="usr-info-codigo">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-circle-check text-muted me-2"></i>Estado:</strong> <span id="usr-info-estado">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-building text-muted me-2"></i>Empresa:</strong> <span id="usr-info-empresa">—</span></p>
+                </div>
             </div>
-        </section>
+        </div>
+    </div>
+
+    <!-- ESTADO VACÍO -->
+    <div id="usr-estado-vacio" class="text-center p-5 text-muted d-none">
+        <i class="fa-regular fa-folder-open fa-3x mb-2 opacity-25"></i>
+        <p class="mb-0">No se encontró ningún usuario con esos datos.</p>
+    </div>
+
+    <!-- TABLA COMPLETA (solo admin/master) -->
+    <div id="usr-tabla-completa" class="mt-3">
+        <div class="table-responsive table-custom">
+            <table class="table mb-0">
+                <thead>
+                    <tr><th>Usuario / ID</th><th>Username / Correo</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr>
+                </thead>
+                <tbody id="tbl-usuarios-body"></tbody>
+            </table>
+        </div>
+    </div>
+</section>
 
         <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: CLIENTES
@@ -869,6 +994,7 @@
                     </button>
                 </div>
             </div>
+
             <hr>
             <div class="row g-3">
                 <div class="col-md-6">
@@ -1091,77 +1217,94 @@
              SECCIÓN: MÓDULO DE PAGOS
              ═══════════════════════════════════════════════════════════════ -->
         <section id="sec-pagos" class="tab-content d-none">
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <div class="card-stat mb-4">
-                        <h6 class="fw-bold mb-3"><i class="fa-solid fa-receipt me-2"></i>Procesar Pago de Factura</h6>
-                        <form id="formPagoModule" onsubmit="procesarPagoModulo(event)">
-                            <div class="mb-3">
-                                <label class="form-label small fw-semibold">1. Cliente</label>
-                                <select class="form-select form-select-pro" id="pagoSelectCliente" onchange="cargarFacturasPendientesDeCliente()" required>
-                                    <option value="">-- Seleccione Cliente --</option>
-                                </select>
-                            </div>
-                            <div id="pagoDetalleFacturasPendientes"></div>
-                            <div class="mb-3">
-                                <label class="form-label small fw-semibold">2. Factura Pendiente a Pagar</label>
-                                <select class="form-select form-select-pro" id="pagoSelectFactura" onchange="autoCompletarMontoPago()" required>
-                                    <option value="">-- Seleccione Factura Pendiente --</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label small fw-semibold">Fecha de Transferencia / Pago</label>
-                                <input type="date" class="form-control form-control-pro" id="pagoFechaTransferencia" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label small fw-semibold">Método de Pago</label>
-                                <select class="form-select form-select-pro" id="pagoMetodo" required>
-                                    <option value="Pago Móvil">Pago Móvil</option>
-                                    <option value="Transferencia">Transferencia Bancaria</option>
-                                    <option value="Zinli / Zelle">Zinli / Zelle</option>
-                                    <option value="Efectivo">Efectivo ($)</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label small fw-semibold">Banco Origen / Entidad</label>
-                                <input type="text" class="form-control form-control-pro" id="pagoBanco" placeholder="Ej: Banco de Venezuela / Zinli" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label small fw-semibold">Referencia</label>
-                                <input type="text" class="form-control form-control-pro" id="pagoRef" placeholder="Número de confirmación" required>
-                            </div>
-                            <div class="row g-2 mb-3">
-                                <div class="col-6">
-                                    <label class="form-label small fw-semibold">Monto ($)</label>
-                                    <input type="number" step="0.01" class="form-control form-control-pro" id="pagoMonto" placeholder="0.00" required>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label small fw-semibold">Monto (Bs)</label>
-                                    <input type="number" step="0.01" class="form-control form-control-pro" id="pagoMontoBs" placeholder="0.00" required>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-success w-100 fw-semibold rounded-3">
-                                <i class="fa-solid fa-paper-plane me-1"></i> Enviar Pago a Validación
-                            </button>
-                        </form>
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <h5 class="fw-bold m-0">Módulo de Pagos</h5>
+    </div>
+
+    <!-- BUSCADOR INTELIGENTE -->
+    <div id="pay-buscador-area" class="text-center p-5 border border-dashed rounded-3 bg-light">
+        <div class="position-relative mx-auto" style="max-width: 480px;">
+            <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+            <input type="text" id="pay-input-cedula" class="form-control ps-5 pe-5" 
+                   placeholder="Ingrese cédula del cliente..." maxlength="20" autocomplete="off">
+            <button class="btn btn-dark position-absolute top-50 end-0 translate-middle-y me-1" 
+                    onclick="buscarClientePagos()">Buscar</button>
+        </div>
+        <small class="text-muted d-block mt-2">Escribe la cédula y presiona Enter</small>
+    </div>
+
+    <!-- INFO DEL CLIENTE -->
+    <div id="pay-tarjeta-cliente" class="card mt-3 d-none">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="rounded-circle bg-success bg-opacity-10 d-flex align-items-center justify-content-center" 
+                         style="width:48px;height:48px;">
+                        <i class="fa-solid fa-user text-success fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-0" id="pay-cliente-nombre">—</h6>
+                        <small class="text-muted">Cédula: <span id="pay-cliente-cedula">—</span></small>
                     </div>
                 </div>
-
-                <div class="col-lg-6">
-                    <div class="card-stat">
-                        <h6 class="fw-bold mb-3">Historial Reciente de Pagos Procesados</h6>
-                        <div class="table-responsive">
-                            <table class="table table-sm mb-0">
-                                <thead>
-                                    <tr><th>Fecha Transf.</th><th>Cliente</th><th>Factura</th><th>Método</th><th>Monto ($)</th><th>Monto (Bs)</th></tr>
-                                </thead>
-                                <tbody id="tbl-historial-pagos"></tbody>
-                            </table>
-                        </div>
+                <button class="btn btn-success" id="btn-procesar-pago" onclick="abrirModalProcesarPago()">
+                    <i class="fa-solid fa-credit-card me-1"></i> Procesar Pago
+                </button>
+            </div>
+            <div class="row g-2 text-center mt-3">
+                <div class="col-6 col-md-3">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">Total Facturas</div>
+                        <div class="fw-bold fs-5" id="pay-stat-total">0</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">Pendientes</div>
+                        <div class="fw-bold fs-5 text-warning" id="pay-stat-pendientes">0</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">En Validación</div>
+                        <div class="fw-bold fs-5 text-info" id="pay-stat-validacion">0</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">Monto Total Pendiente</div>
+                        <div class="fw-bold fs-5 text-danger" id="pay-stat-monto">$0.00</div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+
+    <!-- FACTURAS PENDIENTES -->
+    <div id="pay-area-facturas" class="mt-3 d-none">
+        <h6 class="fw-bold mb-2"><i class="fa-solid fa-file-invoice me-1"></i> Facturas Pendientes del Cliente</h6>
+        <div id="pay-container-facturas"></div>
+    </div>
+
+    <!-- HISTORIAL DE PAGOS DEL CLIENTE -->
+    <div id="pay-area-historial" class="mt-3 d-none">
+        <h6 class="fw-bold mb-2"><i class="fa-solid fa-clock-rotate-left me-1"></i> Historial de Pagos</h6>
+        <div class="table-responsive table-custom">
+            <table class="table mb-0">
+                <thead>
+                    <tr><th>Fecha</th><th>Factura</th><th>Método</th><th>Ref.</th><th>Monto ($)</th><th>Monto (Bs)</th><th>Estado</th></tr>
+                </thead>
+                <tbody id="pay-tbl-historial"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ESTADO VACÍO -->
+    <div id="pay-estado-vacio" class="text-center p-5 text-muted d-none">
+        <i class="fa-regular fa-folder-open fa-3x mb-2 opacity-25"></i>
+        <p class="mb-0">No se encontró ningún cliente con esa cédula.</p>
+    </div>
+</section>
 
         <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: NOTIFICACIONES
@@ -1408,6 +1551,73 @@
                         </div>
                         <button type="submit" class="btn btn-primary w-100 fw-semibold rounded-3">Guardar Usuario</button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL: DETALLE DE USUARIO -->
+    <div class="modal fade" id="modalVerUsuario" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content modal-content-pro">
+                <div class="modal-header modal-header-pro">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-user-shield text-primary me-2"></i>Detalle de Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body modal-body-pro">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted">ID Usuario</label>
+                            <div class="form-control form-control-pro bg-light fw-bold" id="ver-usr-id">—</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted">Nombre Completo</label>
+                            <div class="form-control form-control-pro bg-light fw-bold" id="ver-usr-nombre">—</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted">Username</label>
+                            <div class="form-control form-control-pro bg-light fw-bold" id="ver-usr-username">—</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted">Correo Electrónico</label>
+                            <div class="form-control form-control-pro bg-light fw-bold" id="ver-usr-email">—</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted">Rol</label>
+                            <div id="ver-usr-rol-badge">—</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted">Estado</label>
+                            <div id="ver-usr-estado-badge">—</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted">Código Cliente</label>
+                            <div class="form-control form-control-pro bg-light" id="ver-usr-codigo">—</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-muted">Empresa</label>
+                            <div class="form-control form-control-pro bg-light" id="ver-usr-empresa">—</div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small fw-semibold text-muted">Contraseña</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control form-control-pro fw-bold text-danger bg-light" id="ver-usr-password" readonly value="••••••••">
+                                <button class="btn btn-outline-secondary" type="button" onclick="toggleVerPassword()" title="Mostrar/Ocultar">
+                                    <i class="fa-solid fa-eye" id="ver-usr-password-icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer modal-footer-pro d-flex justify-content-between">
+                    <button type="button" class="btn btn-light fw-semibold rounded-3" data-bs-dismiss="modal">Cerrar</button>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-outline-danger fw-semibold rounded-3 view-admin-master" id="ver-usr-btn-eliminar" onclick="">
+                            <i class="fa-solid fa-trash me-1"></i> Eliminar
+                        </button>
+                        <button type="button" class="btn btn-primary fw-semibold rounded-3 view-admin-master" id="ver-usr-btn-editar" onclick="">
+                            <i class="fa-solid fa-pen me-1"></i> Editar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1693,6 +1903,78 @@
         </div>
     </div>
 
+    <!-- MODAL: PROCESAR PAGO DE FACTURA -->
+    <div class="modal fade" id="modalProcesarPago" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content modal-content-pro">
+                <div class="modal-header modal-header-pro">
+                    <div>
+                        <h5 class="modal-title fw-bold m-0"><i class="fa-solid fa-credit-card text-success me-2"></i>Procesar Pago</h5>
+                        <small class="text-muted" id="pay-modal-subtitle">Cliente</small>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body modal-body-pro">
+                    <form id="formProcesarPago" onsubmit="procesarPagoDesdeModal(event)">
+                        <input type="hidden" id="pay-modal-cliente">
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">1. Seleccionar Factura Pendiente</label>
+                            <select class="form-select form-select-pro" id="pay-modal-factura" onchange="autoCompletarMontoPagoModal()" required>
+                                <option value="">-- Seleccione Factura --</option>
+                            </select>
+                            <div id="pay-modal-detalle-pendientes" class="mt-2"></div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">2. Fecha de Transferencia / Pago</label>
+                                <input type="date" class="form-control form-control-pro" id="pay-modal-fecha" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">3. Método de Pago</label>
+                                <select class="form-select form-select-pro" id="pay-modal-metodo" required>
+                                    <option value="Pago Móvil">Pago Móvil</option>
+                                    <option value="Transferencia">Transferencia Bancaria</option>
+                                    <option value="Zinli / Zelle">Zinli / Zelle</option>
+                                    <option value="Efectivo">Efectivo ($)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">4. Banco Origen / Entidad</label>
+                            <input type="text" class="form-control form-control-pro" id="pay-modal-banco" placeholder="Ej: Banco de Venezuela / Zinli" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold">5. Referencia / Número de Confirmación</label>
+                            <input type="text" class="form-control form-control-pro" id="pay-modal-ref" placeholder="Número de confirmación" required>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">6. Monto ($)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0 text-success fw-bold">$</span>
+                                    <input type="number" step="0.01" class="form-control form-control-pro fw-bold text-success" id="pay-modal-monto" placeholder="0.00" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">7. Monto (Bs)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0 text-primary fw-bold">Bs</span>
+                                    <input type="number" step="0.01" class="form-control form-control-pro fw-bold text-primary" id="pay-modal-monto-bs" placeholder="0.00" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-light border rounded-3 py-2 mb-3">
+                            <small class="text-muted"><i class="fa-solid fa-circle-info me-1 text-primary"></i> El pago será enviado a <strong>validación</strong> antes de ser confirmado por el administrador.</small>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100 fw-semibold rounded-3 py-2">
+                            <i class="fa-solid fa-paper-plane me-2"></i> Enviar Pago a Validación
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -1740,6 +2022,15 @@
         modalCred = new bootstrap.Modal(document.getElementById('modalCredito'));
         modalVerFac = new bootstrap.Modal(document.getElementById('modalVerFactura'));
         modalNotif = new bootstrap.Modal(document.getElementById('modalAddNotificacion'));
+
+        // Inicializar modal de procesar pago
+        modalProcesarPagoInstance = new bootstrap.Modal(document.getElementById('modalProcesarPago'));
+        _payClienteSeleccionado = null;
+
+        // Inicializar modal de detalle de usuario
+        modalVerUsuarioInstance = new bootstrap.Modal(document.getElementById('modalVerUsuario'));
+        // Variable global para contraseña visible
+        _currentViewUserPassword = '';
 
         // Restaurar sesión si existe y no ha expirado (5 minutos de inactividad)
         const savedSession = localStorage.getItem('erp_session_user');
@@ -1905,6 +2196,22 @@
         renderDashboardServicio();
         updateKPIs();
         renderDashboardCharts();
+
+        // Auto-cargar datos del cliente si está logueado
+        const isClient = currentUser && currentUser.rol === 'Cliente';
+        if (isClient) {
+            setTimeout(function() {
+                // Determinar qué pestaña está activa y cargar datos correspondientes
+                const activeTab = document.querySelector('.tab-content:not(.d-none)');
+                if (activeTab) {
+                    const tabId = activeTab.id.replace('sec-', '');
+                    if (tabId === 'facturacion') autoCargarClienteFacturacion();
+                    else if (tabId === 'pagos') autoCargarClientePagos();
+                    else if (tabId === 'creditos') autoCargarClienteCreditos();
+                    else if (tabId === 'clientes') autoCargarClientePerfil();
+                }
+            }, 100);
+        }
     }
 
     // ═══════════════════════════════════════════════════════════════════════════════
@@ -1924,12 +2231,15 @@
 
     function handleLoginSubmit(e) {
         e.preventDefault();
-        const uVal = document.getElementById('loginUser').value.trim();
-        const pVal = document.getElementById('loginPassword').value.trim();
+        const uVal = String(document.getElementById('loginUser').value).trim();
+        const pVal = String(document.getElementById('loginPassword').value).trim();
 
         const found = db.usuarios.find(u =>
-            (u.username === uVal || u.email === uVal || u.codigo_cliente === uVal || u.id_usuario === uVal) &&
-            String(u.password) === String(pVal)
+            (String(u.username).trim() === uVal || 
+             String(u.email).trim().toLowerCase() === uVal.toLowerCase() || 
+             String(u.codigo_cliente).trim() === uVal || 
+             String(u.id_usuario).trim() === uVal) &&
+            String(u.password).trim() === pVal
         );
 
         if (found) {
@@ -2406,10 +2716,108 @@
         };
         document.getElementById('page-title').innerText = titles[tabId] || 'Plataforma ERP';
 
+        // Auto-cargar datos para el rol Cliente al navegar entre pestañas
+        const isClient = currentUser && currentUser.rol === 'Cliente';
+        if (isClient) {
+            if (tabId === 'facturacion') {
+                setTimeout(function() { autoCargarClienteFacturacion(); }, 50);
+            } else if (tabId === 'pagos') {
+                setTimeout(function() { autoCargarClientePagos(); }, 50);
+            } else if (tabId === 'creditos') {
+                setTimeout(function() { autoCargarClienteCreditos(); }, 50);
+            } else if (tabId === 'clientes') {
+                setTimeout(function() { autoCargarClientePerfil(); }, 50);
+            }
+        }
+
         if (tabId === 'dashboard') {
             renderDashboardServicio();
             updateKPIs();
             setTimeout(renderDashboardCharts, 100);
+        }
+    }
+
+    // Funciones de auto-carga para el rol Cliente
+    function autoCargarClienteFacturacion() {
+        const areaBuscador = document.getElementById('fac-buscador-area');
+        if (areaBuscador) areaBuscador.classList.add('d-none');
+
+        const usernameClean = String(currentUser.username || currentUser.codigo_cliente || '').replace(/\D/g, '');
+        const cliente = db.clientes.find(c => 
+            c.codigo_cliente === currentUser.codigo_cliente || 
+            c.correo === currentUser.email ||
+            String(c.documento_id).replace(/\D/g, '') === usernameClean ||
+            String(c.codigo_cliente).toLowerCase() === String(currentUser.username).toLowerCase()
+        );
+
+        if (cliente) {
+            window._facClienteSeleccionado = {
+                codigo: cliente.codigo_cliente,
+                nombre: cliente.nombre_completo,
+                documento: cliente.documento_id
+            };
+            buscarClienteFacturacion(cliente);
+        }
+    }
+
+    function autoCargarClientePagos() {
+        const areaBuscador = document.getElementById('pay-buscador-area');
+        if (areaBuscador) {
+            areaBuscador.classList.add('d-none');
+        }
+
+        const usernameClean = String(currentUser.username || currentUser.codigo_cliente || '').replace(/\D/g, '');
+        const cliente = db.clientes.find(c => 
+            c.codigo_cliente === currentUser.codigo_cliente || 
+            c.correo === currentUser.email ||
+            String(c.documento_id).replace(/\D/g, '') === usernameClean ||
+            String(c.codigo_cliente).toLowerCase() === String(currentUser.username).toLowerCase()
+        );
+
+        if (cliente) {
+            buscarClientePagos(cliente);
+        }
+    }
+
+    function autoCargarClienteCreditos() {
+        const areaBuscador = document.getElementById('cred-buscador-area');
+        if (areaBuscador) areaBuscador.classList.add('d-none');
+
+        const usernameClean = String(currentUser.username || currentUser.codigo_cliente || '').replace(/\D/g, '');
+        const cliente = db.clientes.find(c => 
+            c.codigo_cliente === currentUser.codigo_cliente || 
+            c.correo === currentUser.email ||
+            String(c.documento_id).replace(/\D/g, '') === usernameClean ||
+            String(c.codigo_cliente).toLowerCase() === String(currentUser.username).toLowerCase()
+        );
+
+        if (cliente) {
+            window._credClienteSeleccionado = {
+                codigo: cliente.codigo_cliente,
+                nombre: cliente.nombre_completo,
+                documento: cliente.documento_id,
+                id: cliente.id_cliente
+            };
+            buscarClienteCreditos(cliente);
+        }
+    }
+
+    function autoCargarClientePerfil() {
+        const buscadorArea = document.getElementById('cli-buscador-area');
+        const tablaCompleta = document.getElementById('cli-tabla-completa');
+        if (buscadorArea) buscadorArea.classList.add('d-none');
+        if (tablaCompleta) tablaCompleta.classList.add('d-none');
+
+        const usernameClean = String(currentUser.username || currentUser.codigo_cliente || '').replace(/\D/g, '');
+        const cliente = db.clientes.find(c => 
+            c.codigo_cliente === currentUser.codigo_cliente || 
+            c.correo === currentUser.email ||
+            String(c.documento_id).replace(/\D/g, '') === usernameClean ||
+            String(c.codigo_cliente).toLowerCase() === String(currentUser.username).toLowerCase()
+        );
+
+        if (cliente) {
+            buscarClienteGestion(cliente);
         }
     }
 
@@ -2537,7 +2945,23 @@
     // SECCIÓN: EMPRESAS - CRUD COMPLETO
     // ═══════════════════════════════════════════════════════════════════════════════
     function renderEmpresas() {
+        const isClient = currentUser && currentUser.rol === 'Cliente';
         const tbody = document.getElementById('tbl-empresas-body');
+        const buscadorArea = document.getElementById('emp-buscador-area');
+        const tablaCompleta = document.getElementById('emp-tabla-completa');
+
+        if (isClient) {
+            if (buscadorArea) buscadorArea.classList.add('d-none');
+            if (tablaCompleta) tablaCompleta.classList.add('d-none');
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-4"><i class="fa-solid fa-lock me-2"></i>No tiene permisos para ver esta sección.</td></tr>';
+            return;
+        }
+
+        if (buscadorArea) buscadorArea.classList.remove('d-none');
+        if (tablaCompleta) tablaCompleta.classList.add('d-none');
+        document.getElementById('emp-tarjeta-empresa').classList.add('d-none');
+        document.getElementById('emp-estado-vacio').classList.add('d-none');
+
         tbody.innerHTML = db.empresas.map(e => `
             <tr>
                 <td class="fw-bold">${e.id_empresa}</td>
@@ -2552,6 +2976,47 @@
                 </td>
             </tr>
         `).join('');
+    }
+
+    function buscarEmpresaGestion() {
+        const input = document.getElementById('emp-input-busqueda');
+        const raw = input.value.trim().toLowerCase();
+
+        if (!raw) { input.focus(); return; }
+
+        document.getElementById('emp-tarjeta-empresa').classList.add('d-none');
+        document.getElementById('emp-estado-vacio').classList.add('d-none');
+        document.getElementById('emp-tabla-completa').classList.add('d-none');
+
+        const empresa = db.empresas.find(e => 
+            String(e.rif_fiscal).toLowerCase().includes(raw) ||
+            String(e.nombre_empresa).toLowerCase().includes(raw) ||
+            String(e.id_empresa).toLowerCase().includes(raw)
+        );
+
+        if (!empresa) {
+            document.getElementById('emp-estado-vacio').classList.remove('d-none');
+            document.getElementById('emp-tabla-completa').classList.remove('d-none');
+            return;
+        }
+
+        document.getElementById('emp-encontrada-nombre').innerText = empresa.nombre_empresa;
+        document.getElementById('emp-encontrada-id').innerText = empresa.id_empresa;
+        document.getElementById('emp-info-rif').innerText = empresa.rif_fiscal || 'N/A';
+        document.getElementById('emp-info-telefono').innerText = empresa.telefono || 'N/A';
+        document.getElementById('emp-info-correo').innerText = empresa.correo || 'N/A';
+        document.getElementById('emp-info-direccion').innerText = empresa.direccion || 'N/A';
+        document.getElementById('emp-info-estado').innerHTML = `<span class="badge-status ${empresa.estado === 'Activa' ? 'status-activo' : 'status-suspendido'}">${empresa.estado}</span>`;
+
+        const totalUsuarios = db.usuarios.filter(u => u.id_empresa === empresa.id_empresa).length;
+        document.getElementById('emp-info-usuarios').innerText = totalUsuarios;
+
+        const btnEditar = document.getElementById('emp-btn-editar');
+        const btnEliminar = document.getElementById('emp-btn-eliminar');
+        if (btnEditar) btnEditar.setAttribute('onclick', `abrirModalEmpresa('${empresa.id_empresa}')`);
+        if (btnEliminar) btnEliminar.setAttribute('onclick', `eliminarEmpresa('${empresa.id_empresa}')`);
+
+        document.getElementById('emp-tarjeta-empresa').classList.remove('d-none');
     }
 
     function abrirModalEmpresa(id = null) {
@@ -2607,11 +3072,29 @@
         if (gasUrl) sendGasRequest('deleteEmpresa', { id_empresa: id });
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
-    // SECCIÓN: USUARIOS - CRUD COMPLETO
+        // ═══════════════════════════════════════════════════════════════════════════════
+    // SECCIÓN: USUARIOS Y PERMISOS - BÚSQUEDA INTELIGENTE + DETALLE
     // ═══════════════════════════════════════════════════════════════════════════════
     function renderUsuarios() {
+        const isClient = currentUser && currentUser.rol === 'Cliente';
         const tbody = document.getElementById('tbl-usuarios-body');
+        const buscadorArea = document.getElementById('usr-buscador-area');
+        const tablaCompleta = document.getElementById('usr-tabla-completa');
+
+        // Cliente no ve nada de usuarios
+        if (isClient) {
+            if (buscadorArea) buscadorArea.classList.add('d-none');
+            if (tablaCompleta) tablaCompleta.classList.add('d-none');
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted py-4"><i class="fa-solid fa-lock me-2"></i>No tiene permisos para ver esta sección.</td></tr>';
+            return;
+        }
+
+        if (buscadorArea) buscadorArea.classList.remove('d-none');
+        // Tabla completa oculta por defecto, solo se muestra si no hay resultados de búsqueda
+        if (tablaCompleta) tablaCompleta.classList.add('d-none');
+        document.getElementById('usr-tarjeta-usuario').classList.add('d-none');
+        document.getElementById('usr-estado-vacio').classList.add('d-none');
+
         const isMaster = currentUser && currentUser.rol === 'Master';
 
         tbody.innerHTML = db.usuarios.map(u => `
@@ -2621,6 +3104,7 @@
                 <td><span class="badge ${u.rol === 'Master' ? 'bg-dark' : (u.rol === 'Administrador' ? 'bg-primary' : (u.rol === 'VIP' ? 'bg-warning text-dark' : 'bg-success'))}">${u.rol}</span></td>
                 <td><span class="badge-status ${u.estado === 'Activo' ? 'status-activo' : 'status-suspendido'}">${u.estado}</span></td>
                 <td>
+                    <button class="btn btn-sm btn-outline-info me-1 rounded-2" onclick="abrirModalVerUsuario('${u.id_usuario}')" title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
                     ${isMaster ? `
                         <button class="btn btn-sm btn-outline-primary me-1 rounded-2" onclick="abrirModalEditarUsuario('${u.id_usuario}')"><i class="fa-solid fa-pen"></i></button>
                         <button class="btn btn-sm btn-outline-danger rounded-2" onclick="eliminarUsuario('${u.id_usuario}')"><i class="fa-solid fa-trash"></i></button>
@@ -2628,6 +3112,118 @@
                 </td>
             </tr>
         `).join('');
+    }
+
+    function buscarUsuarioGestion() {
+        const input = document.getElementById('usr-input-busqueda');
+        const raw = input.value.trim().toLowerCase();
+
+        if (!raw) { input.focus(); return; }
+
+        document.getElementById('usr-tarjeta-usuario').classList.add('d-none');
+        document.getElementById('usr-estado-vacio').classList.add('d-none');
+        document.getElementById('usr-tabla-completa').classList.add('d-none');
+
+        const usuario = db.usuarios.find(u => 
+            String(u.id_usuario).toLowerCase().includes(raw) ||
+            String(u.username).toLowerCase().includes(raw) ||
+            String(u.email).toLowerCase().includes(raw) ||
+            String(u.nombre_completo).toLowerCase().includes(raw) ||
+            String(u.codigo_cliente).toLowerCase().includes(raw)
+        );
+
+        if (!usuario) {
+            document.getElementById('usr-estado-vacio').classList.remove('d-none');
+            document.getElementById('usr-tabla-completa').classList.remove('d-none');
+            return;
+        }
+
+        // Llenar tarjeta resumen
+        document.getElementById('usr-encontrado-nombre').innerText = usuario.nombre_completo;
+        document.getElementById('usr-encontrado-id').innerText = usuario.id_usuario;
+        document.getElementById('usr-info-username').innerText = usuario.username || 'N/A';
+        document.getElementById('usr-info-email').innerText = usuario.email || 'N/A';
+        document.getElementById('usr-info-rol').innerHTML = `<span class="badge ${usuario.rol === 'Master' ? 'bg-dark' : (usuario.rol === 'Administrador' ? 'bg-primary' : (usuario.rol === 'VIP' ? 'bg-warning text-dark' : 'bg-success'))}">${usuario.rol}</span>`;
+        document.getElementById('usr-info-codigo').innerText = usuario.codigo_cliente || 'N/A';
+        document.getElementById('usr-info-estado').innerHTML = `<span class="badge-status ${usuario.estado === 'Activo' ? 'status-activo' : 'status-suspendido'}">${usuario.estado}</span>`;
+        document.getElementById('usr-info-empresa').innerText = usuario.id_empresa || 'EMP-001';
+
+        // Botones
+        const btnVer = document.getElementById('usr-btn-ver');
+        const btnEditar = document.getElementById('usr-btn-editar');
+        const btnEliminar = document.getElementById('usr-btn-eliminar');
+
+        if (btnVer) btnVer.setAttribute('onclick', `abrirModalVerUsuario('${usuario.id_usuario}')`);
+        if (btnEditar) btnEditar.setAttribute('onclick', `abrirModalEditarUsuario('${usuario.id_usuario}')`);
+        if (btnEliminar) btnEliminar.setAttribute('onclick', `eliminarUsuario('${usuario.id_usuario}')`);
+
+        document.getElementById('usr-tarjeta-usuario').classList.remove('d-none');
+    }
+
+    let modalVerUsuarioInstance = null;
+    let _currentViewUserPassword = '';
+
+    function abrirModalVerUsuario(id) {
+        const u = db.usuarios.find(x => x.id_usuario === id);
+        if (!u) return;
+
+        _currentViewUserPassword = u.password || '';
+
+        document.getElementById('ver-usr-id').innerText = u.id_usuario;
+        document.getElementById('ver-usr-nombre').innerText = u.nombre_completo;
+        document.getElementById('ver-usr-username').innerText = u.username;
+        document.getElementById('ver-usr-email').innerText = u.email;
+        document.getElementById('ver-usr-codigo').innerText = u.codigo_cliente || 'N/A';
+        document.getElementById('ver-usr-empresa').innerText = u.id_empresa || 'EMP-001';
+
+        // Badge de rol
+        const rolColors = {
+            'Master': 'bg-dark',
+            'Administrador': 'bg-primary',
+            'VIP': 'bg-warning text-dark',
+            'Cliente': 'bg-success'
+        };
+        document.getElementById('ver-usr-rol-badge').innerHTML = `<span class="badge ${rolColors[u.rol] || 'bg-secondary'} fs-6 px-3 py-2">${u.rol}</span>`;
+
+        // Badge de estado
+        const estadoClass = u.estado === 'Activo' ? 'status-activo' : 'status-suspendido';
+        document.getElementById('ver-usr-estado-badge').innerHTML = `<span class="badge-status ${estadoClass}">${u.estado}</span>`;
+
+        // Password (oculto por defecto)
+        const pwdInput = document.getElementById('ver-usr-password');
+        const pwdIcon = document.getElementById('ver-usr-password-icon');
+        pwdInput.value = '••••••••';
+        pwdInput.type = 'password';
+        pwdIcon.className = 'fa-solid fa-eye';
+
+        // Botones del footer
+        const btnEditar = document.getElementById('ver-usr-btn-editar');
+        const btnEliminar = document.getElementById('ver-usr-btn-eliminar');
+        if (btnEditar) {
+            btnEditar.setAttribute('onclick', `modalVerUsuarioInstance.hide(); abrirModalEditarUsuario('${u.id_usuario}')`);
+        }
+        if (btnEliminar) {
+            btnEliminar.setAttribute('onclick', `modalVerUsuarioInstance.hide(); eliminarUsuario('${u.id_usuario}')`);
+        }
+
+        if (!modalVerUsuarioInstance) {
+            modalVerUsuarioInstance = new bootstrap.Modal(document.getElementById('modalVerUsuario'));
+        }
+        modalVerUsuarioInstance.show();
+    }
+
+    function toggleVerPassword() {
+        const input = document.getElementById('ver-usr-password');
+        const icon = document.getElementById('ver-usr-password-icon');
+        if (input.type === 'password') {
+            input.type = 'text';
+            input.value = _currentViewUserPassword;
+            icon.className = 'fa-solid fa-eye-slash';
+        } else {
+            input.type = 'password';
+            input.value = '••••••••';
+            icon.className = 'fa-solid fa-eye';
+        }
     }
 
     function abrirModalCrearUsuario() {
@@ -2750,12 +3346,14 @@
             document.getElementById('cli-input-cedula').value = cliente.documento_id || '';
             buscarClienteGestion();
         }
+
         return;
     }
     
     if (buscadorArea) buscadorArea.classList.remove('d-none');
-    if (tablaCompleta) tablaCompleta.classList.remove('d-none');
-    document.getElementById('cli-tarjeta-cliente').classList.add('d-none');
+        // Tabla completa oculta por defecto
+        if (tablaCompleta) tablaCompleta.classList.add('d-none');
+        document.getElementById('cli-tarjeta-cliente').classList.add('d-none');
     document.getElementById('cli-estado-vacio').classList.add('d-none');
     
     tbody.innerHTML = db.clientes.map(c => {
@@ -2935,6 +3533,7 @@
     
     const container = document.getElementById('fac-container-facturas');
     if (container) container.innerHTML = '';
+
     
     window._facClienteSeleccionado = null;
     ocultarResultadosFacturacion();
@@ -3425,86 +4024,245 @@ function abrirModalCreditoDesdeBusqueda() {
         if(gasUrl) sendGasRequest('deleteCredito', { id_cuota: idCuota });
     }
 
+        // ═══════════════════════════════════════════════════════════════════════════════
+    // SECCIÓN: MÓDULO DE PAGOS - BÚSQUEDA INTELIGENTE + MODAL DE PROCESAR PAGO
     // ═══════════════════════════════════════════════════════════════════════════════
-    // SECCIÓN: MÓDULO DE PAGOS
-    // ═══════════════════════════════════════════════════════════════════════════════
-    function renderModuloPagosSelects() {
-        const selectCli = document.getElementById('pagoSelectCliente');
-        if(!selectCli) return;
-        const isClient = currentUser && currentUser.rol === 'Cliente';
-        const clientList = isClient 
-            ? db.clientes.filter(c => c.codigo_cliente === currentUser.codigo_cliente)
-            : db.clientes;
-        selectCli.innerHTML = '<option value="">-- Seleccione Cliente --</option>' + 
-            clientList.map(c => `<option value="${c.codigo_cliente}">${c.nombre_completo} (${c.codigo_cliente})</option>`).join('');
-        if(isClient && clientList.length > 0) {
-            selectCli.value = clientList[0].codigo_cliente;
-            cargarFacturasPendientesDeCliente();
-        }
+    let modalProcesarPagoInstance = null;
+    let _payClienteSeleccionado = null;
+
+    function ocultarResultadosPagos() {
+        const el = (id) => document.getElementById(id);
+        if (el('pay-tarjeta-cliente')) el('pay-tarjeta-cliente').classList.add('d-none');
+        if (el('pay-area-facturas')) el('pay-area-facturas').classList.add('d-none');
+        if (el('pay-area-historial')) el('pay-area-historial').classList.add('d-none');
+        if (el('pay-estado-vacio')) el('pay-estado-vacio').classList.add('d-none');
+        if (el('pay-container-facturas')) el('pay-container-facturas').innerHTML = '';
+        if (el('pay-tbl-historial')) el('pay-tbl-historial').innerHTML = '';
     }
 
-    function cargarFacturasPendientesDeCliente() {
-        const selectCli = document.getElementById('pagoSelectCliente');
-        const selectFac = document.getElementById('pagoSelectFactura');
-        const boxDetalle = document.getElementById('pagoDetalleFacturasPendientes');
-        if (!selectCli || !selectFac || !boxDetalle) return;
-        const codCliente = selectCli.value;
-        if(!codCliente) {
-            selectFac.innerHTML = '<option value="">-- Seleccione Factura Pendiente --</option>';
-            boxDetalle.innerHTML = '';
+    function buscarClientePagos(clienteForzado = null) {
+        const input = document.getElementById('pay-input-cedula');
+        const areaBuscador = document.getElementById('pay-buscador-area');
+
+        let raw = '';
+        let cliente = null;
+
+        if (clienteForzado) {
+            cliente = clienteForzado;
+        } else {
+            if (input) raw = input.value.trim().replace(/\D/g, '');
+            if (!raw) { if(input) input.focus(); return; }
+            cliente = db.clientes.find(c => 
+                String(c.documento_id).replace(/\D/g, '') === raw
+            );
+        }
+
+        ocultarResultadosPagos();
+        if (areaBuscador && !clienteForzado) {
+            areaBuscador.classList.remove('p-5');
+            areaBuscador.classList.add('p-3');
+        }
+
+        if (!cliente) {
+            const vacio = document.getElementById('pay-estado-vacio');
+            if (vacio) vacio.classList.remove('d-none');
             return;
         }
-        const pendientes = db.facturas.filter(f => 
-            String(f.id_cliente).trim() === String(codCliente).trim() && 
-            f.estado_factura && 
-            f.estado_factura.trim().toLowerCase() === 'pendiente'
+
+        _payClienteSeleccionado = {
+            codigo: cliente.codigo_cliente,
+            nombre: cliente.nombre_completo,
+            documento: cliente.documento_id,
+            id: cliente.id_cliente
+        };
+
+        document.getElementById('pay-cliente-nombre').innerText = cliente.nombre_completo;
+        document.getElementById('pay-cliente-cedula').innerText = cliente.documento_id || 'N/A';
+
+        const facturas = db.facturas.filter(f => 
+            f.id_cliente === cliente.codigo_cliente || 
+            f.id_cliente === cliente.id_cliente
         );
-        selectFac.innerHTML = '<option value="">-- Seleccione Factura Pendiente --</option>' + 
-            pendientes.map(f => `<option value="${f.id_factura}" data-monto="${f.monto_total}">${f.id_factura} - $${Number(f.monto_total || 0).toFixed(2)}</option>`).join('');
-        if(pendientes.length > 0) {
-            boxDetalle.innerHTML = `<div class="alert alert-warning py-2 mb-3 rounded-3"><small class="fw-semibold"><i class="fa-solid fa-circle-exclamation me-1"></i> Tiene ${pendientes.length} factura(s) pendiente(s).</small></div>`;
-        } else {
-            boxDetalle.innerHTML = `<div class="alert alert-success py-2 mb-3 rounded-3"><small class="fw-semibold"><i class="fa-solid fa-check-circle me-1"></i> El cliente se encuentra al día.</small></div>`;
-        }
+        const pendientes = facturas.filter(f => f.estado_factura === 'Pendiente');
+        const validacion = facturas.filter(f => f.estado_factura === 'En Validación');
+        const montoPendiente = pendientes.reduce((s, f) => s + (Number(f.monto_total) || 0), 0);
+
+        document.getElementById('pay-stat-total').innerText = facturas.length;
+        document.getElementById('pay-stat-pendientes').innerText = pendientes.length;
+        document.getElementById('pay-stat-validacion').innerText = validacion.length;
+        document.getElementById('pay-stat-monto').innerText = '$' + montoPendiente.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+        document.getElementById('pay-tarjeta-cliente').classList.remove('d-none');
+        renderFacturasPendientesPago(cliente, pendientes);
+        renderHistorialPagosCliente(cliente);
     }
 
-    function autoCompletarMontoPago() {
-        const selectFac = document.getElementById('pagoSelectFactura');
+    function renderFacturasPendientesPago(cliente, pendientes) {
+        const container = document.getElementById('pay-container-facturas');
+        const area = document.getElementById('pay-area-facturas');
+
+        if (pendientes.length === 0) {
+            if (area) area.classList.add('d-none');
+            return;
+        }
+
+        let html = '<div class="table-responsive"><table class="table table-sm align-middle mb-0">' +
+            '<thead class="table-light"><tr><th>Factura N°</th><th>Servicio</th><th>Vencimiento</th><th>Monto</th></tr></thead><tbody>';
+
+        pendientes.forEach(f => {
+            const servicio = f.tipo_servicio === 'Otro...' 
+                ? (f.especifique_servicio || 'Servicio personalizado') 
+                : (f.tipo_servicio || 'N/A');
+            html += '<tr>' +
+                '<td class="fw-bold">' + f.id_factura + '</td>' +
+                '<td><span class="service-badge">' + servicio + '</span></td>' +
+                '<td>' + (f.fecha_vencimiento || 'N/A') + '</td>' +
+                '<td class="fw-bold text-danger">$' + Number(f.monto_total || 0).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '</td>' +
+            '</tr>';
+        });
+
+        html += '</tbody></table></div>';
+        container.innerHTML = html;
+        if (area) area.classList.remove('d-none');
+    }
+
+    function renderHistorialPagosCliente(cliente) {
+        const tbody = document.getElementById('pay-tbl-historial');
+        const area = document.getElementById('pay-area-historial');
+        if (!tbody || !area) return;
+
+        const historial = db.pagos.filter(p => 
+            p.id_cliente === cliente.codigo_cliente || 
+            p.id_cliente === cliente.id_cliente
+        ).slice(0, 15);
+
+        if (historial.length === 0) {
+            area.classList.add('d-none');
+            return;
+        }
+
+        tbody.innerHTML = historial.map(p => {
+            const estadoClass = p.estado_validacion === 'Confirmado' ? 'status-confirmado' : 'status-validacion';
+            return '<tr>' +
+                '<td>' + (p.fecha_pago || 'N/A') + '</td>' +
+                '<td class="fw-bold">' + p.id_factura + '</td>' +
+                '<td><span class="badge bg-light text-dark border">' + p.metodo_pago + '</span></td>' +
+                '<td><small class="text-muted">' + (p.referencia || 'N/A') + '</small></td>' +
+                '<td class="fw-bold text-success">$' + Number(p.monto_pago || 0).toFixed(2) + '</td>' +
+                '<td class="text-primary">Bs ' + Number(p.monto_pago_bs || 0).toFixed(2) + '</td>' +
+                '<td><span class="badge-status ' + estadoClass + '">' + p.estado_validacion + '</span></td>' +
+            '</tr>';
+        }).join('');
+
+        area.classList.remove('d-none');
+    }
+
+    function abrirModalProcesarPago(idFacturaPreseleccionada) {
+        const cliente = _payClienteSeleccionado;
+        if (!cliente) {
+            showToast('Error', 'Primero busque un cliente.', 'warning');
+            return;
+        }
+
+        // Limpiar formulario
+        const form = document.getElementById('formProcesarPago');
+        if (form) form.reset();
+
+        document.getElementById('pay-modal-cliente').value = cliente.codigo;
+        document.getElementById('pay-modal-subtitle').innerText = 'Cliente: ' + cliente.nombre + ' (' + cliente.codigo + ')';
+        document.getElementById('pay-modal-fecha').value = new Date().toISOString().split('T')[0];
+
+        const selectFac = document.getElementById('pay-modal-factura');
+        const pendientes = db.facturas.filter(f => 
+            (f.id_cliente === cliente.codigo || f.id_cliente === cliente.id) && 
+            f.estado_factura === 'Pendiente'
+        );
+
+        if (pendientes.length === 0) {
+            selectFac.innerHTML = '<option value="">Sin facturas pendientes</option>';
+            document.getElementById('pay-modal-detalle-pendientes').innerHTML = 
+                '<div class="alert alert-success py-2 rounded-3"><small class="fw-semibold"><i class="fa-solid fa-check-circle me-1"></i> El cliente no tiene facturas pendientes.</small></div>';
+        } else {
+            let optionsHtml = '<option value="">-- Seleccione Factura --</option>';
+            let preselectedOption = null;
+            pendientes.forEach(f => {
+                const isPreselected = idFacturaPreseleccionada && f.id_factura === idFacturaPreseleccionada;
+                const selectedAttr = isPreselected ? ' selected' : '';
+                optionsHtml += '<option value="' + f.id_factura + '" data-monto="' + f.monto_total + '"' + selectedAttr + '>' + 
+                    f.id_factura + ' — $' + Number(f.monto_total).toFixed(2) + ' (Vence: ' + (f.fecha_vencimiento || 'N/A') + ')' + 
+                '</option>';
+                if (isPreselected) preselectedOption = f;
+            });
+            selectFac.innerHTML = optionsHtml;
+            document.getElementById('pay-modal-detalle-pendientes').innerHTML = 
+                '<div class="alert alert-warning py-2 rounded-3"><small class="fw-semibold"><i class="fa-solid fa-circle-exclamation me-1"></i> Tiene ' + pendientes.length + ' factura(s) pendiente(s) de pago.</small></div>';
+            if (preselectedOption) {
+                document.getElementById('pay-modal-monto').value = preselectedOption.monto_total;
+                document.getElementById('pay-modal-monto-bs').value = (preselectedOption.monto_total * 1.00).toFixed(2);
+            }
+        }
+
+        // Destruir instancia previa si existe para evitar conflictos
+        if (modalProcesarPagoInstance) {
+            try { modalProcesarPagoInstance.dispose(); } catch(e) {}
+        }
+
+        // Limpiar cualquier backdrop residual
+        document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+
+        // Crear nueva instancia del modal
+        modalProcesarPagoInstance = new bootstrap.Modal(document.getElementById('modalProcesarPago'), {
+            backdrop: true,
+            keyboard: true
+        });
+        modalProcesarPagoInstance.show();
+    }
+
+    function autoCompletarMontoPagoModal() {
+        const selectFac = document.getElementById('pay-modal-factura');
         const opt = selectFac.options[selectFac.selectedIndex];
         const monto = opt ? opt.getAttribute('data-monto') : 0;
-        document.getElementById('pagoMonto').value = monto;
-        document.getElementById('pagoMontoBs').value = (monto * 1.00).toFixed(2);
+        document.getElementById('pay-modal-monto').value = monto;
+        document.getElementById('pay-modal-monto-bs').value = (monto * 1.00).toFixed(2);
     }
 
-    async function procesarPagoModulo(e) {
+    async function procesarPagoDesdeModal(e) {
         e.preventDefault();
-        const codCliente = document.getElementById('pagoSelectCliente').value;
-        const idFactura = document.getElementById('pagoSelectFactura').value;
-        if(!codCliente || !idFactura) {
-            showSystemNotification('Error', 'Seleccione cliente y factura.', 'danger');
+        const codCliente = document.getElementById('pay-modal-cliente').value;
+        const idFactura = document.getElementById('pay-modal-factura').value;
+
+        if (!codCliente || !idFactura) {
+            showSystemNotification('Error', 'Seleccione una factura para pagar.', 'danger');
             return;
         }
+
         const payloadPago = {
             id_pago: 'PAG-' + Date.now(),
             id_factura: idFactura,
             id_cliente: codCliente,
-            fecha_pago: document.getElementById('pagoFechaTransferencia').value,
-            metodo_pago: document.getElementById('pagoMetodo').value,
-            banco_origen: document.getElementById('pagoBanco').value,
-            referencia: document.getElementById('pagoRef').value,
-            monto_pago: Number(document.getElementById('pagoMonto').value),
-            monto_pago_bs: Number(document.getElementById('pagoMontoBs').value),
+            fecha_pago: document.getElementById('pay-modal-fecha').value,
+            metodo_pago: document.getElementById('pay-modal-metodo').value,
+            banco_origen: document.getElementById('pay-modal-banco').value,
+            referencia: document.getElementById('pay-modal-ref').value,
+            monto_pago: Number(document.getElementById('pay-modal-monto').value),
+            monto_pago_bs: Number(document.getElementById('pay-modal-monto-bs').value),
             estado_validacion: 'En Validación'
         };
+
         db.pagos.unshift(payloadPago);
+
         const fac = db.facturas.find(x => x.id_factura === idFactura);
-        if(fac) {
+        if (fac) {
             fac.estado_factura = 'En Validación';
             fac.metodo_pago = payloadPago.metodo_pago;
             fac.banco_origen = payloadPago.banco_origen;
             fac.referencia_pago = payloadPago.referencia;
             fac.fecha_pago = payloadPago.fecha_pago;
         }
+
         const notifAdmin = {
             id_notificacion: 'NOT-' + Date.now(),
             id_usuario: codCliente,
@@ -3512,51 +4270,59 @@ function abrirModalCreditoDesdeBusqueda() {
             rol_destino: 'Administrador',
             tipo: 'Validación de Pago',
             titulo: 'Nuevo Pago Registrado para Validación',
-            mensaje: `El cliente ${codCliente} registró un pago por $${payloadPago.monto_pago.toFixed(2)} (Ref: ${payloadPago.referencia}).`,
+            mensaje: 'El cliente ' + codCliente + ' registró un pago por $' + payloadPago.monto_pago.toFixed(2) + ' (Ref: ' + payloadPago.referencia + ').',
             fecha: new Date().toLocaleString('es-VE'),
             leido: 'NO'
         };
         db.notificaciones.unshift(notifAdmin);
-        document.getElementById('formPagoModule').reset();
-        renderHistorialPagos();
-        renderFacturacionAgrupada();
+
+        modalProcesarPagoInstance.hide();
+
+        // Refrescar vista del cliente
+        if (_payClienteSeleccionado) {
+            buscarClientePagos(_payClienteSeleccionado);
+        }
+
         renderNotificaciones();
         updateKPIs();
         renderDashboardCharts();
         showToast('Pago Enviado', 'Su pago fue enviado a validación exitosamente.', 'success');
-        if(gasUrl) {
+
+        if (gasUrl) {
             sendGasRequest('addPago', payloadPago);
-            sendGasRequest('updateFactura', fac);
+            if (fac) sendGasRequest('updateFactura', fac);
             sendGasRequest('addNotificacion', notifAdmin);
         }
     }
 
+    // Legacy: mantener para compatibilidad con botones "Pagar" desde facturación
     function irAPagarFactura(idCliente, idFactura) {
         switchTab('pagos');
-        document.getElementById('pagoSelectCliente').value = idCliente;
-        cargarFacturasPendientesDeCliente();
-        document.getElementById('pagoSelectFactura').value = idFactura;
-        autoCompletarMontoPago();
+        const cliente = db.clientes.find(c => c.codigo_cliente === idCliente || c.id_cliente === idCliente);
+        if (!cliente) {
+            showToast('Error', 'No se encontró el cliente asociado a la factura.', 'danger');
+            return;
+        }
+        const input = document.getElementById('pay-input-cedula');
+        if (input) input.value = cliente.documento_id || '';
+
+        // Cargar datos del cliente y luego abrir modal con factura preseleccionada
+        buscarClientePagos(cliente);
+
+        // Pequeño delay para asegurar que el DOM esté listo
+        setTimeout(function() {
+            abrirModalProcesarPago(idFactura);
+        }, 200);
     }
 
-    function renderHistorialPagos() {
-        const tbody = document.getElementById('tbl-historial-pagos');
-        if(!tbody) return;
-        const isClient = currentUser && currentUser.rol === 'Cliente';
-        const historial = isClient 
-            ? db.pagos.filter(p => p.id_cliente === currentUser.codigo_cliente)
-            : db.pagos;
-        tbody.innerHTML = historial.slice(0, 10).map(p => `
-            <tr>
-                <td>${p.fecha_pago}</td>
-                <td>${p.id_cliente}</td>
-                <td><span class="fw-bold">${p.id_factura}</span></td>
-                <td><span class="badge bg-light text-dark border">${p.metodo_pago}</span></td>
-                <td class="fw-bold text-success">$${Number(p.monto_pago).toFixed(2)}</td>
-                <td>Bs ${Number(p.monto_pago_bs).toFixed(2)}</td>
-            </tr>
-        `).join('');
-    }
+    
+
+    // Legacy functions (mantener compatibilidad mínima)
+    function renderModuloPagosSelects() { /* legacy, no-op */ }
+    function cargarFacturasPendientesDeCliente() { /* legacy, no-op */ }
+    function autoCompletarMontoPago() { /* legacy, no-op */ }
+    function procesarPagoModulo(e) { e.preventDefault(); }
+    function renderHistorialPagos() { /* legacy, no-op */ }
 
     // ═══════════════════════════════════════════════════════════════════════════════
     // SECCIÓN: NOTIFICACIONES
@@ -4072,6 +4838,121 @@ function renderFacturacionAgrupada() {
     ocultarResultadosFacturacion();
 }
 
+// Eventos del buscador de EMPRESAS
+document.addEventListener('DOMContentLoaded', function() {
+    const inputEmp = document.getElementById('emp-input-busqueda');
+    if (inputEmp) {
+        inputEmp.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') buscarEmpresaGestion();
+        });
+        inputEmp.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                const area = document.getElementById('emp-buscador-area');
+                if (area) {
+                    area.classList.add('p-5');
+                    area.classList.remove('p-3');
+                }
+                document.getElementById('emp-tarjeta-empresa').classList.add('d-none');
+                document.getElementById('emp-estado-vacio').classList.add('d-none');
+                document.getElementById('emp-tabla-completa').classList.remove('d-none');
+            }
+        });
+    }
+});
+
+// Eventos del buscador de USUARIOS
+document.addEventListener('DOMContentLoaded', function() {
+    const inputUsr = document.getElementById('usr-input-busqueda');
+    if (inputUsr) {
+        inputUsr.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') buscarUsuarioGestion();
+        });
+        inputUsr.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                const area = document.getElementById('usr-buscador-area');
+                if (area) {
+                    area.classList.add('p-5');
+                    area.classList.remove('p-3');
+                }
+                document.getElementById('usr-tarjeta-usuario').classList.add('d-none');
+                document.getElementById('usr-estado-vacio').classList.add('d-none');
+                document.getElementById('usr-tabla-completa').classList.remove('d-none');
+            }
+        });
+    }
+});
+
+// Eventos del buscador de PAGOS
+document.addEventListener('DOMContentLoaded', function() {
+    const inputPay = document.getElementById('pay-input-cedula');
+    if (inputPay) {
+        inputPay.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') buscarClientePagos();
+        });
+        inputPay.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                const area = document.getElementById('pay-buscador-area');
+                if (area) {
+                    area.classList.add('p-5');
+                    area.classList.remove('p-3');
+                }
+                _payClienteSeleccionado = null;
+                ocultarResultadosPagos();
+            }
+        });
+    }
+});
+
+// Función para auto-cargar datos del cliente al entrar a la pestaña
+document.addEventListener('DOMContentLoaded', function() {
+    // Observar cambios de pestaña para auto-cargar datos del cliente
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target;
+                if (target.id === 'sec-pagos' && !target.classList.contains('d-none')) {
+                    const isClient = currentUser && currentUser.rol === 'Cliente';
+                    if (isClient && !_payClienteSeleccionado) {
+                        const usernameClean = String(currentUser.username || currentUser.codigo_cliente || '').replace(/\D/g, '');
+                        const cliente = db.clientes.find(c => 
+                            c.codigo_cliente === currentUser.codigo_cliente || 
+                            c.correo === currentUser.email ||
+                            String(c.documento_id).replace(/\D/g, '') === usernameClean ||
+                            String(c.codigo_cliente).toLowerCase() === String(currentUser.username).toLowerCase()
+                        );
+                        if (cliente) {
+                            buscarClientePagos(cliente);
+                        }
+                    }
+                }
+                if (target.id === 'sec-facturacion' && !target.classList.contains('d-none')) {
+                    const isClient = currentUser && currentUser.rol === 'Cliente';
+                    if (isClient && !window._facClienteSeleccionado) {
+                        renderFacturacionAgrupada();
+                    }
+                }
+                if (target.id === 'sec-creditos' && !target.classList.contains('d-none')) {
+                    const isClient = currentUser && currentUser.rol === 'Cliente';
+                    if (isClient && !window._credClienteSeleccionado) {
+                        renderCreditosAgrupados();
+                    }
+                }
+                if (target.id === 'sec-clientes' && !target.classList.contains('d-none')) {
+                    const isClient = currentUser && currentUser.rol === 'Cliente';
+                    if (isClient) {
+                        renderClientes();
+                    }
+                }
+            }
+        });
+    });
+
+    ['sec-pagos', 'sec-facturacion', 'sec-creditos', 'sec-clientes'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el, { attributes: true });
+    });
+});
+
 // Eventos del buscador
 document.addEventListener('DOMContentLoaded', function() {
     const input = document.getElementById('fac-input-cedula');
@@ -4147,6 +5028,121 @@ function toggleGrupoFacturas(header) {
         header.setAttribute('aria-expanded', 'true');
     }
 }
+
+// Eventos del buscador de EMPRESAS
+document.addEventListener('DOMContentLoaded', function() {
+    const inputEmp = document.getElementById('emp-input-busqueda');
+    if (inputEmp) {
+        inputEmp.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') buscarEmpresaGestion();
+        });
+        inputEmp.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                const area = document.getElementById('emp-buscador-area');
+                if (area) {
+                    area.classList.add('p-5');
+                    area.classList.remove('p-3');
+                }
+                document.getElementById('emp-tarjeta-empresa').classList.add('d-none');
+                document.getElementById('emp-estado-vacio').classList.add('d-none');
+                document.getElementById('emp-tabla-completa').classList.remove('d-none');
+            }
+        });
+    }
+});
+
+// Eventos del buscador de USUARIOS
+document.addEventListener('DOMContentLoaded', function() {
+    const inputUsr = document.getElementById('usr-input-busqueda');
+    if (inputUsr) {
+        inputUsr.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') buscarUsuarioGestion();
+        });
+        inputUsr.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                const area = document.getElementById('usr-buscador-area');
+                if (area) {
+                    area.classList.add('p-5');
+                    area.classList.remove('p-3');
+                }
+                document.getElementById('usr-tarjeta-usuario').classList.add('d-none');
+                document.getElementById('usr-estado-vacio').classList.add('d-none');
+                document.getElementById('usr-tabla-completa').classList.remove('d-none');
+            }
+        });
+    }
+});
+
+// Eventos del buscador de PAGOS
+document.addEventListener('DOMContentLoaded', function() {
+    const inputPay = document.getElementById('pay-input-cedula');
+    if (inputPay) {
+        inputPay.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') buscarClientePagos();
+        });
+        inputPay.addEventListener('input', function() {
+            if (!this.value.trim()) {
+                const area = document.getElementById('pay-buscador-area');
+                if (area) {
+                    area.classList.add('p-5');
+                    area.classList.remove('p-3');
+                }
+                _payClienteSeleccionado = null;
+                ocultarResultadosPagos();
+            }
+        });
+    }
+});
+
+// Función para auto-cargar datos del cliente al entrar a la pestaña
+document.addEventListener('DOMContentLoaded', function() {
+    // Observar cambios de pestaña para auto-cargar datos del cliente
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target;
+                if (target.id === 'sec-pagos' && !target.classList.contains('d-none')) {
+                    const isClient = currentUser && currentUser.rol === 'Cliente';
+                    if (isClient && !_payClienteSeleccionado) {
+                        const usernameClean = String(currentUser.username || currentUser.codigo_cliente || '').replace(/\D/g, '');
+                        const cliente = db.clientes.find(c => 
+                            c.codigo_cliente === currentUser.codigo_cliente || 
+                            c.correo === currentUser.email ||
+                            String(c.documento_id).replace(/\D/g, '') === usernameClean ||
+                            String(c.codigo_cliente).toLowerCase() === String(currentUser.username).toLowerCase()
+                        );
+                        if (cliente) {
+                            buscarClientePagos(cliente);
+                        }
+                    }
+                }
+                if (target.id === 'sec-facturacion' && !target.classList.contains('d-none')) {
+                    const isClient = currentUser && currentUser.rol === 'Cliente';
+                    if (isClient && !window._facClienteSeleccionado) {
+                        renderFacturacionAgrupada();
+                    }
+                }
+                if (target.id === 'sec-creditos' && !target.classList.contains('d-none')) {
+                    const isClient = currentUser && currentUser.rol === 'Cliente';
+                    if (isClient && !window._credClienteSeleccionado) {
+                        renderCreditosAgrupados();
+                    }
+                }
+                if (target.id === 'sec-clientes' && !target.classList.contains('d-none')) {
+                    const isClient = currentUser && currentUser.rol === 'Cliente';
+                    if (isClient) {
+                        renderClientes();
+                    }
+                }
+            }
+        });
+    });
+
+    ['sec-pagos', 'sec-facturacion', 'sec-creditos', 'sec-clientes'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el, { attributes: true });
+    });
+});
 
 // Eventos del buscador
 document.addEventListener('DOMContentLoaded', function() {
