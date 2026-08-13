@@ -126,6 +126,9 @@
             border-right: 1px solid var(--border-color);
             position: fixed; top: 0; left: 0; z-index: 1000;
             transition: all 0.3s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
         }
         #sidebar .nav-link {
             color: var(--text-muted);
@@ -393,7 +396,508 @@
         #modalRegistroExito .modal-dialog {
             z-index: 100011 !important;
         }
-    </style>
+        /* Backdrop por encima del login overlay (z-index 99999) */
+        .modal-login-alert.show ~ .modal-backdrop,
+        #modalRegistroLogin.show ~ .modal-backdrop,
+        #modalRegistroExito.show ~ .modal-backdrop,
+        #modalPortalMantenimiento.show ~ .modal-backdrop {
+            z-index: 100009 !important;
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════════
+           SECCIÓN: MODO OSCURO COMPLETO + SCROLL SIDEBAR
+           Agregar al final del <style> existente
+           ═══════════════════════════════════════════════════════════════ */
+
+        /* ─── 0. SCROLL SIDEBAR (desktop y móvil) ─── */
+        #sidebar {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+
+        /* ─── 1. VARIABLES Y ACTIVACIÓN GLOBAL ─── */
+        html[data-bs-theme="dark"] {
+            color-scheme: dark;
+        }
+        body.dark-mode,
+        html[data-bs-theme="dark"] body {
+            background-color: var(--bg-main) !important;
+            color: var(--text-main) !important;
+        }
+
+        /* ─── 2. SIDEBAR ─── */
+        body.dark-mode #sidebar,
+        html[data-bs-theme="dark"] #sidebar {
+            background-color: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+        }
+        body.dark-mode #sidebar .nav-link,
+        html[data-bs-theme="dark"] #sidebar .nav-link {
+            color: var(--text-muted);
+        }
+        body.dark-mode #sidebar .border-top,
+        html[data-bs-theme="dark"] #sidebar .border-top {
+            border-color: var(--border-color) !important;
+        }
+
+        /* ─── 3. HEADER / TOPBAR ─── */
+        body.dark-mode header.bg-white,
+        html[data-bs-theme="dark"] header.bg-white {
+            background-color: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+        }
+        body.dark-mode header .text-dark,
+        html[data-bs-theme="dark"] header .text-dark {
+            color: #f8fafc !important;
+        }
+
+        /* ─── 4. MAIN CONTENT / FONDOS GENERALES ─── */
+        body.dark-mode #main-content,
+        html[data-bs-theme="dark"] #main-content {
+            background-color: var(--bg-main) !important;
+        }
+        body.dark-mode .bg-light,
+        html[data-bs-theme="dark"] .bg-light {
+            background-color: #0f172a !important;
+        }
+        body.dark-mode .bg-white,
+        html[data-bs-theme="dark"] .bg-white {
+            background-color: #1e293b !important;
+        }
+
+        /* ─── 5. CARDS ─── */
+        body.dark-mode .card,
+        html[data-bs-theme="dark"] .card {
+            background-color: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+            color: var(--text-main) !important;
+        }
+        body.dark-mode .card-header,
+        html[data-bs-theme="dark"] .card-header {
+            background-color: rgba(255,255,255,0.03) !important;
+            border-color: var(--border-color) !important;
+        }
+        body.dark-mode .card-body .text-dark,
+        html[data-bs-theme="dark"] .card-body .text-dark {
+            color: #f8fafc !important;
+        }
+
+        /* ─── 6. KPI CARDS ─── */
+        body.dark-mode .kpi-card,
+        html[data-bs-theme="dark"] .kpi-card {
+            background-color: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+        }
+        body.dark-mode .kpi-card .text-dark,
+        html[data-bs-theme="dark"] .kpi-card .text-dark {
+            color: #f8fafc !important;
+        }
+
+        /* ─── 7. TABLAS CUSTOM ─── */
+        body.dark-mode .table-custom,
+        html[data-bs-theme="dark"] .table-custom {
+            background-color: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+        }
+        body.dark-mode .table-custom th,
+        html[data-bs-theme="dark"] .table-custom th {
+            background-color: rgba(255,255,255,0.04) !important;
+            color: #94a3b8 !important;
+            border-color: var(--border-color) !important;
+        }
+        body.dark-mode .table-custom td,
+        html[data-bs-theme="dark"] .table-custom td {
+            color: var(--text-main) !important;
+            border-color: var(--border-color) !important;
+        }
+        body.dark-mode .table-hover tbody tr:hover,
+        html[data-bs-theme="dark"] .table-hover tbody tr:hover {
+            background-color: rgba(255,255,255,0.04) !important;
+        }
+
+        /* ─── 8. TABLAS BOOTSTRAP GENERALES ─── */
+        body.dark-mode .table,
+        html[data-bs-theme="dark"] .table {
+            --bs-table-color: #f1f5f9;
+            --bs-table-bg: transparent;
+            --bs-table-border-color: #334155;
+            --bs-table-striped-color: #f1f5f9;
+            --bs-table-striped-bg: rgba(255,255,255,0.03);
+            --bs-table-active-color: #f1f5f9;
+            --bs-table-active-bg: rgba(255,255,255,0.05);
+            --bs-table-hover-color: #f1f5f9;
+            --bs-table-hover-bg: rgba(255,255,255,0.04);
+            color: var(--bs-table-color);
+            border-color: var(--bs-table-border-color);
+        }
+
+        /* ─── 9. FORMULARIOS / INPUTS / SELECTS ─── */
+        body.dark-mode .form-control,
+        body.dark-mode .form-select,
+        html[data-bs-theme="dark"] .form-control,
+        html[data-bs-theme="dark"] .form-select {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        body.dark-mode .form-control::placeholder,
+        body.dark-mode .form-select::placeholder,
+        html[data-bs-theme="dark"] .form-control::placeholder,
+        html[data-bs-theme="dark"] .form-select::placeholder {
+            color: #64748b !important;
+        }
+        body.dark-mode .form-control:focus,
+        body.dark-mode .form-select:focus,
+        html[data-bs-theme="dark"] .form-control:focus,
+        html[data-bs-theme="dark"] .form-select:focus {
+            background-color: #1e293b !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15) !important;
+            color: #f1f5f9 !important;
+        }
+
+        /* Inputs custom del sistema */
+        body.dark-mode .form-control-pro,
+        body.dark-mode .form-select-pro,
+        html[data-bs-theme="dark"] .form-control-pro,
+        html[data-bs-theme="dark"] .form-select-pro {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        body.dark-mode .form-control-pro:focus,
+        body.dark-mode .form-select-pro:focus,
+        html[data-bs-theme="dark"] .form-control-pro:focus,
+        html[data-bs-theme="dark"] .form-select-pro:focus {
+            background-color: #1e293b !important;
+            border-color: #3b82f6 !important;
+            color: #f1f5f9 !important;
+        }
+
+        /* Input group (login y sistema) */
+        body.dark-mode .input-group-pro,
+        html[data-bs-theme="dark"] .input-group-pro {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+        }
+        body.dark-mode .input-group-pro:focus-within,
+        html[data-bs-theme="dark"] .input-group-pro:focus-within {
+            background-color: #0f172a !important;
+            border-color: #3b82f6 !important;
+        }
+        body.dark-mode .input-group-pro .form-control,
+        body.dark-mode .input-group-pro .input-group-text,
+        html[data-bs-theme="dark"] .input-group-pro .form-control,
+        html[data-bs-theme="dark"] .input-group-pro .input-group-text {
+            background-color: transparent !important;
+            color: #f1f5f9 !important;
+            border-color: transparent !important;
+        }
+
+        /* File inputs */
+        body.dark-mode input[type="file"],
+        html[data-bs-theme="dark"] input[type="file"] {
+            background-color: #0f172a !important;
+            color: #94a3b8 !important;
+        }
+
+        /* Select arrow light */
+        body.dark-mode select.form-select,
+        html[data-bs-theme="dark"] select.form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23cbd5e1' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+        }
+
+        /* ─── 10. LOGIN OVERLAY ─── */
+        body.dark-mode #login-overlay .bg-white,
+        html[data-bs-theme="dark"] #login-overlay .bg-white {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+        }
+        body.dark-mode #login-overlay .text-dark,
+        html[data-bs-theme="dark"] #login-overlay .text-dark {
+            color: #f8fafc !important;
+        }
+        body.dark-mode #login-overlay .text-muted,
+        html[data-bs-theme="dark"] #login-overlay .text-muted {
+            color: #94a3b8 !important;
+        }
+        body.dark-mode #login-overlay .text-secondary,
+        html[data-bs-theme="dark"] #login-overlay .text-secondary {
+            color: #94a3b8 !important;
+        }
+        body.dark-mode #login-overlay .border,
+        html[data-bs-theme="dark"] #login-overlay .border {
+            border-color: #334155 !important;
+        }
+        body.dark-mode #login-overlay .form-control,
+        html[data-bs-theme="dark"] #login-overlay .form-control {
+            color: #f1f5f9 !important;
+        }
+
+        /* ─── 11. MODALES ─── */
+        body.dark-mode .modal-content,
+        html[data-bs-theme="dark"] .modal-content {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+            color: #f1f5f9 !important;
+        }
+        body.dark-mode .modal-header,
+        html[data-bs-theme="dark"] .modal-header {
+            border-color: #334155 !important;
+        }
+        body.dark-mode .modal-footer,
+        html[data-bs-theme="dark"] .modal-footer {
+            border-color: #334155 !important;
+            background-color: rgba(255,255,255,0.03) !important;
+        }
+        body.dark-mode .modal-content .form-control,
+        body.dark-mode .modal-content .form-select,
+        html[data-bs-theme="dark"] .modal-content .form-control,
+        html[data-bs-theme="dark"] .modal-content .form-select {
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        body.dark-mode .modal-header-pro,
+        html[data-bs-theme="dark"] .modal-header-pro {
+            border-color: var(--border-color) !important;
+        }
+        body.dark-mode .modal-footer-pro,
+        html[data-bs-theme="dark"] .modal-footer-pro {
+            background: rgba(255,255,255,0.03) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        /* Modal Portal Mantenimiento (inline styles) */
+        body.dark-mode #modalPortalMantenimiento h4,
+        html[data-bs-theme="dark"] #modalPortalMantenimiento h4 {
+            color: #f8fafc !important;
+        }
+        body.dark-mode #modalPortalMantenimiento p,
+        html[data-bs-theme="dark"] #modalPortalMantenimiento p {
+            color: #cbd5e1 !important;
+        }
+        body.dark-mode #modalPortalMantenimiento strong,
+        html[data-bs-theme="dark"] #modalPortalMantenimiento strong {
+            color: #f1f5f9 !important;
+        }
+
+        /* ─── 12. DROPDOWNS ─── */
+        body.dark-mode .dropdown-menu,
+        html[data-bs-theme="dark"] .dropdown-menu {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+        }
+        body.dark-mode .dropdown-item,
+        html[data-bs-theme="dark"] .dropdown-item {
+            color: #cbd5e1 !important;
+        }
+        body.dark-mode .dropdown-item:hover,
+        html[data-bs-theme="dark"] .dropdown-item:hover {
+            background-color: #334155 !important;
+            color: #ffffff !important;
+        }
+        body.dark-mode .dropdown-divider,
+        html[data-bs-theme="dark"] .dropdown-divider {
+            border-color: #334155 !important;
+        }
+        body.dark-mode .dropdown-header,
+        html[data-bs-theme="dark"] .dropdown-header {
+            color: #94a3b8 !important;
+        }
+
+        /* ─── 13. TOASTS ─── */
+        body.dark-mode .toast-pro,
+        html[data-bs-theme="dark"] .toast-pro {
+            background: rgba(30, 41, 59, 0.95) !important;
+            border-color: rgba(255,255,255,0.08) !important;
+            color: #f1f5f9 !important;
+        }
+
+        /* ─── 14. ALERTS ─── */
+        body.dark-mode .alert-light,
+        html[data-bs-theme="dark"] .alert-light {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+            color: #cbd5e1 !important;
+        }
+
+        /* ─── 15. LISTAS / NOTIFICACIONES ─── */
+        body.dark-mode .list-group-item,
+        html[data-bs-theme="dark"] .list-group-item {
+            background-color: transparent !important;
+            border-color: var(--border-color) !important;
+            color: var(--text-main) !important;
+        }
+
+        /* ─── 16. BADGES DE ESTADO (mejorados para dark) ─── */
+        body.dark-mode .status-pagada,
+        body.dark-mode .status-confirmado,
+        body.dark-mode .status-solvente,
+        body.dark-mode .status-activo,
+        html[data-bs-theme="dark"] .status-pagada,
+        html[data-bs-theme="dark"] .status-confirmado,
+        html[data-bs-theme="dark"] .status-solvente,
+        html[data-bs-theme="dark"] .status-activo {
+            background-color: rgba(34, 197, 94, 0.15) !important;
+            color: #4ade80 !important;
+        }
+        body.dark-mode .status-validacion,
+        body.dark-mode .status-enmora,
+        html[data-bs-theme="dark"] .status-validacion,
+        html[data-bs-theme="dark"] .status-enmora {
+            background-color: rgba(245, 158, 11, 0.15) !important;
+            color: #fbbf24 !important;
+        }
+        body.dark-mode .status-pendiente,
+        body.dark-mode .status-suspendido,
+        html[data-bs-theme="dark"] .status-pendiente,
+        html[data-bs-theme="dark"] .status-suspendido {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+            color: #f87171 !important;
+        }
+        body.dark-mode .status-credito,
+        html[data-bs-theme="dark"] .status-credito {
+            background-color: rgba(6, 182, 212, 0.15) !important;
+            color: #22d3ee !important;
+        }
+
+        /* ─── 17. SERVICE BADGES ─── */
+        body.dark-mode .service-badge,
+        html[data-bs-theme="dark"] .service-badge {
+            background-color: rgba(59, 130, 246, 0.2) !important;
+        }
+
+        /* ─── 18. BORDES GENERALES ─── */
+        body.dark-mode .border,
+        body.dark-mode .border-bottom,
+        body.dark-mode .border-top,
+        html[data-bs-theme="dark"] .border,
+        html[data-bs-theme="dark"] .border-bottom,
+        html[data-bs-theme="dark"] .border-top {
+            border-color: #334155 !important;
+        }
+        body.dark-mode .border-dashed,
+        html[data-bs-theme="dark"] .border-dashed {
+            border-color: #334155 !important;
+        }
+
+        /* ─── 19. TEXTOS UTILITARIOS ─── */
+        body.dark-mode .text-dark,
+        html[data-bs-theme="dark"] .text-dark {
+            color: #f8fafc !important;
+        }
+        body.dark-mode .text-muted,
+        html[data-bs-theme="dark"] .text-muted {
+            color: #94a3b8 !important;
+        }
+        body.dark-mode .text-secondary,
+        html[data-bs-theme="dark"] .text-secondary {
+            color: #94a3b8 !important;
+        }
+
+        /* ─── 20. BOTONES ─── */
+        body.dark-mode .btn-light,
+        html[data-bs-theme="dark"] .btn-light {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+            color: #f1f5f9 !important;
+        }
+        body.dark-mode .btn-outline-dark,
+        html[data-bs-theme="dark"] .btn-outline-dark {
+            color: #cbd5e1 !important;
+            border-color: #475569 !important;
+        }
+        body.dark-mode .btn-outline-dark:hover,
+        html[data-bs-theme="dark"] .btn-outline-dark:hover {
+            background-color: #334155 !important;
+            color: #ffffff !important;
+        }
+
+        /* ─── 21. NAV-PILLS (Mikrotik tabs) ─── */
+        body.dark-mode .nav-pills .nav-link,
+        html[data-bs-theme="dark"] .nav-pills .nav-link {
+            color: #94a3b8 !important;
+        }
+        body.dark-mode .nav-pills .nav-link.active,
+        html[data-bs-theme="dark"] .nav-pills .nav-link.active {
+            background-color: #2563eb !important;
+            color: #ffffff !important;
+        }
+
+        /* ─── 22. IMÁGENES / THUMBNAILS ─── */
+        body.dark-mode .img-thumbnail,
+        html[data-bs-theme="dark"] .img-thumbnail {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+        }
+
+        /* ─── 23. HOVER UTILITIES ─── */
+        body.dark-mode .hover-bg:hover,
+        html[data-bs-theme="dark"] .hover-bg:hover {
+            background-color: rgba(255,255,255,0.05) !important;
+        }
+
+        /* ─── 24. SCROLLBAR OSCURA ─── */
+        body.dark-mode ::-webkit-scrollbar,
+        html[data-bs-theme="dark"] ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        body.dark-mode ::-webkit-scrollbar-track,
+        html[data-bs-theme="dark"] ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        body.dark-mode ::-webkit-scrollbar-thumb,
+        html[data-bs-theme="dark"] ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        body.dark-mode ::-webkit-scrollbar-thumb:hover,
+        html[data-bs-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        /* ─── 25. BADGE SERVIDOR EN PANEL LOGIN (modo oscuro) ─── */
+        body.dark-mode #gs-connection-badge,
+        html[data-bs-theme="dark"] #gs-connection-badge {
+            background: rgba(15, 23, 42, 0.95) !important;
+            border-color: rgba(34, 197, 94, 0.4) !important;
+        }
+
+    
+        /* ═══════════════════════════════════════════════════════════════
+           ANIMACIÓN: PUNTO PULSANTE (Indicador Google Sheets)
+           ═══════════════════════════════════════════════════════════════ */
+        @keyframes pulse-dot {
+            0% { transform: scale(1); opacity: 0.6; }
+            70% { transform: scale(2.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
+
+        /* ═══════════════════════════════════════════════════════════════
+           BOTÓN DE TEMA EN LOGIN OVERLAY
+           ═══════════════════════════════════════════════════════════════ */
+        #theme-toggle-login {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        #theme-toggle-login:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        html[data-bs-theme="dark"] #theme-toggle-login {
+            background: rgba(30, 41, 59, 0.95) !important;
+            border-color: #475569 !important;
+        }
+        html[data-bs-theme="dark"] #theme-toggle-login i {
+            color: #fbbf24 !important;
+        }
+
+</style>
 </head>
 <body>
 
@@ -410,6 +914,7 @@
          MODIFICAR AQUÍ PARA CAMBIAR EL DISEÑO DEL LOGIN
          ═══════════════════════════════════════════════════════════════ -->
     <div id="login-overlay" class="d-flex align-items-center justify-content-center p-3 p-sm-4 overflow-hidden w-100" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background-color: #0f172a;">
+
         <div class="card login-split-card-pro rounded-4 overflow-hidden w-100 my-auto position-relative z-1 shadow-lg" style="max-width: 980px; max-height: 90vh;">
             <div class="row g-0 h-100">
                 <!-- SECCIÓN IZQUIERDA: MARCA Y BIENVENIDA -->
@@ -451,12 +956,38 @@
 
                     <div class="position-relative z-1 pt-3 border-top border-white border-opacity-10 text-white-50 small d-flex justify-content-between align-items-center">
                         <span>Versión ERP 2026.2.1</span>
+
                         <i class="fa-solid fa-microchip text-white-50"></i>
                     </div>
                 </div>
 
                 <!-- SECCIÓN DERECHA: FORMULARIO -->
-                <div class="col-12 col-lg-6 p-4 p-sm-5 d-flex flex-column justify-content-between bg-white text-dark overflow-auto" style="max-height: 90vh;">
+                <div class="col-12 col-lg-6 p-4 p-sm-5 d-flex flex-column justify-content-between bg-white text-dark overflow-auto position-relative" style="max-height: 90vh;">
+
+                    <!-- ═══════════════════════════════════════════════════════════════
+                         CONTROLES SUPERIORES: TEMA + ESTADO DE CONEXIÓN
+                         ═══════════════════════════════════════════════════════════════ -->
+                    <div class="position-absolute top-0 end-0 m-3 m-sm-3 d-flex flex-column align-items-end gap-2" style="z-index: 10;">
+
+                        <!-- Botón Tema (ahora en el login) -->
+                        <button class="btn btn-light rounded-circle border shadow-sm d-flex align-items-center justify-content-center" 
+                                id="theme-toggle-login" onclick="toggleTheme()" title="Cambiar Tema" 
+                                style="width: 40px; height: 40px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);">
+                            <i class="fa-solid fa-moon text-secondary" id="theme-icon-login"></i>
+                        </button>
+
+                        <!-- INDICADOR: ESTADO DE CONEXIÓN CON SERVIDOR -->
+                        <div id="gs-connection-badge" class="d-flex align-items-center gap-1 px-2 py-1 rounded-pill shadow-sm d-none" 
+                             style="background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(34, 197, 94, 0.3);">
+                            <span class="position-relative d-inline-flex rounded-circle" style="width: 6px; height: 6px; background: #22c55e;">
+                                <span class="position-absolute top-0 start-0 rounded-circle w-100 h-100" 
+                                      style="background: #22c55e; animation: pulse-dot 2s ease-out infinite;"></span>
+                            </span>
+                            <span class="text-white fw-semibold d-flex align-items-center gap-1" style="font-size: 0.62rem; letter-spacing: 0.04em;">
+                                <i class="fa-solid fa-server text-success" style="font-size: 0.6rem;"></i>En Linea
+                            </span>
+                        </div>
+                    </div>
                     <div class="d-lg-none text-center mb-3">
                         <div class="p-3 bg-primary bg-opacity-10 rounded-circle d-inline-block text-primary mb-2 border border-primary border-opacity-25">
                             <i class="fa-solid fa-network-wired fs-2 text-primary"></i>
@@ -471,7 +1002,7 @@
                         <h4 class="fw-bold mb-1 text-dark">Ingresar al Dashboard</h4>
                         <p class="text-muted small mb-3">Ingresa tus credenciales para continuar</p>
 
-                        <div id="login-alert" class="alert alert-danger d-none small text-start py-2 mb-3 border-0 bg-danger bg-opacity-10 text-danger" role="alert"></div>
+                        
 
                         <form id="loginForm" onsubmit="handleLoginSubmit(event)">
                             <div class="mb-3 text-start">
@@ -629,7 +1160,7 @@
          BOTON PARA CAMBIAR DE TEMA ESTA DESACTIVADO
          ═══════════════════════════════════════════════════════════════ -->
             <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-icon btn-light rounded-circle border shadow-sm" id="theme-toggle" onclick="toggleTheme()" title="Cambiar Tema" disabled>
+                <button class="btn btn-icon btn-light rounded-circle border shadow-sm" id="theme-toggle" onclick="toggleTheme()" title="Cambiar Tema">
     			<i class="fa-solid fa-moon text-secondary"></i>
 				</button>
 
@@ -642,6 +1173,7 @@
                         </div>
                         <i class="fa-solid fa-chevron-down text-muted small"></i>
                     </div>
+
                     <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2 fs-6">
                         <li><h6 class="dropdown-header text-truncate" id="dropdown-user-email">email@dominio.com</h6></li>
                         <li><hr class="dropdown-divider"></li>
@@ -2823,7 +3355,7 @@
          MODAL: ALERTA GENÉRICA PARA LOGIN (Éxito / Error / Warning)
          Se muestra POR ENCIMA del login overlay
          ═══════════════════════════════════════════════════════════════ -->
-    <div class="modal fade modal-login-alert" id="modalLoginAlert" tabindex="-1">
+    <div class="modal modal-login-alert" id="modalLoginAlert" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content modal-content-pro text-center p-3">
                 <div class="modal-body modal-body-pro">
@@ -3015,10 +3547,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: CONFIGURACIÓN GLOBAL Y VARIABLES
     // MODIFICAR gasUrl CON LA URL DE TU SCRIPT DE GOOGLE APPS SCRIPT
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     const gasUrl = 'https://script.google.com/macros/s/AKfycby6pJKKW_QP5xD1aWQ-USqTnx1N6p4PenSb8THwCzoIpErw3gRguw3TRs3D0FfjvkFZYg/exec';
 
     // Base de datos local en memoria (sincronizada con Google Sheets)
@@ -3043,9 +3575,9 @@
     // Instancias de modales Bootstrap
     let modalSysAlert, modalConfirmLogout, modalPwd, modalPerfil, modalEmp, modalUsr, modalCli, modalFac, modalCred, modalVerFac, modalNotif;
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: INICIALIZACIÓN AL CARGAR LA PÁGINA
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     document.addEventListener('DOMContentLoaded', () => {
         // Event listeners para registro desde login
         // Manejar z-index del backdrop específicamente para el modal de registro
@@ -3063,6 +3595,17 @@
 
         // Inicializar modales Bootstrap
         modalSysAlert = new bootstrap.Modal(document.getElementById('modalSystemAlert'));
+        // Fix: asegurar que el backdrop quede POR ENCIMA del login overlay (z-index 99999)
+        const modalLoginAlertEl = document.getElementById('modalLoginAlert');
+        if (modalLoginAlertEl) {
+            modalLoginAlert = new bootstrap.Modal(modalLoginAlertEl);
+            modalLoginAlertEl.addEventListener('show.bs.modal', () => {
+                setTimeout(() => {
+                    const backdrop = document.querySelector('.modal-backdrop.show');
+                    if (backdrop) backdrop.style.zIndex = '100009';
+                }, 10);
+            });
+        }
         modalConfirmLogout = new bootstrap.Modal(document.getElementById('modalConfirmLogout'));
         modalPwd = new bootstrap.Modal(document.getElementById('modalChangePassword'));
         modalPerfil = new bootstrap.Modal(document.getElementById('modalPerfil'));
@@ -3105,10 +3648,10 @@
         updatePortalUI();
     });
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: TOAST NOTIFICATIONS - NOTIFICACIONES ELEGANTES
     // MODIFICAR ESTILOS EN CSS .toast-pro
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function showToast(title, message, type = 'success', duration = 4000) {
         const container = document.getElementById('toast-container');
         const toast = document.createElement('div');
@@ -3142,10 +3685,10 @@
         }, duration);
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: ALERTA DEL SISTEMA (MODAL)
     // USAR PARA ACCIONES CRÍTICAS QUE REQUIERAN CONFIRMACIÓN DEL USUARIO
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function showSystemNotification(title, message, type = 'success') {
         const icon = document.getElementById('sysAlertIcon');
         const wrapper = document.getElementById('sysAlertIconWrapper');
@@ -3166,10 +3709,10 @@
         modalSysAlert.show();
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: TEMPORIZADOR DE INACTIVIDAD
     // CIERRA SESIÓN AUTOMÁTICAMENTE DESPUÉS DE 5 MINUTOS SIN ACTIVIDAD
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function initInactivityTimer() {
         const resetTimer = () => {
             clearTimeout(inactivityTimer);
@@ -3187,10 +3730,10 @@
         });
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: SINCRONIZACIÓN CON GOOGLE APPS SCRIPT (GAS)
     // CARGA TODOS LOS DATOS DESDE GOOGLE SHEETS
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     async function sincronizarConGAS() {
         if (!gasUrl) {
             showSystemNotification('Error de Configuración', 'URL de Google Apps Script no configurada.', 'danger');
@@ -3208,21 +3751,25 @@
     localStorage.setItem('erp_portal_activo', isActive ? 'true' : 'false');
 }
                 showToast('Sincronización', 'Datos cargados desde servidor.', 'success', 2000);
+                mostrarBadgeGoogleSheets(true);
+            } else {
+                mostrarBadgeGoogleSheets(false);
             }
             renderAllData();
             updatePortalUI();
         } catch (e) {
             console.warn("Error al sincronizar con Apps Script:", e);
             showToast('Advertencia', 'No se pudo conectar con servidor. Usando datos locales.', 'warning');
+            mostrarBadgeGoogleSheets(false);
             renderAllData();
             updatePortalUI();
         }
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: ENVÍO DE DATOS A GOOGLE APPS SCRIPT
     // ENVÍA CUALQUIER ACCIÓN (add, update, delete) AL BACKEND
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     async function sendGasRequest(action, payload) {
         if (!gasUrl) return;
         try {
@@ -3240,10 +3787,10 @@
         }
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: RENDERIZADO GLOBAL
     // LLAMA A TODAS LAS FUNCIONES DE RENDERIZADO PARA ACTUALIZAR LA UI
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function renderAllData() {
         renderEmpresas();
         renderUsuarios();
@@ -3274,9 +3821,9 @@
         }
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: LOGIN Y AUTENTICACIÓN
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function togglePasswordVisibility(inputId, btnEl) {
         const input = document.getElementById(inputId);
         const icon = btnEl.querySelector('i');
@@ -3304,21 +3851,53 @@
 
         if (found) {
             if (found.estado !== 'Activo') {
-                showSystemNotification('Cuenta Inactiva', 'Consulte al Administrador para activar su cuenta.', 'warning');
+                showLoginModalAlert('Cuenta Inactiva', 'Consulte al Administrador para activar su cuenta.', 'warning');
                 return;
             }
             applyUserSession(found);
             showToast('Bienvenido', `Hola ${found.nombre_completo}, has iniciado sesión correctamente.`, 'success');
         } else {
-            showSystemNotification('Credenciales inválidas', 'Verifique sus datos e intente nuevamente.', 'danger');
+            showLoginModalAlert('Credenciales Inválidas', 'Verifique sus datos e intente nuevamente.', 'danger');
         }
     }
 
-    function showLoginError(msg) {
-        const box = document.getElementById('login-alert');
-        box.innerText = msg;
-        box.className = 'alert alert-danger d-none small text-start py-2 mb-3 border-0 bg-danger bg-opacity-10 text-danger';
-        box.classList.remove('d-none');
+    
+
+    /* ═══════════════════════════════════════════════════════════════
+       ALERTA MODAL DE LOGIN (por encima del overlay)
+       Usar SOLO para errores de autenticación que deben
+       mostrarse por encima de la pantalla de login.
+       ═══════════════════════════════════════════════════════════════ */
+    function showLoginModalAlert(title, message, type) {
+        const icon = document.getElementById('loginAlertIcon');
+        const wrapper = document.getElementById('loginAlertIconWrapper');
+        document.getElementById('loginAlertTitle').innerText = title;
+        document.getElementById('loginAlertMessage').innerText = message;
+
+        const colors = {
+            success: { bg: 'rgba(34, 197, 94, 0.1)', icon: 'fa-circle-check text-success' },
+            danger:  { bg: 'rgba(239, 68, 68, 0.1)', icon: 'fa-circle-xmark text-danger' },
+            warning: { bg: 'rgba(245, 158, 11, 0.1)', icon: 'fa-triangle-exclamation text-warning' },
+            info:    { bg: 'rgba(37, 99, 235, 0.1)', icon: 'fa-circle-info text-primary' }
+        };
+        const cfg = colors[type] || colors.danger;
+        wrapper.style.background = cfg.bg;
+        icon.className = 'fa-solid fs-2 ' + cfg.icon;
+
+        modalLoginAlert.show();
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       INDICADOR: Estado de conexión con Google Sheets
+       ═══════════════════════════════════════════════════════════════ */
+    function mostrarBadgeGoogleSheets(conectado) {
+        const badge = document.getElementById('gs-connection-badge');
+        if (!badge) return;
+        if (conectado) {
+            badge.classList.remove('d-none');
+        } else {
+            badge.classList.add('d-none');
+        }
     }
 
     function applyUserSession(user) {
@@ -3344,7 +3923,6 @@
         clearTimeout(inactivityTimer);
         document.getElementById('loginUser').value = '';
         document.getElementById('loginPassword').value = '';
-        document.getElementById('login-alert').classList.add('d-none');
         modalConfirmLogout.hide();
         document.getElementById('login-overlay').classList.remove('d-none');
         showToast('Sesión Cerrada', 'Has cerrado sesión correctamente.', 'info');
@@ -3374,11 +3952,11 @@
         if (isClient) switchTab('dashboard');
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: PERFIL DE USUARIO (NUEVO)
     // MUESTRA Y PERMITE EDITAR TODA LA INFORMACIÓN DEL USUARIO LOGUEADO
     // MODIFICAR CAMPOS AQUÍ PARA AGREGAR/QUITAR INFORMACIÓN DEL PERFIL
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function abrirModalPerfil() {
         if (!currentUser) return;
         document.getElementById('formPerfil').reset();
@@ -3431,12 +4009,12 @@
         }
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: KPIs - TARJETAS DE MÉTRICAS
     // ADMIN: Total Clientes | Facturas Pagadas | Pendientes | Validación | Créditos
     // CLIENTE: Código Cliente | Facturas Pagadas | Pendientes | Validación | Créditos
     // MODIFICAR AQUÍ PARA CAMBIAR LAS MÉTRICAS MOSTRADAS
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function updateKPIs() {
         if (!currentUser) return;
         const isClient = currentUser.rol === 'Cliente';
@@ -3504,9 +4082,9 @@
         document.getElementById('desc-kpi-5').innerText = isAdmin ? 'Cuotas activas de financiamiento' : 'Tus cuotas de financiamiento';
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: ESTADO DEL SERVICIO EN DASHBOARD
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function renderDashboardServicio() {
         if (!currentUser) return;
         const boxClient = document.getElementById('box-estado-servicio-cliente');
@@ -3589,13 +4167,13 @@
         }
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: GRÁFICOS CON DATOS REALES DE PAGOS EN BS
     // GRÁFICO 1: Barras - Pagos en Bs por método de pago
     // GRÁFICO 2: Dona - Estado de facturas
     // GRÁFICO 3: Línea - Historial de pagos en Bs
     // MODIFICAR CONFIGURACIÓN DE CHART.JS AQUÍ
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function renderDashboardCharts() {
         const ctxPagos = document.getElementById('chartPagosBs');
         const ctxFacturas = document.getElementById('chartFacturas');
@@ -3763,9 +4341,9 @@
         });
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: NAVEGACIÓN ENTRE PESTAÑAS
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.add('d-none'));
         document.querySelectorAll('#sidebar .nav-link').forEach(el => el.classList.remove('active'));
@@ -3898,9 +4476,9 @@
         document.getElementById('sidebar').classList.toggle('active');
     }
 		
-// ═══════════════════════════════════════════════════════════════════════════════
+
 // SECCIÓN: PORTAL PÚBLICO — Control de registro desde login
-// ═══════════════════════════════════════════════════════════════════════════════
+
 
 function updatePortalUI() {
     const toggle = document.getElementById('portal-toggle');
@@ -3974,18 +4552,35 @@ function mostrarRegistroOMantenimiento() {
     }
 }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: CAMBIO DE TEMA CLARO/OSCURO
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function toggleTheme() {
-        document.body.classList.toggle('dark-mode');
-        const isDarkMode = document.body.classList.contains('dark-mode');
+        const html = document.documentElement;
+        const isDark = html.getAttribute('data-bs-theme') === 'dark';
+        const newTheme = isDark ? 'light' : 'dark';
+
+        html.setAttribute('data-bs-theme', newTheme);
+        document.body.classList.toggle('dark-mode', !isDark);
+
+        // Icono en el header principal
         const themeIcon = document.querySelector('#theme-toggle i');
         if (themeIcon) {
-            themeIcon.className = isDarkMode ? 'fa-solid fa-sun text-warning' : 'fa-solid fa-moon text-secondary';
+            themeIcon.className = !isDark
+                ? 'fa-solid fa-sun text-warning'
+                : 'fa-solid fa-moon text-secondary';
         }
-        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-        actualizarColoresCharts(isDarkMode);
+
+        // Icono en el login (sincronizado)
+        const loginIcon = document.getElementById('theme-icon-login');
+        if (loginIcon) {
+            loginIcon.className = !isDark
+                ? 'fa-solid fa-sun text-warning'
+                : 'fa-solid fa-moon text-secondary';
+        }
+
+        localStorage.setItem('theme', newTheme);
+        actualizarColoresCharts(!isDark);
     }
 
 
@@ -4013,16 +4608,22 @@ function mostrarRegistroOMantenimiento() {
         });
     }
 
-    // Restaurar tema guardado
-    if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-mode');
-        const themeIcon = document.querySelector('#theme-toggle i');
-        if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-warning';
-    }
+    /* ═══════════════════════════════════════════════════════════════
+       RESTAURAR TEMA AL CARGAR
+       ═══════════════════════════════════════════════════════════════ */
+    (function restaurarTema() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-bs-theme', 'dark');
+            document.body.classList.add('dark-mode');
+            const themeIcon = document.querySelector('#theme-toggle i');
+            if (themeIcon) themeIcon.className = 'fa-solid fa-sun text-warning';
+        }
+    })();
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: CAMBIAR CONTRASEÑA
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function abrirModalCambiarPassword() {
         document.getElementById('formChangePassword').reset();
         modalPwd.show();
@@ -4078,11 +4679,11 @@ function mostrarRegistroOMantenimiento() {
         else container.classList.add('d-none');
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: GENERAR NÚMERO DE FACTURA AUTOMÁTICO
     // FORMATO: FAC-LCS-XXXX (números aleatorios de 4 dígitos)
     // MODIFICAR AQUÍ PARA CAMBIAR EL FORMATO DE LAS FACTURAS
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function generarNumeroFactura() {
         const randomNum = Math.floor(1000 + Math.random() * 9000);
         const numero = 'FAC-LCS-' + randomNum;
@@ -4090,9 +4691,9 @@ function mostrarRegistroOMantenimiento() {
         showToast('Número Generado', `Factura: ${numero}`, 'info', 2000);
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: EMPRESAS - CRUD COMPLETO
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function renderEmpresas() {
         const isClient = currentUser && currentUser.rol === 'Cliente';
         const tbody = document.getElementById('tbl-empresas-body');
@@ -4222,9 +4823,9 @@ function mostrarRegistroOMantenimiento() {
         if (gasUrl) sendGasRequest('deleteEmpresa', { id_empresa: id });
     }
 
-        // ═══════════════════════════════════════════════════════════════════════════════
+        
     // SECCIÓN: USUARIOS Y PERMISOS - BÚSQUEDA INTELIGENTE + DETALLE
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function renderUsuarios() {
         const isClient = currentUser && currentUser.rol === 'Cliente';
         const tbody = document.getElementById('tbl-usuarios-body');
@@ -4438,9 +5039,9 @@ function mostrarRegistroOMantenimiento() {
         if (gasUrl) sendGasRequest('deleteUsuario', { id_usuario: id });
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: CLIENTES - CRUD COMPLETO
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function buscarClienteGestion() {
     const input = document.getElementById('cli-input-cedula');
     const raw = input.value.trim().replace(/\D/g, '');
@@ -4641,10 +5242,10 @@ function mostrarRegistroOMantenimiento() {
         if (gasUrl) sendGasRequest('deleteCliente', { id_cliente: id });
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: FACTURACIÓN - CRUD + VALIDACIONES + NOTIFICACIONES
     // AL EMITIR FACTURA SE GENERA NÚMERO AUTOMÁTICO FAC-LCS-XXXX
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function renderFacturacionAgrupada() {
     const isClient = currentUser && currentUser.rol === 'Cliente';
     
@@ -4888,9 +5489,9 @@ function mostrarRegistroOMantenimiento() {
     }
 
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: CRÉDITOS Y CUOTAS
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     function ocultarResultadosCreditos() {
     const el = (id) => document.getElementById(id);
     if (el('cred-tarjeta-cliente')) el('cred-tarjeta-cliente').classList.add('d-none');
@@ -5234,6 +5835,7 @@ async function guardarCredito(e) {
         fecha: new Date().toLocaleString('es-VE'),
         leido: 'NO'
     };
+
     db.notificaciones.unshift(notifCredito);
     modalCred.hide();
     renderFacturacionAgrupada();
@@ -5278,9 +5880,9 @@ async function guardarCredito(e) {
         if(gasUrl) sendGasRequest('deleteCredito', { id_cuota: idCuota });
     }
 
-        // ═══════════════════════════════════════════════════════════════════════════════
+        
     // SECCIÓN: MÓDULO DE PAGOS - BÚSQUEDA INTELIGENTE + MODAL DE PROCESAR PAGO
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     let modalProcesarPagoInstance = null;
     let _payClienteSeleccionado = null;
 
@@ -5329,6 +5931,7 @@ async function guardarCredito(e) {
             documento: cliente.documento_id,
             id: cliente.id_cliente
         };
+
 
         document.getElementById('pay-cliente-nombre').innerText = cliente.nombre_completo;
         document.getElementById('pay-cliente-cedula').innerText = cliente.documento_id || 'N/A';
@@ -5578,9 +6181,9 @@ async function guardarCredito(e) {
     function procesarPagoModulo(e) { e.preventDefault(); }
     function renderHistorialPagos() { /* legacy, no-op */ }
 
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     // SECCIÓN: NOTIFICACIONES
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     let _notifClienteSeleccionado = null;
 
     function renderNotificaciones() {
@@ -5826,9 +6429,9 @@ async function guardarCredito(e) {
         showToast('Notificaciones', 'Notificación eliminada.', 'success');
         if (gasUrl) sendGasRequest('deleteNotificacion', { id_notificacion: id });
     }
-// ═══════════════════════════════════════════════════════════════════════════════
+
 // SECCIÓN: FACTURACIÓN - FUNCIONES REDISEÑADAS
-// ═══════════════════════════════════════════════════════════════════════════════
+
 
 function formatoDineroFac(n) {
     return '$' + Number(n || 0).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -6218,9 +6821,9 @@ async function eliminarFactura(id) {
 }
     
 
-// ═══════════════════════════════════════════════════════════════════════════════
+
     // SECCIÓN: REGISTRO DESDE LOGIN (AUTOREGISTRO DE CLIENTE)
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     async function handleRegistroSubmit(e) {
         e.preventDefault();
 
@@ -6353,9 +6956,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// ═══════════════════════════════════════════════════════════════════════════════
+
     // SECCIÓN: LISTA DE CLIENTES INLINE
-    // ═══════════════════════════════════════════════════════════════════════════════
+    
     let _listaClientesVisible = false;
 
     function toggleListaClientes() {
@@ -6497,9 +7100,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('cli-tabla-completa').classList.add('d-none');
     }
 	
-	// ═══════════════════════════════════════════════════════════════════════════════
+	
 // SECCIÓN: LISTAS INLINE - EMPRESAS
-// ═══════════════════════════════════════════════════════════════════════════════
+
 let _listaEmpresasVisible = false;
 
 function toggleListaEmpresas() {
@@ -6569,9 +7172,9 @@ function seleccionarEmpresaInline(idEmpresa) {
 }
 
 
-// ═══════════════════════════════════════════════════════════════════════════════
+
 // SECCIÓN: LISTAS INLINE - USUARIOS
-// ═══════════════════════════════════════════════════════════════════════════════
+
 let _listaUsuariosVisible = false;
 
 function toggleListaUsuarios() {
@@ -6644,9 +7247,9 @@ function seleccionarUsuarioInline(idUsuario) {
 }
 
 
-// ═══════════════════════════════════════════════════════════════════════════════
+
 // SECCIÓN: LISTAS INLINE - FACTURAS (AGRUPADAS POR CLIENTE)
-// ═══════════════════════════════════════════════════════════════════════════════
+
 let _listaFacturasVisible = false;
 
 function toggleListaFacturas() {
@@ -6774,9 +7377,9 @@ function seleccionarFacturaInline(codigoCliente) {
 }
 
 
-// ═══════════════════════════════════════════════════════════════════════════════
+
 // SECCIÓN: LISTAS INLINE - CRÉDITOS (AGRUPADOS POR CLIENTE)
-// ═══════════════════════════════════════════════════════════════════════════════
+
 let _listaCreditosVisible = false;
 
 function toggleListaCreditos() {
@@ -6910,9 +7513,9 @@ function seleccionarCreditoInline(codigoCliente) {
 }
 
 
-// ═══════════════════════════════════════════════════════════════════════════════
+
 // SECCIÓN: LISTAS INLINE - PAGOS (CLIENTES CON FACTURAS PENDIENTES)
-// ═══════════════════════════════════════════════════════════════════════════════
+
 let _listaPagosVisible = false;
 
 function toggleListaPagos() {
@@ -7033,9 +7636,9 @@ function seleccionarPagoInline(codigoCliente) {
 }
 
 
-// ═══════════════════════════════════════════════════════════════════════════════
+
 // SECCIÓN: LISTAS INLINE - NOTIFICACIONES
-// ═══════════════════════════════════════════════════════════════════════════════
+
 let _listaNotificacionesVisible = false;
 
 function toggleListaNotificaciones() {
@@ -7153,10 +7756,10 @@ function filtrarListaNotificacionesInline() {
     }).join('');
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+
 // SECCIÓN: MIKROTIK — FUNCIONALIDAD COMPLETA
 // Conexión directa vía REST API por red local. Requiere /ip service enable rest-api
-// ═══════════════════════════════════════════════════════════════════════════════
+
 
 let mktConfig = { host: '', port: 80, user: '', pass: '' };
 let mktData = { profiles: [], users: [], server: {} };
@@ -7514,9 +8117,9 @@ async function eliminarMikrotikUser(id) {
 }
 
 
-// ═══════════════════════════════════════════════════════════════════════════════
+
 // SECCIÓN: FAMILIA — FUNCIONALIDAD COMPLETA
-// ═══════════════════════════════════════════════════════════════════════════════
+
 
 let dbFamilia = [];
 let modalFamiliarInstance = null;
@@ -7682,9 +8285,9 @@ function eliminarFamiliar(id) {
 }
 
 
-// ═══════════════════════════════════════════════════════════════════════════════
+
 // MODIFICACIÓN: switchTab — Agregar renderizado de Familia y MikroTik
-// ═══════════════════════════════════════════════════════════════════════════════
+
 
 const _originalSwitchTab = switchTab;
 switchTab = function(tabId) {
