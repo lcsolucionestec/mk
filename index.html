@@ -763,7 +763,413 @@
     color: #64748b !important;
 }
 
+
+        /* SELECTOR DE PORTALES MULTIPLATAFORMA */
+        #portalAccessModal input::placeholder { opacity: .75; }
+
+        [data-theme="light"] #portalAccessModal > div {
+            background: rgba(255,255,255,.97) !important;
+            border-color: #e2e8f0 !important;
+        }
+
+        [data-theme="light"] #portalAccessModal h3,
+        [data-theme="light"] #portalAccessModal label,
+        [data-theme="light"] #portalAccessModal p,
+        [data-theme="light"] #portalAccessModal .text-slate-400,
+        [data-theme="light"] #portalAccessModal .text-slate-500 {
+            color: #64748b !important;
+        }
+
+        [data-theme="light"] #portalAccessModal input {
+            background: #f8fafc !important;
+            color: #0f172a !important;
+            border-color: #e2e8f0 !important;
+        }
+
+
+/* ===== SELECTOR MODERNO DE PORTALES ===== */
+.portal-selector-backdrop{background:radial-gradient(circle at 15% 10%,rgba(37,99,235,.16),transparent 28%),radial-gradient(circle at 88% 88%,rgba(124,58,237,.13),transparent 30%),rgba(2,11,24,.84);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.portal-selector-card{background:linear-gradient(145deg,#0f172a,#111827 52%,#0b1220);border:1px solid rgba(255,255,255,.10);box-shadow:0 35px 90px rgba(0,0,0,.62),0 0 50px rgba(37,99,235,.10);color:#e5e7eb}
+.portal-choice{position:relative;display:block;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.10)!important;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease,background .28s ease;text-decoration:none!important;color:inherit!important}
+.portal-choice:hover{transform:translateY(-5px);border-color:rgba(96,165,250,.58)!important;background:linear-gradient(145deg,rgba(30,64,175,.18),rgba(15,23,42,.80))!important;box-shadow:0 20px 45px rgba(0,0,0,.34),0 0 30px rgba(37,99,235,.12)}
+.portal-choice::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(59,130,246,.14),transparent 45%,rgba(168,85,247,.10));opacity:0;transition:.28s ease;pointer-events:none}
+.portal-choice:hover::before{opacity:1}.portal-choice>*{position:relative;z-index:1}.portal-icon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 10px 30px rgba(0,0,0,.18)}
+.portal-selector-close{transition:.2s ease}.portal-selector-close:hover{transform:rotate(90deg);background:#ef4444;color:#fff}
+[data-theme="light"] .portal-selector-backdrop{background:radial-gradient(circle at 15% 5%,rgba(37,99,235,.12),transparent 30%),radial-gradient(circle at 88% 92%,rgba(124,58,237,.10),transparent 30%),rgba(15,23,42,.42)!important}
+[data-theme="light"] .portal-selector-card{background:linear-gradient(145deg,#ffffff,#f8fafc 55%,#eef4fb)!important;border:1px solid #dbe4ef!important;box-shadow:0 30px 80px rgba(15,23,42,.20),0 10px 30px rgba(37,99,235,.08)!important;color:#0f172a!important}
+[data-theme="light"] .portal-selector-card .text-white{color:#0f172a!important}
+[data-theme="light"] .portal-selector-card .text-slate-400{color:#64748b!important}
+[data-theme="light"] .portal-selector-card .border-white\/10{border-color:#e2e8f0!important}
+[data-theme="light"] .portal-selector-card .bg-white\/5{background:rgba(15,23,42,.035)!important;border-color:#e2e8f0!important}
+[data-theme="light"] .portal-selector-card .text-slate-500{color:#64748b!important}
+[data-theme="light"] .portal-choice{background:linear-gradient(145deg,#ffffff,#f8fafc)!important;border-color:#dbe4ef!important;color:#0f172a!important;box-shadow:0 10px 24px rgba(15,23,42,.06)!important}
+[data-theme="light"] .portal-choice:hover{background:linear-gradient(145deg,#eff6ff,#ffffff)!important;border-color:#93c5fd!important;box-shadow:0 18px 40px rgba(15,23,42,.11),0 0 24px rgba(37,99,235,.08)!important}
+[data-theme="light"] .portal-choice h4{color:#0f172a!important}.portal-selector-card .text-emerald-400{color:#10b981!important}
+/* ===== TOPBAR MÓVIL SOLO ICONOS ===== */
+.topbar-mobile-icon{display:inline-flex;align-items:center;justify-content:center;transition:.2s ease}
+@media (max-width:639px){.topbar-mobile-icon{width:31px;height:31px;border-radius:999px;cursor:pointer}.topbar-mobile-icon:active{background:transparent!important;transform:scale(.96)}.topbar-mobile-sep{display:none!important}}
+/* ===== MODAL MODERNO DE INFORMACIÓN ===== */
+.topinfo-backdrop{background:radial-gradient(circle at 30% 15%,rgba(37,99,235,.18),transparent 30%),radial-gradient(circle at 75% 85%,rgba(6,182,212,.12),transparent 25%),rgba(2,6,23,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.topinfo-card{background:linear-gradient(145deg,rgba(15,23,42,.99),rgba(8,15,29,.97));border:1px solid rgba(255,255,255,.10);box-shadow:0 35px 90px rgba(0,0,0,.62),0 0 45px rgba(37,99,235,.10)}
+.topinfo-value{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.075)}
+/* ===== TOPBAR MÓVIL SOLO ICONOS ===== */
+.topbar-mobile-icon{display:inline-flex;align-items:center;justify-content:center;transition:.2s ease}
+@media (max-width:639px){.topbar-mobile-icon{width:31px;height:31px;border-radius:999px;cursor:pointer}.topbar-mobile-icon:active{background:rgba(37,99,235,.12);transform:scale(.96)}.topbar-mobile-sep{display:none!important}}
+/* ===== MODAL MODERNO DE INFORMACIÓN ===== */
+.topinfo-backdrop{background:radial-gradient(circle at 30% 15%,rgba(37,99,235,.18),transparent 30%),radial-gradient(circle at 75% 85%,rgba(6,182,212,.12),transparent 25%),rgba(2,6,23,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.topinfo-card{background:linear-gradient(145deg,rgba(15,23,42,.99),rgba(8,15,29,.97));border:1px solid rgba(255,255,255,.10);box-shadow:0 35px 90px rgba(0,0,0,.62),0 0 45px rgba(37,99,235,.10)}
+.topinfo-value{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.075)}
+
+
+/* ================================================================
+   AJUSTES FINALES — BARRA, MODALES Y TARJETAS
+   ================================================================ */
+.topbar-mobile-icon{
+    text-shadow:none!important;
+    box-shadow:none!important;
+    filter:none!important;
+    -webkit-text-stroke:0!important;
+}
+.topbar-mobile-icon:hover,.topbar-mobile-icon:focus,.topbar-mobile-icon:active{
+    text-shadow:none!important;
+    box-shadow:none!important;
+    filter:none!important;
+    outline:none!important;
+}
+.topbar-mobile-icon span,.topbar-mobile-icon i{
+    text-shadow:none!important;
+    filter:none!important;
+}
+#binance-rate-display,.topbar-mobile-icon[title="Tasa Binance P2P"],
+.topbar-mobile-icon[title="Tasa Binance P2P"] i{
+    color:#facc15!important;
+    text-shadow:none!important;
+}
+
+
+/* ===== BARRA INFORMATIVA: SIN SOMBRAS EN TEXTO/ICONOS ===== */
+.bg-gray-900,
+.bg-gray-900 *,
+.sticky.top-0,
+.sticky.top-0 *,
+.topinfo-mobile-trigger,
+.topinfo-mobile-trigger *{text-shadow:none!important;filter:none!important}
+.bg-gray-900 span,.bg-gray-900 i,.bg-gray-900 button{box-shadow:none!important;text-shadow:none!important}
+[data-theme="light"] .bg-gray-900 span,[data-theme="light"] .bg-gray-900 i,[data-theme="light"] .bg-gray-900 button{box-shadow:none!important;text-shadow:none!important}
+
+/* Selector de portales más limpio y legible */
+.portal-selector-card{
+    color:#e5e7eb;
+}
+.portal-choice{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(148,163,184,.16)!important;
+    background:linear-gradient(145deg,rgba(15,23,42,.94),rgba(15,23,42,.72))!important;
+    transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease;
+}
+.portal-choice:hover{
+    transform:translateY(-4px);
+    border-color:rgba(96,165,250,.45)!important;
+    box-shadow:0 18px 45px rgba(2,8,23,.42),0 0 30px rgba(37,99,235,.10);
+}
+
+/* Modales superiores: texto visible en ambos temas */
+.topinfo-card{
+    color:#f8fafc!important;
+}
+.topinfo-card #topinfo-title{color:#f8fafc!important}
+.topinfo-card #topinfo-kicker{color:#60a5fa!important}
+.topinfo-card #topinfo-label-1,.topinfo-card #topinfo-label-2{color:#94a3b8!important}
+.topinfo-card #topinfo-value-1{color:#f8fafc!important}
+.topinfo-card #topinfo-value-2{color:#cbd5e1!important}
+.topinfo-card #topinfo-note{color:#cbd5e1!important}
+[data-theme="light"] .topinfo-backdrop{
+    background:radial-gradient(circle at 15% 10%,rgba(37,99,235,.13),transparent 30%),
+               radial-gradient(circle at 85% 90%,rgba(14,165,233,.10),transparent 28%),
+               rgba(241,245,249,.78)!important;
+}
+[data-theme="light"] .topinfo-card{
+    background:linear-gradient(145deg,#ffffff,#f8fafc)!important;
+    border:1px solid #dbe4ef!important;
+    box-shadow:0 24px 70px rgba(15,23,42,.18),0 0 35px rgba(37,99,235,.08)!important;
+    color:#0f172a!important;
+}
+[data-theme="light"] .topinfo-card #topinfo-title{color:#0f172a!important}
+[data-theme="light"] .topinfo-card #topinfo-kicker{color:#2563eb!important}
+[data-theme="light"] .topinfo-card #topinfo-label-1,[data-theme="light"] .topinfo-card #topinfo-label-2{color:#64748b!important}
+[data-theme="light"] .topinfo-card #topinfo-value-1{color:#0f172a!important}
+[data-theme="light"] .topinfo-card #topinfo-value-2{color:#334155!important}
+[data-theme="light"] .topinfo-card #topinfo-note{color:#475569!important;background:rgba(37,99,235,.05)!important;border-color:rgba(37,99,235,.12)!important}
+[data-theme="light"] #binance-rate-display,[data-theme="light"] .topbar-mobile-icon[title="Tasa Binance P2P"],[data-theme="light"] .topbar-mobile-icon[title="Tasa Binance P2P"] i{color:#facc15!important;text-shadow:none!important}
+[data-theme="light"] .topinfo-value{background:#f8fafc!important;border-color:#e2e8f0!important}
+[data-theme="light"] #modal-top-info .text-white{color:#0f172a!important}
+[data-theme="light"] #modal-top-info .text-slate-300{color:#334155!important}
+[data-theme="light"] #modal-top-info .text-slate-400{color:#64748b!important}
+[data-theme="light"] #modal-top-info .text-slate-500{color:#64748b!important}
+[data-theme="light"] #modal-top-info button{color:#475569!important;background:#f1f5f9!important;border-color:#dbe4ef!important}
+
+
+/* Tarjetas: modo claro moderno y con profundidad */
+[data-theme="light"] .service-card{
+    position:relative!important;
+    background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(248,250,252,.96))!important;
+    border:1px solid #e2e8f0!important;
+    border-top-width:4px!important;
+    box-shadow:0 12px 30px rgba(15,23,42,.07),0 3px 10px rgba(37,99,235,.05)!important;
+    color:#0f172a!important;
+    transform:translateY(0);
+    overflow:hidden;
+}
+[data-theme="light"] .service-card::after{
+    content:"";position:absolute;inset:auto -20% -45% auto;width:160px;height:160px;border-radius:50%;
+    background:radial-gradient(circle,rgba(59,130,246,.10),transparent 68%);pointer-events:none;
+}
+[data-theme="light"] .service-card:hover{
+    transform:translateY(-7px) scale(1.015)!important;
+    box-shadow:0 24px 55px rgba(15,23,42,.12),0 8px 24px rgba(37,99,235,.10)!important;
+    border-color:#bfdbfe!important;
+}
+[data-theme="light"] .service-card h4,
+[data-theme="light"] .service-card .font-black,
+[data-theme="light"] .service-card .font-bold{color:#0f172a!important}
+[data-theme="light"] .service-card .text-white{color:#0f172a!important}
+[data-theme="light"] .service-card .text-gray-300{color:#475569!important}
+[data-theme="light"] .service-card .text-gray-400{color:#64748b!important}
+[data-theme="light"] .service-card hr{border-color:#e2e8f0!important}
+[data-theme="light"] .service-card button{background:rgba(15,23,42,.035)!important;color:#0f172a!important;border-color:#dbe4ef!important}
+[data-theme="light"] .service-card button:hover{background:#eff6ff!important;border-color:#93c5fd!important}
+
+/* Modo oscuro: acabado premium */
+[data-theme="dark"] .service-card:hover,.service-card:hover{
+    box-shadow:0 20px 48px rgba(0,0,0,.34),0 0 26px rgba(37,99,235,.10);
+}
+
+/* Marca de referencia Binance dentro de las tarjetas */
+.binance-price-note{display:block!important;margin-top:.35rem;font-size:.68rem;line-height:1.25;font-weight:700;letter-spacing:.01em;color:#64748b}
+[data-theme="dark"] .binance-price-note{color:#94a3b8!important}
+[data-theme="light"] .binance-price-note{color:#64748b!important}
+[data-theme="dark"] .binance-price-note{color:#facc15!important}
+[data-theme="light"] .binance-price-note{color:#a16207!important}
+
+@media (max-width:639px){
+    .topbar-mobile-icon{background:transparent!important;}
+    .topbar-mobile-icon:hover{background:transparent!important;}
+}
+
+
+/* Navegación de portales: enlaces directos y sin subrayado */
+.portal-choice { display:block; text-decoration:none !important; cursor:pointer; }
+.portal-choice:hover { text-decoration:none !important; }
+.portal-choice:focus-visible { outline:3px solid rgba(59,130,246,.45); outline-offset:3px; }
+
+/* Barra informativa: sin fondos ni sombras en textos/iconos */
+.bg-gray-900, .bg-gray-900 span, .bg-gray-900 i, .bg-gray-900 button,
+.bg-gray-900 .text-brand-blue, .bg-gray-900 .text-gray-300, .bg-gray-900 .text-gray-400,
+.bg-gray-900 .text-gray-600 { text-shadow:none !important; }
+.bg-gray-900 span, .bg-gray-900 i { background:transparent !important; box-shadow:none !important; }
+@media (min-width: 640px){ .bg-gray-900 span:not(.bg-brand-blue\/20), .bg-gray-900 i { text-shadow:none !important; } }
+
+/* ===== SELECTOR DE PORTALES — DISEÑO PREMIUM ===== */
+.portal-selector-backdrop{background:rgba(2,8,23,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.portal-selector-card{background:#ffffff;border:1px solid #dbe4f0;box-shadow:0 30px 90px rgba(15,23,42,.28);animation:portalModalIn .22s ease-out}
+.portal-selector-title{color:#0f172a}
+.portal-selector-subtitle{color:#475569}
+.portal-selector-close{background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;transition:.2s}
+.portal-selector-close:hover{background:#e2e8f0;color:#0f172a;transform:rotate(90deg)}
+.portal-choice{position:relative;min-height:245px;border:1px solid #d8e1ed;background:linear-gradient(145deg,#ffffff,#f4f7fb);box-shadow:0 14px 35px rgba(15,23,42,.08);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.portal-choice:hover{transform:translateY(-5px);box-shadow:0 24px 50px rgba(15,23,42,.14);border-color:#93c5fd}
+.portal-choice-client:hover{border-color:#60a5fa}.portal-choice-intersat:hover{border-color:#a78bfa}
+.portal-choice-icon{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:24px;background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe}
+.portal-choice-intersat .portal-choice-icon{background:#f5f3ff;color:#7c3aed;border-color:#ddd6fe}
+.portal-choice-tag{font-size:10px;font-weight:900;letter-spacing:.16em;color:#2563eb;background:#eff6ff;border:1px solid #bfdbfe;border-radius:999px;padding:7px 10px}
+.portal-choice-intersat .portal-choice-tag{color:#7c3aed;background:#f5f3ff;border-color:#ddd6fe}
+.portal-choice-title{margin-top:25px;font-size:20px;font-weight:900;color:#0f172a}.portal-choice-text{margin-top:8px;font-size:13px;line-height:1.6;color:#475569}.portal-choice-action{position:absolute;left:24px;bottom:22px;display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#2563eb}.portal-choice-intersat .portal-choice-action{color:#7c3aed}.portal-selector-foot{color:#64748b}
+@keyframes portalModalIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+html[data-theme="dark"] .portal-selector-card, html[data-bs-theme="dark"] .portal-selector-card{background:#111827;border-color:#334155;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+html[data-theme="dark"] .portal-selector-title, html[data-bs-theme="dark"] .portal-selector-title{color:#f8fafc}
+html[data-theme="dark"] .portal-selector-subtitle, html[data-bs-theme="dark"] .portal-selector-subtitle{color:#94a3b8}
+html[data-theme="dark"] .portal-selector-close, html[data-bs-theme="dark"] .portal-selector-close{background:#1e293b;color:#cbd5e1;border-color:#334155}
+html[data-theme="dark"] .portal-choice, html[data-bs-theme="dark"] .portal-choice{background:linear-gradient(145deg,#162033,#111827);border-color:#334155;box-shadow:0 16px 36px rgba(0,0,0,.26)}
+html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal-choice-title{color:#f8fafc}html[data-theme="dark"] .portal-choice-text, html[data-bs-theme="dark"] .portal-choice-text{color:#94a3b8}
+@media(max-width:640px){.portal-choice{min-height:225px}.portal-selector-card{border-radius:24px}.portal-choice-title{font-size:18px}}
+
 </style>
+
+<style id="final-portal-topbar-fix">
+/* ===== CORRECCIÓN DEFINITIVA: BARRA INFORMATIVA SIN SOMBREADOS ===== */
+.sticky.top-0 > .bg-gray-900,
+.sticky.top-0 > .bg-gray-900 *,
+.sticky.top-0 > .bg-gray-900 button,
+.sticky.top-0 > .bg-gray-900 span,
+.sticky.top-0 > .bg-gray-900 i {
+    text-shadow:none !important;
+    -webkit-text-shadow:none !important;
+    box-shadow:none !important;
+    filter:none !important;
+}
+.sticky.top-0 > .bg-gray-900 button,
+[data-theme="light"] .sticky.top-0 > .bg-gray-900 button {
+    background:transparent !important;
+    background-color:transparent !important;
+    border-color:transparent !important;
+}
+.sticky.top-0 > .bg-gray-900 button:hover,
+.sticky.top-0 > .bg-gray-900 button:focus,
+.sticky.top-0 > .bg-gray-900 button:active,
+[data-theme="light"] .sticky.top-0 > .bg-gray-900 button:hover,
+[data-theme="light"] .sticky.top-0 > .bg-gray-900 button:focus,
+[data-theme="light"] .sticky.top-0 > .bg-gray-900 button:active {
+    background:transparent !important;
+    background-color:transparent !important;
+    box-shadow:none !important;
+    text-shadow:none !important;
+    outline:none !important;
+}
+/* Speedtest sin pastilla ni fondo */
+.sticky.top-0 > .bg-gray-900 button[onclick="openSpeedtest()"] {
+    background:transparent !important;
+    padding-left:.25rem !important;
+    padding-right:.25rem !important;
+    box-shadow:none !important;
+}
+/* Selector de portales: versión premium clara y oscura */
+.portal-selector-card{
+    max-width:860px !important;
+    border-radius:32px !important;
+    overflow:hidden !important;
+}
+.portal-choice{
+    min-height:250px !important;
+    font-family:inherit !important;
+    font-size:inherit !important;
+    line-height:inherit !important;
+    border-radius:28px !important;
+    text-align:left !important;
+    cursor:pointer !important;
+    appearance:none !important;
+    -webkit-appearance:none !important;
+}
+[data-theme="light"] .portal-choice{
+    background:linear-gradient(145deg,#ffffff 0%,#f8fbff 55%,#eef5ff 100%) !important;
+    color:#0f172a !important;
+    border:1px solid #d7e2ef !important;
+}
+[data-theme="light"] .portal-choice h4{color:#0f172a !important;}
+[data-theme="light"] .portal-choice p{color:#475569 !important;}
+[data-theme="light"] .portal-choice .text-blue-300{color:#2563eb !important;}
+[data-theme="light"] .portal-choice .text-violet-300{color:#7c3aed !important;}
+[data-theme="light"] .portal-choice:hover{
+    background:linear-gradient(145deg,#f8fbff,#eef6ff) !important;
+    transform:translateY(-6px) scale(1.01);
+    border-color:#93c5fd !important;
+}
+[data-theme="light"] .portal-selector-card .text-white{color:#0f172a !important;}
+[data-theme="light"] .portal-selector-card .text-slate-400{color:#64748b !important;}
+[data-theme="light"] .portal-selector-card .text-slate-500{color:#64748b !important;}
+.portal-choice-client{
+    border-color:rgba(59,130,246,.28) !important;
+}
+
+/* ===== BARRA INFORMATIVA: SIN FONDOS NI SOMBRAS EN ELEMENTOS ===== */
+.bg-gray-900 .topbar-mobile-icon,
+.bg-gray-900 .topbar-mobile-icon:hover,
+.bg-gray-900 .topbar-mobile-icon:focus,
+.bg-gray-900 .topbar-mobile-icon:active,
+.bg-gray-900 #theme-toggle,
+.bg-gray-900 #theme-toggle:hover,
+.bg-gray-900 #theme-toggle:focus,
+.bg-gray-900 #theme-toggle:active {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    outline: none !important;
+}
+.bg-gray-900 .topbar-mobile-icon::before,
+.bg-gray-900 .topbar-mobile-icon::after {
+    display:none !important;
+    content:none !important;
+}
+@media (max-width:639px){
+    .bg-gray-900 .topbar-mobile-icon{background:transparent!important}
+}
+#binance-rate-display,
+.topbar-mobile-icon[title="Tasa Binance P2P"],
+.topbar-mobile-icon[title="Tasa Binance P2P"] i {
+    color:#facc15 !important;
+    text-shadow:none !important;
+    box-shadow:none !important;
+}
+
+/* ===== SELECTOR PORTALES: NAVEGACION DIRECTA EN DREAMWEAVER ===== */
+.portal-choice{
+    cursor:pointer !important;
+    user-select:none !important;
+    -webkit-user-select:none !important;
+    appearance:none !important;
+    -webkit-appearance:none !important;
+}
+.portal-choice:focus{outline:none !important;}
+</style>
+
+<style id="final-light-and-prices-v11">
+/* Tema claro menos pálido: fondo y superficies con más contraste */
+[data-theme="light"] body { background:#e7edf4 !important; color:#172033 !important; }
+[data-theme="light"] main { background-color:#e7edf4 !important; }
+[data-theme="light"] .bg-white { background:#ffffff !important; }
+[data-theme="light"] .bg-gray-50 { background:#eef2f7 !important; }
+[data-theme="light"] .text-white { color:#172033 !important; }
+[data-theme="light"] .text-gray-300 { color:#334155 !important; }
+[data-theme="light"] .text-gray-400 { color:#475569 !important; }
+[data-theme="light"] .text-gray-500 { color:#64748b !important; }
+[data-theme="light"] .border-white\/10,
+[data-theme="light"] .border-white\/15,
+[data-theme="light"] .border-white\/20,
+[data-theme="light"] .border-gray-200 { border-color:#cbd5e1 !important; }
+[data-theme="light"] .service-card {
+  background:linear-gradient(145deg,#ffffff 0%,#f5f7fa 62%,#e8edf3 100%) !important;
+  border-color:#cbd5e1 !important;
+  box-shadow:0 12px 30px rgba(15,23,42,.11),0 4px 12px rgba(37,99,235,.07) !important;
+}
+[data-theme="light"] .service-card:hover {
+  background:linear-gradient(145deg,#ffffff 0%,#edf4ff 100%) !important;
+  border-color:#60a5fa !important;
+  transform:translateY(-6px) scale(1.015) !important;
+  box-shadow:0 24px 55px rgba(15,23,42,.16),0 10px 28px rgba(37,99,235,.12) !important;
+}
+
+/* Barra superior: ningún fondo ni sombra detrás del texto/iconos */
+.bg-gray-900 span,
+.bg-gray-900 i,
+.bg-gray-900 svg,
+.bg-gray-900 strong,
+.bg-gray-900 button,
+.bg-gray-900 a {
+  background:transparent !important;
+  box-shadow:none !important;
+  text-shadow:none !important;
+  filter:none !important;
+}
+.bg-gray-900 span:hover,
+.bg-gray-900 i:hover,
+.bg-gray-900 button:hover,
+.bg-gray-900 button:focus,
+.bg-gray-900 button:active { background:transparent !important; box-shadow:none !important; text-shadow:none !important; }
+#binance-rate-display,
+.topbar-mobile-icon[title="Tasa Binance P2P"],
+.topbar-mobile-icon[title="Tasa Binance P2P"] i { color:#facc15 !important; text-shadow:none !important; }
+
+/* Texto de referencia en cada tarjeta: separado del precio */
+.binance-price-note { display:block !important; margin-top:8px !important; font-size:10px !important; line-height:1.3 !important; }
+.usd-label { display:block !important; margin-top:9px !important; font-size:11px !important; line-height:1.25 !important; font-weight:800 !important; }
+[data-theme="light"] .binance-price-note { color:#9a6700 !important; }
+[data-theme="light"] .usd-label { color:#334155 !important; }
+[data-theme="dark"] .binance-price-note { color:#facc15 !important; }
+[data-theme="dark"] .usd-label { color:#cbd5e1 !important; }
+</style>
+
 </head>
 <body class="flex flex-col min-h-screen bg-slate-950 text-slate-100 font-sans">
 
@@ -776,65 +1182,40 @@
     <input type="hidden" id="mt-link-login" value="$(link-login)">
 
     <div class="sticky top-0 z-50 w-full shadow-lg">
-    <div class="bg-gray-900 text-gray-400 text-[10px] md:text-xs py-1.5 px-4 flex justify-between items-center border-b border-gray-800 relative z-50">
-        <div class="flex items-center gap-2 flex-wrap">
-            <i class="fa-regular fa-calendar-days text-brand-blue"></i>
-
-            <!-- Versión para Móviles (Más compacta) -->
-            <span id="info-datetime-mobile" class="sm:hidden">Cargando...</span>
-
-            <!-- Versión para PC / Tablets (Completa) -->
+    <div class="bg-gray-900 text-gray-400 text-[10px] md:text-xs py-1.5 px-3 sm:px-4 flex justify-between items-center border-b border-gray-800 relative z-50">
+        <div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <button type="button" onclick="openTopInfoModal('datetime')" class="topbar-mobile-icon text-brand-blue sm:cursor-default" title="Fecha y hora">
+                <i class="fa-regular fa-calendar-days"></i>
+            </button>
             <span id="info-datetime" class="hidden sm:inline">Cargando fecha y hora...</span>
-
-            <span class="mx-1 text-gray-600 hidden sm:inline">|</span>
         </div>
-
-        <div class="flex items-center gap-2 sm:gap-3">
-            <!-- IP / Proveedor — estilo plano como la hora -->
-            <span onclick="openISPModal()" class="flex items-center gap-1 shrink-0" title="Tu IP Pública y Proveedor">
-                <i class="fa-solid fa-globe text-brand-blue text-sm sm:text-base"></i>
+        <div class="flex items-center gap-1 sm:gap-3 shrink-0">
+            <button type="button" onclick="openISPModal()" class="topbar-mobile-icon text-brand-blue" title="IP pública y proveedor">
+                <i class="fa-solid fa-globe text-sm sm:text-base"></i>
                 <span id="info-public-ip" class="hidden sm:inline text-[10px] sm:text-xs">Detectando...</span>
                 <span id="info-isp" class="hidden sm:inline ml-1 text-gray-300 font-bold truncate max-w-[100px] sm:max-w-none text-[10px] sm:text-xs"></span>
-            </span>
-            <span class="mx-0.5 text-gray-600 hidden sm:inline">|</span>
-
-            <!-- GPS — estilo plano como la hora -->
-            <span onclick="openGPSModal()" class="flex items-center gap-1 shrink-0" title="Tu Ubicación">
-                <i class="fa-solid fa-location-dot text-brand-blue text-sm sm:text-base"></i>
+            </button><span class="topbar-mobile-sep mx-0.5 text-gray-600 hidden sm:inline">|</span>
+            <button type="button" onclick="openGPSModal()" class="topbar-mobile-icon text-brand-blue" title="Ubicación GPS">
+                <i class="fa-solid fa-location-dot text-sm sm:text-base"></i>
                 <span id="info-location" class="hidden sm:inline text-[10px] sm:text-xs">Detectando ubicación...</span>
-            </span>
-            <span class="mx-0.5 text-gray-600 hidden sm:inline">|</span>
-
-            <div class="flex items-center shrink-0" title="Tipo de Dispositivo">
-                <i class="fa-solid fa-mobile-screen text-brand-blue sm:hidden text-sm"></i>
-                <i class="fa-solid fa-tablet-screen-button text-brand-blue hidden sm:inline lg:hidden text-sm"></i>
-                <i class="fa-solid fa-desktop text-brand-blue hidden lg:inline text-sm"></i>
-            </div>
-            <span class="mx-0.5 text-gray-600 hidden sm:inline">|</span>
-
-            <div class="flex items-center shrink-0" title="Tipo de Conexión">
-                <i id="conn-icon" class="fa-solid fa-wifi text-brand-blue text-sm"></i>
-            </div>
-            <span class="mx-0.5 text-gray-600 hidden sm:inline">|</span>
-
-            <!-- Speedtest — único con fondo/sombreado -->
-            <button onclick="openSpeedtest()" class="bg-brand-blue/20 text-brand-blue hover:bg-brand-blue hover:text-white px-2 sm:px-3 py-0.5 rounded-full transition font-bold flex items-center gap-1 cursor-pointer shrink-0 text-[10px] sm:text-xs">
-                <i class="fa-solid fa-gauge-high text-sm"></i>
-                <span class="hidden sm:inline">Speedtest</span>
-            </button>
-            <span class="mx-0.5 text-gray-600 hidden sm:inline">|</span>
-
-            <span class="inline-flex items-center gap-1 font-bold text-brand-blue shrink-0">
-                <svg class="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 21h18"/><path d="M5 21V7l8-4 8 4v14"/><path d="M9 21v-6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6"/>
-                </svg>
-                <span id="bcv-rate-display" class="text-[10px] sm:text-xs">Cargando...</span>
-            </span>
-            <span class="mx-0.5 text-gray-600 hidden sm:inline">|</span>
-
-            <button id="theme-toggle" onclick="toggleTheme()" class="flex items-center justify-center w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 transition cursor-pointer" title="Cambiar tema">
-                <i id="theme-icon" class="fa-solid fa-sun text-brand-blue text-sm"></i>
-            </button>
+            </button><span class="topbar-mobile-sep mx-0.5 text-gray-600 hidden sm:inline">|</span>
+            <button type="button" onclick="openTopInfoModal('device')" class="topbar-mobile-icon text-brand-blue" title="Dispositivo">
+                <i class="fa-solid fa-mobile-screen sm:hidden text-sm"></i><i class="fa-solid fa-tablet-screen-button hidden sm:inline lg:hidden text-sm"></i><i class="fa-solid fa-desktop hidden lg:inline text-sm"></i>
+            </button><span class="topbar-mobile-sep mx-0.5 text-gray-600 hidden sm:inline">|</span>
+            <button type="button" onclick="openTopInfoModal('connection')" class="topbar-mobile-icon text-brand-blue" title="Conexión">
+                <i id="conn-icon" class="fa-solid fa-wifi text-sm"></i>
+            </button><span class="topbar-mobile-sep mx-0.5 text-gray-600 hidden sm:inline">|</span>
+            <button onclick="openSpeedtest()" class="topbar-mobile-icon sm:w-auto sm:h-auto sm:px-3 sm:py-0.5 sm:rounded-full bg-brand-blue/20 text-brand-blue hover:bg-brand-blue hover:text-white transition font-bold gap-1 cursor-pointer shrink-0" title="Speedtest">
+                <i class="fa-solid fa-gauge-high text-sm"></i><span class="hidden sm:inline">Speedtest</span>
+            </button><span class="topbar-mobile-sep mx-0.5 text-gray-600 hidden sm:inline">|</span>
+            <button type="button" onclick="openTopInfoModal('bcv')" class="topbar-mobile-icon sm:w-auto sm:h-auto sm:rounded-none font-bold text-brand-blue" title="Tasa BCV">
+                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4 8 4v14"/><path d="M9 21v-6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6"/></svg>
+                <span id="bcv-rate-display" class="hidden sm:inline text-[10px] sm:text-xs">BCV: Cargando...</span>
+            </button><span class="topbar-mobile-sep mx-0.5 text-gray-600 hidden sm:inline">|</span>
+            <button type="button" onclick="openTopInfoModal('binance')" class="topbar-mobile-icon sm:w-auto sm:h-auto sm:rounded-none font-bold text-amber-400" title="Tasa Binance P2P">
+                <i class="fa-brands fa-bitcoin text-[11px] sm:text-sm"></i><span id="binance-rate-display" class="hidden sm:inline text-[10px] sm:text-xs">Binance: Cargando...</span>
+            </button><span class="topbar-mobile-sep mx-0.5 text-gray-600 hidden sm:inline">|</span>
+            <button id="theme-toggle" onclick="toggleTheme()" class="flex items-center justify-center w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 transition cursor-pointer" title="Cambiar tema"><i id="theme-icon" class="fa-solid fa-sun text-brand-blue text-sm"></i></button>
         </div>
     </div>
 </div>
@@ -918,6 +1299,7 @@
 								<span>Automatización</span>
 							</button>
 
+
 							<button id="btn-trabajos" onclick="switchTab('trabajos')" class="nav-link flex flex-col items-center gap-1 cursor-pointer shrink-0 min-w-full sm:min-w-0 snap-center">
 								<i class="fa-solid fa-laptop-code text-sm"></i>
 								<span>Portafolios</span>
@@ -937,17 +1319,17 @@
 
                     <!-- Botón Portal de Clientes -->
                     <div class="flex items-center gap-2 shrink-0">
-                        <button onclick="openPortalClientes()" class="group relative inline-flex items-center justify-center gap-2 lg:gap-3.5 p-2 lg:px-6 lg:py-3 rounded-full lg:rounded-2xl text-xs font-semibold tracking-wider text-slate-100 bg-slate-950/90 lg:bg-slate-950/70 backdrop-blur-xl border border-white/15 lg:border-white/10 hover:border-indigo-500/50 shadow-2xl shadow-indigo-950/40 hover:shadow-indigo-500/25 transition-all duration-500 cursor-pointer overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/10 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-sm"></div>
-                            <div class="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/25 to-transparent"></div>
-                            <div class="relative w-6 h-6 lg:w-7 lg:h-7 rounded-full lg:rounded-xl bg-gradient-to-br from-indigo-500/20 to-blue-600/20 border border-indigo-400/30 flex items-center justify-center text-indigo-400 group-hover:text-indigo-200 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-inner">
-                                <i class="fa-solid fa-user-shield text-xs lg:text-xs"></i>
-                            </div>
+                        <button type="button" onclick="openPortalClientes()" class="group relative inline-flex items-center justify-center gap-2 lg:gap-3.5 p-2 lg:px-6 lg:py-3 rounded-full lg:rounded-2xl text-xs font-semibold tracking-wider text-slate-100 bg-slate-950/90 lg:bg-slate-950/70 backdrop-blur-xl border border-white/15 lg:border-white/10 hover:border-indigo-500/50 shadow-2xl shadow-indigo-950/40 hover:shadow-indigo-500/25 transition-all duration-500 cursor-pointer overflow-hidden">
+                            <span class="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/10 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-sm"></span>
+                            <span class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"></span>
+                            <span class="relative w-6 h-6 lg:w-7 lg:h-7 rounded-full lg:rounded-xl bg-gradient-to-br from-indigo-500/20 to-blue-600/20 border border-indigo-400/30 flex items-center justify-center text-indigo-400 group-hover:text-indigo-200 group-hover:scale-110 transition-all duration-300 shadow-inner">
+                                <i class="fa-solid fa-route text-xs"></i>
+                            </span>
                             <span class="relative z-10 hidden lg:flex items-center gap-2.5 font-medium text-slate-200 group-hover:text-white transition-colors">
                                 <span>Portal Clientes</span>
-                                <div class="w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-indigo-600 group-hover:border-indigo-500 transition-all duration-300 shadow-sm">
-                                    <i class="fa-solid fa-arrow-right text-[9px] text-slate-400 group-hover:text-white group-hover:translate-x-0.5 transition-all"></i>
-                                </div>
+                                <span class="w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-indigo-600 group-hover:border-indigo-500 transition-all duration-300 shadow-sm">
+                                    <i class="fa-solid fa-chevron-right text-[9px] text-slate-400 group-hover:text-white"></i>
+                                </span>
                             </span>
                         </button>
                     </div>
@@ -972,6 +1354,7 @@
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
                 localStorage.setItem('lc-theme', 'dark');
+
             } else {
                 htmlEl.setAttribute('data-theme', 'light');
                 icon.classList.remove('fa-sun');
@@ -1228,6 +1611,7 @@
                     <i class="fa-solid fa-headset text-sm"></i>
                 </div>
                 <div class="text-xs md:text-sm text-gray-300 leading-relaxed">
+
                     <strong class="block text-white mb-0.5">Soporte Técnico:</strong>
                     Acompañamiento preventivo y correctivo. Estamos comprometidos con la continuidad de tu servicio, 24/7.
                 </div>
@@ -1243,14 +1627,14 @@
 <section id="tab-planes" class="hidden flex-grow py-12 px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="max-w-7xl mx-auto flex flex-col gap-8">
         
-        <!-- Header de Sección con Indicador BCV en la esquina superior derecha -->
+        <!-- Header de Sección con indicadores BCV y Binance -->
         <div class="flex flex-wrap items-center justify-between gap-4 bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-md animate-fade-in-up">
             <div class="flex items-center gap-3">
                 <div class="w-3 h-3 rounded-full bg-brand-orange animate-ping"></div>
                 <span class="text-xs font-mono text-cyan-400 tracking-wider">TARIFARIO Y PLANES DE CONECTIVIDAD</span>
             </div>
             
-            <!-- Grupo derecho: Cobertura, Sin límites y Widget BCV Compacto -->
+            <!-- Grupo derecho: Cobertura, Sin límites y tasas BCV + Binance -->
             <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-gray-400">
                 <span class="hidden sm:inline-block"><i class="fa-solid fa-wifi text-brand-blue mr-1"></i> COBERTURA ZONAL</span>
                 <span class="hidden md:inline-block"><i class="fa-solid fa-shield text-brand-orange mr-1"></i> SIN LÍMITES OCULTOS</span>
@@ -1652,6 +2036,7 @@
                         <h3 class="font-black text-white text-base uppercase">Plan 10 GB Datos</h3>
                         <span class="text-xs font-bold text-brand-orange"><span data-price-id="10gb">0,00 Bs</span> • Capacidad Pro</span>
                     </div>
+
                 </div>
                 <button onclick="closeModal('modal-plan-10gb')" class="text-gray-400 hover:text-white text-xl font-bold px-2 cursor-pointer">&times;</button>
             </div>
@@ -1681,108 +2066,98 @@
 <!--  SCRIPT DE CONFIGURACIÓN CENTRALIZADA DE PRECIOS               -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <script>
-  const planPricesConfig = {
-    '1h':   1.45,   
-    '1d':   3.65,
-    '1s':   10.75,
-    '1m':   25.00,
-    '1gb':  2.85,
-    '3gb':  4.65,
-    '5gb':  9.25,
-    '10gb': 15.15
-  };
+/* ================================================================
+   TARIFAS CENTRALIZADAS — BINANCE P2P USDT/VES
+   Todos los precios en Bs se calculan desde la misma tasa Binance.
+   ================================================================ */
+const planPricesConfig = {
+  '1h': 1.45, '1d': 3.65, '1s': 10.75, '1m': 25.00,
+  '1gb': 2.85, '3gb': 4.65, '5gb': 9.25, '10gb': 15.15
+};
+const hotspotPricesConfig = {
+  'hs-starter': 30.00, 'hs-growth': 70.00,
+  'hs-business': 180.00, 'hs-professional': 270.00
+};
+const devPricesConfig = {
+  'dev-web': 150.00, 'dev-admin': 200.00, 'dev-contable': 300.00,
+  'dev-deportes': 150.00, 'dev-tablas': 250.00, 'dev-reporteria': 150.00
+};
 
-  const API_PRINCIPAL = 'https://rates.dolarvzla.com/bcv/current.json';
-  const API_RESPALDO  = 'https://ve.dolarapi.com/v1/dolares/oficial';
+const API_BCV_PRINCIPAL = 'https://rates.dolarvzla.com/bcv/current.json';
+const API_BCV_RESPALDO = 'https://ve.dolarapi.com/v1/dolares/oficial';
+const API_BINANCE_QUOTE = 'https://www.binance.com/bapi/c2c/v1/public/c2c/agent/quote-price?fiat=VES&asset=USDT&tradeType=BUY';
+let BINANCE_VES_RATE = 0;
 
-  function formatDateES(dateString) {
-    if (!dateString) return 'Fecha no disponible';
-    const date = new Date(dateString + 'T00:00:00-04:00');
-    if (isNaN(date.getTime())) return dateString;
-    return date.toLocaleDateString('es-VE', {
-      day: 'numeric', month: 'long', year: 'numeric',
-      timeZone: 'America/Caracas'
-    });
-  }
+function fmtBs(n) {
+  return Number(n || 0).toLocaleString('es-VE', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' Bs';
+}
 
-  async function loadPricesWithBCV() {
-    const btn = document.getElementById('bcv-refresh-btn');
-    const rateDisplay = document.getElementById('bcv-rate-display');
-    const dateDisplay = document.getElementById('bcv-date-display');
+async function fetchBinanceRate() {
+  const res = await fetch(API_BINANCE_QUOTE, { cache:'no-store', headers:{'Accept':'application/json'} });
+  if (!res.ok) throw new Error('Binance HTTP ' + res.status);
+  const payload = await res.json();
+  const candidates = [payload?.data?.price, payload?.price, payload?.data?.quotePrice, payload?.data?.[0]?.price];
+  const rate = candidates.map(Number).find(v => Number.isFinite(v) && v > 1);
+  if (!rate) throw new Error('Binance no devolvió una cotización válida.');
+  return rate;
+}
 
-    btn?.classList.add('spinning');
-
-    let exchangeRate = 0;
-    let rateDate = null;
-
-    // Intento 1: DolarVzla (API Principal)
+async function loadBCVRateOnly() {
+  const display = document.getElementById('bcv-rate-display');
+  let rate = 0;
+  try {
+    const r = await fetch(API_BCV_PRINCIPAL, {cache:'no-store'});
+    if (r.ok) { const d = await r.json(); rate = Number(d?.current?.usd || 0); }
+  } catch(e) {}
+  if (!rate) {
     try {
-      const response = await fetch(API_PRINCIPAL);
-      if (response.ok) {
-        const data = await response.json();
-        exchangeRate = data?.current?.usd || 0;
-        rateDate = data?.current?.date || null;        // ← Fecha BCV
-      }
-    } catch (e) {
-      console.warn("Aviso: DolarVzla no respondió, probando respaldo...");
-    }
+      const r = await fetch(API_BCV_RESPALDO, {cache:'no-store'});
+      if (r.ok) { const d = await r.json(); const x = Array.isArray(d) ? d[0] : d; rate = Number(x?.promedio || x?.venta || 0); }
+    } catch(e) {}
+  }
+  if (display) display.textContent = rate > 1 ? 'BCV: ' + fmtBs(rate) : 'BCV: No disponible';
+  return rate;
+}
 
-    // Intento 2: DolarAPI de respaldo
-    if (!exchangeRate || exchangeRate <= 1) {
-      try {
-        const response = await fetch(API_RESPALDO);
-        if (response.ok) {
-          const data = await response.json();
-          const rateData = Array.isArray(data) ? data[0] : data;
-          exchangeRate = rateData?.promedio || rateData?.venta || 0;
-          rateDate = rateData?.fechaActualizacion
-            ? rateData.fechaActualizacion.split('T')[0]
-            : null;
-        }
-      } catch (e) {
-        console.warn("Aviso: DolarAPI también falló.");
-      }
-    }
+async function loadBinanceAndApplyPrices() {
+  const display = document.getElementById('binance-rate-display');
+  if (display) display.textContent = 'Binance: Actualizando...';
+  try {
+    BINANCE_VES_RATE = await fetchBinanceRate();
+  } catch (e) {
+    console.warn('No se pudo obtener la tasa Binance:', e);
+    BINANCE_VES_RATE = 0;
+  }
 
-    // Respaldo manual por emergencia
-    if (!exchangeRate || exchangeRate <= 1) {
-      exchangeRate = 750.00;
-      rateDate = new Date().toISOString().split('T')[0];
-      console.warn("Usando tasa de respaldo manual predeterminada.");
-    }
+  if (display) {
+    display.textContent = BINANCE_VES_RATE > 1 ? 'Binance: ' + fmtBs(BINANCE_VES_RATE) : 'Binance: No disponible';
+  }
+  if (!(BINANCE_VES_RATE > 1)) return;
 
-    // Mostrar tasa
-    if (rateDisplay) {
-      rateDisplay.innerText = exchangeRate.toLocaleString('es-VE', {
-        minimumFractionDigits: 2, maximumFractionDigits: 2
-      }) + ' Bs';
-    }
-
-    // Mostrar fecha del cálculo
-    if (dateDisplay) {
-      dateDisplay.innerText = 'Actualizado: ' + formatDateES(rateDate);
-    }
-
-
-    btn?.classList.remove('spinning');
-
-    // Calcular y aplicar precios en los planes
-    for (const [key, basePriceUSD] of Object.entries(planPricesConfig)) {
-      const finalPriceInBolivares = basePriceUSD * exchangeRate;
-      const formattedPrice = finalPriceInBolivares.toLocaleString('es-VE', {
-        minimumFractionDigits: 2, maximumFractionDigits: 2
-      }) + ' Bs';
-
-      document.querySelectorAll(`[data-price-id="${key}"]`).forEach(el => {
-        el.innerText = formattedPrice;
-      });
+  const configs = [planPricesConfig, hotspotPricesConfig, devPricesConfig];
+  for (const config of configs) {
+    for (const [key, usd] of Object.entries(config)) {
+      const txt = fmtBs(Number(usd) * BINANCE_VES_RATE);
+      document.querySelectorAll(`[data-price-id="${key}"]`).forEach(el => { el.textContent = txt; });
     }
   }
 
-  document.addEventListener("DOMContentLoaded", loadPricesWithBCV);
+  // Precio USD de referencia visible cuando exista la leyenda en las tarjetas.
+  document.querySelectorAll('[data-binance-rate]').forEach(el => {
+    el.textContent = fmtBs(BINANCE_VES_RATE);
+  });
+}
+
+async function refreshAllRatesAndPrices() {
+  await Promise.allSettled([loadBCVRateOnly(), loadBinanceAndApplyPrices()]);
+}
+
+document.addEventListener('DOMContentLoaded', refreshAllRatesAndPrices);
+// Refresca las tasas y precios cada 5 minutos sin recargar la página.
+setInterval(refreshAllRatesAndPrices, 5 * 60 * 1000);
 </script>
-	
-        <!-- SECCIÓN DESARROLLOS -->
+
+<!-- SECCIÓN DESARROLLOS -->
 <section id="tab-hotspot" class="hidden flex-grow py-12 px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="max-w-7xl mx-auto flex flex-col gap-8">
 
@@ -1829,7 +2204,7 @@
                         <div class="text-center mb-3">
                             <i class="fa-solid fa-rocket text-gray-400 text-2xl mb-1"></i>
                             <h4 class="font-bold text-white text-xs uppercase tracking-wider">PROYECTO STARTER</h4>
-                            <p class="font-black text-brand-blue text-lg mt-1"><span data-price-id="hs-starter">Cargando...</span> <span class="text-[10px] text-gray-400 font-normal">Bs</span></p>
+                            <p class="font-black text-brand-blue text-lg mt-1"><span data-price-id="hs-starter">Cargando...</span></p>
                         </div>
                         <hr class="my-3 border-white/10">
                         <ul class="text-xs text-gray-300 space-y-2.5 leading-relaxed mb-4">
@@ -1852,7 +2227,7 @@
                         <div class="text-center mb-3">
                             <i class="fa-solid fa-chart-line text-[#cd7f32] text-2xl mb-1"></i>
                             <h4 class="font-bold text-white text-xs uppercase tracking-wider">PROYECTO GROWTH</h4>
-                            <p class="font-black text-brand-blue text-lg mt-1"><span data-price-id="hs-growth">Cargando...</span> <span class="text-[10px] text-gray-400 font-normal">Bs</span></p>
+                            <p class="font-black text-brand-blue text-lg mt-1"><span data-price-id="hs-growth">Cargando...</span></p>
                         </div>
                         <hr class="my-3 border-white/10">
                         <ul class="text-xs text-gray-300 space-y-2.5 leading-relaxed mb-4">
@@ -1875,7 +2250,7 @@
                         <div class="text-center mb-3">
                             <i class="fa-solid fa-briefcase text-[#94a3b8] text-2xl mb-1"></i>
                             <h4 class="font-bold text-white text-xs uppercase tracking-wider">PROYECTO BUSINESS</h4>
-                            <p class="font-black text-brand-blue text-lg mt-1"><span data-price-id="hs-business">Cargando...</span> <span class="text-[10px] text-gray-400 font-normal">Bs</span></p>
+                            <p class="font-black text-brand-blue text-lg mt-1"><span data-price-id="hs-business">Cargando...</span></p>
                         </div>
                         <hr class="my-3 border-white/10">
                         <ul class="text-xs text-gray-300 space-y-2.5 leading-relaxed mb-4">
@@ -1898,7 +2273,7 @@
                         <div class="text-center mb-3">
                             <i class="fa-solid fa-crown text-[#eab308] text-2xl mb-1"></i>
                             <h4 class="font-bold text-white text-xs uppercase tracking-wider">PROYECTO PROFESSIONAL</h4>
-                            <p class="font-black text-brand-blue text-lg mt-1"><span data-price-id="hs-professional">Cargando...</span> <span class="text-[10px] text-gray-400 font-normal">Bs</span></p>
+                            <p class="font-black text-brand-blue text-lg mt-1"><span data-price-id="hs-professional">Cargando...</span></p>
                         </div>
                         <hr class="my-3 border-white/10">
                         <ul class="text-xs text-gray-300 space-y-2.5 leading-relaxed mb-4">
@@ -1937,7 +2312,7 @@
                         <div class="text-center mb-3">
                             <i class="fa-solid fa-globe text-[#8b5cf6] text-2xl mb-1"></i>
                             <h4 class="font-bold text-white text-xs uppercase tracking-wider">PÁGINAS WEB</h4>
-                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-web">Cargando...</span> <span class="text-[10px] text-gray-400 font-normal">Bs</span></p>
+                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-web">Cargando...</span></p>
                         </div>
                         <hr class="my-3 border-white/10">
                         <ul class="text-xs text-gray-300 space-y-2.5 leading-relaxed mb-4">
@@ -1960,7 +2335,7 @@
                         <div class="text-center mb-3">
                             <i class="fa-solid fa-clipboard-list text-[#06b6d4] text-2xl mb-1"></i>
                             <h4 class="font-bold text-white text-xs uppercase tracking-wider">SISTEMAS ADMINISTRATIVOS</h4>
-                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-admin">Cargando...</span> <span class="text-[10px] text-gray-400 font-normal">Bs</span></p>
+                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-admin">Cargando...</span></p>
                         </div>
                         <hr class="my-3 border-white/10">
                         <ul class="text-xs text-gray-300 space-y-2.5 leading-relaxed mb-4">
@@ -1983,7 +2358,7 @@
                         <div class="text-center mb-3">
                             <i class="fa-solid fa-calculator text-[#10b981] text-2xl mb-1"></i>
                             <h4 class="font-bold text-white text-xs uppercase tracking-wider">SISTEMAS CONTABLES</h4>
-                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-contable">Cargando...</span> <span class="text-[10px] text-gray-400 font-normal">Bs</span></p>
+                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-contable">Cargando...</span></p>
                         </div>
                         <hr class="my-3 border-white/10">
                         <ul class="text-xs text-gray-300 space-y-2.5 leading-relaxed mb-4">
@@ -2022,7 +2397,7 @@
                         <div class="text-center mb-3">
                             <i class="fa-solid fa-futbol text-[#f97316] text-2xl mb-1"></i>
                             <h4 class="font-bold text-white text-xs uppercase tracking-wider">DISEÑOS PARA EQUIPOS DE DEPORTES</h4>
-                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-deportes">Cargando...</span> <span class="text-[10px] text-gray-400 font-normal">Bs</span></p>
+                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-deportes">Cargando...</span></p>
                         </div>
                         <hr class="my-3 border-white/10">
                         <ul class="text-xs text-gray-300 space-y-2.5 leading-relaxed mb-4">
@@ -2045,7 +2420,7 @@
                         <div class="text-center mb-3">
                             <i class="fa-solid fa-table text-[#ec4899] text-2xl mb-1"></i>
                             <h4 class="font-bold text-white text-xs uppercase tracking-wider">TABLAS Y CLASIFICACIONES</h4>
-                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-tablas">Cargando...</span> <span class="text-[10px] text-gray-400 font-normal">Bs</span></p>
+                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-tablas">Cargando...</span></p>
                         </div>
                         <hr class="my-3 border-white/10">
                         <ul class="text-xs text-gray-300 space-y-2.5 leading-relaxed mb-4">
@@ -2068,7 +2443,7 @@
                         <div class="text-center mb-3">
                             <i class="fa-solid fa-file-pdf text-[#ef4444] text-2xl mb-1"></i>
                             <h4 class="font-bold text-white text-xs uppercase tracking-wider">REPORTERÍA Y EXPORTACIÓN EN PDF</h4>
-                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-reporteria">Cargando...</span> <span class="text-[10px] text-gray-400 font-normal">Bs</span></p>
+                            <p class="font-black text-brand-blue text-lg mt-1">Desde <span data-price-id="dev-reporteria">Cargando...</span></p>
                         </div>
                         <hr class="my-3 border-white/10">
                         <ul class="text-xs text-gray-300 space-y-2.5 leading-relaxed mb-4">
@@ -2518,69 +2893,10 @@
         });
     });
 
-    // ==========================================
-    // CONFIGURACIÓN DE PRECIOS HOTSPOT EN USD
-    // ==========================================
-    const hotspotPricesConfig = {
-        'hs-starter': 30.00,
-        'hs-growth': 70.00,
-        'hs-business': 180.00,
-        'hs-professional': 270.00
-    };
 
-    const API_HS_PRINCIPAL = 'https://rates.dolarvzla.com/bcv/current.json';
-    const API_HS_RESPALDO  = 'https://ve.dolarapi.com/v1/dolares/oficial';
-
-    async function loadHotspotPricesWithBCV() {
-        let exchangeRate = 0;
-
-        // Intento 1: DolarVzla (API Principal)
-        try {
-            const response = await fetch(API_HS_PRINCIPAL);
-            if (response.ok) {
-                const data = await response.json();
-                exchangeRate = data?.current?.usd || 0;
-            }
-        } catch (e) {
-            console.warn("Aviso: DolarVzla no respondió, probando respaldo...");
-        }
-
-        // Intento 2: DolarAPI de respaldo
-        if (!exchangeRate || exchangeRate <= 1) {
-            try {
-                const response = await fetch(API_HS_RESPALDO);
-                if (response.ok) {
-                    const data = await response.json();
-                    const rateData = Array.isArray(data) ? data[0] : data;
-                    exchangeRate = rateData?.promedio || rateData?.venta || 0;
-                }
-            } catch (e) {
-                console.warn("Aviso: DolarAPI también falló.");
-            }
-        }
-
-        // Respaldo manual por emergencia
-        if (!exchangeRate || exchangeRate <= 1) {
-            exchangeRate = 750.00;
-            console.warn("Usando tasa de respaldo manual predeterminada.");
-        }
-
-        // Calcular y aplicar precios en los planes Hotspot
-        for (const [key, basePriceUSD] of Object.entries(hotspotPricesConfig)) {
-            const finalPriceInBolivares = basePriceUSD * exchangeRate;
-            const formattedPrice = finalPriceInBolivares.toLocaleString('es-VE', {
-                minimumFractionDigits: 2, maximumFractionDigits: 2
-            }) + ' Bs';
-
-            document.querySelectorAll(`[data-price-id="${key}"]`).forEach(el => {
-                el.innerText = formattedPrice;
-            });
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", loadHotspotPricesWithBCV);
-</script>
 					
+</script>
+
         <!-- SECCIÓN AUTOMATIZACIÓN -->
 <section id="tab-automatizacion" class="hidden flex-grow py-12 px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="max-w-6xl mx-auto flex flex-col gap-8">
@@ -3132,47 +3448,22 @@
         </div>
     </footer>
 
-    <!-- MODAL INFO ISP -->
-<div id="modal-isp-info" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-md flex items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-isp-info')">
-    <div class="p-6 sm:p-8 bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl relative max-w-sm w-full text-white animate-fade-in">
-        <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-            <div class="flex items-center gap-3">
-                <div class="p-2.5 bg-white/10 text-brand-blue rounded-xl border border-white/10"><i class="fa-solid fa-globe text-xl"></i></div>
-                <div><h3 class="font-black text-white text-base uppercase">Información de Red</h3></div>
+    <!-- MODAL INFORMACIÓN SUPERIOR -->
+<div id="modal-top-info" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 topinfo-backdrop" onclick="if(event.target===this)closeTopInfoModal()">
+    <div class="topinfo-card w-full max-w-md rounded-[28px] overflow-hidden animate-fade-in relative text-white">
+        <div class="px-5 sm:px-7 py-5 border-b border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-3 min-w-0">
+                <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-400/20 text-blue-300 grid place-items-center shrink-0"><i id="topinfo-icon" class="fa-solid fa-circle-info text-xl"></i></div>
+                <div class="min-w-0"><div id="topinfo-kicker" class="text-[10px] font-black uppercase tracking-widest text-blue-300">Información</div><h3 id="topinfo-title" class="text-lg font-black text-white truncate">Información del sistema</h3></div>
             </div>
-            <button onclick="closeModal('modal-isp-info')" class="text-gray-400 hover:text-white text-xl font-bold px-2 cursor-pointer">&times;</button>
+            <button onclick="closeTopInfoModal()" class="portal-selector-close w-10 h-10 rounded-full border border-white/10 bg-white/5 text-slate-400 flex items-center justify-center shrink-0" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        <div class="space-y-4 text-sm text-gray-300 pointer-events-none" style="user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;">
-            <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                <span class="text-xs text-gray-400 mb-1 block">IP Pública</span>
-                <span id="modal-isp-ip" class="font-mono text-brand-blue font-bold text-lg block break-all" style="color:#38bdf8;">Detectando...</span>
-            </div>
-            <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                <span class="text-xs text-gray-400 mb-1 block">Proveedor (ISP)</span>
-                <span id="modal-isp-name" class="font-bold text-white text-lg block" style="color:#ffffff;">Detectando...</span>
-            </div>
+        <div class="p-5 sm:p-7 space-y-3">
+            <div class="topinfo-value rounded-2xl p-4"><div id="topinfo-label-1" class="text-[10px] uppercase tracking-widest text-slate-500 font-black">Dato</div><div id="topinfo-value-1" class="mt-1 font-black text-base text-slate-100 break-words">—</div></div>
+            <div id="topinfo-row-2" class="topinfo-value rounded-2xl p-4"><div id="topinfo-label-2" class="text-[10px] uppercase tracking-widest text-slate-500 font-black">Detalle</div><div id="topinfo-value-2" class="mt-1 font-bold text-sm text-slate-300 break-words">—</div></div>
+            <div id="topinfo-note" class="rounded-2xl border border-blue-400/10 bg-blue-500/5 px-4 py-3 text-[11px] text-slate-400 leading-relaxed"></div>
         </div>
-        <div class="mt-6"><button onclick="closeModal('modal-isp-info')" class="w-full py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl transition border border-white/10 cursor-pointer">Cerrar</button></div>
-    </div>
-</div>
-
-<!-- MODAL INFO GPS -->
-<div id="modal-gps-info" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-md flex items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-gps-info')">
-    <div class="p-6 sm:p-8 bg-slate-900/95 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl relative max-w-sm w-full text-white animate-fade-in">
-        <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-            <div class="flex items-center gap-3">
-                <div class="p-2.5 bg-white/10 text-brand-blue rounded-xl border border-white/10"><i class="fa-solid fa-location-dot text-xl"></i></div>
-                <div><h3 class="font-black text-white text-base uppercase">Ubicación</h3></div>
-            </div>
-            <button onclick="closeModal('modal-gps-info')" class="text-gray-400 hover:text-white text-xl font-bold px-2 cursor-pointer">&times;</button>
-        </div>
-        <div class="space-y-4 text-sm text-gray-300 pointer-events-none" style="user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;">
-            <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                <span class="text-xs text-gray-400 mb-1 block">Ubicación GPS (Precisa)</span>
-                <span id="modal-gps-gps" class="font-bold text-brand-blue block" style="color:#38bdf8;">No disponible</span>
-            </div>
-        </div>
-        <div class="mt-6"><button onclick="closeModal('modal-gps-info')" class="w-full py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl transition border border-white/10 cursor-pointer">Cerrar</button></div>
+        <div class="px-5 sm:px-7 pb-5 sm:pb-7"><button onclick="closeTopInfoModal()" class="w-full py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-black uppercase tracking-widest transition shadow-lg shadow-blue-950/30">Cerrar</button></div>
     </div>
 </div>
 
@@ -3276,6 +3567,35 @@
     </div>
 </div>
 
+
+    <!-- SELECTOR DE PORTALES -->
+    <div id="portalAccessModal" class="fixed inset-0 z-[99998] hidden items-center justify-center p-4 portal-selector-backdrop" aria-hidden="true">
+        <div class="portal-selector-card w-full max-w-3xl rounded-[30px] overflow-hidden relative">
+            <div class="p-5 sm:p-7 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-4 min-w-0">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-500 flex items-center justify-center shrink-0"><i class="fa-solid fa-layer-group text-xl"></i></div>
+                    <div class="min-w-0"><p class="text-[10px] font-black tracking-[0.22em] uppercase text-indigo-500 mb-1">Acceso multiplataforma</p><h3 class="portal-selector-title text-xl sm:text-2xl font-black">Selecciona tu portal</h3><p class="portal-selector-subtitle text-sm mt-1">Cada portal administra su propia sesión y servicios.</p></div>
+                </div>
+                <button type="button" onclick="closePortalAccess()" class="portal-selector-close w-10 h-10 rounded-full flex items-center justify-center shrink-0" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-5 sm:p-7">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <a href="cliente.html" target="_self" class="portal-choice portal-choice-client block rounded-3xl p-6 sm:p-7 no-underline">
+                        <div class="flex items-start justify-between gap-4"><div class="portal-choice-icon"><i class="fa-solid fa-user-shield"></i></div><span class="portal-choice-tag">CLIENTES</span></div>
+                        <h4 class="portal-choice-title">Portal de Clientes</h4><p class="portal-choice-text">Servicios, facturación, pagos, notificaciones y administración de tu cuenta.</p>
+                        <span class="portal-choice-action">Entrar al portal <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="TELECOMUNICACIONES.html" target="_self" class="portal-choice portal-choice-intersat block rounded-3xl p-6 sm:p-7 no-underline">
+                        <div class="flex items-start justify-between gap-4"><div class="portal-choice-icon"><i class="fa-solid fa-satellite-dish"></i></div><span class="portal-choice-tag">INTERSAT</span></div>
+                        <h4 class="portal-choice-title">Portal Intersat</h4><p class="portal-choice-text">Órdenes, técnicos, clientes, reportes y operaciones de telecomunicaciones.</p>
+                        <span class="portal-choice-action">Entrar al portal <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                </div>
+                <div class="mt-5 text-center text-xs portal-selector-foot"><i class="fa-solid fa-shield-halved me-1 text-emerald-500"></i> Acceso independiente por plataforma.</div>
+            </div>
+        </div>
+    </div>
+
     <!-- WIDGET JOSYBETH -->
     <div id="josybeth-widget" class="fixed bottom-6 right-6 z-50">
         <button onclick="toggleChat()" aria-label="Abrir chat de asistencia" id="btn-josybeth" class="bg-brand-blue text-white w-14 h-14 rounded-full shadow-[0_0_15px_rgba(0,86,255,0.5)] hover:scale-105 transition flex items-center justify-center animate-bounce">
@@ -3310,27 +3630,43 @@
     </div>
 
     <script>
-		 // IFRAME FUNCION PORTAL
-		function openPortalClientes() {
-    const modal = document.getElementById('portalClientesModal');
-    const iframe = document.getElementById('portalClientesIframe');
-    
-    // Cambia 'cliente.html' por la ruta real de tu archivo o enlace independiente
-    if (!iframe.src || iframe.src === "" || iframe.src === window.location.href) {
-        iframe.src = "cliente.html"; 
-    }
-    
-    modal.classList.remove('hidden');
-}
 
-		function openPortalClientes() {
-    window.open('cliente.html', '_blank', 'noopener,noreferrer');
-}
-		
-function closePortalClientes() {
-    const modal = document.getElementById('portalClientesModal');
-    modal.classList.add('hidden');
-}
+        // ==========================================================
+        // SELECTOR DE PORTALES
+        // ==========================================================
+        function openPortalClientes(){
+            const modal=document.getElementById('portalAccessModal');
+            if(!modal)return;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modal.setAttribute('aria-hidden','false');
+            document.body.style.overflow='hidden';
+        }
+        function closePortalAccess(){
+            const modal=document.getElementById('portalAccessModal');
+            if(!modal)return;
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            modal.setAttribute('aria-hidden','true');
+            document.body.style.overflow='';
+        }
+        document.addEventListener('click',function(e){
+            const modal=document.getElementById('portalAccessModal');
+            if(modal && e.target===modal) closePortalAccess();
+        });
+        document.addEventListener('keydown',function(e){ if(e.key==='Escape') closePortalAccess(); });
+
+        function ensureBinancePriceNotes(){
+            document.querySelectorAll('[data-price-id]').forEach(function(priceEl){
+                if(priceEl.parentElement?.querySelector('.binance-price-note')) return;
+                const note=document.createElement('span');
+                note.className='binance-price-note'; note.style.display='block';
+                note.textContent='Precios referenciados a tasa Binance';
+                priceEl.insertAdjacentElement('afterend',note);
+            });
+        }
+        document.addEventListener('DOMContentLoaded',ensureBinancePriceNotes);
+
         // Lógica de Tabs y Carrusel
         function scrollCarrusel(offset) { 
             const container = document.getElementById('carrusel-trabajos'); 
@@ -3357,29 +3693,22 @@ function closePortalClientes() {
         let ubicacionGPS = "No disponible";
         let datosFormularioActual = {};
 
-        function openISPModal() {
-            const ipEl = document.getElementById('info-public-ip');
-            const ispEl = document.getElementById('info-isp');
-            const modalIp = document.getElementById('modal-isp-ip');
-            const modalIsp = document.getElementById('modal-isp-name');
-
-            if (modalIp) modalIp.innerText = (ipEl && ipEl.innerText && ipEl.innerText !== 'Detectando...') ? ipEl.innerText : (clienteIP || 'No disponible');
-            if (modalIsp) modalIsp.innerText = (ispEl && ispEl.innerText && ispEl.innerText !== '' && ispEl.innerText !== 'Detectando...') ? ispEl.innerText.replace('- ', '') : (clienteISP || 'Desconocido');
-
-            const modal = document.getElementById('modal-isp-info');
-            if (modal) { modal.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        function closeTopInfoModal(){const modal=document.getElementById('modal-top-info');if(!modal)return;modal.classList.add('hidden');document.body.style.overflow='auto';}
+        function openTopInfoModal(type){
+            const modal=document.getElementById('modal-top-info'); if(!modal)return;
+            const icon=document.getElementById('topinfo-icon'),k=document.getElementById('topinfo-kicker'),title=document.getElementById('topinfo-title'),l1=document.getElementById('topinfo-label-1'),v1=document.getElementById('topinfo-value-1'),l2=document.getElementById('topinfo-label-2'),v2=document.getElementById('topinfo-value-2'),note=document.getElementById('topinfo-note');
+            const dt=document.getElementById('info-datetime')?.innerText||'No disponible';
+            if(type==='datetime'){icon.className='fa-regular fa-calendar-days text-xl';k.textContent='Sistema';title.textContent='Fecha y hora';l1.textContent='Hora local';v1.textContent=dt;l2.textContent='Actualización';v2.textContent='Se actualiza automáticamente';note.textContent='Información horaria del dispositivo.';}
+            else if(type==='device'){icon.className='fa-solid fa-desktop text-xl';k.textContent='Dispositivo';title.textContent='Tipo de dispositivo';const kind=window.innerWidth<640?'Teléfono móvil':window.innerWidth<1024?'Tablet / pantalla intermedia':'Computador / escritorio';l1.textContent='Dispositivo';v1.textContent=kind;l2.textContent='Resolución';v2.textContent=`${window.innerWidth} × ${window.innerHeight} px`;note.textContent='La interfaz se adapta automáticamente a la pantalla.';}
+            else if(type==='connection'){icon.className='fa-solid fa-wifi text-xl';k.textContent='Conectividad';title.textContent='Estado de conexión';l1.textContent='Estado';v1.textContent=navigator.onLine?'Conectado a Internet':'Sin conexión';l2.textContent='Tipo estimado';v2.textContent=navigator.connection?.effectiveType?String(navigator.connection.effectiveType).toUpperCase():'No disponible';note.textContent='Indicador informativo; el tipo puede variar según navegador y red.';}
+            else if(type==='isp'){icon.className='fa-solid fa-globe text-xl';k.textContent='Red';title.textContent='IP pública y proveedor';l1.textContent='IP pública';v1.textContent=clienteIP||'No disponible';l2.textContent='Proveedor (ISP)';v2.textContent=clienteISP||'Desconocido';note.textContent='La IP y el proveedor se obtienen de servicios públicos de identificación de red.';}
+            else if(type==='gps'){icon.className='fa-solid fa-location-dot text-xl';k.textContent='Ubicación';title.textContent='Ubicación del dispositivo';l1.textContent='Ubicación por IP';v1.textContent=ubicacionIP||'No disponible';l2.textContent='Ubicación GPS';v2.textContent=ubicacionGPS||'No disponible';note.textContent='El GPS requiere permiso del navegador; la ubicación por IP es aproximada.';}
+            else if(type==='bcv'){icon.className='fa-solid fa-building-columns text-xl';k.textContent='Referencia cambiaria';title.textContent='Tasa BCV';l1.textContent='Tasa mostrada';v1.textContent=document.getElementById('bcv-rate-display')?.innerText||'Cargando...';l2.textContent='Uso';v2.textContent='Referencia oficial informativa';note.textContent='Los precios del portal se calculan usando la tasa Binance P2P.';}
+            else if(type==='binance'){icon.className='fa-brands fa-bitcoin text-xl';k.textContent='Referencia comercial';title.textContent='Tasa Binance P2P';l1.textContent='Tasa aplicada';v1.textContent=document.getElementById('binance-rate-display')?.innerText||'Cargando...';l2.textContent='Par';v2.textContent='USDT / VES · P2P · compra';note.textContent='Esta tasa se usa para convertir los precios base y mostrarlos en bolívares.';}
+            modal.classList.remove('hidden');document.body.style.overflow='hidden';
         }
-        function openGPSModal() {
-            const locEl = document.getElementById('info-location');
-            const modalGpsIp = document.getElementById('modal-gps-ip');
-            const modalGpsGps = document.getElementById('modal-gps-gps');
-
-            if (modalGpsIp) modalGpsIp.innerText = (locEl && locEl.innerText && locEl.innerText !== 'Detectando ubicación...') ? locEl.innerText : (ubicacionIP || 'No disponible');
-            if (modalGpsGps) modalGpsGps.innerText = ubicacionGPS || 'No disponible';
-
-            const modal = document.getElementById('modal-gps-info');
-            if (modal) { modal.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
-        }
+        function openISPModal(){openTopInfoModal('isp');}
+        function openGPSModal(){openTopInfoModal('gps');}
 
         // TOKEN Y CHAT_ID DE TELEGRAM (CONFIGURACIÓN)
         const TELEGRAM_TOKEN = "7798276985:AAH3GkNgfRFOa3lApS3xQk5skodbJyAqmqo";
@@ -4116,7 +4445,7 @@ function closePortalClientes() {
                 if(lowerMsg.includes('hola') || lowerMsg.includes('buenos dias') || lowerMsg.includes('buenas')) {
                     botDiv.innerHTML = "¡Hola! Gracias por comunicarte con LC Soluciones Tecnológicas. ¿En qué puedo ayudarte con tu red o servicio?";
                 } else if(lowerMsg.includes('precio') || lowerMsg.includes('costo') || lowerMsg.includes('plan')) {
-                    botDiv.innerHTML = "Contamos con planes ilimitados desde 1.000 Bs y por consumo desde 500 Bs. Puedes revisar la sección <b>Planes</b> en el menú superior.";
+                    botDiv.innerHTML = "Contamos con planes de conectividad y consumo. Consulta la sección <b>Planes</b> para ver los precios actualizados en Bs según la tasa Binance.";
                 } else if(lowerMsg.includes('contacto') || lowerMsg.includes('numero') || lowerMsg.includes('telefono')) {
                     botDiv.innerHTML = "Puedes escribirnos directamente llenando el formulario en nuestra sección <b>Comercial</b>.";
                 } else {
@@ -4129,38 +4458,43 @@ function closePortalClientes() {
         }
     </script>
 
-<script>
-const devPricesConfig = {
-    'dev-web': 150.00,
-    'dev-admin': 200.00,
-    'dev-contable': 300.00,
-    'dev-deportes': 150.00,
-    'dev-tablas': 250.00,
-    'dev-reporteria': 150.00
-};
 
-async function loadDevPricesWithBCV() {
-    let exchangeRate = 0;
-    try {
-        const r1 = await fetch('https://rates.dolarvzla.com/bcv/current.json');
-        if(r1.ok) { const d1 = await r1.json(); exchangeRate = d1?.current?.usd || 0; }
-    } catch(e) {}
-    if(!exchangeRate || exchangeRate <= 1) {
-        try {
-            const r2 = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
-            if(r2.ok) { const d2 = await r2.json(); const rd = Array.isArray(d2)?d2[0]:d2; exchangeRate = rd?.promedio || rd?.venta || 0; }
-        } catch(e) {}
-    }
-    if(!exchangeRate || exchangeRate <= 1) exchangeRate = 750.00;
-
-    for(const [key, usd] of Object.entries(devPricesConfig)) {
-        const final = usd * exchangeRate;
-        const txt = final.toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' Bs';
-        document.querySelectorAll(`[data-price-id="${key}"]`).forEach(el => el.innerText = txt);
-    }
+<style>
+/* REFERENCIA USD EN TARJETAS — visible en claro y oscuro */
+.binance-usd-reference{
+  display:block;
+  margin-top:.35rem;
+  margin-bottom:.25rem;
+  font-size:.69rem;
+  line-height:1.35;
+  font-weight:700;
+  letter-spacing:.01em;
+  color:#64748b;
 }
-document.addEventListener("DOMContentLoaded", loadDevPricesWithBCV);
+[data-theme="dark"] .binance-usd-reference{color:#cbd5e1!important}
+[data-theme="light"] .binance-usd-reference{color:#64748b!important}
+.binance-usd-reference .usd-label{font-weight:900}
+</style>
+<script>
+/* USD base visible junto al precio calculado en Binance P2P */
+(function(){
+  const usdPrices={...planPricesConfig,...hotspotPricesConfig,...devPricesConfig};
+  function addUsdReferences(){
+    document.querySelectorAll('[data-price-id]').forEach(priceEl=>{
+      const key=priceEl.getAttribute('data-price-id');
+      if(!Object.prototype.hasOwnProperty.call(usdPrices,key)) return;
+      const card=priceEl.closest('.service-card');
+      if(!card || card.querySelector(`.binance-usd-reference[data-usd-for="${key}"]`)) return;
+      const note=document.createElement('div');
+      note.className='binance-usd-reference';
+      note.dataset.usdFor=key;
+      note.innerHTML='<span class="usd-label">US$ '+Number(usdPrices[key]).toFixed(2)+'</span>';
+      priceEl.insertAdjacentElement('afterend',note);
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addUsdReferences);
+  else addUsdReferences();
+})();
 </script>
-
 </body>
 </html>
