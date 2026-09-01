@@ -361,7 +361,35 @@
         body.dark-mode .table-custom th { background-color: rgba(255,255,255,0.03); }
         body.dark-mode .table-custom td { border-bottom-color: #334155; }
 
-        /* Utilidades */
+        /* Sidebar scroll fixes */
+        #sidebar {
+            display: flex;
+            flex-direction: column;
+        }
+        #sidebar .sidebar-nav-wrapper {
+            flex: 1 1 auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            min-height: 0;
+        }
+        @media (max-width: 991px) {
+            #sidebar .sidebar-nav-wrapper {
+                max-height: calc(100vh - 180px);
+            }
+        }
+
+        /* Auditoria table styles */
+        .audit-badge-login { background: rgba(37, 99, 235, 0.1); color: #2563eb; }
+        .audit-badge-logout { background: rgba(100, 116, 139, 0.1); color: #64748b; }
+        .audit-badge-create { background: rgba(34, 197, 94, 0.1); color: #16a34a; }
+        .audit-badge-update { background: rgba(245, 158, 11, 0.1); color: #d97706; }
+        .audit-badge-delete { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
+        .audit-badge-payment { background: rgba(6, 182, 212, 0.1); color: #0891b2; }
+        .audit-badge-error { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
+        .audit-badge-warning { background: rgba(245, 158, 11, 0.1); color: #d97706; }
+
+                /* Utilidades */
         .fs-7 { font-size: 0.75rem; }
         .tracking-wider { letter-spacing: 0.05em; }
         .cursor-pointer { cursor: pointer; }
@@ -897,6 +925,85 @@
             color: #fbbf24 !important;
         }
 
+
+/* ================================================================
+   MEJORAS PROFUNDAS — MODALES DE CLIENTES Y FAMILIA
+   ================================================================ */
+#modalCliente .modal-dialog,
+#modalRegistroLogin .modal-dialog,
+#modalFamiliar .modal-dialog,
+#modalRegistroExito .modal-dialog {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+#modalCliente,
+#modalRegistroLogin,
+#modalFamiliar,
+#modalRegistroExito { z-index: 200000 !important; }
+#modalFamiliar + .modal-backdrop,
+#modalFamiliar ~ .modal-backdrop { z-index: 199990 !important; }
+
+/* Expediente familiar: sin backdrop oscuro heredado del login */
+#modalFamiliaExpediente { z-index: 300000 !important; }
+#modalFamiliaExpediente .modal-dialog { z-index: 300001 !important; max-width: 1180px; }
+#modalFamiliaExpediente .modal-content-pro {
+    position: relative; z-index: 300002 !important;
+    background: var(--bg-card) !important; color: var(--text-main) !important;
+    border: 1px solid var(--border-color) !important;
+}
+#modalFamiliaExpediente .modal-body { max-height: 72vh; overflow-y: auto; }
+#modalFamiliaExpediente .modal-footer { background: var(--bg-card) !important; border-color: var(--border-color) !important; }
+#modalFamiliaExpediente .text-muted { color: var(--text-muted) !important; }
+#modalFamiliaExpediente .btn-light { background: #f1f5f9 !important; color: #0f172a !important; border-color: #cbd5e1 !important; }
+html[data-bs-theme="dark"] #modalFamiliaExpediente .btn-light { background: #1e293b !important; color: #f1f5f9 !important; border-color: #334155 !important; }
+body.modal-open #login-overlay.d-none { display:none !important; }
+/* CIERRE DE SESIÓN: evitar capas visuales residuales */
+body.logout-cleanup .modal-backdrop,
+body.logout-cleanup .modal { display:none !important; }
+
+#modalFamiliar .modal-content-pro,
+#modalCliente .modal-content-pro,
+#modalRegistroLogin .modal-content-pro {
+    border: 1px solid rgba(37,99,235,.18);
+    box-shadow: 0 28px 80px rgba(15,23,42,.22);
+}
+#modalFamiliar .modal-header-pro,
+#modalCliente .modal-header-pro {
+    position: sticky; top: 0; z-index: 5;
+    background: linear-gradient(135deg,#0f172a 0%,#1e3a8a 65%,#2563eb 100%) !important;
+    color:#fff !important;
+}
+#modalFamiliar .modal-body-pro,
+#modalCliente .modal-body-pro,
+#modalRegistroLogin .modal-body-pro { max-height: 76vh; overflow-y:auto; }
+.familia-upload-card {
+    border:1px solid var(--border-color); border-radius:16px; padding:12px;
+    background: rgba(37,99,235,.035); height:100%;
+}
+.familia-upload-card .form-label { font-size:.72rem; text-transform:uppercase; letter-spacing:.045em; }
+.familia-upload-preview { width:100%; height:150px; object-fit:cover; border-radius:12px; border:1px dashed #cbd5e1; background:#f8fafc; }
+.familia-doc-card { background:var(--bg-card); border:1px solid var(--border-color); border-radius:18px; overflow:hidden; box-shadow:0 10px 28px rgba(15,23,42,.08); transition:.25s ease; }
+.familia-doc-card:hover { transform:translateY(-3px); box-shadow:0 18px 36px rgba(37,99,235,.12); }
+.familia-main-photo { height:210px; width:100%; object-fit:cover; background:#e2e8f0; }
+.familia-placeholder { height:210px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#e2e8f0,#f8fafc); color:#64748b; }
+.familia-meta { font-size:.8rem; color:var(--text-muted); }
+.familia-doc-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+.familia-doc-thumb { aspect-ratio:1/1; border-radius:10px; overflow:hidden; background:#f1f5f9; border:1px solid var(--border-color); display:flex; align-items:center; justify-content:center; }
+.familia-doc-thumb img { width:100%; height:100%; object-fit:cover; }
+.familia-card-actions { display:flex; gap:8px; flex-wrap:wrap; }
+@media (max-width:767px){
+  #modalFamiliar .modal-dialog,#modalCliente .modal-dialog,#modalRegistroLogin .modal-dialog { margin:.5rem; }
+  #modalFamiliar .modal-body-pro,#modalCliente .modal-body-pro,#modalRegistroLogin .modal-body-pro { max-height:82vh; }
+  .familia-doc-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .familia-main-photo,.familia-placeholder { height:190px; }
+}
+html[data-bs-theme="dark"] .familia-upload-card { background:rgba(59,130,246,.07); border-color:#334155; }
+html[data-bs-theme="dark"] .familia-upload-preview { background:#0f172a; border-color:#475569; }
+html[data-bs-theme="dark"] .familia-placeholder { background:linear-gradient(135deg,#0f172a,#1e293b); color:#94a3b8; }
+html[data-bs-theme="dark"] .familia-doc-thumb { background:#0f172a; border-color:#334155; }
+html[data-bs-theme="dark"] #modalFamiliar .modal-header-pro,
+html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-gradient(135deg,#020617 0%,#172554 65%,#1d4ed8 100%) !important; }
+
 </style>
 </head>
 <body>
@@ -1075,6 +1182,7 @@
             <small class="text-uppercase text-muted fw-semibold px-3" style="font-size: 0.7rem;">Menú Principal</small>
         </div>
 
+        <div class="sidebar-nav-wrapper">
         <nav class="nav flex-column">
             <a href="#dashboard" class="nav-link active" onclick="switchTab('dashboard')">
                 <i class="fa-solid fa-chart-pie"></i> Dashboard
@@ -1101,6 +1209,9 @@
                 <i class="fa-solid fa-bell"></i> Notificaciones
                 <span class="badge bg-danger rounded-pill ms-auto" id="nav-notif-count">0</span>
             </a>
+            <a href="#auditoria" class="nav-link" onclick="switchTab('auditoria')">
+                <i class="fa-solid fa-clipboard-list"></i> Auditoría
+            </a>
             <a href="#portal" class="nav-link view-admin-master" onclick="switchTab('portal')">
                 <i class="fa-solid fa-globe"></i> Portal
             </a>
@@ -1111,6 +1222,7 @@
                 <i class="fa-solid fa-house-user"></i> Familia
             </a>
         </nav>
+        </div>
 
         <!-- FOOTER SIDEBAR -->
         <div class="mt-auto p-3 border-top" style="border-color: var(--border-color) !important;">
@@ -1164,17 +1276,17 @@
     			<i class="fa-solid fa-moon text-secondary"></i>
 				</button>
 
-                <div class="dropdown">
-                    <div class="d-flex align-items-center gap-2 cursor-pointer p-1 rounded-3 hover-bg" data-bs-toggle="dropdown" role="button">
+                <div class="dropdown position-relative">
+                    <button type="button" class="btn border-0 bg-transparent d-flex align-items-center gap-2 cursor-pointer p-1 rounded-3 hover-bg" data-bs-toggle="dropdown" aria-expanded="false" id="userMenuToggle" title="Menú de usuario">
                         <img id="current-user-avatar" src="https://ui-avatars.com/api/?name=User&background=0D6EFD&color=fff" class="rounded-circle shadow-sm" width="40" height="40" alt="User">
                         <div class="d-none d-md-block text-start lh-1 me-1">
                             <span class="fw-bold d-block fs-6 m-0 text-dark" id="current-user-name">Usuario</span>
                             <small class="text-muted fs-7" id="current-user-role">Perfil: Admin</small>
                         </div>
                         <i class="fa-solid fa-chevron-down text-muted small"></i>
-                    </div>
+                    </button>
 
-                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2 fs-6">
+                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2 fs-6" aria-labelledby="userMenuToggle">
                         <li><h6 class="dropdown-header text-truncate" id="dropdown-user-email">email@dominio.com</h6></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item py-2 fw-medium" href="#" onclick="abrirModalPerfil(); return false;">
@@ -1184,7 +1296,7 @@
                             <i class="fa-solid fa-key me-2 text-primary"></i> Cambiar Contraseña
                         </a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item py-2 text-danger fw-semibold" href="#" onclick="abrirModalLogout(); return false;">
+                        <li><a class="dropdown-item py-2 text-danger fw-semibold" href="#" data-bs-toggle="modal" data-bs-target="#modalConfirmLogout">
                             <i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión
                         </a></li>
                     </ul>
@@ -1723,11 +1835,16 @@
                     <p class="mb-1"><strong><i class="fa-solid fa-id-card text-muted me-2"></i>Documento:</strong> <span id="cli-info-documento">—</span></p>
                     <p class="mb-1"><strong><i class="fa-solid fa-phone text-muted me-2"></i>Teléfono:</strong> <span id="cli-info-telefono">—</span></p>
                     <p class="mb-1"><strong><i class="fa-solid fa-envelope text-muted me-2"></i>Correo:</strong> <span id="cli-info-correo">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-cake-candles text-muted me-2"></i>Fecha Nac.:</strong> <span id="cli-info-fecha-nac">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-earth-americas text-muted me-2"></i>Nacionalidad:</strong> <span id="cli-info-nacionalidad">—</span></p>
                 </div>
                 <div class="col-md-6">
                     <p class="mb-1"><strong><i class="fa-solid fa-location-dot text-muted me-2"></i>Dirección:</strong> <span id="cli-info-direccion">—</span></p>
                     <p class="mb-1"><strong><i class="fa-solid fa-signal text-muted me-2"></i>Estado Servicio:</strong> <span id="cli-info-estado">—</span></p>
                     <p class="mb-1"><strong><i class="fa-solid fa-file-invoice text-muted me-2"></i>Total Facturas:</strong> <span id="cli-info-facturas">0</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-ring text-muted me-2"></i>Estado Civil:</strong> <span id="cli-info-estado-civil">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-briefcase text-muted me-2"></i>Profesión:</strong> <span id="cli-info-profesion">—</span></p>
+                    <p class="mb-1"><strong><i class="fa-solid fa-building-user text-muted me-2"></i>Empresa:</strong> <span id="cli-info-empresa-labora">—</span></p>
                 </div>
             </div>
         </div>
@@ -2254,6 +2371,7 @@
                 </div>
             </div>
         </section>
+
     <!-- ═══════════════════════════════════════════════════════════════
          SECCIÓN: MIKROTIK — Gestión Hotspot vía API REST Local
          ═══════════════════════════════════════════════════════════════ -->
@@ -2410,6 +2528,104 @@
         </div>
     </section>
 
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             SECCIÓN: AUDITORÍA — Historial de Actividad del Sistema
+             ═══════════════════════════════════════════════════════════════ -->
+        <section id="sec-auditoria" class="tab-content d-none">
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <div>
+                    <h5 class="fw-bold m-0"><i class="fa-solid fa-clipboard-list text-primary me-2"></i>Auditoría del Sistema</h5>
+                    <small class="text-muted">Historial completo de actividad, cambios y eventos</small>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-dark" onclick="exportarAuditoria()">
+                        <i class="fa-solid fa-file-export me-1"></i> Exportar
+                    </button>
+                    <button class="btn btn-outline-danger view-admin-master" onclick="limpiarAuditoria()">
+                        <i class="fa-solid fa-trash-can me-1"></i> Limpiar Historial
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="card border-0 shadow-sm rounded-3 mb-3">
+                <div class="card-body p-3">
+                    <div class="row g-2">
+                        <div class="col-12 col-md-3">
+                            <label class="form-label small fw-semibold text-muted">Buscar</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-0"><i class="fa-solid fa-magnifying-glass text-muted small"></i></span>
+                                <input type="text" class="form-control form-control-sm border-0 bg-light" id="audit-filtro-texto" placeholder="Usuario, acción, entidad..." oninput="filtrarAuditoria()">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-2">
+                            <label class="form-label small fw-semibold text-muted">Nivel</label>
+                            <select class="form-select form-select-sm border-0 bg-light" id="audit-filtro-nivel" onchange="filtrarAuditoria()">
+                                <option value="">Todos</option>
+                                <option value="INFO">Info</option>
+                                <option value="WARNING">Warning</option>
+                                <option value="ERROR">Error</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-2">
+                            <label class="form-label small fw-semibold text-muted">Acción</label>
+                            <select class="form-select form-select-sm border-0 bg-light" id="audit-filtro-accion" onchange="filtrarAuditoria()">
+                                <option value="">Todas</option>
+                                <option value="LOGIN">Inicio Sesión</option>
+                                <option value="LOGOUT">Cierre Sesión</option>
+                                <option value="CREATE">Creación</option>
+                                <option value="UPDATE">Actualización</option>
+                                <option value="DELETE">Eliminación</option>
+                                <option value="PAYMENT">Pago</option>
+                                <option value="STATUS_CHANGE">Cambio Estado</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-2">
+                            <label class="form-label small fw-semibold text-muted">Desde</label>
+                            <input type="date" class="form-control form-control-sm border-0 bg-light" id="audit-filtro-desde" onchange="filtrarAuditoria()">
+                        </div>
+                        <div class="col-6 col-md-2">
+                            <label class="form-label small fw-semibold text-muted">Hasta</label>
+                            <input type="date" class="form-control form-control-sm border-0 bg-light" id="audit-filtro-hasta" onchange="filtrarAuditoria()">
+                        </div>
+                        <div class="col-12 col-md-1 d-flex align-items-end">
+                            <button class="btn btn-sm btn-light border w-100" onclick="limpiarFiltrosAuditoria()" title="Limpiar filtros">
+                                <i class="fa-solid fa-rotate-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de Auditoría -->
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-body p-0">
+                    <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light sticky-top" style="z-index: 5;">
+                                <tr>
+                                    <th class="ps-3" style="width: 160px;">Fecha y Hora</th>
+                                    <th style="width: 120px;">Usuario</th>
+                                    <th style="width: 80px;">Rol</th>
+                                    <th style="width: 100px;">Acción</th>
+                                    <th style="width: 100px;">Entidad</th>
+                                    <th>Detalle</th>
+                                    <th style="width: 90px;">Nivel</th>
+                                    <th class="pe-3" style="width: 100px;">ID Entidad</th>
+                                </tr>
+                            </thead>
+                            <tbody id="audit-tbody"></tbody>
+                        </table>
+                    </div>
+                    <div id="audit-vacio" class="text-center p-4 text-muted d-none">
+                        <i class="fa-regular fa-folder-open fa-2x mb-2 opacity-25"></i>
+                        <p class="mb-0 small">No se encontraron registros de auditoría.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 	
 	<!-- ═══════════════════════════════════════════════════════════════
@@ -2491,7 +2707,7 @@
     </div>
 
     <!-- MODAL 2: Confirmar Logout -->
-    <div class="modal fade" id="modalConfirmLogout" tabindex="-1">
+    <div class="modal fade" id="modalConfirmLogout" tabindex="-1" data-bs-backdrop="false" data-bs-keyboard="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content modal-content-pro text-center p-3">
                 <div class="modal-body modal-body-pro">
@@ -2769,66 +2985,110 @@
         </div>
     </div>
 
-    <!-- MODAL 7: Cliente -->
-    <div class="modal fade" id="modalCliente" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content modal-content-pro">
-                <div class="modal-header modal-header-pro">
-                    <h5 class="modal-title fw-bold" id="modalClienteTitle"><i class="fa-solid fa-address-card text-primary me-2"></i>Cliente</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <!-- MODAL 7: Cliente — FORMULARIO ORGANIZADO -->
+    <div class="modal fade" id="modalCliente" tabindex="-1" aria-labelledby="modalClienteTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content modal-content-pro cliente-modal-pro">
+                <div class="modal-header modal-header-pro px-4 py-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="cliente-modal-icon"><i class="fa-solid fa-address-card"></i></div>
+                        <div>
+                            <h5 class="modal-title fw-bold mb-0" id="modalClienteTitle">Registrar Cliente</h5>
+                            <small class="text-white-50">Complete la información del cliente de forma rápida y ordenada.</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
-                <div class="modal-body modal-body-pro">
+                <div class="modal-body p-4">
                     <form id="formCliente" onsubmit="guardarCliente(event)">
                         <input type="hidden" id="cli_id">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Código Cliente (cédula)</label>
-                                <input type="text" class="form-control form-control-pro" id="cli_codigo" placeholder="CLI-100X" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Nombre Completo</label>
-                                <input type="text" class="form-control form-control-pro" id="cli_nombre" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Cédula / RIF</label>
-                                <input type="text" class="form-control form-control-pro" id="cli_documento" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Teléfono</label>
-                                <input type="text" class="form-control form-control-pro" id="cli_telefono" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Correo Electrónico</label>
-                                <input type="email" class="form-control form-control-pro" id="cli_correo" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Estado Servicio</label>
-                                <select class="form-select form-select-pro" id="cli_estado">
-                                    <option value="SOLVENTE">SOLVENTE</option>
-                                    <option value="EN MORA">EN MORA</option>
-                                    <option value="SUSPENDIDO">SUSPENDIDO</option>
-                                    <option value="DEMO">DEMO</option>
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label small fw-semibold">Dirección Ubicación</label>
-                                <input type="text" class="form-control form-control-pro" id="cli_direccion" placeholder="Calle/Avenida, Casa/Apto, Ciudad" required>
-                            </div>
-                            <div id="section-usuario-nuevo" class="col-12 mt-3 pt-3 border-top">
-                                <h6 class="fw-bold text-primary mb-3"><i class="fa-solid fa-user-lock me-2"></i>Credenciales de Acceso para el Cliente</h6>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label small fw-semibold">Nombre de Usuario (Username)</label>
-                                        <input type="text" class="form-control form-control-pro" id="cli_username" placeholder="Ej: mrodriguez">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label small fw-semibold">Contraseña</label>
-                                        <input type="password" class="form-control form-control-pro" id="cli_password" placeholder="••••••••">
-                                    </div>
+
+                        <div class="cliente-form-section">
+                            <div class="cliente-section-title"><i class="fa-solid fa-user text-primary"></i><span>Datos del cliente</span></div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Código Cliente <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-pro" id="cli_codigo" placeholder="CLI-100X" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Nombre Completo <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-pro" id="cli_nombre" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Cédula / RIF <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-pro" id="cli_documento" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Teléfono <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-pro" id="cli_telefono" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Correo Electrónico <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control form-control-pro" id="cli_correo" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Estado del Servicio</label>
+                                    <select class="form-select form-select-pro" id="cli_estado">
+                                        <option value="SOLVENTE">SOLVENTE</option>
+                                        <option value="EN MORA">EN MORA</option>
+                                        <option value="SUSPENDIDO">SUSPENDIDO</option>
+                                        <option value="DEMO">DEMO</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small fw-semibold">Dirección <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-pro" id="cli_direccion" placeholder="Calle/Avenida, Casa/Apto, Ciudad" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Fecha de Nacimiento</label>
+                                    <input type="date" class="form-control form-control-pro" id="cli_fecha_nac">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Nacionalidad <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-pro" id="cli_nacionalidad" placeholder="Venezolana" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Estado Civil</label>
+                                    <select class="form-select form-select-pro" id="cli_estado_civil">
+                                        <option value="">-- Seleccione --</option>
+                                        <option value="Soltero(a)">Soltero(a)</option>
+                                        <option value="Casado(a)">Casado(a)</option>
+                                        <option value="Divorciado(a)">Divorciado(a)</option>
+                                        <option value="Viudo(a)">Viudo(a)</option>
+                                        <option value="Concubino(a)">Concubino(a)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Profesión / Ocupación</label>
+                                    <input type="text" class="form-control form-control-pro" id="cli_profesion" placeholder="Ej: Ingeniero">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Empresa donde labora</label>
+                                    <input type="text" class="form-control form-control-pro" id="cli_empresa_labora" placeholder="Nombre de la empresa">
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 mt-4 fw-semibold rounded-3">Guardar Cliente y Crear Acceso</button>
+
+                        <div id="section-usuario-nuevo" class="cliente-form-section mt-4">
+                            <div class="cliente-section-title"><i class="fa-solid fa-shield-halved text-primary"></i><span>Credenciales de acceso</span><span class="badge bg-primary-subtle text-primary border ms-auto">Nuevo acceso</span></div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Nombre de Usuario</label>
+                                    <input type="text" class="form-control form-control-pro" id="cli_username" placeholder="Ej: mrodriguez">
+                                    <small class="text-muted">Si lo deja vacío, se utilizará el código del cliente.</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Contraseña</label>
+                                    <input type="password" class="form-control form-control-pro" id="cli_password" placeholder="••••••••">
+                                    <small class="text-muted">Puede dejarla vacía para usar la contraseña predeterminada.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cliente-form-actions mt-4 pt-3">
+                            <button type="button" class="btn btn-light fw-semibold rounded-3" data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"></i>Cancelar</button>
+                            <button type="submit" class="btn btn-primary fw-semibold rounded-3 px-4"><i class="fa-solid fa-floppy-disk me-2"></i>Guardar Cliente</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -2908,37 +3168,51 @@
                         <small class="text-muted" style="font-size: 0.7rem;"><i class="fa-solid fa-circle-info me-1"></i>Generado automáticamente</small>
                     </div>
 
-                    <!-- SERVICIO AGRUPADO POR TIPO -->
-                    <div class="mb-3">
-                        <label class="form-label small fw-semibold text-secondary" style="font-size: 0.78rem;">Tipo de Servicio / Plan <span class="text-danger">*</span></label>
-                        <div class="input-group rounded-3 overflow-hidden border" style="border-color: #e2e8f0;">
-                            <span class="input-group-text bg-light border-0" style="padding-left: 1rem;">
-                                <i class="fa-solid fa-layer-group text-muted" style="font-size: 0.85rem;"></i>
-                            </span>
-                            <select class="form-select form-select-pro border-0 bg-transparent" id="fac_tipo_servicio" onchange="toggleEspecificarServicio(this.value, 'group_fac_especifique')" required style="font-size: 0.9rem;">
-                                <option value="">-- Seleccione un plan --</option>
-                                
-                                <optgroup label="🌐 Planes Hotspot">
-                                    <option value="PLAN HOTSPOT 1H">Hotspot 1 Hora</option>
-                                    <option value="PLAN HOTSPOT 1D">Hotspot 1 Día</option>
-                                    <option value="PLAN HOTSPOT 7D">Hotspot 7 Días</option>
-                                    <option value="PLAN HOTSPOT 15D">Hotspot 15 Días</option>
-                                    <option value="PLAN HOTSPOT 30D">Hotspot 30 Días</option>
-                                </optgroup>
-                                
-                                <optgroup label="🚀 Proyectos Empresariales">
-                                    <option value="PROYECTO STARTER">Proyecto Starter</option>
-                                    <option value="PROYECTO GROWTH">Proyecto Growth</option>
-                                    <option value="PROYECTO BUSSINES">Proyecto Business</option>
-                                    <option value="PROYECTO PROFESSIONAL">Proyecto Professional</option>
-                                </optgroup>
-                                
-                                <optgroup label="⚙️ Otros">
-                                    <option value="Otro...">Servicio Personalizado...</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div>
+<!-- SERVICIO AGRUPADO POR TIPO -->
+<div class="mb-3">
+    <label class="form-label small fw-semibold text-secondary" style="font-size: 0.78rem;">
+        Tipo de Servicio / Plan <span class="text-danger">*</span>
+    </label>
+    <div class="input-group rounded-3 overflow-hidden border" style="border-color: #e2e8f0;">
+        <span class="input-group-text bg-light border-0" style="padding-left: 1rem;">
+            <i class="fa-solid fa-cubes text-muted" style="font-size: 0.85rem;"></i>
+        </span>
+        <select class="form-select form-select-pro border-0 bg-transparent" id="fac_tipo_servicio" onchange="toggleEspecificarServicio(this.value, 'group_fac_especifique')" required style="font-size: 0.9rem;">
+            <option value="">-- Seleccione un plan --</option>
+            
+            <optgroup label="📡 Planes Hotspot">
+                <option value="PLAN HOTSPOT 1H">⏱️ Hotspot 1 Hora</option>
+                <option value="PLAN HOTSPOT 1D">📅 Hotspot 1 Día</option>
+                <option value="PLAN HOTSPOT 7D">🗓️ Hotspot 7 Días</option>
+                <option value="PLAN HOTSPOT 15D">📆 Hotspot 15 Días</option>
+                <option value="PLAN HOTSPOT 30D">⏳ Hotspot 30 Días</option>
+            </optgroup>
+            
+            <optgroup label="🌐 Desarrollos para equipos MikroTik">
+                <option value="PROYECTO STARTER">🌱 Proyecto Starter</option>
+                <option value="PROYECTO GROWTH">📈 Proyecto Growth</option>
+                <option value="PROYECTO BUSSINES">💼 Proyecto Business</option>
+                <option value="PROYECTO PROFESSIONAL">👑 Proyecto Professional</option>
+            </optgroup>
+            
+            <optgroup label="💻 Desarrollo Web y Sistemas">
+                <option value="PÁGINAS WEB">🌐 Páginas Web</option>
+                <option value="SISTEMAS ADMINISTRATIVOS">📊 Sistemas Administrativos</option>
+                <option value="SISTEMAS CONTABLES">🧮 Sistemas Contables</option>
+            </optgroup>
+            
+            <optgroup label="🏆 Diseño Deportivo y Reportería">
+                <option value="DISEÑOS PARA EQUIPOS DE DEPORTES">🎨 Diseños para equipos de deportes</option>
+                <option value="TABLAS Y CALSIFICACIONES">🏅 Tablas y Clasificaciones</option>
+                <option value="REPORTERÍA Y EXPORTACION EN PDF">📄 Reportería y Exportación en PDF</option>
+            </optgroup>
+            
+            <optgroup label="🛠️ Otros">
+                <option value="Otro...">✏️ Servicio Personalizado...</option>
+            </optgroup>
+        </select>
+    </div>
+</div>
                     
                     <!-- ESPECIFICAR SERVICIO (condicional) -->
                     <div class="mb-3 d-none" id="group_fac_especifique">
@@ -3259,6 +3533,52 @@
                         </div>
                     </div>
 
+                    <!-- ═══ NUEVOS CAMPOS ═══ -->
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-secondary" style="font-size: 0.78rem;">Fecha de Nacimiento</label>
+                            <div class="input-group input-group-pro rounded-3 overflow-hidden border">
+                                <span class="input-group-text bg-transparent border-0 text-muted ps-3"><i class="fa-solid fa-cake-candles" style="font-size: 0.85rem;"></i></span>
+                                <input type="date" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2" id="reg_fecha_nac" style="font-size: 0.9rem;">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-secondary" style="font-size: 0.78rem;">Nacionalidad <span class="text-danger">*</span></label>
+                            <div class="input-group input-group-pro rounded-3 overflow-hidden border">
+                                <span class="input-group-text bg-transparent border-0 text-muted ps-3"><i class="fa-solid fa-earth-americas" style="font-size: 0.85rem;"></i></span>
+                                <input type="text" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2" id="reg_nacionalidad" placeholder="Ej: Venezolana" required style="font-size: 0.9rem;">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-secondary" style="font-size: 0.78rem;">Estado Civil</label>
+                            <div class="input-group input-group-pro rounded-3 overflow-hidden border">
+                                <span class="input-group-text bg-transparent border-0 text-muted ps-3"><i class="fa-solid fa-ring" style="font-size: 0.85rem;"></i></span>
+                                <select class="form-select bg-transparent border-0 text-dark shadow-none ps-2 py-2" id="reg_estado_civil" style="font-size: 0.9rem;">
+                                    <option value="">-- Seleccione --</option>
+                                    <option value="Soltero(a)">Soltero(a)</option>
+                                    <option value="Casado(a)">Casado(a)</option>
+                                    <option value="Divorciado(a)">Divorciado(a)</option>
+                                    <option value="Viudo(a)">Viudo(a)</option>
+                                    <option value="Concubino(a)">Concubino(a)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold text-secondary" style="font-size: 0.78rem;">Profesión / Ocupación</label>
+                            <div class="input-group input-group-pro rounded-3 overflow-hidden border">
+                                <span class="input-group-text bg-transparent border-0 text-muted ps-3"><i class="fa-solid fa-briefcase" style="font-size: 0.85rem;"></i></span>
+                                <input type="text" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2" id="reg_profesion" placeholder="Ej: Ingeniero" style="font-size: 0.9rem;">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label small fw-semibold text-secondary" style="font-size: 0.78rem;">Empresa donde labora</label>
+                            <div class="input-group input-group-pro rounded-3 overflow-hidden border">
+                                <span class="input-group-text bg-transparent border-0 text-muted ps-3"><i class="fa-solid fa-building-user" style="font-size: 0.85rem;"></i></span>
+                                <input type="text" class="form-control bg-transparent border-0 text-dark shadow-none ps-2 py-2" id="reg_empresa_labora" placeholder="Nombre de la empresa (si aplica)" style="font-size: 0.9rem;">
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- ═══ SECCIÓN: CREDENCIALES ═══ -->
                     <div class="d-flex align-items-center gap-2 mb-3 mt-4">
                         <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; background: rgba(37,99,235,0.1);">
@@ -3331,7 +3651,6 @@
     </div>
 </div>
 
-
     <!-- ═══════════════════════════════════════════════════════════════
          MODAL: REGISTRO EXITOSO
          ═══════════════════════════════════════════════════════════════ -->
@@ -3349,7 +3668,8 @@
                     <button type="button" class="btn btn-primary w-100 fw-semibold rounded-3" data-bs-dismiss="modal" onclick="document.getElementById('loginUser').focus();">Entendido</button>
                 </div>
             </div>
-    
+        </div>
+    </div>
 
     <!-- ═══════════════════════════════════════════════════════════════
          MODAL: ALERTA GENÉRICA PARA LOGIN (Éxito / Error / Warning)
@@ -3455,93 +3775,73 @@
         </div>
     </div>
 
-    <!-- MODAL: FAMILIAR -->
-    <div class="modal fade" id="modalFamiliar" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+    <!-- MODAL: FAMILIAR — REGISTRO COMPLETO Y DOCUMENTOS OPCIONALES -->
+    <div class="modal fade" id="modalFamiliar" tabindex="-1" aria-labelledby="modalFamiliarTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content modal-content-pro">
-                <div class="modal-header modal-header-pro">
-                    <h5 class="modal-title fw-bold" id="modalFamiliarTitle"><i class="fa-solid fa-house-user text-primary me-2"></i>Familiar</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <div class="modal-header modal-header-pro px-4 py-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="rounded-3 d-flex align-items-center justify-content-center" style="width:42px;height:42px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);">
+                            <i class="fa-solid fa-people-roof text-white"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title fw-bold mb-0" id="modalFamiliarTitle">Agregar Familiar</h5>
+                            <small class="text-white-50">Información personal y expediente familiar</small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
-                <div class="modal-body modal-body-pro">
+                <div class="modal-body modal-body-pro p-4">
                     <form id="formFamiliar" onsubmit="guardarFamiliar(event)">
                         <input type="hidden" id="fam_id">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Parentesco <span class="text-danger">*</span></label>
-                                <select class="form-select form-select-pro" id="fam_parentesco" required>
-                                    <option value="">-- Seleccione --</option>
-                                    <option value="Esposa">Esposa</option>
-                                    <option value="Esposo">Esposo</option>
-                                    <option value="Padre">Padre</option>
-                                    <option value="Madre">Madre</option>
-                                    <option value="Hermano">Hermano</option>
-                                    <option value="Hermana">Hermana</option>
-                                    <option value="Hijo">Hijo</option>
-                                    <option value="Hija">Hija</option>
-                                    <option value="Otro">Otro</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Nombre Completo <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control form-control-pro" id="fam_nombre" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label small fw-semibold">Cédula / Documento</label>
-                                <input type="text" class="form-control form-control-pro" id="fam_documento" placeholder="12345678">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label small fw-semibold">Fecha de Nacimiento</label>
-                                <input type="date" class="form-control form-control-pro" id="fam_fecha_nac">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label small fw-semibold">Teléfono</label>
-                                <input type="text" class="form-control form-control-pro" id="fam_telefono" placeholder="0412-1234567">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Correo Electrónico</label>
-                                <input type="email" class="form-control form-control-pro" id="fam_correo" placeholder="correo@ejemplo.com">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-semibold">Dirección</label>
-                                <input type="text" class="form-control form-control-pro" id="fam_direccion" placeholder="Ciudad, Estado">
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label small fw-semibold">Notas</label>
-                                <textarea class="form-control form-control-pro" id="fam_notas" rows="2"></textarea>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label small fw-semibold">Foto Personal</label>
-                                <input type="file" class="form-control form-control-pro" id="fam_foto" accept="image/*" onchange="previewFamImage(this, 'fam-preview-foto')">
-                                <div class="mt-2 text-center">
-                                    <img id="fam-preview-foto" src="" class="img-thumbnail d-none" style="max-height:120px;">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label small fw-semibold">Imagen Cédula</label>
-                                <input type="file" class="form-control form-control-pro" id="fam_img_cedula" accept="image/*" onchange="previewFamImage(this, 'fam-preview-cedula')">
-                                <div class="mt-2 text-center">
-                                    <img id="fam-preview-cedula" src="" class="img-thumbnail d-none" style="max-height:120px;">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label small fw-semibold">Partida de Nacimiento</label>
-                                <input type="file" class="form-control form-control-pro" id="fam_img_partida" accept="image/*" onchange="previewFamImage(this, 'fam-preview-partida')">
-                                <div class="mt-2 text-center">
-                                    <img id="fam-preview-partida" src="" class="img-thumbnail d-none" style="max-height:120px;">
-                                </div>
+                        <div class="p-3 rounded-4 mb-4" style="background:rgba(37,99,235,.055);border:1px solid rgba(37,99,235,.13);">
+                            <div class="d-flex align-items-center gap-2 mb-3"><i class="fa-solid fa-id-card text-primary"></i><span class="fw-bold">Datos personales</span></div>
+                            <div class="row g-3">
+                                <div class="col-md-4"><label class="form-label small fw-semibold">Parentesco <span class="text-danger">*</span></label><select class="form-select form-select-pro" id="fam_parentesco" required><option value="">-- Seleccione --</option><option>Esposa</option><option>Esposo</option><option>Padre</option><option>Madre</option><option>Hermano</option><option>Hermana</option><option>Hijo</option><option>Hija</option><option>Otro</option></select></div>
+                                <div class="col-md-8"><label class="form-label small fw-semibold">Nombre Completo <span class="text-danger">*</span></label><input type="text" class="form-control form-control-pro" id="fam_nombre" required></div>
+                                <div class="col-md-4"><label class="form-label small fw-semibold">Cédula / Documento</label><input type="text" class="form-control form-control-pro" id="fam_documento"></div>
+                                <div class="col-md-4"><label class="form-label small fw-semibold">Fecha de Nacimiento</label><input type="date" class="form-control form-control-pro" id="fam_fecha_nac"></div>
+                                <div class="col-md-4"><label class="form-label small fw-semibold">Teléfono</label><input type="text" class="form-control form-control-pro" id="fam_telefono"></div>
+                                <div class="col-md-6"><label class="form-label small fw-semibold">Correo Electrónico</label><input type="email" class="form-control form-control-pro" id="fam_correo"></div>
+                                <div class="col-md-6"><label class="form-label small fw-semibold">Dirección</label><input type="text" class="form-control form-control-pro" id="fam_direccion"></div>
+                                <div class="col-12"><label class="form-label small fw-semibold">Notas / Observaciones</label><textarea class="form-control form-control-pro" id="fam_notas" rows="3" placeholder="Información adicional del familiar..."></textarea></div>
                             </div>
                         </div>
-                        <div class="mt-4 d-flex gap-2">
-                            <button type="button" class="btn btn-light fw-semibold rounded-3" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary fw-semibold rounded-3 flex-grow-1">
-                                <i class="fa-solid fa-floppy-disk me-2"></i>Guardar Familiar
-                            </button>
+
+                        <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
+                            <div><div class="fw-bold"><i class="fa-solid fa-folder-open text-primary me-2"></i>Documentos del familiar</div><small class="text-muted">Todos son opcionales. Solo se guardan los archivos que selecciones.</small></div>
+                            <span class="badge rounded-pill text-bg-light border">Opcional</span>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-4"><div class="familia-upload-card"><label class="form-label fw-bold">Foto Personal</label><input type="file" class="form-control form-control-pro" id="fam_foto" accept="image/*" onchange="previewFamImage(this,'fam-preview-foto')"><img id="fam-preview-foto" class="familia-upload-preview mt-2 d-none" alt="Vista previa foto"><div class="small text-muted mt-2">Opcional · JPG/PNG/WebP</div></div></div>
+                            <div class="col-md-6 col-lg-4"><div class="familia-upload-card"><label class="form-label fw-bold">Cédula / Documento</label><input type="file" class="form-control form-control-pro" id="fam_img_cedula" accept="image/*" onchange="previewFamImage(this,'fam-preview-cedula')"><img id="fam-preview-cedula" class="familia-upload-preview mt-2 d-none" alt="Vista previa cédula"><div class="small text-muted mt-2">Opcional · Imagen</div></div></div>
+                            <div class="col-md-6 col-lg-4"><div class="familia-upload-card"><label class="form-label fw-bold">Partida de Nacimiento</label><input type="file" class="form-control form-control-pro" id="fam_img_partida" accept="image/*" onchange="previewFamImage(this,'fam-preview-partida')"><img id="fam-preview-partida" class="familia-upload-preview mt-2 d-none" alt="Vista previa partida"><div class="small text-muted mt-2">Opcional · Imagen</div></div></div>
+                            <div class="col-md-6 col-lg-6"><div class="familia-upload-card"><label class="form-label fw-bold">Carnet de Vacunas</label><input type="file" class="form-control form-control-pro" id="fam_img_vacunas" accept="image/*" onchange="previewFamImage(this,'fam-preview-vacunas')"><img id="fam-preview-vacunas" class="familia-upload-preview mt-2 d-none" alt="Vista previa carnet de vacunas"><div class="small text-muted mt-2">Opcional · Imagen</div></div></div>
+                            <div class="col-md-6 col-lg-6"><div class="familia-upload-card"><label class="form-label fw-bold">Notas Escolares</label><input type="file" class="form-control form-control-pro" id="fam_img_escolar" accept="image/*" onchange="previewFamImage(this,'fam-preview-escolar')"><img id="fam-preview-escolar" class="familia-upload-preview mt-2 d-none" alt="Vista previa notas escolares"><div class="small text-muted mt-2">Opcional · Imagen</div></div></div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-top d-flex flex-column flex-sm-row gap-2">
+                            <button type="button" class="btn btn-light fw-semibold rounded-3" data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"></i>Cancelar</button>
+                            <button type="submit" class="btn btn-primary fw-semibold rounded-3 flex-grow-1"><i class="fa-solid fa-floppy-disk me-2"></i>Guardar Familiar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- MODAL: EXPEDIENTE FAMILIAR -->
+    <div class="modal fade" id="modalFamiliaExpediente" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content modal-content-pro">
+          <div class="modal-header modal-header-pro px-4 py-3">
+            <div><h5 class="modal-title fw-bold" id="familiaExpTitle">Expediente Familiar</h5><small class="text-white-50">Consulta de datos y documentos</small></div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-4" id="familiaExpBody"></div>
+          <div class="modal-footer d-flex gap-2"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button><button type="button" class="btn btn-primary" onclick="imprimirFamiliaActual()"><i class="fa-solid fa-print me-2"></i>Imprimir expediente</button></div>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -3555,6 +3855,7 @@
 
     // Base de datos local en memoria (sincronizada con Google Sheets)
     let db = {
+        auditoria: [],
         empresas: [],
         usuarios: [],
         clientes: [],
@@ -3579,6 +3880,17 @@
     // SECCIÓN: INICIALIZACIÓN AL CARGAR LA PÁGINA
     
     document.addEventListener('DOMContentLoaded', () => {
+        // Inicialización explícita del menú de usuario para evitar fallos del Data API
+        // cuando el portal se carga en Dreamweaver/GitHub con scripts previos.
+        try {
+            const userMenuToggle = document.getElementById('userMenuToggle');
+            if (userMenuToggle && window.bootstrap?.Dropdown) {
+                bootstrap.Dropdown.getOrCreateInstance(userMenuToggle, { autoClose: true });
+            }
+        } catch (menuError) {
+            console.warn('No se pudo inicializar el menú de usuario:', menuError);
+        }
+
         // Event listeners para registro desde login
         // Manejar z-index del backdrop específicamente para el modal de registro
         const modalRegistroEl = document.getElementById('modalRegistroLogin');
@@ -3617,6 +3929,8 @@
         modalVerFac = new bootstrap.Modal(document.getElementById('modalVerFactura'));
         modalNotif = new bootstrap.Modal(document.getElementById('modalAddNotificacion'));
 
+        initFamiliaModals();
+
         // Inicializar modal de procesar pago
         modalProcesarPagoInstance = new bootstrap.Modal(document.getElementById('modalProcesarPago'));
         _payClienteSeleccionado = null;
@@ -3628,6 +3942,7 @@
 
         // Restaurar sesión si existe y no ha expirado (5 minutos de inactividad)
         const savedSession = localStorage.getItem('erp_session_user');
+
         const lastActivity = localStorage.getItem('erp_session_last_activity');
         const now = Date.now();
 
@@ -3800,6 +4115,7 @@
         renderModuloPagosSelects();
         renderHistorialPagos();
         renderNotificaciones();
+        renderAuditoria();
         renderDashboardServicio();
         updateKPIs();
         renderDashboardCharts();
@@ -3855,6 +4171,7 @@
                 return;
             }
             applyUserSession(found);
+            registrarAuditoria('LOGIN', 'Sistema', found.id_usuario, 'Inicio de sesión exitoso — Usuario: ' + found.username + ' (' + found.rol + ')', 'INFO');
             showToast('Bienvenido', `Hola ${found.nombre_completo}, has iniciado sesión correctamente.`, 'success');
         } else {
             showLoginModalAlert('Credenciales Inválidas', 'Verifique sus datos e intente nuevamente.', 'danger');
@@ -3914,17 +4231,39 @@
         document.getElementById('login-overlay').classList.add('d-none');
     }
 
-    function abrirModalLogout() { modalConfirmLogout.show(); }
-
     function confirmarLogout() {
         currentUser = null;
         localStorage.removeItem('erp_session_user');
         localStorage.removeItem('erp_session_last_activity');
         clearTimeout(inactivityTimer);
-        document.getElementById('loginUser').value = '';
-        document.getElementById('loginPassword').value = '';
-        modalConfirmLogout.hide();
-        document.getElementById('login-overlay').classList.remove('d-none');
+
+        const userEl = document.getElementById('loginUser');
+        const passEl = document.getElementById('loginPassword');
+        if (userEl) userEl.value = '';
+        if (passEl) passEl.value = '';
+
+        // Cerrar solamente el modal de confirmación y limpiar cualquier
+        // backdrop residual. No se vuelve a llamar abrirModalLogout().
+        const modalEl = document.getElementById('modalConfirmLogout');
+        const modal = modalEl ? (bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl, {backdrop:false, keyboard:true})) : null;
+        if (modal) {
+            modal.hide();
+            try { modal.dispose(); } catch (e) {}
+        }
+
+        document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+        document.body.classList.remove('modal-open');
+        document.body.style.removeProperty('overflow');
+        document.body.style.removeProperty('padding-right');
+
+        // El overlay de login queda visible después de limpiar las capas.
+        const overlay = document.getElementById('login-overlay');
+        if (overlay) overlay.classList.remove('d-none');
+
+        // Garantiza que el dropdown del usuario quede cerrado.
+        document.querySelectorAll('.dropdown-menu.show').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('[data-bs-toggle="dropdown"][aria-expanded="true"]').forEach(el => el.setAttribute('aria-expanded','false'));
+
         showToast('Sesión Cerrada', 'Has cerrado sesión correctamente.', 'info');
     }
 
@@ -4000,6 +4339,7 @@
         document.getElementById('current-user-name').innerText = payload.nombre_completo;
         document.getElementById('dropdown-user-email').innerText = payload.email;
 
+        registrarAuditoria('UPDATE', 'Usuario', currentUser.id_usuario, 'Perfil actualizado — Usuario: ' + currentUser.username, 'INFO');
         modalPerfil.hide();
         renderUsuarios();
         showToast('Perfil Actualizado', 'Tus datos se guardaron correctamente.', 'success');
@@ -4157,6 +4497,7 @@
             renderClientes();
             renderDashboardServicio();
             renderNotificaciones();
+        renderAuditoria();
             updateKPIs();
             showToast('Estatus Actualizado', `Estado de servicio para ${client.nombre_completo} actualizado a: ${nuevoEstado}`, 'success');
 
@@ -4363,7 +4704,8 @@
             creditos: 'Financiamientos y Créditos',
             pagos: 'Módulo de Pagos',
             notificaciones: 'Centro de Notificaciones',
-            portal: 'Control del Portal'
+            portal: 'Control del Portal',
+            auditoria: 'Auditoría del Sistema'
         };
         document.getElementById('page-title').innerText = titles[tabId] || 'Plataforma ERP';
 
@@ -4665,6 +5007,7 @@ function mostrarRegistroOMantenimiento() {
 
         modalPwd.hide();
         renderNotificaciones();
+        renderAuditoria();
         showToast('Contraseña Actualizada', 'Tu contraseña se modificó con éxito.', 'success');
 
         if (gasUrl) {
@@ -4796,6 +5139,7 @@ function mostrarRegistroOMantenimiento() {
             id_empresa: id || 'EMP-' + String(db.empresas.length + 1).padStart(3, '0'),
             nombre_empresa: document.getElementById('emp_nombre').value,
             rif_fiscal: document.getElementById('emp_rif').value,
+
             telefono: document.getElementById('emp_telefono').value,
             correo: document.getElementById('emp_correo').value,
             direccion: document.getElementById('emp_direccion').value,
@@ -4809,6 +5153,7 @@ function mostrarRegistroOMantenimiento() {
             db.empresas.push(payload);
         }
 
+        registrarAuditoria(id ? 'UPDATE' : 'CREATE', 'Empresa', payload.id_empresa, (id ? 'Actualización' : 'Creación') + ' de empresa: ' + payload.nombre_empresa, 'INFO');
         modalEmp.hide();
         renderEmpresas();
         showToast('Empresas', 'Datos guardados correctamente.', 'success');
@@ -4818,6 +5163,7 @@ function mostrarRegistroOMantenimiento() {
     async function eliminarEmpresa(id) {
         if (!confirm('¿Eliminar esta empresa?')) return;
         db.empresas = db.empresas.filter(x => x.id_empresa !== id);
+        registrarAuditoria('DELETE', 'Empresa', id, 'Eliminación de empresa ID: ' + id, 'WARNING');
         renderEmpresas();
         showToast('Empresas', 'Empresa eliminada.', 'success');
         if (gasUrl) sendGasRequest('deleteEmpresa', { id_empresa: id });
@@ -4842,6 +5188,7 @@ function mostrarRegistroOMantenimiento() {
 
         if (buscadorArea) buscadorArea.classList.remove('d-none');
         // Tabla completa oculta por defecto, solo se muestra si no hay resultados de búsqueda
+
         if (tablaCompleta) tablaCompleta.classList.add('d-none');
         document.getElementById('usr-tarjeta-usuario').classList.add('d-none');
         document.getElementById('usr-estado-vacio').classList.add('d-none');
@@ -5025,6 +5372,7 @@ function mostrarRegistroOMantenimiento() {
             db.usuarios.push(payload);
         }
 
+        registrarAuditoria(id ? 'UPDATE' : 'CREATE', 'Usuario', payload.id_usuario, (id ? 'Actualización' : 'Creación') + ' de usuario: ' + payload.username + ' (' + payload.rol + ')', 'INFO');
         modalUsr.hide();
         renderUsuarios();
         showToast('Usuarios', 'Usuario guardado.', 'success');
@@ -5034,6 +5382,7 @@ function mostrarRegistroOMantenimiento() {
     async function eliminarUsuario(id) {
         if (!confirm('¿Eliminar usuario?')) return;
         db.usuarios = db.usuarios.filter(x => x.id_usuario !== id);
+        registrarAuditoria('DELETE', 'Usuario', id, 'Eliminación de usuario ID: ' + id, 'WARNING');
         renderUsuarios();
         showToast('Usuarios', 'Usuario eliminado.', 'success');
         if (gasUrl) sendGasRequest('deleteUsuario', { id_usuario: id });
@@ -5069,6 +5418,16 @@ function mostrarRegistroOMantenimiento() {
     document.getElementById('cli-info-correo').innerText = cliente.correo || 'N/A';
     document.getElementById('cli-info-direccion').innerText = cliente.direccion || 'N/A';
     document.getElementById('cli-info-estado').innerText = cliente.estado_servicio || 'SOLVENTE';
+    document.getElementById('cli-info-fecha-nac').innerText = cliente.fecha_nac || 'N/A';
+    document.getElementById('cli-info-nacionalidad').innerText = cliente.nacionalidad || 'N/A';
+    document.getElementById('cli-info-estado-civil').innerText = cliente.estado_civil || 'N/A';
+    document.getElementById('cli-info-profesion').innerText = cliente.profesion || 'N/A';
+    document.getElementById('cli-info-empresa-labora').innerText = cliente.empresa_labora || 'N/A';
+    document.getElementById('cli-info-fecha-nac').innerText = cliente.fecha_nac || 'N/A';
+    document.getElementById('cli-info-nacionalidad').innerText = cliente.nacionalidad || 'N/A';
+    document.getElementById('cli-info-estado-civil').innerText = cliente.estado_civil || 'N/A';
+    document.getElementById('cli-info-profesion').innerText = cliente.profesion || 'N/A';
+    document.getElementById('cli-info-empresa-labora').innerText = cliente.empresa_labora || 'N/A';
     
     const totalFacturas = db.facturas.filter(f => 
         f.id_cliente === cliente.codigo_cliente || f.id_cliente === cliente.id_cliente
@@ -5147,6 +5506,11 @@ function mostrarRegistroOMantenimiento() {
             document.getElementById('cli_telefono').value = c.telefono;
             document.getElementById('cli_correo').value = c.correo;
             document.getElementById('cli_direccion').value = c.direccion || '';
+            document.getElementById('cli_fecha_nac').value = c.fecha_nac || '';
+            document.getElementById('cli_nacionalidad').value = c.nacionalidad || '';
+            document.getElementById('cli_estado_civil').value = c.estado_civil || '';
+            document.getElementById('cli_profesion').value = c.profesion || '';
+            document.getElementById('cli_empresa_labora').value = c.empresa_labora || '';
             document.getElementById('cli_estado').value = c.estado_servicio || 'SOLVENTE';
             document.getElementById('modalClienteTitle').innerHTML = '<i class="fa-solid fa-address-card text-primary me-2"></i>Modificar Cliente';
             secUser.classList.add('d-none');
@@ -5183,6 +5547,7 @@ function mostrarRegistroOMantenimiento() {
             db.clientes[idx] = payloadCliente;
         } else {
             db.clientes.push(payloadCliente);
+            registrarAuditoria('CREATE', 'Cliente', payloadCliente.id_cliente, 'Registro público de cliente: ' + nomCli + ' (' + codCli + ')', 'INFO');
 
             const uUsername = document.getElementById('cli_username').value.trim() || codCli.toLowerCase();
             const uPassword = document.getElementById('cli_password').value.trim() || '123';
@@ -5225,6 +5590,7 @@ function mostrarRegistroOMantenimiento() {
         renderUsuarios();
         renderModuloPagosSelects();
         renderNotificaciones();
+        renderAuditoria();
         renderDashboardServicio();
         updateKPIs();
         showToast('Clientes', id ? 'Cliente actualizado.' : 'Cliente y Usuario registrados.', 'success');
@@ -5234,6 +5600,7 @@ function mostrarRegistroOMantenimiento() {
     async function eliminarCliente(id) {
         if (!confirm('¿Eliminar cliente?')) return;
         db.clientes = db.clientes.filter(x => x.id_cliente !== id);
+        registrarAuditoria('DELETE', 'Cliente', id, 'Eliminación de cliente ID: ' + id, 'WARNING');
         renderClientes();
         renderModuloPagosSelects();
         renderDashboardServicio();
@@ -5369,10 +5736,12 @@ function mostrarRegistroOMantenimiento() {
             if (gasUrl) sendGasRequest('addNotificacion', notifFac);
         }
 
+        registrarAuditoria(id ? 'UPDATE' : 'CREATE', 'Factura', numFac, (id ? 'Actualización' : 'Emisión') + ' de factura N° ' + numFac + ' — Cliente: ' + cliId + ' — Monto: $' + monto.toFixed(2), 'INFO');
         modalFac.hide();
         renderFacturacionAgrupada();
         renderModuloPagosSelects();
         renderNotificaciones();
+        renderAuditoria();
         updateKPIs();
         renderDashboardCharts();
         showToast('Facturación', 'Factura procesada correctamente.', 'success');
@@ -5387,6 +5756,7 @@ function mostrarRegistroOMantenimiento() {
         }
         if (!confirm('¿Eliminar esta factura?')) return;
         db.facturas = db.facturas.filter(x => x.id_factura !== id);
+        registrarAuditoria('DELETE', 'Factura', id, 'Eliminación de factura ID: ' + id, 'WARNING');
         renderFacturacionAgrupada();
         renderModuloPagosSelects();
         updateKPIs();
@@ -5478,9 +5848,11 @@ function mostrarRegistroOMantenimiento() {
         renderFacturacionAgrupada();
         renderCreditosAgrupados();
         renderNotificaciones();
+        renderAuditoria();
         updateKPIs();
         renderDashboardCharts();
 
+        registrarAuditoria('STATUS_CHANGE', 'Factura', idFactura, 'Pago validado — Factura: ' + idFactura + ' — Cliente: ' + idCliente + ' — Estado: Confirmado', 'INFO');
         showToast('Pago Confirmado', `Factura ${idFactura} confirmada. Notificación enviada al cliente.`, 'success');
         if (gasUrl) {
             sendGasRequest('confirmarPago', { id_factura: idFactura, id_cliente: idCliente });
@@ -5841,6 +6213,7 @@ async function guardarCredito(e) {
     renderFacturacionAgrupada();
     renderCreditosAgrupados();
     renderNotificaciones();
+        renderAuditoria();
     updateKPIs();
     renderDashboardCharts();
     showToast('Financiamiento Exitoso', `Se generaron ${numCuotas} cuotas correctamente.`, 'success');
@@ -5874,6 +6247,7 @@ async function guardarCredito(e) {
             }
         }
 
+        registrarAuditoria('DELETE', 'Credito', idCuota, 'Eliminación de cuota ID: ' + idCuota, 'WARNING');
         renderCreditosAgrupados();
         renderFacturacionAgrupada();
         showToast('Créditos', 'Cuota eliminada.', 'success');
@@ -6141,6 +6515,7 @@ async function guardarCredito(e) {
         }
 
         renderNotificaciones();
+        renderAuditoria();
         updateKPIs();
         renderDashboardCharts();
         showToast('Pago Enviado', 'Su pago fue enviado a validación exitosamente.', 'success');
@@ -6268,6 +6643,7 @@ async function guardarCredito(e) {
                 infoLine = 'De: <span class="fw-bold text-dark">' + n.emisor_id + '</span> ➔ Para: <span class="fw-semibold text-primary">' + n.id_usuario + '</span>';
             }
             if (isClient) {
+
                 infoLine = '<span>' + (esMio ? '📤 Enviado al Administrador' : '📥 Recibido del Administrador') + '</span>';
             }
 
@@ -6323,6 +6699,7 @@ async function guardarCredito(e) {
         };
 
         renderNotificaciones();
+        renderAuditoria();
     }
 
     async function marcarNotificacionComoLeida(id) {
@@ -6333,6 +6710,7 @@ async function guardarCredito(e) {
         if (notif && notif.leido === 'NO' && esDestinatario) {
             notif.leido = 'SI';
             renderNotificaciones();
+        renderAuditoria();
             if (gasUrl) {
                 sendGasRequest('updateFieldByKey', {
                     sheetName: 'Notificaciones',
@@ -6418,6 +6796,7 @@ async function guardarCredito(e) {
         db.notificaciones.unshift(...nuevasNotificaciones);
         if (modalNotif && modalNotif.hide) modalNotif.hide();
         renderNotificaciones();
+        renderAuditoria();
         const msgConfirmacion = isClient ? 'Respuesta enviada al Administrador.' : `Notificación enviada a ${nuevasNotificaciones.length} destinatario(s).`;
         showToast('Notificaciones', msgConfirmacion, 'success');
         if (gasUrl) nuevasNotificaciones.forEach(notif => sendGasRequest('addNotificacion', notif));
@@ -6426,6 +6805,7 @@ async function guardarCredito(e) {
     async function eliminarNotificacion(id) {
         db.notificaciones = db.notificaciones.filter(x => x.id_notificacion !== id);
         renderNotificaciones();
+        renderAuditoria();
         showToast('Notificaciones', 'Notificación eliminada.', 'success');
         if (gasUrl) sendGasRequest('deleteNotificacion', { id_notificacion: id });
     }
@@ -6578,6 +6958,7 @@ function renderFacturasAgrupadasNuevo(cliente, facturas) {
             '<div class="card-header bg-white d-flex justify-content-between align-items-center py-3 px-3 border-bottom" style="cursor:pointer;" onclick="toggleGrupoFacturas(this)" role="button" aria-expanded="true">' +
                 '<span class="fw-bold small d-flex align-items-center gap-2">' +
                     '<i class="fa-solid ' + cfg.icon + ' ' + cfg.text + '"></i> ' + cfg.label +
+
                     '<span class="badge ' + cfg.badge + ' rounded-pill ms-1">' + items.length + '</span>' +
                 '</span>' +
                 '<i class="fa-solid fa-chevron-down text-muted small fac-grupo-toggle" style="transition:transform 0.2s"></i>' +
@@ -6773,6 +7154,7 @@ async function guardarFactura(e) {
 
     renderModuloPagosSelects();
     renderNotificaciones();
+        renderAuditoria();
     updateKPIs();
     renderDashboardCharts();
     showToast('Facturación', 'Factura procesada correctamente.', 'success');
@@ -6821,6 +7203,199 @@ async function eliminarFactura(id) {
 }
     
 
+
+    
+    // ═══════════════════════════════════════════════════════════════
+    // SECCIÓN: AUDITORÍA DEL SISTEMA
+    // Registra todo evento: login, logout, CRUD, pagos, cambios de estado
+    // ═══════════════════════════════════════════════════════════════
+
+    function registrarAuditoria(accion, entidad, idEntidad, detalle, nivel = 'INFO') {
+        const registro = {
+            id_auditoria: 'AUD-' + Date.now(),
+            fecha_hora: new Date().toLocaleString('es-VE'),
+            id_usuario: currentUser ? currentUser.id_usuario : 'ANONIMO',
+            username: currentUser ? currentUser.username : 'ANONIMO',
+            rol: currentUser ? currentUser.rol : 'ANONIMO',
+            accion: accion,
+            entidad: entidad,
+            id_entidad: idEntidad || '',
+            detalle: detalle,
+            nivel: nivel
+        };
+        db.auditoria.unshift(registro);
+        if (gasUrl) {
+            sendGasRequest('addAuditoria', registro);
+        }
+    }
+
+    function renderAuditoria() {
+        const tbody = document.getElementById('audit-tbody');
+        const estadoVacio = document.getElementById('audit-vacio');
+        if (!tbody) return;
+
+        const isClient = currentUser && currentUser.rol === 'Cliente';
+        const userCode = currentUser ? (currentUser.id_usuario || currentUser.username || '') : '';
+
+        let registros = db.auditoria || [];
+        if (isClient) {
+            registros = registros.filter(r =>
+                r.id_usuario === userCode || r.username === userCode ||
+                (r.detalle && r.detalle.includes(userCode))
+            );
+        }
+
+        if (registros.length === 0) {
+            tbody.innerHTML = '';
+            if (estadoVacio) estadoVacio.classList.remove('d-none');
+            return;
+        }
+        if (estadoVacio) estadoVacio.classList.add('d-none');
+
+        const badgeClasses = {
+            'LOGIN': 'audit-badge-login',
+            'LOGOUT': 'audit-badge-logout',
+            'CREATE': 'audit-badge-create',
+            'UPDATE': 'audit-badge-update',
+            'DELETE': 'audit-badge-delete',
+            'PAYMENT': 'audit-badge-payment',
+            'STATUS_CHANGE': 'audit-badge-warning'
+        };
+        const nivelClasses = {
+            'INFO': 'text-primary',
+            'WARNING': 'text-warning',
+            'ERROR': 'text-danger'
+        };
+
+        tbody.innerHTML = registros.map(r => {
+            const badgeClass = badgeClasses[r.accion] || 'badge bg-light text-dark';
+            const nivelClass = nivelClasses[r.nivel] || 'text-muted';
+            return '<tr>' +
+                '<td class="ps-3"><small class="text-muted">' + (r.fecha_hora || 'N/A') + '</small></td>' +
+                '<td><span class="fw-semibold small">' + (r.username || 'N/A') + '</span></td>' +
+                '<td><span class="badge bg-light text-dark border small">' + (r.rol || 'N/A') + '</span></td>' +
+                '<td><span class="badge ' + badgeClass + ' small">' + (r.accion || 'N/A') + '</span></td>' +
+                '<td><span class="text-muted small">' + (r.entidad || 'N/A') + '</span></td>' +
+                '<td><small class="text-dark">' + (r.detalle || '') + '</small></td>' +
+                '<td><span class="fw-semibold small ' + nivelClass + '">' + (r.nivel || 'INFO') + '</span></td>' +
+                '<td class="pe-3"><small class="text-muted font-monospace">' + (r.id_entidad || '-') + '</small></td>' +
+            '</tr>';
+        }).join('');
+    }
+
+    function filtrarAuditoria() {
+        const texto = (document.getElementById('audit-filtro-texto').value || '').toLowerCase();
+        const nivel = document.getElementById('audit-filtro-nivel').value;
+        const accion = document.getElementById('audit-filtro-accion').value;
+        const desde = document.getElementById('audit-filtro-desde').value;
+        const hasta = document.getElementById('audit-filtro-hasta').value;
+
+        const isClient = currentUser && currentUser.rol === 'Cliente';
+        const userCode = currentUser ? (currentUser.id_usuario || currentUser.username || '') : '';
+
+        let registros = db.auditoria || [];
+        if (isClient) {
+            registros = registros.filter(r =>
+                r.id_usuario === userCode || r.username === userCode ||
+                (r.detalle && r.detalle.includes(userCode))
+            );
+        }
+
+        const filtrados = registros.filter(r => {
+            if (texto && !(
+                (r.username || '').toLowerCase().includes(texto) ||
+                (r.detalle || '').toLowerCase().includes(texto) ||
+                (r.entidad || '').toLowerCase().includes(texto) ||
+                (r.id_entidad || '').toLowerCase().includes(texto)
+            )) return false;
+            if (nivel && r.nivel !== nivel) return false;
+            if (accion && r.accion !== accion) return false;
+            if (desde) {
+                const fDesde = new Date(desde);
+                const fReg = new Date(r.fecha_hora);
+                if (fReg < fDesde) return false;
+            }
+            if (hasta) {
+                const fHasta = new Date(hasta);
+                fHasta.setHours(23, 59, 59);
+                const fReg = new Date(r.fecha_hora);
+                if (fReg > fHasta) return false;
+            }
+            return true;
+        });
+
+        const tbody = document.getElementById('audit-tbody');
+        const estadoVacio = document.getElementById('audit-vacio');
+
+        if (filtrados.length === 0) {
+            tbody.innerHTML = '';
+            if (estadoVacio) estadoVacio.classList.remove('d-none');
+            return;
+        }
+        if (estadoVacio) estadoVacio.classList.add('d-none');
+
+        const badgeClasses = {
+            'LOGIN': 'audit-badge-login', 'LOGOUT': 'audit-badge-logout',
+            'CREATE': 'audit-badge-create', 'UPDATE': 'audit-badge-update',
+            'DELETE': 'audit-badge-delete', 'PAYMENT': 'audit-badge-payment',
+            'STATUS_CHANGE': 'audit-badge-warning'
+        };
+        const nivelClasses = { 'INFO': 'text-primary', 'WARNING': 'text-warning', 'ERROR': 'text-danger' };
+
+        tbody.innerHTML = filtrados.map(r => {
+            const badgeClass = badgeClasses[r.accion] || 'badge bg-light text-dark';
+            const nivelClass = nivelClasses[r.nivel] || 'text-muted';
+            return '<tr>' +
+                '<td class="ps-3"><small class="text-muted">' + (r.fecha_hora || 'N/A') + '</small></td>' +
+                '<td><span class="fw-semibold small">' + (r.username || 'N/A') + '</span></td>' +
+                '<td><span class="badge bg-light text-dark border small">' + (r.rol || 'N/A') + '</span></td>' +
+                '<td><span class="badge ' + badgeClass + ' small">' + (r.accion || 'N/A') + '</span></td>' +
+                '<td><span class="text-muted small">' + (r.entidad || 'N/A') + '</span></td>' +
+                '<td><small class="text-dark">' + (r.detalle || '') + '</small></td>' +
+                '<td><span class="fw-semibold small ' + nivelClass + '">' + (r.nivel || 'INFO') + '</span></td>' +
+                '<td class="pe-3"><small class="text-muted font-monospace">' + (r.id_entidad || '-') + '</small></td>' +
+            '</tr>';
+        }).join('');
+    }
+
+    function limpiarFiltrosAuditoria() {
+        document.getElementById('audit-filtro-texto').value = '';
+        document.getElementById('audit-filtro-nivel').value = '';
+        document.getElementById('audit-filtro-accion').value = '';
+        document.getElementById('audit-filtro-desde').value = '';
+        document.getElementById('audit-filtro-hasta').value = '';
+        renderAuditoria();
+    }
+
+    function exportarAuditoria() {
+        const isClient = currentUser && currentUser.rol === 'Cliente';
+        const userCode = currentUser ? (currentUser.id_usuario || currentUser.username || '') : '';
+        let registros = db.auditoria || [];
+        if (isClient) {
+            registros = registros.filter(r =>
+                r.id_usuario === userCode || r.username === userCode ||
+                (r.detalle && r.detalle.includes(userCode))
+            );
+        }
+        let csv = 'Fecha,Usuario,Rol,Accion,Entidad,Detalle,Nivel,ID Entidad\n';
+        registros.forEach(r => {
+            csv += `"${r.fecha_hora || ''}","${r.username || ''}","${r.rol || ''}","${r.accion || ''}","${r.entidad || ''}","${(r.detalle || '').replace(/"/g, '""')}","${r.nivel || ''}","${r.id_entidad || ''}"\n`;
+        });
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'auditoria_' + new Date().toISOString().split('T')[0] + '.csv';
+        link.click();
+        showToast('Exportación', 'Auditoría exportada a CSV.', 'success');
+    }
+
+    function limpiarAuditoria() {
+        if (!confirm('¿Eliminar todo el historial de auditoría? Esta acción no se puede deshacer.')) return;
+        db.auditoria = [];
+        renderAuditoria();
+        showToast('Auditoría', 'Historial limpiado.', 'warning');
+        if (gasUrl) sendGasRequest('clearAuditoria', {});
+    }
 
     // SECCIÓN: REGISTRO DESDE LOGIN (AUTOREGISTRO DE CLIENTE)
     
@@ -6879,6 +7454,7 @@ async function eliminarFactura(id) {
             };
 
             db.clientes.push(payloadCliente);
+            registrarAuditoria('CREATE', 'Cliente', payloadCliente.id_cliente, 'Registro público de cliente: ' + nomCli + ' (' + codCli + ')', 'INFO');
 
             const payloadUser = {
                 id_usuario: 'USR-' + Date.now(),
@@ -7141,6 +7717,7 @@ function renderListaEmpresasInline(empresas) {
             '<td><small class="text-muted">' + (e.correo || 'N/A') + '</small></td>' +
             '<td><small class="text-muted">' + (e.direccion || 'N/A') + '</small></td>' +
             '<td><span class="badge-status ' + estadoClass + '">' + e.estado + '</span></td>' +
+
             '<td class="text-center pe-3">' +
                 '<button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-2 me-1" onclick="event.stopPropagation(); abrirModalEmpresa(\'' + e.id_empresa + '\')" title="Editar"><i class="fa-solid fa-pen"></i></button>' +
                 '<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick="event.stopPropagation(); eliminarEmpresa(\'' + e.id_empresa + '\')" title="Eliminar"><i class="fa-solid fa-trash"></i></button>' +
@@ -8118,173 +8695,289 @@ async function eliminarMikrotikUser(id) {
 
 
 
-// SECCIÓN: FAMILIA — FUNCIONALIDAD COMPLETA
-
-
+// SECCIÓN: FAMILIA — FUNCIONALIDAD COMPLETA Y EXPEDIENTE
 let dbFamilia = [];
 let modalFamiliarInstance = null;
+let modalFamiliaExpInstance = null;
 let _famEditId = null;
+let _familiaActualImpresion = null;
+let familiaImageDb = null;
 
-// Inicializar modal de Familia
-if (document.getElementById('modalFamiliar')) {
-    modalFamiliarInstance = new bootstrap.Modal(document.getElementById('modalFamiliar'));
-}
-
-function abrirModalFamiliar(id = null) {
-    const form = document.getElementById('formFamiliar');
-    if (form) form.reset();
-
-    _famEditId = id;
-    const title = document.getElementById('modalFamiliarTitle');
-
-    // Limpiar previews de imágenes
-    ['fam-preview-foto', 'fam-preview-cedula', 'fam-preview-partida'].forEach(pid => {
-        const el = document.getElementById(pid);
-        if (el) { el.src = ''; el.classList.add('d-none'); }
+function abrirDBFamiliaImagenes(){
+    return new Promise((resolve,reject)=>{
+        if(familiaImageDb){ resolve(familiaImageDb); return; }
+        if(!window.indexedDB){ resolve(null); return; }
+        const req=indexedDB.open('LCFamiliaDocumentos',1);
+        req.onupgradeneeded=e=>{ if(!e.target.result.objectStoreNames.contains('imagenes')) e.target.result.createObjectStore('imagenes'); };
+        req.onsuccess=()=>{ familiaImageDb=req.result; resolve(familiaImageDb); };
+        req.onerror=()=>reject(req.error||new Error('No se pudo abrir el almacenamiento de imágenes.'));
     });
-
-    if (id) {
-        const f = dbFamilia.find(x => x.id === id);
-        if (!f) return;
-
-        document.getElementById('fam_id').value = f.id;
-        document.getElementById('fam_parentesco').value = f.parentesco || '';
-        document.getElementById('fam_nombre').value = f.nombre || '';
-        document.getElementById('fam_documento').value = f.documento || '';
-        document.getElementById('fam_fecha_nac').value = f.fecha_nac || '';
-        document.getElementById('fam_telefono').value = f.telefono || '';
-        document.getElementById('fam_correo').value = f.correo || '';
-        document.getElementById('fam_direccion').value = f.direccion || '';
-        document.getElementById('fam_notas').value = f.notas || '';
-
-        if (f.foto) { const el = document.getElementById('fam-preview-foto'); el.src = f.foto; el.classList.remove('d-none'); }
-        if (f.img_cedula) { const el = document.getElementById('fam-preview-cedula'); el.src = f.img_cedula; el.classList.remove('d-none'); }
-        if (f.img_partida) { const el = document.getElementById('fam-preview-partida'); el.src = f.img_partida; el.classList.remove('d-none'); }
-
-        if (title) title.innerHTML = '<i class="fa-solid fa-house-user text-primary me-2"></i>Editar Familiar';
-    } else {
-        document.getElementById('fam_id').value = '';
-        if (title) title.innerHTML = '<i class="fa-solid fa-house-user text-primary me-2"></i>Agregar Familiar';
+}
+function dataUrlABlob(dataUrl){
+    const parts=String(dataUrl).split(',');
+    const mime=(parts[0].match(/data:([^;]+)/)||[])[1]||'image/jpeg';
+    const bin=atob(parts[1]||''); const bytes=new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+    return new Blob([bytes],{type:mime});
+}
+async function guardarImagenFamilia(ref,dataUrl){
+    if(!dataUrl)return '';
+    if(!String(dataUrl).startsWith('data:image'))return dataUrl;
+    const dbi=await abrirDBFamiliaImagenes();
+    if(!dbi)return dataUrl;
+    return new Promise(resolve=>{
+        const tx=dbi.transaction('imagenes','readwrite');
+        tx.objectStore('imagenes').put(dataUrlABlob(dataUrl),ref);
+        tx.oncomplete=()=>resolve('idb://'+ref);
+        tx.onerror=()=>resolve(dataUrl); tx.onabort=()=>resolve(dataUrl);
+    });
+}
+async function leerImagenFamilia(src){
+    if(!src)return '';
+    if(!String(src).startsWith('idb://'))return src;
+    const dbi=await abrirDBFamiliaImagenes(); if(!dbi)return '';
+    const key=String(src).slice(6);
+    return new Promise(resolve=>{
+        const req=dbi.transaction('imagenes','readonly').objectStore('imagenes').get(key);
+        req.onsuccess=()=>resolve(req.result?URL.createObjectURL(req.result):'');
+        req.onerror=()=>resolve('');
+    });
+}
+async function borrarImagenFamilia(src){
+    if(!src || !String(src).startsWith('idb://'))return;
+    const dbi=await abrirDBFamiliaImagenes(); if(!dbi)return;
+    return new Promise(resolve=>{
+        const tx=dbi.transaction('imagenes','readwrite');
+        tx.objectStore('imagenes').delete(String(src).slice(6));
+        tx.oncomplete=tx.onerror=tx.onabort=()=>resolve();
+    });
+}
+function initFamiliaModals(){
+    const fm=document.getElementById('modalFamiliar'), ex=document.getElementById('modalFamiliaExpediente');
+    if(fm) modalFamiliarInstance=bootstrap.Modal.getInstance(fm)||new bootstrap.Modal(fm,{backdrop:true,keyboard:true,focus:true});
+    if(ex) modalFamiliaExpInstance=bootstrap.Modal.getInstance(ex)||new bootstrap.Modal(ex,{backdrop:false,keyboard:true,focus:true});
+}
+function obtenerSrcPreview(id,fallback=''){
+    const el=document.getElementById(id); const src=el?.getAttribute('src')||'';
+    return src && src!=='about:blank' ? src : (fallback||'');
+}
+async function hidratarFamiliaImagenes(root=document){
+    const nodes=root.querySelectorAll('[data-fam-src]');
+    for(const node of nodes){
+        const ref=node.getAttribute('data-fam-src'); if(!ref)continue;
+        const resolved=await leerImagenFamilia(ref); if(!resolved)continue;
+        const img=node.tagName==='IMG'?node:node.querySelector('img');
+        if(img) img.src=resolved;
     }
-
-    if (modalFamiliarInstance) modalFamiliarInstance.show();
+}
+async function abrirModalFamiliar(id=null){
+    initFamiliaModals(); const modalEl=document.getElementById('modalFamiliar'); if(!modalEl)return;
+    const form=document.getElementById('formFamiliar'); if(form)form.reset();
+    _famEditId=id;
+    ['foto','cedula','partida','vacunas','escolar'].forEach(k=>{const el=document.getElementById('fam-preview-'+k);if(el){el.src='';el.classList.add('d-none');}});
+    const title=document.getElementById('modalFamiliarTitle');
+    const existing=id?dbFamilia.find(x=>String(x.id||x.id_familia)===String(id)):null;
+    if(existing){
+        const set=(k,v)=>{const el=document.getElementById('fam_'+k);if(el)el.value=v||'';};
+        set('id',existing.id||existing.id_familia); ['parentesco','nombre','documento','fecha_nac','telefono','correo','direccion','notas'].forEach(k=>set(k,existing[k]));
+        const imgs={foto:existing.foto,cedula:existing.img_cedula,partida:existing.img_partida,vacunas:existing.img_vacunas,escolar:existing.img_escolar};
+        await Promise.all(Object.entries(imgs).map(async([k,v])=>{if(v){const el=document.getElementById('fam-preview-'+k);const src=await leerImagenFamilia(v);if(el&&src){el.src=src;el.classList.remove('d-none');}}}));
+        if(title)title.innerHTML='<i class="fa-solid fa-user-pen me-2"></i>Editar Familiar';
+    }else if(title){ title.innerHTML='<i class="fa-solid fa-user-plus me-2"></i>Agregar Familiar'; }
+    const overlay=document.getElementById('login-overlay'); if(overlay&&currentUser)overlay.classList.add('d-none');
+    document.querySelectorAll('.modal-backdrop').forEach(el=>el.remove()); document.body.classList.remove('modal-open');
+    requestAnimationFrame(()=>modalFamiliarInstance?.show());
+}
+function previewFamImage(input,previewId){
+    const file=input?.files?.[0],preview=document.getElementById(previewId); if(!file||!preview)return;
+    if(!file.type.startsWith('image/')){input.value='';showSystemNotification('Archivo inválido','Seleccione una imagen válida.','warning');return;}
+    const reader=new FileReader(); reader.onload=e=>{
+        const img=new Image(); img.onload=()=>{
+            const maxSide=900,scale=Math.min(1,maxSide/Math.max(img.width,img.height));
+            const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));
+            const ctx=canvas.getContext('2d');if(!ctx){preview.src=e.target.result;preview.classList.remove('d-none');return;}
+            ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);
+            preview.src=canvas.toDataURL('image/jpeg',0.65);preview.classList.remove('d-none');
+        }; img.onerror=()=>{preview.src=e.target.result;preview.classList.remove('d-none');}; img.src=e.target.result;
+    }; reader.readAsDataURL(file);
+}
+async function imagenFamiliaADataUrl(src){
+    if(!src) return '';
+    if(String(src).startsWith('data:image')) return src;
+    if(String(src).startsWith('idb://')){
+        const dbi=await abrirDBFamiliaImagenes();
+        if(!dbi) return '';
+        const key=String(src).slice(6);
+        const blob=await new Promise(resolve=>{
+            const req=dbi.transaction('imagenes','readonly').objectStore('imagenes').get(key);
+            req.onsuccess=()=>resolve(req.result||null); req.onerror=()=>resolve(null);
+        });
+        if(!blob) return '';
+        return await new Promise(resolve=>{
+            const fr=new FileReader(); fr.onload=()=>resolve(fr.result||''); fr.onerror=()=>resolve(''); fr.readAsDataURL(blob);
+        });
+    }
+    return src;
 }
 
-function previewFamImage(input, previewId) {
-    const file = input.files[0];
-    const preview = document.getElementById(previewId);
-    if (file && preview) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-            preview.classList.remove('d-none');
-        };
-        reader.readAsDataURL(file);
+async function esperarFamiliaEnServidor(famId, action, maxIntentos=6){
+    for(let i=0;i<maxIntentos;i++){
+        await new Promise(r=>setTimeout(r,700 + i*250));
+        try{ await sincronizarConGAS(); }catch(_e){}
+        const lista=Array.isArray(db?.familia)?db.familia:[];
+        const encontrado=lista.find(x=>String(x.id_familia||x.id)===String(famId));
+        if(action==='deleteFamilia'){
+            if(!encontrado) return true;
+        }else if(encontrado){
+            return encontrado;
+        }
     }
+    return action==='deleteFamilia' ? false : null;
 }
 
-async function guardarFamiliar(e) {
+async function guardarFamiliar(e){
     e.preventDefault();
-    const id = document.getElementById('fam_id').value;
-    const nombre = document.getElementById('fam_nombre').value.trim();
-    const parentesco = document.getElementById('fam_parentesco').value;
+    const nombre=document.getElementById('fam_nombre')?.value.trim();
+    const parentesco=document.getElementById('fam_parentesco')?.value;
+    if(!nombre||!parentesco){showSystemNotification('Campos requeridos','Nombre y parentesco son obligatorios.','warning');return;}
 
-    if (!nombre || !parentesco) {
-        showSystemNotification('Campos Requeridos', 'El nombre y el parentesco son obligatorios.', 'warning');
-        return;
-    }
-
-    const payload = {
-        id: id || 'FAM-' + Date.now(),
-        parentesco: parentesco,
-        nombre: nombre,
-        documento: document.getElementById('fam_documento').value.trim(),
-        fecha_nac: document.getElementById('fam_fecha_nac').value,
-        telefono: document.getElementById('fam_telefono').value.trim(),
-        correo: document.getElementById('fam_correo').value.trim(),
-        direccion: document.getElementById('fam_direccion').value.trim(),
-        notas: document.getElementById('fam_notas').value.trim(),
-        foto: document.getElementById('fam-preview-foto').src || '',
-        img_cedula: document.getElementById('fam-preview-cedula').src || '',
-        img_partida: document.getElementById('fam-preview-partida').src || '',
-        fecha_registro: new Date().toLocaleString('es-VE')
+    const idField=document.getElementById('fam_id')?.value.trim();
+    const famId=idField||'FAM-'+Date.now()+'-'+Math.floor(Math.random()*1000);
+    const actual=_famEditId?dbFamilia.find(x=>String(x.id||x.id_familia)===String(_famEditId)):null;
+    const previewFields={
+        foto:obtenerSrcPreview('fam-preview-foto',actual?.foto),
+        img_cedula:obtenerSrcPreview('fam-preview-cedula',actual?.img_cedula),
+        img_partida:obtenerSrcPreview('fam-preview-partida',actual?.img_partida),
+        img_vacunas:obtenerSrcPreview('fam-preview-vacunas',actual?.img_vacunas),
+        img_escolar:obtenerSrcPreview('fam-preview-escolar',actual?.img_escolar)
     };
 
-    if (id) {
-        const idx = dbFamilia.findIndex(x => x.id === id);
-        if (idx !== -1) dbFamilia[idx] = payload;
-    } else {
-        dbFamilia.push(payload);
+    const payload={
+        id:famId,
+        id_familia:famId,
+        id_usuario:currentUser?.id_usuario||'',
+        codigo_cliente:currentUser?.codigo_cliente||'',
+        parentesco,
+        nombre,
+        documento:document.getElementById('fam_documento')?.value.trim()||'',
+        fecha_nac:document.getElementById('fam_fecha_nac')?.value||'',
+        telefono:document.getElementById('fam_telefono')?.value.trim()||'',
+        correo:document.getElementById('fam_correo')?.value.trim()||'',
+        direccion:document.getElementById('fam_direccion')?.value.trim()||'',
+        notas:document.getElementById('fam_notas')?.value.trim()||'',
+        fecha_registro:actual?.fecha_registro||new Date().toLocaleString('es-VE')
+    };
+
+    try{
+        // Para Google Sheets/Drive se envían las imágenes como datos del documento;
+        // nunca se envían referencias locales idb:// como fuente de persistencia.
+        for(const [field,src] of Object.entries(previewFields)){
+            payload[field]=src?await imagenFamiliaADataUrl(src):'';
+        }
+
+        const action=_famEditId?'updateFamilia':'addFamilia';
+        showToast('Guardando familiar...','Enviando los datos a Google Sheets y, si aplica, sus documentos al almacenamiento del portal.','info',2200);
+        await sendGasRequest(action,payload);
+
+        const servidor=await esperarFamiliaEnServidor(famId,action);
+        if(!servidor){
+            showSystemNotification('No se confirmó el guardado','Google Sheets no confirmó todavía el registro. Verifica la conexión y vuelve a sincronizar.','warning');
+            return;
+        }
+
+        dbFamilia=Array.isArray(db?.familia)?db.familia:[];
+        modalFamiliarInstance?.hide();
+        renderFamilia();
+        showToast('Familiar Guardado',`${nombre} fue guardado correctamente en Google Sheets.` ,'success');
+    }catch(err){
+        console.error('Error guardando familiar:',err);
+        showSystemNotification('Error al guardar','No se pudo guardar el familiar en Google Sheets.','danger');
     }
-
-    localStorage.setItem('erp_familia', JSON.stringify(dbFamilia));
-
-    if (modalFamiliarInstance) modalFamiliarInstance.hide();
+}
+function buildFamiliaThumb(src,label,icon){
+    if(src)return `<button type="button" class="familia-doc-thumb familia-doc-thumb-btn" title="Ver ${label}" onclick="abrirImagenFamiliar(${JSON.stringify(label)},${JSON.stringify(src)})" data-fam-src="${String(src).replace(/"/g,'&quot;')}"><img class="familia-thumb-img" src="" alt="${label}"></button>`;
+    return `<div class="familia-doc-thumb text-muted" title="${label}"><i class="fa-solid ${icon} opacity-50"></i></div>`;
+}
+async function abrirImagenFamiliar(label,src){
+    const root=document.getElementById('familiaImagenRoot');if(!root)return;const resolved=await leerImagenFamilia(src);if(!resolved){showSystemNotification('Imagen no disponible','No se pudo cargar este documento.','warning');return;}
+    root.innerHTML=`<div class="familia-image-modal" role="dialog" aria-modal="true"><div class="familia-image-modal-card"><div class="d-flex align-items-center justify-content-between gap-3 mb-3"><div><div class="small text-uppercase text-muted fw-semibold">Documento</div><h5 class="fw-bold mb-0">${label}</h5></div><button type="button" class="btn btn-light rounded-circle" onclick="cerrarImagenFamiliar()">✕</button></div><div class="familia-image-stage"><img src="${resolved}" alt="${label}"></div></div></div>`;
+}
+function cerrarImagenFamiliar(){const root=document.getElementById('familiaImagenRoot');if(root)root.innerHTML='';}
+async function abrirExpedienteFamiliar(id){
+    const f=dbFamilia.find(x=>String(x.id||x.id_familia)===String(id));if(!f)return;_familiaActualImpresion=f;initFamiliaModals();
+    const body=document.getElementById('familiaExpBody'),title=document.getElementById('familiaExpTitle');if(title)title.textContent=f.nombre||'Expediente Familiar';
+    const docs=[['Cédula / Documento',f.img_cedula,'fa-id-card'],['Partida de nacimiento',f.img_partida,'fa-file-lines'],['Carnet de vacunas',f.img_vacunas,'fa-syringe'],['Notas escolares',f.img_escolar,'fa-school']];
+    const foto=f.foto?`<button type="button" class="familia-profile-photo-btn" onclick="abrirImagenFamiliar('Foto de perfil',${JSON.stringify(f.foto)})"><img class="familia-main-photo" data-fam-src="${String(f.foto).replace(/"/g,'&quot;')}" src="" alt="Foto de perfil"></button>`:`<div class="familia-placeholder"><i class="fa-solid fa-user fa-4x"></i></div>`;
+    if(body)body.innerHTML=`<div class="row g-4"><div class="col-lg-4"><div class="familia-doc-card h-100 overflow-hidden">${foto}<div class="p-3"><span class="badge bg-primary mb-2">${f.parentesco||'Sin parentesco'}</span><h5 class="fw-bold mb-2">${f.nombre||'—'}</h5><div class="familia-meta mb-1"><i class="fa-solid fa-fingerprint me-2 text-primary"></i>${f.documento||'Sin documento'}</div><div class="familia-meta mb-1"><i class="fa-solid fa-cake-candles me-2 text-primary"></i>${f.fecha_nac||'Sin fecha'}</div><div class="familia-meta mb-1"><i class="fa-solid fa-phone me-2 text-primary"></i>${f.telefono||'Sin teléfono'}</div><div class="familia-meta mb-1"><i class="fa-solid fa-envelope me-2 text-primary"></i>${f.correo||'Sin correo'}</div><div class="familia-meta"><i class="fa-solid fa-location-dot me-2 text-primary"></i>${f.direccion||'Sin dirección'}</div></div></div></div><div class="col-lg-8"><div class="p-3 rounded-4 border mb-3"><h6 class="fw-bold"><i class="fa-solid fa-note-sticky text-primary me-2"></i>Observaciones</h6><p class="text-muted small mb-0">${f.notas||'Sin notas registradas.'}</p></div><div class="p-3 rounded-4 border"><div class="d-flex justify-content-between align-items-center mb-3"><h6 class="fw-bold mb-0"><i class="fa-solid fa-folder-open text-primary me-2"></i>Documentos</h6><small class="text-muted">Haz clic para ampliar</small></div><div class="row g-3">${docs.map(d=>`<div class="col-sm-6"><div class="familia-exp-doc"><div class="fw-semibold small mb-2">${d[0]}</div>${buildFamiliaThumb(d[1],d[0],d[2])}</div></div>`).join('')}</div></div></div></div>`;
+    document.querySelectorAll('.modal-backdrop').forEach(el=>el.remove());document.body.classList.remove('modal-open');document.body.style.removeProperty('overflow');
+    modalFamiliaExpInstance?.show(); requestAnimationFrame(()=>{const exp=document.getElementById('modalFamiliaExpediente');if(exp){exp.style.zIndex='300000';exp.style.display='block';exp.classList.add('show');exp.removeAttribute('aria-hidden');exp.setAttribute('aria-modal','true');}hidratarFamiliaImagenes(body||document);});
+}
+function imprimirFamiliaActual(){
+    const f=_familiaActualImpresion;if(!f)return;
+    Promise.all([['Foto de perfil',f.foto],['Cédula / Documento',f.img_cedula],['Partida de nacimiento',f.img_partida],['Carnet de vacunas',f.img_vacunas],['Notas escolares',f.img_escolar]].filter(x=>x[1]).map(async x=>[x[0],await leerImagenFamilia(x[1])])).then(items=>{
+        const w=window.open('','_blank','width=1100,height=800');if(!w){showSystemNotification('Ventana bloqueada','Permita ventanas emergentes para imprimir el expediente.','warning');return;}
+        const esc=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        w.document.write(`<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Expediente - ${esc(f.nombre||'Familiar')}</title><style>body{font-family:Arial;margin:28px;color:#111}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.doc{border:1px solid #ddd;border-radius:10px;padding:10px;break-inside:avoid}.doc img{width:100%;max-height:360px;object-fit:contain;display:block}
+/* ================================================================
+   FIX DEFINITIVO: MODAL DE CIERRE DE SESIÓN SIN CAPA NEGRA
+   El modal de confirmación debe quedar limpio y completamente visible.
+   ================================================================ */
+#modalConfirmLogout {
+    z-index: 210000 !important;
+}
+#modalConfirmLogout .modal-dialog {
+    z-index: 210001 !important;
+}
+#modalConfirmLogout .modal-content {
+    position: relative;
+    z-index: 210002 !important;
+}
+#modalConfirmLogout + .modal-backdrop,
+#modalConfirmLogout ~ .modal-backdrop {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+body.logout-cleanup .modal-backdrop {
+    display: none !important;
+}
+</style></head><body><h1>${esc(f.nombre||'Familiar')}</h1><p><b>Parentesco:</b> ${esc(f.parentesco||'')}</p><p><b>Documento:</b> ${esc(f.documento||'')}</p><p><b>Fecha de nacimiento:</b> ${esc(f.fecha_nac||'')}</p><p><b>Teléfono:</b> ${esc(f.telefono||'')}</p><p><b>Correo:</b> ${esc(f.correo||'')}</p><p><b>Dirección:</b> ${esc(f.direccion||'')}</p><p><b>Notas:</b> ${esc(f.notas||'—')}</p>${items.some(x=>x[1])?'<h2>Documentos</h2><div class="grid">'+items.filter(x=>x[1]).map(x=>`<div class="doc"><h3>${esc(x[0])}</h3><img src="${x[1]}" alt="${esc(x[0])}"></div>`).join('')+'</div>':''}</body></html>`);w.document.close();setTimeout(()=>{w.focus();w.print();},700);
+    });
+}
+async function eliminarFamiliar(id){
+    if(!confirm('¿Eliminar este familiar del registro?'))return;
+    const f=dbFamilia.find(x=>String(x.id||x.id_familia)===String(id));
+    try{
+        await sendGasRequest('deleteFamilia',{id_familia:id});
+        const eliminado=await esperarFamiliaEnServidor(id,'deleteFamilia');
+        if(!eliminado){
+            showSystemNotification('No se confirmó la eliminación','El servidor no confirmó todavía la eliminación del familiar.','warning');
+            return;
+        }
+        if(f) await Promise.all(['foto','img_cedula','img_partida','img_vacunas','img_escolar'].map(k=>borrarImagenFamilia(f[k])));
+        dbFamilia=Array.isArray(db?.familia)?db.familia:[];
+        renderFamilia();
+        showToast('Familiar Eliminado','El registro fue eliminado de Google Sheets.','success');
+    }catch(err){
+        console.error('Error eliminando familiar:',err);
+        showSystemNotification('Error al eliminar','No se pudo eliminar el familiar de Google Sheets.','danger');
+    }
+}
+async function renderFamilia(){
+    const grid=document.getElementById('familia-grid'),vacio=document.getElementById('familia-estado-vacio');if(!grid)return;
+    // Google Sheets es la fuente oficial de Familia. No se leen registros desde localStorage.
+    dbFamilia=Array.isArray(db?.familia)?db.familia:[];
+    if(!dbFamilia.length){grid.innerHTML='';vacio?.classList.remove('d-none');return;}
+    vacio?.classList.add('d-none');const docs=[['img_cedula','Cédula','fa-id-card'],['img_partida','Partida de nacimiento','fa-file-lines'],['img_vacunas','Carnet de vacunas','fa-syringe'],['img_escolar','Notas escolares','fa-school']];
+    grid.innerHTML=dbFamilia.map(f=>{const id=f.id||f.id_familia||'';const avatar=f.foto?`<button type="button" class="familia-profile-photo-btn" data-fam-src="${String(f.foto).replace(/"/g,'&quot;')}"><img class="familia-main-photo" src="" alt="Foto de ${f.nombre||'familiar'}"></button>`:`<div class="familia-placeholder"><i class="fa-solid fa-user fa-4x"></i></div>`;const docHtml=docs.map(d=>`<div class="familia-doc-item"><span class="familia-doc-label">${d[1]}</span>${buildFamiliaThumb(f[d[0]],d[1],d[2])}</div>`).join('');return `<div class="col-12 col-md-6 col-xl-4"><article class="familia-doc-card h-100">${avatar}<div class="p-3"><div class="d-flex justify-content-between align-items-start gap-2"><div><span class="badge bg-primary mb-2">${f.parentesco||'Familiar'}</span><h5 class="fw-bold mb-1">${f.nombre||'Sin nombre'}</h5></div><i class="fa-solid fa-people-roof text-primary mt-1"></i></div>${f.documento?`<div class="familia-meta mb-1"><i class="fa-solid fa-fingerprint me-2 text-primary"></i>${f.documento}</div>`:''}${f.fecha_nac?`<div class="familia-meta mb-1"><i class="fa-solid fa-cake-candles me-2 text-primary"></i>${f.fecha_nac}</div>`:''}${f.telefono?`<div class="familia-meta mb-2"><i class="fa-solid fa-phone me-2 text-primary"></i>${f.telefono}</div>`:''}<div class="familia-doc-grid mb-3">${docHtml}</div><div class="familia-card-actions"><button class="btn btn-sm btn-primary flex-grow-1" onclick="abrirExpedienteFamiliar('${id}')"><i class="fa-solid fa-eye me-1"></i>Ver expediente</button><button class="btn btn-sm btn-outline-primary" onclick="abrirModalFamiliar('${id}')" title="Editar"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-outline-danger" onclick="eliminarFamiliar('${id}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button></div></div></article></div>`;}).join('');
+    await hidratarFamiliaImagenes(grid);
+    grid.querySelectorAll('.familia-profile-photo-btn').forEach(btn=>btn.onclick=()=>abrirImagenFamiliar('Foto de perfil',btn.getAttribute('data-fam-src')));
+}
+async function inicializarFamiliaDesdeGAS(){
+    dbFamilia=Array.isArray(db?.familia)?db.familia:[];
     renderFamilia();
-    showToast('Familiar Guardado', `${nombre} fue registrado correctamente.`, 'success');
 }
-
-function renderFamilia() {
-    const grid = document.getElementById('familia-grid');
-    const estadoVacio = document.getElementById('familia-estado-vacio');
-
-    // Restaurar desde localStorage
-    const saved = localStorage.getItem('erp_familia');
-    if (saved) {
-        try { dbFamilia = JSON.parse(saved); } catch(e) { dbFamilia = []; }
-    }
-
-    if (!grid) return;
-
-    if (dbFamilia.length === 0) {
-        grid.innerHTML = '';
-        if (estadoVacio) estadoVacio.classList.remove('d-none');
-        return;
-    }
-
-    if (estadoVacio) estadoVacio.classList.add('d-none');
-
-    grid.innerHTML = dbFamilia.map(f => {
-        const avatar = f.foto
-            ? `<img src="${f.foto}" class="card-img-top" style="height:200px;object-fit:cover;border-bottom:1px solid var(--border-color);" alt="Foto">`
-            : `<div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height:200px;border-bottom:1px solid var(--border-color);"><i class="fa-solid fa-user fa-3x text-muted opacity-50"></i></div>`;
-
-        return `
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="card border-0 shadow-sm h-100 hover-lift overflow-hidden" style="background:var(--bg-card);color:var(--text-main);">
-                ${avatar}
-                <div class="card-body p-3">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div>
-                            <span class="badge bg-primary mb-1">${f.parentesco}</span>
-                            <h6 class="fw-bold mb-0" style="font-size:1rem;">${f.nombre}</h6>
-                        </div>
-                    </div>
-                    <div class="small text-muted mb-1"><i class="fa-solid fa-fingerprint me-2 text-primary" style="width:16px;"></i>${f.documento || 'Sin documento'}</div>
-                    <div class="small text-muted mb-1"><i class="fa-solid fa-cake-candles me-2 text-primary" style="width:16px;"></i>${f.fecha_nac || 'Sin fecha'}</div>
-                    <div class="small text-muted mb-1"><i class="fa-solid fa-phone me-2 text-primary" style="width:16px;"></i>${f.telefono || 'Sin teléfono'}</div>
-                    <div class="small text-muted mb-2"><i class="fa-solid fa-location-dot me-2 text-primary" style="width:16px;"></i>${f.direccion || 'Sin dirección'}</div>
-                    ${f.notas ? `<div class="small text-secondary border-top pt-2 mt-1"><em><i class="fa-solid fa-quote-left me-1 opacity-25"></i>${f.notas}</em></div>` : ''}
-                </div>
-                <div class="card-footer bg-transparent border-top d-flex gap-2 p-3">
-                    <button class="btn btn-sm btn-outline-primary flex-grow-1 fw-semibold" onclick="abrirModalFamiliar('${f.id}')"><i class="fa-solid fa-pen me-1"></i> Editar</button>
-                    <button class="btn btn-sm btn-outline-danger" onclick="eliminarFamiliar('${f.id}')"><i class="fa-solid fa-trash"></i></button>
-                </div>
-            </div>
-        </div>
-        `;
-    }).join('');
-}
-
-function eliminarFamiliar(id) {
-    if (!confirm('¿Eliminar este familiar del registro?')) return;
-    dbFamilia = dbFamilia.filter(x => x.id !== id);
-    localStorage.setItem('erp_familia', JSON.stringify(dbFamilia));
-    renderFamilia();
-    showToast('Familiar Eliminado', 'Registro removido correctamente.', 'success');
-}
-
-
+inicializarFamiliaDesdeGAS();
 
 // MODIFICACIÓN: switchTab — Agregar renderizado de Familia y MikroTik
 
@@ -8315,5 +9008,6 @@ switchTab = function(tabId) {
 };
 
 </script>
+<div id="familiaImagenRoot"></div>
 </body>
 </html>
