@@ -424,14 +424,6 @@
         #modalRegistroExito .modal-dialog {
             z-index: 100011 !important;
         }
-        /* Backdrop por encima del login overlay (z-index 99999) */
-        .modal-login-alert.show ~ .modal-backdrop,
-        #modalRegistroLogin.show ~ .modal-backdrop,
-        #modalRegistroExito.show ~ .modal-backdrop,
-        #modalPortalMantenimiento.show ~ .modal-backdrop {
-            z-index: 100009 !important;
-        }
-
 
         /* ═══════════════════════════════════════════════════════════════
            SECCIÓN: MODO OSCURO COMPLETO + SCROLL SIDEBAR
@@ -940,8 +932,6 @@
 #modalRegistroLogin,
 #modalFamiliar,
 #modalRegistroExito { z-index: 200000 !important; }
-#modalFamiliar + .modal-backdrop,
-#modalFamiliar ~ .modal-backdrop { z-index: 199990 !important; }
 
 /* Expediente familiar: sin backdrop oscuro heredado del login */
 #modalFamiliaExpediente { z-index: 300000 !important; }
@@ -1004,6 +994,23 @@ html[data-bs-theme="dark"] .familia-doc-thumb { background:#0f172a; border-color
 html[data-bs-theme="dark"] #modalFamiliar .modal-header-pro,
 html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-gradient(135deg,#020617 0%,#172554 65%,#1d4ed8 100%) !important; }
 
+
+/* FIX DEFINITIVO: una sola capa visual por formulario */
+body.erp-authenticated #login-overlay{display:none!important;pointer-events:none!important}
+body.erp-authenticated .modal-backdrop{display:none!important;pointer-events:none!important}
+body.erp-authenticated .modal{z-index:1060!important}
+body.erp-authenticated .modal-dialog{z-index:1061!important}
+body.erp-authenticated .modal-content{position:relative;z-index:1062!important}
+
+.bank-card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:22px;overflow:hidden;box-shadow:0 12px 32px rgba(15,23,42,.08);height:100%;transition:.2s ease}.bank-card:hover{transform:translateY(-4px);box-shadow:0 22px 48px rgba(15,23,42,.12)}.bank-card-header{padding:18px 20px;background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);color:#fff}.bank-row{padding:11px 0;border-bottom:1px solid var(--border-color)}.bank-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--text-muted)}.bank-value{font-size:.95rem;font-weight:700;color:var(--text-main);word-break:break-word}.bank-copy{border:0;background:rgba(37,99,235,.08);color:#2563eb;border-radius:8px;padding:5px 8px}.bank-note{padding:12px;border-radius:14px;background:rgba(37,99,235,.05);border:1px solid rgba(37,99,235,.12)}.bank-actions{display:flex;gap:8px;flex-wrap:wrap}
+</style>
+<style id="bank-profile-final">.bank-readonly-badge{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#2563eb;background:#eff6ff;border:1px solid #bfdbfe;border-radius:999px;padding:3px 6px}.bank-card{height:100%;border-radius:22px;overflow:hidden;background:linear-gradient(145deg,#fff,#f8fbff);border:1px solid #e2e8f0;box-shadow:0 14px 36px rgba(15,23,42,.08);transition:.2s ease}.bank-card:hover{transform:translateY(-4px);box-shadow:0 24px 55px rgba(15,23,42,.13)}.bank-card-header{background:linear-gradient(135deg,#0f172a,#1d4ed8,#2563eb);color:#fff;padding:20px}.bank-row{padding:12px 0;border-bottom:1px solid #e5e7eb}.bank-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:800}.bank-value{font-size:.95rem;color:#0f172a;font-weight:700}.bank-copy{border:0;border-radius:10px;padding:.4rem .55rem;background:#eff6ff;color:#2563eb}.bank-note{padding:12px;border-radius:14px;background:#f8fbff;border:1px solid #dbeafe}.bank-actions{display:flex;gap:8px;flex-wrap:wrap}@media(max-width:640px){.bank-actions .btn{flex:1 1 100%}}</style>
+<style id="bank-compact-final">
+.bank-card{border-radius:14px;box-shadow:0 6px 18px rgba(15,23,42,.07);border:1px solid #e2e8f0}.bank-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(15,23,42,.10)}.bank-card-header{padding:13px 15px}.bank-kicker{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;opacity:.72;font-weight:800;margin-bottom:2px}.bank-header-icon{font-size:1.25rem;opacity:.7}.bank-card-body{padding:12px 14px}.bank-main-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}.bank-row{padding:7px 0}.bank-label{font-size:.59rem;letter-spacing:.06em}.bank-value{font-size:.82rem;line-height:1.25}.bank-copy{padding:3px 6px;border-radius:6px}.bank-payment{margin-top:9px;padding:9px 10px;border-radius:10px;border:1px solid #e2e8f0}.bank-payment-mobile{background:#f8fbff}.bank-payment-transfer{background:#fafafa}.bank-payment-title{display:flex;align-items:center;gap:7px;font-size:.67rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:#475569;margin-bottom:4px}.bank-payment-value{font-size:.82rem;font-weight:700;word-break:break-word;margin-bottom:6px}.bank-payment .btn{padding:.22rem .5rem;font-size:.72rem}.bank-extra{margin-top:9px;padding:8px 10px;border-radius:9px;background:#f8fafc;font-size:.75rem}.bank-extra .bank-label{display:block;margin-bottom:3px}.bank-actions{margin-top:10px;padding-top:9px;border-top:1px solid #e5e7eb;gap:6px}.bank-actions .btn{padding:.28rem .55rem;font-size:.72rem}@media(max-width:640px){.bank-main-grid{grid-template-columns:1fr}.bank-actions .btn{flex:1 1 auto}}
+</style>
+<style id="invoice-ticket-final">
+.modal-ticket-dialog{max-width:470px!important;margin:1rem auto}.invoice-modal-content{border:0!important;border-radius:20px!important;overflow:hidden;background:#eef2f7!important;box-shadow:0 24px 70px rgba(15,23,42,.24)}.invoice-modal-header{padding:12px 16px!important;background:linear-gradient(135deg,#0f172a,#1d4ed8)!important;color:#fff!important;border:0!important}.invoice-modal-title-wrap{display:flex;align-items:center;gap:10px}.invoice-modal-icon{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.13);display:flex;align-items:center;justify-content:center}.invoice-modal-title-wrap h5{font-size:.98rem;margin:0;font-weight:800}.invoice-modal-title-wrap small{font-size:.66rem;opacity:.78}.invoice-modal-body{padding:14px!important;max-height:78vh;overflow:auto}.invoice-ticket{width:57mm;max-width:100%;margin:0 auto;background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;font-size:10px;line-height:1.25;padding:14px 11px 15px;border:1px solid #d6dbe3;box-shadow:0 8px 28px rgba(15,23,42,.10);border-radius:3px}.invoice-brand{display:flex;align-items:center;gap:8px;border-bottom:1px dashed #555;padding-bottom:10px;margin-bottom:9px}.invoice-logo-mark{width:34px;height:34px;border-radius:8px;background:#eff6ff;color:#2563eb;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900}.invoice-brand-name{font-size:11px;font-weight:900;line-height:1.05}.invoice-brand-sub{font-size:8px;color:#555;margin-top:2px}.invoice-head-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:7px}.invoice-head-kicker{font-size:8px;text-transform:uppercase;letter-spacing:.6px;font-weight:800;color:#555}.invoice-number{font-size:12px;font-weight:900;line-height:1.15}.invoice-status{display:inline-flex;align-items:center;justify-content:center;padding:4px 7px;border:1px solid #222;border-radius:10px;font-size:8px;font-weight:900;text-transform:uppercase;white-space:nowrap}.invoice-section{border:1px solid #bcbcbc;border-radius:3px;padding:8px 8px;margin-bottom:7px;background:#fff}.invoice-section-title{font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #ddd;padding-bottom:5px;margin-bottom:4px;color:#111}.invoice-section-title i{margin-right:4px}.invoice-kv{display:flex;justify-content:space-between;gap:7px;margin:3px 0;align-items:flex-start}.invoice-kv-label{font-weight:700;min-width:31%;color:#333}.invoice-kv-value{text-align:right;max-width:69%;font-weight:600;word-break:break-word;color:#111}.invoice-note{font-size:8px;line-height:1.35;word-break:break-word}.invoice-total{border-top:1px dashed #333;border-bottom:1px dashed #333;padding:8px 2px;margin:7px 0;text-align:center;font-size:14px;font-weight:900}.invoice-qr-wrap{text-align:center;padding:9px 0 4px;border-top:1px dashed #777;margin-top:7px}.invoice-qr-title{font-size:9px;font-weight:900;margin-bottom:5px}.invoice-qr{width:126px;height:126px;display:block;margin:0 auto 4px;image-rendering:auto}.invoice-qr-caption{font-size:7px;color:#555}.invoice-footer-note{text-align:center;font-size:7px;color:#444;margin-top:7px}.invoice-modal-footer{padding:10px 12px!important;background:#fff!important;border-top:1px solid #e5e7eb!important}.invoice-action{font-size:.74rem!important;font-weight:800!important;padding:.48rem .75rem!important;border-radius:9px!important}.bank-edit-btn{cursor:pointer!important;position:relative;z-index:2;pointer-events:auto!important}
+@media(max-width:575.98px){.modal-ticket-dialog{margin:.5rem auto;max-width:calc(100% - 1rem)!important}.invoice-modal-body{padding:8px!important}.invoice-ticket{padding:12px 9px}.invoice-modal-footer{gap:6px}.invoice-action{flex:1}}
 </style>
 </head>
 <body>
@@ -1062,7 +1069,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
                     </div>
 
                     <div class="position-relative z-1 pt-3 border-top border-white border-opacity-10 text-white-50 small d-flex justify-content-between align-items-center">
-                        <span>Versión ERP 2026.2.1</span>
+                        <span>Versión ERP 2026.3.14.3</span>
 
                         <i class="fa-solid fa-microchip text-white-50"></i>
                     </div>
@@ -1205,6 +1212,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
             <a href="#pagos" class="nav-link" onclick="switchTab('pagos')">
                 <i class="fa-solid fa-money-bill-transfer"></i> Módulo de Pagos
             </a>
+            <a href="#bancos" class="nav-link" onclick="switchTab('bancos')"><i class="fa-solid fa-building-columns"></i> Datos Bancarios</a>
             <a href="#notificaciones" class="nav-link d-flex align-items-center" onclick="switchTab('notificaciones')">
                 <i class="fa-solid fa-bell"></i> Notificaciones
                 <span class="badge bg-danger rounded-pill ms-auto" id="nav-notif-count">0</span>
@@ -1310,50 +1318,6 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
              ═══════════════════════════════════════════════════════════════ -->
         <section id="sec-dashboard" class="tab-content active">
 
-            <!-- ESTADO DEL SERVICIO -->
-            <div class="row g-3 mb-4" id="sec-dashboard-servicio">
-
-
-                <div class="col-12">
-                    <div class="card border-0 shadow-sm rounded-3">
-                        <div class="card-body p-3 p-md-4">
-                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="bg-primary-subtle text-primary p-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
-                                        <i class="fa-solid fa-signal fs-5"></i>
-                                    </div>
-                                    <div>
-                                        <h6 class="fw-bold m-0 fs-5 text-dark">Estado del Servicio</h6>
-                                        <small class="text-muted">Estatus global en la plataforma</small>
-                                    </div>
-                                </div>
-
-                                <div id="box-estado-servicio-cliente" class="d-none">
-                                    <span id="badge-estado-servicio-cliente" class="badge bg-success-subtle text-success border border-success-subtle rounded-pill fs-6 px-3 py-2 fw-bold">
-                                        <i class="fa-solid fa-circle-check me-1"></i> SOLVENTE
-                                    </span>
-                                </div>
-
-                                <div id="box-estado-servicio-admin" class="d-none d-flex align-items-center gap-2 flex-wrap bg-light p-2 rounded-3 border">
-                                    <select class="form-select form-select-sm border-0 shadow-sm" id="dashSelectClienteEstado" onchange="cargarEstadoClienteDashboard()" style="min-width: 200px;">
-                                        <option value="">-- Seleccionar Cliente --</option>
-                                    </select>
-                                    <select class="form-select form-select-sm border-0 shadow-sm fw-semibold" id="dashSelectEstadoServicio" style="width: 150px;">
-                                        <option value="SOLVENTE" class="text-success">SOLVENTE</option>
-                                        <option value="EN MORA" class="text-warning">EN MORA</option>
-                                        <option value="SUSPENDIDO" class="text-danger">SUSPENDIDO</option>
-                                        <option value="DEMO" class="text-info">DEMO</option>
-                                    </select>
-                                    <button class="btn btn-sm btn-primary fw-semibold px-3 shadow-sm" onclick="actualizarEstadoServicioDashboard()">
-                                        <i class="fa-solid fa-floppy-disk me-1"></i> Actualizar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- ═══════════════════════════════════════════════════════════════
                  KPIs - TARJETAS DE MÉTRICAS
                  ADMIN: Total Clientes | Facturas Pagadas | Pendientes | Validación | Créditos
@@ -1363,7 +1327,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
             <div class="row g-3 mb-4" id="kpi-container">
                 <!-- KPI 1: Total Clientes / Código Cliente -->
                 <div class="col-12 col-sm-6 col-xl">
-                    <div class="kpi-card kpi-primary hover-lift">
+                    <div class="kpi-card kpi-primary hover-lift kpi-clickable" onclick="abrirKpiMaster('clientes')" role="button" tabindex="0" title="Ver todos los clientes">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <span class="text-muted fw-semibold fs-7 text-uppercase tracking-wider" id="lbl-kpi-1">Total Clientes</span>
@@ -1379,7 +1343,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
 
                 <!-- KPI 2: Facturas Pagadas -->
                 <div class="col-12 col-sm-6 col-xl">
-                    <div class="kpi-card kpi-success hover-lift">
+                    <div class="kpi-card kpi-success hover-lift kpi-clickable" onclick="abrirKpiMaster('pagadas')" role="button" tabindex="0" title="Ver facturas pagadas">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <span class="text-muted fw-semibold fs-7 text-uppercase tracking-wider" id="lbl-kpi-2">Facturas Pagadas</span>
@@ -1395,7 +1359,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
 
                 <!-- KPI 3: Facturas Pendientes -->
                 <div class="col-12 col-sm-6 col-xl">
-                    <div class="kpi-card kpi-warning hover-lift">
+                    <div class="kpi-card kpi-warning hover-lift kpi-clickable" onclick="abrirKpiMaster('pendientes')" role="button" tabindex="0" title="Ver facturas pendientes">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <span class="text-muted fw-semibold fs-7 text-uppercase tracking-wider" id="lbl-kpi-3">Facturas Pendientes</span>
@@ -1411,7 +1375,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
 
                 <!-- KPI 4: En Validación -->
                 <div class="col-12 col-sm-6 col-xl">
-                    <div class="kpi-card kpi-info hover-lift">
+                    <div class="kpi-card kpi-info hover-lift kpi-clickable" onclick="abrirKpiMaster('creditos')" role="button" tabindex="0" title="Ver créditos">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <span class="text-muted fw-semibold fs-7 text-uppercase tracking-wider" id="lbl-kpi-4">En Validación</span>
@@ -1427,7 +1391,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
 
                 <!-- KPI 5: Créditos -->
                 <div class="col-12 col-sm-6 col-xl">
-                    <div class="kpi-card kpi-danger hover-lift">
+                    <div class="kpi-card kpi-danger hover-lift kpi-clickable" onclick="abrirKpiMaster('validacion')" role="button" tabindex="0" title="Ver facturas en validación">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <span class="text-muted fw-semibold fs-7 text-uppercase tracking-wider" id="lbl-kpi-5">Créditos</span>
@@ -1484,6 +1448,21 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- OPERATIVO MASTER: FACTURAS PENDIENTES DE VALIDACIÓN -->
+            <div id="master-pending-validation-panel" class="master-pending-alert p-3 p-md-4 mb-4 d-none">
+                <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap">
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="pending-dot"></span>
+                        <div>
+                            <div class="fw-bold text-dark"><i class="fa-solid fa-triangle-exclamation text-warning me-2"></i>Facturas pendientes por validar</div>
+                            <div class="small text-muted" id="master-pending-validation-summary">No hay facturas pendientes de validación.</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-warning fw-bold" type="button" onclick="abrirKpiMaster('validacion')"><i class="fa-solid fa-list-check me-1"></i>Revisar ahora</button>
+                </div>
+                <div id="master-pending-validation-list" class="mt-3 d-grid gap-2"></div>
             </div>
 
             <!-- Gráfico de Línea: Historial de Pagos -->
@@ -2242,6 +2221,12 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
         <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: NOTIFICACIONES
              ═══════════════════════════════════════════════════════════════ -->
+        <section id="sec-bancos" class="tab-content d-none">
+          <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-building-columns text-primary me-2"></i>Datos Bancarios</h5><p class="text-muted small mb-0">Cuentas disponibles para realizar pagos. Los clientes consultan estos datos en modo lectura; el usuario Master tiene control total.</p></div><button class="btn btn-primary btn-master-only" onclick="abrirModalBanco()"><i class="fa-solid fa-plus me-1"></i>Agregar banco</button></div>
+          <div id="bancos-empty" class="text-center p-5 border rounded-4 bg-light d-none"><i class="fa-solid fa-building-columns fa-3x text-muted opacity-25 mb-3"></i><p class="fw-semibold mb-1">No hay datos bancarios.</p><small class="text-muted">El administrador puede agregarlos.</small></div>
+          <div id="bancos-grid" class="row g-4"></div>
+        </section>
+
         <section id="sec-notificaciones" class="tab-content d-none">
             <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <h5 class="fw-bold m-0">Centro de Notificaciones</h5>
@@ -2771,6 +2756,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
                 <div class="modal-body modal-body-pro">
                     <form id="formPerfil" onsubmit="guardarPerfil(event)">
                         <input type="hidden" id="perfil_id">
+                        <!-- Campos no modificables: ID Usuario, Rol, Estado y Código Cliente. -->
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label small fw-semibold">ID Usuario</label>
@@ -2804,6 +2790,12 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
                                 <label class="form-label small fw-semibold">Código Cliente</label>
                                 <input type="text" class="form-control form-control-pro" id="perfil_codigo_cliente" readonly placeholder="Solo para clientes">
                             </div>
+                            <div class="col-md-6"><label class="form-label small fw-semibold">Cédula / Documento</label><input type="text" class="form-control form-control-pro" id="perfil_documento"></div>
+                            <div class="col-md-6"><label class="form-label small fw-semibold">Fecha de Nacimiento</label><input type="date" class="form-control form-control-pro" id="perfil_fecha_nac"></div>
+                            <div class="col-md-6"><label class="form-label small fw-semibold">Nacionalidad</label><input type="text" class="form-control form-control-pro" id="perfil_nacionalidad"></div>
+                            <div class="col-md-6"><label class="form-label small fw-semibold">Estado Civil</label><select class="form-select form-select-pro" id="perfil_estado_civil"><option value="">-- Seleccione --</option><option>Soltero(a)</option><option>Casado(a)</option><option>Divorciado(a)</option><option>Viudo(a)</option><option>Unión Estable</option></select></div>
+                            <div class="col-md-6"><label class="form-label small fw-semibold">Profesión</label><input type="text" class="form-control form-control-pro" id="perfil_profesion"></div>
+                            <div class="col-md-6"><label class="form-label small fw-semibold">Empresa donde Labora</label><input type="text" class="form-control form-control-pro" id="perfil_empresa_labora"></div>
                             <div class="col-12">
                                 <label class="form-label small fw-semibold">Dirección</label>
                                 <textarea class="form-control form-control-pro" id="perfil_direccion" rows="2" placeholder="Calle, Ciudad, Estado"></textarea>
@@ -2968,6 +2960,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
                                 </button>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="modal-footer modal-footer-pro d-flex justify-content-between">
@@ -3024,15 +3017,16 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label small fw-semibold">Correo Electrónico <span class="text-danger">*</span></label>
+
                                     <input type="email" class="form-control form-control-pro" id="cli_correo" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label small fw-semibold">Estado del Servicio</label>
                                     <select class="form-select form-select-pro" id="cli_estado">
-                                        <option value="SOLVENTE">SOLVENTE</option>
-                                        <option value="EN MORA">EN MORA</option>
+                                        <option value="ACTIVO">ACTIVO</option>
+                                        <option value="MOROSO">MOROSO</option>
+                                        <option value="INACTIVO">INACTIVO</option>
                                         <option value="SUSPENDIDO">SUSPENDIDO</option>
-                                        <option value="DEMO">DEMO</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
@@ -3343,13 +3337,39 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
 
     <!-- MODAL 10: Ver Factura -->
     <div class="modal fade" id="modalVerFactura" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-ticket-dialog">
+            <div class="modal-content invoice-modal-content">
+                <div class="modal-header invoice-modal-header">
+                    <div class="invoice-modal-title-wrap">
+                        <div class="invoice-modal-icon"><i class="fa-solid fa-receipt"></i></div>
+                        <div><h5 class="modal-title" id="modalVerFacturaTitle">Resumen de Factura</h5><small>Vista de comprobante · optimizada para 57 mm</small></div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body invoice-modal-body" id="modalVerFacturaBody"></div>
+                <div class="modal-footer invoice-modal-footer">
+                    <button type="button" class="btn btn-primary invoice-action" id="btn-imprimir-factura" onclick="imprimirFacturaConfirmada()"><i class="fa-solid fa-print me-1"></i>Imprimir / PDF</button>
+                    <button type="button" class="btn btn-light invoice-action" data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"></i>Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: DETALLE OPERATIVO DE KPIs MASTER -->
+    <div class="modal fade" id="modalKpiMaster" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content modal-content-pro">
                 <div class="modal-header modal-header-pro">
-                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-file-invoice text-primary me-2"></i>Resumen de Factura</h5>
+                    <div>
+                        <h5 class="modal-title fw-bold" id="modalKpiMasterTitle"><i class="fa-solid fa-chart-pie text-primary me-2"></i>Detalle</h5>
+                        <small class="text-muted" id="modalKpiMasterSubtitle">Información operativa</small>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body modal-body-pro" id="modalVerFacturaBody"></div>
+                <div class="modal-body modal-body-pro">
+                    <div id="modalKpiMasterBody"></div>
+                </div>
+                <div class="modal-footer modal-footer-pro"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button></div>
             </div>
         </div>
     </div>
@@ -3366,7 +3386,9 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
                     <form id="formNotif" onsubmit="guardarNotificacion(event)">
                         <div class="mb-3" id="group_notif_cliente">
                             <label class="form-label small fw-semibold">Cliente Destino</label>
+                            <input type="text" class="form-control form-control-pro mb-2" id="notif_cliente_busqueda" placeholder="Nombre, cédula, código, teléfono, correo, dirección o cualquier dato..." autocomplete="off">
                             <select class="form-select form-select-pro" id="notif_cliente"></select>
+                            <small class="text-muted">Escriba y presione Enter para buscar y luego seleccione el cliente.</small>
                         </div>
                         <div class="mb-3">
                             <label class="form-label small fw-semibold">Título</label>
@@ -3382,6 +3404,8 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalBanco" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content modal-content-pro"><div class="modal-header modal-header-pro"><h5 class="modal-title fw-bold"><i class="fa-solid fa-building-columns text-primary me-2"></i>Datos Bancarios</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body modal-body-pro"><form id="formBanco" onsubmit="guardarBanco(event)"><input type="hidden" id="banco_id"><div class="row g-3"><div class="col-md-6"><label class="form-label small fw-semibold">Banco *</label><input id="banco_nombre" class="form-control form-control-pro" required></div><div class="col-md-6"><label class="form-label small fw-semibold">Tipo de cuenta</label><input id="banco_tipo_cuenta" class="form-control form-control-pro"></div><div class="col-md-6"><label class="form-label small fw-semibold">N.º de cuenta</label><input id="banco_numero_cuenta" class="form-control form-control-pro"></div><div class="col-md-6"><label class="form-label small fw-semibold">Titular</label><input id="banco_titular" class="form-control form-control-pro"></div><div class="col-md-6"><label class="form-label small fw-semibold">Documento titular</label><input id="banco_documento_titular" class="form-control form-control-pro"></div><div class="col-md-6"><label class="form-label small fw-semibold">Pago Móvil</label><input id="banco_pago_movil" class="form-control form-control-pro"></div><div class="col-12"><label class="form-label small fw-semibold">Transferencia</label><textarea id="banco_transferencia" rows="2" class="form-control form-control-pro"></textarea></div><div class="col-12"><label class="form-label small fw-semibold">Información adicional</label><textarea id="banco_info_adicional" rows="3" class="form-control form-control-pro"></textarea></div></div><button class="btn btn-primary w-100 mt-4">Guardar datos</button></form></div></div></div></div>
 
     <!-- MODAL: PROCESAR PAGO DE FACTURA -->
     <div class="modal fade" id="modalProcesarPago" tabindex="-1">
@@ -3413,36 +3437,39 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
                                 <label class="form-label small fw-semibold">3. Método de Pago</label>
                                 <select class="form-select form-select-pro" id="pay-modal-metodo" required>
                                     <option value="Pago Móvil">Pago Móvil</option>
-                                    <option value="Transferencia">Transferencia Bancaria</option>
-                                    <option value="Zinli / Zelle">Zinli / Zelle</option>
-                                    <option value="Efectivo">Efectivo ($)</option>
+                                    <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+                                    <option value="Zinli">Zinli</option>
+                                    <option value="Zelle">Zelle</option>
+                                    <option value="Binance">Binance</option>
                                 </select>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label small fw-semibold">4. Banco Origen / Entidad</label>
-                            <input type="text" class="form-control form-control-pro" id="pay-modal-banco" placeholder="Ej: Banco de Venezuela / Zinli" required>
+                            <select class="form-select form-select-pro" id="pay-modal-banco" required><option value="">-- Seleccione banco origen --</option></select>
                         </div>
+                        <div class="mb-3"><label class="form-label small fw-semibold">5. Banco Destino</label><select class="form-select form-select-pro" id="pay-modal-banco-destino" required><option value="">-- Seleccione banco destino --</option></select><small id="pay-modal-banco-destino-info" class="text-muted d-block mt-1"></small></div>
                         <div class="mb-3">
-                            <label class="form-label small fw-semibold">5. Referencia / Número de Confirmación</label>
+                            <label class="form-label small fw-semibold">6. Referencia / Número de Confirmación</label>
                             <input type="text" class="form-control form-control-pro" id="pay-modal-ref" placeholder="Número de confirmación" required>
                         </div>
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                <label class="form-label small fw-semibold">6. Monto ($)</label>
+                                <label class="form-label small fw-semibold">7. Monto ($)</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0 text-success fw-bold">$</span>
                                     <input type="number" step="0.01" class="form-control form-control-pro fw-bold text-success" id="pay-modal-monto" placeholder="0.00" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label small fw-semibold">7. Monto (Bs)</label>
+                                <label class="form-label small fw-semibold">8. Monto (Bs)</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light border-end-0 text-primary fw-bold">Bs</span>
-                                    <input type="number" step="0.01" class="form-control form-control-pro fw-bold text-primary" id="pay-modal-monto-bs" placeholder="0.00" required>
+                                    <input type="number" step="0.01" class="form-control form-control-pro fw-bold text-primary" id="pay-modal-monto-bs" placeholder="0.00" readonly required>
                                 </div>
                             </div>
                         </div>
+                        <div class="alert alert-info border rounded-3 py-2 mb-3" id="pay-modal-tasa-box"><div class="d-flex justify-content-between align-items-center gap-2"><strong><i class="fa-solid fa-chart-line me-1"></i>Tasa P2P Binance (USDT/VES)</strong><span id="pay-modal-tasa-binance" class="fw-bold text-primary">Consultando...</span></div><small id="pay-modal-tasa-fecha" class="text-muted d-block mt-1">Consulta en tiempo real.</small></div>
                         <div class="alert alert-light border rounded-3 py-2 mb-3">
                             <small class="text-muted"><i class="fa-solid fa-circle-info me-1 text-primary"></i> El pago será enviado a <strong>validación</strong> antes de ser confirmado por el administrador.</small>
                         </div>
@@ -3845,6 +3872,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js" defer></script>
 
     <script>
     
@@ -3862,11 +3890,14 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
         facturas: [],
         creditos: [],
         pagos: [],
-        notificaciones: []
+        notificaciones: [],
+        bancos: []
     };
 
     let currentUser = null;
     let inactivityTimer = null;
+    let initialSyncPromise = null;
+    let loginInProgress = false;
 
     // Instancias de gráficos Chart.js
     let chartPagosBsInstance = null;
@@ -3874,7 +3905,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
     let chartHistorialPagosInstance = null;
 
     // Instancias de modales Bootstrap
-    let modalSysAlert, modalConfirmLogout, modalPwd, modalPerfil, modalEmp, modalUsr, modalCli, modalFac, modalCred, modalVerFac, modalNotif;
+    let modalSysAlert, modalConfirmLogout, modalPwd, modalPerfil, modalEmp, modalUsr, modalCli, modalFac, modalCred, modalVerFac, modalNotif, modalKpiMaster;
 
     
     // SECCIÓN: INICIALIZACIÓN AL CARGAR LA PÁGINA
@@ -3895,48 +3926,44 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
         // Manejar z-index del backdrop específicamente para el modal de registro
         const modalRegistroEl = document.getElementById('modalRegistroLogin');
         if (modalRegistroEl) {
-            modalRegistroEl.addEventListener('shown.bs.modal', function () {
-                const backdrop = document.querySelector('.modal-backdrop.show');
-                if (backdrop) backdrop.style.zIndex = '99998';
-            });
-            modalRegistroEl.addEventListener('hidden.bs.modal', function () {
-                const backdrop = document.querySelector('.modal-backdrop');
-                if (backdrop) backdrop.style.zIndex = '';
-            });
         }
 
+        // Bootstrap: el ERP usa modales sin backdrop. Limpia cualquier capa residual de versiones anteriores.
+        window.cleanErpModalLayers = function(){
+            document.querySelectorAll('.modal-backdrop').forEach(el=>el.remove());
+            document.body.classList.remove('modal-open');
+            document.body.style.removeProperty('padding-right');
+            if(document.body.classList.contains('erp-authenticated')) document.body.style.removeProperty('overflow');
+        };
         // Inicializar modales Bootstrap
-        modalSysAlert = new bootstrap.Modal(document.getElementById('modalSystemAlert'));
+        modalSysAlert = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalSystemAlert'), {backdrop:false,keyboard:true,focus:true});
         // Fix: asegurar que el backdrop quede POR ENCIMA del login overlay (z-index 99999)
         const modalLoginAlertEl = document.getElementById('modalLoginAlert');
         if (modalLoginAlertEl) {
             modalLoginAlert = new bootstrap.Modal(modalLoginAlertEl);
-            modalLoginAlertEl.addEventListener('show.bs.modal', () => {
-                setTimeout(() => {
-                    const backdrop = document.querySelector('.modal-backdrop.show');
-                    if (backdrop) backdrop.style.zIndex = '100009';
-                }, 10);
-            });
         }
-        modalConfirmLogout = new bootstrap.Modal(document.getElementById('modalConfirmLogout'));
-        modalPwd = new bootstrap.Modal(document.getElementById('modalChangePassword'));
-        modalPerfil = new bootstrap.Modal(document.getElementById('modalPerfil'));
-        modalEmp = new bootstrap.Modal(document.getElementById('modalEmpresa'));
-        modalUsr = new bootstrap.Modal(document.getElementById('modalUsuario'));
-        modalCli = new bootstrap.Modal(document.getElementById('modalCliente'));
-        modalFac = new bootstrap.Modal(document.getElementById('modalFactura'));
-        modalCred = new bootstrap.Modal(document.getElementById('modalCredito'));
-        modalVerFac = new bootstrap.Modal(document.getElementById('modalVerFactura'));
-        modalNotif = new bootstrap.Modal(document.getElementById('modalAddNotificacion'));
+        modalConfirmLogout = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalConfirmLogout'), {backdrop:false,keyboard:true,focus:true});
+        modalPwd = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalChangePassword'), {backdrop:false,keyboard:true,focus:true});
+        modalPerfil = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalPerfil'), {backdrop:false,keyboard:true,focus:true});
+        modalEmp = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalEmpresa'), {backdrop:false,keyboard:true,focus:true});
+        modalUsr = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalUsuario'), {backdrop:false,keyboard:true,focus:true});
+        modalCli = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalCliente'), {backdrop:false,keyboard:true,focus:true});
+        modalFac = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalFactura'), {backdrop:false,keyboard:true,focus:true});
+        modalCred = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalCredito'), {backdrop:false,keyboard:true,focus:true});
+        modalVerFac = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalVerFactura'), {backdrop:false,keyboard:true,focus:true});
+        modalKpiMaster = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalKpiMaster'), {backdrop:false,keyboard:true,focus:true});
+        modalNotif = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalAddNotificacion'), {backdrop:false,keyboard:true,focus:true});
+        const modalBancoEl = document.getElementById('modalBanco');
+        if (modalBancoEl) modalBancoInstance = bootstrap.Modal.getOrCreateInstance(modalBancoEl, {backdrop:false,keyboard:true,focus:true});
 
         initFamiliaModals();
 
         // Inicializar modal de procesar pago
-        modalProcesarPagoInstance = new bootstrap.Modal(document.getElementById('modalProcesarPago'));
+        modalProcesarPagoInstance = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalProcesarPago'), {backdrop:false,keyboard:true,focus:true});
         _payClienteSeleccionado = null;
 
         // Inicializar modal de detalle de usuario
-        modalVerUsuarioInstance = new bootstrap.Modal(document.getElementById('modalVerUsuario'));
+        modalVerUsuarioInstance = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalVerUsuario'), {backdrop:false,keyboard:true,focus:true});
         // Variable global para contraseña visible
         _currentViewUserPassword = '';
 
@@ -3957,8 +3984,15 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
             confirmarLogout();
         }
 
-        // Sincronizar con Google Sheets al cargar
-        sincronizarConGAS();
+
+        const smartSearchMap={
+          'cli-input-cedula':'buscarClienteGestion','cred-input-cedula':'buscarClienteCreditos','pay-input-cedula':'buscarClientePagos','fac-input-cedula':'buscarClienteFacturacion','notif-input-busqueda':'buscarNotificacionesCliente','emp-input-busqueda':'buscarEmpresaGestion','usr-input-busqueda':'buscarUsuarioGestion'
+        };
+        Object.entries(smartSearchMap).forEach(([id,fn])=>{const el=document.getElementById(id);if(el&&!el.dataset.enterSearch){el.dataset.enterSearch='1';el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const handler=window[fn];if(typeof handler==='function')handler();}});}});
+
+        // Sincronizar con Google Sheets al cargar. Se conserva la promesa para que
+        // el login pueda esperar a que los usuarios estén disponibles antes de validar.
+        initialSyncPromise = sincronizarConGAS();
         initInactivityTimer();
         updatePortalUI();
     });
@@ -4085,24 +4119,34 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
     // SECCIÓN: ENVÍO DE DATOS A GOOGLE APPS SCRIPT
     // ENVÍA CUALQUIER ACCIÓN (add, update, delete) AL BACKEND
     
-    async function sendGasRequest(action, payload) {
+    async function sendGasRequest(action, payload = {}) {
         if (!gasUrl) return;
         try {
-            await fetch(gasUrl, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ action: action, data: payload })
-            });
-            // Sincronizar inmediatamente después de cualquier cambio
-            setTimeout(sincronizarConGAS, 500);
-        } catch (e) {
-            console.error("Error al enviar solicitud GAS:", e);
-            showSystemNotification('Error de Red', 'No se pudo sincronizar con servidor.', 'danger');
-        }
+            const actor=currentUser?{id_usuario:currentUser.id_usuario||'',username:currentUser.username||'',rol:currentUser.rol||''}:{};
+            await fetch(gasUrl,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:action,data:{...payload,__actor:actor}})});
+            setTimeout(()=>sincronizarConGAS().catch(()=>{}),450);
+        }catch(e){console.error('Error al enviar solicitud GAS:',e);showSystemNotification('Error de Red','No se pudo sincronizar con servidor.','danger');}
     }
 
     
+    // ACTUALIZACIÓN EN SEGUNDO PLANO DE NOTIFICACIONES
+    let _notifPollingTimer = null;
+    async function actualizarNotificacionesEnSegundoPlano(){
+        if(!currentUser || !gasUrl || document.visibilityState === 'hidden') return;
+        try{
+            const res=await fetch(gasUrl+'?action=getAllData&ts='+Date.now(),{cache:'no-store'});
+            const data=await res.json();
+            if(data && data.success && Array.isArray(data.notificaciones)){
+                db.notificaciones=data.notificaciones;
+                renderNotificaciones();
+            }
+        }catch(e){ console.debug('Polling de notificaciones:',e.message); }
+    }
+    function iniciarPollingNotificaciones(){
+        clearInterval(_notifPollingTimer);
+        _notifPollingTimer=setInterval(actualizarNotificacionesEnSegundoPlano,30000);
+    }
+
     // SECCIÓN: RENDERIZADO GLOBAL
     // LLAMA A TODAS LAS FUNCIONES DE RENDERIZADO PARA ACTUALIZAR LA UI
     
@@ -4115,8 +4159,8 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
         renderModuloPagosSelects();
         renderHistorialPagos();
         renderNotificaciones();
+        renderBancos();
         renderAuditoria();
-        renderDashboardServicio();
         updateKPIs();
         renderDashboardCharts();
 
@@ -4152,29 +4196,52 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
         }
     }
 
-    function handleLoginSubmit(e) {
+    async function handleLoginSubmit(e) {
         e.preventDefault();
-        const uVal = String(document.getElementById('loginUser').value).trim();
-        const pVal = String(document.getElementById('loginPassword').value).trim();
+        if (loginInProgress) return;
+        loginInProgress = true;
+        const submitBtn = document.querySelector('#loginForm button[type="submit"]');
+        const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-2"></i>Validando...'; }
 
-        const found = db.usuarios.find(u =>
-            (String(u.username).trim() === uVal || 
-             String(u.email).trim().toLowerCase() === uVal.toLowerCase() || 
-             String(u.codigo_cliente).trim() === uVal || 
-             String(u.id_usuario).trim() === uVal) &&
-            String(u.password).trim() === pVal
-        );
-
-        if (found) {
-            if (found.estado !== 'Activo') {
-                showLoginModalAlert('Cuenta Inactiva', 'Consulte al Administrador para activar su cuenta.', 'warning');
-                return;
+        try {
+            // IMPORTANTE: el login no debe validar contra db.usuarios vacío mientras
+            // la primera lectura de Google Sheets todavía está en curso.
+            if (initialSyncPromise) {
+                try { await initialSyncPromise; } catch (_) {}
             }
-            applyUserSession(found);
-            registrarAuditoria('LOGIN', 'Sistema', found.id_usuario, 'Inicio de sesión exitoso — Usuario: ' + found.username + ' (' + found.rol + ')', 'INFO');
-            showToast('Bienvenido', `Hola ${found.nombre_completo}, has iniciado sesión correctamente.`, 'success');
-        } else {
-            showLoginModalAlert('Credenciales Inválidas', 'Verifique sus datos e intente nuevamente.', 'danger');
+            if (!Array.isArray(db?.usuarios) || db.usuarios.length === 0) {
+                await sincronizarConGAS();
+            }
+
+            const uVal = String(document.getElementById('loginUser').value).trim();
+            const pVal = String(document.getElementById('loginPassword').value).trim();
+
+            const found = (Array.isArray(db?.usuarios) ? db.usuarios : []).find(u =>
+                (String(u.username).trim() === uVal || 
+                 String(u.email).trim().toLowerCase() === uVal.toLowerCase() || 
+                 String(u.codigo_cliente).trim() === uVal || 
+                 String(u.id_usuario).trim() === uVal) &&
+                String(u.password).trim() === pVal
+            );
+
+            if (found) {
+                if (String(found.estado).trim().toLowerCase() !== 'activo') {
+                    showLoginModalAlert('Cuenta Inactiva', 'Consulte al Administrador para activar su cuenta.', 'warning');
+                    return;
+                }
+                applyUserSession(found);
+                registrarAuditoria('LOGIN', 'Sistema', found.id_usuario, 'Inicio de sesión exitoso — Usuario: ' + found.username + ' (' + found.rol + ')', 'INFO');
+                showToast('Bienvenido', `Hola ${found.nombre_completo}, has iniciado sesión correctamente.`, 'success');
+            } else {
+                showLoginModalAlert('Credenciales Inválidas', 'Verifique sus datos e intente nuevamente.', 'danger');
+            }
+        } catch (err) {
+            console.error('Error durante el inicio de sesión:', err);
+            showLoginModalAlert('Error de conexión', 'No fue posible cargar los usuarios desde Google Sheets. Verifique la conexión e intente nuevamente.', 'danger');
+        } finally {
+            loginInProgress = false;
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = originalBtnHtml; }
         }
     }
 
@@ -4228,48 +4295,38 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
         document.getElementById('current-user-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.nombre_completo)}&background=2563eb&color=fff`;
 
         enforceRolePermissions();
+        document.body.classList.add('erp-authenticated');
         document.getElementById('login-overlay').classList.add('d-none');
     }
 
     function confirmarLogout() {
-        currentUser = null;
+        const actor=currentUser?{...currentUser}:null;
+        try {
+            if(actor) {
+                const registro={id_auditoria:'AUD-'+Date.now(),fecha_hora:new Date().toLocaleString('es-VE'),id_usuario:actor.id_usuario||'ANONIMO',username:actor.username||'ANONIMO',rol:actor.rol||'ANONIMO',accion:'LOGOUT',entidad:'Sistema',id_entidad:actor.id_usuario||'',detalle:'Cierre de sesión — Usuario: '+(actor.username||''),nivel:'INFO',__actor:actor};
+                db.auditoria.unshift(registro);
+                sendGasRequest('addAuditoria',registro);
+            }
+        } catch(e) { console.warn('No se pudo preparar el cierre de sesión para GAS:',e); }
+        currentUser=null;
         localStorage.removeItem('erp_session_user');
         localStorage.removeItem('erp_session_last_activity');
         clearTimeout(inactivityTimer);
-
-        const userEl = document.getElementById('loginUser');
-        const passEl = document.getElementById('loginPassword');
-        if (userEl) userEl.value = '';
-        if (passEl) passEl.value = '';
-
-        // Cerrar solamente el modal de confirmación y limpiar cualquier
-        // backdrop residual. No se vuelve a llamar abrirModalLogout().
-        const modalEl = document.getElementById('modalConfirmLogout');
-        const modal = modalEl ? (bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl, {backdrop:false, keyboard:true})) : null;
-        if (modal) {
-            modal.hide();
-            try { modal.dispose(); } catch (e) {}
-        }
-
-        document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+        document.body.classList.remove('erp-authenticated');
+        document.querySelectorAll('.modal.show').forEach(el=>{try{bootstrap.Modal.getInstance(el)?.hide();}catch(_) {}});
+        document.querySelectorAll('.modal-backdrop').forEach(el=>el.remove());
         document.body.classList.remove('modal-open');
         document.body.style.removeProperty('overflow');
         document.body.style.removeProperty('padding-right');
-
-        // El overlay de login queda visible después de limpiar las capas.
-        const overlay = document.getElementById('login-overlay');
-        if (overlay) overlay.classList.remove('d-none');
-
-        // Garantiza que el dropdown del usuario quede cerrado.
-        document.querySelectorAll('.dropdown-menu.show').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('[data-bs-toggle="dropdown"][aria-expanded="true"]').forEach(el => el.setAttribute('aria-expanded','false'));
-
-        showToast('Sesión Cerrada', 'Has cerrado sesión correctamente.', 'info');
+        document.getElementById('login-overlay')?.classList.remove('d-none');
+        document.getElementById('loginForm')?.reset();
+        switchTab('dashboard');
+        setTimeout(()=>document.getElementById('loginUser')?.focus(),50);
     }
 
     function enforceRolePermissions() {
         if (!currentUser) return;
-        const isMaster = currentUser.rol === 'Master';
+        const isMaster = String(currentUser.rol||'').trim().toLowerCase() === 'master';
         const isClient = currentUser.rol === 'Cliente';
 
         document.querySelectorAll('.view-admin-master').forEach(el => {
@@ -4309,9 +4366,17 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
         document.getElementById('perfil_rol').value = currentUser.rol || '';
         document.getElementById('perfil_estado').value = currentUser.estado || '';
         document.getElementById('perfil_codigo_cliente').value = currentUser.codigo_cliente || '';
-        document.getElementById('perfil_direccion').value = currentUser.direccion || '';
+        const perfilCliente=(db.clientes||[]).find(c=>c.codigo_cliente===currentUser.codigo_cliente || c.correo===currentUser.email || c.id_cliente===currentUser.codigo_cliente) || {};
+        document.getElementById('perfil_documento').value = perfilCliente.documento_id || currentUser.documento_id || '';
+        document.getElementById('perfil_fecha_nac').value = perfilCliente.fecha_nac || currentUser.fecha_nac || '';
+        document.getElementById('perfil_nacionalidad').value = perfilCliente.nacionalidad || currentUser.nacionalidad || '';
+        document.getElementById('perfil_estado_civil').value = perfilCliente.estado_civil || currentUser.estado_civil || '';
+        document.getElementById('perfil_profesion').value = perfilCliente.profesion || currentUser.profesion || '';
+        document.getElementById('perfil_empresa_labora').value = perfilCliente.empresa_labora || currentUser.empresa_labora || '';
+        document.getElementById('perfil_direccion').value = perfilCliente.direccion || currentUser.direccion || '';
 
-        modalPerfil.show();
+        registrarAuditoria('VIEW', 'Perfil', currentUser.id_usuario, 'Consulta del perfil propio — Usuario: ' + currentUser.username, 'INFO');
+        window.cleanErpModalLayers?.(); modalPerfil.show();
     }
 
     async function guardarPerfil(e) {
@@ -4324,7 +4389,13 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
             username: document.getElementById('perfil_username').value.trim(),
             email: document.getElementById('perfil_email').value.trim(),
             telefono: document.getElementById('perfil_telefono').value.trim(),
-            direccion: document.getElementById('perfil_direccion').value.trim()
+            direccion: document.getElementById('perfil_direccion').value.trim(),
+            documento_id: document.getElementById('perfil_documento').value.trim(),
+            fecha_nac: document.getElementById('perfil_fecha_nac').value,
+            nacionalidad: document.getElementById('perfil_nacionalidad').value.trim(),
+            estado_civil: document.getElementById('perfil_estado_civil').value,
+            profesion: document.getElementById('perfil_profesion').value.trim(),
+            empresa_labora: document.getElementById('perfil_empresa_labora').value.trim()
         };
 
         // Actualizar en db local
@@ -4342,10 +4413,39 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
         registrarAuditoria('UPDATE', 'Usuario', currentUser.id_usuario, 'Perfil actualizado — Usuario: ' + currentUser.username, 'INFO');
         modalPerfil.hide();
         renderUsuarios();
+        showSystemNotification('Perfil actualizado','La información del perfil y, cuando corresponde, la ficha del cliente fueron enviadas al servidor.','success');
         showToast('Perfil Actualizado', 'Tus datos se guardaron correctamente.', 'success');
 
         if (gasUrl) {
-            sendGasRequest('updateUsuario', payload);
+            // Actualización propia del perfil: conserva ID, rol, código de cliente y estado.
+            sendGasRequest('updateUserProfile', payload).then(function(resp){
+                if (resp && resp.success === false) {
+                    showSystemNotification('Error al guardar perfil', resp.message || 'No fue posible actualizar el perfil en Google Sheets.', 'error');
+                }
+            }).catch(function(err){
+                console.error('Error actualizando perfil en Google Sheets:', err);
+                showSystemNotification('Error al guardar perfil', 'No fue posible actualizar el perfil en Google Sheets.', 'error');
+            });
+
+            const codigoClientePerfil = currentUser.codigo_cliente;
+            const linkedClient=(db.clientes||[]).find(c=>c.codigo_cliente===codigoClientePerfil || c.id_usuario===currentUser.id_usuario);
+            if(linkedClient) {
+                sendGasRequest('updateCliente',{
+                    id_cliente:linkedClient.id_cliente,
+                    id_usuario:currentUser.id_usuario,
+                    codigo_cliente:linkedClient.codigo_cliente,
+                    nombre_completo:payload.nombre_completo,
+                    documento_id:payload.documento_id,
+                    telefono:payload.telefono,
+                    correo:payload.email,
+                    direccion:payload.direccion,
+                    fecha_nac:payload.fecha_nac,
+                    nacionalidad:payload.nacionalidad,
+                    estado_civil:payload.estado_civil,
+                    profesion:payload.profesion,
+                    empresa_labora:payload.empresa_labora
+                }).catch(function(err){ console.error('Error actualizando ficha de cliente:', err); });
+            }
         }
     }
 
@@ -4420,9 +4520,197 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
         document.getElementById('lbl-kpi-5').innerText = isAdmin ? 'Créditos Activos' : 'Mis Créditos';
         document.getElementById('kpi-5-valor').innerText = countCreditosCuotas;
         document.getElementById('desc-kpi-5').innerText = isAdmin ? 'Cuotas activas de financiamiento' : 'Tus cuotas de financiamiento';
+
+        renderMasterDashboardOperativo();
     }
 
     
+    // SECCIÓN: DASHBOARD MASTER - KPIs INTERACTIVOS Y VALIDACIONES
+    let _facturaPDFActual = null;
+
+    function esMasterActual(){ return !!(currentUser && String(currentUser.rol || '').trim().toLowerCase() === 'master'); }
+
+    function clientePorFactura(f){
+        if(!f) return null;
+        return (db.clientes||[]).find(c => String(c.codigo_cliente)===String(f.id_cliente) || String(c.id_cliente)===String(f.id_cliente)) || null;
+    }
+
+    function escapeHtmlMaster(v){ return String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function escapeJsMaster(v){ return String(v ?? '').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\n/g,' '); }
+
+    function renderMasterDashboardOperativo(){
+        const panel=document.getElementById('master-pending-validation-panel');
+        const list=document.getElementById('master-pending-validation-list');
+        const summary=document.getElementById('master-pending-validation-summary');
+        if(!panel || !list || !summary) return;
+        if(!esMasterActual()){ panel.classList.add('d-none'); return; }
+        const pendientes=(db.facturas||[]).filter(f=>String(f.estado_factura||'').trim().toLowerCase()==='en validación');
+        panel.classList.remove('d-none');
+        summary.textContent=pendientes.length ? `${pendientes.length} factura(s) tienen pagos reportados y requieren validación.` : 'No hay facturas pendientes de validación.';
+        list.innerHTML=pendientes.slice(0,8).map(f=>{
+            const c=clientePorFactura(f), p=(db.pagos||[]).find(x=>String(x.id_factura)===String(f.id_factura));
+            return `<div class="master-list-row d-flex justify-content-between align-items-center gap-2 flex-wrap">
+                <div><button class="btn btn-link p-0 fw-bold text-primary text-decoration-none" onclick="abrirFacturaDesdeMaster('${escapeJsMaster(f.id_factura)}')">${escapeHtmlMaster(f.id_factura)}</button>
+                <span class="text-muted small ms-2">${escapeHtmlMaster(c?.nombre_completo||f.id_cliente||'Cliente')}</span></div>
+                <div class="d-flex align-items-center gap-2"><span class="badge bg-warning-subtle text-warning border">En Validación</span><span class="fw-bold">$${Number(f.monto_total||0).toFixed(2)}</span></div>
+            </div>`;
+        }).join('') || '<div class="text-muted small">Las nuevas facturas aparecerán aquí automáticamente.</div>';
+    }
+
+    function abrirKpiMaster(tipo){
+        if(!esMasterActual()) return;
+        const body=document.getElementById('modalKpiMasterBody'), title=document.getElementById('modalKpiMasterTitle'), sub=document.getElementById('modalKpiMasterSubtitle');
+        if(!body||!title||!sub) return;
+        const titulo={clientes:'Todos los clientes',pagadas:'Facturas pagadas',pendientes:'Facturas pendientes',validacion:'Facturas en validación',creditos:'Facturas en crédito'}[tipo]||'Indicador';
+        title.innerHTML='<i class="fa-solid fa-list-check text-primary me-2"></i>'+titulo;
+        const facturas=(db.facturas||[]).filter(f=> tipo==='pagadas' ? ['confirmado','pagada'].includes(String(f.estado_factura||'').toLowerCase()) : tipo==='pendientes' ? String(f.estado_factura||'').toLowerCase()==='pendiente' : tipo==='validacion' ? String(f.estado_factura||'').toLowerCase()==='en validación' : tipo==='creditos' ? String(f.estado_factura||'').toLowerCase()==='crédito' : false);
+        if(tipo==='clientes'){
+            sub.textContent=(db.clientes||[]).length+' cliente(s) registrados';
+            body.innerHTML=(db.clientes||[]).map(c=>`<div class="master-list-row py-2 border-bottom"><button class="btn btn-link p-0 fw-bold text-primary text-decoration-none" onclick="mostrarFacturasClienteKpi('${escapeJsMaster(c.id_cliente||c.codigo_cliente)}')">${escapeHtmlMaster(c.nombre_completo||'Sin nombre')}</button><div class="small text-muted">${escapeHtmlMaster(c.codigo_cliente||'')} · ${escapeHtmlMaster(c.documento_id||'')}</div></div>`).join('')||'<div class="text-muted text-center p-3">No hay clientes.</div>';
+        } else {
+            const grupos={}; facturas.forEach(f=>{const c=clientePorFactura(f)||{}; const key=String(c.id_cliente||c.codigo_cliente||f.id_cliente); (grupos[key] ||= {c,f:[]}).f.push(f);});
+            sub.textContent=Object.keys(grupos).length+' cliente(s) · '+facturas.length+' factura(s)';
+            body.innerHTML=Object.values(grupos).map(g=>`<div class="master-list-row py-2 border-bottom"><button class="btn btn-link p-0 fw-bold text-primary text-decoration-none" onclick="mostrarFacturasClienteKpi('${escapeJsMaster(g.c.id_cliente||g.c.codigo_cliente||g.f[0].id_cliente)}', '${escapeJsMaster(tipo)}')">${escapeHtmlMaster(g.c.nombre_completo||g.f[0].id_cliente||'Cliente')}</button><div class="small text-muted">${g.f.length} factura(s)</div></div>`).join('')||'<div class="text-muted text-center p-3">No hay registros.</div>';
+        }
+        window.cleanErpModalLayers?.(); modalKpiMaster?.show();
+    }
+
+    function mostrarFacturasClienteKpi(idCliente,tipo){
+        const c=(db.clientes||[]).find(x=>String(x.id_cliente)===String(idCliente)||String(x.codigo_cliente)===String(idCliente)); if(!c)return;
+        const estados={pagadas:['confirmado','pagada'],pendientes:['pendiente'],validacion:['en validación'],creditos:['crédito']};
+        const fs=(db.facturas||[]).filter(f=>(String(f.id_cliente)===String(c.id_cliente)||String(f.id_cliente)===String(c.codigo_cliente)) && (!tipo || (estados[tipo]||[]).includes(String(f.estado_factura||'').toLowerCase())));
+        const body=document.getElementById('modalKpiMasterBody'), title=document.getElementById('modalKpiMasterTitle'), sub=document.getElementById('modalKpiMasterSubtitle');
+        title.innerHTML='<i class="fa-solid fa-user text-primary me-2"></i>'+escapeHtmlMaster(c.nombre_completo||'Cliente'); sub.textContent=fs.length+' factura(s)';
+        body.innerHTML=fs.map(f=>`<div class="master-list-row py-2 border-bottom"><button class="btn btn-link p-0 fw-bold text-primary text-decoration-none" onclick="abrirFacturaDesdeMaster('${escapeJsMaster(f.id_factura)}')">${escapeHtmlMaster(f.id_factura)}</button><span class="badge-status ms-2 status-${String(f.estado_factura||'').toLowerCase().replace(/\s+/g,'')}">${escapeHtmlMaster(f.estado_factura||'')}</span><div class="small text-muted mt-1">${escapeHtmlMaster(f.tipo_servicio||'N/A')} · $${Number(f.monto_total||0).toFixed(2)} · Vence: ${escapeHtmlMaster(f.fecha_vencimiento||'N/A')}</div></div>`).join('')||'<div class="text-muted text-center p-3">No hay facturas para este indicador.</div>';
+    }
+
+    function abrirFacturaDesdeMaster(idFactura){
+        modalKpiMaster?.hide(); setTimeout(()=>{ switchTab('facturacion'); verResumenFactura(idFactura); },180);
+    }
+    function abrirClienteDesdeMaster(idCliente){
+        const c=(db.clientes||[]).find(x=>String(x.id_cliente)===String(idCliente)||String(x.codigo_cliente)===String(idCliente));
+        modalKpiMaster?.hide(); if(!c)return; setTimeout(()=>{ switchTab('clientes'); const input=document.getElementById('cli-input-cedula'); if(input) input.value=c.documento_id||c.codigo_cliente||''; buscarClienteGestion(); },180);
+    }
+
+    function construirPayloadQRFactura(f){
+        const c=clientePorFactura(f)||{nombre_completo:'Cliente',documento_id:'',codigo_cliente:''};
+        const p=(db.pagos||[]).find(x=>String(x.id_factura)===String(f.id_factura))||{};
+        const servicio=f.tipo_servicio==='Otro...'?(f.especifique_servicio||'Otro'):f.tipo_servicio||'N/A';
+        const estado=f.estado_factura||'N/A';
+        const metodo=p.metodo_pago||f.metodo_pago||'N/A';
+        const referencia=p.referencia||f.referencia_pago||'N/A';
+        const fechaPago=p.fecha_pago||f.fecha_pago||'N/A';
+        const bancoOrigen=p.banco_origen||f.banco_origen||'N/A';
+        const bancoDestino=p.banco_destino||f.banco_destino||'N/A';
+        const clienteCodigo=c.codigo_cliente||f.id_cliente||'N/A';
+        const notas=f.notas||'Sin notas registradas.';
+        return [
+            'LC SOLUCIONES TECNOLÓGICAS',
+            'FACTURA / COMPROBANTE',
+            'Factura: '+(f.id_factura||'N/A'),
+            'Estado: '+estado,
+            '--- DATOS DE FACTURA ---',
+            'Emisión: '+(f.fecha_emision||'N/A'),
+            'Vencimiento: '+(f.fecha_vencimiento||'N/A'),
+            '--- CLIENTE ---',
+            'Nombre: '+(c.nombre_completo||'N/A'),
+            'Documento: '+(c.documento_id||'N/A'),
+            'Código: '+clienteCodigo,
+            '--- SERVICIO ---',
+            'Servicio: '+servicio,
+            'Monto: $'+Number(f.monto_total||0).toFixed(2),
+            '--- INFORMACIÓN DEL PAGO ---',
+            'Fecha pago: '+fechaPago,
+            'Método: '+metodo,
+            'Referencia: '+referencia,
+            'Banco emisor: '+bancoOrigen,
+            'Banco receptor: '+bancoDestino,
+            '--- OBSERVACIONES ---',
+            notas,
+            'TOTAL: $'+Number(f.monto_total||0).toFixed(2)
+        ].join('\n');
+    }
+
+    let _qrFacturaLoaderPromise = null;
+    async function asegurarLibreriaQRFactura(){
+        if(window.QRCode?.toDataURL) return true;
+        if(_qrFacturaLoaderPromise) return _qrFacturaLoaderPromise;
+        _qrFacturaLoaderPromise = new Promise(resolve => {
+            const fuentes = [
+                'https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js',
+                'https://unpkg.com/qrcode@1.5.4/build/qrcode.min.js'
+            ];
+            let indice = 0;
+            const intentar = () => {
+                if(window.QRCode?.toDataURL) return resolve(true);
+                if(indice >= fuentes.length) return resolve(false);
+                const src = fuentes[indice++];
+                const script = document.createElement('script');
+                script.src = src;
+                script.async = true;
+                script.onload = () => resolve(!!window.QRCode?.toDataURL);
+                script.onerror = () => { script.remove(); intentar(); };
+                document.head.appendChild(script);
+            };
+            intentar();
+        });
+        return _qrFacturaLoaderPromise;
+    }
+
+    async function generarQRFacturaDataUrl(text){
+        const contenido = String(text||'');
+        try{
+            const disponible = await asegurarLibreriaQRFactura();
+            if(disponible && window.QRCode?.toDataURL){
+                const dataUrl = await window.QRCode.toDataURL(contenido,{
+                    width:220,
+                    margin:1,
+                    errorCorrectionLevel:'M',
+                    color:{dark:'#111111',light:'#FFFFFF'}
+                });
+                if(dataUrl) return dataUrl;
+            }
+        }catch(e){
+            console.warn('No se pudo generar QR local de factura:',e);
+        }
+        // Respaldo externo: evita que el QR desaparezca si el CDN de la librería no carga.
+        return 'https://quickchart.io/qr?size=220&margin=2&text='+encodeURIComponent(contenido);
+    }
+
+    async function imprimirFacturaConfirmada(){
+        const f=_facturaPDFActual; if(!f)return;
+        const estado=String(f.estado_factura||'').toLowerCase();
+        if(!['confirmado','pagada'].includes(estado)){ showToast('Comprobante no disponible','El comprobante PDF solo puede emitirse cuando la factura está confirmada.','warning'); return; }
+        const c=clientePorFactura(f)||{nombre_completo:'Cliente',documento_id:'',codigo_cliente:''};
+        const p=(db.pagos||[]).find(x=>String(x.id_factura)===String(f.id_factura))||{};
+        const esc=escapeHtmlMaster;
+        const servicio=f.tipo_servicio==='Otro...'?(f.especifique_servicio||'Otro'):f.tipo_servicio||'N/A';
+        const fechaPago=p.fecha_pago||f.fecha_pago||'N/A';
+        const metodo=p.metodo_pago||f.metodo_pago||'N/A';
+        const referencia=p.referencia||f.referencia_pago||'N/A';
+        const bancoOrigen=p.banco_origen||f.banco_origen||'N/A';
+        const bancoDestino=p.banco_destino||f.banco_destino||'N/A';
+        const notas=f.notas||'Sin notas registradas.';
+        const qrPayload=construirPayloadQRFactura(f);
+        const qrData=await generarQRFacturaDataUrl(qrPayload);
+        const qrHtml=`<div class="invoice-qr-wrap"><div class="invoice-qr-title">¡GRACIAS POR SU PAGO!</div><img class="invoice-qr" src="${qrData}" alt="Código QR de factura" loading="eager"><div class="invoice-qr-caption">Escanee para consultar la información de este comprobante</div></div>`;
+        const html=`<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Factura ${esc(f.id_factura)}</title><style>
+        *{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;font-size:10px;line-height:1.25}.ticket{width:57mm;margin:0 auto;padding:3.5mm 3mm 4mm}.brand{display:flex;align-items:center;gap:2.5mm;border-bottom:1px dashed #555;padding-bottom:2.5mm;margin-bottom:2.5mm}.brand-mark{width:10mm;height:10mm;border-radius:2.4mm;background:#eff6ff;color:#2563eb;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}.brand-name{font-size:11px;font-weight:900;line-height:1.05}.brand-sub{font-size:8px;color:#555;margin-top:1px}.head{display:flex;align-items:flex-start;justify-content:space-between;gap:2mm;margin-bottom:2.2mm}.kicker{font-size:8px;text-transform:uppercase;letter-spacing:.4px;font-weight:800;color:#555}.number{font-size:12px;font-weight:900}.status{text-align:center;border:1px solid #222;border-radius:10px;padding:1.5mm 2mm;font-weight:800;font-size:9px;margin-bottom:2.5mm}.section{border:1px solid #bbb;border-radius:3px;padding:2mm;margin-bottom:2mm}.section-title{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #ddd;padding-bottom:1mm;margin-bottom:1.2mm}.row{display:flex;justify-content:space-between;gap:2mm;margin:.8mm 0;align-items:flex-start}.label{font-weight:700;min-width:30%}.value{text-align:right;max-width:68%;word-break:break-word}.note{font-size:8px;word-break:break-word;line-height:1.35}.total{border-top:1px dashed #333;border-bottom:1px dashed #333;padding:2mm 0;margin-top:2mm;text-align:center;font-size:14px;font-weight:900}.qr{text-align:center;padding:2mm 0 1mm}.qr-title{font-size:9px;font-weight:900;margin-bottom:1.5mm}.qr img{width:34mm;height:34mm;display:block;margin:0 auto 1mm}.qr-caption{font-size:7px;color:#555}.footer{text-align:center;font-size:7px;margin-top:2.5mm;color:#444}.no-print{display:block;margin:10px auto;padding:8px 12px;border:1px solid #333;background:#fff;cursor:pointer;border-radius:4px}@page{size:57mm auto;margin:0}@media print{html,body{width:57mm;margin:0!important;padding:0!important}.ticket{width:57mm;padding:2.5mm 2.5mm 3mm}.no-print{display:none}}</style></head><body><main class="ticket">
+        <div class="brand"><div class="brand-mark">LC</div><div><div class="brand-name">SOLUCIONES TECNOLÓGICAS</div><div class="brand-sub">LC · Comprobante de factura</div></div></div>
+        <div class="head"><div><div class="kicker">FACTURA</div><div class="number">${esc(f.id_factura)}</div></div><div class="status">${esc(String(f.estado_factura||'CONFIRMADO').toUpperCase())}</div></div>
+        <div class="section"><div class="section-title">Datos de factura</div><div class="row"><span class="label">Emisión</span><span class="value">${esc(f.fecha_emision||'N/A')}</span></div><div class="row"><span class="label">Vencimiento</span><span class="value">${esc(f.fecha_vencimiento||'N/A')}</span></div></div>
+        <div class="section"><div class="section-title">Cliente</div><div class="row"><span class="label">Nombre</span><span class="value">${esc(c.nombre_completo||'N/A')}</span></div><div class="row"><span class="label">Documento</span><span class="value">${esc(c.documento_id||'N/A')}</span></div><div class="row"><span class="label">Código</span><span class="value">${esc(c.codigo_cliente||f.id_cliente||'N/A')}</span></div></div>
+        <div class="section"><div class="section-title">Servicio</div><div class="row"><span class="label">Servicio</span><span class="value">${esc(servicio)}</span></div><div class="row"><span class="label">Monto</span><span class="value">$${Number(f.monto_total||0).toFixed(2)}</span></div></div>
+        <div class="section"><div class="section-title">Información del pago</div><div class="row"><span class="label">Fecha pago</span><span class="value">${esc(fechaPago)}</span></div><div class="row"><span class="label">Método</span><span class="value">${esc(metodo)}</span></div><div class="row"><span class="label">Referencia</span><span class="value">${esc(referencia)}</span></div><div class="row"><span class="label">Banco emisor</span><span class="value">${esc(bancoOrigen)}</span></div><div class="row"><span class="label">Banco receptor</span><span class="value">${esc(bancoDestino)}</span></div></div>
+        <div class="section"><div class="section-title">Observaciones</div><div class="note">${esc(notas)}</div></div>
+        <div class="total">TOTAL: $${Number(f.monto_total||0).toFixed(2)}</div>
+        ${qrHtml.replace('invoice-qr-wrap','qr').replace('invoice-qr-title','qr-title').replace('invoice-qr','qr img').replace('invoice-qr-caption','qr-caption')}
+        <div class="footer">Comprobante confirmado · Conserve este documento</div>
+        </main><button class="no-print" onclick="window.print()">Imprimir / Guardar PDF</button><script>window.onload=()=>setTimeout(()=>window.print(),250);<\/script></body></html>`;
+        const w=window.open('','_blank','width=420,height=760'); if(!w){showToast('Ventana bloqueada','Permita ventanas emergentes para imprimir el comprobante.','warning');return;} w.document.open();w.document.write(html);w.document.close();
+    }
+
     // SECCIÓN: ESTADO DEL SERVICIO EN DASHBOARD
     
     function renderDashboardServicio() {
@@ -4452,19 +4740,33 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
             boxClient.classList.add('d-none');
             boxAdmin.classList.remove('d-none');
 
-            const selectCli = document.getElementById('dashSelectClienteEstado');
-            selectCli.innerHTML = '<option value="">-- Seleccionar Cliente --</option>' +
-                db.clientes.map(c => `<option value="${c.id_cliente}">${c.nombre_completo} (${c.codigo_cliente})</option>`).join('');
+            const datalist = document.getElementById('dashClientesDatalist');
+            if (datalist) datalist.innerHTML = (db.clientes || []).map(c => `<option value="${escapeHtmlMaster(c.nombre_completo || '')} — ${escapeHtmlMaster(c.codigo_cliente || '')} — ${escapeHtmlMaster(c.documento_id || '')}"></option>`).join('');
+            const input = document.getElementById('dashClienteBusqueda');
+            if (input && !input.value) { input.value = ''; document.getElementById('dashSelectClienteEstado').value = ''; }
             cargarEstadoClienteDashboard();
         }
     }
 
+    function buscarClienteEstadoDashboard() {
+        const input = document.getElementById('dashClienteBusqueda');
+        const hidden = document.getElementById('dashSelectClienteEstado');
+        if (!input || !hidden) return;
+        const raw = input.value.trim();
+        const cliente = buscarClientePorCualquierDato(raw) || (db.clientes || []).find(c => String(c.nombre_completo || '').toLowerCase() === raw.toLowerCase());
+        if (cliente) { hidden.value = cliente.id_cliente || cliente.codigo_cliente || ''; cargarEstadoClienteDashboard(); }
+        else hidden.value = '';
+    }
+
     function cargarEstadoClienteDashboard() {
-        const idCli = document.getElementById('dashSelectClienteEstado').value;
+        const idCli = document.getElementById('dashSelectClienteEstado')?.value;
         const selectEstado = document.getElementById('dashSelectEstadoServicio');
-        if (!idCli) { selectEstado.value = 'SOLVENTE'; return; }
-        const client = db.clientes.find(c => c.id_cliente === idCli || c.codigo_cliente === idCli);
-        if (client) selectEstado.value = client.estado_servicio || 'SOLVENTE';
+        if (!idCli) { if(selectEstado) selectEstado.value = 'ACTIVO'; return; }
+        const client = db.clientes.find(c => String(c.id_cliente) === String(idCli) || String(c.codigo_cliente) === String(idCli));
+        if (client && selectEstado) {
+            const estado = String(client.estado_servicio || 'ACTIVO').toUpperCase();
+            selectEstado.value = ['ACTIVO','MOROSO','INACTIVO','SUSPENDIDO'].includes(estado) ? estado : 'ACTIVO';
+        }
     }
 
     async function actualizarEstadoServicioDashboard() {
@@ -4495,7 +4797,6 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
 
 
             renderClientes();
-            renderDashboardServicio();
             renderNotificaciones();
         renderAuditoria();
             updateKPIs();
@@ -4703,6 +5004,7 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
             facturacion: 'Gestión de Facturación',
             creditos: 'Financiamientos y Créditos',
             pagos: 'Módulo de Pagos',
+            bancos: 'Datos Bancarios',
             notificaciones: 'Centro de Notificaciones',
             portal: 'Control del Portal',
             auditoria: 'Auditoría del Sistema'
@@ -4724,7 +5026,6 @@ html[data-bs-theme="dark"] #modalCliente .modal-header-pro { background:linear-g
         }
 
         if (tabId === 'dashboard') {
-            renderDashboardServicio();
             updateKPIs();
             setTimeout(renderDashboardCharts, 100);
         }
@@ -4869,15 +5170,8 @@ function mostrarRegistroOMantenimiento() {
     if (portalActivo) {
         const modalEl = document.getElementById('modalRegistroLogin');
         if (!modalEl) return;
-        
-        // Asegurar que el backdrop aparezca por encima del login overlay
-        modalEl.addEventListener('shown.bs.modal', function handler() {
-            const backdrop = document.querySelector('.modal-backdrop.show');
-            if (backdrop) backdrop.style.zIndex = '99998';
-            modalEl.removeEventListener('shown.bs.modal', handler);
-        }, { once: true });
 
-        const modalReg = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+        const modalReg = bootstrap.Modal.getOrCreateInstance(modalEl,{backdrop:false,keyboard:true,focus:true});
         modalReg.show();
     } else {
         const modalEl = document.getElementById('modalPortalMantenimiento');
@@ -4885,11 +5179,11 @@ function mostrarRegistroOMantenimiento() {
 
         modalEl.addEventListener('shown.bs.modal', function handler() {
             const backdrop = document.querySelector('.modal-backdrop.show');
-            if (backdrop) backdrop.style.zIndex = '99998';
+            if (backdrop) 
             modalEl.removeEventListener('shown.bs.modal', handler);
         }, { once: true });
 
-        const modalMant = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+        const modalMant = bootstrap.Modal.getOrCreateInstance(modalEl,{backdrop:false,keyboard:true,focus:true});
         modalMant.show();
     }
 }
@@ -4968,7 +5262,7 @@ function mostrarRegistroOMantenimiento() {
     
     function abrirModalCambiarPassword() {
         document.getElementById('formChangePassword').reset();
-        modalPwd.show();
+        window.cleanErpModalLayers?.(); modalPwd.show();
     }
 
     async function guardarNuevaContrasena(e) {
@@ -5129,7 +5423,7 @@ function mostrarRegistroOMantenimiento() {
             document.getElementById('emp_id').value = '';
             document.getElementById('modalEmpresaTitle').innerHTML = '<i class="fa-solid fa-building text-primary me-2"></i>Registrar Empresa';
         }
-        modalEmp.show();
+        window.cleanErpModalLayers?.(); modalEmp.show();
     }
 
     async function guardarEmpresa(e) {
@@ -5310,7 +5604,7 @@ function mostrarRegistroOMantenimiento() {
         }
 
         if (!modalVerUsuarioInstance) {
-            modalVerUsuarioInstance = new bootstrap.Modal(document.getElementById('modalVerUsuario'));
+            modalVerUsuarioInstance = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalVerUsuario'), {backdrop:false,keyboard:true,focus:true});
         }
         modalVerUsuarioInstance.show();
     }
@@ -5333,7 +5627,7 @@ function mostrarRegistroOMantenimiento() {
         document.getElementById('formUsuario').reset();
         document.getElementById('usr_id').value = '';
         document.getElementById('modalUsuarioTitle').innerHTML = '<i class="fa-solid fa-user-gear text-primary me-2"></i>Crear Usuario';
-        modalUsr.show();
+        window.cleanErpModalLayers?.(); modalUsr.show();
     }
 
     function abrirModalEditarUsuario(id) {
@@ -5347,7 +5641,7 @@ function mostrarRegistroOMantenimiento() {
         document.getElementById('usr_rol').value = u.rol;
         document.getElementById('usr_estado').value = u.estado;
         document.getElementById('modalUsuarioTitle').innerHTML = '<i class="fa-solid fa-user-gear text-primary me-2"></i>Modificar Usuario';
-        modalUsr.show();
+        window.cleanErpModalLayers?.(); modalUsr.show();
     }
 
     async function guardarUsuario(e) {
@@ -5389,11 +5683,18 @@ function mostrarRegistroOMantenimiento() {
     }
 
     
+
+    function normalizarBusquedaCliente(v){return String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();}
+    function buscarClientePorCualquierDato(raw){
+        const q=normalizarBusquedaCliente(raw); if(!q)return null; const digits=q.replace(/\D/g,'');
+        return (db.clientes||[]).find(c=>Object.values(c||{}).some(v=>normalizarBusquedaCliente(v).includes(q)) || (digits && String(c.documento_id||'').replace(/\D/g,'').includes(digits)))||null;
+    }
+
     // SECCIÓN: CLIENTES - CRUD COMPLETO
     
     function buscarClienteGestion() {
     const input = document.getElementById('cli-input-cedula');
-    const raw = input.value.trim().replace(/\D/g, '');
+    const raw = input.value.trim();
     
     if (!raw) { input.focus(); return; }
 
@@ -5401,9 +5702,7 @@ function mostrarRegistroOMantenimiento() {
     document.getElementById('cli-estado-vacio').classList.add('d-none');
     document.getElementById('cli-tabla-completa').classList.add('d-none');
 
-    const cliente = db.clientes.find(c => 
-        String(c.documento_id).replace(/\D/g, '') === raw
-    );
+    const cliente = buscarClientesPorCualquierDato(raw)[0] || buscarClientePorCualquierDato(raw);
 
     if (!cliente) {
         document.getElementById('cli-estado-vacio').classList.remove('d-none');
@@ -5519,7 +5818,7 @@ function mostrarRegistroOMantenimiento() {
             document.getElementById('modalClienteTitle').innerHTML = '<i class="fa-solid fa-address-card text-primary me-2"></i>Registrar Cliente';
             secUser.classList.remove('d-none');
         }
-        modalCli.show();
+        window.cleanErpModalLayers?.(); modalCli.show();
     }
 
     async function guardarCliente(e) {
@@ -5591,7 +5890,6 @@ function mostrarRegistroOMantenimiento() {
         renderModuloPagosSelects();
         renderNotificaciones();
         renderAuditoria();
-        renderDashboardServicio();
         updateKPIs();
         showToast('Clientes', id ? 'Cliente actualizado.' : 'Cliente y Usuario registrados.', 'success');
         if (gasUrl) sendGasRequest(id ? 'updateCliente' : 'addCliente', payloadCliente);
@@ -5603,7 +5901,6 @@ function mostrarRegistroOMantenimiento() {
         registrarAuditoria('DELETE', 'Cliente', id, 'Eliminación de cliente ID: ' + id, 'WARNING');
         renderClientes();
         renderModuloPagosSelects();
-        renderDashboardServicio();
         updateKPIs();
         showToast('Clientes', 'Cliente eliminado.', 'success');
         if (gasUrl) sendGasRequest('deleteCliente', { id_cliente: id });
@@ -5661,153 +5958,65 @@ function mostrarRegistroOMantenimiento() {
     ocultarResultadosFacturacion();
 }
 
-    function abrirModalFactura(id = null) {
-        document.getElementById('formFactura').reset();
-        const selectCli = document.getElementById('fac_cliente');
-        selectCli.innerHTML = db.clientes.map(c => `<option value="${c.codigo_cliente}">${c.nombre_completo} (${c.codigo_cliente})</option>`).join('');
-        document.getElementById('group_fac_especifique').classList.add('d-none');
-
-        // Generar número automático si es nueva factura
-        if (!id) {
-            generarNumeroFactura();
-            document.getElementById('fac_id').value = '';
-            document.getElementById('modalFacturaTitle').innerHTML = '<i class="fa-solid fa-file-invoice text-primary me-2"></i>Emitir Factura';
-        } else {
-            const f = db.facturas.find(x => x.id_factura === id);
-            if (f && f.estado_factura === 'En Validación' && currentUser.rol === 'Cliente') {
-                showSystemNotification('Acción Bloqueada', 'Esta factura está en proceso de validación y no puede modificarse.', 'warning');
-                return;
-            }
-            document.getElementById('fac_id').value = f.id_factura;
-            document.getElementById('fac_cliente').value = f.id_cliente;
-            document.getElementById('fac_tipo_servicio').value = f.tipo_servicio || 'PROYECTO STARTER';
-            document.getElementById('fac_especifique_servicio').value = f.especifique_servicio || '';
-            toggleEspecificarServicio(f.tipo_servicio, 'group_fac_especifique');
-            document.getElementById('fac_numero').value = f.id_factura;
-            document.getElementById('fac_emision').value = f.fecha_emision;
-            document.getElementById('fac_vencimiento').value = f.fecha_vencimiento;
-            document.getElementById('fac_monto').value = f.monto_total;
-            document.getElementById('fac_estado').value = f.estado_factura;
-            document.getElementById('fac_notas').value = f.notas || '';
-            document.getElementById('modalFacturaTitle').innerHTML = '<i class="fa-solid fa-file-invoice text-primary me-2"></i>Modificar Factura';
-        }
-        modalFac.show();
-    }
-
-    async function guardarFactura(e) {
-        e.preventDefault();
-        const id = document.getElementById('fac_id').value;
-        const numFac = document.getElementById('fac_numero').value;
-        const monto = Number(document.getElementById('fac_monto').value);
-        const cliId = document.getElementById('fac_cliente').value;
-
-        const payload = {
-            id_factura: numFac,
-            id_cliente: cliId,
-            tipo_servicio: document.getElementById('fac_tipo_servicio').value,
-            especifique_servicio: document.getElementById('fac_especifique_servicio').value,
-            fecha_emision: document.getElementById('fac_emision').value,
-            fecha_vencimiento: document.getElementById('fac_vencimiento').value,
-            subtotal: (monto * 0.84).toFixed(2),
-            impuestos: (monto * 0.16).toFixed(2),
-            monto_total: monto,
-            estado_factura: document.getElementById('fac_estado').value,
-            notas: document.getElementById('fac_notas').value
-        };
-
-        if (id) {
-            const idx = db.facturas.findIndex(x => x.id_factura === id);
-            db.facturas[idx] = payload;
-        } else {
-            db.facturas.push(payload);
-
-            const notifFac = {
-                id_notificacion: 'NOT-' + Date.now(),
-                id_usuario: cliId,
-                emisor_id: currentUser ? currentUser.id_usuario : 'ADMIN',
-                rol_destino: 'Cliente',
-                tipo: 'Facturación',
-                titulo: 'Nueva Factura Emitida',
-                mensaje: `Se ha emitido la Factura N° ${numFac} por un total de $${monto.toFixed(2)}.`,
-                fecha: new Date().toLocaleString('es-VE'),
-                leido: 'NO'
-            };
-            db.notificaciones.unshift(notifFac);
-            if (gasUrl) sendGasRequest('addNotificacion', notifFac);
-        }
-
-        registrarAuditoria(id ? 'UPDATE' : 'CREATE', 'Factura', numFac, (id ? 'Actualización' : 'Emisión') + ' de factura N° ' + numFac + ' — Cliente: ' + cliId + ' — Monto: $' + monto.toFixed(2), 'INFO');
-        modalFac.hide();
-        renderFacturacionAgrupada();
-        renderModuloPagosSelects();
-        renderNotificaciones();
-        renderAuditoria();
-        updateKPIs();
-        renderDashboardCharts();
-        showToast('Facturación', 'Factura procesada correctamente.', 'success');
-        if (gasUrl) sendGasRequest(id ? 'updateFactura' : 'addFactura', payload);
-    }
-
-    async function eliminarFactura(id) {
-        const f = db.facturas.find(x => x.id_factura === id);
-        if (f && f.estado_factura === 'En Validación') {
-            showSystemNotification('Acción Bloqueada', 'No se puede eliminar una factura en validación.', 'warning');
-            return;
-        }
-        if (!confirm('¿Eliminar esta factura?')) return;
-        db.facturas = db.facturas.filter(x => x.id_factura !== id);
-        registrarAuditoria('DELETE', 'Factura', id, 'Eliminación de factura ID: ' + id, 'WARNING');
-        renderFacturacionAgrupada();
-        renderModuloPagosSelects();
-        updateKPIs();
-        renderDashboardCharts();
-        showToast('Facturación', 'Factura eliminada.', 'success');
-        if (gasUrl) sendGasRequest('deleteFactura', { id_factura: id });
-    }
-
-    function verResumenFactura(idFactura) {
-        const f = db.facturas.find(x => x.id_factura === idFactura);
+    async function verResumenFactura(idFactura) {
+        const f = db.facturas.find(x => String(x.id_factura) === String(idFactura));
         if (!f) return;
-        const c = db.clientes.find(x => x.codigo_cliente === f.id_cliente || x.id_cliente === f.id_cliente) || { nombre_completo: 'Cliente' };
-        const servText = f.tipo_servicio === 'Otro...' ? f.especifique_servicio : f.tipo_servicio;
+        const c = clientePorFactura(f) || {nombre_completo:'Cliente',documento_id:'',codigo_cliente:''};
+        const p = (db.pagos || []).find(x => String(x.id_factura) === String(f.id_factura)) || {};
+        const esc = escapeHtmlMaster;
+        const servicio = f.tipo_servicio === 'Otro...' ? (f.especifique_servicio || 'Otro') : (f.tipo_servicio || 'N/A');
+        const estado = String(f.estado_factura || 'N/A');
+        const confirmado = ['confirmado','pagada'].includes(estado.toLowerCase());
+        const metodo = p.metodo_pago || f.metodo_pago || 'N/A';
+        const referencia = p.referencia || f.referencia_pago || 'N/A';
+        const fechaPago = p.fecha_pago || f.fecha_pago || 'N/A';
+        const bancoOrigen = p.banco_origen || f.banco_origen || 'N/A';
+        const bancoDestino = p.banco_destino || f.banco_destino || 'N/A';
+        const notas = f.notas || 'Sin notas registradas.';
+        const clienteCodigo = c.codigo_cliente || f.id_cliente || 'N/A';
+        const row = (label, value) => '<div class="invoice-kv"><span class="invoice-kv-label">'+label+'</span><span class="invoice-kv-value">'+esc(value || 'N/A')+'</span></div>';
+        const qrPayload = construirPayloadQRFactura(f);
+        const qrData = await generarQRFacturaDataUrl(qrPayload);
+        let html = '<div class="invoice-ticket">'
+          + '<div class="invoice-brand"><div class="invoice-logo-mark">LC</div><div><div class="invoice-brand-name">SOLUCIONES TECNOLÓGICAS</div><div class="invoice-brand-sub">LC · Comprobante de factura</div></div></div>'
+          + '<div class="invoice-head-row"><div><div class="invoice-head-kicker">FACTURA</div><div class="invoice-number">'+esc(f.id_factura)+'</div></div><span class="invoice-status">'+esc(estado.toUpperCase())+'</span></div>'
+          + '<section class="invoice-section"><div class="invoice-section-title"><i class="fa-regular fa-calendar"></i> Datos de la factura</div>'
+          + row('Emisión', f.fecha_emision) + row('Vencimiento', f.fecha_vencimiento) + '</section>'
+          + '<section class="invoice-section"><div class="invoice-section-title"><i class="fa-regular fa-user"></i> Cliente</div>'
+          + row('Nombre', c.nombre_completo) + row('Documento', c.documento_id) + row('Código', clienteCodigo) + '</section>'
+          + '<section class="invoice-section"><div class="invoice-section-title"><i class="fa-solid fa-server"></i> Servicio</div>'
+          + row('Servicio', servicio) + row('Monto', '$'+Number(f.monto_total || 0).toFixed(2)) + '</section>'
+          + '<section class="invoice-section"><div class="invoice-section-title"><i class="fa-solid fa-money-bill-transfer"></i> Información del pago</div>'
+          + row('Fecha pago', fechaPago) + row('Método', metodo) + row('Referencia', referencia) + row('Banco emisor', bancoOrigen) + row('Banco receptor', bancoDestino) + '</section>'
+          + '<section class="invoice-section"><div class="invoice-section-title"><i class="fa-regular fa-note-sticky"></i> Observaciones</div><div class="invoice-note">'+esc(notas)+'</div></section>'
+          + '<div class="invoice-total">TOTAL: $'+Number(f.monto_total || 0).toFixed(2)+'</div>'
+          + '<div class="invoice-qr-wrap"><div class="invoice-qr-title">¡GRACIAS POR SU PAGO!</div><img class="invoice-qr" src="'+qrData+'" alt="Código QR de factura" loading="eager"><div class="invoice-qr-caption">Escanee para consultar la información de este comprobante</div></div>'
+          + '<div class="invoice-footer-note">Comprobante confirmado · Conserve este documento</div>'
+          + '</div>';
 
-        const estadoClass = 'status-' + f.estado_factura.toLowerCase().replace(/\s+/g, '');
-        let htmlVer = '<div class="p-3 border rounded-3 bg-body-tertiary">' +
-            '<div class="d-flex justify-content-between mb-3">' +
-                '<div>' +
-                    '<h6 class="fw-bold m-0">' + c.nombre_completo + '</h6>' +
-                    '<small class="text-muted">Código: ' + f.id_cliente + '</small>' +
-                '</div>' +
-                '<span class="badge-status ' + estadoClass + '">' + f.estado_factura + '</span>' +
-            '</div>' +
-            '<hr>' +
-            '<p class="m-0"><strong>Servicio:</strong> ' + (servText || 'N/A') + '</p>' +
-            '<p class="m-0"><strong>Factura #:</strong> ' + f.id_factura + '</p>' +
-            '<p class="m-0"><strong>Fecha Emisión:</strong> ' + f.fecha_emision + '</p>' +
-            '<p class="m-0"><strong>Fecha Vencimiento:</strong> ' + f.fecha_vencimiento + '</p>' +
-            '<div class="mt-2 p-2 bg-light rounded border">' +
-                '<strong class="text-primary small">Nota:</strong>' +
-                '<p class="m-0 text-dark small mt-1">' + (f.notas || 'Sin notas registradas.') + '</p>' +
-            '</div>';
-        if (f.referencia_pago) {
-            htmlVer += '<hr>' +
-                '<p class="m-0 text-primary"><strong>Método:</strong> ' + f.metodo_pago + ' (' + f.banco_origen + ')</p>' +
-                '<p class="m-0 text-primary"><strong>Referencia:</strong> ' + f.referencia_pago + '</p>' +
-                '<p class="m-0 text-primary"><strong>Fecha Pago:</strong> ' + (f.fecha_pago || 'N/A') + '</p>';
-        }
-        htmlVer += '<hr>' +
-            '<h4 class="fw-bold text-end mt-2 text-primary">Total: $' + Number(f.monto_total).toFixed(2) + '</h4>' +
-        '</div>';
-        document.getElementById('modalVerFacturaBody').innerHTML = htmlVer;
+        document.getElementById('modalVerFacturaBody').innerHTML = html;
+        const pdfBtn = document.getElementById('btn-imprimir-factura');
+        if (pdfBtn) pdfBtn.classList.toggle('d-none', !confirmado);
+        _facturaPDFActual = f;
+        modalVerFac = modalVerFac || bootstrap.Modal.getOrCreateInstance(document.getElementById('modalVerFactura'), {backdrop:false,keyboard:true,focus:true});
+        window.cleanErpModalLayers?.();
         modalVerFac.show();
     }
 
     async function validarPagoAdmin(idFactura, idCliente) {
         const f = db.facturas.find(x => x.id_factura === idFactura);
-        if (f) f.estado_factura = 'Confirmado';
-
         const p = db.pagos.find(x => x.id_factura === idFactura);
-        if (p) p.estado_validacion = 'Confirmado';
+        if (p) {
+            p.estado_validacion = 'Confirmado';
+            if (f) {
+                f.fecha_pago = p.fecha_pago || f.fecha_pago || new Date().toISOString().split('T')[0];
+                f.metodo_pago = p.metodo_pago || f.metodo_pago || '';
+                f.banco_origen = p.banco_origen || f.banco_origen || '';
+                f.banco_destino = p.banco_destino || f.banco_destino || '';
+                f.referencia_pago = p.referencia || f.referencia_pago || '';
+                f.estado_factura = 'Confirmado';
+            }
+        } else if (f) { f.estado_factura = 'Confirmado'; }
 
         // Verificar si es una factura-cuota y actualizar el crédito correspondiente
         const cuotaRelacionada = db.creditos.find(c => c.id_cuota === idFactura);
@@ -5855,7 +6064,7 @@ function mostrarRegistroOMantenimiento() {
         registrarAuditoria('STATUS_CHANGE', 'Factura', idFactura, 'Pago validado — Factura: ' + idFactura + ' — Cliente: ' + idCliente + ' — Estado: Confirmado', 'INFO');
         showToast('Pago Confirmado', `Factura ${idFactura} confirmada. Notificación enviada al cliente.`, 'success');
         if (gasUrl) {
-            sendGasRequest('confirmarPago', { id_factura: idFactura, id_cliente: idCliente });
+            sendGasRequest('confirmarPago', { id_factura: idFactura, id_cliente: idCliente, id_pago: p ? p.id_pago : '' });
             sendGasRequest('addNotificacion', notifCliente);
         }
     }
@@ -5885,11 +6094,9 @@ function buscarClienteCreditos(clienteForzado = null) {
     if (clienteForzado) {
         cliente = clienteForzado;
     } else {
-        if (input) raw = input.value.trim().replace(/\D/g, '');
+        if (input) raw = input.value.trim();
         if (!raw) { if(input) input.focus(); return; }
-        cliente = db.clientes.find(c => 
-            String(c.documento_id).replace(/\D/g, '') === raw
-        );
+        cliente = buscarClientePorCualquierDato(raw);
     }
 
     ocultarResultadosCreditos();
@@ -6057,7 +6264,7 @@ function abrirModalCreditoDesdeBusqueda() {
     }
     document.getElementById('lbl-cred-monto-total').innerText = '$0.00';
     document.getElementById('lbl-cred-monto-cuota').innerText = '$0.00';
-    modalCred.show();
+    window.cleanErpModalLayers?.(); modalCred.show();
 }
 
 function cargarFacturasPendientesCredito() {
@@ -6280,11 +6487,9 @@ async function guardarCredito(e) {
         if (clienteForzado) {
             cliente = clienteForzado;
         } else {
-            if (input) raw = input.value.trim().replace(/\D/g, '');
+            if (input) raw = input.value.trim();
             if (!raw) { if(input) input.focus(); return; }
-            cliente = db.clientes.find(c => 
-                String(c.documento_id).replace(/\D/g, '') === raw
-            );
+            cliente = buscarClientePorCualquierDato(raw);
         }
 
         ocultarResultadosPagos();
@@ -6379,6 +6584,8 @@ async function guardarCredito(e) {
                 '<td class="fw-bold">' + p.id_factura + '</td>' +
                 '<td><span class="badge bg-light text-dark border">' + p.metodo_pago + '</span></td>' +
                 '<td><small class="text-muted">' + (p.referencia || 'N/A') + '</small></td>' +
+                '<td><small>' + (p.banco_origen || 'N/A') + '</small></td>' +
+                '<td><small>' + (p.banco_destino || 'N/A') + '</small></td>' +
                 '<td class="fw-bold text-success">$' + Number(p.monto_pago || 0).toFixed(2) + '</td>' +
                 '<td class="text-primary">Bs ' + Number(p.monto_pago_bs || 0).toFixed(2) + '</td>' +
                 '<td><span class="badge-status ' + estadoClass + '">' + p.estado_validacion + '</span></td>' +
@@ -6388,77 +6595,21 @@ async function guardarCredito(e) {
         area.classList.remove('d-none');
     }
 
-    function abrirModalProcesarPago(idFacturaPreseleccionada) {
-        const cliente = _payClienteSeleccionado;
-        if (!cliente) {
-            showSystemNotification('Cliente No Seleccionado', 'Primero busque un cliente.', 'warning');
-            return;
-        }
+    let _binanceP2PRate=0;
+    let _binanceP2PRateShownAt='';
+    const BANCOS_ORIGEN_VE=[
+      ['0102','Banco de Venezuela'],['0104','Banco Venezolano de Crédito'],['0105','Mercantil Banco'],['0108','BBVA Provincial'],['0114','Bancaribe'],['0115','Banco Exterior'],['0128','Banco Caroní'],['0134','Banesco'],['0137','Banco Sofitasa'],['0138','Banco Plaza'],['0146','Bangente'],['0151','BFC Banco Fondo Común'],['0156','100% Banco'],['0157','DelSur Banco Universal'],['0163','Banco del Tesoro'],['0166','Banco Agrícola de Venezuela'],['0168','Bancrecer'],['0169','R4 Banco Microfinanciero'],['0171','Banco Activo'],['0172','Bancamiga'],['0173','Banco Internacional de Desarrollo'],['0174','Banplus'],['0175','Banco Digital de los Trabajadores'],['0177','BANFANB'],['0178','N58 Banco Digital'],['0191','Banco Nacional de Crédito'],['BINANCE','Binance'],['ZINLI','Zinli']
+    ];
 
-        // Limpiar formulario
-        const form = document.getElementById('formProcesarPago');
-        if (form) form.reset();
-
-        document.getElementById('pay-modal-cliente').value = cliente.codigo;
-        document.getElementById('pay-modal-subtitle').innerText = 'Cliente: ' + cliente.nombre + ' (' + cliente.codigo + ')';
-        document.getElementById('pay-modal-fecha').value = new Date().toISOString().split('T')[0];
-
-        const selectFac = document.getElementById('pay-modal-factura');
-        const pendientes = db.facturas.filter(f => 
-            (f.id_cliente === cliente.codigo || f.id_cliente === cliente.id) && 
-            f.estado_factura === 'Pendiente'
-        );
-
-        if (pendientes.length === 0) {
-            selectFac.innerHTML = '<option value="">Sin facturas pendientes</option>';
-            document.getElementById('pay-modal-detalle-pendientes').innerHTML = 
-                '<div class="alert alert-success py-2 rounded-3"><small class="fw-semibold"><i class="fa-solid fa-check-circle me-1"></i> El cliente no tiene facturas pendientes.</small></div>';
-        } else {
-            let optionsHtml = '<option value="">-- Seleccione Factura --</option>';
-            let preselectedOption = null;
-            pendientes.forEach(f => {
-                const isPreselected = idFacturaPreseleccionada && f.id_factura === idFacturaPreseleccionada;
-                const selectedAttr = isPreselected ? ' selected' : '';
-                optionsHtml += '<option value="' + f.id_factura + '" data-monto="' + f.monto_total + '"' + selectedAttr + '>' + 
-                    f.id_factura + ' — $' + Number(f.monto_total).toFixed(2) + ' (Vence: ' + (f.fecha_vencimiento || 'N/A') + ')' + 
-                '</option>';
-                if (isPreselected) preselectedOption = f;
-            });
-            selectFac.innerHTML = optionsHtml;
-            document.getElementById('pay-modal-detalle-pendientes').innerHTML = 
-                '<div class="alert alert-warning py-2 rounded-3"><small class="fw-semibold"><i class="fa-solid fa-circle-exclamation me-1"></i> Tiene ' + pendientes.length + ' factura(s) pendiente(s) de pago.</small></div>';
-            if (preselectedOption) {
-                document.getElementById('pay-modal-monto').value = preselectedOption.monto_total;
-                document.getElementById('pay-modal-monto-bs').value = (preselectedOption.monto_total * 1.00).toFixed(2);
-            }
-        }
-
-        // Destruir instancia previa si existe para evitar conflictos
-        if (modalProcesarPagoInstance) {
-            try { modalProcesarPagoInstance.dispose(); } catch(e) {}
-        }
-
-        // Limpiar cualquier backdrop residual
-        document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = '';
-        document.body.style.paddingRight = '';
-
-        // Crear nueva instancia del modal
-        modalProcesarPagoInstance = new bootstrap.Modal(document.getElementById('modalProcesarPago'), {
-            backdrop: true,
-            keyboard: true
-        });
-        modalProcesarPagoInstance.show();
-    }
-
-    function autoCompletarMontoPagoModal() {
-        const selectFac = document.getElementById('pay-modal-factura');
-        const opt = selectFac.options[selectFac.selectedIndex];
-        const monto = opt ? opt.getAttribute('data-monto') : 0;
-        document.getElementById('pay-modal-monto').value = monto;
-        document.getElementById('pay-modal-monto-bs').value = (monto * 1.00).toFixed(2);
-    }
+    const BANCOS_DESTINO_PAGO=[['0102','Banco de Venezuela'],['0175','Banco Digital de los Trabajadores'],['0108','BBVA Provincial'],['BINANCE','Binance'],['ZINLI','Zinli']];
+    function cargarBancosOrigenPago(){const sel=document.getElementById('pay-modal-banco');if(!sel)return;const val=sel.value;sel.innerHTML='<option value="">-- Seleccione banco origen --</option>'+BANCOS_ORIGEN_VE.map(([c,n])=>'<option value="'+c+'">'+c+' - '+escapeHtmlPago(n)+'</option>').join('');if(val)sel.value=val;}
+    function cargarBancosDestinoPago(){const sel=document.getElementById('pay-modal-banco-destino'),info=document.getElementById('pay-modal-banco-destino-info');if(!sel)return;sel.innerHTML='<option value="">-- Seleccione banco destino --</option>'+BANCOS_DESTINO_PAGO.map(([v,n])=>'<option value="'+v+'">'+v+' - '+escapeHtmlPago(n)+'</option>').join('');sel.onchange=()=>{const b=BANCOS_DESTINO_PAGO.find(x=>x[0]===sel.value);if(info)info.textContent=b?'Destino: '+b[0]+' - '+b[1]:'';};}
+    function escapeHtmlPago(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+    function recalcularMontoBsPago(){const usd=Number(document.getElementById('pay-modal-monto')?.value||0),el=document.getElementById('pay-modal-monto-bs');if(el)el.value=usd>0&&_binanceP2PRate>0?(usd*_binanceP2PRate).toFixed(2):'';}
+    function actualizarTasaVisible(){const label=document.getElementById('pay-modal-tasa-binance'),fecha=document.getElementById('pay-modal-tasa-fecha');if(label)label.textContent=_binanceP2PRate>0?_binanceP2PRate.toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2})+' Bs/USDT':'No disponible';if(fecha)fecha.textContent=_binanceP2PRateShownAt?'Tasa capturada: '+_binanceP2PRateShownAt:'Esperando tasa...';recalcularMontoBsPago();}
+    async function cargarTasaBinanceP2P(){const label=document.getElementById('pay-modal-tasa-binance'),fecha=document.getElementById('pay-modal-tasa-fecha');try{const r=await fetch(gasUrl+'?action=getBinanceP2PRate&fiat=VES&asset=USDT&tradeType=SELL',{cache:'no-store'});const d=await r.json();const rate=Number(d.rate||d.price||0);if(!(rate>0))throw new Error('tasa no disponible');_binanceP2PRate=rate;_binanceP2PRateShownAt=new Date().toLocaleString('es-VE');actualizarTasaVisible();return rate;}catch(e){_binanceP2PRate=0;_binanceP2PRateShownAt=new Date().toLocaleString('es-VE');if(label)label.textContent='No disponible';if(fecha)fecha.textContent='No fue posible consultar Binance P2P: '+e.message;recalcularMontoBsPago();return 0;}}
+    async function abrirModalProcesarPago(idFacturaPreseleccionada){const cliente=_payClienteSeleccionado;if(!cliente){showSystemNotification('Cliente No Seleccionado','Primero busque un cliente.','warning');return;}const modalEl=document.getElementById('modalProcesarPago');if(!modalEl)return;document.getElementById('formProcesarPago')?.reset();_binanceP2PRate=0;_binanceP2PRateShownAt=new Date().toLocaleString('es-VE');document.getElementById('pay-modal-cliente').value=cliente.codigo;document.getElementById('pay-modal-subtitle').innerText='Cliente: '+cliente.nombre+' ('+cliente.codigo+')';document.getElementById('pay-modal-fecha').value=new Date().toISOString().split('T')[0];cargarBancosOrigenPago();cargarBancosDestinoPago();const select=document.getElementById('pay-modal-factura');const pendientes=db.facturas.filter(f=>(String(f.id_cliente)===String(cliente.codigo)||String(f.id_cliente)===String(cliente.id))&&f.estado_factura==='Pendiente');select.innerHTML=pendientes.length?'<option value="">-- Seleccione Factura --</option>'+pendientes.map(f=>'<option value="'+f.id_factura+'" data-monto="'+f.monto_total+'"'+(String(f.id_factura)===String(idFacturaPreseleccionada)?' selected':'')+'>'+f.id_factura+' — $'+Number(f.monto_total).toFixed(2)+' (Vence: '+(f.fecha_vencimiento||'N/A')+')</option>').join(''):'<option value="">Sin facturas pendientes</option>';if(idFacturaPreseleccionada){const f=pendientes.find(x=>String(x.id_factura)===String(idFacturaPreseleccionada));if(f){select.value=f.id_factura;document.getElementById('pay-modal-monto').value=Number(f.monto_total).toFixed(2);}}window.cleanErpModalLayers?.();await cargarTasaBinanceP2P();modalProcesarPagoInstance=bootstrap.Modal.getOrCreateInstance(modalEl,{backdrop:false,keyboard:true,focus:true});modalProcesarPagoInstance.show();actualizarTasaVisible();if(idFacturaPreseleccionada)autoCompletarMontoPagoModal();}
+    function autoCompletarMontoPagoModal(){const o=document.getElementById('pay-modal-factura')?.selectedOptions?.[0],monto=Number(o?.dataset?.monto||0),el=document.getElementById('pay-modal-monto');if(el)el.value=monto?monto.toFixed(2):'';recalcularMontoBsPago();}
 
     async function procesarPagoDesdeModal(e) {
         e.preventDefault();
@@ -6470,6 +6621,11 @@ async function guardarCredito(e) {
             return;
         }
 
+        if (!(_binanceP2PRate > 0)) {
+            showSystemNotification('Tasa P2P no disponible','No se puede enviar el reporte sin una tasa P2P capturada al abrir el formulario.','warning');
+            return;
+        }
+
         const payloadPago = {
             id_pago: 'PAG-' + Date.now(),
             id_factura: idFactura,
@@ -6477,9 +6633,12 @@ async function guardarCredito(e) {
             fecha_pago: document.getElementById('pay-modal-fecha').value,
             metodo_pago: document.getElementById('pay-modal-metodo').value,
             banco_origen: document.getElementById('pay-modal-banco').value,
+            banco_destino: document.getElementById('pay-modal-banco-destino').value,
             referencia: document.getElementById('pay-modal-ref').value,
             monto_pago: Number(document.getElementById('pay-modal-monto').value),
             monto_pago_bs: Number(document.getElementById('pay-modal-monto-bs').value),
+            tasa_binance_p2p: Number(_binanceP2PRate||0),
+            tasa_binance_p2p_fecha: _binanceP2PRateShownAt || new Date().toLocaleString('es-VE'),
             estado_validacion: 'En Validación'
         };
 
@@ -6490,15 +6649,16 @@ async function guardarCredito(e) {
             fac.estado_factura = 'En Validación';
             fac.metodo_pago = payloadPago.metodo_pago;
             fac.banco_origen = payloadPago.banco_origen;
+            fac.banco_destino = payloadPago.banco_destino;
             fac.referencia_pago = payloadPago.referencia;
             fac.fecha_pago = payloadPago.fecha_pago;
         }
 
         const notifAdmin = {
             id_notificacion: 'NOT-' + Date.now(),
-            id_usuario: codCliente,
+            id_usuario: 'MASTER',
             emisor_id: codCliente,
-            rol_destino: 'Administrador',
+            rol_destino: 'Master',
             tipo: 'Validación de Pago',
             titulo: 'Nuevo Pago Registrado para Validación',
             mensaje: 'El cliente ' + codCliente + ' registró un pago por $' + payloadPago.monto_pago.toFixed(2) + ' (Ref: ' + payloadPago.referencia + ').',
@@ -6518,6 +6678,7 @@ async function guardarCredito(e) {
         renderAuditoria();
         updateKPIs();
         renderDashboardCharts();
+        showSystemNotification('Pago enviado a validación','El reporte de pago fue registrado con la tasa P2P mostrada al abrir el formulario y enviado al servidor.','success');
         showToast('Pago Enviado', 'Su pago fue enviado a validación exitosamente.', 'success');
 
         if (gasUrl) {
@@ -6526,6 +6687,7 @@ async function guardarCredito(e) {
             sendGasRequest('addNotificacion', notifAdmin);
         }
     }
+
 
     // Legacy: mantener para compatibilidad con botones "Pagar" desde facturación
     function irAPagarFactura(idCliente, idFactura) {
@@ -6557,6 +6719,19 @@ async function guardarCredito(e) {
     function renderHistorialPagos() { /* legacy, no-op */ }
 
     
+    function buscarClientesPorCualquierDato(raw) {
+        const q = normalizarBusquedaCliente(raw);
+        if (!q) return [];
+        const digits = q.replace(/\D/g, '');
+        return (db.clientes || []).filter(c => {
+            const campos = [c.nombre_completo, c.codigo_cliente, c.documento_id, c.correo, c.telefono, c.id_cliente, c.direccion];
+            return campos.some(v => normalizarBusquedaCliente(v).includes(q)) || (digits && String(c.documento_id || '').replace(/\D/g, '').includes(digits));
+        }).sort((a,b) => {
+            const an = normalizarBusquedaCliente(a.nombre_completo), bn = normalizarBusquedaCliente(b.nombre_completo);
+            return (an.startsWith(q)?0:1) - (bn.startsWith(q)?0:1);
+        });
+    }
+
     // SECCIÓN: NOTIFICACIONES
     
     let _notifClienteSeleccionado = null;
@@ -6573,6 +6748,14 @@ async function guardarCredito(e) {
         const isClient = currentUser && currentUser.rol === 'Cliente';
         const isMaster = currentUser && (currentUser.rol === 'Master' || currentUser.rol === 'Admin');
         const userCode = currentUser ? (currentUser.codigo_cliente || currentUser.id_usuario) : '';
+
+        // Badge universal: cualquier usuario ve sus notificaciones no leídas.
+        const unread = (db.notificaciones || []).filter(n => {
+            if (n.leido !== 'NO') return false;
+            if (isClient) return String(n.id_usuario) === String(userCode);
+            return String(n.id_usuario) === String(userCode) || String(n.id_usuario).toUpperCase() === 'MASTER' || ['MASTER','ADMIN','ADMINISTRADOR'].includes(String(n.rol_destino || '').toUpperCase());
+        }).length;
+        if (badgeCount) { badgeCount.innerText = unread; badgeCount.classList.toggle('d-none', unread === 0); }
 
         // Cliente: ocultar buscador y mostrar solo sus notificaciones
         if (isClient) {
@@ -6609,14 +6792,6 @@ async function guardarCredito(e) {
             renderListaNotificaciones(db.notificaciones);
         }
 
-        // Actualizar badge
-        const unread = db.notificaciones.filter(n => n.leido === 'NO' && 
-            ((isClient && n.id_usuario === userCode) || (isMaster && (n.id_usuario === 'MASTER' || n.id_usuario === userCode)))
-        ).length;
-        if (badgeCount) {
-            badgeCount.innerText = unread;
-            badgeCount.classList.toggle('d-none', unread === 0);
-        }
     }
 
     function renderListaNotificaciones(notifs) {
@@ -6676,13 +6851,8 @@ async function guardarCredito(e) {
         const raw = String(input.value).trim().toLowerCase();
 
         if (!raw) { input.focus(); return; }
-
-        // Buscar cliente por cédula, código o nombre
-        const cliente = db.clientes.find(c => 
-            String(c.documento_id).replace(/\D/g, '').includes(raw.replace(/\D/g, '')) ||
-            String(c.codigo_cliente).toLowerCase().includes(raw) ||
-            String(c.nombre_completo).toLowerCase().includes(raw)
-        );
+        // Buscar por cualquier dato disponible del cliente
+        const cliente = buscarClientesPorCualquierDato(raw)[0] || buscarClientePorCualquierDato(raw);
 
         if (!cliente) {
             _notifClienteSeleccionado = null;
@@ -6745,11 +6915,15 @@ async function guardarCredito(e) {
                 });
                 selectCli.innerHTML = optionsHtml;
             }
+            const notifSearch=document.getElementById('notif_cliente_busqueda'); if(notifSearch)notifSearch.value=_notifClienteSeleccionado?.nombre||'';
             if (selectContainer) selectContainer.classList.remove('d-none');
             if (btnSubmit) btnSubmit.innerHTML = '<i class="fa-solid fa-paper-plane me-1"></i> Enviar Notificación';
         }
-        if (modalNotif && modalNotif.show) modalNotif.show();
+        if (modalNotif && modalNotif.show) window.cleanErpModalLayers?.(); modalNotif.show();
     }
+
+    function buscarClientesParaNotificacion(){const input=document.getElementById('notif_cliente_busqueda'),select=document.getElementById('notif_cliente');if(!input||!select)return;const q=input.value.trim();if(!q){select.innerHTML='<option value="TODOS">📢 -- Enviar a Todos los Clientes --</option>';_notifClienteSeleccionado=null;return;}const matches=buscarClientesPorCualquierDato(q);select.innerHTML=(matches.length?'<option value="">-- Seleccione cliente --</option>':'<option value="">No se encontraron clientes</option>')+matches.slice(0,50).map(c=>'<option value="'+escapeHtmlPago(c.codigo_cliente||c.id_cliente)+'">'+escapeHtmlPago(c.nombre_completo||'Cliente')+' · '+escapeHtmlPago(c.documento_id||'Sin cédula')+' · '+escapeHtmlPago(c.codigo_cliente||'')+'</option>').join('');}
+    document.addEventListener('DOMContentLoaded',()=>{const searchIds=[['cli-input-cedula','buscarClienteGestion'],['fac-input-cedula','buscarClienteFacturacion'],['cred-input-cedula','buscarClienteCreditos'],['pay-input-cedula','buscarClientePagos'],['notif-input-busqueda','buscarNotificacionesCliente'],['emp-input-busqueda','buscarEmpresaGestion'],['usr-input-busqueda','buscarUsuarioGestion']];searchIds.forEach(([id,fn])=>{const el=document.getElementById(id);if(el)el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();window[fn]?.();}});});const i=document.getElementById('notif_cliente_busqueda'),sel=document.getElementById('notif_cliente');if(i){i.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();buscarClientesParaNotificacion();}});i.addEventListener('input',buscarClientesParaNotificacion);}if(sel)sel.addEventListener('change',()=>{const c=(db.clientes||[]).find(x=>String(x.codigo_cliente)===String(sel.value)||String(x.id_cliente)===String(sel.value));_notifClienteSeleccionado=c?{codigo:c.codigo_cliente,nombre:c.nombre_completo,documento:c.documento_id,id:c.id_cliente}:null;});});
 
     function prepararRespuesta(destinatarioId, tituloOriginal) {
         abrirModalNuevaNotificacion();
@@ -6763,6 +6937,7 @@ async function guardarCredito(e) {
         e.preventDefault();
         const isClient = currentUser && currentUser.rol === 'Cliente';
         const clienteDestino = isClient ? 'MASTER' : document.getElementById('notif_cliente').value;
+        if(!clienteDestino){showSystemNotification('Cliente requerido','Seleccione un cliente destino antes de enviar la notificación.','warning');return;}
         const titulo = document.getElementById('notif_titulo').value;
         const mensaje = document.getElementById('notif_mensaje').value;
         const fechaActual = new Date().toLocaleString('es-VE');
@@ -6798,6 +6973,7 @@ async function guardarCredito(e) {
         renderNotificaciones();
         renderAuditoria();
         const msgConfirmacion = isClient ? 'Respuesta enviada al Administrador.' : `Notificación enviada a ${nuevasNotificaciones.length} destinatario(s).`;
+        showSystemNotification('Notificación enviada', msgConfirmacion, 'success');
         showToast('Notificaciones', msgConfirmacion, 'success');
         if (gasUrl) nuevasNotificaciones.forEach(notif => sendGasRequest('addNotificacion', notif));
     }
@@ -6836,11 +7012,9 @@ function buscarClienteFacturacion(clienteForzado = null) {
     if (clienteForzado) {
         cliente = clienteForzado;
     } else {
-        if (input) raw = input.value.trim().replace(/\D/g, '');
+        if (input) raw = input.value.trim();
         if (!raw) { if(input) input.focus(); return; }
-        cliente = db.clientes.find(c => 
-            String(c.documento_id).replace(/\D/g, '') === raw
-        );
+        cliente = buscarClientePorCualquierDato(raw);
     }
 
     ocultarResultadosFacturacion();
@@ -7066,7 +7240,7 @@ function abrirModalFactura(id = null, clienteForzado = null) {
         document.getElementById('fac_notas').value = f.notas || '';
         document.getElementById('modalFacturaTitle').innerHTML = '<i class="fa-solid fa-file-invoice text-primary me-2"></i>Modificar Factura';
     }
-    modalFac.show();
+    window.cleanErpModalLayers?.(); modalFac.show();
 }
 
 async function guardarFactura(e) {
@@ -7183,28 +7357,127 @@ async function eliminarFactura(id) {
     if (gasUrl) sendGasRequest('deleteFactura', { id_factura: id });
 }
 
-		function abrirModalFacturaDesdeBusqueda() {
-    // Obtener el código del cliente que está mostrado en la tarjeta
-    const codigoCliente = document.getElementById('fac-cliente-cedula').innerText;
+
+
     
-    // Abrir el modal normal
-    abrirModalFactura();
-    
-    // Preseleccionar el cliente en el select
-    const selectCli = document.getElementById('fac_cliente');
-    if (selectCli) {
-        // Buscar la opción que corresponde al cliente mostrado
-        // Puede ser por código de cliente o por documento_id
-        const cliente = db.clientes.find(c => c.documento_id === codigoCliente);
-        if (cliente && selectCli.querySelector(`option[value="${cliente.codigo_cliente}"]`)) {
-            selectCli.value = cliente.codigo_cliente;
-        }
-    }
+
+
+let modalBancoInstance = null;
+function escapeBankHtml(value){return String(value ?? '').replace(/[&<>\"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch];});}
+function bancoRow(label,value,copy){
+  const v=value||'—';
+  return '<div class="bank-row"><div class="bank-label">'+escapeBankHtml(label)+'</div><div class="bank-value d-flex justify-content-between gap-2 align-items-center"><span>'+escapeBankHtml(v)+'</span>'+(copy?'<button type="button" class="bank-copy" onclick="copiarDatoBancario('+JSON.stringify(String(v))+',this)"><i class="fa-regular fa-copy"></i></button>':'')+'</div></div>';
 }
-    
+function renderBancos(){
+  const grid=document.getElementById('bancos-grid'); const empty=document.getElementById('bancos-empty'); if(!grid)return;
+  const list=Array.isArray(db&&db.bancos)?db.bancos:[]; if(empty) empty.classList.toggle('d-none',list.length>0);
+  if(!list.length){grid.innerHTML='';return;}
+  const isMaster=String(currentUser?.rol||'').trim().toLowerCase()==='master';
+  grid.innerHTML=list.map(function(b){
+    const id=String(b.id_banco||'');
+    let html='<div class="col-12 col-md-6 col-xl-4"><article class="bank-card">';
+    html+='<div class="bank-card-header"><div class="d-flex justify-content-between align-items-start gap-2"><div><div class="bank-kicker">Cuenta bancaria</div><h5 class="mb-0 fw-bold">'+escapeBankHtml(b.nombre_banco||'Banco')+'</h5></div><i class="fa-solid fa-building-columns bank-header-icon"></i></div></div>';
+    html+='<div class="bank-card-body">';
+    html+='<div class="bank-main-grid">'+bancoRow('Tipo de cuenta',b.tipo_cuenta,false)+bancoRow('N.º de cuenta',b.numero_cuenta,true)+bancoRow('Titular',b.titular,false)+bancoRow('Documento',b.documento_titular,true)+'</div>';
+    if(b.pago_movil) html+='<div class="bank-payment bank-payment-mobile"><div class="bank-payment-title"><i class="fa-solid fa-mobile-screen-button"></i><span>Pago Móvil</span></div><div class="bank-payment-value">'+escapeBankHtml(b.pago_movil)+'</div><button type="button" class="btn btn-sm btn-outline-primary" onclick="copiarDatoBancario('+JSON.stringify(String(b.pago_movil))+',this)"><i class="fa-regular fa-copy me-1"></i>Copiar</button></div>';
+    if(b.transferencia) html+='<div class="bank-payment bank-payment-transfer"><div class="bank-payment-title"><i class="fa-solid fa-arrow-right-arrow-left"></i><span>Transferencia</span></div><div class="bank-payment-value">'+escapeBankHtml(b.transferencia)+'</div><button type="button" class="btn btn-sm btn-outline-primary" onclick="copiarDatoBancario('+JSON.stringify(String(b.transferencia))+',this)"><i class="fa-regular fa-copy me-1"></i>Copiar</button></div>';
+    if(b.info_adicional) html+='<div class="bank-extra"><span class="bank-label">Información adicional</span><div>'+escapeBankHtml(b.info_adicional)+'</div></div>';
+    html+='<div class="bank-actions"><button type="button" class="btn btn-primary btn-sm" onclick="copiarTodosDatosBanco('+JSON.stringify(id)+')"><i class="fa-regular fa-copy me-1"></i>Copiar datos</button>';
+    if(isMaster) html+='<button type="button" class="btn btn-outline-primary btn-sm bank-edit-btn" data-banco-id="'+escapeBankHtml(id)+'"><i class="fa-solid fa-pen me-1"></i>Editar</button><button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarBanco('+JSON.stringify(id)+')"><i class="fa-solid fa-trash"></i></button>';
+    html+='</div></div></article></div>'; return html;
+  }).join('');
+}
+function abrirModalBanco(id){
+  if(!currentUser || String(currentUser.rol||'').trim().toLowerCase()!=='master'){
+    showSystemNotification('Acceso restringido','Solo el usuario Master puede editar los datos bancarios.','warning');
+    return false;
+  }
+  const bancoId=String(id||'').trim();
+  const banco=(Array.isArray(db?.bancos)?db.bancos:[]).find(x=>String(x.id_banco||'').trim()===bancoId);
+  if(!banco){
+    showSystemNotification('Banco no encontrado','No se encontró el registro bancario seleccionado.','warning');
+    return false;
+  }
+  const modalEl=document.getElementById('modalBanco');
+  const form=document.getElementById('formBanco');
+  if(!modalEl || !form){
+    showSystemNotification('Formulario no disponible','No se encontró el formulario de datos bancarios.','danger');
+    return false;
+  }
+  // Bootstrap funciona de forma más estable cuando el modal vive directamente bajo <body>.
+  if(modalEl.parentElement !== document.body) document.body.appendChild(modalEl);
+  const values={
+    banco_id:banco.id_banco,
+    banco_nombre:banco.nombre_banco,
+    banco_tipo_cuenta:banco.tipo_cuenta,
+    banco_numero_cuenta:banco.numero_cuenta,
+    banco_titular:banco.titular,
+    banco_documento_titular:banco.documento_titular,
+    banco_pago_movil:banco.pago_movil,
+    banco_transferencia:banco.transferencia,
+    banco_info_adicional:banco.info_adicional
+  };
+  Object.keys(values).forEach(k=>{const el=document.getElementById(k); if(el) el.value=values[k] ?? '';});
+  // Garantiza que el modal no quede atrapado por otra instancia/capa de Bootstrap.
+  if(window.cleanErpModalLayers) window.cleanErpModalLayers();
+  try{
+    const old=bootstrap.Modal.getInstance(modalEl);
+    if(old) old.dispose();
+  }catch(e){ console.warn('No se pudo limpiar la instancia previa del modal bancario:',e); }
+  modalBancoInstance=bootstrap.Modal.getOrCreateInstance(modalEl,{backdrop:false,keyboard:true,focus:false});
+  modalBancoInstance.show();
+  setTimeout(()=>{const first=document.getElementById('banco_nombre'); if(first) first.focus();},250);
+  return false;
+}
 
+// Delegación de eventos: el botón Editar se mantiene funcional aunque las tarjetas
+// bancarias sean renderizadas dinámicamente después de sincronizar Google Sheets.
+document.addEventListener('click', function(e){
+  const btn=e.target.closest?.('.bank-edit-btn');
+  if(!btn) return;
+  e.preventDefault();
+  e.stopPropagation();
+  abrirModalBanco(btn.getAttribute('data-banco-id')||'');
+});
 
-    
+async function guardarBanco(e){
+  e.preventDefault(); if(!currentUser||String(currentUser?.rol||'').trim().toLowerCase()!=='master'){showSystemNotification('Acceso restringido','Solo el usuario Master puede administrar los datos bancarios.','warning');return;}
+  const id=document.getElementById('banco_id').value.trim();
+  const payload={id_banco:id||'BAN-'+Date.now(),nombre_banco:document.getElementById('banco_nombre').value.trim(),tipo_cuenta:document.getElementById('banco_tipo_cuenta').value.trim(),numero_cuenta:document.getElementById('banco_numero_cuenta').value.trim(),titular:document.getElementById('banco_titular').value.trim(),documento_titular:document.getElementById('banco_documento_titular').value.trim(),pago_movil:document.getElementById('banco_pago_movil').value.trim(),transferencia:document.getElementById('banco_transferencia').value.trim(),info_adicional:document.getElementById('banco_info_adicional').value.trim(),estado:'Activo',fecha_registro:new Date().toISOString()};
+  db.bancos=db.bancos||[]; const idx=db.bancos.findIndex(function(x){return String(x.id_banco)===String(payload.id_banco);}); const anterior=idx>=0?{...db.bancos[idx]}:null;
+  if(idx>=0)db.bancos[idx]={...db.bancos[idx],...payload};else db.bancos.unshift(payload);
+  renderBancos();
+  await sendGasRequest(id?'updateBanco':'addBanco',payload);
+  const bancoServidor=await esperarBancoEnServidor(payload.id_banco,id?'updateBanco':'addBanco');
+  if(!bancoServidor){ if(idx>=0)db.bancos[idx]=anterior; else db.bancos=db.bancos.filter(x=>String(x.id_banco)!==String(payload.id_banco)); renderBancos(); showSystemNotification('No se confirmó el guardado','Google Sheets no confirmó el registro bancario. Verifica la conexión con Apps Script y vuelve a intentarlo.','danger');return; }
+  db.bancos=Array.isArray(db?.bancos)?db.bancos:[]; renderBancos(); modalBancoInstance&&modalBancoInstance.hide();
+  registrarAuditoria(id?'UPDATE':'CREATE','Banco',payload.id_banco,(id?'Actualización':'Creación')+' de datos bancarios: '+payload.nombre_banco,'INFO');
+  showToast('Bancos','Datos bancarios guardados correctamente en Google Sheets.','success');
+}
+async function eliminarBanco(id){
+  if(!currentUser||String(currentUser?.rol||'').trim().toLowerCase()!=='master'){showSystemNotification('Acceso restringido','Solo el usuario Master puede eliminar los datos bancarios.','warning');return;}
+  if(!confirm('¿Eliminar estos datos bancarios?'))return;
+  const anterior=[...(db.bancos||[])]; db.bancos=(db.bancos||[]).filter(function(x){return String(x.id_banco)!==String(id);}); renderBancos();
+  await sendGasRequest('deleteBanco',{id_banco:id});
+  const eliminado=await esperarBancoEnServidor(id,'deleteBanco');
+  if(!eliminado){db.bancos=anterior;renderBancos();showSystemNotification('No se confirmó la eliminación','Google Sheets no confirmó la eliminación del banco.','danger');return;}
+  registrarAuditoria('DELETE','Banco',id,'Eliminación de datos bancarios','WARNING');showToast('Bancos','Registro eliminado correctamente.','success');
+}
+async function copiarDatoBancario(txt,btn){try{await navigator.clipboard.writeText(String(txt));if(btn){const old=btn.innerHTML;btn.innerHTML='<i class="fa-solid fa-check"></i>';setTimeout(function(){btn.innerHTML=old;},1000);}showToast('Copiado','El dato fue copiado al portapapeles.','success',1400);}catch(e){showSystemNotification('No se pudo copiar','El navegador no permitió acceder al portapapeles.','warning');}}
+async function esperarBancoEnServidor(idBanco, action, maxIntentos=6){
+  for(let i=0;i<maxIntentos;i++){
+    await new Promise(r=>setTimeout(r,700+i*250));
+    try{await sincronizarConGAS();}catch(_e){}
+    const lista=Array.isArray(db?.bancos)?db.bancos:[];
+    const encontrado=lista.find(x=>String(x.id_banco)===String(idBanco));
+    if(action==='deleteBanco'){if(!encontrado)return true;}
+    else if(encontrado)return encontrado;
+  }
+  return action==='deleteBanco'?false:null;
+}
+function copiarTodosDatosBanco(id){const b=(db.bancos||[]).find(function(x){return String(x.id_banco)===String(id);});if(!b)return;const txt=['Banco: '+(b.nombre_banco||''),'Tipo de cuenta: '+(b.tipo_cuenta||''),'N.º de cuenta: '+(b.numero_cuenta||''),'Titular: '+(b.titular||''),'Documento: '+(b.documento_titular||''),'Pago Móvil: '+(b.pago_movil||''),'Transferencia: '+(b.transferencia||''),'Información adicional: '+(b.info_adicional||'')].join('\n');copiarDatoBancario(txt,null);}
+(function(){const oldSwitch=window.switchTab;if(typeof oldSwitch==='function'&&!window.__bankSwitchPatched){window.__bankSwitchPatched=true;window.switchTab=function(tabId){oldSwitch(tabId);if(tabId==='bancos'){renderBancos(); if(String(currentUser?.rol||'').trim().toLowerCase()==='cliente') setTimeout(()=>sincronizarConGAS().catch(()=>{}),50);}};}})();
+
     // ═══════════════════════════════════════════════════════════════
     // SECCIÓN: AUDITORÍA DEL SISTEMA
     // Registra todo evento: login, logout, CRUD, pagos, cambios de estado
@@ -7259,7 +7532,8 @@ async function eliminarFactura(id) {
             'UPDATE': 'audit-badge-update',
             'DELETE': 'audit-badge-delete',
             'PAYMENT': 'audit-badge-payment',
-            'STATUS_CHANGE': 'audit-badge-warning'
+            'STATUS_CHANGE': 'audit-badge-warning',
+             'VIEW': 'audit-badge-login'
         };
         const nivelClasses = {
             'INFO': 'text-primary',
@@ -7637,6 +7911,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Mostrar la tarjeta de información
         mostrarTarjetaClienteEncontrado(cliente);
+
 
         // Ocultar la lista
         const area = document.getElementById('cli-lista-todos');
@@ -8477,6 +8752,7 @@ function renderMikrotikProfiles() {
         return;
     }
     tbody.innerHTML = mktData.profiles.map(p => `
+
         <tr>
             <td class="fw-bold">${p.name || 'N/A'}</td>
             <td>${p['address-pool'] || 'default'}</td>
@@ -8732,9 +9008,16 @@ async function guardarImagenFamilia(ref,dataUrl){
         tx.onerror=()=>resolve(dataUrl); tx.onabort=()=>resolve(dataUrl);
     });
 }
+function normalizarUrlImagenFamilia(src){
+    const s=String(src||'').trim();
+    if(!s || s.startsWith('data:image') || s.startsWith('idb://')) return s;
+    const m=s.match(/drive\.google\.com\/(?:uc\?[^#]*id=|file\/d\/|thumbnail\?id=)([A-Za-z0-9_-]+)/i);
+    if(m && m[1]) return 'https://drive.google.com/thumbnail?id='+m[1]+'&sz=w1200';
+    return s;
+}
 async function leerImagenFamilia(src){
     if(!src)return '';
-    if(!String(src).startsWith('idb://'))return src;
+    if(!String(src).startsWith('idb://'))return normalizarUrlImagenFamilia(src);
     const dbi=await abrirDBFamiliaImagenes(); if(!dbi)return '';
     const key=String(src).slice(6);
     return new Promise(resolve=>{
@@ -8754,7 +9037,7 @@ async function borrarImagenFamilia(src){
 }
 function initFamiliaModals(){
     const fm=document.getElementById('modalFamiliar'), ex=document.getElementById('modalFamiliaExpediente');
-    if(fm) modalFamiliarInstance=bootstrap.Modal.getInstance(fm)||new bootstrap.Modal(fm,{backdrop:true,keyboard:true,focus:true});
+    if(fm) modalFamiliarInstance=bootstrap.Modal.getInstance(fm)||new bootstrap.Modal(fm,{backdrop:false,keyboard:true,focus:true});
     if(ex) modalFamiliaExpInstance=bootstrap.Modal.getInstance(ex)||new bootstrap.Modal(ex,{backdrop:false,keyboard:true,focus:true});
 }
 function obtenerSrcPreview(id,fallback=''){
@@ -8786,7 +9069,7 @@ async function abrirModalFamiliar(id=null){
     }else if(title){ title.innerHTML='<i class="fa-solid fa-user-plus me-2"></i>Agregar Familiar'; }
     const overlay=document.getElementById('login-overlay'); if(overlay&&currentUser)overlay.classList.add('d-none');
     document.querySelectorAll('.modal-backdrop').forEach(el=>el.remove()); document.body.classList.remove('modal-open');
-    requestAnimationFrame(()=>modalFamiliarInstance?.show());
+    requestAnimationFrame(()=>{window.cleanErpModalLayers?.(); modalFamiliarInstance?.show();});
 }
 function previewFamImage(input,previewId){
     const file=input?.files?.[0],preview=document.getElementById(previewId); if(!file||!preview)return;
@@ -8910,7 +9193,7 @@ async function abrirExpedienteFamiliar(id){
     const foto=f.foto?`<button type="button" class="familia-profile-photo-btn" onclick="abrirImagenFamiliar('Foto de perfil',${JSON.stringify(f.foto)})"><img class="familia-main-photo" data-fam-src="${String(f.foto).replace(/"/g,'&quot;')}" src="" alt="Foto de perfil"></button>`:`<div class="familia-placeholder"><i class="fa-solid fa-user fa-4x"></i></div>`;
     if(body)body.innerHTML=`<div class="row g-4"><div class="col-lg-4"><div class="familia-doc-card h-100 overflow-hidden">${foto}<div class="p-3"><span class="badge bg-primary mb-2">${f.parentesco||'Sin parentesco'}</span><h5 class="fw-bold mb-2">${f.nombre||'—'}</h5><div class="familia-meta mb-1"><i class="fa-solid fa-fingerprint me-2 text-primary"></i>${f.documento||'Sin documento'}</div><div class="familia-meta mb-1"><i class="fa-solid fa-cake-candles me-2 text-primary"></i>${f.fecha_nac||'Sin fecha'}</div><div class="familia-meta mb-1"><i class="fa-solid fa-phone me-2 text-primary"></i>${f.telefono||'Sin teléfono'}</div><div class="familia-meta mb-1"><i class="fa-solid fa-envelope me-2 text-primary"></i>${f.correo||'Sin correo'}</div><div class="familia-meta"><i class="fa-solid fa-location-dot me-2 text-primary"></i>${f.direccion||'Sin dirección'}</div></div></div></div><div class="col-lg-8"><div class="p-3 rounded-4 border mb-3"><h6 class="fw-bold"><i class="fa-solid fa-note-sticky text-primary me-2"></i>Observaciones</h6><p class="text-muted small mb-0">${f.notas||'Sin notas registradas.'}</p></div><div class="p-3 rounded-4 border"><div class="d-flex justify-content-between align-items-center mb-3"><h6 class="fw-bold mb-0"><i class="fa-solid fa-folder-open text-primary me-2"></i>Documentos</h6><small class="text-muted">Haz clic para ampliar</small></div><div class="row g-3">${docs.map(d=>`<div class="col-sm-6"><div class="familia-exp-doc"><div class="fw-semibold small mb-2">${d[0]}</div>${buildFamiliaThumb(d[1],d[0],d[2])}</div></div>`).join('')}</div></div></div></div>`;
     document.querySelectorAll('.modal-backdrop').forEach(el=>el.remove());document.body.classList.remove('modal-open');document.body.style.removeProperty('overflow');
-    modalFamiliaExpInstance?.show(); requestAnimationFrame(()=>{const exp=document.getElementById('modalFamiliaExpediente');if(exp){exp.style.zIndex='300000';exp.style.display='block';exp.classList.add('show');exp.removeAttribute('aria-hidden');exp.setAttribute('aria-modal','true');}hidratarFamiliaImagenes(body||document);});
+    window.cleanErpModalLayers?.(); modalFamiliaExpInstance?.show(); requestAnimationFrame(()=>{const exp=document.getElementById('modalFamiliaExpediente');if(exp){exp.style.zIndex='300000';exp.style.display='block';exp.classList.add('show');exp.removeAttribute('aria-hidden');exp.setAttribute('aria-modal','true');}hidratarFamiliaImagenes(body||document);});
 }
 function imprimirFamiliaActual(){
     const f=_familiaActualImpresion;if(!f)return;
@@ -8941,7 +9224,19 @@ function imprimirFamiliaActual(){
 body.logout-cleanup .modal-backdrop {
     display: none !important;
 }
-</style></head><body><h1>${esc(f.nombre||'Familiar')}</h1><p><b>Parentesco:</b> ${esc(f.parentesco||'')}</p><p><b>Documento:</b> ${esc(f.documento||'')}</p><p><b>Fecha de nacimiento:</b> ${esc(f.fecha_nac||'')}</p><p><b>Teléfono:</b> ${esc(f.telefono||'')}</p><p><b>Correo:</b> ${esc(f.correo||'')}</p><p><b>Dirección:</b> ${esc(f.direccion||'')}</p><p><b>Notas:</b> ${esc(f.notas||'—')}</p>${items.some(x=>x[1])?'<h2>Documentos</h2><div class="grid">'+items.filter(x=>x[1]).map(x=>`<div class="doc"><h3>${esc(x[0])}</h3><img src="${x[1]}" alt="${esc(x[0])}"></div>`).join('')+'</div>':''}</body></html>`);w.document.close();setTimeout(()=>{w.focus();w.print();},700);
+<style id="master-dashboard-payments-final">
+.master-pending-alert{border:1px solid #f59e0b;background:linear-gradient(135deg,rgba(245,158,11,.10),rgba(255,255,255,.96));border-radius:16px;box-shadow:0 10px 28px rgba(15,23,42,.07)}
+.master-pending-alert .pending-dot{width:10px;height:10px;border-radius:50%;background:#f59e0b;box-shadow:0 0 0 6px rgba(245,158,11,.12);animation:pendingPulse 1.8s infinite}
+@keyframes pendingPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.2);opacity:.65}}
+.kpi-clickable{cursor:pointer}.kpi-clickable:focus{outline:3px solid rgba(37,99,235,.2);outline-offset:2px}
+.kpi-master-hint{font-size:.68rem;font-weight:700;color:#2563eb;margin-top:6px}
+.payment-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.payment-summary-item{padding:10px 12px;border:1px solid var(--border-color);border-radius:10px;background:rgba(37,99,235,.025)}
+.payment-summary-item .label{font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);font-weight:800}.payment-summary-item .value{font-weight:700;color:var(--text-main);margin-top:2px;word-break:break-word}
+.master-list-row{border:1px solid var(--border-color);border-radius:12px;padding:10px 12px;background:var(--bg-card);transition:.15s}.master-list-row:hover{border-color:#93c5fd;box-shadow:0 5px 16px rgba(37,99,235,.08)}
+@media(max-width:767px){.payment-summary-grid{grid-template-columns:1fr}}
+html[data-bs-theme="dark"] .master-pending-alert{background:linear-gradient(135deg,rgba(245,158,11,.12),#1e293b);border-color:#92400e}
+</style></style></head><body><h1>${esc(f.nombre||'Familiar')}</h1><p><b>Parentesco:</b> ${esc(f.parentesco||'')}</p><p><b>Documento:</b> ${esc(f.documento||'')}</p><p><b>Fecha de nacimiento:</b> ${esc(f.fecha_nac||'')}</p><p><b>Teléfono:</b> ${esc(f.telefono||'')}</p><p><b>Correo:</b> ${esc(f.correo||'')}</p><p><b>Dirección:</b> ${esc(f.direccion||'')}</p><p><b>Notas:</b> ${esc(f.notas||'—')}</p>${items.some(x=>x[1])?'<h2>Documentos</h2><div class="grid">'+items.filter(x=>x[1]).map(x=>`<div class="doc"><h3>${esc(x[0])}</h3><img src="${x[1]}" alt="${esc(x[0])}"></div>`).join('')+'</div>':''}</body></html>`);w.document.close();setTimeout(()=>{w.focus();w.print();},700);
     });
 }
 async function eliminarFamiliar(id){
