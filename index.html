@@ -648,38 +648,38 @@
         }
 
         /* ─── BOTÓN PORTAL DE CLIENTES (MODO CLARO) ─── */
-        [data-theme="light"] button[onclick="openPortalClientes()"] {
+        [data-theme="light"] button[onclick="window.location.href='cliente.html'"] {
             background: rgba(255, 255, 255, 0.95) !important;
             border-color: rgba(0, 86, 255, 0.2) !important;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
             color: #0f172a !important;
         }
-        [data-theme="light"] button[onclick="openPortalClientes()"]:hover {
+        [data-theme="light"] button[onclick="window.location.href='cliente.html'"]:hover {
             border-color: rgba(0, 86, 255, 0.5) !important;
             box-shadow: 0 4px 20px rgba(0, 86, 255, 0.12) !important;
         }
-        [data-theme="light"] button[onclick="openPortalClientes()"] .text-slate-200,
-        [data-theme="light"] button[onclick="openPortalClientes()"] span {
+        [data-theme="light"] button[onclick="window.location.href='cliente.html'"] .text-slate-200,
+        [data-theme="light"] button[onclick="window.location.href='cliente.html'"] span {
             color: #0f172a !important;
         }
-        [data-theme="light"] button[onclick="openPortalClientes()"] .text-indigo-400 {
+        [data-theme="light"] button[onclick="window.location.href='cliente.html'"] .text-indigo-400 {
             color: #0056ff !important;
             border-color: rgba(0, 86, 255, 0.3) !important;
             background: rgba(0, 86, 255, 0.06) !important;
         }
-        [data-theme="light"] button[onclick="openPortalClientes()"]:hover .text-indigo-400 {
+        [data-theme="light"] button[onclick="window.location.href='cliente.html'"]:hover .text-indigo-400 {
             background: #0056ff !important;
             color: #ffffff !important;
         }
-        [data-theme="light"] button[onclick="openPortalClientes()"] .bg-white\/5 {
+        [data-theme="light"] button[onclick="window.location.href='cliente.html'"] .bg-white\/5 {
             background: rgba(0, 0, 0, 0.04) !important;
             border-color: rgba(0, 0, 0, 0.08) !important;
         }
-        [data-theme="light"] button[onclick="openPortalClientes()"]:hover .bg-white\/5 {
+        [data-theme="light"] button[onclick="window.location.href='cliente.html'"]:hover .bg-white\/5 {
             background: #0056ff !important;
             border-color: #0056ff !important;
         }
-        [data-theme="light"] button[onclick="openPortalClientes()"]:hover .text-slate-400 {
+        [data-theme="light"] button[onclick="window.location.href='cliente.html'"]:hover .text-slate-400 {
             color: #ffffff !important;
         }
 
@@ -763,48 +763,6 @@
     color: #64748b !important;
 }
 
-
-        /* SELECTOR DE PORTALES MULTIPLATAFORMA */
-        #portalAccessModal input::placeholder { opacity: .75; }
-
-        [data-theme="light"] #portalAccessModal > div {
-            background: rgba(255,255,255,.97) !important;
-            border-color: #e2e8f0 !important;
-        }
-
-        [data-theme="light"] #portalAccessModal h3,
-        [data-theme="light"] #portalAccessModal label,
-        [data-theme="light"] #portalAccessModal p,
-        [data-theme="light"] #portalAccessModal .text-slate-400,
-        [data-theme="light"] #portalAccessModal .text-slate-500 {
-            color: #64748b !important;
-        }
-
-        [data-theme="light"] #portalAccessModal input {
-            background: #f8fafc !important;
-            color: #0f172a !important;
-            border-color: #e2e8f0 !important;
-        }
-
-
-/* ===== SELECTOR MODERNO DE PORTALES ===== */
-.portal-selector-backdrop{background:radial-gradient(circle at 15% 10%,rgba(37,99,235,.16),transparent 28%),radial-gradient(circle at 88% 88%,rgba(124,58,237,.13),transparent 30%),rgba(2,11,24,.84);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.portal-selector-card{background:linear-gradient(145deg,#0f172a,#111827 52%,#0b1220);border:1px solid rgba(255,255,255,.10);box-shadow:0 35px 90px rgba(0,0,0,.62),0 0 50px rgba(37,99,235,.10);color:#e5e7eb}
-.portal-choice{position:relative;display:block;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.10)!important;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease,background .28s ease;text-decoration:none!important;color:inherit!important}
-.portal-choice:hover{transform:translateY(-5px);border-color:rgba(96,165,250,.58)!important;background:linear-gradient(145deg,rgba(30,64,175,.18),rgba(15,23,42,.80))!important;box-shadow:0 20px 45px rgba(0,0,0,.34),0 0 30px rgba(37,99,235,.12)}
-.portal-choice::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(59,130,246,.14),transparent 45%,rgba(168,85,247,.10));opacity:0;transition:.28s ease;pointer-events:none}
-.portal-choice:hover::before{opacity:1}.portal-choice>*{position:relative;z-index:1}.portal-icon{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 10px 30px rgba(0,0,0,.18)}
-.portal-selector-close{transition:.2s ease}.portal-selector-close:hover{transform:rotate(90deg);background:#ef4444;color:#fff}
-[data-theme="light"] .portal-selector-backdrop{background:radial-gradient(circle at 15% 5%,rgba(37,99,235,.12),transparent 30%),radial-gradient(circle at 88% 92%,rgba(124,58,237,.10),transparent 30%),rgba(15,23,42,.42)!important}
-[data-theme="light"] .portal-selector-card{background:linear-gradient(145deg,#ffffff,#f8fafc 55%,#eef4fb)!important;border:1px solid #dbe4ef!important;box-shadow:0 30px 80px rgba(15,23,42,.20),0 10px 30px rgba(37,99,235,.08)!important;color:#0f172a!important}
-[data-theme="light"] .portal-selector-card .text-white{color:#0f172a!important}
-[data-theme="light"] .portal-selector-card .text-slate-400{color:#64748b!important}
-[data-theme="light"] .portal-selector-card .border-white\/10{border-color:#e2e8f0!important}
-[data-theme="light"] .portal-selector-card .bg-white\/5{background:rgba(15,23,42,.035)!important;border-color:#e2e8f0!important}
-[data-theme="light"] .portal-selector-card .text-slate-500{color:#64748b!important}
-[data-theme="light"] .portal-choice{background:linear-gradient(145deg,#ffffff,#f8fafc)!important;border-color:#dbe4ef!important;color:#0f172a!important;box-shadow:0 10px 24px rgba(15,23,42,.06)!important}
-[data-theme="light"] .portal-choice:hover{background:linear-gradient(145deg,#eff6ff,#ffffff)!important;border-color:#93c5fd!important;box-shadow:0 18px 40px rgba(15,23,42,.11),0 0 24px rgba(37,99,235,.08)!important}
-[data-theme="light"] .portal-choice h4{color:#0f172a!important}.portal-selector-card .text-emerald-400{color:#10b981!important}
 /* ===== TOPBAR MÓVIL SOLO ICONOS ===== */
 .topbar-mobile-icon{display:inline-flex;align-items:center;justify-content:center;transition:.2s ease}
 @media (max-width:639px){.topbar-mobile-icon{width:31px;height:31px;border-radius:999px;cursor:pointer}.topbar-mobile-icon:active{background:transparent!important;transform:scale(.96)}.topbar-mobile-sep{display:none!important}}
@@ -995,7 +953,6 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
 @media(max-width:640px){.portal-choice{min-height:225px}.portal-selector-card{border-radius:24px}.portal-choice-title{font-size:18px}}
 
 </style>
-
 <style id="final-portal-topbar-fix">
 /* ===== CORRECCIÓN DEFINITIVA: BARRA INFORMATIVA SIN SOMBREADOS ===== */
 .sticky.top-0 > .bg-gray-900,
@@ -1033,43 +990,9 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
     padding-right:.25rem !important;
     box-shadow:none !important;
 }
-/* Selector de portales: versión premium clara y oscura */
-.portal-selector-card{
-    max-width:860px !important;
-    border-radius:32px !important;
-    overflow:hidden !important;
-}
-.portal-choice{
-    min-height:250px !important;
-    font-family:inherit !important;
-    font-size:inherit !important;
-    line-height:inherit !important;
-    border-radius:28px !important;
-    text-align:left !important;
-    cursor:pointer !important;
-    appearance:none !important;
-    -webkit-appearance:none !important;
-}
-[data-theme="light"] .portal-choice{
-    background:linear-gradient(145deg,#ffffff 0%,#f8fbff 55%,#eef5ff 100%) !important;
-    color:#0f172a !important;
-    border:1px solid #d7e2ef !important;
-}
-[data-theme="light"] .portal-choice h4{color:#0f172a !important;}
-[data-theme="light"] .portal-choice p{color:#475569 !important;}
-[data-theme="light"] .portal-choice .text-blue-300{color:#2563eb !important;}
-[data-theme="light"] .portal-choice .text-violet-300{color:#7c3aed !important;}
-[data-theme="light"] .portal-choice:hover{
-    background:linear-gradient(145deg,#f8fbff,#eef6ff) !important;
-    transform:translateY(-6px) scale(1.01);
-    border-color:#93c5fd !important;
-}
 [data-theme="light"] .portal-selector-card .text-white{color:#0f172a !important;}
 [data-theme="light"] .portal-selector-card .text-slate-400{color:#64748b !important;}
 [data-theme="light"] .portal-selector-card .text-slate-500{color:#64748b !important;}
-.portal-choice-client{
-    border-color:rgba(59,130,246,.28) !important;
-}
 
 /* ===== BARRA INFORMATIVA: SIN FONDOS NI SOMBRAS EN ELEMENTOS ===== */
 .bg-gray-900 .topbar-mobile-icon,
@@ -1103,16 +1026,7 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
     box-shadow:none !important;
 }
 
-/* ===== SELECTOR PORTALES: NAVEGACION DIRECTA EN DREAMWEAVER ===== */
-.portal-choice{
-    cursor:pointer !important;
-    user-select:none !important;
-    -webkit-user-select:none !important;
-    appearance:none !important;
-    -webkit-appearance:none !important;
-}
-.portal-choice:focus{outline:none !important;}
-</style>
+/* ===== SELECTOR PORTALES: NAVEGACION DIRECTA EN DREAMWEAVER ===== */</style>
 
 <style id="final-light-and-prices-v11">
 /* Tema claro menos pálido: fondo y superficies con más contraste */
@@ -1168,6 +1082,12 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
 [data-theme="light"] .usd-label { color:#334155 !important; }
 [data-theme="dark"] .binance-price-note { color:#facc15 !important; }
 [data-theme="dark"] .usd-label { color:#cbd5e1 !important; }
+</style>
+
+
+<style id="commercial-light-label-fix">
+[data-theme="light"] #formComercial label { color: #000000 !important; }
+[data-theme="light"] #formComercial label .text-gray-400 { color: #475569 !important; }
 </style>
 
 </head>
@@ -1319,7 +1239,7 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
 
                     <!-- Botón Portal de Clientes -->
                     <div class="flex items-center gap-2 shrink-0">
-                        <button type="button" onclick="openPortalClientes()" class="group relative inline-flex items-center justify-center gap-2 lg:gap-3.5 p-2 lg:px-6 lg:py-3 rounded-full lg:rounded-2xl text-xs font-semibold tracking-wider text-slate-100 bg-slate-950/90 lg:bg-slate-950/70 backdrop-blur-xl border border-white/15 lg:border-white/10 hover:border-indigo-500/50 shadow-2xl shadow-indigo-950/40 hover:shadow-indigo-500/25 transition-all duration-500 cursor-pointer overflow-hidden">
+                        <button type="button" onclick="window.location.href='cliente.html'" class="group relative inline-flex items-center justify-center gap-2 lg:gap-3.5 p-2 lg:px-6 lg:py-3 rounded-full lg:rounded-2xl text-xs font-semibold tracking-wider text-slate-100 bg-slate-950/90 lg:bg-slate-950/70 backdrop-blur-xl border border-white/15 lg:border-white/10 hover:border-indigo-500/50 shadow-2xl shadow-indigo-950/40 hover:shadow-indigo-500/25 transition-all duration-500 cursor-pointer overflow-hidden">
                             <span class="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/10 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-sm"></span>
                             <span class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"></span>
                             <span class="relative w-6 h-6 lg:w-7 lg:h-7 rounded-full lg:rounded-xl bg-gradient-to-br from-indigo-500/20 to-blue-600/20 border border-indigo-400/30 flex items-center justify-center text-indigo-400 group-hover:text-indigo-200 group-hover:scale-110 transition-all duration-300 shadow-inner">
@@ -2079,8 +1999,8 @@ const hotspotPricesConfig = {
   'hs-business': 180.00, 'hs-professional': 270.00
 };
 const devPricesConfig = {
-  'dev-web': 150.00, 'dev-admin': 200.00, 'dev-contable': 300.00,
-  'dev-deportes': 150.00, 'dev-tablas': 250.00, 'dev-reporteria': 150.00
+  'dev-web': 200.00, 'dev-admin': 250.00, 'dev-contable': 500.00,
+  'dev-deportes': 150.00, 'dev-tablas': 500.00, 'dev-reporteria': 150.00
 };
 
 const API_BCV_PRINCIPAL = 'https://rates.dolarvzla.com/bcv/current.json';
@@ -3281,8 +3201,18 @@ setInterval(refreshAllRatesAndPrices, 5 * 60 * 1000);
                 <option value="Consulta" class="bg-slate-900 text-white">Consulta</option>
                 <option value="Asesoría" class="bg-slate-900 text-white">Asesoría</option>
                 <option value="Proyectos FTTH/Inalámbricos (ptp/mtptp)" class="bg-slate-900 text-white">Proyectos FTTH/Inalámbricos (ptp/mtptp)</option>
-                <option value="Cotización de portales Hotspot" class="bg-slate-900 text-white">Cotización de portales Hotspot</option>
-                <option value="Cotización de portales Web" class="bg-slate-900 text-white">Cotización de portales Web</option>
+                
+                <option value="Proyecto Starter — MikroTik" class="bg-slate-900 text-white">Proyecto Starter — MikroTik</option>
+                <option value="Proyecto Growth — MikroTik" class="bg-slate-900 text-white">Proyecto Growth — MikroTik</option>
+                <option value="Proyecto Business — MikroTik" class="bg-slate-900 text-white">Proyecto Business — MikroTik</option>
+                <option value="Proyecto Professional — MikroTik" class="bg-slate-900 text-white">Proyecto Professional — MikroTik</option>
+                <option value="Páginas Web" class="bg-slate-900 text-white">Páginas Web</option>
+                <option value="Sistemas Administrativos" class="bg-slate-900 text-white">Sistemas Administrativos</option>
+                <option value="Sistemas Contables" class="bg-slate-900 text-white">Sistemas Contables</option>
+                <option value="Diseños para Equipos de Deportes" class="bg-slate-900 text-white">Diseños para Equipos de Deportes</option>
+                <option value="Tablas y Clasificaciones" class="bg-slate-900 text-white">Tablas y Clasificaciones</option>
+                <option value="Reportería y Exportación en PDF" class="bg-slate-900 text-white">Reportería y Exportación en PDF</option>
+                
                 <option value="Asistencia Remota" class="bg-slate-900 text-white">Asistencia Remota</option>
                 <option value="Configuración remota Mikrotik" class="bg-slate-900 text-white">Configuración remota Mikrotik</option>
                 <option value="Oferta Laboral" class="bg-slate-900 text-white">Oferta Laboral</option>
@@ -3344,6 +3274,7 @@ setInterval(refreshAllRatesAndPrices, 5 * 60 * 1000);
                                         <stop offset="0%" stop-color="#38BDF8"/>
                                         <stop offset="100%" stop-color="#0284C7"/>
                                     </linearGradient>
+
                                     <linearGradient id="cyanMetallicGradFooter" x1="0%" y1="0%" x2="0%" y2="100%">
                                         <stop offset="0%" stop-color="#38BDF8"/>
                                         <stop offset="100%" stop-color="#0369A1"/>
@@ -3441,7 +3372,7 @@ setInterval(refreshAllRatesAndPrices, 5 * 60 * 1000);
                     </div>
 
                     <div class="font-bold tracking-[2px] text-gray-400 text-center md:text-right">
-                        V.2026.2.1
+                        V.2026.5.6
                     </div>
                 </div>
             </div>
@@ -3568,34 +3499,6 @@ setInterval(refreshAllRatesAndPrices, 5 * 60 * 1000);
 </div>
 
 
-    <!-- SELECTOR DE PORTALES -->
-    <div id="portalAccessModal" class="fixed inset-0 z-[99998] hidden items-center justify-center p-4 portal-selector-backdrop" aria-hidden="true">
-        <div class="portal-selector-card w-full max-w-3xl rounded-[30px] overflow-hidden relative">
-            <div class="p-5 sm:p-7 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between gap-4">
-                <div class="flex items-center gap-4 min-w-0">
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-500 flex items-center justify-center shrink-0"><i class="fa-solid fa-layer-group text-xl"></i></div>
-                    <div class="min-w-0"><p class="text-[10px] font-black tracking-[0.22em] uppercase text-indigo-500 mb-1">Acceso multiplataforma</p><h3 class="portal-selector-title text-xl sm:text-2xl font-black">Selecciona tu portal</h3><p class="portal-selector-subtitle text-sm mt-1">Cada portal administra su propia sesión y servicios.</p></div>
-                </div>
-                <button type="button" onclick="closePortalAccess()" class="portal-selector-close w-10 h-10 rounded-full flex items-center justify-center shrink-0" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="p-5 sm:p-7">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <a href="cliente.html" target="_self" class="portal-choice portal-choice-client block rounded-3xl p-6 sm:p-7 no-underline">
-                        <div class="flex items-start justify-between gap-4"><div class="portal-choice-icon"><i class="fa-solid fa-user-shield"></i></div><span class="portal-choice-tag">CLIENTES</span></div>
-                        <h4 class="portal-choice-title">Portal de Clientes</h4><p class="portal-choice-text">Servicios, facturación, pagos, notificaciones y administración de tu cuenta.</p>
-                        <span class="portal-choice-action">Entrar al portal <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                    <a href="TELECOMUNICACIONES.html" target="_self" class="portal-choice portal-choice-intersat block rounded-3xl p-6 sm:p-7 no-underline">
-                        <div class="flex items-start justify-between gap-4"><div class="portal-choice-icon"><i class="fa-solid fa-satellite-dish"></i></div><span class="portal-choice-tag">INTERSAT</span></div>
-                        <h4 class="portal-choice-title">Portal Intersat</h4><p class="portal-choice-text">Órdenes, técnicos, clientes, reportes y operaciones de telecomunicaciones.</p>
-                        <span class="portal-choice-action">Entrar al portal <i class="fa-solid fa-arrow-right"></i></span>
-                    </a>
-                </div>
-                <div class="mt-5 text-center text-xs portal-selector-foot"><i class="fa-solid fa-shield-halved me-1 text-emerald-500"></i> Acceso independiente por plataforma.</div>
-            </div>
-        </div>
-    </div>
-
     <!-- WIDGET JOSYBETH -->
     <div id="josybeth-widget" class="fixed bottom-6 right-6 z-50">
         <button onclick="toggleChat()" aria-label="Abrir chat de asistencia" id="btn-josybeth" class="bg-brand-blue text-white w-14 h-14 rounded-full shadow-[0_0_15px_rgba(0,86,255,0.5)] hover:scale-105 transition flex items-center justify-center animate-bounce">
@@ -3630,31 +3533,6 @@ setInterval(refreshAllRatesAndPrices, 5 * 60 * 1000);
     </div>
 
     <script>
-
-        // ==========================================================
-        // SELECTOR DE PORTALES
-        // ==========================================================
-        function openPortalClientes(){
-            const modal=document.getElementById('portalAccessModal');
-            if(!modal)return;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            modal.setAttribute('aria-hidden','false');
-            document.body.style.overflow='hidden';
-        }
-        function closePortalAccess(){
-            const modal=document.getElementById('portalAccessModal');
-            if(!modal)return;
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            modal.setAttribute('aria-hidden','true');
-            document.body.style.overflow='';
-        }
-        document.addEventListener('click',function(e){
-            const modal=document.getElementById('portalAccessModal');
-            if(modal && e.target===modal) closePortalAccess();
-        });
-        document.addEventListener('keydown',function(e){ if(e.key==='Escape') closePortalAccess(); });
 
         function ensureBinancePriceNotes(){
             document.querySelectorAll('[data-price-id]').forEach(function(priceEl){
