@@ -1895,6 +1895,8 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
 </style>
 
 
+
+
 </head>
 <body>
 
@@ -2099,6 +2101,9 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
             </a>
             <a href="#clientes" class="nav-link view-admin-master" onclick="switchTab('clientes')">
                 <i class="fa-solid fa-address-book"></i> Gestión Clientes
+            </a>
+            <a href="#agenda" class="nav-link" onclick="switchTab('agenda')">
+                <i class="fa-solid fa-calendar-check"></i> Agenda
             </a>
             <a href="#facturacion" class="nav-link" onclick="switchTab('facturacion')">
                 <i class="fa-solid fa-file-invoice-dollar"></i> Facturación
@@ -2306,6 +2311,17 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
                 <div class="dashboard-chart-card">
                     <div class="dashboard-chart-head"><div><div class="dashboard-chart-title"><i class="fa-solid fa-chart-line text-primary me-2"></i>Histórico de pagos</div><div class="dashboard-chart-sub">Solo pagos realmente confirmados.</div></div><span class="dashboard-chart-badge" id="dash-history-badge">Histórico completo</span></div>
                     <div class="dashboard-chart-body"><div class="dashboard-history-wrap"><canvas id="chartHistorialPagos"></canvas></div><div class="dashboard-chart-summary"><div class="dashboard-summary-pill"><span class="lbl">Pagos confirmados</span><span class="val" id="dash-history-count">0</span></div><div class="dashboard-summary-pill"><span class="lbl">Último pago</span><span class="val" id="dash-last-payment">—</span></div><div class="dashboard-summary-pill"><span class="lbl">Total acumulado</span><span class="val" id="dash-history-total">$0.00 · Bs 0.00</span></div></div></div>
+                </div>
+            </div>
+
+            <div class="dashboard-analytics-grid dashboard-agenda-grid mb-2">
+                <div class="dashboard-chart-card dashboard-agenda-card">
+                    <div class="dashboard-chart-head"><div><div class="dashboard-chart-title"><i class="fa-solid fa-calendar-days text-primary me-2"></i>Distribución de citas</div><div class="dashboard-chart-sub">Todas las categorías de Agenda.</div></div><span class="dashboard-chart-badge" id="dash-agenda-badge">0 citas</span></div>
+                    <div class="dashboard-chart-body"><div class="dashboard-chart-wrap"><canvas id="chartAgendaEstados"></canvas></div><div class="dashboard-chart-summary dashboard-agenda-summary"><div class="dashboard-summary-pill"><span class="lbl">Solicitadas</span><span class="val" id="dash-agenda-solicitadas">0</span></div><div class="dashboard-summary-pill"><span class="lbl">Pendientes</span><span class="val" id="dash-agenda-pendientes">0</span></div><div class="dashboard-summary-pill"><span class="lbl">Atendidas</span><span class="val" id="dash-agenda-atendidas">0</span></div></div></div>
+                </div>
+                <div class="dashboard-chart-card dashboard-agenda-card dashboard-agenda-wide">
+                    <div class="dashboard-chart-head"><div><div class="dashboard-chart-title"><i class="fa-solid fa-chart-bar text-primary me-2"></i>Citas por categoría</div><div class="dashboard-chart-sub">Comparación de cada estado registrado en Agenda.</div></div><span class="dashboard-chart-badge">6 estados</span></div>
+                    <div class="dashboard-chart-body"><div class="dashboard-chart-wrap"><canvas id="chartAgendaCategorias"></canvas></div><div class="dashboard-chart-summary dashboard-agenda-summary"><div class="dashboard-summary-pill"><span class="lbl">Reprogramadas</span><span class="val" id="dash-agenda-reprogramadas">0</span></div><div class="dashboard-summary-pill"><span class="lbl">Rechazadas</span><span class="val" id="dash-agenda-rechazadas">0</span></div><div class="dashboard-summary-pill"><span class="lbl">Canceladas</span><span class="val" id="dash-agenda-canceladas">0</span></div></div></div>
                 </div>
             </div>
         </section>
@@ -3262,11 +3278,18 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
                     <p class="mb-1"><strong><i class="fa-solid fa-building-user text-muted me-2"></i>Empresa:</strong> <span id="cli-info-empresa-labora">—</span></p>
                 </div>
             </div>
+            <div class="d-flex justify-content-end mt-3 pt-3 border-top">
+                <button id="btn-agenda-desde-perfil" type="button" class="btn btn-outline-primary btn-sm" onclick="abrirModalAgendaDesdePerfil()">
+                    <i class="fa-solid fa-calendar-plus me-1"></i><span id="btn-agenda-desde-perfil-texto">Agendar cita</span>
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- TRABAJOS MANUALES DEL CLIENTE -->
     <div id="cli-trabajos-manuales" class="card mt-3 d-none"><div class="card-body p-3 p-md-4"><div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3"><div><h6 class="fw-bold mb-1"><i class="fa-solid fa-screwdriver-wrench text-primary me-2"></i>Trabajos particulares del cliente</h6><small class="text-muted">Trabajos o servicios realizados fuera de los catálogos.</small></div><button id="btn-agregar-trabajo-manual" type="button" class="btn btn-primary btn-sm" onclick="abrirModalTrabajoManualDesdePerfil()"><i class="fa-solid fa-plus me-1"></i>Registrar trabajo</button></div><div id="cli-trabajos-manuales-lista"></div></div></div>
+
+    <div id="cli-agenda-perfil" class="card mt-3 d-none"><div class="card-body p-3 p-md-4"><div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3"><div><h6 class="fw-bold mb-1"><i class="fa-solid fa-calendar-check text-primary me-2"></i>Citas y solicitudes</h6><small class="text-muted">Historial de citas y solicitudes vinculadas a este cliente.</small></div><button id="btn-agenda-perfil-nueva" type="button" class="btn btn-primary btn-sm" onclick="abrirModalAgendaDesdePerfil()"><i class="fa-solid fa-calendar-plus me-1"></i>Solicitar cita</button></div><div id="cli-agenda-perfil-lista"></div></div></div>
 
     <!-- ESTADO VACÍO -->
     <div id="cli-estado-vacio" class="text-center p-5 text-muted d-none">
@@ -3286,6 +3309,72 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
         </div>
     </div>
 </section>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             SECCIÓN: AGENDA / CITAS
+             ═══════════════════════════════════════════════════════════════ -->
+        <section id="sec-agenda" class="tab-content d-none">
+            <div class="agenda-head d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+                <div>
+                    <h5 class="fw-bold m-0"><i class="fa-solid fa-calendar-check text-primary me-2"></i>Agenda y Citas</h5>
+                    <p class="text-muted small mb-0" id="agenda-subtitle">Programación de trabajos, solicitudes de clientes y seguimiento de atención.</p>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                    <button id="btn-agenda-nueva-master" type="button" class="btn btn-primary" onclick="abrirModalAgenda()"><i class="fa-solid fa-calendar-plus me-1"></i>Agendar cita</button>
+                    <button id="btn-agenda-nueva-cliente" type="button" class="btn btn-primary d-none" onclick="abrirModalAgendaDesdePerfil()"><i class="fa-solid fa-calendar-plus me-1"></i>Solicitar cita</button>
+                </div>
+            </div>
+
+            <div id="agenda-master-config" class="card border-0 shadow-sm rounded-4 mb-3 d-none">
+                <div class="card-body p-3 p-md-4">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+                        <div><h6 class="fw-bold mb-1"><i class="fa-brands fa-telegram text-primary me-2"></i>Recordatorios por Telegram</h6><small class="text-muted">Los avisos se procesan automáticamente 24 h, 12 h, 6 h y 2 h antes de una cita pendiente o reprogramada.</small></div>
+                        <span id="agenda-telegram-status" class="badge rounded-pill text-bg-secondary">Desactivado</span>
+                    </div>
+                    <div class="row g-3 align-items-end">
+                        <div class="col-lg-5"><label class="form-label small fw-semibold">Token del Bot</label><input id="agenda-telegram-token" type="password" class="form-control form-control-pro" placeholder="123456:ABC..." autocomplete="off"></div>
+                        <div class="col-lg-4"><label class="form-label small fw-semibold">Chat ID</label><input id="agenda-telegram-chat" class="form-control form-control-pro" placeholder="Ej. 123456789"></div>
+                        <div class="col-lg-3"><label class="form-label small fw-semibold">Estado</label><select id="agenda-telegram-activo" class="form-select form-select-pro"><option value="false">Desactivado</option><option value="true">Activo</option></select></div>
+                        <div class="col-12 d-flex gap-2 flex-wrap">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="guardarConfiguracionAgendaTelegram()"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar configuración</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="probarTelegramAgendaUI()"><i class="fa-solid fa-paper-plane me-1"></i>Probar Telegram</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-3" id="agenda-kpis">
+                <div class="col-6 col-lg-3"><div class="kpi-card kpi-info agenda-kpi-clickable" role="button" tabindex="0" onclick="mostrarKpiAgenda('Solicitada')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();mostrarKpiAgenda('Solicitada');}"><div class="d-flex justify-content-between align-items-center"><div><div class="small text-muted">Solicitadas</div><div class="fs-4 fw-bold" id="agenda-kpi-solicitadas">0</div></div><div class="kpi-icon bg-info-soft"><i class="fa-solid fa-inbox"></i></div></div></div></div>
+                <div class="col-6 col-lg-3"><div class="kpi-card kpi-primary agenda-kpi-clickable" role="button" tabindex="0" onclick="mostrarKpiAgenda('Pendiente')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();mostrarKpiAgenda('Pendiente');}"><div class="d-flex justify-content-between align-items-center"><div><div class="small text-muted">Pendientes</div><div class="fs-4 fw-bold" id="agenda-kpi-pendientes">0</div></div><div class="kpi-icon bg-primary-soft"><i class="fa-solid fa-calendar-day"></i></div></div></div></div>
+                <div class="col-6 col-lg-3"><div class="kpi-card kpi-warning agenda-kpi-clickable" role="button" tabindex="0" onclick="mostrarKpiAgenda('Reprogramada')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();mostrarKpiAgenda('Reprogramada');}"><div class="d-flex justify-content-between align-items-center"><div><div class="small text-muted">Reprogramadas</div><div class="fs-4 fw-bold" id="agenda-kpi-reprogramadas">0</div></div><div class="kpi-icon bg-warning-soft"><i class="fa-solid fa-calendar-days"></i></div></div></div></div>
+                <div class="col-6 col-lg-3"><div class="kpi-card kpi-success agenda-kpi-clickable" role="button" tabindex="0" onclick="mostrarKpiAgenda('Atendida')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();mostrarKpiAgenda('Atendida');}"><div class="d-flex justify-content-between align-items-center"><div><div class="small text-muted">Atendidas</div><div class="fs-4 fw-bold" id="agenda-kpi-atendidas">0</div></div><div class="kpi-icon bg-success-soft"><i class="fa-solid fa-circle-check"></i></div></div></div></div>
+            </div>
+
+            <div id="agenda-master-search" class="card border-0 shadow-sm rounded-4 mb-3">
+                <div class="card-body p-3 p-md-4">
+                    <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-2">
+                        <div><h6 class="fw-bold mb-1"><i class="fa-solid fa-user-magnifying-glass text-primary me-2"></i>Buscar cliente para consultar Agenda</h6><small class="text-muted">Las citas no se muestran hasta seleccionar un cliente. Puede buscar por código, cédula, nombre, correo o teléfono.</small></div>
+                        <button type="button" class="btn btn-outline-dark btn-sm" onclick="limpiarFiltroAgenda()"><i class="fa-solid fa-rotate-left me-1"></i>Limpiar</button>
+                    </div>
+                    <div class="position-relative">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input id="agenda-cliente-busqueda" class="form-control" autocomplete="off" placeholder="Código, cédula, nombre, correo o teléfono..." oninput="buscarClienteAgendaListadoUI()" onkeydown="if(event.key==='Enter'){event.preventDefault();seleccionarPrimeraCoincidenciaAgendaListado();}">
+                            <button type="button" class="btn btn-outline-secondary" onclick="limpiarFiltroAgenda()"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                        <div id="agenda-clientes-resultados" class="agenda-search-results"></div>
+                    </div>
+                    <div id="agenda-cliente-seleccionado" class="alert alert-primary d-none mt-3 mb-0 py-2">
+                        <div class="d-flex justify-content-between align-items-center gap-2 flex-wrap"><div><strong id="agenda-cliente-seleccionado-nombre">—</strong><div class="small">Código: <span id="agenda-cliente-seleccionado-codigo">—</span></div></div><button type="button" class="btn btn-sm btn-outline-primary" onclick="limpiarFiltroAgenda()"><i class="fa-solid fa-user-xmark me-1"></i>Cambiar cliente</button></div>
+                    </div>
+                </div>
+            </div>
+            <div id="agenda-resultados-contenedor" class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div id="agenda-sin-seleccion" class="text-center p-5 text-muted"><i class="fa-solid fa-user-magnifying-glass fa-3x mb-3 opacity-25"></i><h6 class="fw-bold">Seleccione un cliente</h6><p class="mb-0 small">Realice la búsqueda inteligente de un cliente para consultar sus citas agrupadas por estado.</p></div>
+                <div id="agenda-tbody" class="agenda-group-results d-none"></div>
+                <div id="agenda-vacio" class="text-center p-5 text-muted d-none"><i class="fa-regular fa-calendar-xmark fa-3x mb-2 opacity-25"></i><p class="mb-0">Este cliente no tiene citas registradas.</p></div>
+            </div>
+        </section>
 
         <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: FACTURACIÓN
@@ -4333,24 +4422,24 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
                 <div class="modal-body modal-body-pro">
                     <form id="formUsuario" onsubmit="guardarUsuario(event)">
                         <input type="hidden" id="usr_id">
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Nombre Completo</label>
-                            <input type="text" class="form-control form-control-pro" id="usr_nombre" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Username</label>
-                            <input type="text" class="form-control form-control-pro" id="usr_username" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Correo</label>
-                            <input type="email" class="form-control form-control-pro" id="usr_email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Contraseña</label>
-                            <input type="password" class="form-control form-control-pro" id="usr_password" required>
-                        </div>
-                        <div class="row g-2 mb-3">
-                            <div class="col-6">
+                        <div class="usr-form-grid">
+                            <div class="usr-form-field usr-form-field-wide">
+                                <label class="form-label small fw-semibold">Nombre Completo</label>
+                                <input type="text" class="form-control form-control-pro" id="usr_nombre" required>
+                            </div>
+                            <div class="usr-form-field">
+                                <label class="form-label small fw-semibold">Username</label>
+                                <input type="text" class="form-control form-control-pro" id="usr_username" required>
+                            </div>
+                            <div class="usr-form-field">
+                                <label class="form-label small fw-semibold">Correo</label>
+                                <input type="email" class="form-control form-control-pro" id="usr_email" required>
+                            </div>
+                            <div class="usr-form-field">
+                                <label class="form-label small fw-semibold">Contraseña</label>
+                                <input type="password" class="form-control form-control-pro" id="usr_password" required>
+                            </div>
+                            <div class="usr-form-field">
                                 <label class="form-label small fw-semibold">Rol</label>
                                 <select class="form-select form-select-pro" id="usr_rol">
                                     <option value="Master">Master</option>
@@ -4360,7 +4449,7 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
                                     <option value="Familia">Familia</option>
                                 </select>
                             </div>
-                            <div class="col-6">
+                            <div class="usr-form-field">
                                 <label class="form-label small fw-semibold">Estado</label>
                                 <select class="form-select form-select-pro" id="usr_estado">
                                     <option value="Activo">Activo</option>
@@ -4368,16 +4457,21 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-3" id="usr-permisos-panel">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <div><label class="form-label small fw-bold mb-0"><i class="fa-solid fa-key me-1 text-primary"></i>Permisos personalizados</label><div class="text-muted" style="font-size:.72rem;">Seleccione los modulos y luego las acciones permitidas.</div></div>
-                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="seleccionarTodosPermisosUsuario()">Todos</button>
+
+                        <div class="usr-section-divider"><span><i class="fa-solid fa-key text-primary me-2"></i>Permisos personalizados</span></div>
+                        <div id="usr-permisos-panel" class="usr-permisos-compact">
+                            <div class="usr-permisos-toolbar">
+                                <div><div class="small fw-bold">Acceso por módulo</div><div class="text-muted usr-help">Seleccione un módulo para configurar sus acciones.</div></div>
+                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="seleccionarTodosPermisosUsuario()"><i class="fa-solid fa-check-double me-1"></i>Todos</button>
                             </div>
                             <div id="usr-permisos-modulos" class="row g-2"></div>
-                            <div id="usr-permisos-acciones" class="mt-2"></div>
+                            <div id="usr-permisos-acciones" class="usr-permisos-acciones mt-2"></div>
                             <input type="hidden" id="usr_permisos_json" value="{}">
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 fw-semibold rounded-3">Guardar Usuario</button>
+
+                        <div class="usr-form-footer">
+                            <button type="submit" class="btn btn-primary fw-semibold rounded-3 px-4"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar Usuario</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -4533,6 +4627,76 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
 
     <!-- MODAL: TRABAJO PARTICULAR POR CLIENTE -->
     <div class="modal fade" id="modalTrabajoManual" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content modal-content-pro"><div class="modal-header modal-header-pro text-white" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 65%,#2563eb 100%);"><div class="d-flex align-items-center gap-2"><i class="fa-solid fa-screwdriver-wrench"></i><h5 class="modal-title mb-0" id="modalTrabajoManualTitle">Registrar trabajo particular</h5></div><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body modal-body-pro"><form id="formTrabajoManual" onsubmit="guardarTrabajoManual(event)"><input type="hidden" id="tm_id"><input type="hidden" id="tm_cliente_id"><div class="mb-3"><label class="form-label small fw-semibold">Cliente</label><input type="text" class="form-control form-control-pro" id="tm_cliente" readonly></div><div class="row g-3"><div class="col-md-7"><label class="form-label small fw-semibold">Trabajo realizado <span class="text-danger">*</span></label><input type="text" class="form-control form-control-pro" id="tm_trabajo" required></div><div class="col-md-5"><label class="form-label small fw-semibold">Fecha <span class="text-danger">*</span></label><input type="date" class="form-control form-control-pro" id="tm_fecha" required></div><div class="col-md-4"><label class="form-label small fw-semibold">Estado</label><select class="form-select form-select-pro" id="tm_estado"><option>Realizado</option><option>Pendiente</option><option>En proceso</option><option>Cancelado</option></select></div><div class="col-md-4"><label class="form-label small fw-semibold">Cantidad</label><input type="number" min="1" step="1" value="1" class="form-control form-control-pro" id="tm_cantidad"></div><div class="col-md-4"><label class="form-label small fw-semibold">Monto (USD)</label><input type="number" min="0" step="0.01" class="form-control form-control-pro" id="tm_monto_usd"></div><div class="col-12"><label class="form-label small fw-semibold">Descripción</label><textarea class="form-control form-control-pro" id="tm_descripcion" rows="2"></textarea></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea class="form-control form-control-pro" id="tm_observaciones" rows="2"></textarea></div></div><div class="d-flex justify-content-end gap-2 mt-4"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar trabajo</button></div></form></div></div></div></div>
+
+    <!-- MODAL: RESUMEN KPI AGENDA -->
+    <div class="modal fade" id="modalAgendaKpi" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content modal-content-pro"><div class="modal-header modal-header-pro"><div><h5 id="modalAgendaKpiTitle" class="modal-title fw-bold"><i class="fa-solid fa-chart-column text-primary me-2"></i>Agenda</h5><small id="modalAgendaKpiSubtitle" class="text-muted">Información correspondiente</small></div><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body modal-body-pro"><div id="agenda-kpi-resumen"></div></div><div class="modal-footer modal-footer-pro"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button></div></div></div></div>
+
+    <!-- MODAL: DETALLE COMPLETO DE CITA -->
+    <div class="modal fade" id="modalAgendaDetalle" tabindex="-1" aria-labelledby="modalAgendaDetalleTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable agenda-detail-modal-dialog">
+        <div class="modal-content agenda-detail-modal">
+          <div class="modal-header agenda-detail-modal-header">
+            <div class="d-flex align-items-center gap-3 min-w-0">
+              <div class="agenda-detail-hero-icon"><i class="fa-solid fa-calendar-check"></i></div>
+              <div class="min-w-0">
+                <div class="agenda-detail-kicker">AGENDA · DETALLE</div>
+                <h5 class="modal-title mb-1" id="modalAgendaDetalleTitle">Resumen completo de la cita</h5>
+                <div class="agenda-detail-subtitle" id="modalAgendaDetalleSubtitle">Información completa registrada</div>
+              </div>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body agenda-detail-modal-body">
+            <div id="agenda-detalle-contenido"></div>
+          </div>
+          <div class="modal-footer agenda-detail-modal-footer">
+            <button type="button" class="btn btn-light px-3" data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"></i>Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: AGENDA / CITA -->
+    <div class="modal fade" id="modalAgenda" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content modal-content-pro">
+                <div class="modal-header modal-header-pro text-white" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 60%,#2563eb 100%);">
+                    <div class="d-flex align-items-center gap-3"><div class="rounded-circle d-flex align-items-center justify-content-center" style="width:42px;height:42px;background:rgba(255,255,255,.12)"><i class="fa-solid fa-calendar-check"></i></div><div><h5 id="modalAgendaTitle" class="modal-title mb-0">Agendar cita</h5><small id="modalAgendaSubtitle" class="text-white-50">Programación de trabajo</small></div></div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body modal-body-pro">
+                    <form id="formAgenda" onsubmit="guardarCitaAgenda(event)">
+                        <input type="hidden" id="age_id">
+                        <input type="hidden" id="age_cliente_id">
+                        <input type="hidden" id="age_modo">
+                        <div id="age-master-search-wrapper" class="mb-3">
+                            <label class="form-label small fw-semibold">Buscar cliente <span class="text-danger">*</span></label>
+                            <div class="position-relative"><div class="input-group"><span class="input-group-text bg-transparent"><i class="fa-solid fa-magnifying-glass"></i></span><input id="age-cliente-busqueda" class="form-control form-control-pro" placeholder="Código, cédula, nombre, correo o teléfono..." autocomplete="off" oninput="buscarClienteAgendaUI()" onkeydown="if(event.key==='Enter'){event.preventDefault();seleccionarPrimeraCoincidenciaAgenda();}"><button type="button" class="btn btn-outline-secondary" onclick="limpiarBusquedaAgendaCliente()"><i class="fa-solid fa-xmark"></i></button></div><div id="age-clientes-resultados" class="agenda-search-results"></div></div>
+                        </div>
+                        <div id="age-cliente-readonly" class="alert alert-primary d-none py-2 mb-3"><div class="d-flex justify-content-between align-items-center gap-3 flex-wrap"><div><div class="small text-uppercase fw-bold">Cliente seleccionado</div><strong id="age-cliente-nombre">—</strong><div class="small">Código: <span id="age-cliente-codigo">—</span></div></div><button type="button" id="age-cambiar-cliente" class="btn btn-sm btn-outline-primary" onclick="cambiarClienteAgenda()">Cambiar</button></div></div>
+
+                        <div class="row g-3">
+                            <div class="col-md-4"><label class="form-label small fw-semibold">Fecha de la cita <span class="text-danger">*</span></label><input type="date" id="age_fecha_cita" class="form-control form-control-pro" required></div>
+                            <div class="col-md-3"><label class="form-label small fw-semibold">Hora <span class="text-danger">*</span></label><input type="time" id="age_hora_cita" class="form-control form-control-pro" required></div>
+                            <div class="col-md-2"><label class="form-label small fw-semibold">Duración</label><select id="age_duracion" class="form-select form-select-pro"><option value="30">30 min</option><option value="60" selected>1 hora</option><option value="90">1 h 30</option><option value="120">2 horas</option><option value="180">3 horas</option><option value="240">4 horas</option></select></div>
+                            <div class="col-md-3"><label class="form-label small fw-semibold">Prioridad</label><select id="age_prioridad" class="form-select form-select-pro"><option>Normal</option><option>Alta</option><option>Urgente</option></select></div>
+                            <div class="col-md-6"><label class="form-label small fw-semibold">Tipo de trabajo <span class="text-danger">*</span></label><select id="age_tipo" class="form-select form-select-pro" required><option value="">Seleccione...</option><option>Visita técnica</option><option>Instalación</option><option>Soporte técnico</option><option>Mantenimiento</option><option>Configuración</option><option>Consultoría</option><option>Otro</option></select></div>
+                            <div class="col-md-6"><label class="form-label small fw-semibold">Teléfono de contacto</label><input id="age_telefono" class="form-control form-control-pro" placeholder="Teléfono para coordinar la visita"></div>
+                            <div class="col-12"><label class="form-label small fw-semibold">Dirección del trabajo</label><input id="age_direccion" class="form-control form-control-pro" placeholder="Lugar donde se realizará el trabajo"></div>
+                            <div class="col-12"><label class="form-label small fw-semibold">Descripción del trabajo o solicitud <span class="text-danger">*</span></label><textarea id="age_descripcion" class="form-control form-control-pro" rows="3" required placeholder="Describa con claridad qué solicita el cliente o qué trabajo se debe realizar..."></textarea></div>
+                            <div class="col-12"><label class="form-label small fw-semibold">Observaciones / notas del Master</label><textarea id="age_notas" class="form-control form-control-pro" rows="2" placeholder="Indicaciones internas, herramientas, materiales, etc."></textarea></div>
+                        </div>
+                        <div id="age-client-notice" class="alert alert-info d-none mt-3 mb-0"><i class="fa-solid fa-circle-info me-1"></i>La cita se enviará como <strong>Solicitud</strong>. El usuario Master deberá aceptarla o reprogramarla antes de quedar confirmada.</div>
+                        <div id="age-edit-notice" class="alert alert-warning d-none mt-3 mb-0"><i class="fa-solid fa-calendar-pen me-1"></i>Al cambiar fecha u hora de una cita pendiente, quedará registrada como <strong>Reprogramada</strong> y se reiniciarán sus recordatorios.</div>
+                    </form>
+                </div>
+                <div class="modal-footer modal-footer-pro d-flex justify-content-between gap-2 flex-wrap">
+                    <div><button type="button" id="age-btn-eliminar" class="btn btn-outline-danger btn-sm d-none" onclick="eliminarCitaAgendaUI()"><i class="fa-solid fa-trash me-1"></i>Eliminar</button></div>
+                    <div class="d-flex gap-2"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button><button type="submit" form="formAgenda" class="btn btn-primary" id="age-btn-guardar"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar cita</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- MODAL 8: Factura — REDISEÑADO PROFESIONAL -->
 <div class="modal fade" id="modalFactura" tabindex="-1">
@@ -5224,6 +5388,8 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
     let chartPagosBsInstance = null;
     let chartFacturasInstance = null;
     let chartHistorialPagosInstance = null;
+    let chartAgendaEstadosInstance = null;
+    let chartAgendaCategoriasInstance = null;
 
     // Instancias de modales Bootstrap
     let modalSysAlert, modalConfirmLogout, modalPwd, modalPerfil, modalEmp, modalUsr, modalCli, modalFac, modalCred, modalVerFac, modalNotif, modalKpiMaster, modalRegistroExitoso;
@@ -5518,6 +5684,7 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
         renderNotificaciones();
         renderBancos();
         renderAuditoria();
+        renderAgendaModulo();
         updateKPIs();
         renderDashboardCharts();
 
@@ -6236,10 +6403,13 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
         renderDashboardCharts();
     }
 
+    function textoChartSafe(isDarkMode){return isDarkMode?'#cbd5e1':'#475569';}
+    function agendaCitaPerteneceClienteDashboard(c,cliente){if(!cliente)return false;const n=v=>String(v??'').trim().toLowerCase();return [c.id_cliente,c.codigo_cliente,c.id_usuario_cliente].some(v=>{const sv=n(v);return sv&&[cliente.id_cliente,cliente.codigo_cliente,cliente.id_usuario_cliente,cliente.id_usuario].map(n).includes(sv);});}
+
     function renderDashboardCharts() {
-        const ctxPagos=document.getElementById('chartPagosBs'),ctxFacturas=document.getElementById('chartFacturas'),ctxHistorial=document.getElementById('chartHistorialPagos');
+        const ctxPagos=document.getElementById('chartPagosBs'),ctxFacturas=document.getElementById('chartFacturas'),ctxHistorial=document.getElementById('chartHistorialPagos'),ctxAgendaEstados=document.getElementById('chartAgendaEstados'),ctxAgendaCategorias=document.getElementById('chartAgendaCategorias');
         if(!ctxPagos||!ctxFacturas||!ctxHistorial||typeof Chart==='undefined')return;
-        [chartPagosBsInstance,chartFacturasInstance,chartHistorialPagosInstance].forEach(c=>{try{c?.destroy();}catch(_){} });
+        [chartPagosBsInstance,chartFacturasInstance,chartHistorialPagosInstance,chartAgendaEstadosInstance,chartAgendaCategoriasInstance].forEach(c=>{try{c?.destroy();}catch(_){} });
         const isClient=currentUser&&String(currentUser.rol||'').trim().toLowerCase()==='cliente';
         const clienteActual=isClient?obtenerClienteActualPortal():null;
         const num=v=>{const n=Number(String(v??'').replace(/,/g,''));return Number.isFinite(n)?n:0;};
@@ -6284,6 +6454,17 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
         set('dash-history-badge',(_dashboardRange==='all'?'Histórico completo':'Últimos '+_dashboardRange+' días'));
         set('dash-history-count',history.length);set('dash-last-payment',dates.length?dates[dates.length-1]:'—');set('dash-history-total',usd(historyTotalUsd)+' · '+bs(historyTotalBs));
         chartHistorialPagosInstance=new Chart(ctxHistorial,{type:'line',data:{labels:dates,datasets:[{label:'USD',data:dates.map(d=>byDate[d].usd),tension:.35,fill:false,pointRadius:3,pointHoverRadius:6,borderColor:chartBlue,backgroundColor:chartBlue,borderWidth:2},{label:'Bs',data:dates.map(d=>byDate[d].bs),tension:.35,fill:true,borderColor:chartCyan,backgroundColor:isDarkMode?'rgba(34,211,238,.12)':'rgba(8,145,178,.10)',pointRadius:3,pointHoverRadius:6,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},animation:{duration:550},plugins:{legend:{position:'top',labels:{usePointStyle:true,padding:12}},tooltip:{callbacks:{title:items=>items?.[0]?.label||'',label:c=>c.dataset.label==='Bs'?bs(c.raw):usd(c.raw)}}},scales:{x:{grid:{display:false},ticks:{maxRotation:45,minRotation:0}},y:{beginAtZero:true}}}});
+
+        /* Agenda: todas las categorías existentes */
+        const agendaEstados=['Solicitada','Pendiente','Reprogramada','Atendida','Rechazada','Cancelada'];
+        const agendaData=(db.agenda||[]).filter(c=>!isClient||agendaCitaPerteneceClienteDashboard(c,clienteActual));
+        const agendaRango=agendaData.filter(c=>{if(!from)return true;const d=asDate(c.fecha_cita||c.fecha_registro);return !d||d>=from;});
+        const agendaCounts=agendaEstados.map(e=>agendaRango.filter(c=>st(c.estado)===st(e)).length);
+        const agendaTotal=agendaCounts.reduce((a,v)=>a+v,0);
+        set('dash-agenda-badge',agendaTotal+' cita'+(agendaTotal===1?'':'s'));
+        set('dash-agenda-solicitadas',agendaCounts[0]);set('dash-agenda-pendientes',agendaCounts[1]);set('dash-agenda-atendidas',agendaCounts[3]);set('dash-agenda-reprogramadas',agendaCounts[2]);set('dash-agenda-rechazadas',agendaCounts[4]);set('dash-agenda-canceladas',agendaCounts[5]);
+        if(ctxAgendaEstados){chartAgendaEstadosInstance=new Chart(ctxAgendaEstados,{type:'doughnut',data:{labels:agendaEstados,datasets:[{data:agendaCounts,backgroundColor:[chartCyan,chartBlue,chartAmber,chartGreen,chartRed,isDarkMode?'#94a3b8':'#64748b'],borderWidth:0,hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',animation:{duration:600},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:10,color:textoChartSafe(isDarkMode)}},tooltip:{callbacks:{label:c=>c.label+': '+c.raw}}}}});}
+        if(ctxAgendaCategorias){chartAgendaCategoriasInstance=new Chart(ctxAgendaCategorias,{type:'bar',data:{labels:agendaEstados,datasets:[{label:'Citas',data:agendaCounts,backgroundColor:[chartCyan,chartBlue,chartAmber,chartGreen,chartRed,isDarkMode?'#94a3b8':'#64748b'],borderWidth:0,borderRadius:8,maxBarThickness:28}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},animation:{duration:550},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.raw+' cita'+(Number(c.raw)===1?'':'s')}}},scales:{x:{beginAtZero:true,ticks:{precision:0}},y:{grid:{display:false}}}}});}
     }
 
     
@@ -6350,6 +6531,7 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
             empresas: 'Gestión Multiempresa',
             usuarios: 'Usuarios y Permisos',
             clientes: 'Gestión de Clientes',
+            agenda: 'Agenda y Citas',
             facturacion: 'Gestión de Facturación',
             creditos: 'Financiamientos y Créditos',
             pagos: 'Módulo de Pagos',
@@ -6359,11 +6541,15 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
             auditoria: 'Auditoría del Sistema'
         };
         document.getElementById('page-title').innerText = titles[tabId] || 'Plataforma ERP';
-        if(currentUser && String(currentUser.rol||'').trim().toLowerCase()==='cliente' && typeof registrarAuditoria==='function'){ registrarAuditoria('VIEW','Modulo',tabId,'Acceso al módulo: '+(titles[tabId]||tabId),'INFO'); }
+        // Auditoría de navegación para TODOS los usuarios autenticados, sin importar su rol.
+        if(currentUser && typeof registrarAuditoria==='function'){
+            registrarAuditoria('VIEW','Modulo',tabId,'Acceso al módulo: '+(titles[tabId]||tabId),'INFO');
+        }
 
         // Auto-cargar datos para el rol Cliente al navegar entre pestañas
         const isClient = currentUser && String(currentUser.rol || '').toLowerCase() === 'cliente';
         if (tabId === 'bancos') { renderBancos(); }
+        if (tabId === 'agenda') { renderAgendaModulo(); if (String(currentUser?.rol||'').toLowerCase()==='master') cargarAgendaConfigUI(); }
 
         if (tabId === 'servicios' && currentUser) {
             setTimeout(function() { cargarPlanesServiciosCliente(); }, 50);
@@ -6540,11 +6726,14 @@ async function togglePortalStatus() {
         const textColor=isDarkMode?'#cbd5e1':'#475569';
         const gridColor=isDarkMode?'rgba(255,255,255,.07)':'rgba(15,23,42,.08)';
         const blue=isDarkMode?'#60a5fa':'#2563eb', green=isDarkMode?'#4ade80':'#16a34a', amber=isDarkMode?'#fbbf24':'#d97706', red=isDarkMode?'#f87171':'#dc2626', cyan=isDarkMode?'#22d3ee':'#0891b2';
-        const charts=[chartPagosBsInstance,chartFacturasInstance,chartHistorialPagosInstance];
+        const charts=[chartPagosBsInstance,chartFacturasInstance,chartHistorialPagosInstance,chartAgendaEstadosInstance,chartAgendaCategoriasInstance];
         const pagos=chartPagosBsInstance, facturas=chartFacturasInstance, historial=chartHistorialPagosInstance;
         if(pagos?.data?.datasets){pagos.data.datasets[0].backgroundColor=blue;pagos.data.datasets[0].borderColor=blue;pagos.data.datasets[1].backgroundColor=green;pagos.data.datasets[1].borderColor=green;}
         if(facturas?.data?.datasets?.[0])facturas.data.datasets[0].backgroundColor=[green,red,amber,cyan];
         if(historial?.data?.datasets){historial.data.datasets[0].borderColor=blue;historial.data.datasets[0].backgroundColor=blue;historial.data.datasets[1].borderColor=cyan;historial.data.datasets[1].backgroundColor=isDarkMode?'rgba(34,211,238,.12)':'rgba(8,145,178,.10)';}
+        const agendaPalette=[cyan,blue,amber,green,red,isDarkMode?'#94a3b8':'#64748b'];
+        if(chartAgendaEstadosInstance?.data?.datasets?.[0])chartAgendaEstadosInstance.data.datasets[0].backgroundColor=agendaPalette;
+        if(chartAgendaCategoriasInstance?.data?.datasets?.[0])chartAgendaCategoriasInstance.data.datasets[0].backgroundColor=agendaPalette;
         charts.forEach(chart=>{
             if(!chart)return;
             if(chart.options.scales){
@@ -7012,6 +7201,7 @@ async function eliminarEmpresa(id) {
         empresas:{label:'Empresas',icon:'fa-building',actions:['leer','agregar','modificar','eliminar']},
         usuarios:{label:'Usuarios y Permisos',icon:'fa-users-gear',actions:['leer','agregar','modificar','eliminar']},
         clientes:{label:'Clientes',icon:'fa-address-book',actions:['leer','agregar','modificar','eliminar']},
+        agenda:{label:'Agenda y Citas',icon:'fa-calendar-check',actions:['leer','agregar','modificar','eliminar']},
         facturacion:{label:'Facturacion',icon:'fa-file-invoice-dollar',actions:['leer','agregar','modificar','eliminar']},
         creditos:{label:'Creditos y Cuotas',icon:'fa-credit-card',actions:['leer','agregar','modificar','eliminar']},
         pagos:{label:'Pagos',icon:'fa-money-bill-transfer',actions:['leer','agregar','modificar','eliminar']},
@@ -7035,6 +7225,7 @@ async function eliminarEmpresa(id) {
         if(!u)return false;
         const rol=String(u.rol||'').trim().toLowerCase();
         if(rol==='master')return true;
+        if(rol==='cliente' && modulo==='agenda') return ['leer','agregar'].includes(accion);
         const sinMatriz = u.permisos===undefined || u.permisos===null || String(u.permisos).trim()==='';
         if(sinMatriz){
             if(rol==='cliente'){
@@ -9151,6 +9342,7 @@ function copiarTodosDatosBanco(id){const b=(db.bancos||[]).find(function(x){retu
         const isClient = currentUser && String(currentUser.rol||'').trim().toLowerCase() === 'cliente';
         const clienteActual = isClient ? obtenerClienteActualPortal() : null;
         let registros = Array.isArray(db.auditoria) ? [...db.auditoria] : [];
+        // El Master siempre ve absolutamente todo el historial, sin filtros de usuario.
         if (isClient) {
             registros = clienteActual ? registros.filter(r=>auditoriaPerteneceCliente(r,clienteActual)) : [];
         }
@@ -9183,7 +9375,7 @@ function copiarTodosDatosBanco(id){const b=(db.bancos||[]).find(function(x){retu
             const badgeClass = badgeClasses[r.accion] || 'badge bg-light text-dark';
             const nivelClass = nivelClasses[r.nivel] || 'text-muted';
             return '<tr>' +
-                '<td class="ps-3"><small class="text-muted">' + (r.fecha_hora || 'N/A') + '</small></td>' +
+                '<td class="ps-3"><small class="text-muted">' + (formatearFechaHoraAuditoria(r.fecha_hora) || 'N/A') + '</small></td>' +
                 '<td><span class="fw-semibold small">' + (r.username || 'N/A') + '</span></td>' +
                 '<td><span class="badge bg-light text-dark border small">' + (r.rol || 'N/A') + '</span></td>' +
                 '<td><span class="badge ' + badgeClass + ' small">' + (r.accion || 'N/A') + '</span></td>' +
@@ -9196,6 +9388,22 @@ function copiarTodosDatosBanco(id){const b=(db.bancos||[]).find(function(x){retu
     }
 
     function renderAuditoria() {
+        // IMPORTANTE: las sincronizaciones automáticas del portal llaman a
+        // renderAllData() cada pocos segundos. Nunca debemos perder una búsqueda
+        // o filtro que el usuario tenga activo en Auditoría.
+        const texto = String(document.getElementById('audit-filtro-texto')?.value || '').trim();
+        const nivel = String(document.getElementById('audit-filtro-nivel')?.value || '').trim();
+        const accion = String(document.getElementById('audit-filtro-accion')?.value || '').trim();
+        const desde = String(document.getElementById('audit-filtro-desde')?.value || '').trim();
+        const hasta = String(document.getElementById('audit-filtro-hasta')?.value || '').trim();
+
+        if (texto || nivel || accion || desde || hasta) {
+            // Reaplicar exactamente los filtros actuales sobre los datos recién
+            // sincronizados. La pantalla NO debe volver al historial completo.
+            filtrarAuditoria();
+            return;
+        }
+
         renderAuditoriaFiltrada(obtenerAuditoriaVisible());
     }
 
@@ -9207,11 +9415,56 @@ function copiarTodosDatosBanco(id){const b=(db.bancos||[]).find(function(x){retu
         const hasta = String(document.getElementById('audit-filtro-hasta')?.value || '').trim();
         const desdeTs = desde ? new Date(desde + 'T00:00:00').getTime() : null;
         const hastaTs = hasta ? new Date(hasta + 'T23:59:59.999').getTime() : null;
+        const isMaster = currentUser && String(currentUser.rol||'').trim().toLowerCase() === 'master';
+
+        // Para el Master, si el texto identifica a un usuario/cliente, la búsqueda
+        // queda "anclada" a ese usuario y conserva TODO su historial de auditoría.
+        // El historial solo vuelve a mostrar todos los usuarios cuando se borra el texto.
+        let usuarioBuscado = null;
+        if (isMaster && texto) {
+            const q = texto.replace(/\s+/g,' ').trim();
+            usuarioBuscado = (db.usuarios || []).find(u =>
+                [u.id_usuario,u.username,u.nombre_completo,u.codigo_cliente,u.email,u.correo]
+                .filter(Boolean)
+                .some(v => String(v).toLowerCase().includes(q))
+            ) || null;
+
+            // Si se buscó por datos del cliente, resolver el usuario vinculado.
+            if (!usuarioBuscado) {
+                const clienteBuscado = (db.clientes || []).find(c =>
+                    [c.id_cliente,c.codigo_cliente,c.documento_id,c.nombre_completo,c.correo,c.email,c.username,c.id_usuario]
+                    .filter(Boolean)
+                    .some(v => String(v).toLowerCase().includes(q))
+                ) || null;
+                if (clienteBuscado) {
+                    usuarioBuscado = (db.usuarios || []).find(u =>
+                        [u.id_usuario,u.username,u.codigo_cliente,u.email,u.correo].filter(Boolean).some(v =>
+                            [clienteBuscado.id_usuario,clienteBuscado.username,clienteBuscado.codigo_cliente,clienteBuscado.correo,clienteBuscado.email]
+                            .filter(Boolean).map(x=>String(x).toLowerCase()).includes(String(v).toLowerCase())
+                        )
+                    ) || null;
+                }
+            }
+        }
+
+        const refsUsuario = usuarioBuscado ? [
+            usuarioBuscado.id_usuario, usuarioBuscado.username
+        ].filter(Boolean).map(v => String(v).trim().toLowerCase()) : [];
 
         const filtrados = obtenerAuditoriaVisible().filter(r => {
             const campoCompleto = [r.fecha_hora, r.id_auditoria, r.id_usuario, r.username, r.rol, r.accion, r.entidad, r.id_entidad, r.detalle, r.nivel]
                 .map(v => String(v ?? '').toLowerCase()).join(' ');
-            if (texto && !campoCompleto.includes(texto)) return false;
+            const auditId = String(r.id_usuario || '').trim().toLowerCase();
+            const auditUser = String(r.username || '').trim().toLowerCase();
+
+            // Si el Master identificó un usuario, NO se filtra por coincidencia de cada
+            // fila: se conserva todo lo que ese usuario hizo en el sistema.
+            if (usuarioBuscado) {
+                if (!refsUsuario.includes(auditId) && !refsUsuario.includes(auditUser)) return false;
+            } else if (texto && !campoCompleto.includes(texto)) {
+                return false;
+            }
+
             if (nivel && String(r.nivel || '').toLowerCase() !== nivel) return false;
             if (accion && String(r.accion || '').toLowerCase() !== accion) return false;
             const fechaTs = parseFechaAuditoria(r.fecha_hora);
@@ -10441,8 +10694,59 @@ document.addEventListener('DOMContentLoaded', function() {
         set('cli-cliente-nombre',cliente.nombre_completo);set('cli-cliente-codigo',cliente.codigo_cliente);set('cli-info-documento',cliente.documento_id);set('cli-info-telefono',cliente.telefono);set('cli-info-correo',cliente.correo);set('cli-info-direccion',cliente.direccion);set('cli-info-estado',cliente.estado_servicio||'SOLVENTE');set('cli-info-fecha-nac',cliente.fecha_nac);set('cli-info-nacionalidad',cliente.nacionalidad);set('cli-info-estado-civil',cliente.estado_civil);set('cli-info-profesion',cliente.profesion);set('cli-info-empresa-labora',cliente.empresa_labora);
         set('cli-info-facturas',(db.facturas||[]).filter(f=>f.id_cliente===cliente.codigo_cliente||f.id_cliente===cliente.id_cliente).length);
         const ed=document.getElementById('cli-btn-editar'), del=document.getElementById('cli-btn-eliminar');if(ed)ed.setAttribute('onclick',`abrirModalCliente('${cliente.id_cliente}')`);if(del)del.setAttribute('onclick',`eliminarCliente('${cliente.id_cliente}')`);
-        document.getElementById('cli-tarjeta-cliente').classList.remove('d-none');document.getElementById('cli-estado-vacio').classList.add('d-none');document.getElementById('cli-tabla-completa').classList.add('d-none');window._clientePerfilManualActivo=cliente;renderTrabajosManualesCliente(cliente);
+        document.getElementById('cli-tarjeta-cliente').classList.remove('d-none');document.getElementById('cli-estado-vacio').classList.add('d-none');document.getElementById('cli-tabla-completa').classList.add('d-none');window._clientePerfilManualActivo=cliente;renderTrabajosManualesCliente(cliente);renderAgendaPerfilCliente(cliente);
     }
+
+// ================================================================
+// AGENDA / CITAS — módulo aislado
+// ================================================================
+window._agendaClienteSeleccionado=null;window._agendaPerfilCliente=null;window._agendaTelegramLoaded=false;window._agendaClienteListado=null;window._agendaBusquedaListado=[];
+function agendaEsMaster(){return String(currentUser?.rol||'').trim().toLowerCase()==='master';}
+function agendaNormalizar(v){return String(v??'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function agendaEsc(v){if(typeof escapeHtmlMaster==='function')return escapeHtmlMaster(String(v??''));return String(v??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]||m));}
+function agendaFechaHoraLocal(dateObj){const d=(dateObj instanceof Date&&!isNaN(dateObj.getTime()))?dateObj:new Date(),pad=n=>String(n).padStart(2,'0');return{fecha:d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()),hora:pad(d.getHours())+':'+pad(d.getMinutes())};}
+function agendaMostrarFecha(v){const s=String(v??'').trim();if(!s)return'';let m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);if(m)return m[1]+'-'+String(m[2]).padStart(2,'0')+'-'+String(m[3]).padStart(2,'0');const d=new Date(s);return !isNaN(d.getTime())?agendaFechaHoraLocal(d).fecha:s;}
+function agendaMostrarHora(v){const s=String(v??'').trim();if(!s)return'';let m=s.match(/(?:T|\s)(\d{1,2}):(\d{2})(?::\d{2})?/);if(m)return String(m[1]).padStart(2,'0')+':'+m[2];m=s.match(/^(\d{1,2}):(\d{2})/);if(m)return String(m[1]).padStart(2,'0')+':'+m[2];return s;}
+function agendaNormalizarRegistro(c){if(!c)return c;return{...c,fecha_cita:agendaMostrarFecha(c.fecha_cita),hora_cita:agendaMostrarHora(c.hora_cita)};}
+function agendaNormalizarFechaHoraInput(fecha,hora){const f=String(fecha||'').trim(),h=String(hora||'').trim(),fm=f.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/),hm=h.match(/^(\d{1,2}):(\d{2})$/);if(!fm||!hm)return null;const y=+fm[1],m=+fm[2],d=+fm[3],hh=+hm[1],mm=+hm[2];if(y<2000||m<1||m>12||d<1||d>31||hh>23||mm>59)return null;const dt=new Date(y,m-1,d,hh,mm,0,0);if(dt.getFullYear()!==y||dt.getMonth()!==m-1||dt.getDate()!==d||dt.getHours()!==hh||dt.getMinutes()!==mm)return null;return{fecha:y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0'),hora:String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0')};}
+function agendaEstadoBadge(estado){const e=String(estado||'Pendiente'),k=agendaNormalizar(e).replace(/\s+/g,'-');return'<span class="agenda-status agenda-status-'+agendaEsc(k)+'"><i class="fa-solid '+(e==='Atendida'?'fa-circle-check':e==='Solicitada'?'fa-inbox':e==='Reprogramada'?'fa-calendar-days':e==='Rechazada'?'fa-circle-xmark':e==='Cancelada'?'fa-ban':'fa-calendar-day')+'"></i>'+agendaEsc(e)+'</span>';}
+function agendaObtenerClienteActual(){return typeof obtenerClienteActualPortal==='function'?obtenerClienteActualPortal():null;}
+function agendaObtenerLista(){return Array.isArray(db?.agenda)?db.agenda.map(agendaNormalizarRegistro):[];}
+function agendaOrdenar(lista){return lista.sort((a,b)=>String(a.fecha_cita||'').localeCompare(String(b.fecha_cita||''))||String(a.hora_cita||'').localeCompare(String(b.hora_cita||''))||String(a.fecha_registro||'').localeCompare(String(b.fecha_registro||'')));}
+function agendaClienteCoincide(c,q){const nq=agendaNormalizar(q);return[n=c.id_cliente,codigo=c.codigo_cliente,doc=c.documento_id,nombre=c.nombre_completo,correo=c.correo,email=c.email,user=c.username,tel=c.telefono].filter(v=>v!==undefined&&v!==null).some(v=>agendaNormalizar(v).includes(nq));}
+function agendaCitasDeCliente(cliente){if(!cliente)return[];const refs=[cliente.id_cliente,cliente.codigo_cliente,cliente.id_usuario,cliente.documento_id,cliente.correo,cliente.email,cliente.username].filter(Boolean).map(agendaNormalizar);return agendaObtenerLista().filter(a=>[a.id_cliente,a.codigo_cliente,a.id_usuario_cliente,a.documento_id,a.correo,a.email,a.username].filter(Boolean).some(v=>refs.includes(agendaNormalizar(v))));}
+function agendaKpiFiltrada(estado){const base=agendaEsMaster()?agendaObtenerLista():agendaCitasDeCliente(agendaObtenerClienteActual());return base.filter(a=>agendaNormalizar(a.estado)===agendaNormalizar(estado));}
+function renderAgendaModulo(){const sec=document.getElementById('sec-agenda');if(!sec)return;const master=agendaEsMaster(),list=agendaObtenerLista(),client=master?null:agendaObtenerClienteActual();const bMaster=document.getElementById('btn-agenda-nueva-master'),bClient=document.getElementById('btn-agenda-nueva-cliente'),config=document.getElementById('agenda-master-config'),search=document.getElementById('agenda-master-search');if(bMaster)bMaster.classList.toggle('d-none',!master);if(bClient)bClient.classList.toggle('d-none',master);if(config)config.classList.toggle('d-none',!master);if(search)search.classList.toggle('d-none',!master);const visible=master?list:agendaCitasDeCliente(client);const ids={Solicitada:'solicitadas',Pendiente:'pendientes',Reprogramada:'reprogramadas',Atendida:'atendidas'};['Solicitada','Pendiente','Reprogramada','Atendida'].forEach(st=>{const el=document.getElementById('agenda-kpi-'+ids[st]);if(el)el.textContent=visible.filter(x=>agendaNormalizar(x.estado)===agendaNormalizar(st)).length;});if(master){if(!window._agendaClienteListado)renderAgendaListadoSinSeleccion();else renderAgendaListado();}else{const c=agendaObtenerClienteActual();if(c)renderAgendaClienteModulo(c);else renderAgendaListadoSinSeleccion();}}
+function renderAgendaClienteModulo(c){const out=document.getElementById('agenda-tbody'),empty=document.getElementById('agenda-vacio'),intro=document.getElementById('agenda-sin-seleccion');if(!out)return;const data=agendaOrdenar(agendaCitasDeCliente(c));intro?.classList.add('d-none');out.classList.remove('d-none');if(!data.length){out.innerHTML='';empty?.classList.remove('d-none');return;}empty?.classList.add('d-none');const estados=['Solicitada','Pendiente','Reprogramada','Atendida','Rechazada','Cancelada'];out.innerHTML=estados.map(est=>{const rows=data.filter(a=>agendaNormalizar(a.estado)===agendaNormalizar(est));if(!rows.length)return'';const items=rows.map(c=>`<div class="agenda-kpi-list-item"><div class="d-flex justify-content-between align-items-start gap-3 flex-wrap"><div><div class="fw-bold">${agendaEsc(agendaMostrarFecha(c.fecha_cita)||'—')} · ${agendaEsc(agendaMostrarHora(c.hora_cita)||'—')}</div><div class="small text-muted">${agendaEsc(c.tipo_trabajo||'Trabajo')} · ${agendaEsc(c.duracion_minutos||60)} min</div>${c.descripcion?`<div class="small mt-1">${agendaEsc(c.descripcion)}</div>`:''}${c.motivo_rechazo?`<div class="small text-danger mt-1">Motivo: ${agendaEsc(c.motivo_rechazo)}</div>`:''}</div><div class="d-flex align-items-center gap-2">${agendaEstadoBadge(c.estado||est)}<button type="button" class="btn btn-sm btn-outline-info" onclick="verCitaAgendaUI('${agendaEsc(c.id_agenda)}')" title="Ver detalles"><i class="fa-solid fa-eye"></i><span class="d-none d-sm-inline ms-1">Ver</span></button></div></div></div>`).join('');return`<div class="agenda-group-card"><div class="agenda-group-head"><strong>${agendaEstadoBadge(est)}</strong><span class="small text-muted">${rows.length} cita${rows.length===1?'':'s'}</span></div><div class="p-2">${items}</div></div>`;}).join('');}
+function renderAgendaListadoSinSeleccion(){document.getElementById('agenda-tbody')?.classList.add('d-none');document.getElementById('agenda-vacio')?.classList.add('d-none');document.getElementById('agenda-sin-seleccion')?.classList.remove('d-none');}
+function buscarClienteAgendaListadoUI(){const input=document.getElementById('agenda-cliente-busqueda'),out=document.getElementById('agenda-clientes-resultados');if(!input||!out)return;const q=input.value.trim();window._agendaBusquedaListado=[];if(!q){out.innerHTML='';return;}const nq=agendaNormalizar(q);window._agendaBusquedaListado=(db.clientes||[]).filter(c=>agendaClienteCoincide(c,q)).map((c,i)=>{let score=0;[c.codigo_cliente,c.documento_id,c.nombre_completo,c.correo,c.telefono].forEach((v,j)=>{const n=agendaNormalizar(v);if(n===nq)score+=80-j;else if(n.startsWith(nq))score+=30-j;else if(n.includes(nq))score+=10-j;});return{c,score,i};}).sort((a,b)=>b.score-a.score||a.i-b.i).slice(0,12).map(x=>x.c);out.innerHTML=window._agendaBusquedaListado.map(c=>`<button type="button" class="agenda-search-item" onclick="seleccionarClienteAgendaListado('${agendaEsc(c.id_cliente||c.codigo_cliente||'')}')"><div class="fw-semibold">${agendaEsc(c.nombre_completo||'')}</div><div class="meta">Código: ${agendaEsc(c.codigo_cliente||'—')} · Documento: ${agendaEsc(c.documento_id||'—')} · Tel: ${agendaEsc(c.telefono||'—')}</div></button>`).join('')||'<div class="small text-danger p-2">No se encontró el cliente.</div>';}
+function seleccionarPrimeraCoincidenciaAgendaListado(){const c=window._agendaBusquedaListado?.[0];if(c)seleccionarClienteAgendaListado(c.id_cliente||c.codigo_cliente);}
+function seleccionarClienteAgendaListado(key){const c=(db.clientes||[]).find(x=>String(x.id_cliente||'')===String(key)||String(x.codigo_cliente||'')===String(key));if(!c)return;window._agendaClienteListado=c;document.getElementById('agenda-cliente-busqueda').value=(c.nombre_completo||'')+' · '+(c.codigo_cliente||'');document.getElementById('agenda-clientes-resultados').innerHTML='';document.getElementById('agenda-cliente-seleccionado-nombre').textContent=c.nombre_completo||'';document.getElementById('agenda-cliente-seleccionado-codigo').textContent=c.codigo_cliente||'';document.getElementById('agenda-cliente-seleccionado').classList.remove('d-none');renderAgendaListado();}
+function limpiarFiltroAgenda(){window._agendaClienteListado=null;const i=document.getElementById('agenda-cliente-busqueda');if(i)i.value='';const o=document.getElementById('agenda-clientes-resultados');if(o)o.innerHTML='';document.getElementById('agenda-cliente-seleccionado')?.classList.add('d-none');renderAgendaListadoSinSeleccion();}
+function renderAgendaListado(){const out=document.getElementById('agenda-tbody'),empty=document.getElementById('agenda-vacio'),intro=document.getElementById('agenda-sin-seleccion');if(!out)return;if(!agendaEsMaster()){out.classList.add('d-none');return;}const cliente=window._agendaClienteListado;if(!cliente){renderAgendaListadoSinSeleccion();return;}const data=agendaOrdenar(agendaCitasDeCliente(cliente));intro?.classList.add('d-none');out.classList.remove('d-none');if(!data.length){out.innerHTML='';empty?.classList.remove('d-none');return;}empty?.classList.add('d-none');const estados=['Solicitada','Pendiente','Reprogramada','Atendida','Rechazada','Cancelada'];out.innerHTML=estados.map(est=>{const rows=data.filter(a=>agendaNormalizar(a.estado)===agendaNormalizar(est));if(!rows.length)return'';const items=rows.map(c=>{const ac=[`<button class="btn btn-sm btn-outline-info" onclick="verCitaAgendaUI('${agendaEsc(c.id_agenda)}')" title="Ver"><i class="fa-solid fa-eye"></i></button>`],st=String(c.estado||'Pendiente');if(st==='Solicitada'){ac.push(`<button class="btn btn-sm btn-outline-success" onclick="aceptarCitaAgendaUI('${agendaEsc(c.id_agenda)}')" title="Aceptar"><i class="fa-solid fa-check"></i></button>`);ac.push(`<button class="btn btn-sm btn-outline-danger" onclick="rechazarCitaAgendaUI('${agendaEsc(c.id_agenda)}')" title="Rechazar"><i class="fa-solid fa-xmark"></i></button>`);}if(['Pendiente','Reprogramada'].includes(st)){ac.push(`<button class="btn btn-sm btn-outline-success" onclick="atenderCitaAgendaUI('${agendaEsc(c.id_agenda)}')" title="Marcar atendida"><i class="fa-solid fa-check-double"></i></button>`);ac.push(`<button class="btn btn-sm btn-outline-warning" onclick="cancelarCitaAgendaUI('${agendaEsc(c.id_agenda)}')" title="Cancelar"><i class="fa-solid fa-ban"></i></button>`);}ac.push(`<button class="btn btn-sm btn-outline-primary" onclick="abrirModalAgenda('${agendaEsc(c.id_agenda)}')" title="Editar"><i class="fa-solid fa-pen"></i></button>`);return`<tr><td class="ps-3"><div class="fw-bold">${agendaEsc(agendaMostrarFecha(c.fecha_cita)||'—')}</div><div class="text-muted small"><i class="fa-regular fa-clock me-1"></i>${agendaEsc(agendaMostrarHora(c.hora_cita)||'—')} · ${agendaEsc(c.duracion_minutos||60)} min</div></td><td><div class="fw-semibold">${agendaEsc(c.nombre_cliente||'Cliente')}</div><div class="text-muted small">${agendaEsc(c.codigo_cliente||'')}</div></td><td><div class="fw-semibold">${agendaEsc(c.tipo_trabajo||'Trabajo')}</div>${c.descripcion?`<div class="agenda-item-note">${agendaEsc(c.descripcion)}</div>`:''}</td><td>${agendaEsc(c.prioridad||'Normal')}</td><td>${agendaEstadoBadge(st)}</td><td class="text-end pe-3"><div class="agenda-actions">${ac.join('')}</div></td></tr>`;}).join('');return`<div class="agenda-group-card"><div class="agenda-group-head"><strong>${agendaEstadoBadge(est)}</strong><span class="small text-muted">${rows.length} cita${rows.length===1?'':'s'}</span></div><div class="table-responsive"><table class="table table-hover align-middle mb-0 agenda-table"><thead class="table-light"><tr><th class="ps-3">Fecha / Hora</th><th>Cliente</th><th>Trabajo</th><th>Prioridad</th><th>Estado</th><th class="text-end pe-3">Acciones</th></tr></thead><tbody>${items}</tbody></table></div></div>`;}).join('');}
+function buscarClienteAgendaUI(){const input=document.getElementById('age-cliente-busqueda'),out=document.getElementById('age-clientes-resultados');if(!input||!out)return;const q=input.value.trim();window._agendaBusquedaCoincidencias=[];if(!q){out.innerHTML='';return;}const nq=agendaNormalizar(q);window._agendaBusquedaCoincidencias=(db.clientes||[]).filter(c=>agendaClienteCoincide(c,q)).map((c,i)=>{let score=0;[c.codigo_cliente,c.documento_id,c.nombre_completo,c.correo,c.telefono].forEach((v,j)=>{const n=agendaNormalizar(v);if(n===nq)score+=80-j;else if(n.startsWith(nq))score+=30-j;else if(n.includes(nq))score+=10-j;});return{c,score,i};}).sort((a,b)=>b.score-a.score||a.i-b.i).slice(0,12).map(x=>x.c);out.innerHTML=window._agendaBusquedaCoincidencias.map(c=>`<button type="button" class="agenda-search-item" onclick="seleccionarClienteAgenda('${agendaEsc(c.id_cliente||c.codigo_cliente||'')}')"><div class="fw-semibold">${agendaEsc(c.nombre_completo||'')}</div><div class="meta">Código: ${agendaEsc(c.codigo_cliente||'—')} · Documento: ${agendaEsc(c.documento_id||'—')} · Tel: ${agendaEsc(c.telefono||'—')}</div></button>`).join('')||'<div class="small text-danger p-2">No se encontró el cliente.</div>';}
+function seleccionarPrimeraCoincidenciaAgenda(){const c=window._agendaBusquedaCoincidencias?.[0];if(c)seleccionarClienteAgenda(c.id_cliente||c.codigo_cliente);}
+function seleccionarClienteAgenda(key){const c=(db.clientes||[]).find(x=>String(x.id_cliente||'')===String(key)||String(x.codigo_cliente||'')===String(key));if(!c)return;window._agendaClienteSeleccionado=c;document.getElementById('age_cliente_id').value=c.id_cliente||'';document.getElementById('age-cliente-nombre').textContent=c.nombre_completo||'';document.getElementById('age-cliente-codigo').textContent=c.codigo_cliente||'';document.getElementById('age-cliente-readonly')?.classList.remove('d-none');document.getElementById('age-clientes-resultados').innerHTML='';document.getElementById('age-cliente-busqueda').value=(c.nombre_completo||'')+' · '+(c.codigo_cliente||'');document.getElementById('age_telefono').value=document.getElementById('age_telefono').value||c.telefono||'';document.getElementById('age_direccion').value=document.getElementById('age_direccion').value||c.direccion||'';}
+function limpiarBusquedaAgendaCliente(){window._agendaClienteSeleccionado=null;document.getElementById('age_cliente_id').value='';document.getElementById('age-cliente-busqueda').value='';document.getElementById('age-clientes-resultados').innerHTML='';document.getElementById('age-cliente-readonly')?.classList.add('d-none');}
+function cambiarClienteAgenda(){if(String(document.getElementById('age_id')?.value||''))return;document.getElementById('age-cliente-busqueda')?.focus();document.getElementById('age-cliente-readonly')?.classList.add('d-none');window._agendaClienteSeleccionado=null;}
+function agendaPrepararFechaHora(){const d=new Date(Date.now()+60*60*1000);d.setMinutes(Math.ceil(d.getMinutes()/30)*30,0,0);return agendaFechaHoraLocal(d);}
+function abrirModalAgenda(id){if(!currentUser)return;const master=agendaEsMaster(),modalEl=document.getElementById('modalAgenda');if(!modalEl)return;document.getElementById('formAgenda')?.reset();const existing=id?agendaObtenerLista().find(x=>String(x.id_agenda)===String(id)):null,cliente=existing?(db.clientes||[]).find(x=>String(x.codigo_cliente||'')===String(existing.codigo_cliente||'')):null;document.getElementById('age_id').value=existing?.id_agenda||'';document.getElementById('age_modo').value=master?'master':'cliente';document.getElementById('age_cliente_id').value='';const search=document.getElementById('age-master-search-wrapper'),readonly=document.getElementById('age-cliente-readonly'),change=document.getElementById('age-cambiar-cliente'),notice=document.getElementById('age-client-notice'),editNotice=document.getElementById('age-edit-notice'),del=document.getElementById('age-btn-eliminar'),save=document.getElementById('age-btn-guardar');if(master){search?.classList.toggle('d-none',!!existing);readonly?.classList.toggle('d-none',!existing);notice?.classList.add('d-none');change?.classList.toggle('d-none',!!existing);del?.classList.toggle('d-none',!existing);document.getElementById('modalAgendaTitle').innerHTML=existing?'<i class="fa-solid fa-pen me-2"></i>Modificar cita':'<i class="fa-solid fa-calendar-plus me-2"></i>Agendar cita';document.getElementById('modalAgendaSubtitle').textContent=existing?'Actualizar programación, datos y seguimiento':'Programar trabajo para un cliente existente';}else{search?.classList.add('d-none');readonly?.classList.remove('d-none');change?.classList.add('d-none');notice?.classList.remove('d-none');del?.classList.add('d-none');document.getElementById('modalAgendaTitle').innerHTML='<i class="fa-solid fa-calendar-plus me-2"></i>Solicitar cita';document.getElementById('modalAgendaSubtitle').textContent='Solicitud de visita o trabajo';}const c=master?(cliente||window._agendaClienteSeleccionado):agendaObtenerClienteActual();if(!c){if(master)readonly?.classList.add('d-none');else{showSystemNotification('Cliente no disponible','No se pudo identificar el cliente asociado a la sesión.','warning');return;}}else{window._agendaClienteSeleccionado=c;seleccionarClienteAgenda(c.id_cliente||c.codigo_cliente);if(master&&!existing)search?.classList.remove('d-none');if(!master)document.getElementById('age-cliente-readonly')?.classList.remove('d-none');}const dh=existing?{fecha:agendaMostrarFecha(existing.fecha_cita),hora:agendaMostrarHora(existing.hora_cita)}:agendaPrepararFechaHora();[['age_fecha_cita',dh.fecha],['age_hora_cita',dh.hora],['age_duracion',existing?.duracion_minutos||60],['age_prioridad',existing?.prioridad||'Normal'],['age_tipo',existing?.tipo_trabajo||''],['age_telefono',existing?.telefono_contacto||c?.telefono||''],['age_direccion',existing?.direccion_trabajo||c?.direccion||''],['age_descripcion',existing?.descripcion||''],['age_notas',existing?.notas_master||'']].forEach(([k,v])=>{const el=document.getElementById(k);if(el)el.value=v??'';});editNotice?.classList.toggle('d-none',!(existing&&['Pendiente','Reprogramada'].includes(String(existing.estado||''))));if(save)save.innerHTML=master?(existing?'<i class="fa-solid fa-save me-1"></i>Guardar cambios':'<i class="fa-solid fa-calendar-plus me-1"></i>Agendar cita'):'<i class="fa-solid fa-paper-plane me-1"></i>Enviar solicitud';bootstrap.Modal.getOrCreateInstance(modalEl,{backdrop:false,keyboard:true,focus:true}).show();}
+function abrirModalAgendaDesdePerfil(){const c=agendaObtenerClienteActual()||window._clientePerfilManualActivo;if(!c){showSystemNotification('Cliente no seleccionado','No se pudo identificar el cliente asociado.','warning');return;}window._agendaPerfilCliente=c;window._agendaClienteSeleccionado=c;abrirModalAgenda();}
+async function guardarCitaAgenda(e){e.preventDefault();const master=agendaEsMaster(),id=String(document.getElementById('age_id')?.value||'').trim(),c=window._agendaClienteSeleccionado||agendaObtenerClienteActual();if(!c){showSystemNotification('Cliente requerido','Seleccione un cliente.','warning');return;}const f=document.getElementById('formAgenda');if(!f.checkValidity()){f.reportValidity();return;}const fh=agendaNormalizarFechaHoraInput(document.getElementById('age_fecha_cita').value,document.getElementById('age_hora_cita').value);if(!fh){showSystemNotification('Fecha y hora inválidas','Seleccione una fecha y hora válidas.','warning');return;}const p={id_agenda:id||'',codigo_cliente:c.codigo_cliente||'',fecha_cita:fh.fecha,hora_cita:fh.hora,duracion_minutos:Number(document.getElementById('age_duracion').value||60),tipo_trabajo:document.getElementById('age_tipo').value,descripcion:document.getElementById('age_descripcion').value.trim(),direccion_trabajo:document.getElementById('age_direccion').value.trim(),telefono_contacto:document.getElementById('age_telefono').value.trim(),prioridad:document.getElementById('age_prioridad').value,notas_master:document.getElementById('age_notas').value.trim()};try{const action=master?(id?'updateCitaAgenda':'crearCitaAgenda'):'solicitarCitaAgenda',r=await sendGasRequest(action,p,false,35000,true);if(!r?.success)throw new Error(r?.message||'Google Sheets no confirmó la operación.');db.agenda=Array.isArray(db.agenda)?db.agenda:[];if(id){const ix=db.agenda.findIndex(x=>String(x.id_agenda)===id);if(ix>=0)db.agenda[ix]={...db.agenda[ix],...(r.data||p)};}else db.agenda.unshift(r.data||p);localStorage.setItem('erp_db',JSON.stringify(db));if(master)window._agendaClienteListado=c;renderAgendaModulo();if(window._agendaPerfilCliente)renderAgendaPerfilCliente(window._agendaPerfilCliente);bootstrap.Modal.getInstance(document.getElementById('modalAgenda'))?.hide();showSystemNotification(master?(id?'Cita actualizada':'Cita agendada'):'Solicitud enviada',r.message||'Operación completada correctamente.','success');}catch(err){showSystemNotification('No se pudo guardar la cita',err.message||'Error de servidor.','danger');}}
+async function actualizarEstadoCitaAgendaUI(id,estado,motivo){if(!agendaEsMaster())return;const p={id_agenda:id,estado};if(motivo!==undefined)p.motivo_rechazo=motivo;try{const r=await sendGasRequest('updateCitaAgenda',p,false,35000,true);if(!r?.success)throw new Error(r?.message||'No se pudo actualizar la cita.');const ix=db.agenda.findIndex(x=>String(x.id_agenda)===String(id));if(ix>=0)db.agenda[ix]={...db.agenda[ix],...(r.data||p)};localStorage.setItem('erp_db',JSON.stringify(db));renderAgendaModulo();if(window._agendaPerfilCliente)renderAgendaPerfilCliente(window._agendaPerfilCliente);if(window._agendaClienteListado)renderAgendaListado();showSystemNotification('Cita actualizada',r.message||'Estado actualizado correctamente.','success');}catch(err){showSystemNotification('No se pudo actualizar',err.message||'Error de servidor.','danger');}}
+function aceptarCitaAgendaUI(id){actualizarEstadoCitaAgendaUI(id,'Pendiente');}
+function rechazarCitaAgendaUI(id){const motivo=window.prompt('Indique el motivo del rechazo de la solicitud:','');if(motivo===null)return;actualizarEstadoCitaAgendaUI(id,'Rechazada',motivo.trim());}
+function cancelarCitaAgendaUI(id){if(!window.confirm('¿Desea cancelar esta cita?'))return;actualizarEstadoCitaAgendaUI(id,'Cancelada');}
+async function atenderCitaAgendaUI(id){if(!agendaEsMaster())return;try{const r=await sendGasRequest('atenderCitaAgenda',{id_agenda:id},false,35000,true);if(!r?.success)throw new Error(r?.message||'No se pudo marcar la cita.');const ix=db.agenda.findIndex(x=>String(x.id_agenda)===String(id));if(ix>=0)db.agenda[ix]={...db.agenda[ix],estado:'Atendida',fecha_atendida:new Date().toISOString(),atendido_por:currentUser?.username||'MASTER'};localStorage.setItem('erp_db',JSON.stringify(db));renderAgendaModulo();if(window._agendaPerfilCliente)renderAgendaPerfilCliente(window._agendaPerfilCliente);showSystemNotification('Cita atendida','La cita fue marcada como atendida.','success');}catch(err){showSystemNotification('No se pudo marcar como atendida',err.message||'Error de servidor.','danger');}}
+async function eliminarCitaAgendaUI(){const id=String(document.getElementById('age_id')?.value||'');if(!agendaEsMaster()||!id)return;if(!window.confirm('¿Desea eliminar esta cita?'))return;try{const r=await sendGasRequest('deleteCitaAgenda',{id_agenda:id},false,35000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar.');db.agenda=db.agenda.filter(x=>String(x.id_agenda)!==id);localStorage.setItem('erp_db',JSON.stringify(db));bootstrap.Modal.getInstance(document.getElementById('modalAgenda'))?.hide();renderAgendaModulo();showSystemNotification('Cita eliminada','La cita fue eliminada correctamente.','success');}catch(err){showSystemNotification('No se pudo eliminar',err.message||'Error de servidor.','danger');}}
+function agendaDetalleCampos(c){return[['ID de cita',c.id_agenda],['ID cliente',c.id_cliente],['Código cliente',c.codigo_cliente],['Nombre cliente',c.nombre_cliente],['Usuario del cliente',c.id_usuario_cliente],['Fecha de registro',c.fecha_registro],['Hora de registro',c.hora_registro],['Fecha de cita',c.fecha_cita],['Hora de cita',c.hora_cita],['Duración',(c.duracion_minutos||60)+' min'],['Tipo de trabajo',c.tipo_trabajo],['Prioridad',c.prioridad],['Estado',c.estado],['Teléfono',c.telefono_contacto],['Dirección del trabajo',c.direccion_trabajo],['Fecha de confirmación',c.fecha_confirmacion],['Fecha de actualización',c.fecha_actualizacion],['Motivo de rechazo',c.motivo_rechazo],['Fecha atendida',c.fecha_atendida],['Atendido por',c.atendido_por],['Recordatorio 24h',c.recordatorio_24h||'No enviado'],['Recordatorio 12h',c.recordatorio_12h||'No enviado'],['Recordatorio 6h',c.recordatorio_6h||'No enviado'],['Recordatorio 2h',c.recordatorio_2h||'No enviado'],['Descripción del trabajo',c.descripcion,'full'],['Notas del Master',c.notas_master,'full']];}
+function verCitaAgendaUI(id){const c=agendaObtenerLista().find(x=>String(x.id_agenda)===String(id));if(!c){showSystemNotification('Cita no encontrada','No se localizó la cita solicitada.','warning');return;}const box=document.getElementById('agenda-detalle-contenido');if(!box)return;const subtitle=document.getElementById('modalAgendaDetalleSubtitle');if(subtitle)subtitle.textContent=(c.codigo_cliente?String(c.codigo_cliente)+' · ':'')+(agendaMostrarFecha(c.fecha_cita)||'')+' · '+(agendaMostrarHora(c.hora_cita)||'');const groups=[{title:'Identificación',icon:'fa-user',fields:[['Cliente',c.nombre_cliente],['Código cliente',c.codigo_cliente],['ID cliente',c.id_cliente],['Usuario cliente',c.id_usuario_cliente]]},{title:'Programación',icon:'fa-calendar-days',fields:[['Fecha de registro',c.fecha_registro],['Hora de registro',c.hora_registro],['Fecha de cita',agendaMostrarFecha(c.fecha_cita)],['Hora de cita',agendaMostrarHora(c.hora_cita)],['Duración',(c.duracion_minutos||60)+' min'],['Estado',c.estado]]},{title:'Trabajo',icon:'fa-screwdriver-wrench',fields:[['Tipo de trabajo',c.tipo_trabajo],['Prioridad',c.prioridad],['Teléfono de contacto',c.telefono_contacto],['Dirección del trabajo',c.direccion_trabajo],['Descripción del trabajo',c.descripcion,'full']]},{title:'Control y seguimiento',icon:'fa-clipboard-check',fields:[['Fecha de confirmación',c.fecha_confirmacion],['Fecha de actualización',c.fecha_actualizacion],['Motivo de rechazo',c.motivo_rechazo],['Fecha atendida',c.fecha_atendida],['Atendido por',c.atendido_por],['Recordatorio 24h',c.recordatorio_24h||'No enviado'],['Recordatorio 12h',c.recordatorio_12h||'No enviado'],['Recordatorio 6h',c.recordatorio_6h||'No enviado'],['Recordatorio 2h',c.recordatorio_2h||'No enviado'],['Notas del Master',c.notas_master,'full']]}];box.innerHTML='<div class="agenda-detail-overview"><div class="agenda-detail-overview-main"><span class="agenda-detail-overview-label">Cliente</span><div class="name">'+agendaEsc(c.nombre_cliente||'Cliente sin nombre')+'</div><div class="meta">'+agendaEsc(c.codigo_cliente||'Sin código')+' · ID '+agendaEsc(c.id_cliente||'—')+'</div></div><div class="agenda-detail-overview-item"><span class="label">Estado</span><div class="value">'+agendaEstadoBadge(c.estado||'Pendiente')+'</div></div><div class="agenda-detail-overview-item"><span class="label">Fecha</span><div class="value">'+agendaEsc(agendaMostrarFecha(c.fecha_cita)||'—')+'</div></div><div class="agenda-detail-overview-item"><span class="label">Hora</span><div class="value">'+agendaEsc(agendaMostrarHora(c.hora_cita)||'—')+'</div></div></div>'+groups.map(g=>'<section class="agenda-detail-section"><div class="agenda-detail-section-title"><i class="fa-solid '+g.icon+'"></i><span>'+g.title+'</span></div><div class="agenda-detail-fields">'+g.fields.map(f=>'<div class="agenda-detail-field '+(f[2]||'')+'"><span class="label">'+agendaEsc(f[0])+'</span><div class="value">'+agendaEsc(f[1]||'—')+'</div></div>').join('')+'</div></section>').join('');bootstrap.Modal.getOrCreateInstance(document.getElementById('modalAgendaDetalle'),{backdrop:false,keyboard:true,focus:true}).show();}
+function mostrarKpiAgenda(estado){const lista=agendaKpiFiltrada(estado),box=document.getElementById('agenda-kpi-resumen');if(!box)return;document.getElementById('modalAgendaKpiTitle').innerHTML='<i class="fa-solid fa-chart-column text-primary me-2"></i>'+agendaEsc(estado);document.getElementById('modalAgendaKpiSubtitle').textContent=(agendaEsMaster()?'Todas las citas':'Mis citas')+' en estado '+estado+' · '+lista.length+' registro'+(lista.length===1?'':'s');box.innerHTML=lista.length?agendaOrdenar(lista).map(c=>`<div class="agenda-kpi-list-item"><div class="d-flex justify-content-between align-items-start gap-2 flex-wrap"><div><div class="fw-bold">${agendaEsc(c.nombre_cliente||'Cliente')}</div><div class="small text-muted">${agendaEsc(c.codigo_cliente||'')} · ${agendaEsc(c.fecha_cita||'')} · ${agendaEsc(c.hora_cita||'')}</div><div class="small mt-1">${agendaEsc(c.tipo_trabajo||'Trabajo')}</div><div class="small text-muted mt-1">${agendaEsc(c.descripcion||'')}</div></div><div class="d-flex align-items-center gap-2">${agendaEstadoBadge(c.estado||estado)}<button type="button" class="btn btn-sm btn-outline-info" onclick="verCitaAgendaUI('${agendaEsc(c.id_agenda)}')"><i class="fa-solid fa-eye"></i> Ver</button></div></div></div>`).join(''):'<div class="text-center text-muted p-4">No existen citas en este estado.</div>';bootstrap.Modal.getOrCreateInstance(document.getElementById('modalAgendaKpi'),{backdrop:false,keyboard:true,focus:true}).show();}
+function renderAgendaPerfilCliente(c){const box=document.getElementById('cli-agenda-perfil'),list=document.getElementById('cli-agenda-perfil-lista'),btn=document.getElementById('btn-agenda-perfil-nueva'),btnTop=document.getElementById('btn-agenda-desde-perfil-texto');if(!box||!list)return;const data=agendaOrdenar(agendaCitasDeCliente(c));window._agendaPerfilCliente=c;box.classList.remove('d-none');if(btn)btn.innerHTML='<i class="fa-solid fa-calendar-plus me-1"></i>'+(agendaEsMaster()?'Agendar cita':'Solicitar cita');if(btnTop)btnTop.textContent=agendaEsMaster()?'Agendar cita':'Solicitar cita';if(!data.length){list.innerHTML='<div class="text-muted small p-3 border rounded-3 bg-light-subtle"><i class="fa-regular fa-calendar-xmark me-2"></i>Este cliente todavía no tiene citas o solicitudes registradas.</div>';return;}list.innerHTML=data.map(a=>`<div class="agenda-mini-item"><div class="d-flex justify-content-between align-items-start gap-3 flex-wrap"><div><div class="fw-bold">${agendaEsc(agendaMostrarFecha(a.fecha_cita)||'')} · ${agendaEsc(agendaMostrarHora(a.hora_cita)||'')}</div><div class="small text-muted">${agendaEsc(a.tipo_trabajo||'Trabajo')} · ${agendaEsc(a.duracion_minutos||60)} min</div>${a.descripcion?`<div class="small mt-1">${agendaEsc(a.descripcion)}</div>`:''}${a.motivo_rechazo?`<div class="small text-danger mt-1">Motivo: ${agendaEsc(a.motivo_rechazo)}</div>`:''}</div><div class="d-flex align-items-center gap-2">${agendaEstadoBadge(a.estado||'Pendiente')}<button type="button" class="btn btn-sm btn-outline-info" onclick="verCitaAgendaUI('${agendaEsc(a.id_agenda)}')" title="Ver"><i class="fa-solid fa-eye"></i></button></div></div></div>`).join('');}
+async function cargarAgendaConfigUI(){if(!agendaEsMaster()||window._agendaTelegramLoaded)return;try{const r=await sendGasRequest('getAgendaConfig',{},false,35000,false);if(r?.success){const c=r.config||{},t=document.getElementById('agenda-telegram-token'),ch=document.getElementById('agenda-telegram-chat'),a=document.getElementById('agenda-telegram-activo');if(t)t.value=c.telegram_bot_token||'';if(ch)ch.value=c.telegram_chat_id||'';if(a)a.value=c.telegram_activo?'true':'false';actualizarEstadoTelegramAgendaUI(c.telegram_activo);window._agendaTelegramLoaded=true;}}catch(_){}}
+function actualizarEstadoTelegramAgendaUI(activo){const el=document.getElementById('agenda-telegram-status');if(!el)return;el.className='badge rounded-pill '+(activo?'text-bg-success':'text-bg-secondary');el.textContent=activo?'Activo':'Desactivado';}
+async function guardarConfiguracionAgendaTelegram(){if(!agendaEsMaster())return;const p={telegram_bot_token:document.getElementById('agenda-telegram-token').value.trim(),telegram_chat_id:document.getElementById('agenda-telegram-chat').value.trim(),telegram_activo:document.getElementById('agenda-telegram-activo').value==='true'};try{const r=await sendGasRequest('guardarAgendaConfig',p,false,35000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar.');actualizarEstadoTelegramAgendaUI(p.telegram_activo);window._agendaTelegramLoaded=true;showSystemNotification('Telegram configurado','La configuración de recordatorios de Agenda fue guardada.','success');}catch(err){showSystemNotification('No se pudo guardar Telegram',err.message||'Error de servidor.','danger');}}
+async function probarTelegramAgendaUI(){if(!agendaEsMaster())return;try{const r=await sendGasRequest('probarTelegramAgenda',{},false,45000,true);if(!r?.success)throw new Error(r?.message||'Telegram no confirmó el envío.');showSystemNotification('Telegram enviado','El mensaje de prueba fue aceptado por Telegram.','success');}catch(err){showSystemNotification('No se pudo probar Telegram',err.message||'Error de integración.','danger');}}
 
 // ================================================================
 // TRABAJOS PARTICULARES POR CLIENTE — fuera del catálogo
@@ -11942,11 +12246,75 @@ body.logout-cleanup .modal-backdrop {
 @media(max-width:767px){.payment-summary-grid{grid-template-columns:1fr}}
 html[data-bs-theme="dark"] .master-pending-alert{background:linear-gradient(135deg,rgba(245,158,11,.12),#1e293b);border-color:#92400e}
 </style>
+<style id="usuario-form-compacto">
+/* Formulario de usuario: compacto, ordenado y responsive */
+#modalUsuario .modal-dialog{max-width:760px;width:calc(100% - 24px);}
+#modalUsuario .modal-content-pro{border-radius:18px;}
+#modalUsuario .modal-header-pro{padding:.9rem 1.2rem;}
+#modalUsuario .modal-body-pro{padding:1rem 1.2rem 1.05rem;max-height:78vh;overflow-y:auto;}
+#modalUsuario .modal-title{font-size:1rem;}
+#modalUsuario .form-label{margin-bottom:.28rem;}
+#modalUsuario .form-control-pro,#modalUsuario .form-select-pro{padding:.48rem .72rem;border-radius:9px;font-size:.86rem;}
+.usr-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;}
+.usr-form-field{min-width:0;}
+.usr-form-field-wide{grid-column:1/-1;}
+.usr-section-divider{display:flex;align-items:center;gap:10px;margin:14px 0 9px;color:var(--text-main);font-size:.8rem;font-weight:800;}
+.usr-section-divider:after{content:"";height:1px;flex:1;background:var(--border-color);}
+.usr-permisos-compact{border:1px solid var(--border-color);border-radius:12px;padding:10px;background:var(--bg-card);}
+.usr-permisos-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;}
+.usr-help{font-size:.68rem;}
+#usr-permisos-modulos .col-6{padding-left:4px;padding-right:4px;}
+#usr-permisos-modulos label{min-height:39px;padding:7px 8px!important;border-radius:9px!important;background:var(--surface-soft)!important;border-color:var(--border-color)!important;font-size:.7rem!important;transition:.15s ease;}
+#usr-permisos-modulos label:hover{border-color:rgba(37,99,235,.45)!important;background:rgba(37,99,235,.05)!important;}
+#usr-permisos-modulos .form-check-input{width:14px;height:14px;}
+#usr-permisos-acciones{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;}
+#usr-permisos-acciones>[data-action-block]{border:1px solid var(--border-color)!important;border-radius:9px!important;padding:7px 9px!important;margin:0!important;background:var(--surface-soft);}
+#usr-permisos-acciones>[data-action-block]>div:first-child{font-size:.68rem!important;margin-bottom:5px!important;}
+#usr-permisos-acciones .form-check{margin:0!important;font-size:.66rem!important;}
+#usr-permisos-acciones .form-check-input{margin-top:.15em;}
+.usr-form-footer{display:flex;justify-content:flex-end;margin-top:12px;padding-top:10px;border-top:1px solid var(--border-color);}
+html[data-bs-theme="dark"] #modalUsuario .form-control-pro,html[data-bs-theme="dark"] #modalUsuario .form-select-pro{background:#111827!important;color:var(--text-main)!important;border-color:var(--border-color)!important;}
+html[data-bs-theme="dark"] #modalUsuario .form-control-pro:focus,html[data-bs-theme="dark"] #modalUsuario .form-select-pro:focus{background:#172033!important;}
+@media(max-width:575px){#modalUsuario .modal-body-pro{padding:.85rem;max-height:82vh}.usr-form-grid{grid-template-columns:1fr}.usr-form-field-wide{grid-column:auto}#usr-permisos-acciones{grid-template-columns:1fr}.usr-permisos-toolbar{align-items:flex-start}.usr-form-footer .btn{width:100%;}}
+</style>
 /* PERMISOS GRANULARES DE USUARIO */
 #usr-permisos-panel{border:1px solid var(--border-color);border-radius:12px;padding:12px;background:var(--bg-card);}
 #usr-permisos-panel label{cursor:pointer;}
 #usr-permisos-panel .bg-light{background:var(--bg-card)!important;color:var(--text-main)!important;border-color:var(--border-color)!important;}
 html[data-bs-theme="dark"] #usr-permisos-panel .bg-light{background:#172033!important;color:#e5e7eb!important;}
+        /* ================================================================
+           AGENDA / CITAS
+           ================================================================ */
+        .agenda-head{padding:14px 16px;background:linear-gradient(135deg,rgba(37,99,235,.045),rgba(14,165,233,.02));border:1px solid var(--border-color);border-radius:16px}
+        .agenda-table th{font-size:.72rem;text-transform:uppercase;letter-spacing:.045em;color:var(--text-muted);white-space:nowrap}
+        .agenda-table td{font-size:.78rem}
+        .agenda-kpi-clickable{cursor:pointer;user-select:none;transition:transform .18s ease,box-shadow .18s ease;}
+        .agenda-kpi-clickable:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(15,23,42,.10);}
+        .agenda-group-results{padding:14px;}
+        .agenda-group-card{border:1px solid var(--border-color);border-radius:15px;overflow:hidden;margin-bottom:12px;background:var(--bg-card);}
+        .agenda-group-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;background:rgba(37,99,235,.045);border-bottom:1px solid var(--border-color);}
+        .agenda-kpi-list-item{border:1px solid var(--border-color);border-radius:12px;padding:11px 12px;margin-bottom:9px;background:var(--bg-card);}
+        .agenda-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+        .agenda-detail-item{border:1px solid var(--border-color);border-radius:10px;padding:9px 10px;background:rgba(148,163,184,.04);}
+        .agenda-detail-item.full{grid-column:1/-1;}
+        .agenda-detail-label{display:block;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.045em;color:var(--text-muted);margin-bottom:3px;}
+        .agenda-detail-value{font-size:.78rem;font-weight:650;white-space:pre-wrap;word-break:break-word;color:var(--text-main);}
+        @media(max-width:767px){.agenda-detail-grid{grid-template-columns:1fr}.agenda-detail-item.full{grid-column:auto}}
+        .agenda-search-results{position:absolute;left:0;right:0;top:calc(100% + 5px);z-index:1100;display:flex;flex-direction:column;gap:4px;max-height:250px;overflow:auto;padding:5px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;box-shadow:0 16px 35px rgba(15,23,42,.15)}
+        .agenda-search-item{display:block;width:100%;padding:9px 11px;text-align:left;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--text-main)}
+        .agenda-search-item:hover{background:rgba(37,99,235,.07);border-color:rgba(37,99,235,.18)}
+        .agenda-search-item .meta{font-size:.65rem;color:var(--text-muted)}
+        .agenda-item-note{margin-top:3px;font-size:.68rem;color:var(--text-muted);line-height:1.35;max-width:380px}
+        .agenda-actions{display:flex;justify-content:flex-end;gap:5px;flex-wrap:wrap}
+        .agenda-actions .btn{font-size:.68rem;padding:.28rem .42rem}
+        .agenda-status{padding:5px 9px;border-radius:999px;font-size:.65rem;font-weight:800;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+        .agenda-status-solicitada{background:#e0f2fe;color:#075985}.agenda-status-pendiente{background:#dbeafe;color:#1e40af}.agenda-status-reprogramada{background:#fef3c7;color:#92400e}.agenda-status-atendida{background:#dcfce7;color:#166534}.agenda-status-rechazada{background:#fee2e2;color:#991b1b}.agenda-status-cancelada{background:#e2e8f0;color:#475569}
+        #agenda-master-config{border:1px solid rgba(37,99,235,.14)!important;background:linear-gradient(135deg,rgba(37,99,235,.025),rgba(14,165,233,.015))}
+        #cli-agenda-perfil-lista .agenda-mini-item{padding:10px 0;border-bottom:1px solid var(--border-color)}
+        #cli-agenda-perfil-lista .agenda-mini-item:last-child{border-bottom:0}
+        @media(max-width:767px){.agenda-table th:nth-child(4),.agenda-table td:nth-child(4){display:none}.agenda-table th,.agenda-table td{padding:9px 8px!important}.agenda-actions{justify-content:flex-start}.agenda-head{align-items:flex-start!important}}
+        html[data-bs-theme="dark"] .agenda-search-results{box-shadow:0 18px 40px rgba(0,0,0,.45)}
+        html[data-bs-theme="dark"] .agenda-status-solicitada{background:rgba(14,165,233,.15);color:#67e8f9}html[data-bs-theme="dark"] .agenda-status-pendiente{background:rgba(59,130,246,.15);color:#93c5fd}html[data-bs-theme="dark"] .agenda-status-reprogramada{background:rgba(245,158,11,.15);color:#fcd34d}html[data-bs-theme="dark"] .agenda-status-atendida{background:rgba(34,197,94,.15);color:#86efac}html[data-bs-theme="dark"] .agenda-status-rechazada{background:rgba(239,68,68,.15);color:#fca5a5}html[data-bs-theme="dark"] .agenda-status-cancelada{background:rgba(100,116,139,.18);color:#cbd5e1}
 </style></head><body><h1>${esc(f.nombre||'Familiar')}</h1><p><b>Parentesco:</b> ${esc(f.parentesco||'')}</p><p><b>Documento:</b> ${esc(f.documento||'')}</p><p><b>Fecha de nacimiento:</b> ${esc(f.fecha_nac||'')}</p><p><b>Teléfono:</b> ${esc(f.telefono||'')}</p><p><b>Correo:</b> ${esc(f.correo||'')}</p><p><b>Dirección:</b> ${esc(f.direccion||'')}</p><p><b>Notas:</b> ${esc(f.notas||'—')}</p>${items.some(x=>x[1])?'<h2>Documentos</h2><div class="grid">'+items.filter(x=>x[1]).map(x=>`<div class="doc"><h3>${esc(x[0])}</h3><img src="${x[1]}" alt="${esc(x[0])}"></div>`).join('')+'</div>':''}</body></html>`);w.document.close();setTimeout(()=>{w.focus();w.print();},700);
     });
 }
@@ -12155,5 +12523,93 @@ inicializarFamiliaDesdeGAS();
     </div>
   </div>
 </div>
+<style id="ajustes-agenda-dashboard-theme">
+/* ═══════════════════════════════════════════════════════════════
+   AGENDA DASHBOARD + CONTRASTE GLOBAL + DETALLE DE CITA
+   ═══════════════════════════════════════════════════════════════ */
+#sec-dashboard .dashboard-agenda-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.35fr)!important;}
+#sec-dashboard .dashboard-agenda-card{min-width:0;}
+#sec-dashboard .dashboard-agenda-wide .dashboard-chart-wrap{height:205px;}
+#sec-dashboard .dashboard-agenda-summary{margin-top:7px;}
+@media(max-width:767px){#sec-dashboard .dashboard-agenda-grid{display:block!important}#sec-dashboard .dashboard-agenda-card{margin-bottom:8px!important}#sec-dashboard .dashboard-agenda-wide .dashboard-chart-wrap{height:220px}}
+
+/* Selector/resultados de búsqueda en Planes y Servicios */
+#sec-servicios .ps-client-search-box,
+#sec-servicios .ps-catalog-filterbar,
+#sec-servicios #adm-plan-clientes-resultados,
+#sec-servicios #adm-plan-clientes-resultados .btn,
+#sec-servicios .ps-client-search-box .input-group,
+#sec-servicios .ps-client-search-box .input-group-text,
+#sec-servicios .ps-catalog-filterbar .input-group{color:var(--text-main);}
+#sec-servicios #adm-plan-clientes-resultados .btn{background:var(--bg-card)!important;color:var(--text-main)!important;border-color:var(--border-color)!important;}
+#sec-servicios #adm-plan-clientes-resultados .btn:hover{background:rgba(37,99,235,.08)!important;color:var(--text-main)!important;border-color:rgba(37,99,235,.28)!important;}
+#sec-servicios .ps-client-search-box .input-group-text,
+#sec-servicios .ps-catalog-filterbar .input-group-text{background:var(--bg-card)!important;color:var(--text-muted)!important;border-color:var(--border-color)!important;}
+#sec-servicios .ps-client-search-box .form-control,
+#sec-servicios .ps-catalog-filterbar .form-control{background:var(--bg-card)!important;color:var(--text-main)!important;border-color:var(--border-color)!important;}
+#sec-servicios .ps-client-search-box .form-control::placeholder,
+#sec-servicios .ps-catalog-filterbar .form-control::placeholder{color:var(--text-muted)!important;}
+#sec-servicios .ps-admin-nav .btn,
+#sec-servicios .ps-view-title,
+#sec-servicios .ps-rate,
+#sec-servicios .ps-category-chip,
+#sec-servicios .ps-contracts-panel,
+#sec-servicios .ps-contracts-panel>.row>div>div{color:var(--text-main);}
+html[data-bs-theme="dark"] #sec-servicios .ps-client-search-box,
+html[data-bs-theme="dark"] #sec-servicios .ps-catalog-filterbar{background:var(--surface-muted)!important;color:var(--text-main)!important;}
+html[data-bs-theme="dark"] #sec-servicios .ps-admin-nav,
+html[data-bs-theme="dark"] #sec-servicios .ps-view-title,
+html[data-bs-theme="dark"] #sec-servicios .ps-contracts-panel{background:var(--bg-subtle)!important;color:var(--text-main)!important;border-color:var(--border-color)!important;}
+html[data-bs-theme="dark"] #sec-servicios .ps-admin-nav .btn{background:transparent!important;color:var(--text-body)!important;border-color:transparent!important;}
+html[data-bs-theme="dark"] #sec-servicios .ps-admin-nav .btn:hover,
+html[data-bs-theme="dark"] #sec-servicios .ps-admin-nav .btn.active{background:var(--surface-hover)!important;color:var(--text-main)!important;}
+html[data-bs-theme="dark"] #sec-servicios .ps-category-chip{background:var(--bg-card)!important;color:var(--text-body)!important;border-color:var(--border-color)!important;}
+
+/* Barrido de superficies Bootstrap claras que aparecían con texto incorrecto en dark */
+html[data-bs-theme="dark"] .bg-light-subtle,
+body.dark-mode .bg-light-subtle{background-color:var(--surface-muted)!important;color:var(--text-main)!important;}
+html[data-bs-theme="dark"] .bg-light-subtle .text-muted,
+body.dark-mode .bg-light-subtle .text-muted{color:var(--text-muted)!important;}
+html[data-bs-theme="dark"] .text-dark,
+body.dark-mode .text-dark{color:var(--text-main)!important;}
+html[data-bs-theme="dark"] .border,
+body.dark-mode .border{border-color:var(--border-color)!important;}
+html[data-bs-theme="dark"] .form-label,
+body.dark-mode .form-label{color:var(--text-main);}
+html[data-bs-theme="dark"] .modal-content .text-secondary,
+html[data-bs-theme="dark"] .modal-content .text-muted,
+body.dark-mode .modal-content .text-secondary,
+body.dark-mode .modal-content .text-muted{color:var(--text-muted)!important;}
+
+/* Modal elegante y compacto de detalle completo */
+.agenda-detail-modal-dialog{max-width:1040px;}
+.agenda-detail-modal{border:0!important;border-radius:22px!important;overflow:hidden;background:var(--bg-card)!important;color:var(--text-main)!important;box-shadow:0 30px 80px rgba(15,23,42,.24)!important;}
+.agenda-detail-modal-header{border:0!important;padding:15px 18px!important;background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 62%,#0891b2 100%);color:#fff!important;}
+.agenda-detail-hero-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.15);flex:0 0 auto;}
+.agenda-detail-kicker{font-size:.56rem;font-weight:900;letter-spacing:.13em;opacity:.72;}
+.agenda-detail-modal-header .modal-title{font-size:1rem;font-weight:850;letter-spacing:-.02em;}
+.agenda-detail-subtitle{font-size:.68rem;color:rgba(255,255,255,.72);}
+.agenda-detail-modal-body{padding:13px!important;background:var(--bg-main)!important;}
+.agenda-detail-overview{display:grid;grid-template-columns:2fr repeat(3,minmax(120px,1fr));gap:8px;margin-bottom:10px;}
+.agenda-detail-overview-main,.agenda-detail-overview-item{border:1px solid var(--border-color);border-radius:13px;background:var(--bg-card);padding:10px 11px;min-width:0;}
+.agenda-detail-overview-main{background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(8,145,178,.045)),var(--bg-card);}
+.agenda-detail-overview-label,.agenda-detail-overview-item .label{font-size:.56rem;text-transform:uppercase;letter-spacing:.06em;font-weight:850;color:var(--text-muted);display:block;}
+.agenda-detail-overview-main .name{font-size:.92rem;font-weight:850;color:var(--text-main);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.agenda-detail-overview-main .meta{font-size:.66rem;color:var(--text-muted);margin-top:2px;}
+.agenda-detail-overview-item .value{font-size:.74rem;font-weight:800;color:var(--text-main);margin-top:3px;word-break:break-word;}
+.agenda-detail-section{border:1px solid var(--border-color);border-radius:14px;background:var(--bg-card);padding:9px;margin-bottom:8px;}
+.agenda-detail-section-title{display:flex;align-items:center;gap:7px;padding:1px 2px 7px;font-size:.64rem;font-weight:900;text-transform:uppercase;letter-spacing:.065em;color:var(--text-main);}
+.agenda-detail-section-title i{width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:rgba(37,99,235,.1);color:#2563eb;font-size:.68rem;}
+.agenda-detail-fields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;}
+.agenda-detail-field{min-width:0;border:1px solid var(--border-color);border-radius:10px;padding:7px 8px;background:rgba(148,163,184,.035);}
+.agenda-detail-field.full{grid-column:1/-1;}
+.agenda-detail-field .label{font-size:.53rem;text-transform:uppercase;letter-spacing:.045em;font-weight:850;color:var(--text-muted);display:block;margin-bottom:2px;}
+.agenda-detail-field .value{font-size:.69rem;font-weight:700;color:var(--text-main);line-height:1.35;white-space:pre-wrap;overflow-wrap:anywhere;}
+.agenda-detail-modal-footer{border-top:1px solid var(--border-color)!important;background:var(--bg-card)!important;padding:9px 13px!important;}
+@media(max-width:900px){.agenda-detail-overview{grid-template-columns:repeat(2,minmax(0,1fr));}.agenda-detail-overview-main{grid-column:1/-1}.agenda-detail-fields{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:575px){.agenda-detail-modal-dialog{margin:.6rem}.agenda-detail-modal-header{padding:12px 13px!important}.agenda-detail-modal-body{padding:9px!important}.agenda-detail-overview{grid-template-columns:1fr 1fr}.agenda-detail-fields{grid-template-columns:1fr}.agenda-detail-field.full{grid-column:auto}.agenda-detail-overview-main{grid-column:1/-1}.agenda-detail-modal-header .btn-close{transform:scale(.85);}}
+html[data-bs-theme="dark"] .agenda-detail-modal{box-shadow:0 30px 80px rgba(0,0,0,.5)!important;}
+html[data-bs-theme="dark"] .agenda-detail-overview-main{background:linear-gradient(135deg,rgba(59,130,246,.13),rgba(34,211,238,.06)),var(--bg-card);}
+</style>
 </body>
 </html>
