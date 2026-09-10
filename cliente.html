@@ -1982,6 +1982,40 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
   .modal-body{padding:12px!important;}
 }
 </style>
+<style id="familia-registros-menu-style">
+.sidebar-main-nav{gap:3px}.menu-group{margin:2px 8px}.menu-group-toggle{width:100%;border:0;background:transparent;color:var(--text-muted);display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:.74rem;font-weight:850;letter-spacing:.06em;text-transform:uppercase}.menu-group-toggle>span{display:flex;align-items:center;gap:8px}.menu-group-toggle>span>i{width:24px;text-align:center;color:var(--primary-accent)}.menu-group-toggle:hover{background:rgba(37,99,235,.06);color:var(--text-main)}.menu-group-items{display:none;margin-top:1px}.menu-group-items.show{display:block}.menu-group-items .nav-link{margin:2px 4px;padding:8px 12px 8px 18px;font-size:.72rem}.menu-group-items .nav-link>i,.menu-group-items .menu-icon-wrap>i{width:25px;min-width:25px;height:25px;border-radius:8px;display:inline-grid;place-items:center;background:rgba(37,99,235,.09);color:#2563eb;font-size:.74rem}.menu-group-items .nav-link.active{color:#fff!important;background:linear-gradient(135deg,#2563eb,#1d4ed8)!important}.menu-group-items .nav-link.active>i,.menu-group-items .nav-link.active .menu-icon-wrap>i{background:rgba(255,255,255,.16)!important;color:#fff!important}.group-chevron{font-size:.6rem;transition:transform .18s ease}.menu-group-toggle[aria-expanded="false"] .group-chevron{transform:rotate(-90deg)}.family-reg-section{border:1px solid var(--border-color);border-radius:18px;background:var(--bg-card);box-shadow:0 8px 22px rgba(15,23,42,.045);overflow:hidden}.family-reg-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border-color);background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(6,182,212,.035))}.family-reg-head .title{font-weight:850;color:var(--text-main);font-size:.88rem}.family-reg-head .sub{font-size:.68rem;color:var(--text-muted);margin-top:2px}.family-reg-body{padding:14px 16px}.family-reg-table-wrap{overflow:auto;max-height:480px}.family-reg-table{min-width:760px}.family-reg-table th{font-size:.62rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);background:rgba(0,0,0,.02);white-space:nowrap}.family-reg-table td{font-size:.7rem;color:var(--text-main);vertical-align:middle}.health-order-box{border:1px dashed var(--border-color);border-radius:12px;background:rgba(37,99,235,.025);padding:10px;font-size:.72rem;color:var(--text-main);white-space:pre-wrap}.med-status{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:.6rem;font-weight:800;background:#dcfce7;color:#166534}.med-status.off{background:#fee2e2;color:#991b1b}@media(max-width:767px){.menu-group{margin:2px 4px}.menu-group-toggle{padding:9px 10px}.menu-group-items .nav-link{padding:9px 10px 9px 14px}.family-reg-head{align-items:flex-start;flex-direction:column}.family-reg-body{padding:12px}.family-reg-table{min-width:680px}}
+</style>
+
+<style id="portal-font-scale-v20260910">
+/* Escala tipografica general: mejora lectura sin alterar la maquetacion ni la logica. */
+#sidebar .nav-link{font-size:.94rem !important;}
+#sidebar .nav-link i{font-size:1rem !important;}
+#sidebar .sidebar-group-title,#sidebar .menu-group-title{font-size:.88rem !important;}
+#main-content .card-header h5,#main-content .card-header h6,#main-content .section-title,.section-title{font-size:1rem !important;}
+#main-content .table-custom th,.table-custom th{font-size:.79rem !important;}
+#main-content .table-custom td,.table-custom td{font-size:.86rem !important;}
+#sec-dashboard .dashboard-title{font-size:1.5rem !important;}
+#sec-dashboard .dashboard-subtitle{font-size:.84rem !important;}
+#sec-dashboard .dashboard-kpi-value{font-size:1.2rem !important;}
+#sec-dashboard .dashboard-kpi-label{font-size:.62rem !important;}
+#sec-dashboard .dashboard-kpi-meta{font-size:.58rem !important;}
+#sec-dashboard .dashboard-chart-title{font-size:.86rem !important;}
+#sec-dashboard .dashboard-chart-summary,#sec-dashboard .dashboard-summary-pill{font-size:.7rem !important;}
+#sec-dashboard .dashboard-agenda-strip{font-size:.78rem !important;}
+@media (max-width: 991px){
+  #sidebar .nav-link{font-size:.92rem !important;}
+  #sec-dashboard .dashboard-title{font-size:1.32rem !important;}
+  #sec-dashboard .dashboard-kpi-value{font-size:1.08rem !important;}
+}
+@media (max-width: 575px){
+  #sidebar .nav-link{font-size:.9rem !important;}
+  #main-content .table-custom td{font-size:.82rem !important;}
+  #sec-dashboard .dashboard-title{font-size:1.2rem !important;}
+  #sec-dashboard .dashboard-subtitle{font-size:.78rem !important;}
+  #sec-dashboard .dashboard-kpi-value{font-size:1rem !important;}
+  #sec-dashboard .dashboard-kpi-label{font-size:.58rem !important;}
+}
+</style>
 </head>
 <body>
 
@@ -2171,54 +2205,27 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
         </div>
 
         <div class="sidebar-nav-wrapper">
-        <nav class="nav flex-column">
-            <a href="#dashboard" class="nav-link active" onclick="switchTab('dashboard')">
-                <i class="fa-solid fa-chart-pie"></i> Dashboard
-            </a>
-            <a href="#servicios" class="nav-link" onclick="switchTab('servicios')">
-                <i class="fa-solid fa-layer-group"></i> Planes y Servicios
-            </a>
-            <a href="#empresas" class="nav-link view-admin-master" onclick="switchTab('empresas')">
-                <i class="fa-solid fa-building"></i> Gestión Empresas
-            </a>
-            <a href="#usuarios" class="nav-link view-admin-master" onclick="switchTab('usuarios')">
-                <i class="fa-solid fa-users-gear"></i> Usuarios y Permisos
-            </a>
-            <a href="#clientes" class="nav-link view-admin-master" onclick="switchTab('clientes')">
-                <i class="fa-solid fa-address-book"></i> Gestión Clientes
-            </a>
-            <a href="#agenda" class="nav-link" onclick="switchTab('agenda')">
-                <i class="fa-solid fa-calendar-check"></i> Agenda
-            </a>
-            <a href="#facturacion" class="nav-link" onclick="switchTab('facturacion')">
-                <i class="fa-solid fa-file-invoice-dollar"></i> Facturación
-            </a>
-            <a href="#creditos" class="nav-link" onclick="switchTab('creditos')">
-                <i class="fa-solid fa-credit-card"></i> Créditos y Cuotas
-            </a>
-            <a href="#pagos" class="nav-link" onclick="switchTab('pagos')">
-                <i class="fa-solid fa-money-bill-transfer"></i> Módulo de Pagos
-            </a>
-            <a href="#bancos" class="nav-link" onclick="switchTab('bancos')"><i class="fa-solid fa-building-columns"></i> Datos Bancarios</a>
-            <a href="#notificaciones" class="nav-link d-flex align-items-center" onclick="switchTab('notificaciones')">
-                <span class="position-relative d-inline-flex me-2" style="width:20px;justify-content:center;">
-                    <i class="fa-solid fa-bell"></i>
-                    <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle d-none" id="nav-notif-count" style="font-size:.58rem;min-width:17px;padding:2px 4px;line-height:1;z-index:2;">0</span>
-                </span>
-                <span>Notificaciones</span>
-            </a>
-            <a href="#auditoria" class="nav-link" onclick="switchTab('auditoria')">
-                <i class="fa-solid fa-clipboard-list"></i> Auditoría
-            </a>
-            <a href="#portal" class="nav-link view-admin-master" onclick="switchTab('portal')">
-                <i class="fa-solid fa-globe"></i> Portal
-            </a>
-            <a href="#mikrotik" class="nav-link btn-master-only" onclick="switchTab('mikrotik')">
-                <i class="fa-solid fa-tower-broadcast"></i> Mikrotik
-            </a>
-            <a href="#familia" class="nav-link btn-master-only" onclick="switchTab('familia')">
-                <i class="fa-solid fa-house-user"></i> Familia
-            </a>
+        <nav class="nav flex-column sidebar-main-nav">
+            <a href="#dashboard" class="nav-link active" onclick="switchTab('dashboard')"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+            <div class="menu-group"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-grid-2"></i>General</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
+                <a href="#agenda" class="nav-link" onclick="switchTab('agenda')"><i class="fa-solid fa-calendar-check"></i><span>Agenda</span></a>
+                <a href="#notificaciones" class="nav-link" onclick="switchTab('notificaciones')"><span class="position-relative d-inline-flex me-2 menu-icon-wrap"><i class="fa-solid fa-bell"></i><span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle d-none" id="nav-notif-count" style="font-size:.58rem;min-width:17px;padding:2px 4px;line-height:1;z-index:2;">0</span></span><span>Notificaciones</span></a>
+            </div></div>
+            <div class="menu-group"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-briefcase"></i>Administración</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
+                <a href="#empresas" class="nav-link view-admin-master" onclick="switchTab('empresas')"><i class="fa-solid fa-building"></i><span>Gestión Empresas</span></a>
+                <a href="#usuarios" class="nav-link view-admin-master" onclick="switchTab('usuarios')"><i class="fa-solid fa-users-gear"></i><span>Usuarios y Permisos</span></a>
+                <a href="#clientes" class="nav-link view-admin-master" onclick="switchTab('clientes')"><i class="fa-solid fa-address-book"></i><span>Gestión Clientes</span></a>
+                <a href="#servicios" class="nav-link" onclick="switchTab('servicios')"><i class="fa-solid fa-layer-group"></i><span>Planes y Servicios</span></a>
+                <a href="#portal" class="nav-link view-admin-master" onclick="switchTab('portal')"><i class="fa-solid fa-globe"></i><span>Control del Portal</span></a>
+                <a href="#auditoria" class="nav-link" onclick="switchTab('auditoria')"><i class="fa-solid fa-clipboard-list"></i><span>Auditoría</span></a>
+            </div></div>
+            <div class="menu-group"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-file-invoice-dollar"></i>Finanzas</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
+                <a href="#facturacion" class="nav-link" onclick="switchTab('facturacion')"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturación</span></a><a href="#creditos" class="nav-link" onclick="switchTab('creditos')"><i class="fa-solid fa-credit-card"></i><span>Créditos y Cuotas</span></a><a href="#pagos" class="nav-link" onclick="switchTab('pagos')"><i class="fa-solid fa-money-bill-transfer"></i><span>Pagos</span></a><a href="#bancos" class="nav-link" onclick="switchTab('bancos')"><i class="fa-solid fa-building-columns"></i><span>Datos Bancarios</span></a>
+            </div></div>
+            <div class="menu-group"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-people-roof"></i>Familia y Registros</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
+                <a href="#familia" class="nav-link" onclick="switchTab('familia')"><i class="fa-solid fa-house-user"></i><span>Familia</span></a><a href="#historialmedico" class="nav-link" onclick="switchTab('historialmedico')"><i class="fa-solid fa-notes-medical"></i><span>Historial Médico</span></a><a href="#manutencion" class="nav-link" onclick="switchTab('manutencion')"><i class="fa-solid fa-hand-holding-dollar"></i><span>Manutención</span></a><a href="#registrosescolares" class="nav-link" onclick="switchTab('registrosescolares')"><i class="fa-solid fa-school"></i><span>Registros Escolares</span></a>
+            </div></div>
+            <div class="menu-group btn-master-only"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-network-wired"></i>Infraestructura</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items"><a href="#mikrotik" class="nav-link btn-master-only" onclick="switchTab('mikrotik')"><i class="fa-solid fa-tower-broadcast"></i><span>Mikrotik</span></a></div></div>
         </nav>
         </div>
 
@@ -4199,6 +4206,10 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
         <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: AUDITORÍA — Historial de Actividad del Sistema
              ═══════════════════════════════════════════════════════════════ -->
+<section id="sec-historialmedico" class="tab-content d-none"><div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-notes-medical text-primary me-2"></i>Historial Médico</h5><small class="text-muted">Consultas, diagnósticos, órdenes médicas y seguimiento.</small></div><button class="btn btn-primary" onclick="abrirFormularioHistorialMedico()"><i class="fa-solid fa-plus me-1"></i>Nuevo registro</button></div><div class="row g-3 mb-3"><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Registros médicos</div><div class="sub">Historial clínico registrado</div></div><i class="fa-solid fa-file-medical text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-total">0</div><small class="text-muted">Total de registros</small></div></div></div><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Órdenes médicas</div><div class="sub">Registros con indicaciones</div></div><i class="fa-solid fa-file-prescription text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-ordenes">0</div><small class="text-muted">Con orden registrada</small></div></div></div><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Medicinas activas</div><div class="sub">Recordatorios habilitados</div></div><i class="fa-solid fa-pills text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-meds">0</div><small class="text-muted">Tratamientos activos</small></div></div></div></div><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Registrar consulta / orden médica</div><div class="sub">Asocia el registro con el cliente o un integrante de Familia.</div></div></div><div class="family-reg-body"><form id="formHistorialMedico" onsubmit="guardarHistorialMedico(event)"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Persona / paciente *</label><select id="hm_persona" class="form-select form-control-pro" required></select></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input id="hm_fecha" type="date" class="form-control form-control-pro" required></div><div class="col-md-3"><label class="form-label small fw-semibold">Profesional</label><input id="hm_profesional" class="form-control form-control-pro" placeholder="Dr./Dra. Nombre"></div><div class="col-md-3"><label class="form-label small fw-semibold">Especialidad</label><input id="hm_especialidad" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Diagnóstico</label><input id="hm_diagnostico" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Próximo control</label><input id="hm_proximo_control" type="date" class="form-control form-control-pro"></div><div class="col-12"><label class="form-label small fw-semibold">Orden médica / tratamiento</label><textarea id="hm_orden" class="form-control form-control-pro" rows="3"></textarea></div><div class="col-md-6"><label class="form-label small fw-semibold">Alergias</label><textarea id="hm_alergias" class="form-control form-control-pro" rows="2"></textarea></div><div class="col-md-6"><label class="form-label small fw-semibold">Antecedentes</label><textarea id="hm_antecedentes" class="form-control form-control-pro" rows="2"></textarea></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea id="hm_observaciones" class="form-control form-control-pro" rows="2"></textarea></div></div><div class="d-flex justify-content-end gap-2 mt-3"><button type="button" class="btn btn-light border" onclick="limpiarFormularioHistorialMedico()">Limpiar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar registro</button></div></form></div></div><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Recordatorios de medicinas</div><div class="sub">Telegram enviará avisos automáticos según los horarios registrados.</div></div><button class="btn btn-sm btn-outline-primary" onclick="abrirFormularioRecordatorioMedicina()"><i class="fa-solid fa-plus me-1"></i>Agregar medicina</button></div><div class="family-reg-body"><form id="formRecordatorioMedicina" class="mb-3" onsubmit="guardarRecordatorioMedicina(event)"><div class="row g-2"><div class="col-md-3"><label class="form-label small fw-semibold">Persona *</label><select id="med_persona" class="form-select form-control-pro" required></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Medicamento *</label><input id="med_medicamento" class="form-control form-control-pro" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Dosis *</label><input id="med_dosis" class="form-control form-control-pro" placeholder="1 tableta" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Vía</label><input id="med_via" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Frecuencia</label><input id="med_frecuencia" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Horarios *</label><input id="med_horarios" class="form-control form-control-pro" placeholder="08:00 AM, 04:00 PM" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Inicio</label><input id="med_inicio" type="date" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Fin</label><input id="med_fin" type="date" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Estado</label><select id="med_estado" class="form-select form-control-pro"><option>Activo</option><option>Inactivo</option></select></div><div class="col-md-4"><label class="form-label small fw-semibold">Indicaciones</label><input id="med_indicaciones" class="form-control form-control-pro"></div></div><div class="d-flex justify-content-end mt-2"><button class="btn btn-primary btn-sm"><i class="fa-solid fa-bell me-1"></i>Guardar recordatorio</button></div></form><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Paciente</th><th>Medicamento</th><th>Dosis</th><th>Horarios</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="hm-med-tbody"></tbody></table></div></div></div><div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Historial registrado</div><div class="sub">Consulta y administra los registros médicos.</div></div></div><div class="family-reg-body"><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Fecha</th><th>Paciente</th><th>Profesional</th><th>Especialidad</th><th>Diagnóstico</th><th>Orden médica</th><th>Acciones</th></tr></thead><tbody id="hm-tbody"></tbody></table></div></div></div></section>
+<section id="sec-manutencion" class="tab-content d-none"><div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-hand-holding-dollar text-primary me-2"></i>Manutención</h5><small class="text-muted">Registro y seguimiento de manutención familiar.</small></div><button class="btn btn-primary" onclick="limpiarManutencionForm()"><i class="fa-solid fa-plus me-1"></i>Nuevo registro</button></div><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Nuevo registro de manutención</div><div class="sub">Beneficiario, monto, frecuencia y seguimiento.</div></div></div><div class="family-reg-body"><form onsubmit="guardarManutencion(event)" id="formManutencion"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Beneficiario *</label><select id="man_persona" class="form-select form-control-pro" required></select></div><div class="col-md-2"><label class="form-label small fw-semibold">Tipo</label><input id="man_tipo" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Monto</label><input id="man_monto" type="number" step="0.01" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Moneda</label><select id="man_moneda" class="form-select form-control-pro"><option>USD</option><option>VES</option></select></div><div class="col-md-2"><label class="form-label small fw-semibold">Frecuencia</label><input id="man_frecuencia" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Inicio</label><input id="man_inicio" type="date" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Próximo pago</label><input id="man_proximo" type="date" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Estado</label><select id="man_estado" class="form-select form-control-pro"><option>Activo</option><option>Pendiente</option><option>Finalizado</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Responsable</label><input id="man_responsable" class="form-control form-control-pro"></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea id="man_observaciones" class="form-control form-control-pro" rows="2"></textarea></div></div><div class="d-flex justify-content-end mt-3"><button class="btn btn-primary">Guardar registro</button></div></form></div></div><div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Historial de manutención</div><div class="sub">Registros guardados.</div></div></div><div class="family-reg-body"><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Beneficiario</th><th>Tipo</th><th>Monto</th><th>Frecuencia</th><th>Próximo pago</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="man-tbody"></tbody></table></div></div></div></section>
+<section id="sec-registrosescolares" class="tab-content d-none"><div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-school text-primary me-2"></i>Registros Escolares</h5><small class="text-muted">Control académico de integrantes de Familia.</small></div><button class="btn btn-primary" onclick="limpiarEscolarForm()"><i class="fa-solid fa-plus me-1"></i>Nuevo registro</button></div><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Nuevo registro escolar</div><div class="sub">Institución, nivel, grado y período académico.</div></div></div><div class="family-reg-body"><form onsubmit="guardarRegistroEscolar(event)" id="formRegistroEscolar"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Estudiante *</label><select id="esc_persona" class="form-select form-control-pro" required></select></div><div class="col-md-4"><label class="form-label small fw-semibold">Institución</label><input id="esc_institucion" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Nivel</label><input id="esc_nivel" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Grado</label><input id="esc_grado" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Período escolar</label><input id="esc_periodo" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Inicio</label><input id="esc_inicio" type="date" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Fin</label><input id="esc_fin" type="date" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Promedio</label><input id="esc_promedio" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Representante</label><input id="esc_representante" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Teléfono</label><input id="esc_telefono" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Estado</label><select id="esc_estado" class="form-select form-control-pro"><option>Activo</option><option>Retirado</option><option>Graduado</option></select></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea id="esc_observaciones" class="form-control form-control-pro" rows="2"></textarea></div></div><div class="d-flex justify-content-end mt-3"><button class="btn btn-primary">Guardar registro</button></div></form></div></div><div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Historial escolar</div><div class="sub">Registros académicos guardados.</div></div></div><div class="family-reg-body"><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Estudiante</th><th>Institución</th><th>Nivel</th><th>Grado</th><th>Período</th><th>Promedio</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="esc-tbody"></tbody></table></div></div></div></section>
+
         <section id="sec-auditoria" class="tab-content d-none">
             <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <div>
@@ -4555,54 +4566,82 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
                 <div class="modal-body modal-body-pro">
                     <form id="formUsuario" onsubmit="guardarUsuario(event)">
                         <input type="hidden" id="usr_id">
-                        <div class="usr-form-grid">
-                            <div class="usr-form-field usr-form-field-wide">
-                                <label class="form-label small fw-semibold">Nombre Completo</label>
-                                <input type="text" class="form-control form-control-pro" id="usr_nombre" required>
-                            </div>
-                            <div class="usr-form-field">
-                                <label class="form-label small fw-semibold">Username</label>
-                                <input type="text" class="form-control form-control-pro" id="usr_username" required>
-                            </div>
-                            <div class="usr-form-field">
-                                <label class="form-label small fw-semibold">Correo</label>
-                                <input type="email" class="form-control form-control-pro" id="usr_email" required>
-                            </div>
-                            <div class="usr-form-field">
-                                <label class="form-label small fw-semibold">Contraseña</label>
-                                <input type="password" class="form-control form-control-pro" id="usr_password" required>
-                            </div>
-                            <div class="usr-form-field">
-                                <label class="form-label small fw-semibold">Rol</label>
-                                <select class="form-select form-select-pro" id="usr_rol">
-                                    <option value="Master">Master</option>
-                                    <option value="VIP">VIP</option>
-                                    <option value="Administrador">Administrador</option>
-                                    <option value="Cliente">Cliente</option>
-                                    <option value="Familia">Familia</option>
-                                </select>
-                            </div>
-                            <div class="usr-form-field">
-                                <label class="form-label small fw-semibold">Estado</label>
-                                <select class="form-select form-select-pro" id="usr_estado">
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                </select>
+                        <div class="usr-hero-panel">
+                            <div class="usr-avatar"><i class="fa-solid fa-user-gear"></i></div>
+                            <div class="min-w-0">
+                                <div class="text-uppercase small fw-bold text-primary usr-kicker">Gestión de acceso</div>
+                                <div class="usr-hero-title">Datos del usuario y permisos</div>
+                                <div class="text-muted usr-help">Configure la cuenta, el rol, el estado y los accesos desde un único formulario.</div>
                             </div>
                         </div>
 
-                        <div class="usr-section-divider"><span><i class="fa-solid fa-key text-primary me-2"></i>Permisos personalizados</span></div>
-                        <div id="usr-permisos-panel" class="usr-permisos-compact">
-                            <div class="usr-permisos-toolbar">
-                                <div><div class="small fw-bold">Acceso por módulo</div><div class="text-muted usr-help">Seleccione un módulo para configurar sus acciones.</div></div>
-                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="seleccionarTodosPermisosUsuario()"><i class="fa-solid fa-check-double me-1"></i>Todos</button>
+                        <div class="usr-section-block">
+                            <div class="usr-section-divider"><span><i class="fa-solid fa-id-card text-primary me-2"></i>Información básica</span></div>
+                            <div class="usr-form-grid">
+                                <div class="usr-form-field usr-form-field-wide">
+                                    <label class="form-label small fw-semibold">Nombre Completo</label>
+                                    <input type="text" class="form-control form-control-pro" id="usr_nombre" required>
+                                </div>
+                                <div class="usr-form-field">
+                                    <label class="form-label small fw-semibold">Username</label>
+                                    <div class="input-group usr-input-group">
+                                        <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
+                                        <input type="text" class="form-control form-control-pro" id="usr_username" required>
+                                    </div>
+                                </div>
+                                <div class="usr-form-field">
+                                    <label class="form-label small fw-semibold">Correo</label>
+                                    <input type="email" class="form-control form-control-pro" id="usr_email" required>
+                                </div>
                             </div>
-                            <div id="usr-permisos-modulos" class="row g-2"></div>
-                            <div id="usr-permisos-acciones" class="usr-permisos-acciones mt-2"></div>
-                            <input type="hidden" id="usr_permisos_json" value="{}">
+                        </div>
+
+                        <div class="usr-section-block">
+                            <div class="usr-section-divider"><span><i class="fa-solid fa-shield-halved text-primary me-2"></i>Seguridad y estado</span></div>
+                            <div class="usr-form-grid">
+                                <div class="usr-form-field">
+                                    <label class="form-label small fw-semibold">Contraseña</label>
+                                    <div class="input-group usr-input-group">
+                                        <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                        <input type="password" class="form-control form-control-pro" id="usr_password" required>
+                                    </div>
+                                </div>
+                                <div class="usr-form-field">
+                                    <label class="form-label small fw-semibold">Rol</label>
+                                    <select class="form-select form-select-pro" id="usr_rol">
+                                        <option value="Master">Master</option>
+                                        <option value="VIP">VIP</option>
+                                        <option value="Administrador">Administrador</option>
+                                        <option value="Cliente">Cliente</option>
+                                        <option value="Familia">Familia</option>
+                                    </select>
+                                </div>
+                                <div class="usr-form-field usr-form-field-status">
+                                    <label class="form-label small fw-semibold">Estado</label>
+                                    <select class="form-select form-select-pro" id="usr_estado">
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+                                <div class="usr-status-note"><i class="fa-solid fa-circle-info me-1 text-primary"></i>Los permisos se aplican según el rol y la configuración seleccionada.</div>
+                            </div>
+                        </div>
+
+                        <div class="usr-section-block">
+                            <div class="usr-section-divider"><span><i class="fa-solid fa-key text-primary me-2"></i>Permisos personalizados</span></div>
+                            <div id="usr-permisos-panel" class="usr-permisos-compact">
+                                <div class="usr-permisos-toolbar">
+                                    <div><div class="fw-bold">Acceso por módulo</div><div class="text-muted usr-help">Active un módulo y luego configure sus acciones permitidas.</div></div>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="seleccionarTodosPermisosUsuario()"><i class="fa-solid fa-check-double me-1"></i>Todos</button>
+                                </div>
+                                <div id="usr-permisos-modulos" class="row g-2"></div>
+                                <div id="usr-permisos-acciones" class="usr-permisos-acciones mt-2"></div>
+                                <input type="hidden" id="usr_permisos_json" value="{}">
+                            </div>
                         </div>
 
                         <div class="usr-form-footer">
+                            <button type="button" class="btn btn-light border fw-semibold rounded-3 px-4" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary fw-semibold rounded-3 px-4"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar Usuario</button>
                         </div>
                     </form>
@@ -5510,6 +5549,10 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
         notificaciones: [],
         bancos: [],
         familia: [],
+        historialmedico: [],
+        recordatoriosmedicinas: [],
+        manutencion: [],
+        registrosescolares: [],
         trabajos_manuales: []
     };
 
@@ -5665,6 +5708,26 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
         });
     }
 
+
+    function solicitarTextoModal(titulo, mensaje, valorInicial=''){
+        return new Promise(resolve=>{
+            let el=document.getElementById('modalPromptSistema');
+            if(!el){
+                el=document.createElement('div');el.id='modalPromptSistema';el.className='modal fade';el.tabIndex=-1;
+                el.innerHTML='<div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content modal-content-pro"><div class="modal-header modal-header-pro"><h5 class="modal-title fw-bold" id="promptSistemaTitulo"></h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div><div class="modal-body modal-body-pro"><p class="text-muted small mb-3" id="promptSistemaMensaje"></p><input type="text" class="form-control form-control-pro" id="promptSistemaInput" autocomplete="off"></div><div class="modal-footer modal-footer-pro"><button type="button" class="btn btn-light" id="promptSistemaNo">Cancelar</button><button type="button" class="btn btn-primary fw-semibold" id="promptSistemaSi">Aceptar</button></div></div></div>';
+                document.body.appendChild(el);
+            }
+            const title=el.querySelector('#promptSistemaTitulo'), msg=el.querySelector('#promptSistemaMensaje'), input=el.querySelector('#promptSistemaInput');
+            title.textContent=titulo; msg.textContent=mensaje; input.value=valorInicial??'';
+            const modal=bootstrap.Modal.getOrCreateInstance(el,{backdrop:false,keyboard:true,focus:true}); let finished=false;
+            const finish=v=>{if(finished)return;finished=true;modal.hide();resolve(v);};
+            el.querySelector('#promptSistemaSi').onclick=()=>finish(input.value);
+            el.querySelector('#promptSistemaNo').onclick=()=>finish(null);
+            el.addEventListener('hidden.bs.modal',()=>finish(null),{once:true});
+            modal.show(); setTimeout(()=>{input.focus();input.select();},80);
+        });
+    }
+
     // SECCIÓN: TEMPORIZADOR DE INACTIVIDAD
     // CIERRA SESIÓN AUTOMÁTICAMENTE DESPUÉS DE 5 MINUTOS SIN ACTIVIDAD
     
@@ -5807,19 +5870,30 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
     // LLAMA A TODAS LAS FUNCIONES DE RENDERIZADO PARA ACTUALIZAR LA UI
 
     function renderAllData() {
-        renderEmpresas();
-        renderUsuarios();
-        renderClientes();
-        renderFacturacionAgrupada();
-        renderCreditosAgrupados();
-        renderModuloPagosSelects();
-        renderHistorialPagos();
-        renderNotificaciones();
-        renderBancos();
-        renderAuditoria();
-        renderAgendaModulo();
-        updateKPIs();
-        renderDashboardCharts();
+        // Una vista nueva nunca debe bloquear las vistas existentes. Cada
+        // render se aísla para que un error puntual no impida actualizar KPIs
+        // ni gráficos con los datos que ya fueron cargados desde Sheets.
+        const renderSeguro = (fn, nombre) => { try { fn(); } catch (err) { console.warn('Render '+nombre+':', err); } };
+        renderSeguro(renderEmpresas,'Empresas');
+        renderSeguro(renderUsuarios,'Usuarios');
+        renderSeguro(renderClientes,'Clientes');
+        renderSeguro(renderFacturacionAgrupada,'Facturación');
+        renderSeguro(renderCreditosAgrupados,'Créditos');
+        renderSeguro(renderModuloPagosSelects,'Pagos-selects');
+        renderSeguro(renderHistorialPagos,'HistorialPagos');
+        renderSeguro(renderNotificaciones,'Notificaciones');
+        renderSeguro(renderBancos,'Bancos');
+        renderSeguro(renderAuditoria,'Auditoría');
+        renderSeguro(renderAgendaModulo,'Agenda');
+        if (currentUser && esMasterEfectivoUsuario(currentUser)) {
+            renderSeguro(renderHistorialMedicoModulo,'HistorialMedico');
+            renderSeguro(renderManutencionModulo,'Manutención');
+            renderSeguro(renderRegistrosEscolaresModulo,'RegistrosEscolares');
+        }
+        // Estas dos funciones son prioritarias: siempre deben ejecutarse aunque
+        // una vista secundaria tenga un problema.
+        renderSeguro(updateKPIs,'KPIs');
+        renderSeguro(renderDashboardCharts,'DashboardCharts');
 
         // No reejecutar búsquedas durante la sincronización. El resultado permanece exactamente como lo dejó el usuario.
 
@@ -5988,7 +6062,7 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
 
     function enforceRolePermissions() {
         if (!currentUser) return;
-        const isMaster = String(currentUser.rol||'').trim().toLowerCase() === 'master';
+        const isMaster = esMasterEfectivoUsuario(currentUser);
         document.querySelectorAll('.view-admin-master').forEach(el => {
             el.style.display = isMaster ? '' : 'none';
         });
@@ -5999,7 +6073,7 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
         document.querySelectorAll('#sidebar .nav-link').forEach(el => {
             const href=String(el.getAttribute('href')||'').replace('#','');
             if(!href)return;
-            const visible=isMaster || puedeAccederModuloUsuario(href);
+            const visible=isMaster || usuarioTieneCualquierPermisoModulo(href,currentUser);
             el.style.display=visible?'':'none';
         });
         renderAllData();
@@ -6222,7 +6296,7 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
     // SECCIÓN: DASHBOARD MASTER - KPIs INTERACTIVOS Y VALIDACIONES
     let _facturaPDFActual = null;
 
-    function esMasterActual(){ return !!(currentUser && String(currentUser.rol || '').trim().toLowerCase() === 'master'); }
+    function esMasterActual(){ return esMasterEfectivoUsuario(currentUser); }
 
     function clientePorFactura(f){
         if(!f) return null;
@@ -6731,13 +6805,16 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
         ocultarListasMostrarInteligentes();
     }
 
+    function toggleMenuGroup(btn){if(!btn)return;const items=btn.parentElement?.querySelector('.menu-group-items');if(!items)return;const open=items.classList.toggle('show');btn.setAttribute('aria-expanded',open?'true':'false');}
+    function abrirGrupoMenuActivo(tabId){const link=document.querySelector('#sidebar a[href="#'+String(tabId||'')+'"]');const group=link?.closest('.menu-group');const btn=group?.querySelector('.menu-group-toggle');const items=group?.querySelector('.menu-group-items');if(btn&&items){items.classList.add('show');btn.setAttribute('aria-expanded','true');}}
+
     function switchTab(tabId) {
         tabId = String(tabId || 'dashboard');
         const previo=document.querySelector('.tab-content:not(.d-none)');
         const previoId=previo?.id ? previo.id.replace('sec-','') : '';
         if(previoId && previoId!==tabId) limpiarBusquedaModuloInteligente(previoId);
         ocultarListasMostrarInteligentes();
-        if(currentUser && String(currentUser.rol||'').trim().toLowerCase()!=='master' && tabId!=='dashboard' && !puedeAccederModuloUsuario(tabId)){
+        if(currentUser && !esMasterEfectivoUsuario(currentUser) && tabId!=='dashboard' && !puedeAccederModuloUsuario(tabId)){
             showSystemNotification('Acceso restringido','No tiene permiso para acceder a este modulo.','warning');
             return false;
         }
@@ -6750,6 +6827,7 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
 
         const activeNav = document.querySelector(`#sidebar a[href="#${tabId}"]`);
         if (activeNav) activeNav.classList.add('active');
+        abrirGrupoMenuActivo(tabId);
 
         const titles = {
             dashboard: 'Dashboard General',
@@ -6764,7 +6842,10 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
             bancos: 'Datos Bancarios',
             notificaciones: 'Centro de Notificaciones',
             portal: 'Control del Portal',
-            auditoria: 'Auditoría del Sistema'
+            auditoria: 'Auditoría del Sistema',
+            historialmedico: 'Historial Médico',
+            manutencion: 'Manutención Familiar',
+            registrosescolares: 'Registros Escolares'
         };
         document.getElementById('page-title').innerText = titles[tabId] || 'Plataforma ERP';
         // Auditoría de navegación para TODOS los usuarios autenticados, sin importar su rol.
@@ -6776,6 +6857,9 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
         const isClient = currentUser && String(currentUser.rol || '').toLowerCase() === 'cliente';
         if (tabId === 'bancos') { renderBancos(); }
         if (tabId === 'agenda') { renderAgendaModulo(); if (String(currentUser?.rol||'').toLowerCase()==='master') cargarAgendaConfigUI(); }
+        if (tabId === 'historialmedico') { renderHistorialMedicoModulo(); }
+        if (tabId === 'manutencion') { renderManutencionModulo(); }
+        if (tabId === 'registrosescolares') { renderRegistrosEscolaresModulo(); }
 
         if (tabId === 'servicios' && currentUser) {
             setTimeout(function() { cargarPlanesServiciosCliente(); }, 50);
@@ -7224,7 +7308,7 @@ async function eliminarEmpresa(id) {
     // SECCIÓN: USUARIOS Y PERMISOS - BÚSQUEDA INTELIGENTE + DETALLE
     
     function esMasterUsuarioGestion() {
-        return String(currentUser?.rol || '').trim().toLowerCase() === 'master';
+        return esMasterEfectivoUsuario(currentUser);
     }
 
     function esUsuarioGestionVisible(u) {
@@ -7438,6 +7522,10 @@ async function eliminarEmpresa(id) {
         portal:{label:'Portal',icon:'fa-globe',actions:['leer','modificar']},
         mikrotik:{label:'Mikrotik',icon:'fa-tower-broadcast',actions:['leer','agregar','modificar','eliminar']},
         familia:{label:'Familia',icon:'fa-house-user',actions:['leer','agregar','modificar','eliminar']},
+        historialmedico:{label:'Historial Médico',icon:'fa-notes-medical',actions:['leer','agregar','modificar','eliminar']},
+        manutencion:{label:'Manutención',icon:'fa-hand-holding-dollar',actions:['leer','agregar','modificar','eliminar']},
+        registrosescolares:{label:'Registros Escolares',icon:'fa-school',actions:['leer','agregar','modificar','eliminar']},
+        recordatoriosmedicinas:{label:'Recordatorios de Medicinas',icon:'fa-pills',actions:['leer','agregar','modificar','eliminar']},
         perfil:{label:'Mi Perfil y Seguridad',icon:'fa-user-circle',actions:['modificar']}
     };
     const ACCION_LABELS_USUARIO={leer:'Solo lectura',agregar:'Agregar',modificar:'Modificar',eliminar:'Eliminar'};
@@ -7448,25 +7536,56 @@ async function eliminarEmpresa(id) {
     function actualizarAccionesPermisoUsuario(key){const cb=document.querySelector(`#usr-permisos-modulos input[data-module="${key}"]`),block=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);if(block)block.style.display=cb?.checked?'':'none';if(cb?.checked&&block){const checks=[...block.querySelectorAll('input[data-action]')];if(!checks.some(x=>x.checked)){const l=block.querySelector('input[data-action="leer"]');if(l)l.checked=true;}}actualizarHiddenPermisosUsuario();}
     function renderEditorPermisosUsuario(raw={}){const current=normalizarPermisosUsuario(raw),mods=document.getElementById('usr-permisos-modulos'),acts=document.getElementById('usr-permisos-acciones');if(!mods||!acts)return;mods.innerHTML=Object.entries(MATRIZ_PERMISOS_USUARIO).map(([k,c])=>`<div class="col-6 col-md-4"><label class="border rounded-3 p-2 w-100 d-flex align-items-center gap-2 small bg-light"><input class="form-check-input m-0" type="checkbox" data-module="${k}" ${current[k]?'checked':''} onchange="actualizarAccionesPermisoUsuario('${k}')"><i class="fa-solid ${c.icon} text-primary"></i><span>${c.label}</span></label></div>`).join('');acts.innerHTML='';Object.entries(MATRIZ_PERMISOS_USUARIO).forEach(([k,c])=>renderBloqueAccionesPermisoUsuario(k,c,current[k]||{}));document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(cb=>actualizarAccionesPermisoUsuario(cb.dataset.module));actualizarHiddenPermisosUsuario();}
     function seleccionarTodosPermisosUsuario(){document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-action]').forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(x=>actualizarAccionesPermisoUsuario(x.dataset.module));}
-    function permisosUsuarioTieneModulo(modulo,accion='leer',u=currentUser){
+    function normalizarModuloPermisoUsuario(modulo){return String(modulo||'').trim().toLowerCase();}
+    function usuarioTienePermisosCompletosGranulares(u=currentUser){
         if(!u)return false;
         const rol=String(u.rol||'').trim().toLowerCase();
         if(rol==='master')return true;
-        if(rol==='cliente' && modulo==='agenda') return ['leer','agregar'].includes(accion);
-        const sinMatriz = u.permisos===undefined || u.permisos===null || String(u.permisos).trim()==='';
+        if(!['admin','administrador','vip'].includes(rol))return false;
+        const p=normalizarPermisosUsuario(u.permisos);
+        const modulos=Object.entries(MATRIZ_PERMISOS_USUARIO);
+        return modulos.every(([key,cfg])=>{
+            const mk=Object.keys(p).find(k=>normalizarModuloPermisoUsuario(k)===key);
+            const actual=mk?p[mk]:null;
+            if(!actual||typeof actual!=='object')return false;
+            return cfg.actions.every(a=>actual[a]===true||String(actual[a]||'').toLowerCase()==='true');
+        });
+    }
+    function usuarioTieneAccesoAdministrativoCompleto(u=currentUser){return usuarioTienePermisosCompletosGranulares(u);}
+    function esMasterEfectivoUsuario(u=currentUser){return !!(u&&((String(u.rol||'').trim().toLowerCase()==='master')||usuarioTienePermisosCompletosGranulares(u)));}
+    function permisosUsuarioTieneModulo(modulo,accion='leer',u=currentUser){
+        if(!u)return false;
+        const key=normalizarModuloPermisoUsuario(modulo), act=String(accion||'leer').trim().toLowerCase();
+        const rol=String(u.rol||'').trim().toLowerCase();
+        if(rol==='master')return true;
+        if(['admin','administrador','vip'].includes(rol) && usuarioTienePermisosCompletosGranulares(u)) return true;
+        if(rol==='cliente' && key==='agenda' && !(u.permisos&&Object.keys(normalizarPermisosUsuario(u.permisos)).length)) return ['leer','agregar'].includes(act);
+        const p=normalizarPermisosUsuario(u.permisos);
+        const moduloPerm=Object.keys(p).find(k=>normalizarModuloPermisoUsuario(k)===key);
+        const cfg=moduloPerm?p[moduloPerm]:null;
+        if(cfg && typeof cfg==='object'){
+            if(cfg[act]===true || String(cfg[act]||'').toLowerCase()==='true') return true;
+            if(act==='leer' && (cfg.ver===true || String(cfg.ver||'').toLowerCase()==='true')) return true;
+        }
+        const sinMatriz=!Object.keys(p).length;
         if(sinMatriz){
             if(rol==='cliente'){
-                const legacyCliente={dashboard:['leer'],servicios:['leer'],facturacion:['leer','agregar'],pagos:['leer','agregar'],bancos:['leer'],notificaciones:['leer','agregar'],auditoria:['leer'],perfil:['modificar']};
-                return !!legacyCliente[modulo] && legacyCliente[modulo].includes(accion);
+                const legacyCliente={dashboard:['leer'],servicios:['leer'],facturacion:['leer','agregar'],pagos:['leer','agregar'],bancos:['leer'],notificaciones:['leer','agregar'],auditoria:['leer'],perfil:['modificar'],agenda:['leer','agregar']};
+                return !!legacyCliente[key]&&legacyCliente[key].includes(act);
             }
-            if(rol==='familia') return modulo==='familia' && ['leer'].includes(accion);
-            if(rol==='administrador' || rol==='vip'){
-                const legacy=['dashboard','empresas','usuarios','clientes','facturacion','creditos','pagos','bancos','notificaciones','auditoria','portal'];
-                return legacy.includes(modulo);
-            }
+            if(rol==='familia') return key==='familia'&&act==='leer';
+            if(rol==='administrador'||rol==='vip') return ['dashboard','empresas','usuarios','clientes','facturacion','creditos','pagos','bancos','notificaciones','auditoria','portal'].includes(key);
         }
-        const p=normalizarPermisosUsuario(u.permisos);
-        return !!(p[modulo]&&(p[modulo][accion] || (accion==='leer'&&p[modulo].ver)));
+        return false;
+    }
+    function usuarioTieneCualquierPermisoModulo(modulo,u=currentUser){
+        if(!u)return false;
+        if(esMasterEfectivoUsuario(u))return true;
+        const key=normalizarModuloPermisoUsuario(modulo), p=normalizarPermisosUsuario(u.permisos);
+        const k=Object.keys(p).find(x=>normalizarModuloPermisoUsuario(x)===key);
+        const cfg=k&&p[k];
+        if(cfg&&typeof cfg==='object') return Object.values(cfg).some(v=>v===true||String(v||'').toLowerCase()==='true');
+        return permisosUsuarioTieneModulo(key,'leer',u);
     }
     function puedeAccederModuloUsuario(modulo){return permisosUsuarioTieneModulo(modulo,'leer');}
     function protegerAccionUsuario(modulo,accion,msg='No tiene permiso para realizar esta accion.'){if(window._registroPublicoCliente===true&&modulo==='clientes')return true;if(permisosUsuarioTieneModulo(modulo,accion))return true;showSystemNotification('Acceso restringido',msg,'warning');return false;}
@@ -9416,14 +9535,14 @@ function bancoRow(label,value,copy){
   return '<div class="bank-row"><div class="bank-label">'+escapeBankHtml(label)+'</div><div class="bank-value d-flex justify-content-between gap-2 align-items-center"><span>'+escapeBankHtml(v)+'</span>'+(copy?'<button type="button" class="bank-copy" onclick="copiarDatoBancario('+JSON.stringify(String(v))+',this)"><i class="fa-regular fa-copy"></i></button>':'')+'</div></div>';
 }
 function renderBancos(){
-  const grid=document.getElementById('bancos-grid'),empty=document.getElementById('bancos-empty');if(!grid)return;const list=Array.isArray(db?.bancos)?db.bancos:[];if(empty)empty.classList.toggle('d-none',list.length>0);if(!list.length){grid.innerHTML='';return;}const isMaster=String(currentUser?.rol||'').trim().toLowerCase()==='master';
+  const grid=document.getElementById('bancos-grid'),empty=document.getElementById('bancos-empty');if(!grid)return;const list=Array.isArray(db?.bancos)?db.bancos:[];if(empty)empty.classList.toggle('d-none',list.length>0);if(!list.length){grid.innerHTML='';return;}const isMaster=esMasterEfectivoUsuario(currentUser);
   const field=(label,value,icon)=>{const v=String(value??'').trim();if(!v)return '';return `<div class="bank-v2-field"><div class="bank-v2-label"><i class="fa-solid ${icon}"></i><span>${escapeBankHtml(label)}</span></div><div class="bank-v2-value"><span>${escapeBankHtml(v)}</span><button type="button" class="bank-v2-copy" title="Copiar" onclick="copiarDatoBancario(${JSON.stringify(v)},this)"><i class="fa-regular fa-copy"></i></button></div></div>`};
   grid.innerHTML=list.map(b=>{const id=String(b.id_banco||'');let h='<div class="col-12 col-md-6 col-xl-4"><article class="bank-card-v2"><div class="bank-v2-top"><div><div class="bank-v2-kicker">Datos bancarios</div><h5 class="bank-v2-name">'+escapeBankHtml(b.nombre_banco||'Banco')+'</h5></div><div class="bank-v2-icon"><i class="fa-solid fa-building-columns"></i></div></div><div class="bank-v2-grid">';h+=field('Banco',b.nombre_banco,'fa-building-columns')+field('Tipo de cuenta',b.tipo_cuenta,'fa-wallet')+field('N.º de cuenta',b.numero_cuenta,'fa-hashtag')+field('Titular',b.titular,'fa-user')+field('Documento',b.documento_titular,'fa-id-card')+field('Pago Móvil',b.pago_movil,'fa-mobile-screen-button')+field('Transferencia',b.transferencia,'fa-arrow-right-arrow-left')+field('Información adicional',b.info_adicional,'fa-circle-info');h+='</div><div class="bank-v2-actions"><button type="button" class="btn btn-primary btn-sm" onclick="copiarTodosDatosBanco('+JSON.stringify(id)+')"><i class="fa-regular fa-copy me-1"></i>Copiar todos</button>';if(isMaster)h+='<button type="button" class="btn btn-outline-primary btn-sm bank-edit-btn" data-banco-id="'+escapeBankHtml(id)+'"><i class="fa-solid fa-pen me-1"></i>Editar</button><button type="button" class="btn btn-outline-danger btn-sm" onclick="eliminarBanco('+JSON.stringify(id)+')"><i class="fa-solid fa-trash"></i></button>';h+='</div></article></div>';return h;}).join('');
 }
 function abrirModalBanco(id){
   if (!protegerAccionUsuario('bancos','leer')) return;
-  if(!currentUser || String(currentUser.rol||'').trim().toLowerCase()!=='master'){
-    showSystemNotification('Acceso restringido','Solo el usuario Master puede editar los datos bancarios.','warning');
+  if(!currentUser || !esMasterEfectivoUsuario(currentUser)){
+    showSystemNotification('Acceso restringido','No tiene permisos para editar los datos bancarios.','warning');
     return false;
   }
   const bancoId=String(id||'').trim();
@@ -9478,7 +9597,7 @@ async function guardarBanco(e){
   e.preventDefault();
   const id=document.getElementById('banco_id').value.trim();
   if(!protegerAccionUsuario('bancos',id?'modificar':'agregar'))return;
-  if(!currentUser||String(currentUser.rol||'').trim().toLowerCase()!=='master'){showSystemNotification('Acceso restringido','Solo el usuario Master puede administrar los datos bancarios.','warning');return;}
+  if(!currentUser||!esMasterEfectivoUsuario(currentUser)){showSystemNotification('Acceso restringido','No tiene permisos para administrar los datos bancarios.','warning');return;}
   const payload={id_banco:id||'BAN-'+Date.now(),nombre_banco:document.getElementById('banco_nombre').value.trim(),tipo_cuenta:document.getElementById('banco_tipo_cuenta').value.trim(),numero_cuenta:document.getElementById('banco_numero_cuenta').value.trim(),titular:document.getElementById('banco_titular').value.trim(),documento_titular:document.getElementById('banco_documento_titular').value.trim(),pago_movil:document.getElementById('banco_pago_movil').value.trim(),transferencia:document.getElementById('banco_transferencia').value.trim(),info_adicional:document.getElementById('banco_info_adicional').value.trim(),estado:'Activo',fecha_registro:formatearFechaHoraPortal(new Date())};
   try{
     const result=await sendGasRequest(id?'updateBanco':'addBanco',payload,false,35000,true);
@@ -9490,7 +9609,7 @@ async function guardarBanco(e){
 }
 async function eliminarBanco(id){
   if(!protegerAccionUsuario('bancos','eliminar'))return;
-  if(!currentUser||String(currentUser.rol||'').trim().toLowerCase()!=='master'){showSystemNotification('Acceso restringido','Solo el usuario Master puede eliminar los datos bancarios.','warning');return;}
+  if(!currentUser||!esMasterEfectivoUsuario(currentUser)){showSystemNotification('Acceso restringido','No tiene permisos para eliminar los datos bancarios.','warning');return;}
   if(!await confirmarAccionModal('Eliminar dato bancario','Se eliminará el registro bancario seleccionado.'))return;
   try{
     const result=await sendGasRequest('deleteBanco',{id_banco:id},false,35000,true);
@@ -9642,7 +9761,7 @@ function copiarTodosDatosBanco(id){const b=(db.bancos||[]).find(function(x){retu
         const hasta = String(document.getElementById('audit-filtro-hasta')?.value || '').trim();
         const desdeTs = desde ? new Date(desde + 'T00:00:00').getTime() : null;
         const hastaTs = hasta ? new Date(hasta + 'T23:59:59.999').getTime() : null;
-        const isMaster = currentUser && String(currentUser.rol||'').trim().toLowerCase() === 'master';
+        const isMaster = currentUser && esMasterEfectivoUsuario(currentUser);
 
         // Para el Master, si el texto identifica a un usuario/cliente, la búsqueda
         // queda "anclada" a ese usuario y conserva TODO su historial de auditoría.
@@ -10957,7 +11076,7 @@ function fechaInputVenezuela(valor=new Date()) {
 }
 
 
-function agendaEsMaster(){return String(currentUser?.rol||'').trim().toLowerCase()==='master';}
+function agendaEsMaster(){return typeof esMasterEfectivoUsuario==='function' ? esMasterEfectivoUsuario(currentUser) : String(currentUser?.rol||'').trim().toLowerCase()==='master';}
 function agendaNormalizar(v){return String(v??'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
 function agendaEsc(v){if(typeof escapeHtmlMaster==='function')return escapeHtmlMaster(String(v??''));return String(v??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]||m));}
 function agendaFechaHoraLocal(dateObj){const d=(dateObj instanceof Date&&!isNaN(dateObj.getTime()))?dateObj:new Date(),pad=n=>String(n).padStart(2,'0');return{fecha:d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()),hora:pad(d.getHours())+':'+pad(d.getMinutes())};}
@@ -10994,10 +11113,10 @@ function abrirModalAgendaDesdePerfil(){const c=agendaObtenerClienteActual()||win
 async function guardarCitaAgenda(e){e.preventDefault();const master=agendaEsMaster(),id=String(document.getElementById('age_id')?.value||'').trim(),c=window._agendaClienteSeleccionado||agendaObtenerClienteActual();if(!c){showSystemNotification('Cliente requerido','Seleccione un cliente.','warning');return;}const f=document.getElementById('formAgenda');if(!f.checkValidity()){f.reportValidity();return;}const fh=agendaNormalizarFechaHoraInput(document.getElementById('age_fecha_cita').value,document.getElementById('age_hora_cita').value);if(!fh){showSystemNotification('Fecha y hora inválidas','Seleccione una fecha y hora válidas.','warning');return;}const p={id_agenda:id||'',codigo_cliente:c.codigo_cliente||'',fecha_cita:fh.fecha,hora_cita:fh.hora,duracion_minutos:document.getElementById('age_duracion').value === '' ? '' : Number(document.getElementById('age_duracion').value),tipo_trabajo:document.getElementById('age_tipo').value,descripcion:document.getElementById('age_descripcion').value.trim(),direccion_trabajo:document.getElementById('age_direccion').value.trim(),telefono_contacto:document.getElementById('age_telefono').value.trim(),prioridad:document.getElementById('age_prioridad').value,notas_master:document.getElementById('age_notas').value.trim()};try{const action=master?(id?'updateCitaAgenda':'crearCitaAgenda'):'solicitarCitaAgenda',r=await sendGasRequest(action,p,false,35000,true);if(!r?.success)throw new Error(r?.message||'Google Sheets no confirmó la operación.');db.agenda=Array.isArray(db.agenda)?db.agenda:[];if(id){const ix=db.agenda.findIndex(x=>String(x.id_agenda)===id);if(ix>=0)db.agenda[ix]={...db.agenda[ix],...(r.data||p)};}else db.agenda.unshift(r.data||p);localStorage.setItem('erp_db',JSON.stringify(db));if(master)window._agendaClienteListado=c;renderAgendaModulo();if(window._agendaPerfilCliente)renderAgendaPerfilCliente(window._agendaPerfilCliente);bootstrap.Modal.getInstance(document.getElementById('modalAgenda'))?.hide();showSystemNotification(master?(id?'Cita actualizada':'Cita agendada'):'Solicitud enviada',r.message||'Operación completada correctamente.','success');}catch(err){showSystemNotification('No se pudo guardar la cita',err.message||'Error de servidor.','danger');}}
 async function actualizarEstadoCitaAgendaUI(id,estado,motivo){if(!agendaEsMaster())return;const p={id_agenda:id,estado};if(motivo!==undefined)p.motivo_rechazo=motivo;try{const r=await sendGasRequest('updateCitaAgenda',p,false,35000,true);if(!r?.success)throw new Error(r?.message||'No se pudo actualizar la cita.');const ix=db.agenda.findIndex(x=>String(x.id_agenda)===String(id));if(ix>=0)db.agenda[ix]={...db.agenda[ix],...(r.data||p)};localStorage.setItem('erp_db',JSON.stringify(db));renderAgendaModulo();if(window._agendaPerfilCliente)renderAgendaPerfilCliente(window._agendaPerfilCliente);if(window._agendaClienteListado)renderAgendaListado();showSystemNotification('Cita actualizada',r.message||'Estado actualizado correctamente.','success');}catch(err){showSystemNotification('No se pudo actualizar',err.message||'Error de servidor.','danger');}}
 function aceptarCitaAgendaUI(id){actualizarEstadoCitaAgendaUI(id,'Pendiente');}
-function rechazarCitaAgendaUI(id){const motivo=window.prompt('Indique el motivo del rechazo de la solicitud:','');if(motivo===null)return;actualizarEstadoCitaAgendaUI(id,'Rechazada',motivo.trim());}
-function cancelarCitaAgendaUI(id){if(!window.confirm('¿Desea cancelar esta cita?'))return;actualizarEstadoCitaAgendaUI(id,'Cancelada');}
+async function rechazarCitaAgendaUI(id){const motivo=await solicitarTextoModal('Motivo del rechazo','Indique el motivo del rechazo de la solicitud:','');if(motivo===null)return;actualizarEstadoCitaAgendaUI(id,'Rechazada',motivo.trim());}
+async function cancelarCitaAgendaUI(id){if(!(await confirmarAccionModal('Cancelar cita','¿Desea cancelar esta cita?')))return;actualizarEstadoCitaAgendaUI(id,'Cancelada');}
 async function atenderCitaAgendaUI(id){if(!agendaEsMaster())return;try{const r=await sendGasRequest('atenderCitaAgenda',{id_agenda:id},false,35000,true);if(!r?.success)throw new Error(r?.message||'No se pudo marcar la cita.');const ix=db.agenda.findIndex(x=>String(x.id_agenda)===String(id));if(ix>=0)db.agenda[ix]={...db.agenda[ix],estado:'Atendida',fecha_atendida:formatearFechaHoraPortal(new Date()),atendido_por:currentUser?.username||'MASTER'};localStorage.setItem('erp_db',JSON.stringify(db));renderAgendaModulo();if(window._agendaPerfilCliente)renderAgendaPerfilCliente(window._agendaPerfilCliente);showSystemNotification('Cita atendida','La cita fue marcada como atendida.','success');}catch(err){showSystemNotification('No se pudo marcar como atendida',err.message||'Error de servidor.','danger');}}
-async function eliminarCitaAgendaUI(){const id=String(document.getElementById('age_id')?.value||'');if(!agendaEsMaster()||!id)return;if(!window.confirm('¿Desea eliminar esta cita?'))return;try{const r=await sendGasRequest('deleteCitaAgenda',{id_agenda:id},false,35000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar.');db.agenda=db.agenda.filter(x=>String(x.id_agenda)!==id);localStorage.setItem('erp_db',JSON.stringify(db));bootstrap.Modal.getInstance(document.getElementById('modalAgenda'))?.hide();renderAgendaModulo();showSystemNotification('Cita eliminada','La cita fue eliminada correctamente.','success');}catch(err){showSystemNotification('No se pudo eliminar',err.message||'Error de servidor.','danger');}}
+async function eliminarCitaAgendaUI(){const id=String(document.getElementById('age_id')?.value||'');if(!agendaEsMaster()||!id)return;if(!(await confirmarAccionModal('Eliminar cita','¿Desea eliminar esta cita?')))return;try{const r=await sendGasRequest('deleteCitaAgenda',{id_agenda:id},false,35000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar.');db.agenda=db.agenda.filter(x=>String(x.id_agenda)!==id);localStorage.setItem('erp_db',JSON.stringify(db));bootstrap.Modal.getInstance(document.getElementById('modalAgenda'))?.hide();renderAgendaModulo();showSystemNotification('Cita eliminada','La cita fue eliminada correctamente.','success');}catch(err){showSystemNotification('No se pudo eliminar',err.message||'Error de servidor.','danger');}}
 function agendaDetalleCampos(c){return[['ID de cita',c.id_agenda],['ID cliente',c.id_cliente],['Código cliente',c.codigo_cliente],['Nombre cliente',c.nombre_cliente],['Usuario del cliente',c.id_usuario_cliente],['Fecha de registro',c.fecha_registro],['Hora de registro',c.hora_registro],['Fecha de cita',c.fecha_cita],['Hora de cita',c.hora_cita],['Duración',agendaDuracionTexto(c.duracion_minutos)],['Tipo de trabajo',c.tipo_trabajo],['Prioridad',c.prioridad],['Estado',c.estado],['Teléfono',c.telefono_contacto],['Dirección del trabajo',c.direccion_trabajo],['Fecha de confirmación',c.fecha_confirmacion],['Fecha de actualización',c.fecha_actualizacion],['Motivo de rechazo',c.motivo_rechazo],['Fecha atendida',c.fecha_atendida],['Atendido por',c.atendido_por],['Recordatorio 24h',c.recordatorio_24h||'No enviado'],['Recordatorio 12h',c.recordatorio_12h||'No enviado'],['Recordatorio 6h',c.recordatorio_6h||'No enviado'],['Recordatorio 2h',c.recordatorio_2h||'No enviado'],['Descripción del trabajo',c.descripcion,'full'],['Notas del Master',c.notas_master,'full']];}
 function verCitaAgendaUI(id){const c=agendaObtenerLista().find(x=>String(x.id_agenda)===String(id));if(!c){showSystemNotification('Cita no encontrada','No se localizó la cita solicitada.','warning');return;}const box=document.getElementById('agenda-detalle-contenido');if(!box)return;const subtitle=document.getElementById('modalAgendaDetalleSubtitle');if(subtitle)subtitle.textContent=(c.codigo_cliente?String(c.codigo_cliente)+' · ':'')+(agendaMostrarFecha(c.fecha_cita)||'')+' · '+(agendaMostrarHora(c.hora_cita)||'');const groups=[{title:'Identificación',icon:'fa-user',fields:[['Cliente',c.nombre_cliente],['Código cliente',c.codigo_cliente],['ID cliente',c.id_cliente],['Usuario cliente',c.id_usuario_cliente]]},{title:'Programación',icon:'fa-calendar-days',fields:[['Fecha de registro',c.fecha_registro],['Hora de registro',c.hora_registro],['Fecha de cita',agendaMostrarFecha(c.fecha_cita)],['Hora de cita',agendaMostrarHora(c.hora_cita)],['Duración',agendaDuracionTexto(c.duracion_minutos)],['Estado',c.estado]]},{title:'Trabajo',icon:'fa-screwdriver-wrench',fields:[['Tipo de trabajo',c.tipo_trabajo],['Prioridad',c.prioridad],['Teléfono de contacto',c.telefono_contacto],['Dirección del trabajo',c.direccion_trabajo],['Descripción del trabajo',c.descripcion,'full']]},{title:'Control y seguimiento',icon:'fa-clipboard-check',fields:[['Fecha de confirmación',c.fecha_confirmacion],['Fecha de actualización',c.fecha_actualizacion],['Motivo de rechazo',c.motivo_rechazo],['Fecha atendida',c.fecha_atendida],['Atendido por',c.atendido_por],['Recordatorio 24h',c.recordatorio_24h||'No enviado'],['Recordatorio 12h',c.recordatorio_12h||'No enviado'],['Recordatorio 6h',c.recordatorio_6h||'No enviado'],['Recordatorio 2h',c.recordatorio_2h||'No enviado'],['Notas del Master',c.notas_master,'full']]}];box.innerHTML='<div class="agenda-detail-overview"><div class="agenda-detail-overview-main"><span class="agenda-detail-overview-label">Cliente</span><div class="name">'+agendaEsc(c.nombre_cliente||'Cliente sin nombre')+'</div><div class="meta">'+agendaEsc(c.codigo_cliente||'Sin código')+' · ID '+agendaEsc(c.id_cliente||'—')+'</div></div><div class="agenda-detail-overview-item"><span class="label">Estado</span><div class="value">'+agendaEstadoBadge(c.estado||'Pendiente')+'</div></div><div class="agenda-detail-overview-item"><span class="label">Fecha</span><div class="value">'+agendaEsc(agendaMostrarFecha(c.fecha_cita)||'—')+'</div></div><div class="agenda-detail-overview-item"><span class="label">Hora</span><div class="value">'+agendaEsc(agendaMostrarHora(c.hora_cita)||'—')+'</div></div></div>'+groups.map(g=>'<section class="agenda-detail-section"><div class="agenda-detail-section-title"><i class="fa-solid '+g.icon+'"></i><span>'+g.title+'</span></div><div class="agenda-detail-fields">'+g.fields.map(f=>'<div class="agenda-detail-field '+(f[2]||'')+'"><span class="label">'+agendaEsc(f[0])+'</span><div class="value">'+agendaEsc(f[1]||'—')+'</div></div>').join('')+'</div></section>').join('');bootstrap.Modal.getOrCreateInstance(document.getElementById('modalAgendaDetalle'),{backdrop:false,keyboard:true,focus:true}).show();}
 function mostrarKpiAgenda(estado){const lista=agendaKpiFiltrada(estado),box=document.getElementById('agenda-kpi-resumen');if(!box)return;document.getElementById('modalAgendaKpiTitle').innerHTML='<i class="fa-solid fa-chart-column text-primary me-2"></i>'+agendaEsc(estado);document.getElementById('modalAgendaKpiSubtitle').textContent=(agendaEsMaster()?'Todas las citas':'Mis citas')+' en estado '+estado+' · '+lista.length+' registro'+(lista.length===1?'':'s');box.innerHTML=lista.length?agendaOrdenar(lista).map(c=>`<div class="agenda-kpi-list-item"><div class="d-flex justify-content-between align-items-start gap-2 flex-wrap"><div><div class="fw-bold">${agendaEsc(c.nombre_cliente||'Cliente')}</div><div class="small text-muted">${agendaEsc(c.codigo_cliente||'')} · ${agendaEsc(c.fecha_cita||'')} · ${agendaEsc(c.hora_cita||'')}</div><div class="small mt-1">${agendaEsc(c.tipo_trabajo||'Trabajo')}</div><div class="small text-muted mt-1">${agendaEsc(c.descripcion||'')}</div></div><div class="d-flex align-items-center gap-2">${agendaEstadoBadge(c.estado||estado)}<button type="button" class="btn btn-sm btn-outline-info" onclick="verCitaAgendaUI('${agendaEsc(c.id_agenda)}')"><i class="fa-solid fa-eye"></i> Ver</button></div></div></div>`).join(''):'<div class="text-center text-muted p-4">No existen citas en este estado.</div>';bootstrap.Modal.getOrCreateInstance(document.getElementById('modalAgendaKpi'),{backdrop:false,keyboard:true,focus:true}).show();}
@@ -11151,7 +11270,7 @@ function toggleListaUsuarios() {
 function renderListaUsuariosInline(usuarios) {
     const tbody = document.getElementById('usr-lista-tbody');
     const estadoVacio = document.getElementById('usr-lista-vacio');
-    const isMaster = currentUser && currentUser.rol === 'Master';
+    const isMaster = currentUser && esMasterEfectivoUsuario(currentUser);
     if (!tbody) return;
     if (usuarios.length === 0) {
         tbody.innerHTML = '';
@@ -12083,6 +12202,28 @@ async function eliminarMikrotikUser(id) {
 
 
 // SECCIÓN: FAMILIA — FUNCIONALIDAD COMPLETA Y EXPEDIENTE
+function personasFamiliaRegistros(){const out=[];(Array.isArray(db?.familia)?db.familia:[]).forEach(f=>{const id=String(f.id_familia||f.id||'').trim();if(id)out.push({type:'familia',id_cliente:'',codigo_cliente:f.codigo_cliente||'',id_familia:id,nombre:String(f.nombre||'Familiar sin nombre')});});return out;}
+function escMod(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function personasSelect(id,placeholder='Seleccionar persona'){const el=document.getElementById(id);if(!el)return;el.innerHTML='<option value="">'+placeholder+'</option>'+personasFamiliaRegistros().map(p=>{const key=p.type+':'+(p.type==='familia'?p.id_familia:p.id_cliente);return '<option value="'+escMod(key)+'">'+escMod(p.nombre)+' · '+(p.type==='familia'?'Familiar':'Cliente')+'</option>';}).join('');}
+function resolverPersonaRegistro(key){const [type,id]=String(key||'').split(':');if(!type||!id)return null;return personasFamiliaRegistros().find(p=>p.type===type&&String(type==='familia'?p.id_familia:p.id_cliente)===id)||null;}
+function fechaHoyModulo(){return typeof fechaInputVenezuela==='function'?fechaInputVenezuela(new Date()):new Date().toISOString().slice(0,10);}
+function fechaRegistroModuloDesdeInput(v){const s=String(v||'').trim();const m=s.match(/^(\d{4})-(\d{2})-(\d{2})$/);return m?m[3]+'/'+m[2]+'/'+m[1]:s;}
+function abrirFormularioHistorialMedico(){document.getElementById('formHistorialMedico')?.reset();personasSelect('hm_persona');const e=document.getElementById('hm_fecha');if(e)e.value=fechaHoyModulo();}
+function limpiarFormularioHistorialMedico(){abrirFormularioHistorialMedico();}
+async function guardarHistorialMedico(e){e.preventDefault();if(!protegerAccionUsuario('historialmedico','agregar'))return;const p=resolverPersonaRegistro(document.getElementById('hm_persona')?.value);if(!p){showSystemNotification('Paciente requerido','Seleccione una persona.','warning');return;}const payload={id_historial_medico:'MED-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',nombre_persona:p.nombre,fecha_registro:fechaRegistroModuloDesdeInput(document.getElementById('hm_fecha')?.value||fechaHoyModulo()),profesional:document.getElementById('hm_profesional')?.value.trim()||'',especialidad:document.getElementById('hm_especialidad')?.value.trim()||'',diagnostico:document.getElementById('hm_diagnostico')?.value.trim()||'',orden_medica:document.getElementById('hm_orden')?.value.trim()||'',alergias:document.getElementById('hm_alergias')?.value.trim()||'',antecedentes:document.getElementById('hm_antecedentes')?.value.trim()||'',observaciones:document.getElementById('hm_observaciones')?.value.trim()||'',proximo_control:document.getElementById('hm_proximo_control')?.value||''};try{const r=await sendGasRequest('addHistorialMedico',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');db.historialmedico=Array.isArray(db.historialmedico)?db.historialmedico:[];db.historialmedico.unshift(r.data||payload);renderHistorialMedicoModulo();limpiarFormularioHistorialMedico();showSystemNotification('Registro guardado','Historial médico guardado correctamente.','success');}catch(err){showSystemNotification('Error al guardar',err.message||'No se pudo guardar.','danger');}}
+function abrirFormularioRecordatorioMedicina(){document.getElementById('formRecordatorioMedicina')?.reset();personasSelect('med_persona');const e=document.getElementById('med_estado');if(e)e.value='Activo';}
+async function guardarRecordatorioMedicina(e){e.preventDefault();if(!protegerAccionUsuario('recordatoriosmedicinas','agregar'))return;const p=resolverPersonaRegistro(document.getElementById('med_persona')?.value);if(!p){showSystemNotification('Paciente requerido','Seleccione una persona.','warning');return;}const payload={id_recordatorio:'MEDREM-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',id_historial_medico:'',nombre_persona:p.nombre,medicamento:document.getElementById('med_medicamento')?.value.trim()||'',dosis:document.getElementById('med_dosis')?.value.trim()||'',via_administracion:document.getElementById('med_via')?.value.trim()||'',frecuencia:document.getElementById('med_frecuencia')?.value.trim()||'',horarios:document.getElementById('med_horarios')?.value.trim()||'',fecha_inicio:document.getElementById('med_inicio')?.value||'',fecha_fin:document.getElementById('med_fin')?.value||'',indicaciones:document.getElementById('med_indicaciones')?.value.trim()||'',estado:document.getElementById('med_estado')?.value||'Activo',ultimo_recordatorio:'',fecha_registro:formatearFechaHoraPortal(new Date())};try{const r=await sendGasRequest('addRecordatorioMedicina',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');db.recordatoriosmedicinas=Array.isArray(db.recordatoriosmedicinas)?db.recordatoriosmedicinas:[];db.recordatoriosmedicinas.unshift(r.data||payload);renderHistorialMedicoModulo();abrirFormularioRecordatorioMedicina();showSystemNotification('Recordatorio guardado','Recordatorio de medicina configurado.','success');}catch(err){showSystemNotification('Error al guardar',err.message||'No se pudo guardar.','danger');}}
+async function eliminarRecordatorioMedicina(id){if(!protegerAccionUsuario('recordatoriosmedicinas','eliminar')||!(await confirmarAccionModal('Eliminar recordatorio','¿Eliminar este recordatorio de medicina?')))return;try{const r=await sendGasRequest('deleteRecordatorioMedicina',{id_recordatorio:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');db.recordatoriosmedicinas=(db.recordatoriosmedicinas||[]).filter(x=>String(x.id_recordatorio)!==String(id));renderHistorialMedicoModulo();}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
+async function eliminarHistorialMedico(id){if(!protegerAccionUsuario('historialmedico','eliminar')||!(await confirmarAccionModal('Eliminar registro','¿Eliminar este registro médico?')))return;try{const r=await sendGasRequest('deleteHistorialMedico',{id_historial_medico:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');db.historialmedico=(db.historialmedico||[]).filter(x=>String(x.id_historial_medico)!==String(id));renderHistorialMedicoModulo();}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
+function renderHistorialMedicoModulo(){const body=document.getElementById('hm-tbody');if(!body)return;const rows=Array.isArray(db?.historialmedico)?db.historialmedico:[],meds=Array.isArray(db?.recordatoriosmedicinas)?db.recordatoriosmedicinas:[];document.getElementById('hm-kpi-total')?.replaceChildren(document.createTextNode(rows.length));document.getElementById('hm-kpi-ordenes')?.replaceChildren(document.createTextNode(rows.filter(x=>String(x.orden_medica||'').trim()).length));document.getElementById('hm-kpi-meds')?.replaceChildren(document.createTextNode(meds.filter(x=>String(x.estado||'Activo').toLowerCase()==='activo').length));const v=x=>escMod(x||'—');body.innerHTML=rows.length?rows.map(r=>'<tr><td>'+v(r.fecha_registro)+'</td><td>'+v(r.nombre_persona)+'</td><td>'+v(r.profesional)+'</td><td>'+v(r.especialidad)+'</td><td>'+v(r.diagnostico)+'</td><td><div class="health-order-box">'+v(r.orden_medica)+'</div></td><td><button class="btn btn-sm btn-outline-danger" onclick="eliminarHistorialMedico(\''+escMod(r.id_historial_medico)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="7" class="text-center text-muted py-4">No hay registros médicos.</td></tr>';const mb=document.getElementById('hm-med-tbody');if(mb)mb.innerHTML=meds.length?meds.map(r=>'<tr><td>'+v(r.nombre_persona)+'</td><td>'+v(r.medicamento)+'</td><td>'+v(r.dosis)+'</td><td>'+v(r.horarios)+'</td><td><span class="med-status '+(String(r.estado||'Activo').toLowerCase()==='activo'?'':'off')+'">'+v(r.estado||'Activo')+'</span></td><td><button class="btn btn-sm btn-outline-danger" onclick="eliminarRecordatorioMedicina(\''+escMod(r.id_recordatorio)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="6" class="text-center text-muted py-4">No hay recordatorios configurados.</td></tr>';}
+function limpiarManutencionForm(){document.getElementById('formManutencion')?.reset();personasSelect('man_persona');}
+async function guardarManutencion(e){e.preventDefault();if(!protegerAccionUsuario('manutencion','agregar'))return;const p=resolverPersonaRegistro(document.getElementById('man_persona')?.value);if(!p){showSystemNotification('Beneficiario requerido','Seleccione el beneficiario.','warning');return;}const payload={id_manutencion:'MAN-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',nombre_beneficiario:p.nombre,tipo:document.getElementById('man_tipo')?.value.trim()||'',monto:document.getElementById('man_monto')?.value||'',moneda:document.getElementById('man_moneda')?.value||'USD',frecuencia:document.getElementById('man_frecuencia')?.value.trim()||'',fecha_inicio:document.getElementById('man_inicio')?.value||'',fecha_proximo_pago:document.getElementById('man_proximo')?.value||'',estado:document.getElementById('man_estado')?.value||'Activo',responsable:document.getElementById('man_responsable')?.value.trim()||'',observaciones:document.getElementById('man_observaciones')?.value.trim()||'',fecha_registro:formatearFechaHoraPortal(new Date())};try{const r=await sendGasRequest('addManutencion',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');db.manutencion=Array.isArray(db.manutencion)?db.manutencion:[];db.manutencion.unshift(r.data||payload);renderManutencionModulo();limpiarManutencionForm();showSystemNotification('Registro guardado','Manutención registrada correctamente.','success');}catch(e){showSystemNotification('Error',e.message||'No se pudo guardar.','danger');}}
+async function eliminarManutencion(id){if(!protegerAccionUsuario('manutencion','eliminar')||!(await confirmarAccionModal('Eliminar registro','¿Eliminar este registro de manutención?')))return;try{const r=await sendGasRequest('deleteManutencion',{id_manutencion:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');db.manutencion=(db.manutencion||[]).filter(x=>String(x.id_manutencion)!==String(id));renderManutencionModulo();}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
+function renderManutencionModulo(){const b=document.getElementById('man-tbody');if(!b)return;const rows=Array.isArray(db?.manutencion)?db.manutencion:[],v=x=>escMod(x||'—');b.innerHTML=rows.length?rows.map(r=>'<tr><td>'+v(r.nombre_beneficiario)+'</td><td>'+v(r.tipo)+'</td><td>'+v(r.monto)+' '+v(r.moneda)+'</td><td>'+v(r.frecuencia)+'</td><td>'+v(r.fecha_proximo_pago)+'</td><td>'+v(r.estado)+'</td><td><button class="btn btn-sm btn-outline-danger" onclick="eliminarManutencion(\''+escMod(r.id_manutencion)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="7" class="text-center text-muted py-4">No hay registros de manutención.</td></tr>';}
+function limpiarEscolarForm(){document.getElementById('formRegistroEscolar')?.reset();personasSelect('esc_persona');}
+async function guardarRegistroEscolar(e){e.preventDefault();if(!protegerAccionUsuario('registrosescolares','agregar'))return;const p=resolverPersonaRegistro(document.getElementById('esc_persona')?.value);if(!p){showSystemNotification('Estudiante requerido','Seleccione el estudiante.','warning');return;}const payload={id_registro_escolar:'ESC-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',nombre_estudiante:p.nombre,institucion:document.getElementById('esc_institucion')?.value.trim()||'',nivel:document.getElementById('esc_nivel')?.value.trim()||'',grado:document.getElementById('esc_grado')?.value.trim()||'',periodo_escolar:document.getElementById('esc_periodo')?.value.trim()||'',fecha_inicio:document.getElementById('esc_inicio')?.value||'',fecha_fin:document.getElementById('esc_fin')?.value||'',promedio:document.getElementById('esc_promedio')?.value.trim()||'',representante:document.getElementById('esc_representante')?.value.trim()||'',telefono_representante:document.getElementById('esc_telefono')?.value.trim()||'',estado:document.getElementById('esc_estado')?.value||'Activo',observaciones:document.getElementById('esc_observaciones')?.value.trim()||'',fecha_registro:formatearFechaHoraPortal(new Date())};try{const r=await sendGasRequest('addRegistroEscolar',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');db.registrosescolares=Array.isArray(db.registrosescolares)?db.registrosescolares:[];db.registrosescolares.unshift(r.data||payload);renderRegistrosEscolaresModulo();limpiarEscolarForm();showSystemNotification('Registro guardado','Registro escolar guardado correctamente.','success');}catch(e){showSystemNotification('Error',e.message||'No se pudo guardar.','danger');}}
+async function eliminarRegistroEscolar(id){if(!protegerAccionUsuario('registrosescolares','eliminar')||!(await confirmarAccionModal('Eliminar registro','¿Eliminar este registro escolar?')))return;try{const r=await sendGasRequest('deleteRegistroEscolar',{id_registro_escolar:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');db.registrosescolares=(db.registrosescolares||[]).filter(x=>String(x.id_registro_escolar)!==String(id));renderRegistrosEscolaresModulo();}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
+function renderRegistrosEscolaresModulo(){const b=document.getElementById('esc-tbody');if(!b)return;const rows=Array.isArray(db?.registrosescolares)?db.registrosescolares:[],v=x=>escMod(x||'—');b.innerHTML=rows.length?rows.map(r=>'<tr><td>'+v(r.nombre_estudiante)+'</td><td>'+v(r.institucion)+'</td><td>'+v(r.nivel)+'</td><td>'+v(r.grado)+'</td><td>'+v(r.periodo_escolar)+'</td><td>'+v(r.promedio)+'</td><td>'+v(r.estado)+'</td><td><button class="btn btn-sm btn-outline-danger" onclick="eliminarRegistroEscolar(\''+escMod(r.id_registro_escolar)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="8" class="text-center text-muted py-4">No hay registros escolares.</td></tr>';}
 let dbFamilia = [];
 let modalFamiliarInstance = null;
 let modalFamiliaExpInstance = null;
@@ -12535,6 +12676,26 @@ html[data-bs-theme="dark"] .master-pending-alert{background:linear-gradient(135d
 html[data-bs-theme="dark"] #modalUsuario .form-control-pro,html[data-bs-theme="dark"] #modalUsuario .form-select-pro{background:#111827!important;color:var(--text-main)!important;border-color:var(--border-color)!important;}
 html[data-bs-theme="dark"] #modalUsuario .form-control-pro:focus,html[data-bs-theme="dark"] #modalUsuario .form-select-pro:focus{background:#172033!important;}
 @media(max-width:575px){#modalUsuario .modal-body-pro{padding:.85rem;max-height:82vh}.usr-form-grid{grid-template-columns:1fr}.usr-form-field-wide{grid-column:auto}#usr-permisos-acciones{grid-template-columns:1fr}.usr-permisos-toolbar{align-items:flex-start}.usr-form-footer .btn{width:100%;}}
+#modalUsuario .usr-hero-panel{display:flex;align-items:center;gap:12px;padding:12px 13px;margin-bottom:2px;border:1px solid var(--border-color);border-radius:14px;background:linear-gradient(135deg,rgba(37,99,235,.09),rgba(37,99,235,.025));}
+#modalUsuario .usr-avatar{width:42px;height:42px;flex:0 0 42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(37,99,235,.12);color:#2563eb;font-size:1rem;}
+#modalUsuario .usr-kicker{font-size:.62rem;letter-spacing:.09em;}
+#modalUsuario .usr-hero-title{font-size:1rem;font-weight:800;color:var(--text-main);line-height:1.15;margin-top:1px;}
+#modalUsuario .usr-section-block{margin-top:5px;}
+#modalUsuario .usr-section-divider{margin:12px 0 8px;font-size:.78rem;}
+#modalUsuario .usr-form-grid{gap:9px 12px;}
+#modalUsuario .usr-status-note{grid-column:1/-1;font-size:.72rem;color:var(--text-muted);padding:7px 9px;border:1px dashed var(--border-color);border-radius:9px;background:var(--bg-subtle);}
+#modalUsuario .usr-input-group .input-group-text{border:1px solid var(--border-color);border-right:0;background:var(--bg-subtle);color:var(--text-muted);border-radius:9px 0 0 9px;}
+#modalUsuario .usr-input-group .form-control-pro{border-left:0;border-radius:0 9px 9px 0;}
+#modalUsuario .usr-permisos-toolbar{padding:1px 0 8px;}
+#modalUsuario #usr-permisos-modulos label{font-size:.75rem!important;line-height:1.15;}
+#modalUsuario #usr-permisos-acciones .border{padding:8px!important;margin-bottom:7px!important;}
+#modalUsuario #usr-permisos-acciones .small.fw-bold{font-size:.74rem!important;}
+#modalUsuario #usr-permisos-acciones .form-check{font-size:.7rem!important;}
+#modalUsuario .usr-form-footer{gap:8px;}
+html[data-bs-theme="dark"] #modalUsuario .usr-hero-panel{background:linear-gradient(135deg,rgba(59,130,246,.14),rgba(30,41,59,.6));}
+html[data-bs-theme="dark"] #modalUsuario .usr-status-note{background:#111827;}
+html[data-bs-theme="dark"] #modalUsuario .usr-input-group .input-group-text{background:#111827;color:#94a3b8;}
+
 </style>
 /* PERMISOS GRANULARES DE USUARIO */
 #usr-permisos-panel{border:1px solid var(--border-color);border-radius:12px;padding:12px;background:var(--bg-card);}
@@ -12600,7 +12761,7 @@ async function eliminarFamiliar(id){
 async function renderFamilia(){
     const grid=document.getElementById('familia-grid'),vacio=document.getElementById('familia-estado-vacio');
     if(!grid)return;
-    dbFamilia=Array.isArray(db?.familia)?db.familia:[];
+    dbFamilia=(Array.isArray(db?.familia)?db.familia:[]).filter(f=>String(f?.id_familia||f?.id||'').trim() && !f?.id_cliente && String(f?.tipo||'').toLowerCase()!=='cliente');
     if(!dbFamilia.length){grid.innerHTML='';vacio?.classList.remove('d-none');return;}
     vacio?.classList.add('d-none');
     const esc=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
