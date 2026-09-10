@@ -1158,6 +1158,14 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
   #modal-exchange-info .lc-exchange-body > .grid:first-child{
     gap:8px;
   }
+  #modal-exchange-info .lc-exchange-body > .grid:first-child{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+  @media (min-width:701px) and (max-width:900px){
+    #modal-exchange-info .lc-exchange-body > .grid:first-child{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+  }
   #modal-exchange-info .lc-exchange-rate{
     padding:10px !important;
     border-radius:13px;
@@ -1412,32 +1420,29 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
             }
         }
 
+        function getSystemThemeMode() {
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+
         function toggleTheme() {
+            // El botón solo permite una vista temporal; la preferencia persistente
+            // siempre queda determinada por el dispositivo/navegador.
             const current = document.documentElement.getAttribute('data-theme') === 'light';
-            const next = current ? 'dark' : 'light';
-            applyThemeMode(next);
-            localStorage.setItem('lc-theme', next);
+            applyThemeMode(current ? 'dark' : 'light');
         }
 
         function initTheme() {
-            const saved = localStorage.getItem('lc-theme');
-            const media = window.matchMedia('(prefers-color-scheme: light)');
-            // Sin selección manual, el dispositivo determina el tema inicial.
-            applyThemeMode(saved === 'light' || saved === 'dark'
-                ? saved
-                : (media.matches ? 'light' : 'dark'));
+            // Elimina preferencias antiguas guardadas por versiones anteriores.
+            try { localStorage.removeItem('lc-theme'); } catch(e) {}
+            applyThemeMode(getSystemThemeMode());
         }
 
         initTheme();
 
-        // Si no existe una selección manual, seguir los cambios del tema del dispositivo.
+        // Seguir automáticamente cualquier cambio del tema del sistema mientras la página está abierta.
         (function bindSystemTheme(){
             const media = window.matchMedia('(prefers-color-scheme: light)');
-            const sync = function(e){
-                if (!localStorage.getItem('lc-theme')) {
-                    applyThemeMode(e.matches ? 'light' : 'dark');
-                }
-            };
+            const sync = function(){ applyThemeMode(getSystemThemeMode()); };
             if (media.addEventListener) media.addEventListener('change', sync);
             else if (media.addListener) media.addListener(sync);
         })();
@@ -2143,9 +2148,12 @@ const devPricesConfig = {
 
 const API_BCV_PRINCIPAL = 'https://rates.dolarvzla.com/bcv/current.json';
 const API_BCV_RESPALDO = 'https://ve.dolarapi.com/v1/dolares/oficial';
+const API_BCV_EURO = 'https://ve.dolarapi.com/v1/euros/oficial';
 const API_BINANCE_QUOTE_BASE = 'https://www.binance.com/bapi/c2c/v1/public/c2c/agent/quote-price';
 let BCV_VES_RATE = 0;
 let BCV_RATE_DATE = '';
+let BCV_EUR_VES_RATE = 0;
+let BCV_EUR_RATE_DATE = '';
 let BINANCE_VES_BUY = 0;
 let BINANCE_VES_SELL = 0;
 let exchangeCalcMode = 'USD_BS';
@@ -2155,6 +2163,23 @@ function fmtBs(n){
 }
 function fmtNum(n){
   return Number(n||0).toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+// Formato unificado para fechas/horas de actualización: dd/mm/aaaa, h:mm:ss AM/PM
+function fmtUpdateDateTime(value){
+  if(!value) return '';
+  const d = value instanceof Date ? value : new Date(value);
+  if(Number.isNaN(d.getTime())) return String(value).replace(/[zZ]|\s*([+-]\d{2}:?\d{2})$/, '').trim();
+  const day=String(d.getDate()).padStart(2,'0');
+  const month=String(d.getMonth()+1).padStart(2,'0');
+  const year=d.getFullYear();
+  let hour=d.getHours();
+  const ampm=hour>=12?'PM':'AM';
+  hour=hour%12||12;
+  const hh=String(hour);
+  const mm=String(d.getMinutes()).padStart(2,'0');
+  const ss=String(d.getSeconds()).padStart(2,'0');
+  return `${day}/${month}/${year}, ${hh}:${mm}:${ss} ${ampm}`;
 }
 
 async function fetchBinanceQuote(tradeType){
@@ -2187,6 +2212,22 @@ async function loadBCVRateOnly(){
   return BCV_VES_RATE;
 }
 
+async function loadBCVEuroRate(){
+  let rate=0,date='';
+  try{
+    const r=await fetch(API_BCV_EURO,{cache:'no-store',headers:{'Accept':'application/json'}});
+    if(r.ok){
+      const d=await r.json();
+      rate=Number(d?.promedio||d?.venta||d?.rate||d?.price||0);
+      date=d?.fechaActualizacion||d?.fecha||d?.date||'';
+    }
+  }catch(e){}
+  BCV_EUR_VES_RATE=rate>1?rate:0;
+  BCV_EUR_RATE_DATE=date||'';
+  updateExchangeSummary();
+  return BCV_EUR_VES_RATE;
+}
+
 async function loadBinanceRatesAndApplyPrices(){
   try{
     const [buy,sell]=await Promise.all([fetchBinanceQuote('BUY'),fetchBinanceQuote('SELL')]);
@@ -2208,13 +2249,16 @@ async function loadBinanceRatesAndApplyPrices(){
 
 function updateExchangeSummary(){
   const bcv=document.getElementById('exchange-bcv-value'),date=document.getElementById('exchange-bcv-date');
+  const euro=document.getElementById('exchange-bcv-euro-value'),euroDate=document.getElementById('exchange-bcv-euro-date');
   const buy=document.getElementById('exchange-binance-buy'),sell=document.getElementById('exchange-binance-sell');
   if(bcv) bcv.textContent=BCV_VES_RATE?fmtBs(BCV_VES_RATE):'No disponible';
-  if(date) date.textContent=BCV_RATE_DATE?'Actualización: '+BCV_RATE_DATE:'Fecha BCV no disponible';
+  if(date) date.textContent=BCV_RATE_DATE?'Actualización: '+fmtUpdateDateTime(BCV_RATE_DATE):'Fecha BCV no disponible';
+  if(euro) euro.textContent=BCV_EUR_VES_RATE?fmtBs(BCV_EUR_VES_RATE):'No disponible';
+  if(euroDate) euroDate.textContent=BCV_EUR_RATE_DATE?'Actualización: '+fmtUpdateDateTime(BCV_EUR_RATE_DATE):'Fecha BCV no disponible';
   if(buy) buy.textContent=BINANCE_VES_BUY?fmtBs(BINANCE_VES_BUY):'No disponible';
   if(sell) sell.textContent=BINANCE_VES_SELL?fmtBs(BINANCE_VES_SELL):'No disponible';
   const updated=document.getElementById('exchange-updated-at');
-  if(updated) updated.textContent='Última consulta: '+new Date().toLocaleTimeString('es-VE');
+  if(updated) updated.textContent='Última consulta: '+fmtUpdateDateTime(new Date());
 }
 
 function setExchangeCalcMode(mode){
@@ -2267,20 +2311,20 @@ function updateExchangeCalculator(){
 }
 async function refreshExchangeData(){
   const icon=document.getElementById('exchange-refresh-icon'); icon?.classList.add('fa-spin');
-  await Promise.allSettled([loadBCVRateOnly(),loadBinanceRatesAndApplyPrices()]);
+  await Promise.allSettled([loadBCVRateOnly(),loadBCVEuroRate(),loadBinanceRatesAndApplyPrices()]);
   icon?.classList.remove('fa-spin');
 }
 function openExchangeModal(){
   const modal=document.getElementById('modal-exchange-info'); if(!modal)return;
   modal.classList.remove('hidden'); document.body.style.overflow='hidden';
   updateExchangeSummary(); setExchangeCalcMode(exchangeCalcMode); updateExchangeCalculator();
-  if(!BCV_VES_RATE||!BINANCE_VES_BUY||!BINANCE_VES_SELL)refreshExchangeData();
+  if(!BCV_VES_RATE||!BCV_EUR_VES_RATE||!BINANCE_VES_BUY||!BINANCE_VES_SELL)refreshExchangeData();
 }
 function closeExchangeModal(){
   const modal=document.getElementById('modal-exchange-info'); if(!modal)return;
   modal.classList.add('hidden'); document.body.style.overflow='auto';
 }
-async function refreshAllRatesAndPrices(){await Promise.allSettled([loadBCVRateOnly(),loadBinanceRatesAndApplyPrices()]);}
+async function refreshAllRatesAndPrices(){await Promise.allSettled([loadBCVRateOnly(),loadBCVEuroRate(),loadBinanceRatesAndApplyPrices()]);}
 document.addEventListener('DOMContentLoaded',refreshAllRatesAndPrices);
 setInterval(refreshAllRatesAndPrices,5*60*1000);
 </script>
@@ -3356,7 +3400,7 @@ setInterval(refreshAllRatesAndPrices,5*60*1000);
             <input type="text" id="soc_especifique" placeholder="Ej: Instalación de red en galpón" class="input-field bg-white/5 border border-white/10 text-white placeholder-gray-500 text-sm shadow-inner py-1.5 px-3 focus:bg-white/10 focus:text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue">
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
             <div>
                 <label for="soc_estado" class="block text-xs font-bold text-gray-200 mb-0.5">Estado <span class="text-red-400 font-bold">*</span></label>
                 <select id="soc_estado" class="input-field bg-slate-800 border border-white/10 text-white text-sm shadow-inner py-1.5 px-3 focus:bg-slate-800 focus:text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue" onchange="cargarMunicipios()" required>
@@ -3553,6 +3597,12 @@ setInterval(refreshAllRatesAndPrices,5*60*1000);
           <div id="exchange-bcv-value" class="lc-exchange-value lc-exchange-bcv mt-3">Cargando...</div>
           <div id="exchange-bcv-date" class="lc-exchange-meta text-[9px] mt-1.5">Fecha no disponible</div>
           <div class="lc-exchange-desc mt-2">Referencia oficial del dólar.</div>
+        </div>
+        <div class="lc-exchange-rate rounded-2xl p-4">
+          <div class="flex items-center justify-between gap-2"><span class="lc-exchange-label">BCV · EUR</span><span class="lc-exchange-pill official">OFICIAL</span></div>
+          <div id="exchange-bcv-euro-value" class="lc-exchange-value lc-exchange-bcv mt-3">Cargando...</div>
+          <div id="exchange-bcv-euro-date" class="lc-exchange-meta text-[9px] mt-1.5">Fecha no disponible</div>
+          <div class="lc-exchange-desc mt-2">Referencia oficial del euro BCV.</div>
         </div>
         <div class="lc-exchange-rate rounded-2xl p-4">
           <div class="flex items-center justify-between gap-2"><span class="lc-exchange-label">COMPRA</span><span class="lc-exchange-pill buy">P2P</span></div>
