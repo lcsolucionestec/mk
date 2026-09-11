@@ -147,6 +147,80 @@
     .portal-modal-container { height: 95vh; max-height: none; border-radius: 14px; }
     .portal-modal-title { font-size: 11px; }
 }
+
+/* ==================== RESPONSIVIDAD TABLET ==================== */
+@media (min-width: 769px) and (max-width: 1199px) {
+    header.bg-brand-dark > .max-w-7xl > .flex {
+        height: auto !important;
+        min-height: 118px;
+        flex-wrap: wrap;
+        align-items: center;
+        row-gap: 6px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    header.bg-brand-dark > .max-w-7xl > .flex > .relative.w-full {
+        order: 3;
+        flex: 1 0 100%;
+        width: 100%;
+        max-width: none !important;
+        min-width: 0;
+        margin: 0 !important;
+        overflow: visible;
+    }
+
+    #nav-container {
+        width: 100%;
+        max-width: none;
+        justify-content: space-evenly;
+        align-items: stretch;
+        gap: clamp(4px, 1.5vw, 18px);
+        overflow: visible !important;
+        padding: 2px 6px 6px;
+    }
+
+    #nav-container .nav-link {
+        flex: 1 1 0;
+        min-width: 0 !important;
+        max-width: 170px;
+        justify-content: center;
+        padding: 4px 5px 7px;
+        font-size: clamp(9px, 1.1vw, 12px);
+        letter-spacing: 0.06em;
+    }
+
+    #nav-container .nav-link i {
+        font-size: clamp(13px, 1.6vw, 16px);
+    }
+
+    header.bg-brand-dark .relative.w-full > button[onclick*="slideNav"] {
+        display: none !important;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 860px) {
+    header.bg-brand-dark > .max-w-7xl > .flex {
+        min-height: 122px;
+    }
+
+    #nav-container {
+        gap: 2px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #nav-container .nav-link {
+        padding-left: 2px;
+        padding-right: 2px;
+        font-size: 8.5px;
+        letter-spacing: 0.03em;
+    }
+
+    #nav-container .nav-link i {
+        font-size: 13px;
+    }
+}
         * {
             margin: 0;
             padding: 0;
@@ -1102,7 +1176,7 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
 .lc-exchange-rate{background:linear-gradient(145deg,#121e33,#0d1729);border:1px solid rgba(148,163,184,.14);box-shadow:0 6px 18px rgba(0,0,0,.14);transition:.2s}
 .lc-exchange-rate:hover{transform:translateY(-1px);border-color:rgba(96,165,250,.28)}
 .lc-exchange-label{font-size:9px;font-weight:900;letter-spacing:.10em;color:#94a3b8}.lc-exchange-pill{font-size:7px;font-weight:900;padding:4px 7px;border-radius:999px}.lc-exchange-pill.official{background:rgba(59,130,246,.12);color:#93c5fd;border:1px solid rgba(59,130,246,.28)}.lc-exchange-pill.buy{background:rgba(16,185,129,.12);color:#6ee7b7;border:1px solid rgba(16,185,129,.28)}.lc-exchange-pill.sell{background:rgba(245,158,11,.12);color:#fcd34d;border:1px solid rgba(245,158,11,.28)}
-.lc-exchange-value{font-size:22px;line-height:1.05;font-weight:950;letter-spacing:-.025em}.lc-exchange-bcv{color:#60a5fa}.lc-exchange-buy{color:#34d399}.lc-exchange-sell{color:#fbbf24}.lc-exchange-meta{color:#94a3b8}.lc-exchange-desc{font-size:9px;line-height:1.4;color:#cbd5e1;padding-top:6px;border-top:1px solid rgba(148,163,184,.1)}
+.lc-exchange-value{font-size:22px;line-height:1.05;font-weight:950;letter-spacing:-.025em}.lc-exchange-bcv{color:#60a5fa}.lc-exchange-buy{color:#34d399}.lc-exchange-sell{color:#fbbf24}.lc-exchange-meta{color:#94a3b8}.lc-exchange-update{font-size:8px;line-height:1.25;color:#94a3b8;margin-top:5px;font-weight:700;letter-spacing:.01em}.lc-exchange-desc{font-size:9px;line-height:1.4;color:#cbd5e1;padding-top:6px;border-top:1px solid rgba(148,163,184,.1)}
 .lc-exchange-calculator{background:linear-gradient(145deg,rgba(15,23,42,.9),rgba(10,19,34,.82));border:1px solid rgba(59,130,246,.18);box-shadow:0 8px 22px rgba(0,0,0,.10)}
 .lc-calc-title{font-size:13px;font-weight:950;color:#f8fafc}.lc-exchange-mode-btn{font-size:9px;font-weight:900;color:#cbd5e1;background:rgba(148,163,184,.06);border:1px solid rgba(148,163,184,.15);min-height:34px;transition:.2s}.lc-exchange-mode-btn.active-usd{background:rgba(59,130,246,.17);border-color:rgba(96,165,250,.4);color:#bfdbfe}.lc-exchange-mode-btn.active-usdt{background:rgba(16,185,129,.17);border-color:rgba(52,211,153,.4);color:#a7f3d0}
 .lc-calc-input{width:100%;min-height:42px;padding:9px 11px;border-radius:11px;background:#111c30;color:#f8fafc;border:1px solid #334155;outline:none;font-size:12px;font-weight:700}.lc-calc-input:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.12)}.lc-calc-input option{background:#0f172a;color:#f8fafc}
@@ -1110,7 +1184,7 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
 .lc-exchange-footnote{display:flex;gap:7px;align-items:flex-start;font-size:8.5px;line-height:1.45;color:#94a3b8;padding:0 1px}.lc-exchange-footnote i{color:#60a5fa;margin-top:2px}
 [data-theme="light"] .lc-exchange-backdrop{background:rgba(15,23,42,.42)}
 [data-theme="light"] .lc-exchange-card{background:#f8fafc;color:#0f172a;border-color:#cbd5e1;box-shadow:0 24px 70px rgba(15,23,42,.18)}
-[data-theme="light"] .lc-exchange-header{background:linear-gradient(135deg,#fff,#eef4fb);border-bottom-color:#dbe4ee}[data-theme="light"] .lc-exchange-title{color:#0f172a}[data-theme="light"] .lc-exchange-kicker{color:#2563eb}[data-theme="light"] .lc-exchange-subtitle{color:#64748b}[data-theme="light"] .lc-exchange-action{background:#f1f5f9;border-color:#cbd5e1;color:#334155}[data-theme="light"] .lc-exchange-rate{background:linear-gradient(145deg,#fff,#f1f5f9);border-color:#cbd5e1;box-shadow:0 6px 18px rgba(15,23,42,.05)}[data-theme="light"] .lc-exchange-label{color:#475569}[data-theme="light"] .lc-exchange-meta{color:#64748b}[data-theme="light"] .lc-exchange-desc{color:#334155;border-top-color:#e2e8f0}[data-theme="light"] .lc-exchange-calculator{background:#fff;border-color:#dbeafe}[data-theme="light"] .lc-calc-title{color:#0f172a}[data-theme="light"] .lc-exchange-mode-btn{color:#334155;background:#f8fafc;border-color:#cbd5e1}[data-theme="light"] .lc-exchange-mode-btn.active-usd{background:#eff6ff;color:#1d4ed8;border-color:#93c5fd}[data-theme="light"] .lc-exchange-mode-btn.active-usdt{background:#ecfdf5;color:#047857;border-color:#86efac}[data-theme="light"] .lc-calc-input{background:#fff;color:#0f172a;border-color:#cbd5e1}[data-theme="light"] .lc-calc-input option{background:#fff;color:#0f172a}[data-theme="light"] .lc-calc-result{background:#f8fafc;color:#0f172a;border-color:#cbd5e1}[data-theme="light"] .lc-calc-note{background:#eff6ff;border-color:#bfdbfe;color:#334155}[data-theme="light"] .lc-exchange-footnote{color:#475569}
+[data-theme="light"] .lc-exchange-update{color:#64748b}[data-theme="light"] .lc-exchange-header{background:linear-gradient(135deg,#fff,#eef4fb);border-bottom-color:#dbe4ee}[data-theme="light"] .lc-exchange-title{color:#0f172a}[data-theme="light"] .lc-exchange-kicker{color:#2563eb}[data-theme="light"] .lc-exchange-subtitle{color:#64748b}[data-theme="light"] .lc-exchange-action{background:#f1f5f9;border-color:#cbd5e1;color:#334155}[data-theme="light"] .lc-exchange-rate{background:linear-gradient(145deg,#fff,#f1f5f9);border-color:#cbd5e1;box-shadow:0 6px 18px rgba(15,23,42,.05)}[data-theme="light"] .lc-exchange-label{color:#475569}[data-theme="light"] .lc-exchange-meta{color:#64748b}[data-theme="light"] .lc-exchange-desc{color:#334155;border-top-color:#e2e8f0}[data-theme="light"] .lc-exchange-calculator{background:#fff;border-color:#dbeafe}[data-theme="light"] .lc-calc-title{color:#0f172a}[data-theme="light"] .lc-exchange-mode-btn{color:#334155;background:#f8fafc;border-color:#cbd5e1}[data-theme="light"] .lc-exchange-mode-btn.active-usd{background:#eff6ff;color:#1d4ed8;border-color:#93c5fd}[data-theme="light"] .lc-exchange-mode-btn.active-usdt{background:#ecfdf5;color:#047857;border-color:#86efac}[data-theme="light"] .lc-calc-input{background:#fff;color:#0f172a;border-color:#cbd5e1}[data-theme="light"] .lc-calc-input option{background:#fff;color:#0f172a}[data-theme="light"] .lc-calc-result{background:#f8fafc;color:#0f172a;border-color:#cbd5e1}[data-theme="light"] .lc-calc-note{background:#eff6ff;border-color:#bfdbfe;color:#334155}[data-theme="light"] .lc-exchange-footnote{color:#475569}
 @media(max-width:700px){.lc-exchange-backdrop{padding:8px}.lc-exchange-card{width:min(100%,560px);max-height:calc(100dvh - 12px);border-radius:18px}.lc-exchange-header{min-height:56px}.lc-exchange-header .lc-exchange-icon{width:38px;height:38px;border-radius:12px}.lc-exchange-header .lc-exchange-title{font-size:17px}.lc-exchange-header .lc-exchange-kicker{font-size:7.5px}.lc-exchange-header .lc-exchange-subtitle{font-size:8.5px}.lc-exchange-header .lc-exchange-action{width:36px;height:36px}.lc-exchange-body{padding-bottom:max(14px,env(safe-area-inset-bottom))!important}.lc-exchange-value{font-size:21px}.lc-exchange-rate{padding:12px!important}.lc-exchange-desc{display:none}.lc-exchange-calculator{padding:12px!important}.lc-exchange-mode-btn{padding-left:7px!important;padding-right:7px!important}.lc-exchange-body{scrollbar-width:none}.lc-exchange-body::-webkit-scrollbar{display:none}}
 @media(max-width:390px){.lc-exchange-header{padding:10px 12px!important}.lc-exchange-body{padding:10px!important;padding-bottom:max(14px,env(safe-area-inset-bottom))!important}.lc-exchange-rate{padding:10px!important}.lc-exchange-value{font-size:19px}.lc-exchange-mode-btn{font-size:8.5px;min-height:32px}.lc-calc-input,.lc-calc-result{min-height:40px}.lc-calc-result{font-size:16px}.lc-calc-note{font-size:8.5px}}
 @media(max-height:560px){.lc-exchange-card{max-height:calc(100dvh - 8px)}.lc-exchange-header{min-height:50px}.lc-exchange-body{padding-top:9px!important;padding-bottom:10px!important}.lc-exchange-rate{padding:9px!important}.lc-exchange-value{font-size:18px}.lc-exchange-calculator{padding:10px!important}.lc-exchange-footnote{font-size:8px}}
@@ -1156,6 +1230,7 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
     gap:10px;
   }
   #modal-exchange-info .lc-exchange-body > .grid:first-child{
+    grid-template-columns:repeat(4,minmax(0,1fr));
     gap:8px;
   }
   #modal-exchange-info .lc-exchange-body > .grid:first-child{
@@ -1168,6 +1243,7 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
   }
   #modal-exchange-info .lc-exchange-rate{
     padding:10px !important;
+    min-width:0;
     border-radius:13px;
   }
   #modal-exchange-info .lc-exchange-label{
@@ -1244,6 +1320,143 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
   }catch(e){}
 })();
 </script>
+
+<style id="tablet-navigation-final-fix">
+/* ===== NAVEGACIÓN TABLET: VISIBILIDAD Y ACCESO A TODOS LOS MÓDULOS ===== */
+@media (min-width:769px) and (max-width:1023px){
+  header.bg-brand-dark{overflow:visible !important;}
+  header.bg-brand-dark > .max-w-7xl{width:100% !important; max-width:none !important;}
+  header.bg-brand-dark > .max-w-7xl > .flex{
+    min-height:0 !important;
+    height:auto !important;
+    display:flex !important;
+    flex-wrap:wrap !important;
+    align-items:center !important;
+    row-gap:8px !important;
+  }
+  header.bg-brand-dark > .max-w-7xl > .flex > .relative.w-full{
+    order:3 !important;
+    flex:0 0 100% !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    margin:0 !important;
+    overflow:visible !important;
+  }
+  #nav-container{
+    display:flex !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    flex:1 1 auto !important;
+    flex-wrap:nowrap !important;
+    justify-content:space-between !important;
+    align-items:stretch !important;
+    gap:4px !important;
+    overflow:visible !important;
+    padding:4px 0 7px !important;
+  }
+  #nav-container .nav-link{
+    display:flex !important;
+    flex:1 1 20% !important;
+    width:auto !important;
+    min-width:0 !important;
+    max-width:none !important;
+    justify-content:center !important;
+    align-items:center !important;
+    white-space:nowrap !important;
+    overflow:visible !important;
+    padding:5px 4px 8px !important;
+    font-size:clamp(9px,1.25vw,12px) !important;
+    letter-spacing:.04em !important;
+  }
+  #nav-container .nav-link i{font-size:clamp(13px,1.7vw,17px) !important;}
+  header.bg-brand-dark .relative.w-full > button[onclick*="slideNav"]{display:none !important;}
+}
+
+@media (min-width:769px) and (max-width:850px){
+  header.bg-brand-dark > .max-w-7xl{padding-left:10px !important;padding-right:10px !important;}
+  #nav-container .nav-link{font-size:8.5px !important;letter-spacing:.02em !important;padding-left:2px !important;padding-right:2px !important;}
+  #nav-container .nav-link i{font-size:13px !important;}
+}
+</style>
+
+<style id="mobile-layout-tablet-unified-fix">
+/* ===== TABLET = MISMA ESTRUCTURA RESPONSIVE QUE MÓVIL ===== */
+@media (min-width:640px) and (max-width:1023px){
+  header.bg-brand-dark{overflow:visible !important;}
+  header.bg-brand-dark > .max-w-7xl{width:100% !important;max-width:none !important;padding-left:12px !important;padding-right:12px !important;}
+  header.bg-brand-dark > .max-w-7xl > .flex{
+    height:auto !important;
+    min-height:0 !important;
+    flex-wrap:wrap !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    row-gap:8px !important;
+    padding-top:6px !important;
+    padding-bottom:8px !important;
+  }
+  header.bg-brand-dark > .max-w-7xl > .flex > .relative.w-full{
+    order:3 !important;
+    flex:0 0 100% !important;
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    min-width:0 !important;
+    overflow:visible !important;
+  }
+  header.bg-brand-dark > .max-w-7xl > .flex > .relative.w-full #nav-container{
+    display:flex !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    flex:1 1 auto !important;
+    justify-content:flex-start !important;
+    align-items:stretch !important;
+    gap:8px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    padding:4px 34px !important;
+    scrollbar-width:none !important;
+    -webkit-overflow-scrolling:touch !important;
+    scroll-snap-type:x mandatory !important;
+  }
+  header.bg-brand-dark > .max-w-7xl > .flex > .relative.w-full #nav-container::-webkit-scrollbar{display:none !important;}
+  #nav-container .nav-link{
+    flex:0 0 auto !important;
+    min-width:112px !important;
+    width:112px !important;
+    max-width:112px !important;
+    min-height:58px !important;
+    justify-content:center !important;
+    align-items:center !important;
+    white-space:nowrap !important;
+    padding:7px 8px 9px !important;
+    font-size:10px !important;
+    letter-spacing:.055em !important;
+    scroll-snap-align:center !important;
+  }
+  #nav-container .nav-link i{font-size:16px !important;}
+  header.bg-brand-dark .relative.w-full > button[onclick*="slideNav"]{
+    display:flex !important;
+    top:50% !important;
+    transform:translateY(-50%) !important;
+    width:28px !important;
+    height:28px !important;
+    z-index:30 !important;
+  }
+  header.bg-brand-dark .relative.w-full > button[onclick*="slideNav"][onclick*="left"]{left:2px !important;}
+  header.bg-brand-dark .relative.w-full > button[onclick*="slideNav"][onclick*="right"]{right:2px !important;}
+  header.bg-brand-dark > .max-w-7xl > .flex > .flex.shrink-0{
+    max-width:46% !important;
+  }
+}
+
+@media (min-width:640px) and (max-width:760px){
+  header.bg-brand-dark > .max-w-7xl{padding-left:8px !important;padding-right:8px !important;}
+  #nav-container .nav-link{min-width:100px !important;width:100px !important;max-width:100px !important;font-size:9px !important;}
+}
+</style>
 </head>
 <body class="flex flex-col min-h-screen bg-slate-950 text-slate-100 font-sans">
 
@@ -2149,13 +2362,18 @@ const devPricesConfig = {
 const API_BCV_PRINCIPAL = 'https://rates.dolarvzla.com/bcv/current.json';
 const API_BCV_RESPALDO = 'https://ve.dolarapi.com/v1/dolares/oficial';
 const API_BCV_EURO = 'https://ve.dolarapi.com/v1/euros/oficial';
+const API_BCV_UNIFICADA = 'https://bcv.today/api/v1/rate.json';
 const API_BINANCE_QUOTE_BASE = 'https://www.binance.com/bapi/c2c/v1/public/c2c/agent/quote-price';
+
 let BCV_VES_RATE = 0;
 let BCV_RATE_DATE = '';
+let BCV_RATE_FETCHED_AT = '';
 let BCV_EUR_VES_RATE = 0;
 let BCV_EUR_RATE_DATE = '';
+let BCV_EUR_RATE_FETCHED_AT = '';
 let BINANCE_VES_BUY = 0;
 let BINANCE_VES_SELL = 0;
+let BINANCE_RATE_DATE = '';
 let exchangeCalcMode = 'USD_BS';
 
 function fmtBs(n){
@@ -2182,49 +2400,167 @@ function fmtUpdateDateTime(value){
   return `${day}/${month}/${year}, ${hh}:${mm}:${ss} ${ampm}`;
 }
 
+async function fetchFreshJson(url, options={}){
+  const joiner=url.includes('?')?'&':'?';
+  const freshUrl=url+joiner+'_cb='+Date.now()+'_'+Math.random().toString(36).slice(2);
+  const res=await fetch(freshUrl,{cache:'no-store',headers:{'Accept':'application/json',...(options.headers||{})},...options});
+  if(!res.ok) throw new Error(`HTTP ${res.status} en ${url}`);
+  return res.json();
+}
+
 async function fetchBinanceQuote(tradeType){
-  const url = API_BINANCE_QUOTE_BASE+'?fiat=VES&asset=USDT&tradeType='+encodeURIComponent(tradeType);
-  const res = await fetch(url,{cache:'no-store',headers:{'Accept':'application/json'}});
-  if(!res.ok) throw new Error('Binance HTTP '+res.status);
-  const payload = await res.json();
+  const payload=await fetchFreshJson(API_BINANCE_QUOTE_BASE+'?fiat=VES&asset=USDT&tradeType='+encodeURIComponent(tradeType));
   const candidates=[payload?.data?.price,payload?.price,payload?.data?.quotePrice,payload?.data?.[0]?.price,payload?.data?.data?.[0]?.price];
   const rate=candidates.map(Number).find(v=>Number.isFinite(v)&&v>1);
   if(!rate) throw new Error('Binance no devolvió cotización '+tradeType);
   return rate;
 }
 
-async function loadBCVRateOnly(){
-  let rate=0,date='';
-  try{
-    const r=await fetch(API_BCV_PRINCIPAL,{cache:'no-store'});
-    if(r.ok){const d=await r.json();rate=Number(d?.current?.usd||d?.current?.rate||0);date=d?.current?.date||d?.date||'';}
-  }catch(e){}
-  if(!rate){
-    try{
-      const r=await fetch(API_BCV_RESPALDO,{cache:'no-store'});
-      if(r.ok){const d=await r.json();const x=Array.isArray(d)?d[0]:d;rate=Number(x?.promedio||x?.venta||x?.price||0);date=x?.fechaActualizacion||x?.fecha||x?.date||'';}
-    }catch(e){}
+function applyBCVRates(usd,eur,usdEffectiveDate,eurEffectiveDate){
+  const fetchedAt=new Date();
+  if(Number(usd)>1){
+    BCV_VES_RATE=Number(usd);
+    BCV_RATE_DATE=usdEffectiveDate||BCV_RATE_DATE;
+    BCV_RATE_FETCHED_AT=fetchedAt;
   }
-  BCV_VES_RATE=rate>1?rate:0; BCV_RATE_DATE=date||'';
+  if(Number(eur)>1){
+    BCV_EUR_VES_RATE=Number(eur);
+    BCV_EUR_RATE_DATE=eurEffectiveDate||BCV_EUR_RATE_DATE;
+    BCV_EUR_RATE_FETCHED_AT=fetchedAt;
+  }
+  return Number(usd)>1||Number(eur)>1;
+}
+
+function fmtValidDate(value){
+  if(!value) return '';
+  const raw=String(value).trim();
+  const isoMatch=raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(isoMatch) return `${isoMatch[3]}/${isoMatch[2]}/${isoMatch[1]}`;
+  const d=new Date(value);
+  if(Number.isNaN(d.getTime())) return raw.replace(/[zZ]$/, '').trim();
+  return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+}
+
+/*
+ * Fuente primaria: DolarVZLA publica la última tasa oficial BCV disponible
+ * y documenta /bcv/current.json como el endpoint actual de USD y EUR.
+ * Se consulta primero y siempre sin caché.
+ */
+async function fetchBCVPrimary(){
+  const d=await fetchFreshJson(API_BCV_PRINCIPAL);
+  const current=d?.current||d?.data||d||{};
+  const usd=Number(current?.usd||current?.USD||current?.rate||0);
+  const eur=Number(current?.eur||current?.EUR||current?.euro||0);
+  const date=current?.date||current?.fechaActualizacion||d?.date||d?.updated_at||'';
+  if(!usd && !eur) throw new Error('DolarVZLA no devolvió USD/EUR');
+  return {usd,eur,date,source:'DolarVZLA'};
+}
+
+async function fetchBCVDolarApi(){
+  const [usdData,eurData]=await Promise.all([
+    fetchFreshJson(API_BCV_RESPALDO),
+    fetchFreshJson(API_BCV_EURO)
+  ]);
+  const usdObj=Array.isArray(usdData)?usdData[0]:usdData;
+  const eurObj=Array.isArray(eurData)?eurData[0]:eurData;
+  const usd=Number(usdObj?.promedio||usdObj?.venta||usdObj?.price||0);
+  const eur=Number(eurObj?.promedio||eurObj?.venta||eurObj?.price||0);
+  const usdDate=usdObj?.fechaActualizacion||usdObj?.fecha||usdObj?.date||'';
+  const eurDate=eurObj?.fechaActualizacion||eurObj?.fecha||eurObj?.date||'';
+  if(!usd && !eur) throw new Error('DolarApi no devolvió USD/EUR');
+  return {usd,eur,usdDate,eurDate,source:'DolarApi'};
+}
+
+async function fetchBCVUnifiedFallback(){
+  const d=await fetchFreshJson(API_BCV_UNIFICADA);
+  const usd=Number(d?.USD||0);
+  const eur=Number(d?.EUR||0);
+  const date=d?.effective_date||d?.date||d?.updated_at||'';
+  if(!usd && !eur) throw new Error('BCV Today no devolvió USD/EUR');
+  return {usd,eur,date,source:'BCV Today'};
+}
+
+async function loadBCVUnified(){
+  let primary=null;
+  try{
+    primary=await fetchBCVPrimary();
+  }catch(e){
+    console.warn('Fuente primaria BCV no disponible:',e);
+  }
+
+  // DolarVZLA puede traer USD y EUR juntos. Si falta alguna divisa,
+  // completamos únicamente la que falte con DolarApi.
+  let backup=null;
+  if(!primary || primary.usd<=1 || primary.eur<=1){
+    try{ backup=await fetchBCVDolarApi(); }
+    catch(e){ console.warn('Fuente respaldo DolarApi no disponible:',e); }
+  }
+
+  let usd=primary?.usd>1?primary.usd:backup?.usd;
+  let eur=primary?.eur>1?primary.eur:backup?.eur;
+  let usdEffectiveDate=primary?.usdDate||primary?.date||backup?.usdDate||'';
+  let eurEffectiveDate=primary?.eurDate||primary?.date||backup?.eurDate||backup?.usdDate||'';
+
+  // Último respaldo únicamente si todavía falta alguna divisa.
+  if(!(usd>1 && eur>1)){
+    try{
+      const fallback=await fetchBCVUnifiedFallback();
+      if(!(usd>1)) { usd=fallback.usd; usdEffectiveDate=usdEffectiveDate||fallback.date; }
+      if(!(eur>1)) { eur=fallback.eur; eurEffectiveDate=eurEffectiveDate||fallback.date; }
+    }catch(e){
+      console.warn('Fuente BCV Today no disponible:',e);
+    }
+  }
+
+  if(usd>1 || eur>1){
+    applyBCVRates(usd,eur,usdEffectiveDate,eurEffectiveDate);
+    return {ok:true,usd,eur,source:primary?.source||backup?.source||'BCV Today'};
+  }
+
+  return {ok:false,usd:0,eur:0,source:''};
+}
+
+async function loadBCVRateOnly(skipUnified=false){
+  if(!skipUnified) await loadBCVUnified();
+
+  // Si aún no hay USD, intenta la fuente secundaria sin borrar un valor válido.
+  if(!(BCV_VES_RATE>1)){
+    try{
+      const d=await fetchFreshJson(API_BCV_RESPALDO);
+      const x=Array.isArray(d)?d[0]:d;
+      const rate=Number(x?.promedio||x?.venta||x?.price||0);
+      if(rate>1){
+        BCV_VES_RATE=rate;
+        BCV_RATE_DATE=x?.fechaActualizacion||x?.fecha||x?.date||BCV_RATE_DATE;
+        BCV_RATE_FETCHED_AT=new Date();
+      }
+    }catch(e){ console.warn('No se pudo obtener USD BCV:',e); }
+  }
+
   const display=document.getElementById('bcv-rate-display');
   if(display) display.textContent=BCV_VES_RATE?'BCV: '+fmtBs(BCV_VES_RATE):'BCV: No disponible';
-  updateExchangeSummary(); updateExchangeCalculator();
+  updateExchangeSummary();
+  updateExchangeCalculator();
   return BCV_VES_RATE;
 }
 
-async function loadBCVEuroRate(){
-  let rate=0,date='';
-  try{
-    const r=await fetch(API_BCV_EURO,{cache:'no-store',headers:{'Accept':'application/json'}});
-    if(r.ok){
-      const d=await r.json();
-      rate=Number(d?.promedio||d?.venta||d?.rate||d?.price||0);
-      date=d?.fechaActualizacion||d?.fecha||d?.date||'';
-    }
-  }catch(e){}
-  BCV_EUR_VES_RATE=rate>1?rate:0;
-  BCV_EUR_RATE_DATE=date||'';
+async function loadBCVEuroRate(skipUnified=false){
+  if(!skipUnified) await loadBCVUnified();
+
+  if(!(BCV_EUR_VES_RATE>1)){
+    try{
+      const d=await fetchFreshJson(API_BCV_EURO);
+      const x=Array.isArray(d)?d[0]:d;
+      const rate=Number(x?.promedio||x?.venta||x?.rate||x?.price||0);
+      if(rate>1){
+        BCV_EUR_VES_RATE=rate;
+        BCV_EUR_RATE_DATE=x?.fechaActualizacion||x?.fecha||x?.date||BCV_EUR_RATE_DATE;
+        BCV_EUR_RATE_FETCHED_AT=new Date();
+      }
+    }catch(e){ console.warn('No se pudo obtener EUR BCV:',e); }
+  }
   updateExchangeSummary();
+  updateExchangeCalculator();
   return BCV_EUR_VES_RATE;
 }
 
@@ -2232,6 +2568,7 @@ async function loadBinanceRatesAndApplyPrices(){
   try{
     const [buy,sell]=await Promise.all([fetchBinanceQuote('BUY'),fetchBinanceQuote('SELL')]);
     BINANCE_VES_BUY=buy; BINANCE_VES_SELL=sell;
+    BINANCE_RATE_DATE=new Date();
   }catch(e){console.warn('No se pudieron obtener las tasas Binance BUY/SELL:',e);}
   const pricingRate=BINANCE_VES_BUY||BINANCE_VES_SELL;
   if(pricingRate>1){
@@ -2248,28 +2585,68 @@ async function loadBinanceRatesAndApplyPrices(){
 }
 
 function updateExchangeSummary(){
-  const bcv=document.getElementById('exchange-bcv-value'),date=document.getElementById('exchange-bcv-date');
-  const euro=document.getElementById('exchange-bcv-euro-value'),euroDate=document.getElementById('exchange-bcv-euro-date');
+  const bcv=document.getElementById('exchange-bcv-value');
+  const euro=document.getElementById('exchange-bcv-euro-value');
   const buy=document.getElementById('exchange-binance-buy'),sell=document.getElementById('exchange-binance-sell');
+  const bcvDate=document.getElementById('exchange-bcv-date');
+  const euroDate=document.getElementById('exchange-bcv-euro-date');
+  const buyDate=document.getElementById('exchange-binance-buy-date');
+  const sellDate=document.getElementById('exchange-binance-sell-date');
   if(bcv) bcv.textContent=BCV_VES_RATE?fmtBs(BCV_VES_RATE):'No disponible';
-  if(date) date.textContent=BCV_RATE_DATE?'Actualización: '+fmtUpdateDateTime(BCV_RATE_DATE):'Fecha BCV no disponible';
   if(euro) euro.textContent=BCV_EUR_VES_RATE?fmtBs(BCV_EUR_VES_RATE):'No disponible';
-  if(euroDate) euroDate.textContent=BCV_EUR_RATE_DATE?'Actualización: '+fmtUpdateDateTime(BCV_EUR_RATE_DATE):'Fecha BCV no disponible';
   if(buy) buy.textContent=BINANCE_VES_BUY?fmtBs(BINANCE_VES_BUY):'No disponible';
   if(sell) sell.textContent=BINANCE_VES_SELL?fmtBs(BINANCE_VES_SELL):'No disponible';
+  if(bcvDate) bcvDate.textContent=BCV_RATE_DATE?'Fecha válida: '+fmtValidDate(BCV_RATE_DATE):'Fecha válida: esperando...';
+  if(euroDate) euroDate.textContent=BCV_EUR_RATE_DATE?'Fecha válida: '+fmtValidDate(BCV_EUR_RATE_DATE):'Fecha válida: esperando...';
+  const p2pDate=BINANCE_RATE_DATE?fmtUpdateDateTime(BINANCE_RATE_DATE):'';
+  if(buyDate) buyDate.textContent=p2pDate?'Actualizado: '+p2pDate:'Actualización: esperando...';
+  if(sellDate) sellDate.textContent=p2pDate?'Actualizado: '+p2pDate:'Actualización: esperando...';
   const updated=document.getElementById('exchange-updated-at');
-  if(updated) updated.textContent='Última consulta: '+fmtUpdateDateTime(new Date());
+  const latest=[BCV_RATE_FETCHED_AT,BCV_EUR_RATE_FETCHED_AT,BINANCE_RATE_DATE].filter(Boolean).map(v=>v instanceof Date?v:new Date(v)).filter(d=>!Number.isNaN(d.getTime())).sort((a,b)=>b-a)[0];
+  if(updated) updated.textContent=latest?'Última actualización: '+fmtUpdateDateTime(latest):'Actualización: esperando...';
 }
 
 function setExchangeCalcMode(mode){
   exchangeCalcMode=mode;
-  const modes={BS_USD:'calc-mode-bs-usd',USD_BS:'calc-mode-usd',USDT_BS:'calc-mode-usdt',BS_USDT:'calc-mode-bs-usdt'};
-  Object.entries(modes).forEach(([key,id])=>{const el=document.getElementById(id);if(el)el.className='lc-exchange-mode-btn px-3 py-2 rounded-xl'+(key===mode?' active-usd':'');});
-  const inputLabel=document.getElementById('calc-input-label'),resultLabel=document.getElementById('calc-result-label'),selector=document.getElementById('usdt-rate-selector');
-  if(mode==='BS_USD'){if(inputLabel)inputLabel.textContent='Monto en Bs';if(resultLabel)resultLabel.textContent='Resultado en USD';selector?.classList.add('hidden');}
-  else if(mode==='USD_BS'){if(inputLabel)inputLabel.textContent='Monto en USD';if(resultLabel)resultLabel.textContent='Resultado en Bs';selector?.classList.add('hidden');}
-  else if(mode==='USDT_BS'){if(inputLabel)inputLabel.textContent='Monto en USDT';if(resultLabel)resultLabel.textContent='Resultado en Bs';selector?.classList.remove('hidden');if(document.getElementById('exchange-calc-rate-type'))document.getElementById('exchange-calc-rate-type').value='sell';}
-  else {if(inputLabel)inputLabel.textContent='Monto en Bs';if(resultLabel)resultLabel.textContent='Resultado en USDT';selector?.classList.remove('hidden');if(document.getElementById('exchange-calc-rate-type'))document.getElementById('exchange-calc-rate-type').value='buy';}
+  const modes={
+    BS_USD:'calc-mode-bs-usd', USD_BS:'calc-mode-usd',
+    USDT_BS:'calc-mode-usdt', BS_USDT:'calc-mode-bs-usdt',
+    BS_EUR:'calc-mode-bs-eur', EUR_BS:'calc-mode-eur-bs'
+  };
+  Object.entries(modes).forEach(([key,id])=>{
+    const el=document.getElementById(id);
+    if(el){
+      el.className='lc-exchange-mode-btn px-3 py-2 rounded-xl'+(key===mode?' active-usd':'');
+    }
+  });
+  const inputLabel=document.getElementById('calc-input-label');
+  const resultLabel=document.getElementById('calc-result-label');
+  const selector=document.getElementById('usdt-rate-selector');
+  if(selector) selector.classList.add('hidden');
+
+  if(mode==='BS_USD'){
+    if(inputLabel)inputLabel.textContent='Monto en Bs';
+    if(resultLabel)resultLabel.textContent='Resultado en USD';
+  }else if(mode==='USD_BS'){
+    if(inputLabel)inputLabel.textContent='Monto en USD';
+    if(resultLabel)resultLabel.textContent='Resultado en Bs';
+  }else if(mode==='USDT_BS'){
+    if(inputLabel)inputLabel.textContent='Monto en USDT';
+    if(resultLabel)resultLabel.textContent='Resultado en Bs';
+    selector?.classList.remove('hidden');
+    if(document.getElementById('exchange-calc-rate-type'))document.getElementById('exchange-calc-rate-type').value='sell';
+  }else if(mode==='BS_USDT'){
+    if(inputLabel)inputLabel.textContent='Monto en Bs';
+    if(resultLabel)resultLabel.textContent='Resultado en USDT';
+    selector?.classList.remove('hidden');
+    if(document.getElementById('exchange-calc-rate-type'))document.getElementById('exchange-calc-rate-type').value='buy';
+  }else if(mode==='BS_EUR'){
+    if(inputLabel)inputLabel.textContent='Monto en Bs';
+    if(resultLabel)resultLabel.textContent='Resultado en EUR';
+  }else if(mode==='EUR_BS'){
+    if(inputLabel)inputLabel.textContent='Monto en EUR';
+    if(resultLabel)resultLabel.textContent='Resultado en Bs';
+  }
   updateExchangeCalculator();
 }
 async function copyExchangeResult(){
@@ -2302,16 +2679,33 @@ function updateExchangeCalculator(){
   if(!input||!result)return;
   const amount=Number(input.value||0); let rate=0,value=0,label='';
   const type=document.getElementById('exchange-calc-rate-type')?.value||'sell';
-  if(exchangeCalcMode==='BS_USD'){rate=BCV_VES_RATE;value=rate?amount/rate:0;label=rate?'Tasa BCV: '+fmtBs(rate)+' Bs/USD':'Tasa BCV: no disponible';}
-  else if(exchangeCalcMode==='USD_BS'){rate=BCV_VES_RATE;value=amount*rate;label=rate?'Tasa BCV: '+fmtBs(rate)+' Bs/USD':'Tasa BCV: no disponible';}
-  else if(exchangeCalcMode==='USDT_BS'){rate=BINANCE_VES_SELL;value=amount*rate;label=rate?'Tasa P2P VENTA: '+fmtBs(rate)+' Bs/USDT':'Tasa P2P VENTA: no disponible';}
-  else {rate=BINANCE_VES_BUY;value=rate?amount/rate:0;label=rate?'Tasa P2P COMPRA: '+fmtBs(rate)+' Bs/USDT':'Tasa P2P COMPRA: no disponible';}
-  result.textContent=rate>0?(exchangeCalcMode==='BS_USD'||exchangeCalcMode==='BS_USDT'?value.toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2}):fmtBs(value)):'Esperando tasa...';
+  if(exchangeCalcMode==='BS_USD'){
+    rate=BCV_VES_RATE; value=rate?amount/rate:0;
+    label=rate?'Tasa BCV USD: '+fmtBs(rate)+' Bs/USD':'Tasa BCV USD: no disponible';
+  }else if(exchangeCalcMode==='USD_BS'){
+    rate=BCV_VES_RATE; value=amount*rate;
+    label=rate?'Tasa BCV USD: '+fmtBs(rate)+' Bs/USD':'Tasa BCV USD: no disponible';
+  }else if(exchangeCalcMode==='USDT_BS'){
+    rate=BINANCE_VES_SELL; value=amount*rate;
+    label=rate?'Tasa P2P VENTA: '+fmtBs(rate)+' Bs/USDT':'Tasa P2P VENTA: no disponible';
+  }else if(exchangeCalcMode==='BS_USDT'){
+    rate=BINANCE_VES_BUY; value=rate?amount/rate:0;
+    label=rate?'Tasa P2P COMPRA: '+fmtBs(rate)+' Bs/USDT':'Tasa P2P COMPRA: no disponible';
+  }else if(exchangeCalcMode==='BS_EUR'){
+    rate=BCV_EUR_VES_RATE; value=rate?amount/rate:0;
+    label=rate?'Tasa BCV EUR: '+fmtBs(rate)+' Bs/EUR':'Tasa BCV EUR: no disponible';
+  }else if(exchangeCalcMode==='EUR_BS'){
+    rate=BCV_EUR_VES_RATE; value=amount*rate;
+    label=rate?'Tasa BCV EUR: '+fmtBs(rate)+' Bs/EUR':'Tasa BCV EUR: no disponible';
+  }
+  const outputIsBs=['USD_BS','USDT_BS','EUR_BS'].includes(exchangeCalcMode);
+  result.textContent=rate>0?(outputIsBs?fmtBs(value):value.toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2})):'Esperando tasa...';
   if(note)note.textContent=label;
 }
 async function refreshExchangeData(){
   const icon=document.getElementById('exchange-refresh-icon'); icon?.classList.add('fa-spin');
-  await Promise.allSettled([loadBCVRateOnly(),loadBCVEuroRate(),loadBinanceRatesAndApplyPrices()]);
+  await loadBCVUnified();
+  await Promise.allSettled([loadBCVRateOnly(true),loadBCVEuroRate(true),loadBinanceRatesAndApplyPrices()]);
   icon?.classList.remove('fa-spin');
 }
 function openExchangeModal(){
@@ -2324,9 +2718,14 @@ function closeExchangeModal(){
   const modal=document.getElementById('modal-exchange-info'); if(!modal)return;
   modal.classList.add('hidden'); document.body.style.overflow='auto';
 }
-async function refreshAllRatesAndPrices(){await Promise.allSettled([loadBCVRateOnly(),loadBCVEuroRate(),loadBinanceRatesAndApplyPrices()]);}
+async function refreshAllRatesAndPrices(){
+  await loadBCVUnified();
+  await Promise.allSettled([loadBCVRateOnly(true),loadBCVEuroRate(true),loadBinanceRatesAndApplyPrices()]);
+}
 document.addEventListener('DOMContentLoaded',refreshAllRatesAndPrices);
-setInterval(refreshAllRatesAndPrices,5*60*1000);
+setInterval(refreshAllRatesAndPrices,60*1000);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refreshAllRatesAndPrices();});
+window.addEventListener('focus',()=>refreshAllRatesAndPrices());
 </script>
 
 <!-- SECCIÓN DESARROLLOS -->
@@ -3582,7 +3981,7 @@ setInterval(refreshAllRatesAndPrices,5*60*1000);
         <div class="min-w-0">
           <div class="lc-exchange-kicker text-[9px] font-black uppercase tracking-[0.16em]">LC Soluciones Tecnológicas</div>
           <h3 class="lc-exchange-title text-xl font-black leading-tight">LC Cambios</h3>
-          <p id="exchange-updated-at" class="lc-exchange-subtitle text-[9px] mt-0.5">Actualizando tasas...</p>
+          <p id="exchange-updated-at" class="lc-exchange-subtitle text-[9px] mt-0.5">Actualización BCV: esperando...</p>
         </div>
       </div>
       <div class="flex items-center gap-1.5 shrink-0">
@@ -3595,36 +3994,40 @@ setInterval(refreshAllRatesAndPrices,5*60*1000);
         <div class="lc-exchange-rate rounded-2xl p-4">
           <div class="flex items-center justify-between gap-2"><span class="lc-exchange-label">BCV · USD</span><span class="lc-exchange-pill official">OFICIAL</span></div>
           <div id="exchange-bcv-value" class="lc-exchange-value lc-exchange-bcv mt-3">Cargando...</div>
-          <div id="exchange-bcv-date" class="lc-exchange-meta text-[9px] mt-1.5">Fecha no disponible</div>
+          <div id="exchange-bcv-date" class="lc-exchange-update">Fecha válida: esperando...</div>
           <div class="lc-exchange-desc mt-2">Referencia oficial del dólar.</div>
         </div>
         <div class="lc-exchange-rate rounded-2xl p-4">
           <div class="flex items-center justify-between gap-2"><span class="lc-exchange-label">BCV · EUR</span><span class="lc-exchange-pill official">OFICIAL</span></div>
           <div id="exchange-bcv-euro-value" class="lc-exchange-value lc-exchange-bcv mt-3">Cargando...</div>
-          <div id="exchange-bcv-euro-date" class="lc-exchange-meta text-[9px] mt-1.5">Fecha no disponible</div>
+          <div id="exchange-bcv-euro-date" class="lc-exchange-update">Fecha válida: esperando...</div>
           <div class="lc-exchange-desc mt-2">Referencia oficial del euro BCV.</div>
         </div>
         <div class="lc-exchange-rate rounded-2xl p-4">
           <div class="flex items-center justify-between gap-2"><span class="lc-exchange-label">COMPRA</span><span class="lc-exchange-pill buy">P2P</span></div>
           <div id="exchange-binance-buy" class="lc-exchange-value lc-exchange-buy mt-3">Cargando...</div>
           <div class="lc-exchange-meta text-[9px] mt-1.5">Bs por 1 USDT</div>
+          <div id="exchange-binance-buy-date" class="lc-exchange-update">Actualización: esperando...</div>
           <div class="lc-exchange-desc mt-2">Tasa para comprar USDT.</div>
         </div>
         <div class="lc-exchange-rate rounded-2xl p-4">
           <div class="flex items-center justify-between gap-2"><span class="lc-exchange-label">VENTA</span><span class="lc-exchange-pill sell">P2P</span></div>
           <div id="exchange-binance-sell" class="lc-exchange-value lc-exchange-sell mt-3">Cargando...</div>
           <div class="lc-exchange-meta text-[9px] mt-1.5">Bs por 1 USDT</div>
+          <div id="exchange-binance-sell-date" class="lc-exchange-update">Actualización: esperando...</div>
           <div class="lc-exchange-desc mt-2">Tasa para vender USDT.</div>
         </div>
       </div>
       <section class="lc-exchange-calculator rounded-2xl p-4 sm:p-5">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 mb-4">
           <div><h4 class="lc-calc-title">Conversión rápida</h4><p class="lc-exchange-meta text-[9px] mt-1">Selecciona la operación que necesitas.</p></div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 w-full lg:w-auto">
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 w-full lg:w-auto">
             <button id="calc-mode-bs-usd" type="button" onclick="setExchangeCalcMode('BS_USD')" class="lc-exchange-mode-btn px-3 py-2 rounded-xl">Bs → USD</button>
             <button id="calc-mode-usd" type="button" onclick="setExchangeCalcMode('USD_BS')" class="lc-exchange-mode-btn active-usd px-3 py-2 rounded-xl">USD → Bs</button>
             <button id="calc-mode-usdt" type="button" onclick="setExchangeCalcMode('USDT_BS')" class="lc-exchange-mode-btn px-3 py-2 rounded-xl">USDT → Bs</button>
             <button id="calc-mode-bs-usdt" type="button" onclick="setExchangeCalcMode('BS_USDT')" class="lc-exchange-mode-btn px-3 py-2 rounded-xl">Bs → USDT</button>
+            <button id="calc-mode-bs-eur" type="button" onclick="setExchangeCalcMode('BS_EUR')" class="lc-exchange-mode-btn px-3 py-2 rounded-xl">Bs → EUR</button>
+            <button id="calc-mode-eur-bs" type="button" onclick="setExchangeCalcMode('EUR_BS')" class="lc-exchange-mode-btn px-3 py-2 rounded-xl">EUR → Bs</button>
           </div>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-3 items-end">
@@ -3786,13 +4189,18 @@ setInterval(refreshAllRatesAndPrices,5*60*1000);
 
         function switchTab(tab){
             const sections = ['wifi', 'planes', 'hotspot', 'trabajos', 'reclamos'];
-            sections.forEach(s => {
-                document.getElementById('tab-' + s).classList.add('hidden');
-                document.getElementById('btn-' + s).classList.remove('nav-active');
+            if(!sections.includes(tab)) return;
+            sections.forEach(name => {
+                const section = document.getElementById('tab-' + name);
+                const button = document.getElementById('btn-' + name);
+                if(section) section.classList.add('hidden');
+                if(button) button.classList.remove('nav-active');
             });
-            document.getElementById('tab-' + tab).classList.remove('hidden');
-            document.getElementById('btn-' + tab).classList.add('nav-active');
-            window.scrollTo(0, 0);
+            const target = document.getElementById('tab-' + tab);
+            const activeButton = document.getElementById('btn-' + tab);
+            if(target) target.classList.remove('hidden');
+            if(activeButton) activeButton.classList.add('nav-active');
+            window.scrollTo({top:0,left:0,behavior:'auto'});
         }
 
         // ==========================================
