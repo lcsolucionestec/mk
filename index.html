@@ -1457,6 +1457,165 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
   #nav-container .nav-link{min-width:100px !important;width:100px !important;max-width:100px !important;font-size:9px !important;}
 }
 </style>
+
+<style id="lc-cambios-elegant-v13">
+/* LC CAMBIOS — refinamiento visual v13 */
+#modal-exchange-info .lc-exchange-card{width:min(100%,650px);max-height:min(84dvh,720px);border-radius:22px}
+#modal-exchange-info .lc-exchange-body{padding:14px}
+#modal-exchange-info .lc-exchange-header{padding:12px 14px!important;min-height:52px}
+#modal-exchange-info .lc-exchange-header .lc-exchange-icon{width:38px!important;height:38px!important;border-radius:13px!important}
+#modal-exchange-info .lc-exchange-header .lc-exchange-title{font-size:16px!important}
+#modal-exchange-info .lc-exchange-header .lc-exchange-subtitle{font-size:8px!important}
+#modal-exchange-info .lc-exchange-body > .grid:first-child{gap:8px!important}
+#modal-exchange-info .lc-exchange-rate{padding:11px!important;border-radius:15px;box-shadow:0 4px 14px rgba(0,0,0,.10)}
+#modal-exchange-info .lc-exchange-value{font-size:19px}
+#modal-exchange-info .lc-exchange-calculator{padding:12px!important;border-radius:16px}
+#modal-exchange-info .lc-exchange-mode-btn{min-height:32px;font-size:8.5px;border-radius:10px!important}
+#modal-exchange-info .lc-calc-input,#modal-exchange-info .lc-calc-result{min-height:40px;padding:8px 10px}
+#modal-exchange-info .lc-calc-result{font-size:16px}
+#modal-exchange-info .lc-exchange-footnote{font-size:8px}
+@media(max-width:700px){#modal-exchange-info .lc-exchange-card{width:min(100%,580px);max-height:calc(100dvh - 10px)}#modal-exchange-info .lc-exchange-body{padding:10px!important}#modal-exchange-info .lc-exchange-rate{padding:10px!important}}
+
+/* Selector de moneda para Planes y Desarrollos */
+.catalog-currency-panel{border:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.58);backdrop-filter:blur(12px);border-radius:16px;padding:9px}
+.catalog-currency-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.catalog-currency-title{font-size:9px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;color:#cbd5e1;display:flex;align-items:center;gap:7px}
+.catalog-currency-title i{color:#60a5fa}
+.catalog-currency-buttons{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.catalog-currency-btn{min-height:29px;padding:6px 9px;border-radius:10px;border:1px solid rgba(148,163,184,.16);background:rgba(148,163,184,.06);color:#cbd5e1;font-size:8.5px;font-weight:900;letter-spacing:.02em;transition:.18s;cursor:pointer;white-space:nowrap}
+.catalog-currency-btn:hover{border-color:rgba(96,165,250,.4);transform:translateY(-1px)}
+.catalog-currency-btn.active{background:rgba(59,130,246,.16);border-color:rgba(96,165,250,.48);color:#bfdbfe;box-shadow:inset 0 0 0 1px rgba(96,165,250,.08)}
+.catalog-currency-status{display:flex;align-items:center;gap:7px;min-width:190px;flex:1;justify-content:flex-end}
+.catalog-currency-badge{font-size:7px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:999px;border:1px solid rgba(148,163,184,.16);background:rgba(148,163,184,.06);color:#94a3b8;white-space:nowrap}
+.catalog-currency-rate{font-size:8px;color:#94a3b8;font-weight:800;white-space:nowrap}
+.catalog-currency-rate strong{color:#cbd5e1}
+.catalog-price-note{display:block;margin-top:3px;font-size:8px;line-height:1.25;font-weight:800;color:#94a3b8}
+.catalog-price-note .catalog-source{font-weight:950;color:#60a5fa}
+[data-theme="light"] .catalog-currency-panel{background:rgba(248,250,252,.82);border-color:#dbe4ee}
+[data-theme="light"] .catalog-currency-title{color:#334155}
+[data-theme="light"] .catalog-currency-btn{background:#fff;color:#475569;border-color:#cbd5e1}
+[data-theme="light"] .catalog-currency-btn.active{background:#eff6ff;color:#1d4ed8;border-color:#93c5fd}
+[data-theme="light"] .catalog-currency-badge{background:#fff;color:#64748b;border-color:#cbd5e1}
+[data-theme="light"] .catalog-currency-rate{color:#64748b}
+[data-theme="light"] .catalog-currency-rate strong{color:#334155}
+[data-theme="light"] .catalog-price-note{color:#64748b}
+@media(max-width:700px){.catalog-currency-panel{padding:8px}.catalog-currency-toolbar{align-items:flex-start}.catalog-currency-status{min-width:100%;justify-content:flex-start}.catalog-currency-buttons{width:100%}.catalog-currency-btn{flex:1 1 auto;min-width:72px}.catalog-price-note{font-size:7.5px}}
+</style>
+
+
+<style id="lc-cambios-color-pop-v19">
+/* ===== LC CAMBIOS · COLOR Y CONTRASTE V19 ===== */
+#modal-exchange-info .lc-exchange-card{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(59,130,246,.16),transparent 28%),
+    radial-gradient(circle at 92% 12%,rgba(168,85,247,.14),transparent 26%),
+    linear-gradient(145deg,#07111f 0%,#0d1729 54%,#111827 100%) !important;
+  border:1px solid rgba(96,165,250,.28) !important;
+}
+#modal-exchange-info .lc-exchange-header{
+  background:
+    linear-gradient(135deg,rgba(37,99,235,.30),rgba(124,58,237,.24) 55%,rgba(16,185,129,.12)) !important;
+  border-bottom-color:rgba(148,163,184,.18) !important;
+}
+#modal-exchange-info .lc-exchange-icon{
+  background:linear-gradient(135deg,#2563eb,#7c3aed) !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.26) !important;
+  box-shadow:0 8px 22px rgba(37,99,235,.28);
+}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini{
+  position:relative;
+  overflow:hidden;
+  border-color:rgba(148,163,184,.18) !important;
+}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini::after{
+  content:"";position:absolute;left:0;right:0;top:0;height:3px;opacity:.95;
+}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(1){background:linear-gradient(145deg,rgba(30,64,175,.24),rgba(15,23,42,.82)) !important;border-color:rgba(96,165,250,.28) !important}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(1)::after{background:#60a5fa}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(2){background:linear-gradient(145deg,rgba(91,33,182,.24),rgba(15,23,42,.82)) !important;border-color:rgba(167,139,250,.28) !important}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(2)::after{background:#a78bfa}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(3){background:linear-gradient(145deg,rgba(5,150,105,.22),rgba(15,23,42,.82)) !important;border-color:rgba(52,211,153,.28) !important}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(3)::after{background:#34d399}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(4){background:linear-gradient(145deg,rgba(180,83,9,.24),rgba(15,23,42,.82)) !important;border-color:rgba(251,191,36,.30) !important}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(4)::after{background:#fbbf24}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(1) strong{color:#93c5fd !important}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(2) strong{color:#c4b5fd !important}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(3) strong{color:#6ee7b7 !important}
+#modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(4) strong{color:#fcd34d !important}
+#modal-exchange-info .lc-converter-main{
+  background:linear-gradient(145deg,rgba(30,64,175,.17),rgba(15,23,42,.82)) !important;
+  border-color:rgba(96,165,250,.30) !important;
+}
+#modal-exchange-info .lc-custom-converter{
+  background:linear-gradient(145deg,rgba(109,40,217,.16),rgba(15,23,42,.82)) !important;
+  border-color:rgba(192,132,252,.30) !important;
+}
+#modal-exchange-info .lc-exchange-mode-btn.active{
+  background:linear-gradient(135deg,rgba(37,99,235,.35),rgba(79,70,229,.30)) !important;
+  border-color:#60a5fa !important;
+  color:#dbeafe !important;
+  box-shadow:0 0 0 1px rgba(96,165,250,.08),0 8px 18px rgba(37,99,235,.16);
+}
+#modal-exchange-info .lc-calc-result{
+  background:linear-gradient(135deg,rgba(15,23,42,.92),rgba(30,41,59,.92)) !important;
+  border-color:rgba(96,165,250,.25) !important;
+}
+#modal-exchange-info .lc-calc-note{
+  background:rgba(37,99,235,.12) !important;
+  border-color:rgba(96,165,250,.22) !important;
+}
+#modal-exchange-info .lc-custom-result{
+  background:linear-gradient(135deg,rgba(126,34,206,.18),rgba(88,28,135,.12)) !important;
+  border-color:rgba(216,180,254,.32) !important;
+}
+#modal-exchange-info .lc-custom-preview{
+  background:rgba(168,85,247,.07);
+  border:1px solid rgba(192,132,252,.12);
+  border-radius:9px;
+  padding:7px 9px;
+}
+[data-theme="light"] #modal-exchange-info .lc-exchange-card{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(59,130,246,.10),transparent 28%),
+    radial-gradient(circle at 92% 5%,rgba(168,85,247,.08),transparent 24%),
+    linear-gradient(145deg,#ffffff 0%,#f5f9ff 55%,#f7f4ff 100%) !important;
+  border-color:#bfd3ee !important;
+}
+[data-theme="light"] #modal-exchange-info .lc-exchange-header{
+  background:linear-gradient(135deg,#eaf3ff,#f2edff 55%,#eafbf5) !important;
+  border-bottom-color:#cfdaea !important;
+}
+[data-theme="light"] #modal-exchange-info .lc-exchange-icon{
+  background:linear-gradient(135deg,#2563eb,#7c3aed) !important;
+  color:#fff !important;
+}
+[data-theme="light"] #modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(1){background:linear-gradient(145deg,#eef6ff,#e4efff) !important;border-color:#b7d3fb !important}
+[data-theme="light"] #modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(2){background:linear-gradient(145deg,#f5efff,#eee7ff) !important;border-color:#d1bdf7 !important}
+[data-theme="light"] #modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(3){background:linear-gradient(145deg,#ebfbf4,#e2f7ef) !important;border-color:#a8dfca !important}
+[data-theme="light"] #modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(4){background:linear-gradient(145deg,#fff8e7,#fff1cc) !important;border-color:#f0cf8b !important}
+[data-theme="light"] #modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(1) strong{color:#1d4ed8 !important}
+[data-theme="light"] #modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(2) strong{color:#6d28d9 !important}
+[data-theme="light"] #modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(3) strong{color:#047857 !important}
+[data-theme="light"] #modal-exchange-info .lc-rate-summary-grid .lc-rate-mini:nth-child(4) strong{color:#b45309 !important}
+[data-theme="light"] #modal-exchange-info .lc-converter-main{background:linear-gradient(145deg,#eef6ff,#ffffff) !important;border-color:#bfdbfe !important}
+[data-theme="light"] #modal-exchange-info .lc-custom-converter{background:linear-gradient(145deg,#fbf7ff,#ffffff) !important;border-color:#ddd6fe !important}
+[data-theme="light"] #modal-exchange-info .lc-calc-result{background:#ffffff !important;color:#0f172a !important;border-color:#b9cbe3 !important}
+[data-theme="light"] #modal-exchange-info .lc-calc-note{background:#eff6ff !important;border-color:#bfdbfe !important;color:#334155 !important}
+[data-theme="light"] #modal-exchange-info .lc-custom-result{background:linear-gradient(135deg,#faf5ff,#f5f3ff) !important;color:#581c87 !important;border-color:#d8b4fe !important}
+[data-theme="light"] #modal-exchange-info .lc-custom-preview{background:#faf5ff;border-color:#e9d5ff;color:#64748b !important}
+
+/* Etiqueta USD bajo el precio de catálogo */
+.usd-label{display:block;margin-top:-7px;font-size:9px;line-height:1.15;font-weight:900;letter-spacing:.02em}
+[data-theme="light"] .usd-label{color:#475569 !important}
+[data-theme="dark"] .usd-label{color:#cbd5e1 !important}
+
+@media(max-width:700px){
+  #modal-exchange-info .lc-rate-summary-grid .lc-rate-mini{min-height:82px}
+  #modal-exchange-info .lc-rate-summary-grid .lc-rate-mini strong{font-size:15px !important}
+}
+</style>
+
 </head>
 <body class="flex flex-col min-h-screen bg-slate-950 text-slate-100 font-sans">
 
@@ -1496,12 +1655,13 @@ html[data-theme="dark"] .portal-choice-title, html[data-bs-theme="dark"] .portal
                 <i class="fa-solid fa-gauge-high text-sm"></i><span class="hidden sm:inline">Speedtest</span>
             </button><span class="topbar-mobile-sep mx-0.5 text-gray-600 hidden sm:inline">|</span>
             <button type="button" onclick="openExchangeModal()" class="topbar-mobile-icon sm:w-auto sm:h-auto sm:rounded-none font-bold text-emerald-400" title="LC Cambios — BCV y Binance P2P">
-                <i class="fa-solid fa-arrow-right-arrow-left text-[11px] sm:text-sm"></i>
+                <i class="fa-solid fa-money-bill-transfer text-[11px] sm:text-sm"></i>
                 <span class="hidden sm:inline text-[10px] sm:text-xs">LC Cambios</span>
             </button><span class="topbar-mobile-sep mx-0.5 text-gray-600 hidden sm:inline">|</span>
             <button id="theme-toggle" onclick="toggleTheme()" class="flex items-center justify-center w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 transition cursor-pointer" title="Cambiar tema"><i id="theme-icon" class="fa-solid fa-sun text-brand-blue text-sm"></i></button>
         </div>
     </div>
+
 </div>
 
         <!-- Cabecera Principal --><!-- Cabecera Principal -->
@@ -2363,6 +2523,8 @@ const API_BCV_PRINCIPAL = 'https://rates.dolarvzla.com/bcv/current.json';
 const API_BCV_RESPALDO = 'https://ve.dolarapi.com/v1/dolares/oficial';
 const API_BCV_EURO = 'https://ve.dolarapi.com/v1/euros/oficial';
 const API_BCV_UNIFICADA = 'https://bcv.today/api/v1/rate.json';
+const API_COP_TRM = 'https://api.dolarencolombia.co/v1/trm/latest';
+const API_COP_TRM_RESPALDO = 'https://www.datos.gov.co/resource/32sa-8pi3.json';
 const API_BINANCE_QUOTE_BASE = 'https://www.binance.com/bapi/c2c/v1/public/c2c/agent/quote-price';
 
 let BCV_VES_RATE = 0;
@@ -2371,6 +2533,9 @@ let BCV_RATE_FETCHED_AT = '';
 let BCV_EUR_VES_RATE = 0;
 let BCV_EUR_RATE_DATE = '';
 let BCV_EUR_RATE_FETCHED_AT = '';
+let COP_TRM_RATE = 0;
+let COP_TRM_DATE = '';
+let COP_TRM_FETCHED_AT = '';
 let BINANCE_VES_BUY = 0;
 let BINANCE_VES_SELL = 0;
 let BINANCE_RATE_DATE = '';
@@ -2406,6 +2571,70 @@ async function fetchFreshJson(url, options={}){
   const res=await fetch(freshUrl,{cache:'no-store',headers:{'Accept':'application/json',...(options.headers||{})},...options});
   if(!res.ok) throw new Error(`HTTP ${res.status} en ${url}`);
   return res.json();
+}
+
+function parseTRMValue(raw){
+  if(typeof raw==='number') return Number.isFinite(raw)?raw:0;
+  const text=String(raw??'').trim().replace(/\s/g,'');
+  if(!text) return 0;
+  const normalized=text.includes(',')&&text.includes('.')
+    ? (text.lastIndexOf(',')>text.lastIndexOf('.') ? text.replace(/\./g,'').replace(',','.') : text.replace(/,/g,''))
+    : text.includes(',') ? text.replace(',','.') : text;
+  const n=Number(normalized);
+  return Number.isFinite(n)?n:0;
+}
+
+async function fetchCOPTRM(){
+  let lastError=null;
+  const sources=[
+    {
+      url: API_COP_TRM,
+      parse:(x)=>({rate:parseTRMValue(x?.valor??x?.value??x?.trm),date:x?.fecha||x?.vigenciaHasta||x?.vigenciaDesde||''}),
+      name:'Dólar en Colombia / Superfinanciera'
+    },
+    {
+      url: API_COP_TRM_RESPALDO+'?$select=valor,vigenciadesde,vigenciahasta&$limit=1&$order=vigenciadesde%20DESC',
+      parse:(x)=>({rate:parseTRMValue(x?.valor??x?.VALOR),date:x?.vigenciadesde||x?.vigenciahasta||''}),
+      name:'Datos Abiertos Colombia / Superfinanciera'
+    },
+    {
+      url: 'https://www.datos.gov.co/resource/ceyp-9c7c.json?$select=valor,vigenciadesde,vigenciahasta&$limit=1&$order=vigenciadesde%20DESC',
+      parse:(x)=>({rate:parseTRMValue(x?.valor??x?.VALOR),date:x?.vigenciadesde||x?.vigenciahasta||''}),
+      name:'Datos Abiertos Colombia / TRM'
+    }
+  ];
+  for(const source of sources){
+    try{
+      const rows=await fetchFreshJson(source.url);
+      const x=Array.isArray(rows)?rows[0]:rows;
+      const parsed=source.parse(x||{});
+      if(parsed.rate>1){
+        COP_TRM_RATE=parsed.rate;
+        COP_TRM_DATE=parsed.date||COP_TRM_DATE;
+        COP_TRM_FETCHED_AT=new Date();
+        return {rate:COP_TRM_RATE,date:COP_TRM_DATE,source:source.name};
+      }
+      lastError=new Error('La respuesta de '+source.name+' no contiene una TRM válida');
+    }catch(e){
+      lastError=e;
+      console.warn('Fuente TRM COP no disponible:',source.url,e?.message||e);
+    }
+  }
+  throw lastError||new Error('No se pudo obtener la TRM oficial de Colombia');
+}
+
+async function loadCOPTRM(){
+  try{
+    const result=await fetchCOPTRM();
+    updateExchangeSummary();
+    updateExchangeCalculator();
+    return result;
+  }catch(e){
+    console.warn('No se pudo obtener la TRM oficial de Colombia:',e);
+    updateExchangeSummary();
+    updateExchangeCalculator();
+    return {rate:COP_TRM_RATE,date:COP_TRM_DATE,source:COP_TRM_RATE?'memoria':''};
+  }
 }
 
 async function fetchBinanceQuote(tradeType){
@@ -2587,6 +2816,10 @@ async function loadBinanceRatesAndApplyPrices(){
 function updateExchangeSummary(){
   const bcv=document.getElementById('exchange-bcv-value');
   const euro=document.getElementById('exchange-bcv-euro-value');
+  const copBs=document.getElementById('exchange-cop-bs-value');
+  const copUsd=document.getElementById('exchange-cop-usd-value');
+  const copDate=document.getElementById('exchange-cop-date');
+  const copTrm=document.getElementById('exchange-cop-trm-value');
   const buy=document.getElementById('exchange-binance-buy'),sell=document.getElementById('exchange-binance-sell');
   const bcvDate=document.getElementById('exchange-bcv-date');
   const euroDate=document.getElementById('exchange-bcv-euro-date');
@@ -2594,15 +2827,21 @@ function updateExchangeSummary(){
   const sellDate=document.getElementById('exchange-binance-sell-date');
   if(bcv) bcv.textContent=BCV_VES_RATE?fmtBs(BCV_VES_RATE):'No disponible';
   if(euro) euro.textContent=BCV_EUR_VES_RATE?fmtBs(BCV_EUR_VES_RATE):'No disponible';
+  const copBsRate=(COP_TRM_RATE>1&&BCV_VES_RATE>1)?BCV_VES_RATE/COP_TRM_RATE:0;
+  const copUsdRate=COP_TRM_RATE>1?1/COP_TRM_RATE:0;
+  if(copBs) copBs.textContent=copBsRate?fmtBs(copBsRate):'No disponible';
+  if(copUsd) copUsd.textContent=copUsdRate?fmtNum(copUsdRate)+' USD':'No disponible';
+  if(copTrm) copTrm.textContent=COP_TRM_RATE?fmtNum(COP_TRM_RATE)+' COP/USD':'No disponible';
   if(buy) buy.textContent=BINANCE_VES_BUY?fmtBs(BINANCE_VES_BUY):'No disponible';
   if(sell) sell.textContent=BINANCE_VES_SELL?fmtBs(BINANCE_VES_SELL):'No disponible';
   if(bcvDate) bcvDate.textContent=BCV_RATE_DATE?'Fecha válida: '+fmtValidDate(BCV_RATE_DATE):'Fecha válida: esperando...';
   if(euroDate) euroDate.textContent=BCV_EUR_RATE_DATE?'Fecha válida: '+fmtValidDate(BCV_EUR_RATE_DATE):'Fecha válida: esperando...';
+  if(copDate) copDate.textContent=COP_TRM_DATE?'Fecha válida: '+fmtValidDate(COP_TRM_DATE):'Fecha válida: esperando...';
   const p2pDate=BINANCE_RATE_DATE?fmtUpdateDateTime(BINANCE_RATE_DATE):'';
   if(buyDate) buyDate.textContent=p2pDate?'Actualizado: '+p2pDate:'Actualización: esperando...';
   if(sellDate) sellDate.textContent=p2pDate?'Actualizado: '+p2pDate:'Actualización: esperando...';
   const updated=document.getElementById('exchange-updated-at');
-  const latest=[BCV_RATE_FETCHED_AT,BCV_EUR_RATE_FETCHED_AT,BINANCE_RATE_DATE].filter(Boolean).map(v=>v instanceof Date?v:new Date(v)).filter(d=>!Number.isNaN(d.getTime())).sort((a,b)=>b-a)[0];
+  const latest=[BCV_RATE_FETCHED_AT,BCV_EUR_RATE_FETCHED_AT,COP_TRM_FETCHED_AT,BINANCE_RATE_DATE].filter(Boolean).map(v=>v instanceof Date?v:new Date(v)).filter(d=>!Number.isNaN(d.getTime())).sort((a,b)=>b-a)[0];
   if(updated) updated.textContent=latest?'Última actualización: '+fmtUpdateDateTime(latest):'Actualización: esperando...';
 }
 
@@ -2646,6 +2885,18 @@ function setExchangeCalcMode(mode){
   }else if(mode==='EUR_BS'){
     if(inputLabel)inputLabel.textContent='Monto en EUR';
     if(resultLabel)resultLabel.textContent='Resultado en Bs';
+  }else if(mode==='BS_COP'){
+    if(inputLabel)inputLabel.textContent='Monto en Bs';
+    if(resultLabel)resultLabel.textContent='Resultado en COP';
+  }else if(mode==='COP_BS'){
+    if(inputLabel)inputLabel.textContent='Monto en COP';
+    if(resultLabel)resultLabel.textContent='Resultado en Bs';
+  }else if(mode==='COP_USD'){
+    if(inputLabel)inputLabel.textContent='Monto en COP';
+    if(resultLabel)resultLabel.textContent='Resultado en USD';
+  }else if(mode==='USD_COP'){
+    if(inputLabel)inputLabel.textContent='Monto en USD';
+    if(resultLabel)resultLabel.textContent='Resultado en COP';
   }
   updateExchangeCalculator();
 }
@@ -2697,22 +2948,34 @@ function updateExchangeCalculator(){
   }else if(exchangeCalcMode==='EUR_BS'){
     rate=BCV_EUR_VES_RATE; value=amount*rate;
     label=rate?'Tasa BCV EUR: '+fmtBs(rate)+' Bs/EUR':'Tasa BCV EUR: no disponible';
+  }else if(exchangeCalcMode==='BS_COP'){
+    rate=(COP_TRM_RATE>1&&BCV_VES_RATE>1)?BCV_VES_RATE/COP_TRM_RATE:0; value=rate?amount/rate:0;
+    label=rate?'Tasa derivada COP: '+fmtBs(rate)+' Bs/COP':'Tasa COP/Bs: no disponible';
+  }else if(exchangeCalcMode==='COP_BS'){
+    rate=(COP_TRM_RATE>1&&BCV_VES_RATE>1)?BCV_VES_RATE/COP_TRM_RATE:0; value=amount*rate;
+    label=rate?'Tasa derivada COP: '+fmtBs(rate)+' Bs/COP':'Tasa COP/Bs: no disponible';
+  }else if(exchangeCalcMode==='COP_USD'){
+    rate=COP_TRM_RATE>1?1/COP_TRM_RATE:0; value=amount*rate;
+    label=rate?'TRM oficial: '+fmtNum(COP_TRM_RATE)+' COP/USD':'TRM oficial: no disponible';
+  }else if(exchangeCalcMode==='USD_COP'){
+    rate=COP_TRM_RATE; value=amount*rate;
+    label=rate?'TRM oficial: '+fmtNum(rate)+' COP/USD':'TRM oficial: no disponible';
   }
-  const outputIsBs=['USD_BS','USDT_BS','EUR_BS'].includes(exchangeCalcMode);
+  const outputIsBs=['USD_BS','USDT_BS','EUR_BS','COP_BS'].includes(exchangeCalcMode);
   result.textContent=rate>0?(outputIsBs?fmtBs(value):value.toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2})):'Esperando tasa...';
   if(note)note.textContent=label;
 }
 async function refreshExchangeData(){
   const icon=document.getElementById('exchange-refresh-icon'); icon?.classList.add('fa-spin');
   await loadBCVUnified();
-  await Promise.allSettled([loadBCVRateOnly(true),loadBCVEuroRate(true),loadBinanceRatesAndApplyPrices()]);
+  await Promise.allSettled([loadBCVRateOnly(true),loadBCVEuroRate(true),loadCOPTRM(),loadBinanceRatesAndApplyPrices()]);
   icon?.classList.remove('fa-spin');
 }
 function openExchangeModal(){
   const modal=document.getElementById('modal-exchange-info'); if(!modal)return;
   modal.classList.remove('hidden'); document.body.style.overflow='hidden';
   updateExchangeSummary(); setExchangeCalcMode(exchangeCalcMode); updateExchangeCalculator();
-  if(!BCV_VES_RATE||!BCV_EUR_VES_RATE||!BINANCE_VES_BUY||!BINANCE_VES_SELL)refreshExchangeData();
+  if(!BCV_VES_RATE||!BCV_EUR_VES_RATE||!COP_TRM_RATE||!BINANCE_VES_BUY||!BINANCE_VES_SELL)refreshExchangeData();
 }
 function closeExchangeModal(){
   const modal=document.getElementById('modal-exchange-info'); if(!modal)return;
@@ -2720,7 +2983,7 @@ function closeExchangeModal(){
 }
 async function refreshAllRatesAndPrices(){
   await loadBCVUnified();
-  await Promise.allSettled([loadBCVRateOnly(true),loadBCVEuroRate(true),loadBinanceRatesAndApplyPrices()]);
+  await Promise.allSettled([loadBCVRateOnly(true),loadBCVEuroRate(true),loadCOPTRM(),loadBinanceRatesAndApplyPrices()]);
 }
 document.addEventListener('DOMContentLoaded',refreshAllRatesAndPrices);
 setInterval(refreshAllRatesAndPrices,60*1000);
@@ -3945,7 +4208,7 @@ window.addEventListener('focus',()=>refreshAllRatesAndPrices());
                     </div>
 
                     <div class="font-bold tracking-[2px] text-gray-400 text-center md:text-right">
-                        V.2026.2.1
+                        V.2026.14.7
                     </div>
                 </div>
             </div>
@@ -3974,14 +4237,14 @@ window.addEventListener('focus',()=>refreshAllRatesAndPrices());
 
 <!-- MODAL LC CAMBIOS -->
 <div id="modal-exchange-info" class="fixed inset-0 z-[110] hidden flex items-center justify-center lc-exchange-backdrop" onclick="if(event.target===this)closeExchangeModal()">
-  <div class="lc-exchange-card w-full overflow-hidden animate-fade-in">
-    <div class="lc-exchange-header px-5 py-4 flex items-center justify-between gap-3">
+  <div class="lc-exchange-card animate-fade-in">
+    <div class="lc-exchange-header px-4 py-3 flex items-center justify-between gap-3">
       <div class="flex items-center gap-3 min-w-0">
-        <div class="lc-exchange-icon w-11 h-11 rounded-2xl grid place-items-center shrink-0"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+        <div class="lc-exchange-icon w-10 h-10 rounded-2xl grid place-items-center shrink-0"><i class="fa-solid fa-money-bill-transfer"></i></div>
         <div class="min-w-0">
-          <div class="lc-exchange-kicker text-[9px] font-black uppercase tracking-[0.16em]">LC Soluciones Tecnológicas</div>
-          <h3 class="lc-exchange-title text-xl font-black leading-tight">LC Cambios</h3>
-          <p id="exchange-updated-at" class="lc-exchange-subtitle text-[9px] mt-0.5">Actualización BCV: esperando...</p>
+          <div class="lc-exchange-kicker">LC SOLUCIONES TECNOLÓGICAS · CAMBIOS</div>
+          <h3 class="lc-exchange-title">Tasas y conversiones</h3>
+          <p id="exchange-updated-at" class="lc-exchange-subtitle">Actualización: esperando...</p>
         </div>
       </div>
       <div class="flex items-center gap-1.5 shrink-0">
@@ -3989,56 +4252,57 @@ window.addEventListener('focus',()=>refreshAllRatesAndPrices());
         <button type="button" onclick="closeExchangeModal()" class="lc-exchange-action w-9 h-9 rounded-xl flex items-center justify-center" aria-label="Cerrar"><i class="fa-solid fa-xmark text-sm"></i></button>
       </div>
     </div>
-    <div class="lc-exchange-body p-4 sm:p-5 space-y-4">
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div class="lc-exchange-rate rounded-2xl p-4">
-          <div class="flex items-center justify-between gap-2"><span class="lc-exchange-label">BCV · USD</span><span class="lc-exchange-pill official">OFICIAL</span></div>
-          <div id="exchange-bcv-value" class="lc-exchange-value lc-exchange-bcv mt-3">Cargando...</div>
-          <div id="exchange-bcv-date" class="lc-exchange-update">Fecha válida: esperando...</div>
-          <div class="lc-exchange-desc mt-2">Referencia oficial del dólar.</div>
-        </div>
-        <div class="lc-exchange-rate rounded-2xl p-4">
-          <div class="flex items-center justify-between gap-2"><span class="lc-exchange-label">BCV · EUR</span><span class="lc-exchange-pill official">OFICIAL</span></div>
-          <div id="exchange-bcv-euro-value" class="lc-exchange-value lc-exchange-bcv mt-3">Cargando...</div>
-          <div id="exchange-bcv-euro-date" class="lc-exchange-update">Fecha válida: esperando...</div>
-          <div class="lc-exchange-desc mt-2">Referencia oficial del euro BCV.</div>
-        </div>
-        <div class="lc-exchange-rate rounded-2xl p-4">
-          <div class="flex items-center justify-between gap-2"><span class="lc-exchange-label">COMPRA</span><span class="lc-exchange-pill buy">P2P</span></div>
-          <div id="exchange-binance-buy" class="lc-exchange-value lc-exchange-buy mt-3">Cargando...</div>
-          <div class="lc-exchange-meta text-[9px] mt-1.5">Bs por 1 USDT</div>
-          <div id="exchange-binance-buy-date" class="lc-exchange-update">Actualización: esperando...</div>
-          <div class="lc-exchange-desc mt-2">Tasa para comprar USDT.</div>
-        </div>
-        <div class="lc-exchange-rate rounded-2xl p-4">
-          <div class="flex items-center justify-between gap-2"><span class="lc-exchange-label">VENTA</span><span class="lc-exchange-pill sell">P2P</span></div>
-          <div id="exchange-binance-sell" class="lc-exchange-value lc-exchange-sell mt-3">Cargando...</div>
-          <div class="lc-exchange-meta text-[9px] mt-1.5">Bs por 1 USDT</div>
-          <div id="exchange-binance-sell-date" class="lc-exchange-update">Actualización: esperando...</div>
-          <div class="lc-exchange-desc mt-2">Tasa para vender USDT.</div>
-        </div>
+
+    <div class="lc-exchange-body p-3 sm:p-4 space-y-3">
+      <div class="lc-rate-summary-grid">
+        <div class="lc-rate-mini"><div><span class="lc-mini-label">BCV USD</span><span class="lc-mini-pill official">OFICIAL</span></div><strong id="exchange-bcv-value">Cargando...</strong><small id="exchange-bcv-date">Fecha válida: esperando...</small></div>
+        <div class="lc-rate-mini"><div><span class="lc-mini-label">BCV EUR</span><span class="lc-mini-pill official">OFICIAL</span></div><strong id="exchange-bcv-euro-value">Cargando...</strong><small id="exchange-bcv-euro-date">Fecha válida: esperando...</small></div>
+        <div class="lc-rate-mini"><div><span class="lc-mini-label">BINANCE</span><span class="lc-mini-pill p2p">P2P</span></div><strong id="exchange-binance-sell">Cargando...</strong><small id="exchange-binance-sell-date">Actualización: esperando...</small></div>
+        <div class="lc-rate-mini"><div><span class="lc-mini-label">COP / USD</span><span class="lc-mini-pill official">TRM</span></div><strong id="exchange-cop-trm-value">Cargando...</strong><small id="exchange-cop-date">Fecha válida: esperando...</small></div>
       </div>
-      <section class="lc-exchange-calculator rounded-2xl p-4 sm:p-5">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 mb-4">
-          <div><h4 class="lc-calc-title">Conversión rápida</h4><p class="lc-exchange-meta text-[9px] mt-1">Selecciona la operación que necesitas.</p></div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 w-full lg:w-auto">
-            <button id="calc-mode-bs-usd" type="button" onclick="setExchangeCalcMode('BS_USD')" class="lc-exchange-mode-btn px-3 py-2 rounded-xl">Bs → USD</button>
-            <button id="calc-mode-usd" type="button" onclick="setExchangeCalcMode('USD_BS')" class="lc-exchange-mode-btn active-usd px-3 py-2 rounded-xl">USD → Bs</button>
-            <button id="calc-mode-usdt" type="button" onclick="setExchangeCalcMode('USDT_BS')" class="lc-exchange-mode-btn px-3 py-2 rounded-xl">USDT → Bs</button>
-            <button id="calc-mode-bs-usdt" type="button" onclick="setExchangeCalcMode('BS_USDT')" class="lc-exchange-mode-btn px-3 py-2 rounded-xl">Bs → USDT</button>
-            <button id="calc-mode-bs-eur" type="button" onclick="setExchangeCalcMode('BS_EUR')" class="lc-exchange-mode-btn px-3 py-2 rounded-xl">Bs → EUR</button>
-            <button id="calc-mode-eur-bs" type="button" onclick="setExchangeCalcMode('EUR_BS')" class="lc-exchange-mode-btn px-3 py-2 rounded-xl">EUR → Bs</button>
-          </div>
+
+      <section class="lc-converter-main rounded-2xl p-3 sm:p-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+          <div><div class="lc-calc-kicker"><i class="fa-solid fa-bolt"></i> CONVERSIÓN RÁPIDA</div><h4 class="lc-calc-title">Calcula con las tasas actuales</h4></div>
+          <div id="exchange-live-source" class="lc-live-source">Fuente: esperando...</div>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-3 items-end">
-          <div><label id="calc-input-label" class="lc-exchange-label block mb-1.5">Monto en Bs</label><input id="exchange-calc-input" type="number" min="0" step="0.01" value="1" oninput="updateExchangeCalculator()" class="lc-calc-input" placeholder="0,00"></div>
-          <div class="hidden lg:flex items-center justify-center pb-1"><span class="lc-calc-arrow"><i class="fa-solid fa-arrow-right"></i></span></div>
-          <div><label id="calc-result-label" class="lc-exchange-label block mb-1.5">Resultado en Bs</label><div class="flex items-stretch gap-2"><div id="exchange-calc-result" class="lc-calc-result flex-1">Cargando...</div><button id="exchange-copy-result" type="button" onclick="copyExchangeResult()" class="lc-exchange-action w-10 min-w-10 rounded-xl flex items-center justify-center" title="Copiar resultado" aria-label="Copiar resultado"><i id="exchange-copy-icon" class="fa-regular fa-copy"></i></button></div></div>
+        <div class="lc-mode-scroller" id="exchange-mode-scroller">
+          <button id="calc-mode-bs-usd" type="button" onclick="setExchangeCalcMode('BS_USD')" class="lc-exchange-mode-btn active">Bs → USD</button>
+          <button id="calc-mode-usd" type="button" onclick="setExchangeCalcMode('USD_BS')" class="lc-exchange-mode-btn">USD → Bs</button>
+          <button id="calc-mode-usdt" type="button" onclick="setExchangeCalcMode('USDT_BS')" class="lc-exchange-mode-btn">USDT → Bs</button>
+          <button id="calc-mode-bs-usdt" type="button" onclick="setExchangeCalcMode('BS_USDT')" class="lc-exchange-mode-btn">Bs → USDT</button>
+          <button id="calc-mode-bs-eur" type="button" onclick="setExchangeCalcMode('BS_EUR')" class="lc-exchange-mode-btn">Bs → EUR</button>
+          <button id="calc-mode-eur-bs" type="button" onclick="setExchangeCalcMode('EUR_BS')" class="lc-exchange-mode-btn">EUR → Bs</button>
+          <button id="calc-mode-bs-cop" type="button" onclick="setExchangeCalcMode('BS_COP')" class="lc-exchange-mode-btn">Bs → COP</button>
+          <button id="calc-mode-cop-bs" type="button" onclick="setExchangeCalcMode('COP_BS')" class="lc-exchange-mode-btn">COP → Bs</button>
+          <button id="calc-mode-cop-usd" type="button" onclick="setExchangeCalcMode('COP_USD')" class="lc-exchange-mode-btn">COP → USD</button>
+          <button id="calc-mode-usd-cop" type="button" onclick="setExchangeCalcMode('USD_COP')" class="lc-exchange-mode-btn">USD → COP</button>
         </div>
-        <div id="usdt-rate-selector" class="hidden mt-3"><label class="lc-exchange-label block mb-1.5">Tipo de tasa P2P</label><select id="exchange-calc-rate-type" onchange="updateExchangeCalculator()" class="lc-calc-input"><option value="sell">Venta — USDT → Bs</option><option value="buy">Compra — Bs → USDT</option></select></div>
-        <div id="exchange-calc-note" class="lc-calc-note mt-3">Tasa BCV: Cargando...</div>
+        <div id="exchange-mode-mobile" class="lc-mode-mobile">
+          <label for="exchange-mode-select" class="lc-field-label">Tipo de conversión</label>
+          <select id="exchange-mode-select" class="lc-mode-mobile-select" onchange="setExchangeCalcMode(this.value)">
+            <option value="BS_USD">Bs → USD</option>
+            <option value="USD_BS">USD → Bs</option>
+            <option value="USDT_BS">USDT → Bs</option>
+            <option value="BS_USDT">Bs → USDT</option>
+            <option value="BS_EUR">Bs → EUR</option>
+            <option value="EUR_BS">EUR → Bs</option>
+            <option value="BS_COP">Bs → COP</option>
+            <option value="COP_BS">COP → Bs</option>
+            <option value="COP_USD">COP → USD</option>
+            <option value="USD_COP">USD → COP</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-2 items-end mt-3">
+          <div><label id="calc-input-label" class="lc-field-label">Monto en Bs</label><input id="exchange-calc-input" type="number" min="0" step="0.01" value="1" oninput="updateExchangeCalculator()" class="lc-calc-input" placeholder="0,00"></div>
+          <div class="lc-arrow-box"><i class="fa-solid fa-arrow-right"></i></div>
+          <div><label id="calc-result-label" class="lc-field-label">Resultado en USD</label><div class="flex items-stretch gap-2"><div id="exchange-calc-result" class="lc-calc-result flex-1">Cargando...</div><button id="exchange-copy-result" type="button" onclick="copyExchangeResult()" class="lc-exchange-action w-10 min-w-10 rounded-xl flex items-center justify-center" title="Copiar resultado" aria-label="Copiar resultado"><i id="exchange-copy-icon" class="fa-regular fa-copy"></i></button></div></div>
+        </div>
+        <div id="usdt-rate-selector" class="hidden mt-2"><label class="lc-field-label">Tipo de tasa P2P</label><select id="exchange-calc-rate-type" onchange="updateExchangeCalculator()" class="lc-calc-input"><option value="sell">Venta — USDT → Bs</option><option value="buy">Compra — Bs → USDT</option></select></div>
+        <div id="exchange-calc-note" class="lc-calc-note mt-2">Tasa BCV: esperando...</div>
       </section>
-      <div class="lc-exchange-footnote"><i class="fa-solid fa-circle-info"></i><span>Las tasas son referencias informativas y pueden variar según la fuente, el momento de consulta y las condiciones del mercado P2P.</span></div>
+
+      <div class="lc-exchange-footnote"><i class="fa-solid fa-circle-info"></i><span>BCV y TRM son referencias oficiales; Binance corresponde a referencia P2P.</span></div>
     </div>
   </div>
 </div>
@@ -4990,42 +5254,104 @@ ${datosFormularioActual.descripcion}
     </script>
 
 
-<style>
-/* REFERENCIA USD EN TARJETAS — visible en claro y oscuro */
-.binance-usd-reference{
-  display:block;
-  margin-top:.28rem;
-  margin-bottom:.18rem;
-  font-size:.69rem;
-  line-height:1.35;
-  font-weight:700;
-  letter-spacing:.01em;
-  color:#64748b;
-}
-[data-theme="dark"] .binance-usd-reference{color:#cbd5e1!important}
-[data-theme="light"] .binance-usd-reference{color:#64748b!important}
-.binance-usd-reference .usd-label{font-weight:900;display:block;margin-top:0!important;padding-top:1px}
+<style id="catalog-currency-renderer-v14">
+.catalog-currency-panel{border:1px solid rgba(148,163,184,.16);background:rgba(15,23,42,.58);backdrop-filter:blur(12px);border-radius:16px;padding:8px}
+.catalog-currency-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.catalog-currency-title{font-size:9px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;color:#cbd5e1;white-space:nowrap}.catalog-currency-title i{margin-right:5px;color:#60a5fa}.catalog-currency-buttons{display:flex;gap:6px;flex-wrap:wrap}.catalog-currency-btn{font-size:8px;font-weight:950;letter-spacing:.04em;min-height:30px;padding:6px 10px;border-radius:10px;border:1px solid rgba(148,163,184,.18);background:rgba(148,163,184,.06);color:#cbd5e1;transition:.18s;cursor:pointer}.catalog-currency-btn:hover{transform:translateY(-1px);border-color:rgba(96,165,250,.45)}.catalog-currency-btn.active{background:linear-gradient(135deg,rgba(37,99,235,.27),rgba(16,185,129,.14));border-color:rgba(96,165,250,.5);color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.16)}.catalog-currency-status{display:flex;align-items:center;gap:7px;margin-left:auto;font-size:8px;color:#94a3b8;white-space:nowrap}.catalog-currency-badge{font-size:7px;font-weight:950;padding:4px 6px;border-radius:999px;border:1px solid rgba(96,165,250,.28);background:rgba(59,130,246,.10);color:#93c5fd}.catalog-currency-rate strong{color:#e2e8f0}
+[data-theme="light"] .catalog-currency-panel{background:rgba(248,250,252,.9);border-color:#dbe4ee}. [data-theme="light"] .catalog-currency-title{color:#334155}. [data-theme="light"] .catalog-currency-btn{color:#334155;background:#f8fafc;border-color:#cbd5e1}. [data-theme="light"] .catalog-currency-btn.active{background:#eff6ff;border-color:#93c5fd;color:#1d4ed8}. [data-theme="light"] .catalog-currency-status{color:#64748b}. [data-theme="light"] .catalog-currency-rate strong{color:#334155}
+.plan-rate-switch{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin-top:5px}.plan-rate-btn{font-size:7px;line-height:1;min-height:24px;padding:5px 7px;border-radius:8px;font-weight:950;letter-spacing:.03em;border:1px solid rgba(148,163,184,.16);background:rgba(148,163,184,.06);color:#cbd5e1;cursor:pointer;transition:.18s}.plan-rate-btn.active{background:rgba(59,130,246,.18);border-color:rgba(96,165,250,.45);color:#fff}.plan-rate-source{font-size:7px;line-height:1.25;color:#94a3b8;margin-top:4px;font-weight:800}.plan-rate-source .official-dot{color:#60a5fa}.plan-rate-source .p2p-dot{color:#34d399}.plan-rate-source .cop-dot{color:#fbbf24}
+.lc-rate-summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.lc-rate-mini{border:1px solid rgba(148,163,184,.14);background:linear-gradient(145deg,rgba(18,30,51,.96),rgba(10,19,34,.90));border-radius:14px;padding:9px;min-width:0}.lc-rate-mini>div{display:flex;align-items:center;justify-content:space-between;gap:5px}.lc-mini-label{font-size:7.5px;font-weight:950;letter-spacing:.08em;color:#94a3b8}.lc-mini-pill{font-size:6.5px;font-weight:950;padding:3px 5px;border-radius:999px}.lc-mini-pill.official{color:#93c5fd;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)}.lc-mini-pill.p2p{color:#6ee7b7;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)}.lc-rate-mini strong{display:block;font-size:17px;line-height:1.1;color:#f8fafc;margin-top:7px;letter-spacing:-.02em}.lc-rate-mini small{display:block;font-size:6.9px;line-height:1.25;color:#94a3b8;margin-top:4px}
+.lc-converter-main,.lc-custom-converter{background:linear-gradient(145deg,rgba(15,23,42,.92),rgba(9,17,30,.86));border:1px solid rgba(59,130,246,.18);box-shadow:0 10px 26px rgba(0,0,0,.10)}.lc-custom-converter{border-color:rgba(168,85,247,.18)}.lc-calc-kicker{font-size:7px;font-weight:950;letter-spacing:.14em;color:#60a5fa}.lc-calc-kicker.custom{color:#c084fc}.lc-calc-kicker i{margin-right:5px}.lc-calc-title{font-size:13px;font-weight:950;color:#f8fafc;margin-top:2px}.lc-live-source{font-size:7px;font-weight:900;color:#94a3b8;border:1px solid rgba(148,163,184,.14);padding:5px 7px;border-radius:8px}.lc-mode-scroller{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}.lc-mode-scroller::-webkit-scrollbar{display:none}.lc-exchange-mode-btn{flex:0 0 auto;font-size:8px;font-weight:950;color:#cbd5e1;background:rgba(148,163,184,.06);border:1px solid rgba(148,163,184,.15);min-height:31px;padding:6px 9px;border-radius:10px;cursor:pointer;white-space:nowrap}.lc-exchange-mode-btn.active{background:rgba(37,99,235,.2);border-color:rgba(96,165,250,.45);color:#dbeafe}.lc-field-label{display:block;font-size:7px;font-weight:950;letter-spacing:.06em;text-transform:uppercase;color:#94a3b8;margin-bottom:4px}.lc-calc-input{width:100%;min-height:39px;border-radius:10px;border:1px solid rgba(148,163,184,.18);background:rgba(2,6,23,.42);color:#f8fafc;padding:8px 10px;font-size:12px;font-weight:850;outline:none}.lc-calc-input:focus{border-color:#60a5fa;box-shadow:0 0 0 3px rgba(96,165,250,.08)}.lc-calc-input option{background:#0f172a;color:#fff}.lc-calc-result{min-height:39px;border-radius:10px;border:1px solid rgba(148,163,184,.18);background:rgba(2,6,23,.32);color:#f8fafc;padding:8px 10px;display:flex;align-items:center;font-size:14px;font-weight:950}.lc-arrow-box{height:39px;display:flex;align-items:center;justify-content:center;color:#60a5fa;font-size:12px}.lc-calc-note{font-size:8px;line-height:1.35;color:#bfdbfe;background:rgba(37,99,235,.08);border:1px solid rgba(96,165,250,.14);padding:7px 9px;border-radius:9px}.lc-custom-result{border:1px dashed rgba(192,132,252,.28);background:rgba(168,85,247,.06);color:#f3e8ff;border-radius:10px;min-height:40px;padding:9px 10px;display:flex;align-items:center;font-size:10px;font-weight:900}.lc-custom-preview{font-size:7.5px;line-height:1.35;color:#94a3b8}.lc-exchange-footnote{display:flex;gap:6px;align-items:flex-start;font-size:7.5px;line-height:1.4;color:#94a3b8;padding:0 1px}.lc-exchange-footnote i{color:#60a5fa;margin-top:2px}.lc-exchange-card{width:min(100%,820px);max-height:90dvh;display:flex;flex-direction:column;min-height:0;border-radius:22px;overflow:hidden;background:#0b1324;color:#f8fafc;border:1px solid rgba(148,163,184,.18);box-shadow:0 28px 90px rgba(0,0,0,.58)}.lc-exchange-header{background:linear-gradient(135deg,#101d35,#0b1324);border-bottom:1px solid rgba(148,163,184,.15);min-height:58px}.lc-exchange-icon{background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(168,85,247,.13));border:1px solid rgba(96,165,250,.25);color:#60a5fa}.lc-exchange-kicker{font-size:7px;font-weight:950;letter-spacing:.16em;color:#60a5fa}.lc-exchange-title{font-size:18px;font-weight:950;line-height:1.05;color:#f8fafc;margin-top:2px}.lc-exchange-subtitle{font-size:7px;color:#94a3b8;margin-top:3px}.lc-exchange-action{background:rgba(148,163,184,.07);border:1px solid rgba(148,163,184,.15);color:#cbd5e1;transition:.18s}.lc-exchange-action:hover{background:#2563eb;color:#fff;border-color:#3b82f6}.lc-exchange-body{min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}.lc-exchange-body::-webkit-scrollbar{width:6px}.lc-exchange-body::-webkit-scrollbar-thumb{background:rgba(148,163,184,.28);border-radius:999px}.lc-exchange-backdrop{background:rgba(2,6,23,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:10px}
+[data-theme="light"] .lc-exchange-card{background:#f8fafc;color:#0f172a;border-color:#cbd5e1;box-shadow:0 28px 90px rgba(15,23,42,.18)}[data-theme="light"] .lc-exchange-header{background:linear-gradient(135deg,#fff,#eef4fb);border-bottom-color:#dbe4ee}[data-theme="light"] .lc-exchange-title{color:#0f172a}[data-theme="light"] .lc-exchange-subtitle{color:#64748b}[data-theme="light"] .lc-exchange-action{background:#f1f5f9;border-color:#cbd5e1;color:#334155}[data-theme="light"] .lc-rate-mini{background:linear-gradient(145deg,#fff,#f1f5f9);border-color:#cbd5e1}[data-theme="light"] .lc-rate-mini strong{color:#0f172a}[data-theme="light"] .lc-rate-mini small{color:#64748b}[data-theme="light"] .lc-mini-label{color:#475569}[data-theme="light"] .lc-converter-main,[data-theme="light"] .lc-custom-converter{background:#fff;border-color:#dbeafe}[data-theme="light"] .lc-custom-converter{border-color:#ede9fe}[data-theme="light"] .lc-calc-title{color:#0f172a}[data-theme="light"] .lc-live-source{color:#64748b}[data-theme="light"] .lc-exchange-mode-btn{color:#334155;background:#f8fafc;border-color:#cbd5e1}[data-theme="light"] .lc-exchange-mode-btn.active{background:#eff6ff;color:#1d4ed8;border-color:#93c5fd}[data-theme="light"] .lc-calc-input{background:#fff;color:#0f172a;border-color:#cbd5e1}[data-theme="light"] .lc-calc-input option{background:#fff;color:#0f172a}[data-theme="light"] .lc-calc-result{background:#f8fafc;color:#0f172a;border-color:#cbd5e1}[data-theme="light"] .lc-calc-note{background:#eff6ff;color:#334155}[data-theme="light"] .lc-custom-result{background:#faf5ff;color:#581c87;border-color:#d8b4fe}[data-theme="light"] .lc-custom-preview{color:#64748b}
+.lc-mode-mobile{display:none}
+.lc-mode-mobile-select{width:100%;min-height:42px;padding:9px 36px 9px 12px;border-radius:12px;border:1px solid rgba(96,165,250,.30);background:linear-gradient(145deg,rgba(30,64,175,.16),rgba(15,23,42,.84));color:#f8fafc;font-size:11px;font-weight:900;outline:none;appearance:auto;-webkit-appearance:auto}.lc-mode-mobile-select:focus{border-color:#60a5fa;box-shadow:0 0 0 3px rgba(96,165,250,.10)}.lc-mode-mobile-select option{background:#0f172a;color:#fff;font-weight:800}
+[data-theme="light"] .lc-mode-mobile-select{background:linear-gradient(145deg,#eef6ff,#fff);color:#0f172a;border-color:#93c5fd}[data-theme="light"] .lc-mode-mobile-select option{background:#fff;color:#0f172a}
+@media(max-width:700px){.lc-exchange-backdrop{padding:6px}.lc-exchange-card{width:min(100%,600px);max-height:calc(100dvh - 8px);border-radius:18px}.lc-exchange-body{padding-bottom:max(12px,env(safe-area-inset-bottom))!important}.lc-rate-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lc-rate-mini strong{font-size:16px}.catalog-currency-toolbar{align-items:flex-start}.catalog-currency-buttons{width:100%}.catalog-currency-status{width:100%;margin-left:0;justify-content:flex-start}.plan-rate-btn{min-height:22px;font-size:6.7px;padding:4px 6px}.lc-exchange-mode-btn{font-size:7.5px}.lc-mode-scroller{display:none}.lc-mode-mobile{display:block;margin-top:2px}.lc-arrow-box{display:none}}
+@media(max-width:390px){.lc-rate-summary-grid{gap:5px}.lc-rate-mini{padding:8px}.lc-rate-mini strong{font-size:14px}.lc-exchange-title{font-size:16px}.lc-calc-title{font-size:12px}.lc-custom-result{font-size:9px}}
 </style>
 <script>
-/* USD base visible junto al precio calculado en Binance P2P */
-(function(){
-  const usdPrices={...planPricesConfig,...hotspotPricesConfig,...devPricesConfig};
-  function addUsdReferences(){
-    document.querySelectorAll('[data-price-id]').forEach(priceEl=>{
-      const key=priceEl.getAttribute('data-price-id');
-      if(!Object.prototype.hasOwnProperty.call(usdPrices,key)) return;
-      const card=priceEl.closest('.service-card');
-      if(!card || card.querySelector(`.binance-usd-reference[data-usd-for="${key}"]`)) return;
-      const note=document.createElement('div');
-      note.className='binance-usd-reference';
-      note.dataset.usdFor=key;
-      note.innerHTML='<span class="usd-label">USD/USDT '+Number(usdPrices[key]).toFixed(2)+'</span>';
-      priceEl.insertAdjacentElement('afterend',note);
-    });
+/* ================================================================
+   LC CAMBIOS v14 — CONVERSIÓN EN VIVO + TASA PERSONALIZADA
+   ================================================================ */
+function setExchangeCalcMode(mode){
+  exchangeCalcMode=mode;
+  const modes={BS_USD:'calc-mode-bs-usd',USD_BS:'calc-mode-usd',USDT_BS:'calc-mode-usdt',BS_USDT:'calc-mode-bs-usdt',BS_EUR:'calc-mode-bs-eur',EUR_BS:'calc-mode-eur-bs',BS_COP:'calc-mode-bs-cop',COP_BS:'calc-mode-cop-bs',COP_USD:'calc-mode-cop-usd',USD_COP:'calc-mode-usd-cop'};
+  Object.entries(modes).forEach(([key,id])=>document.getElementById(id)?.classList.toggle('active',key===mode));
+  const mobileModeSelect=document.getElementById('exchange-mode-select');
+  if(mobileModeSelect) mobileModeSelect.value=mode;
+  document.getElementById('usdt-rate-selector')?.classList.add('hidden');
+  const inputLabel=document.getElementById('calc-input-label'), resultLabel=document.getElementById('calc-result-label'), selector=document.getElementById('usdt-rate-selector');
+  const map={BS_USD:['Monto en Bs','Resultado en USD'],USD_BS:['Monto en USD','Resultado en Bs'],USDT_BS:['Monto en USDT','Resultado en Bs'],BS_USDT:['Monto en Bs','Resultado en USDT'],BS_EUR:['Monto en Bs','Resultado en EUR'],EUR_BS:['Monto en EUR','Resultado en Bs'],BS_COP:['Monto en Bs','Resultado en COP'],COP_BS:['Monto en COP','Resultado en Bs'],COP_USD:['Monto en COP','Resultado en USD'],USD_COP:['Monto en USD','Resultado en COP']};
+  if(map[mode]){inputLabel.textContent=map[mode][0];resultLabel.textContent=map[mode][1];}
+  if(['USDT_BS','BS_USDT'].includes(mode)){selector?.classList.remove('hidden');const type=document.getElementById('exchange-calc-rate-type');if(type)type.value=mode==='USDT_BS'?'sell':'buy';}
+  updateExchangeCalculator();
+}
+function updateExchangeCalculator(){
+  const input=document.getElementById('exchange-calc-input'),result=document.getElementById('exchange-calc-result'),note=document.getElementById('exchange-calc-note'),live=document.getElementById('exchange-live-source');
+  if(!input||!result)return;
+  const amount=Number(input.value||0),type=document.getElementById('exchange-calc-rate-type')?.value||'sell';let rate=0,value=0,label='';
+  if(exchangeCalcMode==='BS_USD'){rate=BCV_VES_RATE;value=rate?amount/rate:0;label=rate?'BCV OFICIAL · '+fmtBs(rate)+' Bs/USD':'BCV USD no disponible';}
+  else if(exchangeCalcMode==='USD_BS'){rate=BCV_VES_RATE;value=amount*rate;label=rate?'BCV OFICIAL · '+fmtBs(rate)+' Bs/USD':'BCV USD no disponible';}
+  else if(exchangeCalcMode==='USDT_BS'){rate=type==='buy'?BINANCE_VES_BUY:BINANCE_VES_SELL;value=amount*rate;label=rate?'BINANCE P2P · '+fmtBs(rate)+' Bs/USDT':'Binance P2P no disponible';}
+  else if(exchangeCalcMode==='BS_USDT'){rate=type==='sell'?BINANCE_VES_SELL:BINANCE_VES_BUY;value=rate?amount/rate:0;label=rate?'BINANCE P2P · '+fmtBs(rate)+' Bs/USDT':'Binance P2P no disponible';}
+  else if(exchangeCalcMode==='BS_EUR'){rate=BCV_EUR_VES_RATE;value=rate?amount/rate:0;label=rate?'BCV OFICIAL · '+fmtBs(rate)+' Bs/EUR':'BCV EUR no disponible';}
+  else if(exchangeCalcMode==='EUR_BS'){rate=BCV_EUR_VES_RATE;value=amount*rate;label=rate?'BCV OFICIAL · '+fmtBs(rate)+' Bs/EUR':'BCV EUR no disponible';}
+  else if(exchangeCalcMode==='BS_COP'){rate=(COP_TRM_RATE>1&&BCV_VES_RATE>1)?BCV_VES_RATE/COP_TRM_RATE:0;value=rate?amount/rate:0;label=rate?'TRM + BCV · '+fmtBs(rate)+' Bs/COP':'TRM/BCV no disponible';}
+  else if(exchangeCalcMode==='COP_BS'){rate=(COP_TRM_RATE>1&&BCV_VES_RATE>1)?BCV_VES_RATE/COP_TRM_RATE:0;value=amount*rate;label=rate?'TRM + BCV · '+fmtBs(rate)+' Bs/COP':'TRM/BCV no disponible';}
+  else if(exchangeCalcMode==='COP_USD'){rate=COP_TRM_RATE>1?1/COP_TRM_RATE:0;value=amount*rate;label=rate?'TRM OFICIAL · '+fmtNum(COP_TRM_RATE)+' COP/USD':'TRM no disponible';}
+  else if(exchangeCalcMode==='USD_COP'){rate=COP_TRM_RATE;value=amount*rate;label=rate?'TRM OFICIAL · '+fmtNum(rate)+' COP/USD':'TRM no disponible';}
+  const outBs=['USD_BS','USDT_BS','EUR_BS','COP_BS'].includes(exchangeCalcMode);
+  result.textContent=rate>0?(outBs?fmtBs(value):value.toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2})):'Esperando tasa...';
+  if(note)note.textContent=label;
+  if(live)live.textContent='Fuente: '+(label||'esperando');
+}
+function parseFlexibleNumber(value){
+  if(typeof value==='number') return Number.isFinite(value)?value:0;
+  let text=String(value??'').trim().replace(/\s/g,'');
+  if(!text)return 0;
+  if(text.includes(',')&&text.includes('.')){
+    text=text.lastIndexOf(',')>text.lastIndexOf('.')?text.replace(/\./g,'').replace(',','.'):text.replace(/,/g,'');
+  }else if(text.includes(',')){
+    text=text.replace(/,/g,'.');
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addUsdReferences);
-  else addUsdReferences();
-})();
+  const n=Number(text);
+  return Number.isFinite(n)?n:0;
+}
+async function copyCustomExchangeResult(){const el=document.getElementById('custom-exchange-result');if(!el)return;try{await navigator.clipboard.writeText(el.textContent.trim());}catch(e){const ta=document.createElement('textarea');ta.value=el.textContent.trim();document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}}
+async function copyExchangeResult(){const result=document.getElementById('exchange-calc-result');if(!result)return;const text=result.textContent.trim();if(!text||text==='Cargando...'||text==='Esperando tasa...')return;try{await navigator.clipboard.writeText(text);}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();}}
+
+/* Precios de catálogo: se muestran únicamente en Bs usando Binance P2P. */
+function getCatalogBasePrice(key){const all={...planPricesConfig,...hotspotPricesConfig,...devPricesConfig};const n=Number(all[key]);return Number.isFinite(n)?n:0;}
+function renderCardPrice(section,card){
+  const priceEl=card.querySelector('[data-price-id]');
+  if(!priceEl)return;
+  const key=priceEl.getAttribute('data-price-id');
+  const base=getCatalogBasePrice(key);
+  if(!base)return;
+  const pricingRate=Number(BINANCE_VES_BUY||BINANCE_VES_SELL||0);
+  priceEl.textContent=pricingRate>1?fmtBs(base*pricingRate):'No disponible';
+  let usdLabel=card.querySelector('.usd-label[data-usd-for]');
+  if(!usdLabel){
+    usdLabel=document.createElement('span');
+    usdLabel.className='usd-label';
+    usdLabel.setAttribute('data-usd-for',key);
+    priceEl.parentElement?.appendChild(usdLabel);
+  }
+  usdLabel.textContent='USD $'+base.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function renderAllCatalogCards(section){const root=section==='planes'?'#tab-planes':'#tab-hotspot';document.querySelectorAll(`${root} .service-card`).forEach(card=>{if(card.querySelector('[data-price-id]'))renderCardPrice(section,card);});}
+function renderAllCatalogPrices(){renderAllCatalogCards('planes');renderAllCatalogCards('desarrollos');}
+function updateExchangeSummary_v14(){
+  const bcv=document.getElementById('exchange-bcv-value'),euro=document.getElementById('exchange-bcv-euro-value'),copUsd=document.getElementById('exchange-cop-usd-value'),copTrm=document.getElementById('exchange-cop-trm-value'),sell=document.getElementById('exchange-binance-sell'),bcvDate=document.getElementById('exchange-bcv-date'),euroDate=document.getElementById('exchange-bcv-euro-date'),sellDate=document.getElementById('exchange-binance-sell-date'),copDate=document.getElementById('exchange-cop-date');
+  if(bcv)bcv.textContent=BCV_VES_RATE?fmtBs(BCV_VES_RATE):'No disponible';if(euro)euro.textContent=BCV_EUR_VES_RATE?fmtBs(BCV_EUR_VES_RATE):'No disponible';if(copTrm)copTrm.textContent=COP_TRM_RATE?fmtNum(COP_TRM_RATE)+' COP/USD':'No disponible';if(sell)sell.textContent=BINANCE_VES_SELL?fmtBs(BINANCE_VES_SELL):'No disponible';if(bcvDate)bcvDate.textContent=BCV_RATE_DATE?'Fecha válida: '+fmtValidDate(BCV_RATE_DATE):'Fecha válida: esperando...';if(euroDate)euroDate.textContent=BCV_EUR_RATE_DATE?'Fecha válida: '+fmtValidDate(BCV_EUR_RATE_DATE):'Fecha válida: esperando...';if(copDate)copDate.textContent=COP_TRM_DATE?'Fecha válida: '+fmtValidDate(COP_TRM_DATE):'Fecha válida: esperando...';if(sellDate){const d=BINANCE_RATE_DATE?fmtUpdateDateTime(BINANCE_RATE_DATE):'';sellDate.textContent=d?'Actualización: '+d:'Actualización: esperando...';}
+}
+const _summaryV13=typeof updateExchangeSummary==='function'?updateExchangeSummary:null;
+updateExchangeSummary=function(){if(_summaryV13)_summaryV13();updateExchangeSummary_v14();renderAllCatalogPrices();updateExchangeCalculator();};
+function openExchangeModal_v14(){openExchangeModal_original_v14();updateExchangeSummary_v14();setExchangeCalcMode(exchangeCalcMode);}
+const openExchangeModal_original_v14=typeof openExchangeModal==='function'?openExchangeModal:null;
+if(openExchangeModal_original_v14)openExchangeModal=openExchangeModal_original_v14;
+const _loadBinance_v14=typeof loadBinanceRatesAndApplyPrices==='function'?loadBinanceRatesAndApplyPrices:null;
+if(_loadBinance_v14){loadBinanceRatesAndApplyPrices=async function(){const result=await _loadBinance_v14();renderAllCatalogPrices();return result;};}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{renderAllCatalogPrices();setExchangeCalcMode(exchangeCalcMode);});else{renderAllCatalogPrices();setExchangeCalcMode(exchangeCalcMode);}
 </script>
 </body>
 </html>
