@@ -1989,7 +1989,18 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-ticket .invoice-total {
 }
 </style>
 <style id="familia-registros-menu-style">
-.sidebar-main-nav{gap:3px}.menu-group{margin:2px 8px}.menu-group-toggle{width:100%;border:0;background:transparent;color:var(--text-muted);display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:.74rem;font-weight:850;letter-spacing:.06em;text-transform:uppercase}.menu-group-toggle>span{display:flex;align-items:center;gap:8px}.menu-group-toggle>span>i{width:24px;text-align:center;color:var(--primary-accent)}.menu-group-toggle:hover{background:rgba(37,99,235,.06);color:var(--text-main)}.menu-group-items{display:none;margin-top:1px}.menu-group-items.show{display:block}.menu-group-items .nav-link{margin:2px 4px;padding:8px 12px 8px 18px;font-size:.72rem}.menu-group-items .nav-link>i,.menu-group-items .menu-icon-wrap>i{width:25px;min-width:25px;height:25px;border-radius:8px;display:inline-grid;place-items:center;background:rgba(37,99,235,.09);color:#2563eb;font-size:.74rem}.menu-group-items .nav-link.active{color:#fff!important;background:linear-gradient(135deg,#2563eb,#1d4ed8)!important}.menu-group-items .nav-link.active>i,.menu-group-items .nav-link.active .menu-icon-wrap>i{background:rgba(255,255,255,.16)!important;color:#fff!important}.group-chevron{font-size:.6rem;transition:transform .18s ease}.menu-group-toggle[aria-expanded="false"] .group-chevron{transform:rotate(-90deg)}.family-reg-section{border:1px solid var(--border-color);border-radius:18px;background:var(--bg-card);box-shadow:0 8px 22px rgba(15,23,42,.045);overflow:hidden}.family-reg-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border-color);background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(6,182,212,.035))}.family-reg-head .title{font-weight:850;color:var(--text-main);font-size:.88rem}.family-reg-head .sub{font-size:.68rem;color:var(--text-muted);margin-top:2px}.family-reg-body{padding:14px 16px}.family-reg-table-wrap{overflow:auto;max-height:480px}.family-reg-table{min-width:760px}.family-reg-table th{font-size:.62rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);background:rgba(0,0,0,.02);white-space:nowrap}.family-reg-table td{font-size:.7rem;color:var(--text-main);vertical-align:middle}.health-order-box{border:1px dashed var(--border-color);border-radius:12px;background:rgba(37,99,235,.025);padding:10px;font-size:.72rem;color:var(--text-main);white-space:pre-wrap}.med-status{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:.6rem;font-weight:800;background:#dcfce7;color:#166534}.med-status.off{background:#fee2e2;color:#991b1b}@media(max-width:767px){.menu-group{margin:2px 4px}.menu-group-toggle{padding:9px 10px}.menu-group-items .nav-link{padding:9px 10px 9px 14px}.family-reg-head{align-items:flex-start;flex-direction:column}.family-reg-body{padding:12px}.family-reg-table{min-width:680px}}
+.sidebar-main-nav{gap:3px}.menu-group{margin:2px 8px}.menu-group-toggle{width:100%;border:0;background:transparent;color:var(--text-muted);display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:10px;font-size:.74rem;font-weight:850;letter-spacing:.06em;text-transform:uppercase}.menu-group-toggle>span{display:flex;align-items:center;gap:8px}.menu-group-toggle>span>i{width:24px;text-align:center;color:var(--primary-accent)}.menu-group-toggle:hover{background:rgba(37,99,235,.06);color:var(--text-main)}.menu-group-items{display:none;margin-top:1px}.menu-group-items.show{display:block}.menu-group-items .nav-link{margin:2px 4px;padding:8px 12px 8px 18px;font-size:.72rem}.menu-group-items .nav-link>i,.menu-group-items .menu-icon-wrap>i{width:25px;min-width:25px;height:25px;border-radius:8px;display:inline-grid;place-items:center;background:rgba(37,99,235,.09);color:#2563eb;font-size:.74rem}.menu-group-items .nav-link.active{color:#fff!important;background:linear-gradient(135deg,#2563eb,#1d4ed8)!important}.menu-group-items .nav-link.active>i,.menu-group-items .nav-link.active .menu-icon-wrap>i{background:rgba(255,255,255,.16)!important;color:#fff!important}.group-chevron{font-size:.6rem;transition:transform .18s ease}.menu-group-toggle[aria-expanded="false"] .group-chevron{transform:rotate(-90deg)}/* Formularios de Familia: se editan exclusivamente dentro de un modal. */
+#hm-form-host,#man-form-host,#esc-form-host,#med-form-host{display:none!important;}
+#modalFamiliaRegistroForm{z-index:350000!important;}
+#modalFamiliaRegistroForm .modal-dialog{z-index:350001!important;max-width:980px;margin:1rem auto;}
+#modalFamiliaRegistroForm .modal-content{position:relative;z-index:350002!important;background:var(--bg-card)!important;color:var(--text-main)!important;border:1px solid var(--border-color)!important;border-radius:20px;overflow:hidden;}
+#modalFamiliaRegistroForm .modal-header{background:linear-gradient(135deg,rgba(37,99,235,.10),rgba(6,182,212,.045));border-bottom:1px solid var(--border-color);padding:1rem 1.25rem;}
+#modalFamiliaRegistroForm .modal-body{padding:0;max-height:78vh;overflow-y:auto;}
+#modalFamiliaRegistroForm .family-reg-section{border:0!important;border-radius:0!important;box-shadow:none!important;margin:0!important;}
+#modalFamiliaRegistroForm .family-reg-head{border-radius:0;padding:12px 16px;}
+#modalFamiliaRegistroForm .family-reg-body{padding:16px;}
+@media(max-width:767px){#modalFamiliaRegistroForm .modal-dialog{margin:.5rem;}#modalFamiliaRegistroForm .modal-body{max-height:84vh;}#modalFamiliaRegistroForm .family-reg-body{padding:12px;}}
+.family-reg-section{border:1px solid var(--border-color);border-radius:18px;background:var(--bg-card);box-shadow:0 8px 22px rgba(15,23,42,.045);overflow:hidden}.family-reg-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border-color);background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(6,182,212,.035))}.family-reg-head .title{font-weight:850;color:var(--text-main);font-size:.88rem}.family-reg-head .sub{font-size:.68rem;color:var(--text-muted);margin-top:2px}.family-reg-body{padding:14px 16px}.family-reg-table-wrap{overflow:auto;max-height:480px}.family-reg-table{min-width:760px}.family-reg-table th{font-size:.62rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);background:rgba(0,0,0,.02);white-space:nowrap}.family-reg-table td{font-size:.7rem;color:var(--text-main);vertical-align:middle}.health-order-box{border:1px dashed var(--border-color);border-radius:12px;background:rgba(37,99,235,.025);padding:10px;font-size:.72rem;color:var(--text-main);white-space:pre-wrap}.med-status{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:.6rem;font-weight:800;background:#dcfce7;color:#166534}.med-status.off{background:#fee2e2;color:#991b1b}@media(max-width:767px){.menu-group{margin:2px 4px}.menu-group-toggle{padding:9px 10px}.menu-group-items .nav-link{padding:9px 10px 9px 14px}.family-reg-head{align-items:flex-start;flex-direction:column}.family-reg-body{padding:12px}.family-reg-table{min-width:680px}}
 </style>
 
 <style id="portal-font-scale-v20260910">
@@ -2229,7 +2240,6 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
             <a href="#dashboard" class="nav-link active" onclick="switchTab('dashboard')"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
             <div class="menu-group"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-cubes"></i>General</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
                 <a href="#agenda" class="nav-link" onclick="switchTab('agenda')"><i class="fa-solid fa-calendar-check"></i><span>Agenda</span></a>
-                <a href="#notificaciones" class="nav-link" onclick="switchTab('notificaciones')"><span class="position-relative d-inline-flex me-2 menu-icon-wrap"><i class="fa-solid fa-bell"></i><span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle d-none" id="nav-notif-count" style="font-size:.58rem;min-width:17px;padding:2px 4px;line-height:1;z-index:2;">0</span></span><span>Notificaciones</span></a>
                 <a href="#tareas" class="nav-link" onclick="switchTab('tareas')"><i class="fa-solid fa-list-check"></i><span>Tareas</span></a>
             </div></div>
             <div class="menu-group"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-briefcase"></i>Administración</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
@@ -2298,6 +2308,10 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
          BOTON PARA CAMBIAR DE TEMA ESTA DESACTIVADO
          ═══════════════════════════════════════════════════════════════ -->
             <div class="d-flex align-items-center gap-3">
+                <button type="button" class="btn btn-icon btn-light rounded-circle border shadow-sm position-relative" id="header-notif-toggle" onclick="abrirCentroNotificacionesDesdeCabecera()" title="Notificaciones" aria-label="Abrir notificaciones">
+                    <i class="fa-solid fa-bell text-secondary"></i>
+                    <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle d-none" id="header-notif-count" style="font-size:.58rem;min-width:17px;padding:2px 4px;line-height:1;z-index:2;">0</span>
+                </button>
                 <button class="btn btn-icon btn-light rounded-circle border shadow-sm" id="theme-toggle" onclick="toggleTheme()" title="Cambiar Tema">
     			<i class="fa-solid fa-moon text-secondary"></i>
 				</button>
@@ -3545,7 +3559,30 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
   <div class="col-sm-6 col-xl-3"><div class="task-kpi-card"><div class="task-kpi-icon"><i class="fa-solid fa-clock"></i></div><div><div class="task-kpi-label">Próximas</div><div class="task-kpi-value" id="tareas-kpi-proximas">0</div></div></div></div>
   <div class="col-sm-6 col-xl-3"><div class="task-kpi-card"><div class="task-kpi-icon"><i class="fa-solid fa-paper-plane"></i></div><div><div class="task-kpi-label">Enviadas</div><div class="task-kpi-value" id="tareas-kpi-enviadas">0</div></div></div></div>
 </div>
-<div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Tareas registradas</div><div class="sub">Organizadas por estado. Los avisos se procesan automáticamente.</div></div></div><div class="family-reg-body"><div id="tareas-listado"></div></div></div>
+<div class="family-reg-section tarea-telegram-manual-section">
+  <div class="family-reg-head">
+    <div>
+      <div class="title"><i class="fa-brands fa-telegram text-primary me-2"></i>Enviar tareas a Telegram</div>
+      <div class="sub">Seleccione las tareas que desea enviar. El mensaje solo incluirá título, descripción y observaciones.</div>
+    </div>
+  </div>
+  <div class="family-reg-body">
+    <div class="tarea-telegram-toolbar">
+      <div class="d-flex flex-wrap gap-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="seleccionarGrupoTareasTelegram_('pendientes')"><i class="fa-solid fa-clock me-1"></i>Seleccionar pendientes</button>
+        <button type="button" class="btn btn-sm btn-outline-success" onclick="seleccionarGrupoTareasTelegram_('realizadas')"><i class="fa-solid fa-circle-check me-1"></i>Seleccionar realizadas</button>
+        <button type="button" class="btn btn-sm btn-outline-primary" onclick="seleccionarTodasTareasTelegram_(true)"><i class="fa-solid fa-check-double me-1"></i>Seleccionar todas</button>
+        <button type="button" class="btn btn-sm btn-light border" onclick="limpiarSeleccionTareasTelegram_()"><i class="fa-solid fa-xmark me-1"></i>Limpiar selección</button>
+      </div>
+      <div class="d-flex flex-wrap align-items-center gap-2 mt-2 mt-md-0">
+        <span id="tareas-telegram-seleccion-count" class="tarea-telegram-count"><i class="fa-solid fa-list-check me-1"></i>0 seleccionadas</span>
+        <button type="button" class="btn btn-primary" id="btn-enviar-tareas-telegram" onclick="enviarTareasSeleccionadasTelegram()"><i class="fa-brands fa-telegram me-1"></i>Enviar seleccionadas</button>
+      </div>
+    </div>
+    <div id="tareas-telegram-estado" class="small text-muted mt-2"></div>
+  </div>
+</div>
+<div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Tareas registradas</div><div class="sub">Organizadas por estado. Seleccione las tareas que desea enviar manualmente a Telegram y los avisos automáticos se mantienen independientes.</div></div></div><div class="family-reg-body"><div id="tareas-listado"></div></div></div>
 <div id="tareaFormModal" class="tarea-summary-modal tarea-form-modal" aria-hidden="true" role="dialog" aria-modal="true">
   <div class="tarea-summary-card tarea-form-card">
     <div class="tarea-summary-head">
@@ -3560,8 +3597,10 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         <div class="col-md-3"><label class="form-label small fw-semibold">Tipo *</label><select id="tarea_tipo" class="form-select form-control-pro"><option>Compromiso</option><option>Actividad</option><option>Evento</option><option>Pago</option><option>Reunión</option><option>Vencimiento</option><option>Otro</option></select></div>
         <div class="col-md-3"><label class="form-label small fw-semibold">Prioridad</label><select id="tarea_prioridad" class="form-select form-control-pro"><option>Normal</option><option>Alta</option><option>Urgente</option><option>Baja</option></select></div>
         <div class="col-12"><label class="form-label small fw-semibold">Descripción *</label><textarea id="tarea_descripcion" class="form-control form-control-pro" rows="2" required placeholder="Detalle de lo que debe recordarse..."></textarea></div>
-        <div class="col-md-4"><label class="form-label small fw-semibold">Fecha de inicio *</label><input id="tarea_fecha_inicio" type="date" class="form-control form-control-pro" required></div>
-        <div class="col-md-4"><label class="form-label small fw-semibold">Hora del recordatorio *</label><input id="tarea_hora" type="time" class="form-control form-control-pro" required></div>
+        <div class="col-md-4"><label class="form-label small fw-semibold">Fecha de la tarea *</label><input id="tarea_fecha_inicio" type="date" class="form-control form-control-pro" required></div>
+        <div class="col-md-4"><label class="form-label small fw-semibold">Hora de la tarea *</label><input id="tarea_hora_tarea" type="time" class="form-control form-control-pro" required><small class="text-muted">Hora exacta de la actividad.</small></div>
+        <div class="col-md-2"><label class="form-label small fw-semibold">Recordarme antes</label><input id="tarea_recordatorio_antes" type="number" min="0" step="1" value="30" class="form-control form-control-pro" placeholder="30"><small class="text-muted">Tiempo previo</small></div>
+        <div class="col-md-2"><label class="form-label small fw-semibold">Unidad</label><select id="tarea_recordatorio_unidad" class="form-select form-control-pro"><option value="minutos" selected>Minutos</option><option value="horas">Horas</option><option value="dias">Días</option></select><small class="text-muted">Antes de la tarea</small></div>
         <div class="col-md-4"><label class="form-label small fw-semibold">Fecha de fin</label><input id="tarea_fecha_fin" type="date" class="form-control form-control-pro"></div>
         <div class="col-md-8"><label class="form-label small fw-semibold">Fechas específicas (opcional)</label><input id="tarea_fechas_especificas" class="form-control form-control-pro" placeholder="14/09/2026, 20/09/2026, 01/10/2026"><small class="text-muted">Separe varias fechas con coma, punto y coma o salto de línea.</small></div>
         <div class="col-md-2"><label class="form-label small fw-semibold">Intervalo</label><input id="tarea_intervalo_valor" type="number" min="1" step="1" class="form-control form-control-pro" placeholder="Ej. 2"></div>
@@ -3585,7 +3624,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
 <section id="sec-facturacion" class="tab-content d-none">
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
     <h5 class="fw-bold m-0">Gestión de Facturación</h5>
-    <button class="btn btn-outline-dark view-admin-master" onclick="toggleListaFacturas()">
+    <button class="btn btn-outline-dark view-admin-master" id="btn-mostrar-facturas-admin" data-admin-only="true" onclick="toggleListaFacturas()">
     <i class="fa-solid fa-list me-1"></i> Mostrar Facturas
 </button>
 </div>
@@ -3828,7 +3867,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         <section id="sec-pagos" class="tab-content d-none">
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
         <h5 class="fw-bold m-0">Módulo de Pagos</h5>
-        <button class="btn btn-outline-dark view-admin-master" onclick="toggleListaPagos()">
+        <button class="btn btn-outline-dark view-admin-master" id="btn-mostrar-pagos-admin" data-admin-only="true" onclick="toggleListaPagos()">
             <i class="fa-solid fa-list me-1"></i> Mostrar Pendientes
         </button>
     </div>
@@ -3959,9 +3998,6 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
             <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <h5 class="fw-bold m-0">Centro de Notificaciones</h5>
                 <div class="d-flex gap-2">
-                    <button class="btn btn-outline-dark view-admin-master" onclick="toggleListaNotificaciones()">
-                        <i class="fa-solid fa-list me-1"></i> Mostrar Notificaciones
-                    </button>
                     <button class="btn btn-primary view-admin-master" data-perm-module="notificaciones" data-perm-action="agregar" id="btn-enviar-notif" onclick="abrirModalNuevaNotificacion()">
                         <i class="fa-solid fa-paper-plane me-1"></i> Enviar Notificación
                     </button>
@@ -3981,7 +4017,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
             </div>
 
             <!-- LISTA DE NOTIFICACIONES POR CATEGORÍA -->
-            <div id="notif-lista-todos" class="mt-3 d-none">
+            <div id="notif-lista-todos" class="mt-3">
                 <div class="card border-0 shadow-sm rounded-3">
                     <div class="card-header bg-white d-flex justify-content-between align-items-center py-3 px-3 border-bottom flex-wrap gap-2">
                         <h6 class="fw-bold m-0"><i class="fa-solid fa-bell text-primary me-2"></i>Notificaciones Emitidas y Recibidas</h6>
@@ -4038,7 +4074,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
             </div>
 
             <!-- LISTA DE NOTIFICACIONES -->
-            <div class="list-group card-stat p-2" id="lista-notificaciones-global"></div>
+            <div class="d-none" id="lista-notificaciones-global"></div>
         </section>
 
         <!-- ═══════════════════════════════════════════════════════════════
@@ -4266,9 +4302,9 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: AUDITORÍA — Historial de Actividad del Sistema
              ═══════════════════════════════════════════════════════════════ -->
-<section id="sec-historialmedico" class="tab-content d-none"><div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-notes-medical text-primary me-2"></i>Historial Médico</h5><small class="text-muted">Consultas, diagnósticos, órdenes médicas y seguimiento.</small></div><button class="btn btn-primary" onclick="abrirFormularioHistorialMedico()"><i class="fa-solid fa-plus me-1"></i>Nuevo registro</button></div><div class="row g-3 mb-3"><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Registros médicos</div><div class="sub">Historial clínico registrado</div></div><i class="fa-solid fa-file-medical text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-total">0</div><small class="text-muted">Total de registros</small></div></div></div><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Órdenes médicas</div><div class="sub">Registros con indicaciones</div></div><i class="fa-solid fa-file-prescription text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-ordenes">0</div><small class="text-muted">Con orden registrada</small></div></div></div><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Medicinas activas</div><div class="sub">Recordatorios habilitados</div></div><i class="fa-solid fa-pills text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-meds">0</div><small class="text-muted">Tratamientos activos</small></div></div></div></div><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Registrar consulta / orden médica</div><div class="sub">Asocia el registro con el cliente o un integrante de Familia.</div></div></div><div class="family-reg-body"><form id="formHistorialMedico" onsubmit="guardarHistorialMedico(event)"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Persona / paciente *</label><select id="hm_persona" class="form-select form-control-pro" required></select></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input id="hm_fecha" type="date" class="form-control form-control-pro" required></div><div class="col-md-3"><label class="form-label small fw-semibold">Profesional</label><input id="hm_profesional" class="form-control form-control-pro" placeholder="Dr./Dra. Nombre"></div><div class="col-md-3"><label class="form-label small fw-semibold">Especialidad</label><input id="hm_especialidad" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Diagnóstico</label><input id="hm_diagnostico" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Próximo control</label><input id="hm_proximo_control" type="date" class="form-control form-control-pro"></div><div class="col-12"><label class="form-label small fw-semibold">Orden médica / tratamiento</label><textarea id="hm_orden" class="form-control form-control-pro" rows="3"></textarea></div><div class="col-md-6"><label class="form-label small fw-semibold">Alergias</label><textarea id="hm_alergias" class="form-control form-control-pro" rows="2"></textarea></div><div class="col-md-6"><label class="form-label small fw-semibold">Antecedentes</label><textarea id="hm_antecedentes" class="form-control form-control-pro" rows="2"></textarea></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea id="hm_observaciones" class="form-control form-control-pro" rows="2"></textarea></div></div><div class="d-flex justify-content-end gap-2 mt-3"><button type="button" class="btn btn-light border" onclick="limpiarFormularioHistorialMedico()">Limpiar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar registro</button></div></form></div></div><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Recordatorios de medicinas</div><div class="sub">Telegram enviará avisos automáticos según los horarios registrados.</div></div><button class="btn btn-sm btn-outline-primary" onclick="abrirFormularioRecordatorioMedicina()"><i class="fa-solid fa-plus me-1"></i>Agregar medicina</button></div><div class="family-reg-body"><form id="formRecordatorioMedicina" class="mb-3" onsubmit="guardarRecordatorioMedicina(event)"><div class="row g-2"><div class="col-md-3"><label class="form-label small fw-semibold">Persona *</label><select id="med_persona" class="form-select form-control-pro" required></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Medicamento *</label><input id="med_medicamento" class="form-control form-control-pro" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Dosis *</label><input id="med_dosis" class="form-control form-control-pro" placeholder="1 tableta" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Vía</label><input id="med_via" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Frecuencia</label><input id="med_frecuencia" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Horarios *</label><input id="med_horarios" class="form-control form-control-pro" placeholder="08:00 AM, 04:00 PM" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Inicio</label><input id="med_inicio" type="date" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Fin</label><input id="med_fin" type="date" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Estado</label><select id="med_estado" class="form-select form-control-pro"><option>Activo</option><option>Inactivo</option></select></div><div class="col-md-4"><label class="form-label small fw-semibold">Indicaciones</label><input id="med_indicaciones" class="form-control form-control-pro"></div></div><div class="d-flex justify-content-end mt-2"><button class="btn btn-primary btn-sm"><i class="fa-solid fa-bell me-1"></i>Guardar recordatorio</button></div></form><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Paciente</th><th>Medicamento</th><th>Dosis</th><th>Horarios</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="hm-med-tbody"></tbody></table></div></div></div><div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Historial registrado</div><div class="sub">Consulta y administra los registros médicos.</div></div></div><div class="family-reg-body"><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Fecha</th><th>Paciente</th><th>Profesional</th><th>Especialidad</th><th>Diagnóstico</th><th>Orden médica</th><th>Acciones</th></tr></thead><tbody id="hm-tbody"></tbody></table></div></div></div></section>
-<section id="sec-manutencion" class="tab-content d-none"><div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-hand-holding-dollar text-primary me-2"></i>Manutención Familiar</h5><small class="text-muted">Registro de cualquier pago o aporte realizado a favor de la familia: transferencia, pago móvil, efectivo y otros medios.</small></div><button class="btn btn-primary" onclick="limpiarManutencionForm()"><i class="fa-solid fa-plus me-1"></i>Nuevo pago</button></div><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Registrar pago / aporte familiar</div><div class="sub">Registre el beneficiario, monto, método de pago, referencia y comprobante para mantener trazabilidad.</div></div></div><div class="family-reg-body"><form onsubmit="guardarManutencion(event)" id="formManutencion"><input type="hidden" id="man_id"><div class="row g-2"><div class="col-md-5"><label class="form-label small fw-semibold">Beneficiario *</label><select id="man_persona" class="form-select form-control-pro" required></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Fecha del pago *</label><input id="man_fecha_pago" type="date" class="form-control form-control-pro" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Monto *</label><input id="man_monto" type="number" step="0.01" min="0" class="form-control form-control-pro" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Moneda</label><select id="man_moneda" class="form-select form-control-pro"><option>USD</option><option>VES</option><option>EUR</option><option>COP</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Método de pago *</label><select id="man_tipo" class="form-select form-control-pro" required><option>Transferencia bancaria</option><option>Pago móvil</option><option>Efectivo</option><option>Depósito</option><option>Zelle</option><option>Binance / USDT</option><option>Cheque</option><option>Otro</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Banco / entidad</label><input id="man_banco" class="form-control form-control-pro" placeholder="Banco, plataforma o entidad"></div><div class="col-md-3"><label class="form-label small fw-semibold">Referencia / comprobante</label><input id="man_referencia" class="form-control form-control-pro" placeholder="Número de operación"></div><div class="col-md-3"><label class="form-label small fw-semibold">Responsable / quien paga</label><input id="man_responsable" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Concepto</label><input id="man_frecuencia" class="form-control form-control-pro" placeholder="Alimentación, colegio, vivienda..."></div><div class="col-md-3"><label class="form-label small fw-semibold">Estado</label><select id="man_estado" class="form-select form-control-pro"><option>Pagado</option><option>Pendiente</option><option>Por confirmar</option><option>Anulado</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Próximo pago</label><input id="man_proximo" type="date" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Periodicidad</label><select id="man_periodicidad" class="form-select form-control-pro"><option>Único</option><option>Semanal</option><option>Quincenal</option><option>Mensual</option><option>Trimestral</option><option>Personalizada</option></select></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea id="man_observaciones" class="form-control form-control-pro" rows="2" placeholder="Detalles adicionales del pago, comprobante, acuerdo, etc."></textarea></div></div><div class="d-flex justify-content-end gap-2 mt-3"><button type="button" class="btn btn-light border" onclick="limpiarManutencionForm()">Limpiar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i><span id="man_btn_texto">Registrar pago</span></button></div></form></div></div><div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Historial de pagos familiares</div><div class="sub">Cada registro conserva el método, referencia, responsable y estado del pago.</div></div></div><div class="family-reg-body"><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Fecha</th><th>Beneficiario</th><th>Método</th><th>Monto</th><th>Referencia</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="man-tbody"></tbody></table></div></div></div></section>
-<section id="sec-registrosescolares" class="tab-content d-none"><div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-school text-primary me-2"></i>Registros Escolares</h5><small class="text-muted">Control académico de integrantes de Familia.</small></div><button class="btn btn-primary" onclick="limpiarEscolarForm()"><i class="fa-solid fa-plus me-1"></i>Nuevo registro</button></div><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Nuevo registro escolar</div><div class="sub">Institución, nivel, grado y período académico.</div></div></div><div class="family-reg-body"><form onsubmit="guardarRegistroEscolar(event)" id="formRegistroEscolar"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Estudiante *</label><select id="esc_persona" class="form-select form-control-pro" required></select></div><div class="col-md-4"><label class="form-label small fw-semibold">Institución</label><input id="esc_institucion" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Nivel</label><input id="esc_nivel" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Grado</label><input id="esc_grado" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Período escolar</label><input id="esc_periodo" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Inicio</label><input id="esc_inicio" type="date" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Fin</label><input id="esc_fin" type="date" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Promedio</label><input id="esc_promedio" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Representante</label><input id="esc_representante" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Teléfono</label><input id="esc_telefono" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Estado</label><select id="esc_estado" class="form-select form-control-pro"><option>Activo</option><option>Retirado</option><option>Graduado</option></select></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea id="esc_observaciones" class="form-control form-control-pro" rows="2"></textarea></div></div><div class="d-flex justify-content-end mt-3"><button class="btn btn-primary">Guardar registro</button></div></form></div></div><div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Historial escolar</div><div class="sub">Registros académicos guardados.</div></div></div><div class="family-reg-body"><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Estudiante</th><th>Institución</th><th>Nivel</th><th>Grado</th><th>Período</th><th>Promedio</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="esc-tbody"></tbody></table></div></div></div></section>
+<section id="sec-historialmedico" class="tab-content d-none"><div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-notes-medical text-primary me-2"></i>Historial Médico</h5><small class="text-muted">Consultas, diagnósticos, órdenes médicas y seguimiento.</small></div><button class="btn btn-primary" onclick="abrirFormularioHistorialMedico()"><i class="fa-solid fa-plus me-1"></i>Nuevo registro</button></div><div class="row g-3 mb-3"><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Registros médicos</div><div class="sub">Historial clínico registrado</div></div><i class="fa-solid fa-file-medical text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-total">0</div><small class="text-muted">Total de registros</small></div></div></div><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Órdenes médicas</div><div class="sub">Registros con indicaciones</div></div><i class="fa-solid fa-file-prescription text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-ordenes">0</div><small class="text-muted">Con orden registrada</small></div></div></div><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Medicinas activas</div><div class="sub">Recordatorios habilitados</div></div><i class="fa-solid fa-pills text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-meds">0</div><small class="text-muted">Tratamientos activos</small></div></div></div></div><div id="hm-form-host" class="d-none"><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Registrar consulta / orden médica</div><div class="sub">Asocia el registro con el cliente o un integrante de Familia.</div></div></div><div class="family-reg-body"><form id="formHistorialMedico" onsubmit="guardarHistorialMedico(event)"><input type="hidden" id="hm_id"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Persona / paciente *</label><select id="hm_persona" class="form-select form-control-pro" required></select></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input id="hm_fecha" type="date" class="form-control form-control-pro" required></div><div class="col-md-3"><label class="form-label small fw-semibold">Profesional</label><input id="hm_profesional" class="form-control form-control-pro" placeholder="Dr./Dra. Nombre"></div><div class="col-md-3"><label class="form-label small fw-semibold">Especialidad</label><input id="hm_especialidad" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Diagnóstico</label><input id="hm_diagnostico" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Próximo control</label><input id="hm_proximo_control" type="date" class="form-control form-control-pro"></div><div class="col-12"><label class="form-label small fw-semibold">Orden médica / tratamiento</label><textarea id="hm_orden" class="form-control form-control-pro" rows="3"></textarea></div><div class="col-md-6"><label class="form-label small fw-semibold">Alergias</label><textarea id="hm_alergias" class="form-control form-control-pro" rows="2"></textarea></div><div class="col-md-6"><label class="form-label small fw-semibold">Antecedentes</label><textarea id="hm_antecedentes" class="form-control form-control-pro" rows="2"></textarea></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea id="hm_observaciones" class="form-control form-control-pro" rows="2"></textarea></div></div><div class="d-flex justify-content-end gap-2 mt-3"><button type="button" class="btn btn-light border" onclick="limpiarFormularioHistorialMedico()">Limpiar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar registro</button></div></form></div></div></div><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Recordatorios de medicinas</div><div class="sub">Telegram enviará avisos automáticos según los horarios registrados.</div></div><button class="btn btn-sm btn-outline-primary" onclick="abrirFormularioRecordatorioMedicina()"><i class="fa-solid fa-plus me-1"></i>Agregar medicina</button></div><div class="family-reg-body"><div id="med-form-host" class="d-none"><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Agregar medicina / recordatorio</div><div class="sub">Configure el medicamento, dosis, horarios y período del tratamiento.</div></div></div><div class="family-reg-body"><form id="formRecordatorioMedicina" onsubmit="guardarRecordatorioMedicina(event)"><input type="hidden" id="med_id"><div class="row g-2"><div class="col-md-3"><label class="form-label small fw-semibold">Persona *</label><select id="med_persona" class="form-select form-control-pro" required></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Medicamento *</label><input id="med_medicamento" class="form-control form-control-pro" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Dosis *</label><input id="med_dosis" class="form-control form-control-pro" placeholder="1 tableta" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Vía</label><input id="med_via" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Frecuencia</label><input id="med_frecuencia" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Horarios *</label><input id="med_horarios" class="form-control form-control-pro" placeholder="08:00 AM, 04:00 PM" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Inicio</label><input id="med_inicio" type="date" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Fin</label><input id="med_fin" type="date" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Estado</label><select id="med_estado" class="form-select form-control-pro"><option>Activo</option><option>Inactivo</option></select></div><div class="col-md-4"><label class="form-label small fw-semibold">Indicaciones</label><input id="med_indicaciones" class="form-control form-control-pro"></div></div><div class="d-flex justify-content-end mt-2"><button class="btn btn-primary btn-sm"><i class="fa-solid fa-bell me-1"></i>Guardar recordatorio</button></div></form></div></div></div><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Paciente</th><th>Medicamento</th><th>Dosis</th><th>Horarios</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="hm-med-tbody"></tbody></table></div></div></div><div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Historial registrado</div><div class="sub">Consulta y administra los registros médicos.</div></div></div><div class="family-reg-body"><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Fecha</th><th>Paciente</th><th>Profesional</th><th>Especialidad</th><th>Diagnóstico</th><th>Orden médica</th><th>Acciones</th></tr></thead><tbody id="hm-tbody"></tbody></table></div></div></div></section>
+<section id="sec-manutencion" class="tab-content d-none"><div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-hand-holding-dollar text-primary me-2"></i>Manutención Familiar</h5><small class="text-muted">Registro de cualquier pago o aporte realizado a favor de la familia: transferencia, pago móvil, efectivo y otros medios.</small></div><button class="btn btn-primary" onclick="abrirFormularioManutencion()"><i class="fa-solid fa-plus me-1"></i>Nuevo pago</button></div><div id="man-form-host" class="d-none"><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Registrar pago / aporte familiar</div><div class="sub">Registre el beneficiario, monto, método de pago, referencia y comprobante para mantener trazabilidad.</div></div></div><div class="family-reg-body"><form onsubmit="guardarManutencion(event)" id="formManutencion"><input type="hidden" id="man_id"><div class="row g-2"><div class="col-md-5"><label class="form-label small fw-semibold">Beneficiario *</label><select id="man_persona" class="form-select form-control-pro" required></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Fecha del pago *</label><input id="man_fecha_pago" type="date" class="form-control form-control-pro" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Monto *</label><input id="man_monto" type="number" step="0.01" min="0" class="form-control form-control-pro" required></div><div class="col-md-2"><label class="form-label small fw-semibold">Moneda</label><select id="man_moneda" class="form-select form-control-pro"><option>USD</option><option>VES</option><option>EUR</option><option>COP</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Método de pago *</label><select id="man_tipo" class="form-select form-control-pro" required><option>Transferencia bancaria</option><option>Pago móvil</option><option>Efectivo</option><option>Depósito</option><option>Zelle</option><option>Binance / USDT</option><option>Cheque</option><option>Otro</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Banco / entidad</label><input id="man_banco" class="form-control form-control-pro" placeholder="Banco, plataforma o entidad"></div><div class="col-md-3"><label class="form-label small fw-semibold">Referencia / comprobante</label><input id="man_referencia" class="form-control form-control-pro" placeholder="Número de operación"></div><div class="col-md-3"><label class="form-label small fw-semibold">Responsable / quien paga</label><input id="man_responsable" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Concepto</label><input id="man_frecuencia" class="form-control form-control-pro" placeholder="Alimentación, colegio, vivienda..."></div><div class="col-md-3"><label class="form-label small fw-semibold">Estado</label><select id="man_estado" class="form-select form-control-pro"><option>Pagado</option><option>Pendiente</option><option>Por confirmar</option><option>Anulado</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Próximo pago</label><input id="man_proximo" type="date" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Periodicidad</label><select id="man_periodicidad" class="form-select form-control-pro"><option>Único</option><option>Semanal</option><option>Quincenal</option><option>Mensual</option><option>Trimestral</option><option>Personalizada</option></select></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea id="man_observaciones" class="form-control form-control-pro" rows="2" placeholder="Detalles adicionales del pago, comprobante, acuerdo, etc."></textarea></div></div><div class="d-flex justify-content-end gap-2 mt-3"><button type="button" class="btn btn-light border" onclick="limpiarManutencionForm()">Limpiar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i><span id="man_btn_texto">Registrar pago</span></button></div></form></div></div></div><div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Historial de pagos familiares</div><div class="sub">Cada registro conserva el método, referencia, responsable y estado del pago.</div></div></div><div class="family-reg-body"><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Fecha</th><th>Beneficiario</th><th>Método</th><th>Monto</th><th>Referencia</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="man-tbody"></tbody></table></div></div></div></section>
+<section id="sec-registrosescolares" class="tab-content d-none"><div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-school text-primary me-2"></i>Registros Escolares</h5><small class="text-muted">Control académico de integrantes de Familia.</small></div><button class="btn btn-primary" onclick="abrirFormularioEscolar()"><i class="fa-solid fa-plus me-1"></i>Nuevo registro</button></div><div id="esc-form-host" class="d-none"><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Nuevo registro escolar</div><div class="sub">Institución, nivel, grado y período académico.</div></div></div><div class="family-reg-body"><form onsubmit="guardarRegistroEscolar(event)" id="formRegistroEscolar"><input type="hidden" id="esc_id"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Estudiante *</label><select id="esc_persona" class="form-select form-control-pro" required></select></div><div class="col-md-4"><label class="form-label small fw-semibold">Institución</label><input id="esc_institucion" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Nivel</label><input id="esc_nivel" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Grado</label><input id="esc_grado" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Período escolar</label><input id="esc_periodo" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Inicio</label><input id="esc_inicio" type="date" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Fin</label><input id="esc_fin" type="date" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Promedio</label><input id="esc_promedio" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Representante</label><input id="esc_representante" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Teléfono</label><input id="esc_telefono" class="form-control form-control-pro"></div><div class="col-md-4"><label class="form-label small fw-semibold">Estado</label><select id="esc_estado" class="form-select form-control-pro"><option>Activo</option><option>Retirado</option><option>Graduado</option></select></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea id="esc_observaciones" class="form-control form-control-pro" rows="2"></textarea></div></div><div class="d-flex justify-content-end mt-3"><button class="btn btn-primary">Guardar registro</button></div></form></div></div></div><div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Historial escolar</div><div class="sub">Registros académicos guardados.</div></div></div><div class="family-reg-body"><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Estudiante</th><th>Institución</th><th>Nivel</th><th>Grado</th><th>Período</th><th>Promedio</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="esc-tbody"></tbody></table></div></div></div></section>
 
         <section id="sec-auditoria" class="tab-content d-none">
             <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
@@ -6191,7 +6227,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
     async function sendGasRequest(action,payload={},syncAfter=false,timeoutMs=6000,showNetworkError=true){
         if(!gasUrl)return {success:false,message:'URL del servidor no configurada.'};
         const mutacion=esOperacionMutacion_(action);const inicio=Date.now();
-        if(mutacion)iniciarIndicadorOperacion_('Procesando '+nombreOperacionServidor_(action)+'...','El servidor está procesando la operación.');
+        if(mutacion)iniciarIndicadorOperacion_(String(action||'').toLowerCase()==='marknotificationread'?'Realizando operación...':'Procesando '+nombreOperacionServidor_(action)+'...','El servidor está procesando la operación.');
         let solicitud;
         try{
             const actor=currentUser?{id_usuario:currentUser.id_usuario||'',username:currentUser.username||'',rol:currentUser.rol||'',codigo_cliente:currentUser.codigo_cliente||''}:{};
@@ -6514,6 +6550,10 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
             if(!href)return;
             const visible=isMaster || usuarioTieneCualquierPermisoModulo(href,currentUser) || (href==='mikrotik' && isMaster);
             el.style.display=visible?'':'none';
+        });
+        const clientRole = String(currentUser.rol||'').trim().toLowerCase() === 'cliente';
+        document.querySelectorAll('[data-admin-only="true"]').forEach(el => {
+            el.style.display = clientRole ? 'none' : '';
         });
         document.querySelectorAll('.view-admin-master').forEach(el => {
             if(el.matches('#sidebar .nav-link')) return;
@@ -7244,7 +7284,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
     // SECCIÓN: NAVEGACIÓN ENTRE PESTAÑAS
     
     function ocultarListasMostrarInteligentes(){
-        const areas=['cli-lista-todos','emp-lista-todos','usr-lista-todos','fac-lista-todos','cred-lista-todos','pay-lista-todos','notif-lista-todos'];
+        const areas=['cli-lista-todos','emp-lista-todos','usr-lista-todos','fac-lista-todos','cred-lista-todos','pay-lista-todos'];
         areas.forEach(id=>document.getElementById(id)?.classList.add('d-none'));
         if(typeof _listaClientesVisible!=='undefined') _listaClientesVisible=false;
         if(typeof _listaEmpresasVisible!=='undefined') _listaEmpresasVisible=false;
@@ -7327,6 +7367,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         // Auto-cargar datos para el rol Cliente al navegar entre pestañas
         const isClient = currentUser && String(currentUser.rol || '').toLowerCase() === 'cliente';
         if (tabId === 'bancos') { renderBancos(); }
+        if (tabId === 'notificaciones') { renderNotificaciones(); }
         if (tabId === 'agenda') { renderAgendaModulo(); if (String(currentUser?.rol||'').toLowerCase()==='master') cargarAgendaConfigUI(); }
         if (tabId === 'historialmedico') { renderHistorialMedicoModulo(); }
         if (tabId === 'tareas') { renderTareasModulo(); }
@@ -7554,28 +7595,51 @@ async function togglePortalStatus() {
 async function guardarNuevaContrasena(e) {
     e.preventDefault();
     if (!protegerAccionUsuario('perfil','modificar')) return;
-    const curr = document.getElementById('pwd_current').value;
-    const n1 = document.getElementById('pwd_new').value;
-    const n2 = document.getElementById('pwd_confirm').value;
-    if (String(curr) !== String(currentUser.password)) { showSystemNotification('Error de Contraseña', 'La contraseña actual no coincide.', 'danger'); return; }
+    if (!currentUser?.id_usuario) { showSystemNotification('Sesión no disponible','No se encontró el usuario de la sesión actual.','danger'); return; }
+    const curr = String(document.getElementById('pwd_current')?.value || '');
+    const n1 = String(document.getElementById('pwd_new')?.value || '');
+    const n2 = String(document.getElementById('pwd_confirm')?.value || '');
+    if (!curr || !n1 || !n2) { showSystemNotification('Datos incompletos','Ingrese la contraseña actual, la nueva contraseña y su confirmación.','warning'); return; }
     if (n1 !== n2) { showSystemNotification('Error de Confirmación', 'La confirmación no coincide.', 'danger'); return; }
+    if (curr === n1) { showSystemNotification('Contraseña no válida','La nueva contraseña debe ser diferente de la contraseña actual.','warning'); return; }
+    const pwdBtn=document.querySelector('#formChangePassword button[type="submit"]');
+    const oldBtn=pwdBtn?.innerHTML;
+    if(pwdBtn){pwdBtn.disabled=true;pwdBtn.innerHTML='<i class="fa-solid fa-spinner fa-spin me-1"></i>Verificando...';}
     try {
-        const result = await sendGasRequest('changePassword', {id_usuario:currentUser.id_usuario,new_password:n1}, false, 35000, true);
+        // currentUser.password se elimina deliberadamente de la sesión por seguridad.
+        // La contraseña actual se valida siempre contra Apps Script para evitar falsos
+        // rechazos cuando la copia local de Usuarios está ausente o desactualizada.
+        let passwordValid=false;
+        const controller=new AbortController();
+        const timer=setTimeout(()=>controller.abort(),15000);
+        try{
+            const url=gasUrl+'?action=authenticateUser&username='+encodeURIComponent(currentUser.username||'')+'&password='+encodeURIComponent(curr)+'&ts='+Date.now();
+            const res=await fetch(url,{method:'GET',cache:'no-store',signal:controller.signal});
+            const data=await res.json();
+            passwordValid=!!(res.ok&&data?.success&&data?.user);
+        }finally{clearTimeout(timer);}
+        if(!passwordValid){ showSystemNotification('Error de Contraseña','La contraseña actual no coincide.','danger'); return; }
+        if(pwdBtn)pwdBtn.innerHTML='<i class="fa-solid fa-spinner fa-spin me-1"></i>Actualizando...';
+        const result = await sendGasRequest('changePassword', {id_usuario:currentUser.id_usuario,current_password:curr,new_password:n1}, false, 35000, true);
         if (!result?.success) throw new Error(result?.message || 'El servidor no confirmó el cambio de contraseña.');
-        currentUser.password = n1;
-        const usrObj = db.usuarios.find(u => u.id_usuario === currentUser.id_usuario);
+        const usrObj = (db.usuarios||[]).find(u => String(u.id_usuario) === String(currentUser.id_usuario));
         if (usrObj) usrObj.password = n1;
+        // No se almacena la contraseña en la sesión persistente.
+        delete currentUser.password;
         localStorage.setItem('erp_session_user', JSON.stringify(currentUser));
         const notifPass = {id_notificacion:'NOT-'+Date.now(),id_usuario:currentUser.codigo_cliente||currentUser.id_usuario,emisor_id:currentUser.id_usuario,rol_destino:currentUser.rol,tipo:'Seguridad',titulo:'Cambio de Contraseña',mensaje:'Su contraseña fue actualizada exitosamente.',fecha:formatearFechaHoraPortal(new Date()),leido:'NO'};
         const notifResult = await sendGasRequest('addNotificacion', notifPass, false, 35000, false);
         if (notifResult?.success) db.notificaciones.unshift(notifPass);
         registrarAuditoria('PASSWORD_CHANGE','Usuario',currentUser.id_usuario,'Cambio de contraseña del usuario.','INFO');
         modalPwd.hide();
+        document.getElementById('formChangePassword')?.reset();
         renderNotificaciones();
         renderAuditoria();
         showSystemNotification('Contraseña actualizada', 'Tu contraseña se modificó correctamente en el servidor.', 'success');
     } catch (err) {
-        showSystemNotification('No se pudo actualizar', err.message || 'servidor no confirmó el cambio.', 'danger');
+        showSystemNotification('No se pudo actualizar', err.message || 'No fue posible confirmar el cambio de contraseña.', 'danger');
+    } finally {
+        if(pwdBtn){pwdBtn.disabled=false;pwdBtn.innerHTML=oldBtn||'Actualizar Contraseña';}
     }
 }
 
@@ -8182,7 +8246,7 @@ async function eliminarUsuario(id) {
         if (buscadorArea) buscadorArea.classList.add('d-none');
         if (tablaCompleta) tablaCompleta.classList.add('d-none');
         
-        const cliente = db.clientes.find(c => 
+        const cliente = obtenerClienteActualPortal() || db.clientes.find(c => 
             c.codigo_cliente === currentUser.codigo_cliente || 
             c.correo === currentUser.email
         );
@@ -8390,7 +8454,7 @@ async function eliminarCliente(id) {
         const areaBuscador = document.getElementById('fac-buscador-area');
         if (areaBuscador) areaBuscador.classList.add('d-none');
         
-        const cliente = db.clientes.find(c => 
+        const cliente = obtenerClienteActualPortal() || db.clientes.find(c => 
             c.codigo_cliente === currentUser.codigo_cliente || 
             c.correo === currentUser.email
         );
@@ -8996,6 +9060,8 @@ async function guardarCredito(e) {
 
         if (clienteForzado) {
             cliente = clienteForzado;
+        } else if (currentUser && String(currentUser.rol||'').trim().toLowerCase() === 'cliente') {
+            cliente = obtenerClienteActualPortal();
         } else {
             if (input) raw = input.value.trim();
             if (!raw) { if(input){ input.dataset.busquedaActiva=''; input.focus(); } ocultarResultadosPagos(); return; }
@@ -9374,68 +9440,39 @@ async function aceptarPagoConfirmado() {
     
     let _notifClienteSeleccionado = null;
 
+    function abrirCentroNotificacionesDesdeCabecera(){
+        if(!currentUser)return;
+        switchTab('notificaciones');
+        setTimeout(()=>document.getElementById('notif-lista-todos')?.scrollIntoView({behavior:'smooth',block:'start'}),80);
+    }
+
     function renderNotificaciones() {
-        const container = document.getElementById('lista-notificaciones-global');
-        const badgeCount = document.getElementById('nav-notif-count');
-        const buscadorArea = document.getElementById('notif-buscador-area');
-        const tarjetaCliente = document.getElementById('notif-tarjeta-cliente');
-        const estadoVacio = document.getElementById('notif-estado-vacio');
-
-        if (!container) return;
-
-        const isClient = currentUser && String(currentUser.rol||'').trim().toLowerCase() === 'cliente';
-        const isMaster = currentUser && (currentUser.rol === 'Master' || currentUser.rol === 'Admin');
-        const clienteActual = isClient ? obtenerClienteActualPortal() : null;
-        const userRefs = [currentUser?.id_usuario,currentUser?.codigo_cliente,currentUser?.id_cliente,currentUser?.documento_id,currentUser?.email,currentUser?.correo,currentUser?.username,clienteActual?.id_usuario,clienteActual?.codigo_cliente,clienteActual?.id_cliente,clienteActual?.documento_id,clienteActual?.email,clienteActual?.correo,clienteActual?.username].filter(Boolean).map(String);
-
-        // Badge universal: cualquier usuario ve sus notificaciones no leídas.
-        const userCode = currentUser ? (currentUser.codigo_cliente || currentUser.id_usuario || currentUser.username || '') : '';
-        const unread = (db.notificaciones || []).filter(n => {
-            if (n.leido !== 'NO') return false;
-            if (isClient) return userRefs.some(ref=>String(n.id_usuario||'').trim().toLowerCase()===String(ref).trim().toLowerCase()) || userRefs.some(ref=>String(n.emisor_id||'').trim().toLowerCase()===String(ref).trim().toLowerCase());
-            return String(n.id_usuario) === String(userCode) || String(n.id_usuario) === String(currentUser?.id_usuario||'') || String(n.id_usuario).toUpperCase() === 'MASTER' || ['MASTER','ADMIN','ADMINISTRADOR'].includes(String(n.rol_destino || '').toUpperCase());
+        const badgeLegacy=document.getElementById('nav-notif-count');
+        const badgeHeader=document.getElementById('header-notif-count');
+        const buscadorArea=document.getElementById('notif-buscador-area');
+        const tarjetaCliente=document.getElementById('notif-tarjeta-cliente');
+        const estadoVacio=document.getElementById('notif-estado-vacio');
+        const principal=document.getElementById('notif-lista-todos');
+        if(!currentUser)return;
+        const norm=v=>String(v??'').trim().toLowerCase();
+        const isClient=norm(currentUser.rol)==='cliente';
+        const isMaster=['master','admin','administrador'].includes(norm(currentUser.rol));
+        const clienteActual=isClient?obtenerClienteActualPortal():null;
+        const refs=[currentUser?.id_usuario,currentUser?.codigo_cliente,currentUser?.id_cliente,currentUser?.documento_id,currentUser?.email,currentUser?.correo,currentUser?.username,clienteActual?.id_usuario,clienteActual?.codigo_cliente,clienteActual?.id_cliente,clienteActual?.documento_id,clienteActual?.email,clienteActual?.correo,clienteActual?.username].filter(Boolean).map(norm);
+        const todas=Array.isArray(db?.notificaciones)?db.notificaciones:[];
+        const unread=todas.filter(n=>norm(n.leido)==='no').filter(n=>{
+            const destino=norm(n.id_usuario),rolDestino=norm(n.rol_destino).toUpperCase();
+            if(isClient)return refs.includes(destino);
+            return refs.includes(destino)||destino==='master'||['MASTER','ADMIN','ADMINISTRADOR'].includes(rolDestino);
         }).length;
-        if (badgeCount) { badgeCount.innerText = unread; badgeCount.classList.toggle('d-none', unread === 0); }
-
-        // Cliente: ocultar buscador y mostrar solo sus notificaciones
-        if (isClient) {
-            if (buscadorArea) buscadorArea.classList.add('d-none');
-            if (tarjetaCliente) tarjetaCliente.classList.add('d-none');
-            const notifs = (db.notificaciones||[]).filter(n =>
-                userRefs.some(ref=>String(n.id_usuario||'').trim().toLowerCase()===String(ref).trim().toLowerCase()) ||
-                userRefs.some(ref=>String(n.emisor_id||'').trim().toLowerCase()===String(ref).trim().toLowerCase()) ||
-                (String(n.id_usuario||'').trim().toUpperCase()==='MASTER' && ['CLIENTE','CLIENTES'].includes(String(n.rol_destino||'').trim().toUpperCase()))
-            );
-            renderListaNotificaciones(notifs);
-            return;
-        }
-
-        // Admin/Master: mostrar buscador
-        if (buscadorArea) buscadorArea.classList.remove('d-none');
-        if (tarjetaCliente) tarjetaCliente.classList.add('d-none');
-        if (estadoVacio) estadoVacio.classList.add('d-none');
-
-        // Si hay cliente seleccionado, filtrar; si no, mostrar todas
-        if (_notifClienteSeleccionado) {
-            const notifs = db.notificaciones.filter(n => 
-                n.id_usuario === _notifClienteSeleccionado.codigo ||
-                n.emisor_id === _notifClienteSeleccionado.codigo
-            );
-            document.getElementById('notif-cliente-nombre').innerText = _notifClienteSeleccionado.nombre;
-            document.getElementById('notif-cliente-codigo').innerText = _notifClienteSeleccionado.codigo;
-            if (tarjetaCliente) tarjetaCliente.classList.remove('d-none');
-
-            if (notifs.length === 0) {
-                if (estadoVacio) estadoVacio.classList.remove('d-none');
-                container.innerHTML = '';
-            } else {
-                renderListaNotificaciones(notifs);
-            }
-        } else {
-            // Mostrar todas las notificaciones
-            renderListaNotificaciones(db.notificaciones);
-        }
-
+        [badgeLegacy,badgeHeader].forEach(el=>{if(el){el.textContent=String(unread);el.classList.toggle('d-none',unread===0);}});
+        if(isClient){if(buscadorArea)buscadorArea.classList.add('d-none');if(tarjetaCliente)tarjetaCliente.classList.add('d-none');}
+        else if(buscadorArea)buscadorArea.classList.remove('d-none');
+        if(estadoVacio)estadoVacio.classList.add('d-none');
+        if(principal)principal.classList.remove('d-none');
+        if(document.getElementById('notif-lista-filtro'))document.getElementById('notif-lista-filtro').value=document.getElementById('notif-lista-filtro').value||'';
+        if(document.getElementById('notif-lista-categoria')&&!document.getElementById('notif-lista-categoria').value)document.getElementById('notif-lista-categoria').value='TODAS';
+        renderListaNotificacionesInline();
     }
 
     function renderListaNotificaciones(notifs) {
@@ -9518,9 +9555,24 @@ async function aceptarPagoConfirmado() {
         renderAuditoria();
     }
 
+    const _notificacionesEnProceso = new Set();
+
     async function marcarNotificacionComoLeida(id) {
-        const notif = (db.notificaciones || []).find(n => String(n.id_notificacion || '').trim() === String(id || '').trim());
-        if (!notif || !currentUser || !gasUrl) return;
+        const idNormalizado = String(id || '').trim();
+        const notif = (db.notificaciones || []).find(n => String(n.id_notificacion || '').trim() === idNormalizado);
+        if (!notif) {
+            showSystemNotification('Notificación', 'No se encontró la notificación seleccionada.', 'warning');
+            return;
+        }
+        if (!currentUser || !gasUrl) {
+            showSystemNotification('Conexión', 'No hay una sesión o conexión con el servidor disponible.', 'danger');
+            return;
+        }
+        if (String(notif.leido || '').trim().toUpperCase() === 'SI') {
+            showSystemNotification('Notificación', 'Esta notificación ya está marcada como leída.', 'info');
+            return;
+        }
+        if (_notificacionesEnProceso.has(idNormalizado)) return;
 
         const norm = v => String(v ?? '').trim().toLowerCase();
         const clienteActual = norm(currentUser.rol) === 'cliente' ? obtenerClienteActualPortal() : null;
@@ -9534,22 +9586,48 @@ async function aceptarPagoConfirmado() {
         const isMaster = ['master','admin','administrador'].includes(norm(currentUser.rol));
         const notifUser = norm(notif.id_usuario);
         const rolDestino = norm(notif.rol_destino).toUpperCase();
-        const esDestinatario = userRefs.includes(notifUser) ||
-            (isClient && notifUser === 'master' && ['CLIENTE','CLIENTES'].includes(rolDestino)) ||
-            (isMaster && (notifUser === 'master' || ['MASTER','ADMIN','ADMINISTRADOR'].includes(rolDestino)));
-        if (!esDestinatario) return;
 
-        // El cambio definitivo se hace en servidor. Solo después de recibir confirmación
-        // del servidor se deja SI en la memoria del portal.
-        const respuesta = await sendGasRequest('markNotificationRead', { id_notificacion: String(id) });
-        if (!respuesta?.success) {
-            console.warn('No se pudo marcar la notificación como leída en servidor:', respuesta?.message || 'respuesta no válida');
+        // El administrador puede gestionar las notificaciones que aparecen en su
+        // Centro de Notificaciones. El cliente solo puede gestionar las dirigidas a él.
+        const esDestinatario = isMaster || userRefs.includes(notifUser);
+        if (!esDestinatario) {
+            showSystemNotification('Acceso restringido', 'Esta notificación no pertenece al usuario actual.', 'warning');
             return;
         }
 
-        notif.leido = 'SI';
-        renderNotificaciones();
-        renderAuditoria();
+        _notificacionesEnProceso.add(idNormalizado);
+        const botones = document.querySelectorAll('[data-notif-action="read"][data-notif-id="' + CSS.escape(idNormalizado) + '"]');
+        botones.forEach(btn => { btn.disabled = true; btn.classList.add('disabled'); btn.setAttribute('aria-busy','true'); });
+
+        const inicio = Date.now();
+        try {
+            // sendGasRequest mantiene el indicador de operación durante el ciclo visual
+            // de 6 segundos. Aquí además garantizamos un mínimo de 6 segundos aunque
+            // el servidor responda con error inmediatamente.
+            const respuesta = await sendGasRequest('markNotificationRead', { id_notificacion: idNormalizado });
+            const restante = 6000 - (Date.now() - inicio);
+            if (restante > 0) await new Promise(resolve => setTimeout(resolve, restante));
+
+            if (!respuesta?.success) {
+                showSystemNotification('No se pudo completar la acción', respuesta?.message || 'El servidor no confirmó que la notificación fue marcada como leída.', 'danger');
+                return;
+            }
+
+            notif.leido = 'SI';
+            renderNotificaciones();
+            renderAuditoria();
+            renderListaNotificacionesInline();
+            showSystemNotification('Notificación leída', 'La notificación fue marcada como leída correctamente.', 'success');
+        } catch (error) {
+            const restante = 6000 - (Date.now() - inicio);
+            if (restante > 0) await new Promise(resolve => setTimeout(resolve, restante));
+            console.error('Error marcando notificación como leída:', error);
+            showSystemNotification('Error', error?.message || 'No fue posible marcar la notificación como leída.', 'danger');
+        } finally {
+            _notificacionesEnProceso.delete(idNormalizado);
+            const botonesFinales = document.querySelectorAll('[data-notif-action="read"][data-notif-id="' + CSS.escape(idNormalizado) + '"]');
+            botonesFinales.forEach(btn => { btn.disabled = false; btn.classList.remove('disabled'); btn.removeAttribute('aria-busy'); });
+        }
     }
 
     function abrirModalNuevaNotificacion() {
@@ -11829,6 +11907,9 @@ function seleccionarUsuarioInline(idUsuario) {
 let _listaFacturasVisible = false;
 
 function toggleListaFacturas() {
+    if (currentUser && String(currentUser.rol||'').trim().toLowerCase() === 'cliente') {
+        return;
+    }
     const area = document.getElementById('fac-lista-todos');
     if (!area) return;
     _listaFacturasVisible = !_listaFacturasVisible;
@@ -12095,6 +12176,9 @@ function seleccionarCreditoInline(codigoCliente) {
 let _listaPagosVisible = false;
 
 function toggleListaPagos() {
+    if (currentUser && String(currentUser.rol||'').trim().toLowerCase() === 'cliente') {
+        return;
+    }
     const area = document.getElementById('pay-lista-todos');
     if (!area) return;
     _listaPagosVisible = !_listaPagosVisible;
@@ -12235,113 +12319,81 @@ function toggleListaNotificaciones() {
     }
 }
 
-function renderListaNotificacionesInline() {
-    const userCode = currentUser ? (currentUser.codigo_cliente || currentUser.id_usuario || currentUser.username || '') : '';
-    const tbody = document.getElementById('notif-lista-tbody');
-    const estadoVacio = document.getElementById('notif-lista-vacio');
-    const isClient = currentUser && String(currentUser.rol||'').trim().toLowerCase() === 'cliente';
-    const clienteActual = isClient ? obtenerClienteActualPortal() : null;
-        const userRefs = [currentUser?.id_usuario,currentUser?.codigo_cliente,currentUser?.id_cliente,currentUser?.documento_id,currentUser?.email,currentUser?.correo,currentUser?.username,clienteActual?.id_usuario,clienteActual?.codigo_cliente,clienteActual?.id_cliente,clienteActual?.documento_id,clienteActual?.email,clienteActual?.correo,clienteActual?.username].filter(Boolean).map(String);
-    if (!tbody) return;
-
-    let datos = [...(db.notificaciones || [])];
-    if (isClient) {
-        datos = datos.filter(n => userRefs.some(ref=>String(n.id_usuario||'').trim().toLowerCase()===String(ref).trim().toLowerCase()) || userRefs.some(ref=>String(n.emisor_id||'').trim().toLowerCase()===String(ref).trim().toLowerCase()));
-    }
-
-    datos.sort((a,b) => parseFechaAuditoria(b.fecha || b.fecha_hora) - parseFechaAuditoria(a.fecha || a.fecha_hora));
-
-    if (datos.length === 0) {
-        tbody.innerHTML = '';
-        if (estadoVacio) estadoVacio.classList.remove('d-none');
-        return;
-    }
-    if (estadoVacio) estadoVacio.classList.add('d-none');
-
-    tbody.innerHTML = datos.map(n => {
-        const estadoBadge = n.leido === 'SI'
-            ? '<span class="badge-status status-confirmado">Leído</span>'
-            : '<span class="badge-status status-pendiente">No Leído</span>';
-        const tipoBadge = n.tipo === 'Sistema' ? 'bg-secondary' : (n.tipo === 'Manual Master' ? 'bg-primary' : 'bg-info text-dark');
-        return '<tr>' +
-            '<td class="ps-3"><small class="text-muted">' + (n.fecha || 'N/A') + '</small></td>' +
-            '<td><div class="fw-semibold small">' + n.titulo + '</div></td>' +
-            '<td><small class="text-muted">' + (n.mensaje || '').substring(0, 60) + '...</small></td>' +
-            '<td><small>' + n.emisor_id + '</small></td>' +
-            '<td><span class="badge bg-light text-dark border">' + n.id_usuario + '</span></td>' +
-            '<td><span class="badge ' + tipoBadge + '">' + n.tipo + '</span></td>' +
-            '<td class="text-center">' + estadoBadge + '</td>' +
-
-            '<td class="text-center pe-3">' +
-                '<button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-2 me-1" onclick="prepararRespuesta(\'' + n.emisor_id + '\', \'' + n.titulo + '\')" title="Responder"><i class="fa-solid fa-reply"></i></button>' +
-                '<button class="btn btn-sm btn-outline-success py-0 px-2 rounded-2 me-1" onclick="marcarNotificacionComoLeida(\'' + n.id_notificacion + '\')" title="Marcar Leída"><i class="fa-solid fa-check"></i></button>' +
-                '<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick="eliminarNotificacion(\'' + n.id_notificacion + '\')" title="Eliminar"><i class="fa-solid fa-trash"></i></button>' +
-            '</td>' +
-        '</tr>';
+function obtenerNotificacionesVisiblesInline_(){
+    const norm=v=>String(v??'').trim().toLowerCase();
+    const isClient=currentUser&&norm(currentUser.rol)==='cliente';
+    const clienteActual=isClient?obtenerClienteActualPortal():null;
+    const refs=[currentUser?.id_usuario,currentUser?.codigo_cliente,currentUser?.id_cliente,currentUser?.documento_id,currentUser?.email,currentUser?.correo,currentUser?.username,clienteActual?.id_usuario,clienteActual?.codigo_cliente,clienteActual?.id_cliente,clienteActual?.documento_id,clienteActual?.email,clienteActual?.correo,clienteActual?.username].filter(Boolean).map(norm);
+    let datos=Array.isArray(db?.notificaciones)?[...db.notificaciones]:[];
+    if(isClient){datos=datos.filter(n=>refs.includes(norm(n.id_usuario))||refs.includes(norm(n.emisor_id))||(norm(n.id_usuario)==='master'&&['CLIENTE','CLIENTES'].includes(norm(n.rol_destino).toUpperCase())));}
+    if(!isClient&&_notifClienteSeleccionado){const codigo=norm(_notifClienteSeleccionado.codigo),id=norm(_notifClienteSeleccionado.id);datos=datos.filter(n=>norm(n.id_usuario)===codigo||norm(n.id_usuario)===id||norm(n.emisor_id)===codigo||norm(n.emisor_id)===id);}
+    return datos;
+}
+function configurarAccionesNotificacionesInline_(){
+    const tbody=document.getElementById('notif-lista-tbody');
+    if(!tbody||tbody.dataset.actionsReady==='1')return;
+    tbody.dataset.actionsReady='1';
+    tbody.addEventListener('click',async ev=>{
+        const btn=ev.target.closest('[data-notif-action]');
+        if(!btn||!tbody.contains(btn))return;
+        ev.preventDefault();ev.stopPropagation();
+        const id=btn.getAttribute('data-notif-id')||'';
+        const action=btn.getAttribute('data-notif-action')||'';
+        const notif=(db.notificaciones||[]).find(n=>String(n.id_notificacion)===String(id));
+        if(!notif)return;
+        if(action==='reply'){
+            const isClient=currentUser&&String(currentUser.rol||'').trim().toLowerCase()==='cliente';
+            const destino=isClient?'MASTER':String(notif.emisor_id||'');
+            abrirModalNuevaNotificacion();
+            const sel=document.getElementById('notif_cliente');if(sel)sel.value=destino;
+            const title=document.getElementById('notif_titulo');if(title){const t=String(notif.titulo||'');title.value=t.startsWith('Re:')?t:'Re: '+t;}
+        }else if(action==='read'){
+            await marcarNotificacionComoLeida(id);
+        }else if(action==='delete'){
+            await eliminarNotificacion(id);
+        }
+    });
+}
+function renderListaNotificacionesInline(){
+    const tbody=document.getElementById('notif-lista-tbody');
+    const estadoVacio=document.getElementById('notif-lista-vacio');
+    if(!tbody)return;
+    configurarAccionesNotificacionesInline_();
+    let datos=obtenerNotificacionesVisiblesInline_();
+    const input=document.getElementById('notif-lista-filtro'),categoria=document.getElementById('notif-lista-categoria');
+    const raw=String(input?.value||'').trim().toLowerCase(),cat=String(categoria?.value||'TODAS');
+    const norm=v=>String(v??'').trim().toLowerCase();
+    const isClient=currentUser&&norm(currentUser.rol)==='cliente';
+    const refs=[currentUser?.id_usuario,currentUser?.codigo_cliente,currentUser?.id_cliente,currentUser?.documento_id,currentUser?.email,currentUser?.correo,currentUser?.username].filter(Boolean).map(norm);
+    if(cat==='Enviadas')datos=datos.filter(n=>refs.includes(norm(n.emisor_id)));
+    if(cat==='Recibidas')datos=datos.filter(n=>refs.includes(norm(n.id_usuario))||(isClient&&norm(n.id_usuario)==='master'));
+    if(cat==='Sistema')datos=datos.filter(n=>norm(n.emisor_id)==='sistema');
+    if(raw)datos=datos.filter(n=>[n.titulo,n.mensaje,n.emisor_id,n.id_usuario,n.tipo,n.fecha].some(v=>String(v??'').toLowerCase().includes(raw)));
+    datos.sort((a,b)=>parseFechaAuditoria(b.fecha||b.fecha_hora)-parseFechaAuditoria(a.fecha||a.fecha_hora));
+    if(!datos.length){tbody.innerHTML='';if(estadoVacio)estadoVacio.classList.remove('d-none');return;}
+    if(estadoVacio)estadoVacio.classList.add('d-none');
+    const esc=v=>escMod(v??'—');
+    const isMaster=['master','admin','administrador'].includes(norm(currentUser?.rol));
+    tbody.innerHTML=datos.map(n=>{
+        const leida=norm(n.leido)==='si';
+        const tipoBadge=norm(n.tipo)==='sistema'?'bg-secondary':(norm(n.tipo)==='manual master'?'bg-primary':'bg-info text-dark');
+        const readBtn=leida?'':'<button type="button" class="btn btn-sm btn-outline-success py-0 px-2 rounded-2 me-1" data-notif-action="read" data-notif-id="'+esc(n.id_notificacion)+'" title="Marcar como leída"><i class="fa-solid fa-check"></i></button>';
+        const delBtn=isMaster?'<button type="button" class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" data-notif-action="delete" data-notif-id="'+esc(n.id_notificacion)+'" title="Eliminar"><i class="fa-solid fa-trash"></i></button>':'';
+        const mensaje=String(n.mensaje||'');
+        return '<tr class="'+(leida?'':'table-primary-subtle')+'">'+
+            '<td class="ps-3"><small class="text-muted">'+esc(n.fecha||n.fecha_hora||'N/A')+'</small></td>'+
+            '<td><div class="fw-semibold small">'+esc(n.titulo||'Sin título')+'</div></td>'+
+            '<td><small class="text-muted">'+esc(mensaje.length>80?mensaje.slice(0,80)+'…':(mensaje||'—'))+'</small></td>'+
+            '<td><small>'+esc(n.emisor_id||'—')+'</small></td>'+
+            '<td><span class="badge bg-light text-dark border">'+esc(n.id_usuario||'—')+'</span></td>'+
+            '<td><span class="badge '+tipoBadge+'">'+esc(n.tipo||'Notificación')+'</span></td>'+
+            '<td class="text-center">'+(leida?'<span class="badge-status status-confirmado">Leído</span>':'<span class="badge-status status-pendiente">No Leído</span>')+'</td>'+
+            '<td class="text-center pe-3"><button type="button" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-2 me-1" data-notif-action="reply" data-notif-id="'+esc(n.id_notificacion)+'" title="Responder"><i class="fa-solid fa-reply"></i></button>'+readBtn+delBtn+'</td>'+
+            '</tr>';
     }).join('');
 }
 
-function filtrarListaNotificacionesInline() {
-    const userCode = currentUser ? (currentUser.codigo_cliente || currentUser.id_usuario || currentUser.username || '') : '';
-    const input = document.getElementById('notif-lista-filtro');
-    const categoria = document.getElementById('notif-lista-categoria');
-    const raw = String(input ? input.value : '').trim().toLowerCase();
-    const cat = categoria ? categoria.value : 'TODAS';
-    const tbody = document.getElementById('notif-lista-tbody');
-    const estadoVacio = document.getElementById('notif-lista-vacio');
-    const isClient = currentUser && String(currentUser.rol||'').trim().toLowerCase() === 'cliente';
-    const clienteActual = isClient ? obtenerClienteActualPortal() : null;
-        const userRefs = [currentUser?.id_usuario,currentUser?.codigo_cliente,currentUser?.id_cliente,currentUser?.documento_id,currentUser?.email,currentUser?.correo,currentUser?.username,clienteActual?.id_usuario,clienteActual?.codigo_cliente,clienteActual?.id_cliente,clienteActual?.documento_id,clienteActual?.email,clienteActual?.correo,clienteActual?.username].filter(Boolean).map(String);
-    if (!tbody) return;
-
-    let datos = [...(db.notificaciones || [])];
-    if (isClient) {
-        datos = datos.filter(n => userRefs.some(ref=>String(n.id_usuario||'').trim().toLowerCase()===String(ref).trim().toLowerCase()) || userRefs.some(ref=>String(n.emisor_id||'').trim().toLowerCase()===String(ref).trim().toLowerCase()));
-    }
-
-    if (cat === 'Enviadas') datos = datos.filter(n => userRefs.some(ref=>String(n.emisor_id||'').trim().toLowerCase()===String(ref).trim().toLowerCase()));
-    if (cat === 'Recibidas') datos = datos.filter(n => userRefs.some(ref=>String(n.id_usuario||'').trim().toLowerCase()===String(ref).trim().toLowerCase()));
-    if (cat === 'Sistema') datos = datos.filter(n => n.emisor_id === 'SISTEMA');
-
-    const filtrados = (!raw ? datos : datos.filter(n =>
-        String(n.titulo).toLowerCase().includes(raw) ||
-        String(n.mensaje).toLowerCase().includes(raw) ||
-        String(n.emisor_id).toLowerCase().includes(raw) ||
-        String(n.id_usuario).toLowerCase().includes(raw) ||
-        String(n.tipo).toLowerCase().includes(raw)
-    ));
-    filtrados.sort((a,b) => parseFechaAuditoria(b.fecha || b.fecha_hora) - parseFechaAuditoria(a.fecha || a.fecha_hora));
-
-    if (filtrados.length === 0) {
-        tbody.innerHTML = '';
-        if (estadoVacio) estadoVacio.classList.remove('d-none');
-        return;
-    }
-    if (estadoVacio) estadoVacio.classList.add('d-none');
-
-    tbody.innerHTML = filtrados.map(n => {
-        const estadoBadge = n.leido === 'SI'
-            ? '<span class="badge-status status-confirmado">Leído</span>'
-            : '<span class="badge-status status-pendiente">No Leído</span>';
-        const tipoBadge = n.tipo === 'Sistema' ? 'bg-secondary' : (n.tipo === 'Manual Master' ? 'bg-primary' : 'bg-info text-dark');
-        return '<tr>' +
-            '<td class="ps-3"><small class="text-muted">' + (n.fecha || 'N/A') + '</small></td>' +
-            '<td><div class="fw-semibold small">' + n.titulo + '</div></td>' +
-            '<td><small class="text-muted">' + (n.mensaje || '').substring(0, 60) + '...</small></td>' +
-
-            '<td><small>' + n.emisor_id + '</small></td>' +
-            '<td><span class="badge bg-light text-dark border">' + n.id_usuario + '</span></td>' +
-            '<td><span class="badge ' + tipoBadge + '">' + n.tipo + '</span></td>' +
-            '<td class="text-center">' + estadoBadge + '</td>' +
-            '<td class="text-center pe-3">' +
-                '<button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-2 me-1" onclick="prepararRespuesta(\'' + n.emisor_id + '\', \'' + n.titulo + '\')" title="Responder"><i class="fa-solid fa-reply"></i></button>' +
-                '<button class="btn btn-sm btn-outline-success py-0 px-2 rounded-2 me-1" onclick="marcarNotificacionComoLeida(\'' + n.id_notificacion + '\')" title="Marcar Leída"><i class="fa-solid fa-check"></i></button>' +
-                '<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick="eliminarNotificacion(\'' + n.id_notificacion + '\')" title="Eliminar"><i class="fa-solid fa-trash"></i></button>' +
-            '</td>' +
-        '</tr>';
-    }).join('');
-}
-
+function filtrarListaNotificacionesInline(){renderListaNotificacionesInline();}
 
 // SECCIÓN: MIKROTIK — FUNCIONALIDAD COMPLETA
 // Conexión directa vía REST API por red local. Requiere /ip service enable rest-api
@@ -12701,65 +12753,467 @@ async function eliminarMikrotikUser(id) {
 
 
 // SECCIÓN: FAMILIA — FUNCIONALIDAD COMPLETA Y EXPEDIENTE
-function personasFamiliaRegistros(){const out=[];(Array.isArray(db?.familia)?db.familia:[]).forEach(f=>{const id=String(f.id_familia||f.id||'').trim();if(id)out.push({type:'familia',id_cliente:'',codigo_cliente:f.codigo_cliente||'',id_familia:id,nombre:String(f.nombre||'Familiar sin nombre')});});return out;}
+function personasFamiliaRegistros(){const out=[];const seen=new Set();const fuentes=[];if(Array.isArray(db?.familia))fuentes.push(...db.familia);if(Array.isArray(dbFamilia))fuentes.push(...dbFamilia);fuentes.forEach(f=>{const id=String(f?.id_familia||f?.id||'').trim();const nombre=String(f?.nombre||f?.nombre_completo||'Familiar sin nombre').trim();if(!id||!nombre||f?.id_cliente||String(f?.tipo||'').toLowerCase()==='cliente')return;const key='familia:'+id;if(seen.has(key))return;seen.add(key);out.push({type:'familia',id_cliente:'',codigo_cliente:f?.codigo_cliente||currentUser?.codigo_cliente||'',id_familia:id,nombre});});return out;}
 function escMod(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
-function personasSelect(id,placeholder='Seleccionar persona'){const el=document.getElementById(id);if(!el)return;el.innerHTML='<option value="">'+placeholder+'</option>'+personasFamiliaRegistros().map(p=>{const key=p.type+':'+(p.type==='familia'?p.id_familia:p.id_cliente);return '<option value="'+escMod(key)+'">'+escMod(p.nombre)+' · '+(p.type==='familia'?'Familiar':'Cliente')+'</option>';}).join('');}
+function personasSelect(id,placeholder='Seleccionar persona'){const el=document.getElementById(id);if(!el)return;el.innerHTML='<option value="">'+placeholder+'</option>'+personasFamiliaRegistros().map(p=>'<option value="'+escMod('familia:'+p.id_familia)+'">'+escMod(p.nombre)+' · Familiar</option>').join('');}
 function resolverPersonaRegistro(key){const [type,id]=String(key||'').split(':');if(!type||!id)return null;return personasFamiliaRegistros().find(p=>p.type===type&&String(type==='familia'?p.id_familia:p.id_cliente)===id)||null;}
 function fechaHoyModulo(){return typeof fechaInputVenezuela==='function'?fechaInputVenezuela(new Date()):new Date().toISOString().slice(0,10);}
 function fechaRegistroModuloDesdeInput(v){const s=String(v||'').trim();const m=s.match(/^(\d{4})-(\d{2})-(\d{2})$/);return m?m[3]+'/'+m[2]+'/'+m[1]:s;}
-function abrirFormularioHistorialMedico(){document.getElementById('formHistorialMedico')?.reset();personasSelect('hm_persona');const e=document.getElementById('hm_fecha');if(e)e.value=fechaHoyModulo();}
+let _familiaRegistroModal=null;
+let _familiaRegistroHost=null;
+let _familiaRegistroSection=null;
+function abrirModalFamiliaRegistro(tipo,preparar=true){
+    const cfg={
+        hm:{host:'hm-form-host',title:'Nuevo registro — Historial Médico',icon:'fa-notes-medical',form:'formHistorialMedico'},
+        man:{host:'man-form-host',title:'Nuevo pago — Manutención Familiar',icon:'fa-hand-holding-dollar',form:'formManutencion'},
+        esc:{host:'esc-form-host',title:'Nuevo registro — Registros Escolares',icon:'fa-school',form:'formRegistroEscolar'},
+        med:{host:'med-form-host',title:'Agregar medicina',icon:'fa-pills',form:'formRecordatorioMedicina'}
+    }[tipo];
+    if(!cfg)return;
+    const host=document.getElementById(cfg.host); if(!host)return;
+    let el=document.getElementById('modalFamiliaRegistroForm');
+    if(!el){
+        el=document.createElement('div');el.id='modalFamiliaRegistroForm';el.className='modal fade';el.tabIndex=-1;el.setAttribute('aria-hidden','true');
+        el.innerHTML='<div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content"><div class="modal-header"><div><h5 class="modal-title fw-bold mb-0" id="familiaRegistroModalTitulo"></h5><small class="text-muted">Complete toda la información y guarde el registro.</small></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div><div class="modal-body" id="familiaRegistroModalBody"></div></div></div>';
+        document.body.appendChild(el);
+        el.addEventListener('hidden.bs.modal',()=>{
+            if(_familiaRegistroHost&&_familiaRegistroSection&&!_familiaRegistroHost.contains(_familiaRegistroSection))_familiaRegistroHost.appendChild(_familiaRegistroSection);
+            _familiaRegistroHost=null;_familiaRegistroSection=null;
+        });
+    }
+    // Si otro formulario estaba abierto, devolverlo antes de abrir el nuevo.
+    if(_familiaRegistroHost&&_familiaRegistroSection&&!_familiaRegistroHost.contains(_familiaRegistroSection))_familiaRegistroHost.appendChild(_familiaRegistroSection);
+    const section=host.firstElementChild; if(!section)return;
+    _familiaRegistroHost=host;_familiaRegistroSection=section;
+    if(preparar){
+        const form=section.querySelector('form');
+        if(form)form.reset();
+        const selectId={hm:'hm_persona',man:'man_persona',esc:'esc_persona',med:'med_persona'}[tipo];if(selectId)personasSelect(selectId);
+        if(tipo==='hm'){const e=document.getElementById('hm_fecha');if(e)e.value=fechaHoyModulo();}
+        if(tipo==='man'){const d=document.getElementById('man_fecha_pago');if(d)d.value=fechaHoyModulo();const st=document.getElementById('man_estado');if(st)st.value='Pagado';const id=document.getElementById('man_id');if(id)id.value='';const bt=document.getElementById('man_btn_texto');if(bt)bt.textContent='Registrar pago';}
+        if(tipo==='esc'){const st=document.getElementById('esc_estado');if(st)st.value='Activo';const id=document.getElementById('esc_id');if(id)id.value='';}
+        if(tipo==='med'){const st=document.getElementById('med_estado');if(st)st.value='Activo';const id=document.getElementById('med_id');if(id)id.value='';}
+        setModoFormularioFamilia_('editar',tipo);
+    }
+    document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid '+cfg.icon+' text-primary me-2"></i>'+cfg.title;
+    document.getElementById('familiaRegistroModalBody').appendChild(section);
+    _familiaRegistroModal=bootstrap.Modal.getOrCreateInstance(el,{backdrop:true,keyboard:true,focus:true});
+    _familiaRegistroModal.show();
+}
+function cerrarModalFamiliaRegistro(){try{if(_familiaRegistroModal)_familiaRegistroModal.hide();else{const el=document.getElementById('modalFamiliaRegistroForm');if(el)bootstrap.Modal.getOrCreateInstance(el).hide();}}catch(e){console.debug('Cierre modal Familia:',e.message);}}
+function fechaMedicoParaInput_(v){const s=String(v??'').trim();if(/^\d{4}-\d{2}-\d{2}$/.test(s))return s;let m=s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/);return m?m[3]+'-'+String(m[2]).padStart(2,'0')+'-'+String(m[1]).padStart(2,'0'):'';}
+function prepararCampoFamilia_(id,v){const e=document.getElementById(id);if(e)e.value=v??'';}
+function setModoFormularioFamilia_(modo,tipo){const formId={hm:'formHistorialMedico',med:'formRecordatorioMedicina',man:'formManutencion',esc:'formRegistroEscolar'}[tipo];const form=document.getElementById(formId);if(!form)return;form.querySelectorAll('input,select,textarea').forEach(el=>{el.disabled=modo==='ver';});form.querySelectorAll('button').forEach(el=>{if(el.type!=='button'&&el.type!=='submit')return;el.disabled=modo==='ver';});const acciones=form.querySelector('.d-flex.justify-content-end');if(acciones)acciones.classList.toggle('d-none',modo==='ver');}
+function abrirFormularioHistorialMedico(){abrirModalFamiliaRegistro('hm',true);setModoFormularioFamilia_('editar','hm');document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-notes-medical text-primary me-2"></i>Nuevo registro — Historial Médico';}
 function limpiarFormularioHistorialMedico(){abrirFormularioHistorialMedico();}
-async function guardarHistorialMedico(e){e.preventDefault();if(!protegerAccionUsuario('historialmedico','agregar'))return;const p=resolverPersonaRegistro(document.getElementById('hm_persona')?.value);if(!p){showSystemNotification('Paciente requerido','Seleccione una persona.','warning');return;}const payload={id_historial_medico:'MED-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',nombre_persona:p.nombre,fecha_registro:fechaRegistroModuloDesdeInput(document.getElementById('hm_fecha')?.value||fechaHoyModulo()),profesional:document.getElementById('hm_profesional')?.value.trim()||'',especialidad:document.getElementById('hm_especialidad')?.value.trim()||'',diagnostico:document.getElementById('hm_diagnostico')?.value.trim()||'',orden_medica:document.getElementById('hm_orden')?.value.trim()||'',alergias:document.getElementById('hm_alergias')?.value.trim()||'',antecedentes:document.getElementById('hm_antecedentes')?.value.trim()||'',observaciones:document.getElementById('hm_observaciones')?.value.trim()||'',proximo_control:document.getElementById('hm_proximo_control')?.value||''};try{const r=await sendGasRequest('addHistorialMedico',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');db.historialmedico=Array.isArray(db.historialmedico)?db.historialmedico:[];db.historialmedico.unshift(r.data||payload);renderHistorialMedicoModulo();limpiarFormularioHistorialMedico();showSystemNotification('Registro guardado','Historial médico guardado correctamente.','success');}catch(err){showSystemNotification('Error al guardar',err.message||'No se pudo guardar.','danger');}}
-function abrirFormularioRecordatorioMedicina(){document.getElementById('formRecordatorioMedicina')?.reset();personasSelect('med_persona');const e=document.getElementById('med_estado');if(e)e.value='Activo';}
-async function guardarRecordatorioMedicina(e){e.preventDefault();if(!protegerAccionUsuario('recordatoriosmedicinas','agregar'))return;const p=resolverPersonaRegistro(document.getElementById('med_persona')?.value);if(!p){showSystemNotification('Paciente requerido','Seleccione una persona.','warning');return;}const payload={id_recordatorio:'MEDREM-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',id_historial_medico:'',nombre_persona:p.nombre,medicamento:document.getElementById('med_medicamento')?.value.trim()||'',dosis:document.getElementById('med_dosis')?.value.trim()||'',via_administracion:document.getElementById('med_via')?.value.trim()||'',frecuencia:document.getElementById('med_frecuencia')?.value.trim()||'',horarios:document.getElementById('med_horarios')?.value.trim()||'',fecha_inicio:document.getElementById('med_inicio')?.value||'',fecha_fin:document.getElementById('med_fin')?.value||'',indicaciones:document.getElementById('med_indicaciones')?.value.trim()||'',estado:document.getElementById('med_estado')?.value||'Activo',ultimo_recordatorio:'',fecha_registro:formatearFechaHoraPortal(new Date())};try{const r=await sendGasRequest('addRecordatorioMedicina',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');db.recordatoriosmedicinas=Array.isArray(db.recordatoriosmedicinas)?db.recordatoriosmedicinas:[];db.recordatoriosmedicinas.unshift(r.data||payload);renderHistorialMedicoModulo();abrirFormularioRecordatorioMedicina();showSystemNotification('Recordatorio guardado','Recordatorio de medicina configurado.','success');}catch(err){showSystemNotification('Error al guardar',err.message||'No se pudo guardar.','danger');}}
-async function eliminarRecordatorioMedicina(id){if(!protegerAccionUsuario('recordatoriosmedicinas','eliminar')||!(await confirmarAccionModal('Eliminar recordatorio','¿Eliminar este recordatorio de medicina?')))return;try{const r=await sendGasRequest('deleteRecordatorioMedicina',{id_recordatorio:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');db.recordatoriosmedicinas=(db.recordatoriosmedicinas||[]).filter(x=>String(x.id_recordatorio)!==String(id));renderHistorialMedicoModulo();}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
-async function eliminarHistorialMedico(id){if(!protegerAccionUsuario('historialmedico','eliminar')||!(await confirmarAccionModal('Eliminar registro','¿Eliminar este registro médico?')))return;try{const r=await sendGasRequest('deleteHistorialMedico',{id_historial_medico:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');db.historialmedico=(db.historialmedico||[]).filter(x=>String(x.id_historial_medico)!==String(id));renderHistorialMedicoModulo();}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
-function renderHistorialMedicoModulo(){const body=document.getElementById('hm-tbody');if(!body)return;const rows=Array.isArray(db?.historialmedico)?db.historialmedico:[],meds=Array.isArray(db?.recordatoriosmedicinas)?db.recordatoriosmedicinas:[];document.getElementById('hm-kpi-total')?.replaceChildren(document.createTextNode(rows.length));document.getElementById('hm-kpi-ordenes')?.replaceChildren(document.createTextNode(rows.filter(x=>String(x.orden_medica||'').trim()).length));document.getElementById('hm-kpi-meds')?.replaceChildren(document.createTextNode(meds.filter(x=>String(x.estado||'Activo').toLowerCase()==='activo').length));const v=x=>escMod(x||'—');body.innerHTML=rows.length?rows.map(r=>'<tr><td>'+v(r.fecha_registro)+'</td><td>'+v(r.nombre_persona)+'</td><td>'+v(r.profesional)+'</td><td>'+v(r.especialidad)+'</td><td>'+v(r.diagnostico)+'</td><td><div class="health-order-box">'+v(r.orden_medica)+'</div></td><td><button class="btn btn-sm btn-outline-danger" onclick="eliminarHistorialMedico(\''+escMod(r.id_historial_medico)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="7" class="text-center text-muted py-4">No hay registros médicos.</td></tr>';const mb=document.getElementById('hm-med-tbody');if(mb)mb.innerHTML=meds.length?meds.map(r=>'<tr><td>'+v(r.nombre_persona)+'</td><td>'+v(r.medicamento)+'</td><td>'+v(r.dosis)+'</td><td>'+v(r.horarios)+'</td><td><span class="med-status '+(String(r.estado||'Activo').toLowerCase()==='activo'?'':'off')+'">'+v(r.estado||'Activo')+'</span></td><td><button class="btn btn-sm btn-outline-danger" onclick="eliminarRecordatorioMedicina(\''+escMod(r.id_recordatorio)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="6" class="text-center text-muted py-4">No hay recordatorios configurados.</td></tr>';}
-function formatearFechaTareaVisual(v){const s=String(v??'').trim();if(!s)return'—';let m=s.match(/^(\d{4})-(\d{2})-(\d{2})$/);if(m)return`${m[3]}/${m[2]}/${m[1]}`;m=s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})/);if(m)return`${String(m[1]).padStart(2,'0')}/${String(m[2]).padStart(2,'0')}/${m[3]}`;m=s.match(/^(?:\d{4}\-\d{2}\-\d{2})[T ]/);if(m){const d=new Date(s);if(!Number.isNaN(d.getTime()))return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();}return s;}
-function formatearHoraTareaVisual(v){if(v===null||v===undefined||v==='')return'—';if(typeof v==='number'&&Number.isFinite(v)){let f=v>1?(v%1440)/1440:v;if(f>=0&&f<1){let total=Math.round(f*86400)%86400;let h=Math.floor(total/3600),mi=Math.floor((total%3600)/60),se=total%60;const ap=h>=12?'PM':'AM';h=h%12||12;return`${h}:${String(mi).padStart(2,'0')}:${String(se).padStart(2,'0')} ${ap}`;}}const s=String(v).trim();if(!s)return'—';let m=s.match(/(?:1899-12-30|30\/12\/(?:18)?99|30\/12\/1989)[T ,.]*(\d{1,2}):(\d{2})(?::(\d{2}))?/i);if(!m)m=s.match(/(?:^|\s)(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?/i);if(m){let h=Number(m[1]),mi=Number(m[2]),se=Number(m[3]||0),ap=(m[4]||'').toUpperCase();if(!ap)ap=h>=12?'PM':'AM';h=h%12||12;return`${h}:${String(mi).padStart(2,'0')}:${String(se).padStart(2,'0')} ${ap}`;}return s;}
-function horaTareaParaInput(v){if(v===null||v===undefined||v==='')return'';if(typeof v==='number'&&Number.isFinite(v)){let f=v>1?(v%1440)/1440:v;if(f>=0&&f<1){let total=Math.round(f*86400)%86400;return String(Math.floor(total/3600)).padStart(2,'0')+':'+String(Math.floor((total%3600)/60)).padStart(2,'0');}}const s=String(v).trim();let m=s.match(/(?:1899-12-30|30\/12\/1899)[T ,.]*(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)?/i);if(!m)m=s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)?$/i);if(!m)return'';let h=Number(m[1]),mi=Number(m[2]),ap=(m[3]||'').toUpperCase();if(ap==='PM'&&h<12)h+=12;if(ap==='AM'&&h===12)h=0;return String(h).padStart(2,'0')+':'+String(mi).padStart(2,'0');}
-function fechaHoyTareaInput(){return typeof fechaInputVenezuela==='function'?fechaInputVenezuela(new Date()):new Date().toISOString().slice(0,10);}
-function limpiarFormularioTarea(){const f=document.getElementById('formTarea');if(f)f.reset();const id=document.getElementById('tarea_id');if(id)id.value='';const fi=document.getElementById('tarea_fecha_inicio');if(fi)fi.value=fechaHoyTareaInput();const st=document.getElementById('tarea_estado');if(st)st.value='Activa';const bt=document.getElementById('tarea_btn_texto');if(bt)bt.textContent='Guardar tarea';}
-function cerrarFormularioTarea(){const m=document.getElementById('tareaFormModal');if(m){m.classList.remove('show');m.setAttribute('aria-hidden','true');}document.body.classList.remove('overflow-hidden');}
-function abrirFormularioTarea(id){if(!id&&!protegerAccionUsuario('tareas','agregar'))return;const f=document.getElementById('formTarea');if(!f)return;f.reset();document.getElementById('tarea_id').value='';document.getElementById('tarea_fecha_inicio').value=fechaHoyTareaInput();document.getElementById('tarea_estado').value='Activa';document.getElementById('tarea_btn_texto').textContent='Guardar tarea';if(id){if(!protegerAccionUsuario('tareas','modificar'))return;const t=(db.tareas||[]).find(x=>String(x.id_tarea)===String(id));if(!t)return;const set=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v??''};set('tarea_id',t.id_tarea);set('tarea_titulo',t.titulo);set('tarea_tipo',t.tipo||'Compromiso');set('tarea_prioridad',t.prioridad||'Normal');set('tarea_descripcion',t.descripcion);set('tarea_fecha_inicio',/^\d{4}-\d{2}-\d{2}$/.test(String(t.fecha_inicio||''))?t.fecha_inicio:'');set('tarea_hora',horaTareaParaInput(t.hora_recordatorio));set('tarea_fecha_fin',/^\d{4}-\d{2}-\d{2}$/.test(String(t.fecha_fin||''))?t.fecha_fin:'');set('tarea_fechas_especificas',t.fechas_especificas);set('tarea_intervalo_valor',t.intervalo_valor);set('tarea_intervalo_unidad',t.intervalo_unidad);set('tarea_responsable',t.responsable);set('tarea_ubicacion',t.ubicacion);set('tarea_telegram_activo',String(t.telegram_activo||'true').toLowerCase()==='true'?'true':'false');set('tarea_telegram_chat_id',t.telegram_chat_id);set('tarea_mensaje_telegram',t.mensaje_telegram);set('tarea_estado',t.estado||'Activa');set('tarea_observaciones',t.observaciones);document.getElementById('tarea_btn_texto').textContent='Actualizar tarea';}const m=document.getElementById('tareaFormModal');if(m){m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}}
+function abrirFormularioManutencion(){abrirModalFamiliaRegistro('man',true);}
+function abrirFormularioEscolar(){abrirModalFamiliaRegistro('esc',true);}
+async function verHistorialMedico(id){if(!protegerAccionUsuario('historialmedico','leer'))return;const r=(db.historialmedico||[]).find(x=>String(x.id_historial_medico)===String(id));if(!r)return;personasSelect('hm_persona');prepararCampoFamilia_('hm_persona',r.id_familia?'familia:'+r.id_familia:'');prepararCampoFamilia_('hm_fecha',fechaMedicoParaInput_(r.fecha_registro));prepararCampoFamilia_('hm_profesional',r.profesional);prepararCampoFamilia_('hm_especialidad',r.especialidad);prepararCampoFamilia_('hm_diagnostico',r.diagnostico);prepararCampoFamilia_('hm_orden',r.orden_medica);prepararCampoFamilia_('hm_alergias',r.alergias);prepararCampoFamilia_('hm_antecedentes',r.antecedentes);prepararCampoFamilia_('hm_observaciones',r.observaciones);prepararCampoFamilia_('hm_proximo_control',fechaMedicoParaInput_(r.proximo_control));prepararCampoFamilia_('hm_id',r.id_historial_medico);abrirModalFamiliaRegistro('hm',false);document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-eye text-primary me-2"></i>Ver registro médico';setModoFormularioFamilia_('ver','hm');}
+function editarHistorialMedico(id){if(!protegerAccionUsuario('historialmedico','modificar'))return;const r=(db.historialmedico||[]).find(x=>String(x.id_historial_medico)===String(id));if(!r)return;personasSelect('hm_persona');prepararCampoFamilia_('hm_persona',r.id_familia?'familia:'+r.id_familia:'');prepararCampoFamilia_('hm_fecha',fechaMedicoParaInput_(r.fecha_registro));prepararCampoFamilia_('hm_profesional',r.profesional);prepararCampoFamilia_('hm_especialidad',r.especialidad);prepararCampoFamilia_('hm_diagnostico',r.diagnostico);prepararCampoFamilia_('hm_orden',r.orden_medica);prepararCampoFamilia_('hm_alergias',r.alergias);prepararCampoFamilia_('hm_antecedentes',r.antecedentes);prepararCampoFamilia_('hm_observaciones',r.observaciones);prepararCampoFamilia_('hm_proximo_control',fechaMedicoParaInput_(r.proximo_control));prepararCampoFamilia_('hm_id',r.id_historial_medico);abrirModalFamiliaRegistro('hm',false);document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-pen-to-square text-primary me-2"></i>Editar registro médico';setModoFormularioFamilia_('editar','hm');}
+async function guardarHistorialMedico(e){e.preventDefault();const id=String(document.getElementById('hm_id')?.value||'').trim();if(!protegerAccionUsuario('historialmedico',id?'modificar':'agregar'))return;const p=resolverPersonaRegistro(document.getElementById('hm_persona')?.value);if(!p){showSystemNotification('Paciente requerido','Seleccione una persona.','warning');return;}const payload={id_historial_medico:id||'MED-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',nombre_persona:p.nombre,fecha_registro:fechaRegistroModuloDesdeInput(document.getElementById('hm_fecha')?.value||fechaHoyModulo()),profesional:document.getElementById('hm_profesional')?.value.trim()||'',especialidad:document.getElementById('hm_especialidad')?.value.trim()||'',diagnostico:document.getElementById('hm_diagnostico')?.value.trim()||'',orden_medica:document.getElementById('hm_orden')?.value.trim()||'',alergias:document.getElementById('hm_alergias')?.value.trim()||'',antecedentes:document.getElementById('hm_antecedentes')?.value.trim()||'',observaciones:document.getElementById('hm_observaciones')?.value.trim()||'',proximo_control:document.getElementById('hm_proximo_control')?.value||''};try{const r=await sendGasRequest(id?'updateHistorialMedico':'addHistorialMedico',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');renderHistorialMedicoModulo();cerrarModalFamiliaRegistro();showSystemNotification(id?'Registro actualizado':'Registro guardado',id?'El historial médico fue actualizado correctamente.':'Historial médico guardado correctamente.','success');}catch(err){_erpOperacionExitoPendiente=null;showSystemNotification('Error al guardar',err.message||'No se pudo guardar.','danger');}}
+function abrirFormularioRecordatorioMedicina(){abrirModalFamiliaRegistro('med',true);setModoFormularioFamilia_('editar','med');document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-pills text-primary me-2"></i>Agregar medicina';}
+function limpiarFormularioRecordatorioMedicina(){abrirFormularioRecordatorioMedicina();}
+function cargarRecordatorioMedicinaEnFormulario_(r){personasSelect('med_persona');prepararCampoFamilia_('med_persona',r.id_familia?'familia:'+r.id_familia:'');prepararCampoFamilia_('med_medicamento',r.medicamento);prepararCampoFamilia_('med_dosis',r.dosis);prepararCampoFamilia_('med_via',r.via_administracion);prepararCampoFamilia_('med_frecuencia',r.frecuencia);prepararCampoFamilia_('med_horarios',r.horarios);prepararCampoFamilia_('med_inicio',fechaMedicoParaInput_(r.fecha_inicio));prepararCampoFamilia_('med_fin',fechaMedicoParaInput_(r.fecha_fin));prepararCampoFamilia_('med_indicaciones',r.indicaciones);prepararCampoFamilia_('med_estado',r.estado||'Activo');prepararCampoFamilia_('med_id',r.id_recordatorio);}
+function verRecordatorioMedicina(id){if(!protegerAccionUsuario('recordatoriosmedicinas','leer'))return;const r=(db.recordatoriosmedicinas||[]).find(x=>String(x.id_recordatorio)===String(id));if(!r)return;cargarRecordatorioMedicinaEnFormulario_(r);abrirModalFamiliaRegistro('med',false);document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-eye text-primary me-2"></i>Ver medicina';setModoFormularioFamilia_('ver','med');}
+function editarRecordatorioMedicina(id){if(!protegerAccionUsuario('recordatoriosmedicinas','modificar'))return;const r=(db.recordatoriosmedicinas||[]).find(x=>String(x.id_recordatorio)===String(id));if(!r)return;cargarRecordatorioMedicinaEnFormulario_(r);abrirModalFamiliaRegistro('med',false);document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-pen-to-square text-primary me-2"></i>Editar medicina';setModoFormularioFamilia_('editar','med');}
+async function guardarRecordatorioMedicina(e){e.preventDefault();const id=String(document.getElementById('med_id')?.value||'').trim();if(!protegerAccionUsuario('recordatoriosmedicinas',id?'modificar':'agregar'))return;const p=resolverPersonaRegistro(document.getElementById('med_persona')?.value);if(!p){showSystemNotification('Paciente requerido','Seleccione una persona.','warning');return;}const original=id?(db.recordatoriosmedicinas||[]).find(x=>String(x.id_recordatorio)===id):null;const payload={id_recordatorio:id||'MEDREM-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',id_historial_medico:original?.id_historial_medico||'',nombre_persona:p.nombre,medicamento:document.getElementById('med_medicamento')?.value.trim()||'',dosis:document.getElementById('med_dosis')?.value.trim()||'',via_administracion:document.getElementById('med_via')?.value.trim()||'',frecuencia:document.getElementById('med_frecuencia')?.value.trim()||'',horarios:document.getElementById('med_horarios')?.value.trim()||'',fecha_inicio:document.getElementById('med_inicio')?.value||'',fecha_fin:document.getElementById('med_fin')?.value||'',indicaciones:document.getElementById('med_indicaciones')?.value.trim()||'',estado:document.getElementById('med_estado')?.value||'Activo',ultimo_recordatorio:original?.ultimo_recordatorio||'',fecha_registro:original?.fecha_registro||formatearFechaHoraPortal(new Date())};try{const r=await sendGasRequest(id?'updateRecordatorioMedicina':'addRecordatorioMedicina',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');renderHistorialMedicoModulo();cerrarModalFamiliaRegistro();showSystemNotification(id?'Medicina actualizada':'Medicina guardada',id?'El recordatorio fue actualizado correctamente.':'El recordatorio de medicina fue configurado.','success');}catch(err){showSystemNotification('Error al guardar',err.message||'No se pudo guardar.','danger');}}
+async function eliminarRecordatorioMedicina(id){if(!protegerAccionUsuario('recordatoriosmedicinas','eliminar')||!(await confirmarAccionModal('Eliminar recordatorio','¿Eliminar este recordatorio de medicina?')))return;try{const r=await sendGasRequest('deleteRecordatorioMedicina',{id_recordatorio:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');renderHistorialMedicoModulo();}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
+async function eliminarHistorialMedico(id){if(!protegerAccionUsuario('historialmedico','eliminar')||!(await confirmarAccionModal('Eliminar registro','¿Eliminar este registro médico?')))return;try{const r=await sendGasRequest('deleteHistorialMedico',{id_historial_medico:id},false,30000,true);if(!r?.success)throw new Error(r.message||'No se pudo eliminar');renderHistorialMedicoModulo();}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
+function renderHistorialMedicoModulo(){const body=document.getElementById('hm-tbody');if(!body)return;const rows=Array.isArray(db?.historialmedico)?db.historialmedico:[],meds=Array.isArray(db?.recordatoriosmedicinas)?db.recordatoriosmedicinas:[];document.getElementById('hm-kpi-total')?.replaceChildren(document.createTextNode(rows.length));document.getElementById('hm-kpi-ordenes')?.replaceChildren(document.createTextNode(rows.filter(x=>String(x.orden_medica||'').trim()).length));document.getElementById('hm-kpi-meds')?.replaceChildren(document.createTextNode(meds.filter(x=>String(x.estado||'Activo').toLowerCase()==='activo').length));const v=x=>escMod(x||'—');body.innerHTML=rows.length?rows.map(r=>'<tr><td>'+v(r.fecha_registro)+'</td><td>'+v(r.nombre_persona)+'</td><td>'+v(r.profesional)+'</td><td>'+v(r.especialidad)+'</td><td>'+v(r.diagnostico)+'</td><td><div class="health-order-box">'+v(r.orden_medica)+'</div></td><td class="text-nowrap"><button class="btn btn-sm btn-outline-secondary me-1" title="Ver" onclick="verHistorialMedico(\''+escMod(r.id_historial_medico)+'\')"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-outline-primary me-1" title="Editar" onclick="editarHistorialMedico(\''+escMod(r.id_historial_medico)+'\')"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="eliminarHistorialMedico(\''+escMod(r.id_historial_medico)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="7" class="text-center text-muted py-4">No hay registros médicos.</td></tr>';const mb=document.getElementById('hm-med-tbody');if(mb)mb.innerHTML=meds.length?meds.map(r=>'<tr><td>'+v(r.nombre_persona)+'</td><td>'+v(r.medicamento)+'</td><td>'+v(r.dosis)+'</td><td>'+v(r.horarios)+'</td><td><span class="med-status '+(String(r.estado||'Activo').toLowerCase()==='activo'?'':'off')+'">'+v(r.estado||'Activo')+'</span></td><td class="text-nowrap"><button class="btn btn-sm btn-outline-secondary me-1" title="Ver" onclick="verRecordatorioMedicina(\''+escMod(r.id_recordatorio)+'\')"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-outline-primary me-1" title="Editar" onclick="editarRecordatorioMedicina(\''+escMod(r.id_recordatorio)+'\')"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="eliminarRecordatorioMedicina(\''+escMod(r.id_recordatorio)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="6" class="text-center text-muted py-4">No hay recordatorios configurados.</td></tr>';}
+
+
+function limpiarFormularioTarea(){
+    const form=document.getElementById('formTarea');
+    if(form) form.reset();
+    const id=document.getElementById('tarea_id'); if(id) id.value='';
+    const estado=document.getElementById('tarea_estado'); if(estado) estado.value='Activa';
+    const tipo=document.getElementById('tarea_tipo'); if(tipo) tipo.value='Compromiso';
+    const prioridad=document.getElementById('tarea_prioridad'); if(prioridad) prioridad.value='Normal';
+    const telegram=document.getElementById('tarea_telegram_activo'); if(telegram) telegram.value='true';
+    const unidad=document.getElementById('tarea_intervalo_unidad'); if(unidad) unidad.value='';
+    const fecha=document.getElementById('tarea_fecha_inicio'); if(fecha) fecha.value=fechaInputVenezuela(new Date());
+    const hora=document.getElementById('tarea_hora_tarea'); if(hora) hora.value='';
+    const antes=document.getElementById('tarea_recordatorio_antes'); if(antes) antes.value='30';
+    const antesUnidad=document.getElementById('tarea_recordatorio_unidad'); if(antesUnidad) antesUnidad.value='minutos';
+    const titulo=document.getElementById('tareaFormTitle'); if(titulo) titulo.textContent='Programar tarea / recordatorio';
+    const sub=document.querySelector('#tareaFormModal .tarea-summary-sub'); if(sub) sub.textContent='Configure la hora exacta de la tarea y cuánto tiempo antes desea recibir el recordatorio.';
+    const btn=document.getElementById('tarea_btn_texto'); if(btn) btn.textContent='Guardar tarea';
+}
+function abrirFormularioTarea(id=''){
+    const editar=!!String(id||'').trim();
+    if(!protegerAccionUsuario('tareas',editar?'modificar':'agregar')) return;
+    const modal=document.getElementById('tareaFormModal');
+    if(!modal){ showSystemNotification('Tareas','No se encontró el formulario de nueva tarea.','danger'); return; }
+    if(!editar){
+        const form=document.getElementById('formTarea'); if(form)form.reset();
+        const hid=document.getElementById('tarea_id'); if(hid)hid.value='';
+        const fecha=document.getElementById('tarea_fecha_inicio'); if(fecha)fecha.value=fechaInputVenezuela(new Date());
+        const hora=document.getElementById('tarea_hora_tarea'); if(hora)hora.value='';
+        const antes=document.getElementById('tarea_recordatorio_antes'); if(antes)antes.value='30';
+        const antesUnidad=document.getElementById('tarea_recordatorio_unidad'); if(antesUnidad)antesUnidad.value='minutos';
+        const tipo=document.getElementById('tarea_tipo'); if(tipo)tipo.value='Compromiso';
+        const estado=document.getElementById('tarea_estado'); if(estado)estado.value='Activa';
+        const prioridad=document.getElementById('tarea_prioridad'); if(prioridad)prioridad.value='Normal';
+        const telegram=document.getElementById('tarea_telegram_activo'); if(telegram)telegram.value='true';
+        const unidad=document.getElementById('tarea_intervalo_unidad'); if(unidad)unidad.value='';
+        const title=document.getElementById('tareaFormTitle'); if(title)title.textContent='Nueva tarea / recordatorio';
+        const sub=modal.querySelector('.tarea-summary-sub'); if(sub)sub.textContent='Programa una actividad y define cuántos minutos, horas o días antes deseas recibir el aviso.';
+        const btn=document.getElementById('tarea_btn_texto'); if(btn)btn.textContent='Guardar tarea';
+    }else{
+        const t=(db.tareas||[]).find(x=>String(x.id_tarea)===String(id));
+        if(!t){showSystemNotification('Tarea no encontrada','No se localizó la tarea seleccionada.','warning');return;}
+        const set=(i,v)=>{const el=document.getElementById(i);if(el)el.value=v??''};
+        const horaTarea=obtenerHoraTarea_(t);
+        const offset=obtenerRecordatorioAntes_(t);
+        set('tarea_id',t.id_tarea);set('tarea_titulo',t.titulo);set('tarea_tipo',t.tipo||'Compromiso');set('tarea_prioridad',t.prioridad||'Normal');set('tarea_descripcion',t.descripcion);set('tarea_fecha_inicio',fechaTareaInput(t.fecha_inicio));set('tarea_hora_tarea',formatearHoraTareaInput(horaTarea));set('tarea_recordatorio_antes',offset.valor);set('tarea_recordatorio_unidad',offset.unidad);set('tarea_fecha_fin',fechaTareaInput(t.fecha_fin));set('tarea_fechas_especificas',t.fechas_especificas);set('tarea_intervalo_valor',t.intervalo_valor);set('tarea_intervalo_unidad',t.intervalo_unidad||'');set('tarea_responsable',t.responsable);set('tarea_ubicacion',t.ubicacion);set('tarea_telegram_activo',String(t.telegram_activo).toLowerCase()==='false'?'false':'true');set('tarea_telegram_chat_id',t.telegram_chat_id);set('tarea_mensaje_telegram',t.mensaje_telegram);set('tarea_estado',t.estado||'Activa');set('tarea_observaciones',t.observaciones);
+        const title=document.getElementById('tareaFormTitle'); if(title)title.textContent='Editar tarea / recordatorio';
+        const sub=modal.querySelector('.tarea-summary-sub'); if(sub)sub.textContent='Actualice la hora de la actividad y el tiempo de aviso previo.';
+        const btn=document.getElementById('tarea_btn_texto'); if(btn)btn.textContent='Actualizar tarea';
+    }
+    modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); document.body.classList.add('overflow-hidden');
+    setTimeout(()=>document.getElementById('tarea_titulo')?.focus(),80);
+}
+function cerrarFormularioTarea(){
+    const modal=document.getElementById('tareaFormModal'); if(modal){modal.classList.remove('show');modal.setAttribute('aria-hidden','true');}
+    document.body.classList.remove('overflow-hidden');
+}
+function fechaTareaInput(v){
+    const s=String(v??'').trim(); if(!s)return '';
+    const m=s.match(/^(\d{4})-(\d{2})-(\d{2})/); if(m)return s.slice(0,10);
+    const d=s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})/); if(d)return `${d[3]}-${String(d[2]).padStart(2,'0')}-${String(d[1]).padStart(2,'0')}`;
+    const dt=new Date(s); if(!Number.isNaN(dt.getTime()))return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+    return '';
+}
+function formatearHoraTareaInput(v){
+    const s=String(v??'').trim(); if(!s)return '';
+    let m=s.match(/(?:T|\s)(\d{1,2}):(\d{2})/); if(!m)m=s.match(/^(\d{1,2}):(\d{2})/);
+    if(m)return `${String(m[1]).padStart(2,'0')}:${m[2]}`;
+    const d=new Date(s); if(!Number.isNaN(d.getTime())&&/[T\s]/.test(s))return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+    return '';
+}
+function obtenerHoraTarea_(t){
+    return String(t?.hora_tarea||t?.hora_actividad||t?.hora_recordatorio||'').trim();
+}
+function obtenerRecordatorioAntes_(t){
+    const valorRaw=String(t?.recordatorio_antes_valor??t?.recordatorio_antes??'').trim();
+    const unidadRaw=String(t?.recordatorio_antes_unidad||'minutos').trim().toLowerCase();
+    if(valorRaw!==''){
+        const valor=Math.max(0,Number(valorRaw)||0);
+        const unidad=['minutos','horas','dias'].includes(unidadRaw)?unidadRaw:'minutos';
+        return {valor,unidad};
+    }
+    // Tareas anteriores no tenían un desplazamiento separado; conservamos su comportamiento.
+    return {valor:0,unidad:'minutos'};
+}
+function calcularRecordatorioTarea_(fecha,hora,valor,unidad){
+    if(!fecha||!hora)return {fecha:'',hora:''};
+    const n=Math.max(0,Number(valor)||0);
+    const mult={minutos:1,horas:60,dias:1440}[String(unidad||'minutos').toLowerCase()]||1;
+    const base=new Date(`${fecha}T${hora}:00`);
+    if(Number.isNaN(base.getTime()))return {fecha:'',hora:''};
+    base.setMinutes(base.getMinutes()-(n*mult));
+    return {
+        fecha:`${base.getFullYear()}-${String(base.getMonth()+1).padStart(2,'0')}-${String(base.getDate()).padStart(2,'0')}`,
+        hora:`${String(base.getHours()).padStart(2,'0')}:${String(base.getMinutes()).padStart(2,'0')}`
+    };
+}
+function formatearRecordatorioAntesTarea_(valor,unidad){
+    const n=Math.max(0,Number(valor)||0); const u=String(unidad||'minutos').toLowerCase();
+    if(n===0)return 'En el momento de la tarea';
+    if(u==='horas')return `${n} ${n===1?'hora':'horas'} antes`;
+    if(u==='dias')return `${n} ${n===1?'día':'días'} antes`;
+    return `${n} ${n===1?'minuto':'minutos'} antes`;
+}
+
 async function marcarTareaRealizadaUI(id){
     if(!protegerAccionUsuario('tareas','modificar'))return;
     const tarea=(db.tareas||[]).find(x=>String(x.id_tarea)===String(id));
-    if(!tarea||String(tarea.estado||'').toLowerCase()==='completada')return;
+    if(!tarea){showSystemNotification('Tarea no disponible','No se encontró la tarea seleccionada.','warning');return;}
+    const estado=String(tarea.estado||'Activa').trim().toLowerCase();
+    if(['completada','realizada'].includes(estado)){showSystemNotification('Tarea ya realizada','Esta tarea ya figura como completada.','info');return;}
     try{
-        const payload={id_tarea:id,estado:'Completada',proxima_ejecucion:'',ultima_ejecucion:formatearFechaHoraPortal(new Date())};
+        const payload={id_tarea:String(id),estado:'Completada',proxima_ejecucion:'',ultima_ejecucion:formatearFechaHoraPortal(new Date())};
         const r=await sendGasRequest('marcarTareaRealizada',payload,false,30000,true);
-        if(!r?.success)throw new Error(r?.message||'No se pudo actualizar la tarea.');
-        const ix=(db.tareas||[]).findIndex(x=>String(x.id_tarea)===String(id));
-        if(ix>=0)db.tareas[ix]={...db.tareas[ix],...payload,...(r.data||{})};
+        if(!r?.success)throw new Error(r?.message||'El servidor no confirmó la operación.');
+        db.tareas=Array.isArray(db.tareas)?db.tareas:[];
+        const ix=db.tareas.findIndex(x=>String(x.id_tarea)===String(id));
+        const actualizado={...(ix>=0?db.tareas[ix]:tarea),...payload,...(r.data||{})};
+        if(ix>=0)db.tareas[ix]=actualizado;else db.tareas.unshift(actualizado);
         guardarDBLocalSeguro_();renderTareasModulo();
-        showSystemNotification('Tarea realizada','La tarea fue marcada como realizada y no recibirá más recordatorios.','success');
-    }catch(e){showSystemNotification('Error',e.message||'No se pudo actualizar la tarea.','danger');}
+        showSystemNotification('Tarea realizada','La tarea "'+String(tarea.titulo||'')+'" fue marcada como realizada correctamente.','success');
+    }catch(err){
+        _erpOperacionExitoPendiente=null;
+        showSystemNotification('No se pudo completar la tarea',err.message||'No fue posible marcar la tarea como realizada.','danger');
+    }
 }
 
-async function guardarTarea(e){e.preventDefault();const id=String(document.getElementById('tarea_id')?.value||'').trim();if(!protegerAccionUsuario('tareas',id?'modificar':'agregar'))return;const val=i=>String(document.getElementById(i)?.value||'').trim();const payload={id_tarea:id||'TASK-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:currentUser?.codigo_cliente||'',titulo:val('tarea_titulo'),tipo:val('tarea_tipo')||'Compromiso',descripcion:val('tarea_descripcion'),fecha_inicio:val('tarea_fecha_inicio'),fecha_fin:val('tarea_fecha_fin'),hora_recordatorio:val('tarea_hora'),fechas_especificas:val('tarea_fechas_especificas'),intervalo_valor:val('tarea_intervalo_valor'),intervalo_unidad:val('tarea_intervalo_unidad'),prioridad:val('tarea_prioridad')||'Normal',responsable:val('tarea_responsable'),ubicacion:val('tarea_ubicacion'),estado:val('tarea_estado')||'Activa',telegram_activo:val('tarea_telegram_activo')!=='false',telegram_chat_id:val('tarea_telegram_chat_id'),mensaje_telegram:val('tarea_mensaje_telegram'),observaciones:val('tarea_observaciones'),fecha_registro:formatearFechaHoraPortal(new Date())};if(!payload.titulo||!payload.descripcion||!payload.fecha_inicio||!payload.hora_recordatorio){showSystemNotification('Datos incompletos','Título, descripción, fecha y hora son obligatorios.','warning');return;}try{const action=id?'updateTarea':'addTarea';const r=await sendGasRequest(action,payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');renderTareasModulo();limpiarFormularioTarea();cerrarFormularioTarea();showSystemNotification(id?'Tarea actualizada':'Tarea registrada',id?'La tarea fue actualizada correctamente.':'La tarea quedó programada correctamente.','success');}catch(err){showSystemNotification('Error al guardar',err.message||'No se pudo guardar la tarea.','danger');}}
+async function guardarTarea(e){
+    e.preventDefault();
+    const id=String(document.getElementById('tarea_id')?.value||'').trim();
+    if(!protegerAccionUsuario('tareas',id?'modificar':'agregar'))return;
+    const val=i=>String(document.getElementById(i)?.value||'').trim();
+    const fechaTarea=val('tarea_fecha_inicio');
+    const horaTarea=val('tarea_hora_tarea');
+    const recordatorioAntesValor=Math.max(0,Number(val('tarea_recordatorio_antes')||0));
+    const recordatorioAntesUnidad=val('tarea_recordatorio_unidad')||'minutos';
+    const momentoRecordatorio=calcularRecordatorioTarea_(fechaTarea,horaTarea,recordatorioAntesValor,recordatorioAntesUnidad);
+    const payload={
+        id_tarea:id||'TASK-'+Date.now(),
+        id_usuario:currentUser?.id_usuario||'',
+        codigo_cliente:currentUser?.codigo_cliente||'',
+        titulo:val('tarea_titulo'),
+        tipo:val('tarea_tipo')||'Compromiso',
+        descripcion:val('tarea_descripcion'),
+        fecha_inicio:fechaTarea,
+        fecha_fin:val('tarea_fecha_fin'),
+        hora_tarea:horaTarea,
+        hora_actividad:horaTarea,
+        recordatorio_antes_valor:recordatorioAntesValor,
+        recordatorio_antes_unidad:recordatorioAntesUnidad,
+        fecha_recordatorio:momentoRecordatorio.fecha,
+        // Se conserva este campo para compatibilidad con el programador actual del GAS.
+        hora_recordatorio:momentoRecordatorio.hora,
+        fechas_especificas:val('tarea_fechas_especificas'),
+        intervalo_valor:val('tarea_intervalo_valor'),
+        intervalo_unidad:val('tarea_intervalo_unidad'),
+        prioridad:val('tarea_prioridad')||'Normal',
+        responsable:val('tarea_responsable'),
+        ubicacion:val('tarea_ubicacion'),
+        estado:val('tarea_estado')||'Activa',
+        telegram_activo:val('tarea_telegram_activo')!=='false',
+        telegram_chat_id:val('tarea_telegram_chat_id'),
+        mensaje_telegram:val('tarea_mensaje_telegram'),
+        observaciones:val('tarea_observaciones'),
+        fecha_registro:formatearFechaHoraPortal(new Date())
+    };
+    if(!payload.titulo||!payload.descripcion||!payload.fecha_inicio||!payload.hora_tarea){
+        showSystemNotification('Datos incompletos','Título, descripción, fecha y hora de la tarea son obligatorios.','warning');
+        return;
+    }
+    if(!momentoRecordatorio.fecha||!momentoRecordatorio.hora){
+        showSystemNotification('Recordatorio inválido','No fue posible calcular el momento del recordatorio. Revise la fecha, hora y anticipación.','warning');
+        return;
+    }
+    try{
+        const action=id?'updateTarea':'addTarea';
+        const r=await sendGasRequest(action,payload,false,30000,true);
+        if(!r?.success)throw new Error(r?.message||'No se pudo guardar');
+        db.tareas=Array.isArray(db.tareas)?db.tareas:[];
+        const idGuardado=String(payload.id_tarea);
+        const ixGuardado=db.tareas.findIndex(x=>String(x.id_tarea)===idGuardado);
+        const filaGuardada={...(ixGuardado>=0?db.tareas[ixGuardado]:{}),...payload,...(r.data||{})};
+        if(ixGuardado>=0)db.tareas[ixGuardado]=filaGuardada;else db.tareas.unshift(filaGuardada);
+        try{localStorage.setItem('erp_db',JSON.stringify(db));}catch(_){}
+        renderTareasModulo();
+        limpiarFormularioTarea();
+        cerrarFormularioTarea();
+        showSystemNotification(id?'Tarea actualizada':'Tarea registrada',id?'La tarea fue actualizada correctamente.':'La tarea quedó programada correctamente.','success');
+    }catch(err){showSystemNotification('Error al guardar',err.message||'No se pudo guardar la tarea.','danger');}
+}
 
 async function eliminarTarea(id){if(!protegerAccionUsuario('tareas','eliminar')||!(await confirmarAccionModal('Eliminar tarea','¿Desea eliminar este recordatorio?')))return;try{const r=await sendGasRequest('deleteTarea',{id_tarea:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');db.tareas=(db.tareas||[]).filter(x=>String(x.id_tarea)!==String(id));localStorage.setItem('erp_db',JSON.stringify(db));renderTareasModulo();showSystemNotification('Tarea eliminada','El recordatorio fue eliminado.','success');}catch(err){showSystemNotification('Error al eliminar',err.message||'No se pudo eliminar.','danger');}}
-function renderTareasModulo(){const container=document.getElementById('tareas-listado');const rows=Array.isArray(db?.tareas)?db.tareas:[];const norm=v=>String(v??'').trim().toLowerCase();const pendientes=rows.filter(r=>!['completada','realizada','cancelada'].includes(norm(r.estado||'Activa')));const realizadas=rows.filter(r=>['completada','realizada'].includes(norm(r.estado)));document.getElementById('tareas-kpi-total')?.replaceChildren(document.createTextNode(rows.length));document.getElementById('tareas-kpi-activas')?.replaceChildren(document.createTextNode(pendientes.length));document.getElementById('tareas-kpi-proximas')?.replaceChildren(document.createTextNode(rows.filter(r=>norm(r.estado)==='activa'&&String(r.proxima_ejecucion||'').trim()).length));document.getElementById('tareas-kpi-enviadas')?.replaceChildren(document.createTextNode(rows.reduce((n,r)=>n+Number(r.total_envios||0),0)));if(!container)return;const v=x=>escMod(x||'—');const filaAcciones=r=>{const id=String(r.id_tarea||'');let html='<div class="d-flex gap-1">';html+='<button type="button" class="btn btn-sm btn-outline-info" data-tarea-action="ver" data-tarea-id="'+escMod(id)+'" title="Ver"><i class="fa-solid fa-eye"></i></button>';html+='<button type="button" class="btn btn-sm btn-outline-primary" data-tarea-action="editar" data-tarea-id="'+escMod(id)+'" title="Editar"><i class="fa-solid fa-pen"></i></button>';if(norm(r.estado)==='activa')html+='<button type="button" class="btn btn-sm btn-outline-success" data-tarea-action="realizada" data-tarea-id="'+escMod(id)+'" title="Marcar realizada"><i class="fa-solid fa-circle-check"></i></button>';html+='<button type="button" class="btn btn-sm btn-outline-danger" data-tarea-action="eliminar" data-tarea-id="'+escMod(id)+'" title="Eliminar"><i class="fa-solid fa-trash"></i></button></div>';return html;};const tabla=(titulo,lista,icono,clase)=>'<div class="tareas-estado-bloque '+clase+'"><div class="tareas-estado-cab"><div><i class="fa-solid '+icono+' me-2"></i>'+titulo+'</div><span>'+lista.length+'</span></div><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Tarea</th><th>Programación</th><th>Próximo aviso</th><th>Prioridad</th><th>Acciones</th></tr></thead><tbody>'+ (lista.length?lista.map(r=>'<tr><td><div class="fw-bold">'+v(r.titulo)+'</div><small class="text-muted">'+v(r.tipo)+' · '+v(r.descripcion).slice(0,80)+'</small></td><td>'+v(formatearFechaTareaVisual(r.fecha_inicio))+' '+v(formatearHoraTareaVisual(r.hora_recordatorio))+(r.intervalo_unidad?' · cada '+v(r.intervalo_valor)+' '+v(r.intervalo_unidad):'')+'</td><td>'+v(r.proxima_ejecucion)+'</td><td>'+v(r.prioridad)+'</td><td>'+filaAcciones(r)+'</td></tr>').join(''):'<tr><td colspan="5" class="text-center text-muted py-4">No hay tareas en este estado.</td></tr>')+'</tbody></table></div></div>';container.innerHTML=tabla('Pendientes',pendientes,'fa-clock','pendientes')+tabla('Realizadas',realizadas,'fa-circle-check','realizadas');container.onclick=function(ev){const btn=ev.target.closest('[data-tarea-action]');if(!btn||!container.contains(btn))return;const id=btn.getAttribute('data-tarea-id')||'';const action=btn.getAttribute('data-tarea-action');if(action==='ver')abrirResumenTarea(id);else if(action==='editar')abrirFormularioTarea(id);else if(action==='realizada')marcarTareaRealizadaUI(id);else if(action==='eliminar')eliminarTarea(id);};}
+function renderTareasModulo(){
+    const container=document.getElementById('tareas-listado');
+    const rows=Array.isArray(db?.tareas)?db.tareas:[];
+    const norm=v=>String(v??'').trim().toLowerCase();
+    const pendientes=rows.filter(r=>!['completada','realizada','cancelada'].includes(norm(r.estado||'Activa')));
+    const realizadas=rows.filter(r=>['completada','realizada'].includes(norm(r.estado)));
+    document.getElementById('tareas-kpi-total')?.replaceChildren(document.createTextNode(rows.length));
+    document.getElementById('tareas-kpi-activas')?.replaceChildren(document.createTextNode(pendientes.length));
+    document.getElementById('tareas-kpi-proximas')?.replaceChildren(document.createTextNode(rows.filter(r=>norm(r.estado)==='activa'&&String(r.proxima_ejecucion||'').trim()).length));
+    document.getElementById('tareas-kpi-enviadas')?.replaceChildren(document.createTextNode(rows.reduce((n,r)=>n+Number(r.total_envios||0),0)));
+    if(!window._tareasTelegramSeleccionadas)window._tareasTelegramSeleccionadas=new Set();
+    const idsValidos=new Set(rows.map(r=>String(r.id_tarea||'')));
+    window._tareasTelegramSeleccionadas.forEach(id=>{if(!idsValidos.has(String(id)))window._tareasTelegramSeleccionadas.delete(id);});
+    if(!container){actualizarContadorTareasTelegram_();return;}
+    const v=x=>escMod(x||'—');
+    const filaAcciones=r=>{
+        const id=String(r.id_tarea||''); let html='<div class="d-flex gap-1">';
+        html+='<button type="button" class="btn btn-sm btn-outline-info" data-tarea-action="ver" data-tarea-id="'+escMod(id)+'" title="Ver"><i class="fa-solid fa-eye"></i></button>';
+        html+='<button type="button" class="btn btn-sm btn-outline-primary" data-tarea-action="editar" data-tarea-id="'+escMod(id)+'" title="Editar"><i class="fa-solid fa-pen"></i></button>';
+        if(norm(r.estado)==='activa')html+='<button type="button" class="btn btn-sm btn-outline-success" data-tarea-action="realizada" data-tarea-id="'+escMod(id)+'" title="Marcar realizada"><i class="fa-solid fa-circle-check"></i></button>';
+        html+='<button type="button" class="btn btn-sm btn-outline-danger" data-tarea-action="eliminar" data-tarea-id="'+escMod(id)+'" title="Eliminar"><i class="fa-solid fa-trash"></i></button></div>';
+        return html;
+    };
+    const fila=(r)=>{
+        const id=String(r.id_tarea||'');
+        const checked=window._tareasTelegramSeleccionadas.has(id)?' checked':'';
+        const horaTarea=obtenerHoraTarea_(r);
+        const offset=obtenerRecordatorioAntes_(r);
+        const aviso=formatearRecordatorioAntesTarea_(offset.valor,offset.unidad);
+        const programacion=formatearFechaTareaVisual(r.fecha_inicio)+(horaTarea?' · '+formatearHoraTareaVisual(horaTarea):'');
+        return '<tr><td class="tarea-telegram-row"><input type="checkbox" class="tarea-telegram-select" data-tarea-select="1" data-tarea-id="'+escMod(id)+'"'+checked+' title="Seleccionar para Telegram"></td><td><div class="fw-bold">'+v(r.titulo)+'</div><small class="text-muted">'+v(r.tipo)+' · '+v(r.descripcion).slice(0,80)+'</small></td><td>'+v(programacion)+'<div class="small text-muted">Aviso: '+v(aviso)+'</div></td><td>'+v(r.proxima_ejecucion||r.fecha_recordatorio||'—')+'</td><td>'+v(r.prioridad)+'</td><td>'+filaAcciones(r)+'</td></tr>';
+    };
+    const tabla=(titulo,lista,icono,clase)=>{
+        const todosMarcados=lista.length>0&&lista.every(r=>window._tareasTelegramSeleccionadas.has(String(r.id_tarea||'')));
+        return '<div class="tareas-estado-bloque '+clase+'"><div class="tareas-estado-cab"><div><i class="fa-solid '+icono+' me-2"></i>'+titulo+'</div><span>'+lista.length+'</span></div><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th class="tarea-telegram-row"><input type="checkbox" class="tarea-telegram-select" data-tarea-group="'+clase+'"'+(todosMarcados?' checked':'')+' title="Seleccionar grupo"></th><th>Tarea</th><th>Programación</th><th>Próximo aviso</th><th>Prioridad</th><th>Acciones</th></tr></thead><tbody>'+(lista.length?lista.map(fila).join(''):'<tr><td colspan="6" class="text-center text-muted py-4">No hay tareas en este estado.</td></tr>')+'</tbody></table></div></div>';};
+    container.innerHTML=tabla('Pendientes',pendientes,'fa-clock','pendientes')+tabla('Realizadas',realizadas,'fa-circle-check','realizadas');
+    container.onclick=function(ev){
+        const btn=ev.target.closest('[data-tarea-action]');
+        if(!btn||!container.contains(btn))return;
+        const id=btn.getAttribute('data-tarea-id')||'';
+        const action=btn.getAttribute('data-tarea-action');
+        if(action==='ver')abrirResumenTarea(id);
+        else if(action==='editar')abrirFormularioTarea(id);
+        else if(action==='realizada')marcarTareaRealizadaUI(id);
+        else if(action==='eliminar')eliminarTarea(id);
+    };
+    container.onchange=function(ev){
+        const cb=ev.target.closest('input[type="checkbox"]');
+        if(!cb||!container.contains(cb))return;
+        if(cb.hasAttribute('data-tarea-select')){
+            toggleSeleccionTareaTelegram_(cb.getAttribute('data-tarea-id')||'',cb.checked);
+            return;
+        }
+        const group=cb.getAttribute('data-tarea-group');
+        if(group)seleccionarGrupoTareasTelegram_(group,cb.checked);
+    };
+    actualizarContadorTareasTelegram_();
+}
+
+function toggleSeleccionTareaTelegram_(id,checked){
+    const key=String(id||'').trim();
+    if(!window._tareasTelegramSeleccionadas)window._tareasTelegramSeleccionadas=new Set();
+    if(!key)return;
+    if(checked)window._tareasTelegramSeleccionadas.add(key);else window._tareasTelegramSeleccionadas.delete(key);
+    actualizarContadorTareasTelegram_();
+}
+function seleccionarGrupoTareasTelegram_(grupo,checked=true){
+    if(!window._tareasTelegramSeleccionadas)window._tareasTelegramSeleccionadas=new Set();
+    const rows=Array.isArray(db?.tareas)?db.tareas:[];
+    const norm=v=>String(v??'').trim().toLowerCase();
+    const lista=grupo==='pendientes'?rows.filter(r=>!['completada','realizada','cancelada'].includes(norm(r.estado||'Activa'))):rows.filter(r=>['completada','realizada'].includes(norm(r.estado)));
+    lista.forEach(r=>{const id=String(r.id_tarea||'');if(!id)return;if(checked)window._tareasTelegramSeleccionadas.add(id);else window._tareasTelegramSeleccionadas.delete(id);});
+    renderTareasModulo();
+}
+function seleccionarTodasTareasTelegram_(checked=true){
+    if(!window._tareasTelegramSeleccionadas)window._tareasTelegramSeleccionadas=new Set();
+    const rows=Array.isArray(db?.tareas)?db.tareas:[];
+    rows.forEach(r=>{const id=String(r.id_tarea||'');if(!id)return;if(checked)window._tareasTelegramSeleccionadas.add(id);else window._tareasTelegramSeleccionadas.delete(id);});
+    renderTareasModulo();
+}
+function limpiarSeleccionTareasTelegram_(){
+    window._tareasTelegramSeleccionadas=new Set();
+    renderTareasModulo();
+}
+function obtenerTareasSeleccionadasTelegram_(){
+    const ids=window._tareasTelegramSeleccionadas||new Set();
+    const rows=Array.isArray(db?.tareas)?db.tareas:[];
+    return rows.filter(r=>ids.has(String(r.id_tarea||'')));
+}
+function actualizarContadorTareasTelegram_(){
+    const n=(window._tareasTelegramSeleccionadas||new Set()).size;
+    const el=document.getElementById('tareas-telegram-seleccion-count');
+    if(el)el.innerHTML='<i class="fa-solid fa-list-check me-1"></i>'+n+' '+(n===1?'seleccionada':'seleccionadas');
+    const btn=document.getElementById('btn-enviar-tareas-telegram'); if(btn)btn.disabled=n===0;
+}
+function escaparHtmlTelegramTarea_(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function construirMensajeTareasTelegram_(tareas){
+    const norm=v=>String(v??'').trim().toLowerCase();
+    const pendientes=tareas.filter(r=>!['completada','realizada','cancelada'].includes(norm(r.estado||'Activa')));
+    const realizadas=tareas.filter(r=>['completada','realizada'].includes(norm(r.estado)));
+    const lines=['<b>📋 TAREAS SELECCIONADAS</b>','<i>LC Soluciones Tecnológicas</i>',''];
+    const agregar=(titulo,icono,lista)=>{
+        if(!lista.length)return;
+        lines.push('<b>'+icono+' '+titulo+' ('+lista.length+')</b>','');
+        lista.forEach((r,i)=>{
+            lines.push('<b>'+(i+1)+'. '+escaparHtmlTelegramTarea_(r.titulo||'Sin título')+'</b>');
+            if(String(r.descripcion||'').trim())lines.push('📝 <b>Descripción:</b> '+escaparHtmlTelegramTarea_(r.descripcion));
+            if(String(r.observaciones||'').trim())lines.push('📌 <b>Observaciones:</b> '+escaparHtmlTelegramTarea_(r.observaciones));
+            lines.push('');
+        });
+    };
+    agregar('PENDIENTES','⏳',pendientes);
+    agregar('REALIZADAS','✅',realizadas);
+    return lines.join('\n').replace(/\n{3,}/g,'\n\n').trim();
+}
+function trocearMensajeTelegramTarea_(texto,maxLen=3800){
+    const lines=String(texto||'').split('\n'); const chunks=[];let actual='';
+    const agregarLinea=line=>{
+        if(line.length<=maxLen){
+            const next=actual?actual+'\n'+line:line;
+            if(next.length>maxLen&&actual){chunks.push(actual);actual=line;}else actual=next;
+            return;
+        }
+        if(actual){chunks.push(actual);actual='';}
+        for(let i=0;i<line.length;i+=maxLen)chunks.push(line.slice(i,i+maxLen));
+    };
+    lines.forEach(agregarLinea);
+    if(actual)chunks.push(actual);
+    return chunks.filter(Boolean);
+}
+async function enviarTareasSeleccionadasTelegram(){
+    if(!protegerAccionUsuario('tareas','leer'))return;
+    const tareas=obtenerTareasSeleccionadasTelegram_();
+    const btn=document.getElementById('btn-enviar-tareas-telegram'),estado=document.getElementById('tareas-telegram-estado');
+    if(!tareas.length){showSystemNotification('Sin selección','Seleccione al menos una tarea para enviar.','warning');return;}
+    try{
+        if(!agendaEsMaster())throw new Error('Solo el usuario Master puede utilizar el bot de Telegram configurado en Agenda.');
+        if(!window._agendaTelegramLoaded)await cargarAgendaConfigUI();
+        const token=document.getElementById('agenda-telegram-token')?.value.trim()||'';
+        const chatId=document.getElementById('agenda-telegram-chat')?.value.trim()||'';
+        const activo=document.getElementById('agenda-telegram-activo')?.value==='true';
+        if(!activo)throw new Error('Telegram está desactivado en la configuración de Agenda.');
+        if(!token||!chatId)throw new Error('Configure primero el Bot Token y el Chat ID de Telegram en Agenda.');
+        const chunks=trocearMensajeTelegramTarea_(construirMensajeTareasTelegram_(tareas));
+        if(btn){btn.disabled=true;btn.innerHTML='<span class="spinner-border spinner-border-sm me-1"></span>Enviando...';}
+        if(estado)estado.textContent='Enviando '+chunks.length+' mensaje'+(chunks.length===1?'':'s')+' a Telegram...';
+        const url='https://api.telegram.org/bot'+encodeURIComponent(token)+'/sendMessage';
+        for(let i=0;i<chunks.length;i++){
+            const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:chatId,text:chunks[i],parse_mode:'HTML',disable_web_page_preview:true})});
+            const r=await res.json().catch(()=>null);
+            if(!res.ok||!r?.ok)throw new Error(r?.description||'Telegram no confirmó el envío.');
+        }
+        if(estado)estado.textContent='Enviado correctamente a Telegram.';
+        showSystemNotification('Tareas enviadas','Las tareas seleccionadas fueron enviadas correctamente a Telegram.','success');
+    }catch(err){
+        if(estado)estado.textContent='No se pudo enviar el mensaje.';
+        showSystemNotification('No se pudo enviar a Telegram',err.message||'Error de integración con Telegram.','danger');
+    }finally{
+        if(btn){btn.disabled=(window._tareasTelegramSeleccionadas||new Set()).size===0;btn.innerHTML='<i class="fa-brands fa-telegram me-1"></i>Enviar seleccionadas';}
+    }
+}
 
 function tareaResumenEscape(v){return escMod(v??'—');}
 function tareaResumenFecha(v){const x=String(v??'').trim();if(!x)return'—';return typeof formatearFechaTareaVisual==='function'?formatearFechaTareaVisual(x):x;}
-function abrirResumenTarea(id){if(!protegerAccionUsuario('tareas','leer'))return;const t=(db.tareas||[]).find(x=>String(x.id_tarea)===String(id));if(!t){showSystemNotification('Tarea no disponible','No se encontró la tarea seleccionada.','warning');return;}const campos=[['Identificador',t.id_tarea],['Título',t.titulo],['Tipo',t.tipo||'—'],['Prioridad',t.prioridad||'—'],['Estado',t.estado||'—'],['Descripción',t.descripcion||'—',true],['Fecha de inicio',tareaResumenFecha(t.fecha_inicio)],['Hora del recordatorio',formatearHoraTareaVisual(t.hora_recordatorio)],['Fecha de fin',tareaResumenFecha(t.fecha_fin)],['Fechas específicas',t.fechas_especificas||'—',true],['Intervalo',t.intervalo_unidad?(String(t.intervalo_valor||'')+' '+String(t.intervalo_unidad||'')):'Una sola vez'],['Próxima ejecución',t.proxima_ejecucion||'—'],['Responsable',t.responsable||'—'],['Ubicación',t.ubicacion||'—'],['Telegram',String(t.telegram_activo).toLowerCase()==='false'?'No enviar':'Enviar recordatorio'],['Chat ID Telegram',t.telegram_chat_id||'Usar configuración predeterminada'],['Mensaje de Telegram',t.mensaje_telegram||'—',true],['Total de envíos',t.total_envios??0],['Último recordatorio',formatearFechaHoraTareaVisual(t.ultimo_recordatorio)],['Fecha de registro',formatearFechaHoraTareaVisual(t.fecha_registro)],['Observaciones',t.observaciones||'—',true]];const grid=document.getElementById('tareaSummaryGrid');if(grid)grid.innerHTML=campos.map(([l,v,full])=>'<div class="tarea-summary-field'+(full?' full':'')+'"><div class="tarea-summary-label">'+tareaResumenEscape(l)+'</div><div class="tarea-summary-value">'+tareaResumenEscape(v)+'</div></div>').join('');document.getElementById('tareaSummaryTitle').textContent=t.titulo||'Resumen de tarea';document.getElementById('tareaSummarySub').textContent='Detalle completo de la tarea '+(t.id_tarea||'');const m=document.getElementById('tareaSummaryModal');if(m){m._task=t;m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}}
+function abrirResumenTarea(id){if(!protegerAccionUsuario('tareas','leer'))return;const t=(db.tareas||[]).find(x=>String(x.id_tarea)===String(id));if(!t){showSystemNotification('Tarea no disponible','No se encontró la tarea seleccionada.','warning');return;}const campos=[['Identificador',t.id_tarea],['Título',t.titulo],['Tipo',t.tipo||'—'],['Prioridad',t.prioridad||'—'],['Estado',t.estado||'—'],['Descripción',t.descripcion||'—',true],['Fecha de la tarea',tareaResumenFecha(t.fecha_inicio)],['Hora de la tarea',formatearHoraTareaVisual(obtenerHoraTarea_(t))],['Recordatorio',formatearRecordatorioAntesTarea_(obtenerRecordatorioAntes_(t).valor,obtenerRecordatorioAntes_(t).unidad)],['Hora del recordatorio',formatearHoraTareaVisual(t.hora_recordatorio)],['Fecha de fin',tareaResumenFecha(t.fecha_fin)],['Fechas específicas',t.fechas_especificas||'—',true],['Intervalo',t.intervalo_unidad?(String(t.intervalo_valor||'')+' '+String(t.intervalo_unidad||'')):'Una sola vez'],['Próxima ejecución',t.proxima_ejecucion||'—'],['Responsable',t.responsable||'—'],['Ubicación',t.ubicacion||'—'],['Telegram',String(t.telegram_activo).toLowerCase()==='false'?'No enviar':'Enviar recordatorio'],['Chat ID Telegram',t.telegram_chat_id||'Usar configuración predeterminada'],['Mensaje de Telegram',t.mensaje_telegram||'—',true],['Total de envíos',t.total_envios??0],['Último recordatorio',formatearFechaHoraTareaVisual(t.ultimo_recordatorio)],['Fecha de registro',formatearFechaHoraTareaVisual(t.fecha_registro)],['Observaciones',t.observaciones||'—',true]];const grid=document.getElementById('tareaSummaryGrid');if(grid)grid.innerHTML=campos.map(([l,v,full])=>'<div class="tarea-summary-field'+(full?' full':'')+'"><div class="tarea-summary-label">'+tareaResumenEscape(l)+'</div><div class="tarea-summary-value">'+tareaResumenEscape(v)+'</div></div>').join('');document.getElementById('tareaSummaryTitle').textContent=t.titulo||'Resumen de tarea';document.getElementById('tareaSummarySub').textContent='Detalle completo de la tarea '+(t.id_tarea||'');const m=document.getElementById('tareaSummaryModal');if(m){m._task=t;m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}}
 function cerrarResumenTarea(){const m=document.getElementById('tareaSummaryModal');if(m){m.classList.remove('show');m.setAttribute('aria-hidden','true');m._task=null;}document.body.classList.remove('overflow-hidden');}
+function formatearFechaTareaVisual(v){const s=String(v??'').trim();if(!s)return'—';let m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m)return`${m[3]}/${m[2]}/${m[1]}`;m=s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})/);if(m)return`${String(m[1]).padStart(2,'0')}/${String(m[2]).padStart(2,'0')}/${m[3]}`;const d=new Date(s);if(!Number.isNaN(d.getTime()))return`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;return s;}
+function formatearHoraTareaVisual(v){const s=String(v??'').trim();if(!s)return'—';let m=s.match(/(?:T|\s)(\d{1,2}):(\d{2})(?::(\d{2}))?/);if(!m&&/^\d{1,2}:\d{2}(?::\d{2})?$/.test(s))m=s.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?/);if(m)return`${String(m[1]).padStart(2,'0')}:${m[2]}`;const d=new Date(s);if(!Number.isNaN(d.getTime())&&/[T\s]/.test(s))return`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;return s;}
 function formatearFechaHoraTareaVisual(v){const s=String(v??'').trim();if(!s)return'—';const hora=formatearHoraTareaVisual(v);if(hora!=='—'){const dm=s.match(/^(\d{4})-(\d{2})-(\d{2})/);if(dm)return`${dm[3]}/${dm[2]}/${dm[1]}, ${hora}`;const dd=s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})/);if(dd)return`${String(dd[1]).padStart(2,'0')}/${String(dd[2]).padStart(2,'0')}/${dd[3]}, ${hora}`;}return s;}
-function abrirImpresionTarea(formato='57mm'){const m=document.getElementById('tareaSummaryModal'),t=m?._task;if(!t)return;const esc=v=>String(v??'—').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');const campos=[['ID',t.id_tarea],['Título',t.titulo],['Tipo',t.tipo],['Prioridad',t.prioridad],['Estado',t.estado],['Fecha de inicio',formatearFechaTareaVisual(t.fecha_inicio)],['Hora del recordatorio',formatearHoraTareaVisual(t.hora_recordatorio)],['Fecha de fin',formatearFechaTareaVisual(t.fecha_fin)],['Fechas específicas',t.fechas_especificas],['Intervalo',t.intervalo_unidad?(String(t.intervalo_valor||'')+' '+String(t.intervalo_unidad||'')):'Una sola vez'],['Próxima ejecución',t.proxima_ejecucion],['Responsable',t.responsable],['Ubicación',t.ubicacion],['Telegram',String(t.telegram_activo).toLowerCase()==='false'?'No enviar':'Enviar recordatorio'],['Chat ID',t.telegram_chat_id||'Configuración predeterminada'],['Total de envíos',t.total_envios??0],['Último recordatorio',formatearFechaHoraTareaVisual(t.ultimo_recordatorio)],['Fecha de registro',formatearFechaHoraTareaVisual(t.fecha_registro)],['Descripción',t.descripcion],['Mensaje Telegram',t.mensaje_telegram],['Observaciones',t.observaciones]];const carta=formato==='carta';const temaActual=document.documentElement.getAttribute('data-bs-theme')==='dark'?'dark':'light';const fondo=temaActual==='dark'?'#0f172a':'#ffffff';const texto=temaActual==='dark'?'#f8fafc':'#111111';const tenue=temaActual==='dark'?'#94a3b8':'#555555';const borde=temaActual==='dark'?'#475569':'#bcbcbc';const bordeSuave=temaActual==='dark'?'#334155':'#dddddd';const botonFondo=temaActual==='dark'?'#1e293b':'#ffffff';const style=`*{box-sizing:border-box}html,body{margin:0;padding:0;background:${fondo};color:${texto};font-family:Arial,Helvetica,sans-serif;font-size:${carta?'10px':'9px'};line-height:1.22}.ticket{width:${carta?'190mm':'57mm'};margin:0 auto;padding:${carta?'8mm 8mm 10mm':'3.2mm 2.8mm 4mm'}}.brand{border-bottom:1px dashed ${borde};padding-bottom:2.5mm;margin-bottom:2.5mm}.brand-title{font-size:${carta?'15px':'11px'};font-weight:900}.brand-sub{font-size:${carta?'9px':'7px'};color:${tenue};margin-top:1px}.head{display:flex;justify-content:space-between;gap:2mm;margin-bottom:2.2mm}.kicker{font-size:7px;text-transform:uppercase;font-weight:800;color:${tenue}}.number{font-size:${carta?'12px':'10px'};font-weight:900}.status{border:1px solid ${texto};border-radius:10px;padding:1mm 1.8mm;font-size:7px;font-weight:900}.section{border:1px solid ${borde};border-radius:3px;padding:${carta?'2.5mm':'1.8mm'};margin-bottom:${carta?'2.5mm':'1.8mm'}}.section-title{font-size:${carta?'8px':'7px'};font-weight:900;text-transform:uppercase;border-bottom:1px solid ${bordeSuave};padding-bottom:1mm;margin-bottom:1mm}.row{display:flex;gap:1.5mm;margin:.75mm 0;align-items:flex-start}.label{font-weight:700;min-width:${carta?'27%':'34%'}}.value{flex:1;word-break:break-word;white-space:pre-wrap}.full{margin-top:1.5mm}.note{word-break:break-word;white-space:pre-wrap}.total{border-top:1px dashed ${texto};border-bottom:1px dashed ${texto};padding:2mm 0;margin-top:2mm;text-align:center;font-weight:900;font-size:${carta?'14px':'11px'}}.foot{text-align:center;margin-top:2mm;font-size:7px;color:${tenue}}@page{size:${carta?'Letter':'57mm auto'};margin:0}@media print{html,body{width:${carta?'216mm':'57mm'};margin:0!important;padding:0!important;background:${fondo};color:${texto}}.ticket{width:${carta?'190mm':'57mm'}}}.no-print{margin:10px auto;padding:8px 12px;border:1px solid ${borde};background:${botonFondo};color:${texto};cursor:pointer;border-radius:4px}`;const sections=[['Identificación',['ID','Título','Tipo','Prioridad','Estado']],['Programación',['Fecha de inicio','Hora del recordatorio','Fecha de fin','Fechas específicas','Intervalo','Próxima ejecución']],['Responsable y ubicación',['Responsable','Ubicación','Telegram','Chat ID']],['Seguimiento',['Total de envíos','Último recordatorio','Fecha de registro']],['Detalle',['Descripción','Mensaje Telegram','Observaciones']]];const valueMap=Object.fromEntries(campos.map(x=>[x[0],x[1]]));let body='<main class="ticket"><div class="brand"><div class="brand-title">SOLUCIONES TECNOLÓGICAS</div><div class="brand-sub">LC · Resumen de tarea / recordatorio</div></div><div class="head"><div><div class="kicker">TAREA</div><div class="number">'+esc(t.id_tarea||'—')+'</div></div><div class="status">'+esc(t.estado||'Activa')+'</div></div>';for(const [title,names] of sections){body+='<section class="section"><div class="section-title">'+esc(title)+'</div>'+names.map(n=>'<div class="row"><span class="label">'+esc(n)+'</span><span class="value">'+esc(valueMap[n]??'—')+'</span></div>').join('')+'</section>';}body+='<div class="total">'+esc(t.titulo||'Resumen de tarea')+'</div><div class="foot">Documento generado desde el portal</div></main><button class="no-print" onclick="window.print()">Imprimir / Guardar PDF</button>';const w=window.open('','_blank','width='+(carta?850:380)+',height=760');if(!w){showToast?.('Ventana bloqueada','Permita ventanas emergentes para imprimir el resumen.','warning');return;}w.document.open();w.document.write('<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(t.titulo||'Tarea')+'</title><style>'+style+'</style></head><body>'+body+'<script>window.onload=()=>setTimeout(()=>window.print(),250);<\/script></body></html>');w.document.close();}
+function abrirImpresionTarea(formato='57mm'){const m=document.getElementById('tareaSummaryModal'),t=m?._task;if(!t)return;const esc=v=>String(v??'—').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');const campos=[['ID',t.id_tarea],['Título',t.titulo],['Tipo',t.tipo],['Prioridad',t.prioridad],['Estado',t.estado],['Fecha de la tarea',formatearFechaTareaVisual(t.fecha_inicio)],['Hora de la tarea',formatearHoraTareaVisual(obtenerHoraTarea_(t))],['Recordatorio',formatearRecordatorioAntesTarea_(obtenerRecordatorioAntes_(t).valor,obtenerRecordatorioAntes_(t).unidad)],['Hora del recordatorio',formatearHoraTareaVisual(t.hora_recordatorio)],['Fecha de fin',formatearFechaTareaVisual(t.fecha_fin)],['Fechas específicas',t.fechas_especificas],['Intervalo',t.intervalo_unidad?(String(t.intervalo_valor||'')+' '+String(t.intervalo_unidad||'')):'Una sola vez'],['Próxima ejecución',t.proxima_ejecucion],['Responsable',t.responsable],['Ubicación',t.ubicacion],['Telegram',String(t.telegram_activo).toLowerCase()==='false'?'No enviar':'Enviar recordatorio'],['Chat ID',t.telegram_chat_id||'Configuración predeterminada'],['Total de envíos',t.total_envios??0],['Último recordatorio',formatearFechaHoraTareaVisual(t.ultimo_recordatorio)],['Fecha de registro',formatearFechaHoraTareaVisual(t.fecha_registro)],['Descripción',t.descripcion],['Mensaje Telegram',t.mensaje_telegram],['Observaciones',t.observaciones]];const carta=formato==='carta';const temaActual=document.documentElement.getAttribute('data-bs-theme')==='dark'?'dark':'light';const fondo=temaActual==='dark'?'#0f172a':'#ffffff';const texto=temaActual==='dark'?'#f8fafc':'#111111';const tenue=temaActual==='dark'?'#94a3b8':'#555555';const borde=temaActual==='dark'?'#475569':'#bcbcbc';const bordeSuave=temaActual==='dark'?'#334155':'#dddddd';const botonFondo=temaActual==='dark'?'#1e293b':'#ffffff';const style=`*{box-sizing:border-box}html,body{margin:0;padding:0;background:${fondo};color:${texto};font-family:Arial,Helvetica,sans-serif;font-size:${carta?'10px':'9px'};line-height:1.22}.ticket{width:${carta?'190mm':'57mm'};margin:0 auto;padding:${carta?'8mm 8mm 10mm':'3.2mm 2.8mm 4mm'}}.brand{border-bottom:1px dashed ${borde};padding-bottom:2.5mm;margin-bottom:2.5mm}.brand-title{font-size:${carta?'15px':'11px'};font-weight:900}.brand-sub{font-size:${carta?'9px':'7px'};color:${tenue};margin-top:1px}.head{display:flex;justify-content:space-between;gap:2mm;margin-bottom:2.2mm}.kicker{font-size:7px;text-transform:uppercase;font-weight:800;color:${tenue}}.number{font-size:${carta?'12px':'10px'};font-weight:900}.status{border:1px solid ${texto};border-radius:10px;padding:1mm 1.8mm;font-size:7px;font-weight:900}.section{border:1px solid ${borde};border-radius:3px;padding:${carta?'2.5mm':'1.8mm'};margin-bottom:${carta?'2.5mm':'1.8mm'}}.section-title{font-size:${carta?'8px':'7px'};font-weight:900;text-transform:uppercase;border-bottom:1px solid ${bordeSuave};padding-bottom:1mm;margin-bottom:1mm}.row{display:flex;gap:1.5mm;margin:.75mm 0;align-items:flex-start}.label{font-weight:700;min-width:${carta?'27%':'34%'}}.value{flex:1;word-break:break-word;white-space:pre-wrap}.full{margin-top:1.5mm}.note{word-break:break-word;white-space:pre-wrap}.total{border-top:1px dashed ${texto};border-bottom:1px dashed ${texto};padding:2mm 0;margin-top:2mm;text-align:center;font-weight:900;font-size:${carta?'14px':'11px'}}.foot{text-align:center;margin-top:2mm;font-size:7px;color:${tenue}}@page{size:${carta?'Letter':'57mm auto'};margin:0}@media print{html,body{width:${carta?'216mm':'57mm'};margin:0!important;padding:0!important;background:${fondo};color:${texto}}.ticket{width:${carta?'190mm':'57mm'}}}.no-print{margin:10px auto;padding:8px 12px;border:1px solid ${borde};background:${botonFondo};color:${texto};cursor:pointer;border-radius:4px}`;const sections=[['Identificación',['ID','Título','Tipo','Prioridad','Estado']],['Programación',['Fecha de la tarea','Hora de la tarea','Recordatorio','Hora del recordatorio','Fecha de fin','Fechas específicas','Intervalo','Próxima ejecución']],['Responsable y ubicación',['Responsable','Ubicación','Telegram','Chat ID']],['Seguimiento',['Total de envíos','Último recordatorio','Fecha de registro']],['Detalle',['Descripción','Mensaje Telegram','Observaciones']]];const valueMap=Object.fromEntries(campos.map(x=>[x[0],x[1]]));let body='<main class="ticket"><div class="brand"><div class="brand-title">SOLUCIONES TECNOLÓGICAS</div><div class="brand-sub">LC · Resumen de tarea / recordatorio</div></div><div class="head"><div><div class="kicker">TAREA</div><div class="number">'+esc(t.id_tarea||'—')+'</div></div><div class="status">'+esc(t.estado||'Activa')+'</div></div>';for(const [title,names] of sections){body+='<section class="section"><div class="section-title">'+esc(title)+'</div>'+names.map(n=>'<div class="row"><span class="label">'+esc(n)+'</span><span class="value">'+esc(valueMap[n]??'—')+'</span></div>').join('')+'</section>';}body+='<div class="total">'+esc(t.titulo||'Resumen de tarea')+'</div><div class="foot">Documento generado desde el portal</div></main><button class="no-print" onclick="window.print()">Imprimir / Guardar PDF</button>';const w=window.open('','_blank','width='+(carta?850:380)+',height=760');if(!w){showToast?.('Ventana bloqueada','Permita ventanas emergentes para imprimir el resumen.','warning');return;}w.document.open();w.document.write('<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(t.titulo||'Tarea')+'</title><style>'+style+'</style></head><body>'+body+'<script>window.onload=()=>setTimeout(()=>window.print(),250);<\/script></body></html>');w.document.close();}
 function imprimirResumenTarea(formato='57mm'){abrirImpresionTarea(formato);}
 function exportarResumenTareaPDF(){abrirImpresionTarea('carta');}
-function descargarResumenTareaHTML(){const m=document.getElementById('tareaSummaryModal');const t=m?._task;if(!t)return;const esc=v=>String(v??'—').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');const labels=[['ID',t.id_tarea],['Título',t.titulo],['Tipo',t.tipo],['Prioridad',t.prioridad],['Estado',t.estado],['Descripción',t.descripcion],['Fecha inicio',t.fecha_inicio],['Hora',formatearHoraTareaVisual(t.hora_recordatorio)],['Fecha fin',t.fecha_fin],['Fechas específicas',t.fechas_especificas],['Intervalo',t.intervalo_unidad?(t.intervalo_valor+' '+t.intervalo_unidad):'Una sola vez'],['Próxima ejecución',t.proxima_ejecucion],['Responsable',t.responsable],['Ubicación',t.ubicacion],['Telegram',String(t.telegram_activo).toLowerCase()==='false'?'No':'Sí'],['Chat ID',t.telegram_chat_id],['Mensaje Telegram',t.mensaje_telegram],['Envíos',t.total_envios],['Último recordatorio',formatearFechaHoraTareaVisual(t.ultimo_recordatorio)],['Fecha registro',formatearFechaHoraTareaVisual(t.fecha_registro)],['Observaciones',t.observaciones]];const html='<!doctype html><html><head><meta charset="utf-8"><title>'+esc(t.titulo||'Tarea')+'</title><style>body{font-family:Arial,sans-serif;padding:30px;color:#111827}h1{margin:0 0 4px}p.sub{color:#64748b}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.f{border:1px solid #d1d5db;border-radius:10px;padding:10px}.l{font-size:11px;text-transform:uppercase;color:#64748b;font-weight:700;margin-bottom:4px}.v{font-size:14px;white-space:pre-wrap;word-break:break-word}@media(max-width:700px){.grid{grid-template-columns:1fr}}</style></head><body><h1>'+esc(t.titulo||'Resumen de tarea')+'</h1><p class="sub">Detalle completo de la tarea '+esc(t.id_tarea||'')+'</p><div class="grid">'+labels.map(x=>'<div class="f"><div class="l">'+esc(x[0])+'</div><div class="v">'+esc(x[1])+'</div></div>').join('')+'</div></body></html>';const blob=new Blob([html],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='tarea_'+String(t.id_tarea||'resumen').replace(/[^a-z0-9_-]/gi,'_')+'.html';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function descargarResumenTareaHTML(){const m=document.getElementById('tareaSummaryModal');const t=m?._task;if(!t)return;const esc=v=>String(v??'—').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');const labels=[['ID',t.id_tarea],['Título',t.titulo],['Tipo',t.tipo],['Prioridad',t.prioridad],['Estado',t.estado],['Descripción',t.descripcion],['Fecha tarea',t.fecha_inicio],['Hora de la tarea',formatearHoraTareaVisual(obtenerHoraTarea_(t))],['Recordatorio',formatearRecordatorioAntesTarea_(obtenerRecordatorioAntes_(t).valor,obtenerRecordatorioAntes_(t).unidad)],['Hora del recordatorio',formatearHoraTareaVisual(t.hora_recordatorio)],['Fecha fin',t.fecha_fin],['Fechas específicas',t.fechas_especificas],['Intervalo',t.intervalo_unidad?(t.intervalo_valor+' '+t.intervalo_unidad):'Una sola vez'],['Próxima ejecución',t.proxima_ejecucion],['Responsable',t.responsable],['Ubicación',t.ubicacion],['Telegram',String(t.telegram_activo).toLowerCase()==='false'?'No':'Sí'],['Chat ID',t.telegram_chat_id],['Mensaje Telegram',t.mensaje_telegram],['Envíos',t.total_envios],['Último recordatorio',formatearFechaHoraTareaVisual(t.ultimo_recordatorio)],['Fecha registro',formatearFechaHoraTareaVisual(t.fecha_registro)],['Observaciones',t.observaciones]];const html='<!doctype html><html><head><meta charset="utf-8"><title>'+esc(t.titulo||'Tarea')+'</title><style>body{font-family:Arial,sans-serif;padding:30px;color:#111827}h1{margin:0 0 4px}p.sub{color:#64748b}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.f{border:1px solid #d1d5db;border-radius:10px;padding:10px}.l{font-size:11px;text-transform:uppercase;color:#64748b;font-weight:700;margin-bottom:4px}.v{font-size:14px;white-space:pre-wrap;word-break:break-word}@media(max-width:700px){.grid{grid-template-columns:1fr}}</style></head><body><h1>'+esc(t.titulo||'Resumen de tarea')+'</h1><p class="sub">Detalle completo de la tarea '+esc(t.id_tarea||'')+'</p><div class="grid">'+labels.map(x=>'<div class="f"><div class="l">'+esc(x[0])+'</div><div class="v">'+esc(x[1])+'</div></div>').join('')+'</div></body></html>';const blob=new Blob([html],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='tarea_'+String(t.id_tarea||'resumen').replace(/[^a-z0-9_-]/gi,'_')+'.html';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function limpiarManutencionForm(){const f=document.getElementById('formManutencion');if(f)f.reset();const id=document.getElementById('man_id');if(id)id.value='';personasSelect('man_persona');const d=document.getElementById('man_fecha_pago');if(d)d.value=fechaHoyModulo();const st=document.getElementById('man_estado');if(st)st.value='Pagado';const bt=document.getElementById('man_btn_texto');if(bt)bt.textContent='Registrar pago';}
-function editarManutencion(id){if(!protegerAccionUsuario('manutencion','modificar'))return;const r=(db.manutencion||[]).find(x=>String(x.id_manutencion)===String(id));if(!r)return;limpiarManutencionForm();const set=(i,v)=>{const e=document.getElementById(i);if(e)e.value=v??''};set('man_id',r.id_manutencion);set('man_persona',(r.id_familia?'familia:'+r.id_familia:''));set('man_fecha_pago',/^\d{4}-\d{2}-\d{2}$/.test(String(r.fecha_pago||''))?r.fecha_pago:(/^\d{4}-\d{2}-\d{2}$/.test(String(r.fecha_inicio||''))?r.fecha_inicio:''));set('man_monto',r.monto);set('man_moneda',r.moneda||'USD');set('man_tipo',r.metodo_pago||r.tipo||'Transferencia bancaria');set('man_banco',r.banco);set('man_referencia',r.referencia);set('man_responsable',r.responsable);set('man_frecuencia',r.concepto||r.frecuencia);set('man_estado',r.estado||'Pagado');set('man_proximo',/^\d{4}-\d{2}-\d{2}$/.test(String(r.fecha_proximo_pago||''))?r.fecha_proximo_pago:'');set('man_periodicidad',r.periodicidad||'Único');set('man_observaciones',r.observaciones);const bt=document.getElementById('man_btn_texto');if(bt)bt.textContent='Actualizar pago';}
-async function guardarManutencion(e){e.preventDefault();const id=String(document.getElementById('man_id')?.value||'').trim();if(!protegerAccionUsuario('manutencion',id?'modificar':'agregar'))return;const p=resolverPersonaRegistro(document.getElementById('man_persona')?.value);if(!p){showSystemNotification('Beneficiario requerido','Seleccione el beneficiario.','warning');return;}const val=i=>String(document.getElementById(i)?.value||'').trim();const payload={id_manutencion:id||'MAN-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',nombre_beneficiario:p.nombre,tipo:val('man_tipo')||'Otro',monto:val('man_monto'),moneda:val('man_moneda')||'USD',frecuencia:val('man_frecuencia'),fecha_inicio:val('man_fecha_pago'),fecha_proximo_pago:val('man_proximo'),estado:val('man_estado')||'Pagado',responsable:val('man_responsable'),observaciones:val('man_observaciones'),fecha_pago:val('man_fecha_pago'),metodo_pago:val('man_tipo')||'Otro',banco:val('man_banco'),referencia:val('man_referencia'),concepto:val('man_frecuencia'),periodicidad:val('man_periodicidad')||'Único',fecha_registro:formatearFechaHoraPortal(new Date())};try{const r=await sendGasRequest(id?'updateManutencion':'addManutencion',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');db.manutencion=Array.isArray(db.manutencion)?db.manutencion:[];const row=r.data||payload;if(id){const ix=db.manutencion.findIndex(x=>String(x.id_manutencion)===id);if(ix>=0)db.manutencion[ix]={...db.manutencion[ix],...row};else db.manutencion.unshift(row);}else db.manutencion.unshift(row);localStorage.setItem('erp_db',JSON.stringify(db));renderManutencionModulo();limpiarManutencionForm();showSystemNotification(id?'Pago actualizado':'Pago registrado',id?'El registro fue actualizado correctamente.':'El pago fue registrado correctamente.','success');}catch(err){showSystemNotification('Error',err.message||'No se pudo guardar.','danger');}}
+function cargarManutencionEnFormulario_(r){limpiarManutencionForm();const set=(i,v)=>{const e=document.getElementById(i);if(e)e.value=v??''};personasSelect('man_persona');set('man_id',r.id_manutencion);set('man_persona',r.id_familia?'familia:'+r.id_familia:'');set('man_fecha_pago',/^\d{4}-\d{2}-\d{2}$/.test(String(r.fecha_pago||''))?r.fecha_pago:(/^\d{4}-\d{2}-\d{2}$/.test(String(r.fecha_inicio||''))?r.fecha_inicio:''));set('man_monto',r.monto);set('man_moneda',r.moneda||'USD');set('man_tipo',r.metodo_pago||r.tipo||'Transferencia bancaria');set('man_banco',r.banco);set('man_referencia',r.referencia);set('man_responsable',r.responsable);set('man_frecuencia',r.concepto||r.frecuencia);set('man_estado',r.estado||'Pagado');set('man_proximo',/^\d{4}-\d{2}-\d{2}$/.test(String(r.fecha_proximo_pago||''))?r.fecha_proximo_pago:'');set('man_periodicidad',r.periodicidad||'Único');set('man_observaciones',r.observaciones);const bt=document.getElementById('man_btn_texto');if(bt)bt.textContent='Actualizar pago';}
+function verManutencion(id){if(!protegerAccionUsuario('manutencion','leer'))return;const r=(db.manutencion||[]).find(x=>String(x.id_manutencion)===String(id));if(!r)return;cargarManutencionEnFormulario_(r);abrirModalFamiliaRegistro('man',false);document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-eye text-primary me-2"></i>Ver pago de manutención';setModoFormularioFamilia_('ver','man');}
+function editarManutencion(id){if(!protegerAccionUsuario('manutencion','modificar'))return;const r=(db.manutencion||[]).find(x=>String(x.id_manutencion)===String(id));if(!r)return;cargarManutencionEnFormulario_(r);abrirModalFamiliaRegistro('man',false);document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-pen-to-square text-primary me-2"></i>Editar pago de manutención';setModoFormularioFamilia_('editar','man');}
+async function guardarManutencion(e){e.preventDefault();const id=String(document.getElementById('man_id')?.value||'').trim();if(!protegerAccionUsuario('manutencion',id?'modificar':'agregar'))return;const p=resolverPersonaRegistro(document.getElementById('man_persona')?.value);if(!p){showSystemNotification('Beneficiario requerido','Seleccione el beneficiario.','warning');return;}const val=i=>String(document.getElementById(i)?.value||'').trim();const payload={id_manutencion:id||'MAN-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',nombre_beneficiario:p.nombre,tipo:val('man_tipo')||'Otro',monto:val('man_monto'),moneda:val('man_moneda')||'USD',frecuencia:val('man_frecuencia'),fecha_inicio:val('man_fecha_pago'),fecha_proximo_pago:val('man_proximo'),estado:val('man_estado')||'Pagado',responsable:val('man_responsable'),observaciones:val('man_observaciones'),fecha_pago:val('man_fecha_pago'),metodo_pago:val('man_tipo')||'Otro',banco:val('man_banco'),referencia:val('man_referencia'),concepto:val('man_frecuencia'),periodicidad:val('man_periodicidad')||'Único',fecha_registro:formatearFechaHoraPortal(new Date())};try{const r=await sendGasRequest(id?'updateManutencion':'addManutencion',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');guardarDBLocalSeguro_();renderManutencionModulo();document.getElementById('modalFamiliaRegistroForm')&&_familiaRegistroModal?.hide();showSystemNotification(id?'Pago actualizado':'Pago registrado',id?'El registro fue actualizado correctamente.':'El pago fue registrado correctamente.','success');}catch(err){showSystemNotification('Error',err.message||'No se pudo guardar.','danger');}}
 async function eliminarManutencion(id){if(!protegerAccionUsuario('manutencion','eliminar')||!(await confirmarAccionModal('Eliminar registro','¿Eliminar este registro de manutención?')))return;try{const r=await sendGasRequest('deleteManutencion',{id_manutencion:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');db.manutencion=(db.manutencion||[]).filter(x=>String(x.id_manutencion)!==String(id));localStorage.setItem('erp_db',JSON.stringify(db));renderManutencionModulo();}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
-function renderManutencionModulo(){const sel=document.getElementById('man_persona');const selected=sel?sel.value:'';if(sel)personasSelect('man_persona');if(sel&&selected&&[...sel.options].some(o=>o.value===selected))sel.value=selected;const b=document.getElementById('man-tbody');if(!b)return;const rows=Array.isArray(db?.manutencion)?db.manutencion:[],v=x=>escMod(x||'—');b.innerHTML=rows.length?rows.map(r=>'<tr><td>'+v(r.fecha_inicio)+'</td><td>'+v(r.nombre_beneficiario)+'</td><td>'+v(r.tipo)+'</td><td>'+v(r.monto)+' '+v(r.moneda)+'</td><td>'+v(r.referencia||'—')+'</td><td>'+v(r.estado)+'</td><td><button class="btn btn-sm btn-outline-primary me-1" onclick="editarManutencion(\''+escMod(r.id_manutencion)+'\')"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-outline-danger" onclick="eliminarManutencion(\''+escMod(r.id_manutencion)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="7" class="text-center text-muted py-4">No hay pagos familiares registrados.</td></tr>';}
-function limpiarEscolarForm(){document.getElementById('formRegistroEscolar')?.reset();personasSelect('esc_persona');}
-async function guardarRegistroEscolar(e){e.preventDefault();if(!protegerAccionUsuario('registrosescolares','agregar'))return;const p=resolverPersonaRegistro(document.getElementById('esc_persona')?.value);if(!p){showSystemNotification('Estudiante requerido','Seleccione el estudiante.','warning');return;}const payload={id_registro_escolar:'ESC-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',nombre_estudiante:p.nombre,institucion:document.getElementById('esc_institucion')?.value.trim()||'',nivel:document.getElementById('esc_nivel')?.value.trim()||'',grado:document.getElementById('esc_grado')?.value.trim()||'',periodo_escolar:document.getElementById('esc_periodo')?.value.trim()||'',fecha_inicio:document.getElementById('esc_inicio')?.value||'',fecha_fin:document.getElementById('esc_fin')?.value||'',promedio:document.getElementById('esc_promedio')?.value.trim()||'',representante:document.getElementById('esc_representante')?.value.trim()||'',telefono_representante:document.getElementById('esc_telefono')?.value.trim()||'',estado:document.getElementById('esc_estado')?.value||'Activo',observaciones:document.getElementById('esc_observaciones')?.value.trim()||'',fecha_registro:formatearFechaHoraPortal(new Date())};try{const r=await sendGasRequest('addRegistroEscolar',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');db.registrosescolares=Array.isArray(db.registrosescolares)?db.registrosescolares:[];db.registrosescolares.unshift(r.data||payload);renderRegistrosEscolaresModulo();limpiarEscolarForm();showSystemNotification('Registro guardado','Registro escolar guardado correctamente.','success');}catch(e){showSystemNotification('Error',e.message||'No se pudo guardar.','danger');}}
-async function eliminarRegistroEscolar(id){if(!protegerAccionUsuario('registrosescolares','eliminar')||!(await confirmarAccionModal('Eliminar registro','¿Eliminar este registro escolar?')))return;try{const r=await sendGasRequest('deleteRegistroEscolar',{id_registro_escolar:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');db.registrosescolares=(db.registrosescolares||[]).filter(x=>String(x.id_registro_escolar)!==String(id));renderRegistrosEscolaresModulo();}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
-function renderRegistrosEscolaresModulo(){const b=document.getElementById('esc-tbody');if(!b)return;const rows=Array.isArray(db?.registrosescolares)?db.registrosescolares:[],v=x=>escMod(x||'—');b.innerHTML=rows.length?rows.map(r=>'<tr><td>'+v(r.nombre_estudiante)+'</td><td>'+v(r.institucion)+'</td><td>'+v(r.nivel)+'</td><td>'+v(r.grado)+'</td><td>'+v(r.periodo_escolar)+'</td><td>'+v(r.promedio)+'</td><td>'+v(r.estado)+'</td><td><button class="btn btn-sm btn-outline-danger" onclick="eliminarRegistroEscolar(\''+escMod(r.id_registro_escolar)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="8" class="text-center text-muted py-4">No hay registros escolares.</td></tr>';}
+function renderManutencionModulo(){
+    const sel=document.getElementById('man_persona');
+    const selected=sel?sel.value:'';
+    if(sel)personasSelect('man_persona');
+    if(sel&&selected&&[...sel.options].some(o=>o.value===selected))sel.value=selected;
+    const b=document.getElementById('man-tbody');
+    if(!b)return;
+    const rows=Array.isArray(db?.manutencion)?db.manutencion:[],v=x=>escMod(x||'—');
+    b.innerHTML=rows.length?rows.map(r=>`<tr><td>${v(r.fecha_inicio)}</td><td>${v(r.nombre_beneficiario)}</td><td>${v(r.tipo)}</td><td>${v(r.monto)} ${v(r.moneda)}</td><td>${v(r.referencia||'—')}</td><td>${v(r.estado)}</td><td class="text-nowrap"><button class="btn btn-sm btn-outline-secondary me-1" title="Ver" onclick="verManutencion('${escMod(r.id_manutencion)}')"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-outline-primary me-1" title="Editar" onclick="editarManutencion('${escMod(r.id_manutencion)}')"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="eliminarManutencion('${escMod(r.id_manutencion)}')"><i class="fa-solid fa-trash"></i></button></td></tr>`).join(''):'<tr><td colspan="7" class="text-center text-muted py-4">No hay pagos familiares registrados.</td></tr>';
+}
+function limpiarEscolarForm(){const f=document.getElementById('formRegistroEscolar');if(f)f.reset();const id=document.getElementById('esc_id');if(id)id.value='';personasSelect('esc_persona');const st=document.getElementById('esc_estado');if(st)st.value='Activo';}
+function cargarRegistroEscolarEnFormulario_(r){limpiarEscolarForm();const set=(i,v)=>{const e=document.getElementById(i);if(e)e.value=v??''};personasSelect('esc_persona');set('esc_id',r.id_registro_escolar);set('esc_persona',r.id_familia?'familia:'+r.id_familia:'');set('esc_institucion',r.institucion);set('esc_nivel',r.nivel);set('esc_grado',r.grado);set('esc_periodo',r.periodo_escolar);set('esc_inicio',fechaMedicoParaInput_(r.fecha_inicio));set('esc_fin',fechaMedicoParaInput_(r.fecha_fin));set('esc_promedio',r.promedio);set('esc_representante',r.representante);set('esc_telefono',r.telefono_representante);set('esc_estado',r.estado||'Activo');set('esc_observaciones',r.observaciones);}
+function verRegistroEscolar(id){if(!protegerAccionUsuario('registrosescolares','leer'))return;const r=(db.registrosescolares||[]).find(x=>String(x.id_registro_escolar)===String(id));if(!r)return;cargarRegistroEscolarEnFormulario_(r);abrirModalFamiliaRegistro('esc',false);document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-eye text-primary me-2"></i>Ver registro escolar';setModoFormularioFamilia_('ver','esc');}
+function editarRegistroEscolar(id){if(!protegerAccionUsuario('registrosescolares','modificar'))return;const r=(db.registrosescolares||[]).find(x=>String(x.id_registro_escolar)===String(id));if(!r)return;cargarRegistroEscolarEnFormulario_(r);abrirModalFamiliaRegistro('esc',false);document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-pen-to-square text-primary me-2"></i>Editar registro escolar';setModoFormularioFamilia_('editar','esc');}
+async function guardarRegistroEscolar(e){e.preventDefault();const id=String(document.getElementById('esc_id')?.value||'').trim();if(!protegerAccionUsuario('registrosescolares',id?'modificar':'agregar'))return;const p=resolverPersonaRegistro(document.getElementById('esc_persona')?.value);if(!p){showSystemNotification('Estudiante requerido','Seleccione el estudiante.','warning');return;}const payload={id_registro_escolar:id||'ESC-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',nombre_estudiante:p.nombre,institucion:document.getElementById('esc_institucion')?.value.trim()||'',nivel:document.getElementById('esc_nivel')?.value.trim()||'',grado:document.getElementById('esc_grado')?.value.trim()||'',periodo_escolar:document.getElementById('esc_periodo')?.value.trim()||'',fecha_inicio:document.getElementById('esc_inicio')?.value||'',fecha_fin:document.getElementById('esc_fin')?.value||'',promedio:document.getElementById('esc_promedio')?.value.trim()||'',representante:document.getElementById('esc_representante')?.value.trim()||'',telefono_representante:document.getElementById('esc_telefono')?.value.trim()||'',estado:document.getElementById('esc_estado')?.value||'Activo',observaciones:document.getElementById('esc_observaciones')?.value.trim()||'',fecha_registro:formatearFechaHoraPortal(new Date())};try{const r=await sendGasRequest(id?'updateRegistroEscolar':'addRegistroEscolar',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');renderRegistrosEscolaresModulo();cerrarModalFamiliaRegistro();showSystemNotification(id?'Registro actualizado':'Registro guardado',id?'El registro escolar fue actualizado correctamente.':'Registro escolar guardado correctamente.','success');}catch(e){_erpOperacionExitoPendiente=null;showSystemNotification('Error al guardar',e.message||'No se pudo guardar.','danger');}}
+async function eliminarRegistroEscolar(id){if(!protegerAccionUsuario('registrosescolares','eliminar')||!(await confirmarAccionModal('Eliminar registro','¿Eliminar este registro escolar?')))return;try{const r=await sendGasRequest('deleteRegistroEscolar',{id_registro_escolar:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');renderRegistrosEscolaresModulo();}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
+function renderRegistrosEscolaresModulo(){
+    const b=document.getElementById('esc-tbody');
+    if(!b)return;
+    const rows=Array.isArray(db?.registrosescolares)?db.registrosescolares:[],v=x=>escMod(x||'—');
+    b.innerHTML=rows.length?rows.map(r=>`<tr><td>${v(r.nombre_estudiante)}</td><td>${v(r.institucion)}</td><td>${v(r.nivel)}</td><td>${v(r.grado)}</td><td>${v(r.periodo_escolar)}</td><td>${v(r.promedio)}</td><td>${v(r.estado)}</td><td class="text-nowrap"><button class="btn btn-sm btn-outline-secondary me-1" title="Ver" onclick="verRegistroEscolar('${escMod(r.id_registro_escolar)}')"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-outline-primary me-1" title="Editar" onclick="editarRegistroEscolar('${escMod(r.id_registro_escolar)}')"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="eliminarRegistroEscolar('${escMod(r.id_registro_escolar)}')"><i class="fa-solid fa-trash"></i></button></td></tr>`).join(''):'<tr><td colspan="8" class="text-center text-muted py-4">No hay registros escolares.</td></tr>';
+}
+
 let dbFamilia = [];
 let modalFamiliarInstance = null;
 let modalFamiliaExpInstance = null;
@@ -13232,6 +13686,39 @@ html[data-bs-theme="dark"] #modalUsuario .usr-hero-panel{background:linear-gradi
 html[data-bs-theme="dark"] #modalUsuario .usr-status-note{background:#111827;}
 html[data-bs-theme="dark"] #modalUsuario .usr-input-group .input-group-text{background:#111827;color:#94a3b8;}
 
+<style id="usuario-form-nuevo-diseno">
+/* Nuevo diseño compacto y organizado para Crear/Editar Usuario */
+#modalUsuario .modal-dialog{max-width:820px;width:calc(100% - 20px)}
+#modalUsuario .modal-content-pro{border-radius:20px;overflow:hidden}
+#modalUsuario .modal-header-pro{padding:.72rem 1rem;background:linear-gradient(135deg,rgba(37,99,235,.10),rgba(14,165,233,.05));border-bottom:1px solid var(--border-color)}
+#modalUsuario .modal-body-pro{padding:.8rem 1rem 1rem;max-height:84vh;overflow:auto}
+#modalUsuario .usr-hero-panel{padding:9px 11px;border-radius:13px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+#modalUsuario .usr-avatar{width:38px;height:38px;flex-basis:38px;border-radius:10px;font-size:.92rem}
+#modalUsuario .usr-hero-title{font-size:.9rem}.usr-help{font-size:.64rem!important}
+#modalUsuario .usr-section-block{margin-top:7px;padding:9px 10px;border:1px solid var(--border-color);border-radius:13px;background:rgba(148,163,184,.025)}
+#modalUsuario .usr-section-divider{margin:0 0 8px;font-size:.72rem}
+#modalUsuario .usr-form-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 9px}
+#modalUsuario .usr-form-field-wide{grid-column:span 2}
+#modalUsuario .usr-form-field-status{grid-column:auto}
+#modalUsuario .form-label{font-size:.66rem!important;margin-bottom:.22rem}
+#modalUsuario .form-control-pro,#modalUsuario .form-select-pro{min-height:34px;padding:.38rem .58rem;border-radius:8px;font-size:.78rem}
+#modalUsuario .input-group-text{min-height:34px;padding:.34rem .5rem}
+#modalUsuario .usr-status-note{font-size:.62rem;padding:5px 7px;grid-column:1/-1}
+#modalUsuario .usr-permisos-compact{padding:7px;border-radius:10px}
+#modalUsuario .usr-permisos-toolbar{margin-bottom:6px;padding:0 0 5px}
+#modalUsuario #usr-permisos-modulos{row-gap:5px!important}
+#modalUsuario #usr-permisos-modulos label{min-height:33px;padding:5px 6px!important;font-size:.63rem!important}
+#modalUsuario #usr-permisos-modulos .form-check-input{width:12px;height:12px}
+#modalUsuario #usr-permisos-acciones{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+#modalUsuario #usr-permisos-acciones>[data-action-block]{padding:6px 7px!important}
+#modalUsuario #usr-permisos-acciones>[data-action-block]>div:first-child{font-size:.62rem!important}
+#modalUsuario #usr-permisos-acciones .form-check{font-size:.58rem!important}
+#modalUsuario .usr-form-footer{margin-top:8px;padding-top:8px;gap:6px}
+#modalUsuario .usr-form-footer .btn{font-size:.72rem;padding:.4rem .7rem}
+@media(max-width:767px){#modalUsuario .modal-body-pro{max-height:86vh;padding:.7rem}.usr-form-grid,#modalUsuario .usr-form-grid{grid-template-columns:1fr 1fr}#modalUsuario .usr-form-field-wide{grid-column:1/-1}#modalUsuario #usr-permisos-acciones{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){#modalUsuario .usr-form-grid{grid-template-columns:1fr}#modalUsuario .usr-form-field-wide{grid-column:auto}#modalUsuario #usr-permisos-acciones{grid-template-columns:1fr}.usr-form-footer{flex-direction:column-reverse}.usr-form-footer .btn{width:100%}}
+html[data-bs-theme="dark"] #modalUsuario .usr-section-block{background:rgba(15,23,42,.35)}
+</style>
 </style>
 /* PERMISOS GRANULARES DE USUARIO */
 #usr-permisos-panel{border:1px solid var(--border-color);border-radius:12px;padding:12px;background:var(--bg-card);}
@@ -13800,7 +14287,14 @@ html[data-bs-theme="dark"] .invoice-modal-header {
   color: #ffffff !important;
 }
 
-.tarea-form-modal{z-index:1070}.tarea-form-card{width:min(980px,100%);max-height:94vh}.tarea-form-modal .tarea-summary-body{max-height:calc(94vh - 72px);overflow:auto}.tareas-estado-bloque{margin-bottom:14px}.tareas-estado-cab{display:flex;justify-content:space-between;align-items:center;font-weight:800;padding:9px 12px;border:1px solid var(--border-color);border-radius:12px 12px 0 0;background:var(--bg-card)}.tareas-estado-cab span{min-width:28px;text-align:center;border-radius:999px;padding:2px 8px;font-size:.78rem;background:var(--bs-secondary-bg);color:var(--bs-body-color)}.tareas-estado-bloque.pendientes .tareas-estado-cab i{color:var(--bs-warning-text-emphasis)}.tareas-estado-bloque.realizadas .tareas-estado-cab i{color:var(--bs-success-text-emphasis)}.tareas-estado-bloque .family-reg-table-wrap{border-radius:0 0 12px 12px}.tareas-estado-bloque .table{margin-bottom:0}.tareas-estado-bloque.realizadas{opacity:.94}@media(max-width:767px){.tarea-form-card{width:100%;max-height:95vh}.tarea-form-modal .tarea-summary-body{max-height:calc(95vh - 65px)}.tareas-estado-bloque .family-reg-table-wrap{overflow-x:auto}}
+.tarea-form-modal{z-index:1070}.tarea-form-card{width:min(980px,100%);max-height:94vh}.tarea-form-modal .tarea-summary-body{max-height:calc(94vh - 72px);overflow:auto}.tareas-estado-bloque{margin-bottom:14px}.tareas-estado-cab{display:flex;justify-content:space-between;align-items:center;font-weight:800;padding:9px 12px;border:1px solid var(--border-color);border-radius:12px 12px 0 0;background:var(--bg-card)}.tareas-estado-cab span{min-width:28px;text-align:center;border-radius:999px;padding:2px 8px;font-size:.78rem;background:var(--bs-secondary-bg);color:var(--bs-body-color)}.tareas-estado-bloque.pendientes .tareas-estado-cab i{color:var(--bs-warning-text-emphasis)}.tareas-estado-bloque.realizadas .tareas-estado-cab i{color:var(--bs-success-text-emphasis)}.tareas-estado-bloque .family-reg-table-wrap{border-radius:0 0 12px 12px}.tareas-estado-bloque .table{margin-bottom:0}.tareas-estado-bloque.realizadas{opacity:.94}
+.tarea-telegram-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 12px;border:1px solid var(--border-color);border-radius:12px;background:var(--bs-body-bg)}
+.tarea-telegram-count{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;background:rgba(37,99,235,.08);color:var(--bs-body-color);font-size:.68rem;font-weight:800}
+.tarea-telegram-select{width:18px;height:18px;cursor:pointer;accent-color:#2563eb}
+.tarea-telegram-row{min-width:44px;width:44px;text-align:center}
+.tarea-telegram-section-title{font-size:.64rem;text-transform:uppercase;letter-spacing:.055em;font-weight:850;color:var(--bs-secondary-color)}
+@media(max-width:767px){.tarea-telegram-toolbar{align-items:stretch}.tarea-telegram-toolbar>div{width:100%}.tarea-telegram-toolbar .btn{flex:1 1 auto}}
+@media(max-width:767px){.tarea-form-card{width:100%;max-height:95vh}.tarea-form-modal .tarea-summary-body{max-height:calc(95vh - 65px)}.tareas-estado-bloque .family-reg-table-wrap{overflow-x:auto}}
 /* Resumen detallado de tareas — compacto y preparado para pantalla/impresión */
 .tarea-summary-modal{position:fixed;inset:0;z-index:1065;display:none;align-items:center;justify-content:center;padding:12px;background:rgba(15,23,42,.58);backdrop-filter:blur(4px)}
 .tarea-summary-modal.show{display:flex}
