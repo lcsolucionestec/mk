@@ -2244,6 +2244,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
             <div class="menu-group"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-cubes"></i>General</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
                 <a href="#agenda" class="nav-link" onclick="switchTab('agenda')"><i class="fa-solid fa-calendar-check"></i><span>Agenda</span></a>
 <a href="#tareas" class="nav-link" onclick="switchTab('tareas')"><i class="fa-solid fa-list-check"></i><span>Tareas</span></a>
+<a href="#recordatorios" class="nav-link" onclick="switchTab('recordatorios')"><i class="fa-solid fa-bell-plus"></i><span>Recordatorios</span></a>
             </div></div>
             <div class="menu-group"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-briefcase"></i>Administración</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
                 <a href="#empresas" class="nav-link view-admin-master" onclick="switchTab('empresas')"><i class="fa-solid fa-building"></i><span>Gestión Empresas</span></a>
@@ -3703,6 +3704,86 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
 </div>
 
 </section>
+
+<!-- SECCIÓN: RECORDATORIOS PERSONALES -->
+<section id="sec-recordatorios" class="tab-content d-none">
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <div>
+      <h5 class="fw-bold m-0"><i class="fa-solid fa-bell-plus text-primary me-2"></i>Recordatorios</h5>
+      <small class="text-muted">Organiza compromisos, búsquedas, citas, trabajos y cualquier pendiente personal con avisos por Telegram.</small>
+    </div>
+    <button class="btn btn-primary" type="button" onclick="abrirFormularioRecordatorio()"><i class="fa-solid fa-plus me-1"></i>Nuevo recordatorio</button>
+  </div>
+
+  <div class="recordatorios-filtro-bar mb-3">
+    <div class="input-group">
+      <span class="input-group-text bg-transparent"><i class="fa-solid fa-magnifying-glass"></i></span>
+      <input id="recordatorios-filtro" class="form-control" autocomplete="off" placeholder="Buscar por cualquier dato registrado..." oninput="renderRecordatoriosModulo()">
+      <button type="button" class="btn btn-outline-danger" onclick="limpiarFiltroRecordatorios()"><i class="fa-solid fa-xmark me-1"></i>Limpiar</button>
+    </div>
+  </div>
+
+  <div id="recordatorios-listado">
+    <div class="recordatorios-estado-bloque pendiente">
+      <div class="recordatorios-estado-cab"><div><i class="fa-regular fa-clock me-1"></i> Pendientes <span class="badge bg-primary ms-1" id="recordatorios-count-pendientes">0</span></div></div>
+      <div id="recordatorios-pendientes" class="recordatorios-grid"></div>
+    </div>
+    <div class="recordatorios-estado-bloque transito mt-3">
+      <div class="recordatorios-estado-cab"><div><i class="fa-solid fa-person-running me-1"></i> En tránsito <span class="badge bg-warning text-dark ms-1" id="recordatorios-count-transito">0</span></div></div>
+      <div id="recordatorios-transito" class="recordatorios-grid"></div>
+    </div>
+    <div class="recordatorios-estado-bloque realizada mt-3">
+      <div class="recordatorios-estado-cab"><div><i class="fa-solid fa-circle-check me-1"></i> Realizadas <span class="badge bg-success ms-1" id="recordatorios-count-realizadas">0</span></div></div>
+      <div id="recordatorios-realizadas" class="recordatorios-grid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO RECORDATORIO -->
+<div id="recordatorioFormModal" class="recordatorio-overlay" aria-hidden="true">
+  <div class="recordatorio-form-card">
+    <div class="recordatorio-modal-head">
+      <div><div id="recordatorioFormTitle" class="fw-bold">Nuevo recordatorio</div><small class="text-muted">Registra lo que necesitas recordar y configura el aviso por Telegram.</small></div>
+      <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarFormularioRecordatorio()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form onsubmit="guardarRecordatorioPersonal(event)">
+      <input type="hidden" id="recordatorio-id">
+      <div class="recordatorio-form-body">
+        <div class="row g-3">
+          <div class="col-12 col-lg-8"><label class="form-label small fw-semibold">Título *</label><input id="recordatorio-titulo" class="form-control form-control-pro" required maxlength="160" placeholder="Ej. Buscar repuesto para el equipo principal"></div>
+          <div class="col-12 col-lg-4"><label class="form-label small fw-semibold">Tipo</label><select id="recordatorio-tipo" class="form-select form-select-pro"><option>Compromiso</option><option>Búsqueda</option><option>Cita</option><option>Trabajo</option><option>Actividad</option><option>Compra</option><option>Otro</option></select></div>
+          <div class="col-12"><label class="form-label small fw-semibold">Detalle / qué debo hacer *</label><textarea id="recordatorio-descripcion" class="form-control form-control-pro" rows="4" required placeholder="Escribe libremente todo lo relacionado con este recordatorio..."></textarea></div>
+          <div class="col-6 col-md-3"><label class="form-label small fw-semibold">Fecha *</label><input id="recordatorio-fecha" type="date" class="form-control form-control-pro" required></div>
+          <div class="col-6 col-md-3"><label class="form-label small fw-semibold">Hora *</label><input id="recordatorio-hora" type="time" class="form-control form-control-pro" required></div>
+          <div class="col-6 col-md-3"><label class="form-label small fw-semibold">Prioridad</label><select id="recordatorio-prioridad" class="form-select form-select-pro"><option>Normal</option><option>Alta</option><option>Urgente</option><option>Baja</option></select></div>
+          <div class="col-6 col-md-3"><label class="form-label small fw-semibold">Estado</label><select id="recordatorio-estado" class="form-select form-select-pro"><option>Pendiente</option><option>En tránsito</option><option>Realizada</option></select></div>
+          <div class="col-12 col-lg-7"><label class="form-label small fw-semibold">Ubicación / referencia</label><input id="recordatorio-ubicacion" class="form-control form-control-pro" placeholder="Lugar, dirección, teléfono, web o referencia"></div>
+          <div class="col-12 col-lg-5"><label class="form-label small fw-semibold">Chat ID Telegram <span class="text-muted fw-normal">(opcional)</span></label><input id="recordatorio-chat" class="form-control form-control-pro" placeholder="Vacío = usa el grupo configurado en Portal"></div>
+          <div class="col-12">
+            <div class="recordatorio-telegram-box">
+              <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap">
+                <div><div class="fw-semibold"><i class="fa-brands fa-telegram text-primary me-1"></i>Notificación por Telegram</div><small class="text-muted">Se enviará automáticamente en la fecha y hora indicadas mientras el recordatorio no esté finalizado.</small></div>
+                <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="recordatorio-telegram" checked><label class="form-check-label small fw-semibold" for="recordatorio-telegram">Activar</label></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12"><label class="form-label small fw-semibold">Mensaje adicional para Telegram</label><textarea id="recordatorio-mensaje" class="form-control form-control-pro" rows="3" placeholder="Información extra que quieres ver en la notificación..."></textarea></div>
+          <div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea id="recordatorio-observaciones" class="form-control form-control-pro" rows="2" placeholder="Notas adicionales para tu control personal..."></textarea></div>
+        </div>
+      </div>
+      <div class="recordatorio-modal-foot"><button type="button" class="btn btn-outline-secondary" onclick="cerrarFormularioRecordatorio()">Cancelar</button><button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar recordatorio</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- RESUMEN RECORDATORIO -->
+<div id="recordatorioViewModal" class="recordatorio-overlay" aria-hidden="true">
+  <div class="recordatorio-form-card recordatorio-view-card">
+    <div class="recordatorio-modal-head"><div><div id="recordatorioViewTitle" class="fw-bold">Recordatorio</div><small id="recordatorioViewSub" class="text-muted">Detalle completo</small></div><button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarResumenRecordatorio()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div id="recordatorioViewGrid" class="recordatorio-view-grid"></div>
+    <div class="recordatorio-modal-foot"><button type="button" class="btn btn-outline-secondary" onclick="cerrarResumenRecordatorio()">Cerrar</button></div>
+  </div>
+</div>
 
 <section id="sec-facturacion" class="tab-content d-none">
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
@@ -5831,6 +5912,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         manutencion: [],
         registrosescolares: [],
         tareas: [],
+        recordatorios: [],
         trabajos_manuales: []
     };
 
@@ -6148,6 +6230,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         addManutencion:'manutencion', updateManutencion:'manutencion', deleteManutencion:'manutencion',
         addRegistroEscolar:'registrosescolares', updateRegistroEscolar:'registrosescolares', deleteRegistroEscolar:'registrosescolares',
         addTarea:'tareas', updateTarea:'tareas', deleteTarea:'tareas',
+        addRecordatorio:'recordatorios', updateRecordatorio:'recordatorios', deleteRecordatorio:'recordatorios', updateRecordatorioEstado:'recordatorios',
         addTrabajoManual:'trabajos_manuales', updateTrabajoManual:'trabajos_manuales', deleteTrabajoManual:'trabajos_manuales'
     };
     const _tablaIdLocal = {
@@ -6155,7 +6238,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         facturas:'id_factura', creditos:'id_cuota', pagos:'id_pago', notificaciones:'id_notificacion',
         auditoria:'id_auditoria', familia:'id_familia', historialmedico:'id_historial_medico',
         recordatoriosmedicinas:'id_recordatorio', manutencion:'id_manutencion',
-        registrosescolares:'id_registro_escolar', tareas:'id_tarea', trabajos_manuales:'id_trabajo'
+        registrosescolares:'id_registro_escolar', tareas:'id_tarea', recordatorios:'id_recordatorio', trabajos_manuales:'id_trabajo'
     };
     function _normalizarFilaLocal_(v){
         if(!v || typeof v!=='object') return v;
@@ -6259,6 +6342,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
             case 'manutencion': render(renderManutencionModulo); break;
             case 'registrosescolares': render(renderRegistrosEscolaresModulo); break;
             case 'tareas': render(renderTareasModulo); break;
+            case 'recordatorios': render(renderRecordatoriosModulo); break;
             case 'trabajos_manuales': render(renderTrabajosManuales); break;
         }
         if(['updatePerfilCliente','registrarPagoCliente','confirmarPago'].includes(action)){
@@ -6486,6 +6570,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
             renderSeguro(renderRegistrosEscolaresModulo,'RegistrosEscolares');
         }
         if (typeof renderTareasModulo==='function') renderSeguro(renderTareasModulo,'Tareas');
+        if (typeof renderRecordatoriosModulo==='function') renderSeguro(renderRecordatoriosModulo,'Recordatorios');
         // Estas dos funciones son prioritarias: siempre deben ejecutarse aunque
         // una vista secundaria tenga un problema.
         renderSeguro(updateKPIs,'KPIs');
@@ -7496,6 +7581,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
             auditoria: 'Auditoría del Sistema',
             historialmedico: 'Historial Médico',
             tareas: 'Tareas y Recordatorios',
+            recordatorios: 'Recordatorios Personales',
             manutencion: 'Manutención Familiar',
             registrosescolares: 'Registros Escolares'
         };
@@ -7513,6 +7599,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         if (tabId === 'agenda') { renderAgendaModulo(); if (String(currentUser?.rol||'').toLowerCase()==='master') cargarAgendaConfigUI(); }
         if (tabId === 'historialmedico') { renderHistorialMedicoModulo(); }
         if (tabId === 'tareas') { renderTareasModulo(); if(currentUser && gasUrl) sincronizarConGAS().then(()=>renderTareasModulo()).catch(()=>{}); }
+        if (tabId === 'recordatorios') { renderRecordatoriosModulo(); if(currentUser && gasUrl) sincronizarConGAS().then(()=>renderRecordatoriosModulo()).catch(()=>{}); }
         if (tabId === 'manutencion') { renderManutencionModulo(); }
         if (tabId === 'registrosescolares') { renderRegistrosEscolaresModulo(); }
 
@@ -8214,11 +8301,12 @@ async function eliminarEmpresa(id) {
         manutencion:{label:'Manutención',icon:'fa-hand-holding-dollar',actions:['leer','agregar','modificar','eliminar']},
         registrosescolares:{label:'Registros Escolares',icon:'fa-school',actions:['leer','agregar','modificar','eliminar']},
         tareas:{label:'Tareas y Recordatorios',icon:'fa-list-check',actions:['leer','agregar','modificar','eliminar']},
+        recordatorios:{label:'Recordatorios Personales',icon:'fa-bell-plus',actions:['leer','agregar','modificar','eliminar']},
         recordatoriosmedicinas:{label:'Recordatorios de Medicinas',icon:'fa-pills',actions:['leer','agregar','modificar','eliminar']},
         perfil:{label:'Mi Perfil y Seguridad',icon:'fa-user-circle',actions:['modificar']}
     };
     const ACCION_LABELS_USUARIO={leer:'Solo lectura',agregar:'Agregar',modificar:'Modificar',eliminar:'Eliminar'};
-    function permisosClientePorDefectoUsuario(){return {dashboard:{leer:true},servicios:{leer:true},facturacion:{leer:true,agregar:true},pagos:{leer:true,agregar:true},bancos:{leer:true},notificaciones:{leer:true,agregar:true},auditoria:{leer:true},agenda:{leer:true,agregar:true},perfil:{modificar:true}};}
+    function permisosClientePorDefectoUsuario(){return {dashboard:{leer:true},servicios:{leer:true},facturacion:{leer:true,agregar:true},pagos:{leer:true,agregar:true},bancos:{leer:true},notificaciones:{leer:true,agregar:true},auditoria:{leer:true},agenda:{leer:true,agregar:true},recordatorios:{leer:true,agregar:true,modificar:true,eliminar:true},perfil:{modificar:true}};}
     function aplicarPermisosPorRolUsuario(){const rol=String(document.getElementById('usr_rol')?.value||'').trim().toLowerCase();const id=String(document.getElementById('usr_id')?.value||'').trim();if(!id&&rol==='cliente')renderEditorPermisosUsuario(permisosClientePorDefectoUsuario());}
 
     function normalizarPermisosUsuario(raw){let p=raw;if(typeof p==='string'){try{p=JSON.parse(p)}catch(_){p={}}}if(Array.isArray(p)){const o={};p.forEach(k=>o[k]={leer:true});return o;}return p&&typeof p==='object'?p:{};}
@@ -13219,6 +13307,45 @@ function renderTareasModulo(){
     actualizarContadorTareasTelegram();
 }
 
+
+// ================================================================
+// RECORDATORIOS PERSONALES
+// ================================================================
+function recordatorioEscape(v){return escMod(v??'—');}
+function recordatorioFechaVisual(v){const s=String(v??'').trim();if(!s)return'—';let m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);if(m)return String(m[3]).padStart(2,'0')+'/'+String(m[2]).padStart(2,'0')+'/'+m[1];m=s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})/);return m?String(m[1]).padStart(2,'0')+'/'+String(m[2]).padStart(2,'0')+'/'+m[3]:s;}
+function recordatorioEstadoClase(v){const s=String(v||'Pendiente').trim().toLowerCase();return s==='realizada'?'recordatorio-status-realizada':(s==='en tránsito'?'recordatorio-status-transito':'recordatorio-status-pendiente');}
+function recordatorioEstadoIcono(v){const s=String(v||'Pendiente').trim().toLowerCase();return s==='realizada'?'fa-circle-check':(s==='en tránsito'?'fa-person-running':'fa-clock');}
+function recordatorioParseFechaRegistro(v){const s=String(v??'').trim();if(!s)return 0;let m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:,?\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?)?/i);if(m){let h=+(m[4]||0),mi=+(m[5]||0),ss=+(m[6]||0),ap=String(m[7]||'').toUpperCase();if(ap==='PM'&&h<12)h+=12;if(ap==='AM'&&h===12)h=0;return new Date(+m[3],+m[2]-1,+m[1],h,mi,ss).getTime();}m=s.match(/^(\d{4})-(\d{2})-(\d{2})(?:T|\s)(\d{2}):(\d{2})(?::(\d{2}))?/);if(m)return new Date(+m[1],+m[2]-1,+m[3],+m[4],+m[5],+(m[6]||0)).getTime();return 0;}
+function limpiarFiltroRecordatorios(){const i=document.getElementById('recordatorios-filtro');if(i)i.value='';renderRecordatoriosModulo();}
+function abrirFormularioRecordatorio(id){if(!protegerAccionUsuario('recordatorios',id?'modificar':'agregar'))return;const m=document.getElementById('recordatorioFormModal');if(!m)return;const r=id?(db.recordatorios||[]).find(x=>String(x.id_recordatorio)===String(id)):null;document.getElementById('recordatorio-id').value=r?.id_recordatorio||'';document.getElementById('recordatorio-titulo').value=r?.titulo||'';document.getElementById('recordatorio-tipo').value=r?.tipo||'Compromiso';document.getElementById('recordatorio-descripcion').value=r?.descripcion||'';document.getElementById('recordatorio-fecha').value=r?.fecha_recordatorio||'';document.getElementById('recordatorio-hora').value=(String(r?.hora_recordatorio||'').match(/^\d{1,2}:\d{2}/)||[''])[0];document.getElementById('recordatorio-prioridad').value=r?.prioridad||'Normal';document.getElementById('recordatorio-estado').value=r?.estado||'Pendiente';document.getElementById('recordatorio-ubicacion').value=r?.ubicacion||'';document.getElementById('recordatorio-chat').value=r?.telegram_chat_id||'';document.getElementById('recordatorio-telegram').checked=String(r?.telegram_activo||'true').toLowerCase()!=='false';document.getElementById('recordatorio-mensaje').value=r?.mensaje_telegram||'';document.getElementById('recordatorio-observaciones').value=r?.observaciones||'';document.getElementById('recordatorioFormTitle').textContent=r?'Editar recordatorio':'Nuevo recordatorio';m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');setTimeout(()=>document.getElementById('recordatorio-titulo')?.focus(),40);}
+function cerrarFormularioRecordatorio(){const m=document.getElementById('recordatorioFormModal');if(m)m.classList.remove('show');m?.setAttribute('aria-hidden','true');document.body.classList.remove('overflow-hidden');}
+async function guardarRecordatorioPersonal(ev){ev.preventDefault();if(!protegerAccionUsuario('recordatorios',document.getElementById('recordatorio-id')?.value?'modificar':'agregar'))return;const id=String(document.getElementById('recordatorio-id')?.value||'').trim();const payload={id_recordatorio:id,titulo:document.getElementById('recordatorio-titulo').value.trim(),tipo:document.getElementById('recordatorio-tipo').value,descripcion:document.getElementById('recordatorio-descripcion').value.trim(),fecha_recordatorio:document.getElementById('recordatorio-fecha').value,hora_recordatorio:document.getElementById('recordatorio-hora').value,prioridad:document.getElementById('recordatorio-prioridad').value,estado:document.getElementById('recordatorio-estado').value,ubicacion:document.getElementById('recordatorio-ubicacion').value.trim(),telegram_activo:document.getElementById('recordatorio-telegram').checked,telegram_chat_id:document.getElementById('recordatorio-chat').value.trim(),mensaje_telegram:document.getElementById('recordatorio-mensaje').value.trim(),observaciones:document.getElementById('recordatorio-observaciones').value.trim()};if(!payload.titulo||!payload.descripcion||!payload.fecha_recordatorio||!payload.hora_recordatorio){showSystemNotification('Datos incompletos','Debe indicar título, detalle, fecha y hora.','warning');return;}try{const action=id?'updateRecordatorio':'addRecordatorio';const r=await sendGasRequest(action,payload,false,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar el recordatorio.');cerrarFormularioRecordatorio();showSystemNotification(id?'Recordatorio actualizado':'Recordatorio creado',id?'Los cambios fueron guardados correctamente.':'El recordatorio fue registrado correctamente.','success');await sincronizarConGAS();renderRecordatoriosModulo();}catch(err){showSystemNotification('No se pudo guardar',err.message||'Error de servidor.','danger');}}
+async function eliminarRecordatorioPersonal(id){if(!protegerAccionUsuario('recordatorios','eliminar'))return;const r=(db.recordatorios||[]).find(x=>String(x.id_recordatorio)===String(id));if(!r)return;if(!confirm('¿Eliminar el recordatorio "'+String(r.titulo||'sin título').replace(/'/g,'\\\'')+'"?'))return;try{const x=await sendGasRequest('deleteRecordatorio',{id_recordatorio:id},false,45000,true);if(!x?.success)throw new Error(x?.message||'No se pudo eliminar.');showSystemNotification('Recordatorio eliminado','El registro fue eliminado correctamente.','success');await sincronizarConGAS();renderRecordatoriosModulo();}catch(err){showSystemNotification('No se pudo eliminar',err.message||'Error de servidor.','danger');}}
+async function cambiarEstadoRecordatorio(id,estado){if(!protegerAccionUsuario('recordatorios','modificar'))return;try{const r=await sendGasRequest('updateRecordatorioEstado',{id_recordatorio:id,estado:estado},false,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo actualizar el estado.');showSystemNotification('Estado actualizado','El recordatorio ahora está en '+estado.toLowerCase()+'.','success');await sincronizarConGAS();renderRecordatoriosModulo();}catch(err){showSystemNotification('No se pudo actualizar',err.message||'Error de servidor.','danger');}}
+function abrirResumenRecordatorio(id){if(!protegerAccionUsuario('recordatorios','leer'))return;const r=(db.recordatorios||[]).find(x=>String(x.id_recordatorio)===String(id));if(!r)return;const campos=[['Identificador',r.id_recordatorio],['Título',r.titulo],['Tipo',r.tipo||'—'],['Estado',r.estado||'—'],['Descripción',r.descripcion||'—',true],['Fecha',recordatorioFechaVisual(r.fecha_recordatorio)],['Hora',r.hora_recordatorio||'—'],['Prioridad',r.prioridad||'Normal'],['Ubicación',r.ubicacion||'—'],['Telegram',String(r.telegram_activo||'true').toLowerCase()==='false'?'No enviar':'Activado'],['Chat ID',r.telegram_chat_id||'Configuración predeterminada'],['Mensaje Telegram',r.mensaje_telegram||'—',true],['Total de envíos',r.total_envios??0],['Última notificación',r.ultima_notificacion||'—'],['Fecha de registro',r.fecha_registro||'—'],['Observaciones',r.observaciones||'—',true]];const g=document.getElementById('recordatorioViewGrid');if(g)g.innerHTML=campos.map(([l,v,full])=>'<div class="recordatorio-view-field'+(full?' full':'')+'"><div class="recordatorio-view-label">'+recordatorioEscape(l)+'</div><div class="recordatorio-view-value">'+recordatorioEscape(v)+'</div></div>').join('');document.getElementById('recordatorioViewTitle').textContent=r.titulo||'Recordatorio';document.getElementById('recordatorioViewSub').textContent='Detalle completo · '+(r.id_recordatorio||'');const m=document.getElementById('recordatorioViewModal');if(m){m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}}
+function cerrarResumenRecordatorio(){const m=document.getElementById('recordatorioViewModal');if(m)m.classList.remove('show');m?.setAttribute('aria-hidden','true');document.body.classList.remove('overflow-hidden');}
+function renderRecordatorioCard_(r){const id=String(r.id_recordatorio||'');const acciones='<div class="recordatorio-table-actions">'+
+'<button type="button" class="btn btn-sm btn-outline-info" onclick="abrirResumenRecordatorio(\''+recordatorioEscape(id)+'\')" title="Ver"><i class="fa-solid fa-eye"></i></button>'+
+'<button type="button" class="btn btn-sm btn-outline-primary" onclick="abrirFormularioRecordatorio(\''+recordatorioEscape(id)+'\')" title="Editar"><i class="fa-solid fa-pen"></i></button>'+
+'<button type="button" class="btn btn-sm btn-outline-danger" onclick="eliminarRecordatorioPersonal(\''+recordatorioEscape(id)+'\')" title="Eliminar"><i class="fa-solid fa-trash"></i></button>'+
+'<button type="button" class="btn btn-sm btn-outline-primary" onclick="cambiarEstadoRecordatorio(\''+recordatorioEscape(id)+'\',\'Pendiente\')" title="Marcar pendiente"><i class="fa-solid fa-clock"></i></button>'+
+'<button type="button" class="btn btn-sm btn-outline-warning" onclick="cambiarEstadoRecordatorio(\''+recordatorioEscape(id)+'\',\'En tránsito\')" title="Marcar en tránsito"><i class="fa-solid fa-person-running"></i></button>'+
+'<button type="button" class="btn btn-sm btn-outline-success" onclick="cambiarEstadoRecordatorio(\''+recordatorioEscape(id)+'\',\'Realizada\')" title="Marcar finalizada"><i class="fa-solid fa-circle-check"></i></button></div>';
+const cell=(value,cls='')=>'<td class="recordatorio-table-cell '+cls+'">'+recordatorioEscape(value==null||value===''?'—':value)+'</td>';
+return '<tr class="recordatorio-table-row">'+
+cell(r.titulo||'Sin título','recordatorio-col-title')+
+cell(r.tipo||'Otro','recordatorio-col-type')+
+cell(recordatorioFechaVisual(r.fecha_recordatorio),'recordatorio-col-date')+
+cell(r.hora_recordatorio||'—','recordatorio-col-time')+
+cell(r.descripcion||'—','recordatorio-col-detail recordatorio-col-wrap')+
+cell(r.ubicacion||'—','recordatorio-col-location recordatorio-col-wrap')+
+cell(r.mensaje_telegram||'—','recordatorio-col-message recordatorio-col-wrap')+
+cell(r.observaciones||'—','recordatorio-col-observaciones recordatorio-col-wrap')+
+'<td class="recordatorio-table-cell recordatorio-col-actions">'+acciones+'</td></tr>';
+}
+function renderRecordatoriosGrupo_(id,rows,vacio){const c=document.getElementById(id);if(!c)return;if(!rows.length){c.innerHTML='<div class="recordatorios-table-wrap"><table class="recordatorios-table mb-0"><tbody><tr><td colspan="9" class="recordatorios-table-empty">'+recordatorioEscape(vacio)+'</td></tr></tbody></table></div>';return;}c.innerHTML='<div class="recordatorios-table-wrap"><table class="recordatorios-table mb-0"><thead><tr><th>Título</th><th>Tipo</th><th>Fecha</th><th>Hora</th><th>Detalle</th><th>Ubicación</th><th>Mensaje adicional</th><th>Observaciones</th><th>Acciones</th></tr></thead><tbody>'+rows.map(renderRecordatorioCard_).join('')+'</tbody></table></div>'; }
+function renderRecordatoriosModulo(){const base=Array.isArray(db?.recordatorios)?db.recordatorios:[];const q=String(document.getElementById('recordatorios-filtro')?.value||'').trim().toLowerCase();const campos=r=>[r.id_recordatorio,r.titulo,r.tipo,r.descripcion,r.fecha_recordatorio,r.hora_recordatorio,r.prioridad,r.ubicacion,r.estado,r.telegram_chat_id,r.mensaje_telegram,r.observaciones,r.fecha_registro].join(' ').toLowerCase();const rows=base.filter(r=>!q||campos(r).includes(q)).sort((a,b)=>recordatorioParseFechaRegistro(b.fecha_registro)-recordatorioParseFechaRegistro(a.fecha_registro));const pend=rows.filter(r=>String(r.estado||'Pendiente')==='Pendiente'),trans=rows.filter(r=>String(r.estado||'Pendiente')==='En tránsito'),done=rows.filter(r=>String(r.estado||'Pendiente')==='Realizada');document.getElementById('recordatorios-count-pendientes')?.replaceChildren(document.createTextNode(pend.length));document.getElementById('recordatorios-count-transito')?.replaceChildren(document.createTextNode(trans.length));document.getElementById('recordatorios-count-realizadas')?.replaceChildren(document.createTextNode(done.length));renderRecordatoriosGrupo_('recordatorios-pendientes',pend,'No hay recordatorios pendientes.');renderRecordatoriosGrupo_('recordatorios-transito',trans,'No hay recordatorios en tránsito.');renderRecordatoriosGrupo_('recordatorios-realizadas',done,'No hay recordatorios realizados.');}
+
 function alternarRegistrosManutencionUI(){const panel=document.getElementById('man-registros-panel'),btn=document.getElementById('btn-ver-registros-manutencion');if(!panel)return;const mostrar=panel.classList.contains('d-none');panel.classList.toggle('d-none',!mostrar);if(btn){const span=btn.querySelector('span');if(span)span.textContent=mostrar?'Ocultar registros':'Ver registros';btn.classList.toggle('btn-outline-primary',!mostrar);btn.classList.toggle('btn-primary',mostrar); }if(mostrar)panel.scrollIntoView({behavior:'smooth',block:'nearest'});}
 
 function tareaResumenEscape(v){return escMod(v??'—');}
@@ -14284,6 +14411,8 @@ html[data-bs-theme="dark"] .invoice-modal-header {
 }
 
 .notif-list-compact{border-radius:12px;overflow:hidden}.notif-list-compact .notif-item-compact{padding:.55rem .7rem!important}.notif-list-compact .notif-head-compact{min-height:22px}.notif-title-compact{font-size:.77rem;line-height:1.15}.notif-date-compact{font-size:.6rem;white-space:nowrap}.notif-message-compact{font-size:.68rem;line-height:1.25;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.notif-foot-compact{margin-top:4px!important;min-height:21px}.notif-info-compact{font-size:.58rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.notif-actions-compact .btn{font-size:.58rem!important;padding:.15rem .35rem!important}.task-check-col{width:34px!important;min-width:34px!important;text-align:center;vertical-align:middle}.tareas-estado-bloque .task-check-col .form-check-input{margin:0;cursor:pointer}.telegram-destino-option{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--bs-border-color,#dee2e6);border-radius:10px;padding:9px 10px;cursor:pointer;background:var(--bs-body-bg,#fff)}.telegram-destino-option:has(input:checked){border-color:rgba(37,99,235,.45);background:rgba(37,99,235,.045)}.telegram-destino-option input{margin-top:3px}.tarea-telegram-card{width:min(680px,100%)}.tarea-telegram-card .alert{background:rgba(37,99,235,.055)!important}.man-registros-toggle{white-space:nowrap}@media(max-width:767px){.notif-list-compact .notif-item-compact{padding:.5rem .6rem!important}.notif-foot-compact{align-items:flex-end!important}.notif-info-compact{max-width:62vw}.task-check-col{width:30px!important;min-width:30px!important}}
+
+.recordatorios-filtro-bar{background:var(--bg-card,#fff);border:1px solid var(--border-color,#e2e8f0);border-radius:12px;padding:10px;box-shadow:var(--shadow-sm,0 4px 14px rgba(15,23,42,.04))}.recordatorios-filtro-bar .input-group{min-height:42px}.recordatorios-estado-bloque{margin-bottom:14px;background:transparent;border:0;border-radius:0;overflow:visible}.recordatorios-estado-bloque.pendiente .recordatorios-estado-cab{border-left:4px solid #2563eb}.recordatorios-estado-bloque.transito .recordatorios-estado-cab{border-left:4px solid #f59e0b}.recordatorios-estado-bloque.realizada .recordatorios-estado-cab{border-left:4px solid #16a34a}.recordatorios-estado-cab{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;font-weight:800;border:1px solid var(--border-color,#e2e8f0);border-radius:12px 12px 0 0;background:var(--bg-card,#fff);min-height:40px}.recordatorios-grid{display:block;padding:0}.recordatorio-card{border:0;border-radius:0;padding:0;background:transparent;min-width:0}.recordatorio-card:hover{box-shadow:none;transform:none}.recordatorio-card .rc-title,.recordatorio-card .rc-detail,.recordatorio-card .rc-meta,.recordatorio-card .rc-actions{display:none}.recordatorio-empty{padding:16px;text-align:center;color:var(--text-muted,#64748b);font-size:.78rem;border:1px solid var(--border-color,#e2e8f0);border-top:0;border-radius:0 0 12px 12px}.recordatorio-overlay{position:fixed;inset:0;z-index:1090;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.58);backdrop-filter:blur(3px)}.recordatorio-overlay.show{display:flex}.recordatorio-form-card{width:min(920px,96vw);max-height:92vh;overflow:auto;background:var(--bg-card,#fff);color:var(--bs-body-color,#111827);border:1px solid var(--border-color,#e2e8f0);border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.24)}.recordatorio-view-card{width:min(820px,94vw)}.recordatorio-modal-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:var(--bg-card,#fff);border-bottom:1px solid var(--border-color,#e2e8f0)}.recordatorio-form-body{padding:16px}.recordatorio-modal-foot{position:sticky;bottom:0;display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;background:var(--bg-card,#fff);border-top:1px solid var(--border-color,#e2e8f0)}.recordatorio-telegram-box{border:1px solid rgba(37,99,235,.18);background:rgba(37,99,235,.05);border-radius:13px;padding:11px 12px}.recordatorio-view-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:16px}.recordatorio-view-field{border:1px solid var(--border-color,#e2e8f0);border-radius:11px;padding:10px}.recordatorio-view-field.full{grid-column:1/-1}.recordatorio-view-label{font-size:.67rem;font-weight:800;color:var(--text-muted,#64748b);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}.recordatorio-view-value{font-size:.82rem;line-height:1.45;white-space:pre-wrap}.recordatorio-status-badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:.68rem;font-weight:800}.recordatorio-status-pendiente{background:rgba(37,99,235,.12);color:#1d4ed8}.recordatorio-status-transito{background:rgba(245,158,11,.16);color:#a16207}.recordatorio-status-realizada{background:rgba(22,163,74,.13);color:#15803d}.recordatorios-table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border-color,#e2e8f0);border-top:0;border-radius:0 0 12px 12px;background:var(--bg-card,#fff)}.recordatorios-table{width:100%;min-width:0;border-collapse:separate;border-spacing:0;table-layout:auto;font-size:.73rem}.recordatorios-table thead th{background:var(--bg-subtle,#f8fafc);color:var(--text-muted,#64748b);font-size:.65rem;text-transform:uppercase;letter-spacing:.035em;font-weight:800;padding:8px 9px;border-bottom:1px solid var(--border-color,#e2e8f0);white-space:nowrap}.recordatorios-table tbody td{padding:8px 9px;border-bottom:1px solid var(--border-color,#e2e8f0);vertical-align:middle;color:var(--text-main,#0f172a)}.recordatorios-table tbody tr:last-child td{border-bottom:0}.recordatorios-table tbody tr:hover td{background:rgba(37,99,235,.035)}.recordatorio-table-cell{line-height:1.3}.recordatorio-col-title{width:13%;font-weight:800}.recordatorio-col-type{width:8%;white-space:nowrap}.recordatorio-col-date{width:8%;white-space:nowrap}.recordatorio-col-time{width:7%;white-space:nowrap}.recordatorio-col-detail{width:19%}.recordatorio-col-location{width:10%}.recordatorio-col-message{width:13%}.recordatorio-col-observaciones{width:13%}.recordatorio-col-actions{width:9%;min-width:132px}.recordatorio-col-wrap{white-space:pre-wrap;word-break:break-word}.recordatorio-table-actions{display:flex;gap:3px;flex-wrap:nowrap;align-items:center}.recordatorio-table-actions .btn{width:28px;height:28px;padding:0;display:inline-flex;align-items:center;justify-content:center;font-size:.66rem;border-radius:7px}.recordatorios-table-empty{padding:16px!important;text-align:center;color:var(--text-muted,#64748b)!important}.recordatorios-table-status-dot{display:inline-flex;align-items:center;gap:5px}@media(max-width:900px){.recordatorios-table{min-width:980px}.recordatorios-table thead th,.recordatorios-table tbody td{padding:7px 8px}.recordatorio-table-actions{flex-wrap:wrap}.recordatorio-table-actions .btn{width:27px;height:27px}}@media(max-width:680px){.recordatorios-table{min-width:980px}.recordatorio-view-grid{grid-template-columns:1fr}.recordatorio-view-field.full{grid-column:auto}.recordatorio-form-card{max-height:95vh;border-radius:15px}.recordatorio-form-body{padding:12px}}
 .tarea-form-modal{z-index:1070}.tarea-form-card{width:min(980px,100%);max-height:94vh}.tarea-form-modal .tarea-summary-body{max-height:calc(94vh - 72px);overflow:auto}.tareas-estado-bloque{margin-bottom:14px}.tareas-estado-cab{display:flex;justify-content:space-between;align-items:center;font-weight:800;padding:9px 12px;border:1px solid var(--border-color);border-radius:12px 12px 0 0;background:var(--bg-card)}.tareas-estado-cab span{min-width:28px;text-align:center;border-radius:999px;padding:2px 8px;font-size:.78rem;background:var(--bs-secondary-bg);color:var(--bs-body-color)}.tareas-estado-bloque.pendientes .tareas-estado-cab i{color:var(--bs-warning-text-emphasis)}.tareas-estado-bloque.realizadas .tareas-estado-cab i{color:var(--bs-success-text-emphasis)}.tareas-estado-bloque .family-reg-table-wrap{border-radius:0 0 12px 12px}.tareas-estado-bloque .table{margin-bottom:0}.tareas-estado-bloque.realizadas{opacity:.94}@media(max-width:767px){.tarea-form-card{width:100%;max-height:95vh}.tarea-form-modal .tarea-summary-body{max-height:calc(95vh - 65px)}.tareas-estado-bloque .family-reg-table-wrap{overflow-x:auto}}
 /* Resumen detallado de tareas — compacto y preparado para pantalla/impresión */
 .tarea-summary-modal{position:fixed;inset:0;z-index:1065;display:none;align-items:center;justify-content:center;padding:12px;background:rgba(15,23,42,.58);backdrop-filter:blur(4px)}
