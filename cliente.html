@@ -6,10 +6,8 @@
     <script>
     (function(){
         try {
-            var saved=localStorage.getItem('theme');
             var systemDark=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            var initial=(saved==='dark'||saved==='light')?saved:(systemDark?'dark':'light');
-            document.documentElement.setAttribute('data-bs-theme',initial);
+            document.documentElement.setAttribute('data-bs-theme',systemDark?'dark':'light');
         } catch(e) {}
     })();
     </script>
@@ -1091,6 +1089,24 @@ html[data-bs-theme="dark"] .familia-placeholder { background:linear-gradient(135
 html[data-bs-theme="dark"] .familia-doc-thumb { background:#0f172a; border-color:#334155; }
 html[data-bs-theme="dark"] #modalFamiliar .modal-header-pro { background:linear-gradient(135deg,#020617 0%,#172554 65%,#1d4ed8 100%) !important; }
 
+/* UNIFICACIÓN VISUAL: formulario Nuevo Familiar con el mismo lenguaje del portal */
+#modalFamiliar .modal-dialog{max-width:min(1120px,calc(100vw - 24px));}
+#modalFamiliar .modal-content-pro{background:var(--glass-bg)!important;border:1px solid var(--glass-border)!important;border-radius:20px!important;box-shadow:var(--shadow-lg)!important;color:var(--text-main)!important;}
+#modalFamiliar .modal-header-pro{background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(37,99,235,.02))!important;color:var(--text-main)!important;border-bottom:1px solid var(--border-color)!important;}
+#modalFamiliar .modal-header-pro .text-white-50{color:var(--text-muted)!important;}
+#modalFamiliar .modal-header-pro .btn-close-white{filter:var(--bs-btn-close-white-filter);opacity:.75;}
+#modalFamiliar .modal-header-pro .rounded-3{background:rgba(37,99,235,.09)!important;border:1px solid rgba(37,99,235,.15)!important;color:#2563eb!important;}
+#modalFamiliar .modal-header-pro .rounded-3 i{color:#2563eb!important;}
+#modalFamiliar .modal-body-pro{padding:1.25rem!important;background:transparent!important;max-height:78vh;overflow-y:auto;}
+#modalFamiliar .modal-body-pro form > .p-3.rounded-4{background:var(--bg-subtle)!important;border:1px solid var(--border-color)!important;border-radius:14px!important;}
+#modalFamiliar .modal-body-pro .text-primary{color:var(--primary-accent)!important;}
+#modalFamiliar .familia-upload-card{background:var(--bg-card)!important;border:1px solid var(--border-color)!important;border-radius:14px!important;box-shadow:none!important;}
+#modalFamiliar .familia-upload-card:hover{border-color:rgba(37,99,235,.25)!important;transform:none;box-shadow:0 8px 22px rgba(15,23,42,.06)!important;}
+#modalFamiliar .form-label{color:var(--text-main);}
+#modalFamiliar .modal-body-pro .border-top{border-color:var(--border-color)!important;}
+#modalFamiliar .modal-body-pro .btn-light{background:var(--bg-card)!important;color:var(--text-main)!important;border-color:var(--border-color)!important;}
+#modalFamiliar .modal-body-pro .btn-primary{box-shadow:0 8px 18px rgba(37,99,235,.16);}
+html[data-bs-theme="dark"] #modalFamiliar .modal-header-pro{background:linear-gradient(135deg,rgba(37,99,235,.14),rgba(15,23,42,.02))!important;color:var(--text-main)!important;}
 
 /* FIX DEFINITIVO: una sola capa visual por formulario */
 body.erp-authenticated #login-overlay{display:none!important;pointer-events:none!important}
@@ -1103,15 +1119,23 @@ body.erp-authenticated .modal-content{position:relative;z-index:1062!important}
         #loginForm input:disabled{cursor:not-allowed;opacity:.7}
 
         /* Estado de conexión inicial del portal: barra real con porcentaje. */
-        #server-connection-status{position:fixed;inset:0;background:rgba(2,6,23,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;z-index:300000;padding:20px;}
+        #server-connection-status{position:fixed;inset:0;background:rgba(2,6,23,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;z-index:300000;padding:20px;}
         #server-connection-status.is-hidden{display:none!important;}
-        .server-connection-card{width:min(430px,92vw);background:#fff;border-radius:20px;padding:28px 26px;box-shadow:0 25px 70px rgba(0,0,0,.28);text-align:center;}
-        .server-connection-title{font-size:1.08rem;font-weight:800;color:#0f172a;margin-bottom:4px;}
-        .server-connection-substatus{font-size:.82rem;color:#64748b;min-height:20px;}
-        .server-connection-percent{font-size:2rem;font-weight:900;color:#2563eb;line-height:1;margin:18px 0 12px;}
-        .server-connection-track{height:11px;background:#e2e8f0;border-radius:999px;overflow:hidden;}
-        .server-connection-fill{height:100%;width:0;background:linear-gradient(90deg,#2563eb,#22c55e);border-radius:999px;transition:width .08s linear;}
-        .server-connection-online{margin-top:14px;font-size:.72rem;font-weight:800;letter-spacing:.08em;color:#16a34a;}
+        .server-connection-card{width:min(560px,94vw);background:rgba(8,13,28,.88);border:1px solid rgba(255,255,255,.12);border-radius:26px;padding:34px 30px 28px;box-shadow:0 30px 100px rgba(0,0,0,.48);text-align:center;color:#fff;}
+        .server-connection-logo-wrap{width:100%;display:flex;justify-content:center;overflow:hidden;}
+        .server-connection-logo{width:100%!important;max-width:500px!important;gap:18px!important;}
+        .server-connection-logo .lc-text-logo-mark{width:104px!important;height:104px!important;min-width:104px!important;}
+        .server-connection-logo .lc-text-logo-initials{font-size:2.85rem!important;}
+        .server-connection-logo .lc-text-logo-main,.server-connection-logo .lc-text-logo-tech{font-size:clamp(1.15rem,4.7cqw,2.35rem)!important;line-height:.96!important;}
+        .server-connection-logo .lc-text-logo-lc,.server-connection-logo .lc-text-logo-title,.server-connection-logo .lc-text-logo-tech{font-size:inherit!important;line-height:inherit!important;}
+        .server-connection-logo .lc-text-logo-line{position:relative;height:4px!important;margin-top:12px!important;width:100%!important;overflow:hidden;background:rgba(34,211,238,.16)!important;box-shadow:0 0 12px rgba(34,211,238,.18)!important;}
+        .server-connection-logo .lc-text-logo-line::before,.server-connection-logo .lc-text-logo-line::after{z-index:3;}
+        .server-connection-fill{position:absolute;left:0;top:0;height:100%;width:1%;background:linear-gradient(90deg,#06b6d4,#38bdf8);border-radius:999px;transition:width .08s linear;box-shadow:0 0 12px rgba(34,211,238,.55);z-index:2;}
+        .server-connection-title{font-size:1.12rem;font-weight:850;color:#fff;margin-top:18px;margin-bottom:4px;letter-spacing:.01em;}
+        .server-connection-substatus{font-size:.82rem;color:rgba(255,255,255,.62);min-height:20px;}
+        .server-connection-percent{font-size:2.2rem;font-weight:950;color:#38bdf8;line-height:1;margin:16px 0 2px;text-shadow:0 0 18px rgba(56,189,248,.24);}
+        .server-connection-online{margin-top:10px;font-size:.68rem;font-weight:850;letter-spacing:.11em;color:#22c55e;}
+        @media(max-width:575px){.server-connection-card{padding:26px 18px 22px;border-radius:22px}.server-connection-logo{gap:10px!important}.server-connection-logo .lc-text-logo-mark{width:74px!important;height:74px!important;min-width:74px!important}.server-connection-logo .lc-text-logo-initials{font-size:2rem!important}.server-connection-logo .lc-text-logo-main,.server-connection-logo .lc-text-logo-tech{font-size:clamp(.86rem,4.8vw,1.35rem)!important}.server-connection-logo .lc-text-logo-line{margin-top:8px!important;height:3px!important}.server-connection-percent{font-size:1.9rem}}
 <style id="payment-summary-final">
 #modalConfirmarPago .modal-dialog{max-width:690px;margin:1rem auto}
 #modalConfirmarPago .modal-content{border:0;border-radius:18px;overflow:hidden;box-shadow:0 20px 55px rgba(15,23,42,.20)}
@@ -1333,6 +1357,61 @@ html[data-bs-theme="light"] #modalFormatoFactura .btn-outline-dark:focus small {
       @media(max-width:767px){#sec-servicios>.ps-section-head{padding:14px!important}#sec-servicios .ps-admin-nav{display:flex!important;flex-direction:column!important;grid-template-columns:1fr!important}#sec-servicios .ps-admin-nav .btn{min-height:46px!important}}
     </style>
 
+
+
+<style id="vehiculos-style">
+#sec-vehiculos .veh-shell{display:flex;flex-direction:column;gap:12px}
+#sec-vehiculos .veh-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#sec-vehiculos .veh-search{max-width:420px}
+#sec-vehiculos .veh-card{border:1px solid #e2e8f0;border-radius:16px;background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.06);overflow:hidden}
+#sec-vehiculos .veh-card-head{padding:12px 14px;background:linear-gradient(135deg,#f8fbff,#eff6ff);border-bottom:1px solid #e5e7eb}
+#sec-vehiculos .veh-title{font-weight:850;color:#0f172a}
+#sec-vehiculos .veh-sub{font-size:.72rem;color:#64748b}
+#sec-vehiculos .veh-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;font-size:.66rem;font-weight:800;border:1px solid #cbd5e1;background:#fff;color:#475569}
+#sec-vehiculos .veh-badge.blue{background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8}
+#sec-vehiculos .veh-badge.green{background:#ecfdf5;border-color:#a7f3d0;color:#047857}
+#sec-vehiculos .veh-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:12px 14px}
+#sec-vehiculos .veh-meta{border:1px solid #e5e7eb;border-radius:9px;padding:8px;background:#fff;min-width:0}
+#sec-vehiculos .veh-meta .label{font-size:.61rem;text-transform:uppercase;letter-spacing:.04em;font-weight:800;color:#64748b}
+#sec-vehiculos .veh-meta .value{font-size:.77rem;font-weight:750;color:#0f172a;margin-top:2px;overflow-wrap:anywhere}
+#sec-vehiculos .veh-actions{display:flex;gap:5px;flex-wrap:wrap;padding:0 14px 12px}
+#sec-vehiculos .veh-actions .btn{font-size:.7rem;padding:.32rem .5rem}
+#sec-vehiculos .veh-history{border-top:1px solid #e5e7eb;background:#fbfdff;padding:10px 14px 14px}
+#sec-vehiculos .veh-history-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+#sec-vehiculos .veh-history-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:10px}
+#sec-vehiculos .veh-history-panel{border:1px solid #e2e8f0;border-radius:10px;background:#fff;overflow:hidden}
+#sec-vehiculos .veh-history-panel .head{padding:8px 10px;border-bottom:1px solid #e5e7eb;font-size:.7rem;font-weight:850;color:#334155;background:#f8fafc}
+#sec-vehiculos .veh-history-panel .body{padding:0}
+#sec-vehiculos .veh-table{width:100%;border-collapse:collapse;font-size:.68rem}
+#sec-vehiculos .veh-table th,#sec-vehiculos .veh-table td{padding:6px 7px;border-bottom:1px solid #eef2f7;vertical-align:middle;text-align:center}
+#sec-vehiculos .veh-table th{font-size:.6rem;text-transform:uppercase;letter-spacing:.03em;color:#64748b;background:#fff}
+#sec-vehiculos .veh-empty{padding:14px;text-align:center;color:#94a3b8;font-size:.7rem}
+.vehiculos-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;padding:14px;z-index:1085}
+.vehiculos-overlay.show{display:flex}
+.vehiculos-card{width:min(1080px,100%);max-height:92vh;min-height:0;overflow:hidden;background:#fff;border:1px solid #dbe3ec;border-radius:18px;box-shadow:0 30px 90px rgba(15,23,42,.25);display:flex;flex-direction:column}
+.vehiculos-card.wide{width:min(1180px,100%)}
+.vehiculos-card > form{display:flex;flex:1 1 auto;min-height:0;flex-direction:column}
+.vehiculos-head{flex:0 0 auto;padding:12px 14px;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(135deg,#f8fbff,#eff6ff)}
+.vehiculos-head .title{font-weight:850;color:#0f172a}
+.vehiculos-head small{display:block;color:#64748b;font-size:.7rem}
+.vehiculos-body{flex:1 1 auto;min-height:0;padding:14px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#94a3b8 transparent}
+.vehiculos-body::-webkit-scrollbar{width:8px}
+.vehiculos-body::-webkit-scrollbar-track{background:transparent}
+.vehiculos-body::-webkit-scrollbar-thumb{background:#94a3b8;border-radius:999px}
+.vehiculos-foot{flex:0 0 auto;display:flex;justify-content:flex-end;gap:7px;padding:10px 14px;border-top:1px solid #e5e7eb;background:#fbfdff}
+.veh-section-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;color:#475569;margin:6px 0 8px;display:flex;align-items:center;gap:6px}
+.vehiculos-note{font-size:.68rem;color:#64748b}
+@media(max-width:900px){#sec-vehiculos .veh-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#sec-vehiculos .veh-history-grid{grid-template-columns:1fr}}
+@media(max-width:576px){#sec-vehiculos .veh-grid{grid-template-columns:1fr 1fr}#sec-vehiculos .veh-actions .btn{flex:1 1 calc(50% - 5px)}.vehiculos-overlay{padding:8px}.vehiculos-card{max-height:96vh;border-radius:14px}}
+body.dark-mode #sec-vehiculos .veh-card,body.dark-mode .vehiculos-card{background:#111827;color:#e5edf7;border-color:#263244}
+body.dark-mode #sec-vehiculos .veh-card-head,body.dark-mode #sec-vehiculos .vehiculos-head{background:linear-gradient(135deg,#111c2e,#132238);border-color:#263244}
+body.dark-mode #sec-vehiculos .veh-title,body.dark-mode .vehiculos-head .title{color:#e5edf7}
+body.dark-mode #sec-vehiculos .veh-meta,body.dark-mode #sec-vehiculos .veh-history-panel{background:#0f172a;border-color:#263244}
+body.dark-mode #sec-vehiculos .veh-meta .value{color:#e5edf7}
+body.dark-mode #sec-vehiculos .veh-history{background:#0b1220;border-color:#263244}
+body.dark-mode #sec-vehiculos .veh-history-panel .head,body.dark-mode .vehiculos-foot{background:#111c2e;border-color:#263244;color:#cbd5e1}
+body.dark-mode #sec-vehiculos .veh-table th,body.dark-mode #sec-vehiculos .veh-table td{border-color:#263244;color:#cbd5e1}
+</style>
 
     <style id="ajuste-tres-disenos-finales">
       /* 1) MI PERFIL — compacto y más limpio */
@@ -2155,6 +2234,391 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
 @media(max-width:575px){.horario-catalogo-context{grid-template-columns:1fr}.horario-catalogo-table th,.horario-catalogo-table td{font-size:.52rem;padding:4px 2px}.horario-catalogo-form .btn{font-size:.58rem}.horario-catalogo-actions .btn{width:22px;height:22px;min-width:22px}}
 </style>
 
+
+<style id="portal-modern-v2-ajustes-solicitados">
+/* ===== AJUSTES FINALES SOLICITADOS ===== */
+
+/* 1) MENÚ MÓVIL: flecha para cerrar y sin sombra/backdrop */
+.sidebar-mobile-close{
+  width:34px!important;height:34px!important;min-width:34px!important;padding:0!important;
+  border:1px solid var(--border-color)!important;border-radius:10px!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  background:var(--bg-card)!important;color:var(--text-main)!important;
+  box-shadow:none!important;font-size:.78rem!important;
+}
+.sidebar-mobile-close:hover{background:rgba(99,91,255,.08)!important;color:var(--v2-primary,#635bff)!important}
+
+/* ================================================================
+   NUEVO ENCABEZADO DE MARCA — LC SOLUCIONES
+   Logo oficial integrado en el HTML para que no dependa de rutas externas.
+   ================================================================ */
+.lc-brand-logo-shell{width:100%;display:flex;align-items:center;justify-content:center;padding:8px 10px;border-radius:18px;background:transparent;border:0;box-shadow:none;backdrop-filter:none;}
+.lc-login-logo-shell{width:min(100%,650px);padding:8px 10px;}
+.lc-mobile-logo-shell{width:min(100%,390px);margin:0 auto;padding:8px 10px;}
+.lc-text-logo{display:flex;align-items:center;gap:16px;width:100%;max-width:620px;color:#fff;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-transform:uppercase;}
+.lc-text-logo-mark{position:relative;width:96px;height:96px;min-width:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 45% 40%,rgba(34,211,238,.22),rgba(15,23,42,.18) 58%,transparent 72%);border:3px solid rgba(14,165,233,.95);box-shadow:inset 0 0 22px rgba(56,189,248,.18),0 0 26px rgba(14,165,233,.18);overflow:hidden;}
+.lc-text-logo-mark::before,.lc-text-logo-mark::after{content:"";position:absolute;border-radius:50%;border:2px solid rgba(56,189,248,.78);inset:9px;transform:rotate(42deg) scaleX(.76);}
+.lc-text-logo-mark::after{inset:17px;transform:rotate(-42deg) scaleX(.70);border-color:rgba(96,165,250,.55);}
+.lc-text-logo-initials{position:relative;z-index:2;font-size:2.65rem;font-weight:950;letter-spacing:-.16em;line-height:1;color:#fff;text-shadow:0 3px 14px rgba(0,0,0,.42);margin-left:-4px;}
+.lc-text-logo-initials .c{color:#ff7a18;margin-left:-2px;}
+.lc-text-logo-copy{min-width:0;display:flex;flex-direction:column;justify-content:center;line-height:1;}
+.lc-text-logo-main{display:flex;align-items:baseline;gap:10px;white-space:nowrap;}
+.lc-text-logo-lc{font-size:1.65rem;font-weight:950;letter-spacing:-.04em;color:#ff7a18;}
+.lc-text-logo-title{font-size:clamp(1.55rem,2.9vw,2.55rem);font-weight:950;letter-spacing:.015em;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.38);}
+.lc-text-logo-tech{margin-top:7px;font-size:clamp(1.25rem,2.55vw,2.15rem);font-weight:950;letter-spacing:.02em;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.38);}
+.lc-text-logo-line{height:3px;width:100%;margin-top:11px;background:linear-gradient(90deg,#06b6d4,#38bdf8);border-radius:99px;box-shadow:0 0 10px rgba(34,211,238,.34);position:relative;}
+.lc-text-logo-line::before,.lc-text-logo-line::after{content:"";position:absolute;top:50%;width:8px;height:8px;background:#22d3ee;border-radius:50%;transform:translateY(-50%);box-shadow:0 0 9px rgba(34,211,238,.55);}
+.lc-text-logo-line::before{left:-1px}.lc-text-logo-line::after{right:-1px}
+.lc-text-logo-sub{margin-top:7px;font-size:clamp(.52rem,1.05vw,.78rem);font-weight:900;letter-spacing:.055em;color:#ff7a18;white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.35);}
+.lc-sidebar-logo-shell{width:100%;min-height:96px;padding:10px 9px;border-radius:18px;background:linear-gradient(145deg,rgba(10,25,49,.98),rgba(19,55,91,.96));border:1px solid rgba(56,189,248,.24);box-shadow:0 12px 28px rgba(2,6,23,.24),inset 0 1px 0 rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;}
+.lc-sidebar-text-logo{gap:10px;max-width:300px;}
+.lc-sidebar-text-logo .lc-text-logo-mark{width:58px;height:58px;min-width:58px;border-width:2px;}
+.lc-sidebar-text-logo .lc-text-logo-mark::before{inset:6px}.lc-sidebar-text-logo .lc-text-logo-mark::after{inset:11px}
+.lc-sidebar-text-logo .lc-text-logo-initials{font-size:1.55rem;}
+.lc-sidebar-text-logo .lc-text-logo-main{gap:6px}.lc-sidebar-text-logo .lc-text-logo-lc{font-size:.88rem}.lc-sidebar-text-logo .lc-text-logo-title{font-size:1.02rem;letter-spacing:0}.lc-sidebar-text-logo .lc-text-logo-tech{font-size:.82rem;margin-top:4px}.lc-sidebar-text-logo .lc-text-logo-line{margin-top:6px;height:2px}.lc-sidebar-text-logo .lc-text-logo-sub{font-size:.36rem;margin-top:4px;letter-spacing:.045em;white-space:normal;line-height:1.25}
+@media(max-width:991px){.lc-login-logo-shell{width:min(100%,520px);padding:8px 6px;}.lc-text-logo{gap:12px}.lc-text-logo-mark{width:82px;height:82px;min-width:82px}.lc-text-logo-initials{font-size:2.2rem}.lc-text-logo-title{font-size:clamp(1.25rem,4.2vw,2rem)}.lc-text-logo-tech{font-size:clamp(1.05rem,3.6vw,1.7rem)}}
+@media(max-width:575px){.lc-mobile-logo-shell{width:min(100%,340px);padding:8px 10px;border-radius:15px;}.lc-text-logo{gap:10px}.lc-text-logo-mark{width:72px;height:72px;min-width:72px}.lc-text-logo-initials{font-size:1.92rem}.lc-text-logo-main{gap:6px}.lc-text-logo-lc{font-size:1rem}.lc-text-logo-title{font-size:1.15rem}.lc-text-logo-tech{font-size:.92rem;margin-top:4px}.lc-text-logo-line{height:2px;margin-top:7px}.lc-text-logo-sub{font-size:.39rem;margin-top:5px;white-space:normal;line-height:1.2}}
+
+
+.lc-sidebar-brand-text{min-width:0;display:flex;flex-direction:column;line-height:1.05}
+.lc-sidebar-brand-text .tracking-tight{line-height:1.1;letter-spacing:.055em;text-transform:uppercase}
+.lc-sidebar-brand-divider{width:100%;border-top:1px solid rgba(148,163,184,.42);margin:6px 0 5px}
+.lc-sidebar-brand-text small{display:block;font-size:.47rem;line-height:1.35;font-weight:850;letter-spacing:.08em;color:var(--text-muted);max-width:190px;text-transform:uppercase}
+.lc-sidebar-brand-wrap{min-width:0;align-items:stretch!important}
+.lc-sidebar-brand-mark{width:50px;min-width:50px;min-height:68px;border-radius:15px;background:linear-gradient(145deg,#eef2ff,#e0e7ff);border:1px solid rgba(99,91,255,.18);display:flex;align-items:center;justify-content:center;color:#635bff;box-shadow:0 10px 24px rgba(99,91,255,.12)}
+.lc-sidebar-brand-mark i{font-size:1.55rem;line-height:1}
+html[data-bs-theme="dark"] .lc-sidebar-brand-mark{background:linear-gradient(145deg,rgba(99,91,255,.18),rgba(59,130,246,.12));border-color:rgba(129,140,248,.22);color:#a5b4fc;box-shadow:0 10px 24px rgba(2,6,23,.24)}
+@media(max-width:991px){
+  body.portal-modern-v2 #sidebar,
+  body.portal-modern-v2 #sidebar.active{box-shadow:none!important;}
+  body.portal-modern-v2 .sidebar-backdrop,
+  body.portal-modern-v2 #sidebar.active + .sidebar-backdrop{display:none!important;opacity:0!important;pointer-events:none!important;background:transparent!important;}
+}
+
+/* 2) FORMULARIOS TAREA / RECORDATORIO: centrados arriba y con scroll interno */
+body.portal-modern-v2 #tareaFormModal{
+  align-items:flex-start!important;
+  justify-content:center!important;
+  padding:10px 12px 16px!important;
+  overflow-y:auto!important;
+}
+body.portal-modern-v2 #tareaFormModal .tarea-form-card{
+  width:min(980px,96vw)!important;
+  max-height:calc(100vh - 20px)!important;
+  margin:0 auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:hidden!important;
+}
+body.portal-modern-v2 #tareaFormModal .tarea-summary-head,
+body.portal-modern-v2 #tareaFormModal .tarea-summary-actions{flex:0 0 auto!important}
+body.portal-modern-v2 #tareaFormModal .tarea-summary-body{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain;
+}
+body.portal-modern-v2 #recordatorioFormModal{
+  align-items:flex-start!important;
+  justify-content:center!important;
+  padding:10px 12px 16px!important;
+  overflow-y:auto!important;
+}
+body.portal-modern-v2 #recordatorioFormModal .recordatorio-form-card{
+  width:min(920px,96vw)!important;
+  max-height:calc(100vh - 20px)!important;
+  margin:0 auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:hidden!important;
+}
+body.portal-modern-v2 #recordatorioFormModal form{display:flex!important;flex-direction:column!important;flex:1 1 auto!important;min-height:0!important}
+body.portal-modern-v2 #recordatorioFormModal .recordatorio-modal-head,
+body.portal-modern-v2 #recordatorioFormModal .recordatorio-modal-foot{flex:0 0 auto!important}
+body.portal-modern-v2 #recordatorioFormModal .recordatorio-form-body{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain}
+@media(max-width:680px){
+  body.portal-modern-v2 #tareaFormModal,
+  body.portal-modern-v2 #recordatorioFormModal{padding:6px 7px 10px!important}
+  body.portal-modern-v2 #tareaFormModal .tarea-form-card,
+  body.portal-modern-v2 #recordatorioFormModal .recordatorio-form-card{max-height:calc(100vh - 12px)!important;width:calc(100vw - 14px)!important;border-radius:15px!important}
+}
+
+/* 3) FORMULARIO AGREGAR FAMILIAR / REGISTROS FAMILIARES: misma identidad cromática */
+body.portal-modern-v2 #modalFamiliaRegistroForm .modal-dialog{max-width:980px!important;width:calc(100% - 22px)!important}
+body.portal-modern-v2 #modalFamiliaRegistroForm .modal-content{
+  border:1px solid var(--v2-border)!important;
+  border-radius:20px!important;
+  background:var(--v2-surface)!important;
+  box-shadow:var(--v2-shadow-lg)!important;
+  overflow:hidden!important;
+}
+body.portal-modern-v2 #modalFamiliaRegistroForm .modal-header{
+  padding:13px 16px!important;
+  background:linear-gradient(135deg,rgba(99,91,255,.10),rgba(6,182,212,.045))!important;
+  border-bottom:1px solid var(--v2-border)!important;
+}
+body.portal-modern-v2 #modalFamiliaRegistroForm .modal-header .modal-title{font-size:.9rem!important;font-weight:900!important;color:var(--v2-text)!important}
+body.portal-modern-v2 #modalFamiliaRegistroForm .modal-header small{font-size:.62rem!important;color:var(--v2-muted)!important}
+body.portal-modern-v2 #modalFamiliaRegistroForm .modal-body{padding:13px!important;background:var(--v2-surface)!important;color:var(--v2-text)!important;max-height:calc(100vh - 155px);overflow:auto}
+body.portal-modern-v2 #modalFamiliaRegistroForm .family-reg-section,
+body.portal-modern-v2 #modalFamiliaRegistroForm .family-reg-head,
+body.portal-modern-v2 #modalFamiliaRegistroForm .family-reg-body{background:transparent!important;border-color:var(--v2-border)!important}
+body.portal-modern-v2 #modalFamiliaRegistroForm .family-reg-section{border-radius:15px!important;box-shadow:none!important}
+body.portal-modern-v2 #modalFamiliaRegistroForm .form-label{font-size:.61rem!important;color:var(--v2-muted)!important;font-weight:800!important;letter-spacing:.01em}
+body.portal-modern-v2 #modalFamiliaRegistroForm .form-control,
+body.portal-modern-v2 #modalFamiliaRegistroForm .form-select,
+body.portal-modern-v2 #modalFamiliaRegistroForm textarea{
+  background:var(--v2-surface-2)!important;
+  color:var(--v2-text)!important;
+  border:1px solid var(--v2-border)!important;
+  border-radius:10px!important;
+  box-shadow:none!important;
+}
+body.portal-modern-v2 #modalFamiliaRegistroForm .form-control:focus,
+body.portal-modern-v2 #modalFamiliaRegistroForm .form-select:focus,
+body.portal-modern-v2 #modalFamiliaRegistroForm textarea:focus{border-color:rgba(99,91,255,.55)!important;box-shadow:0 0 0 3px rgba(99,91,255,.08)!important}
+body.portal-modern-v2 #modalFamiliaRegistroForm .btn-primary,
+body.portal-modern-v2 #modalFamiliaRegistroForm .btn-success{border-color:transparent!important;background:linear-gradient(135deg,var(--v2-primary),#7c3aed)!important;box-shadow:0 8px 18px rgba(99,91,255,.18)!important}
+
+/* 4) MODAL DE KPIs: más pequeño, limpio y ordenado */
+body.portal-modern-v2 #modalKpiMaster .modal-dialog{
+  max-width:780px!important;
+  width:calc(100% - 24px)!important;
+  margin:.6rem auto!important;
+}
+body.portal-modern-v2 #modalKpiMaster .modal-content{border-radius:18px!important;overflow:hidden!important}
+body.portal-modern-v2 #modalKpiMaster .modal-header{padding:11px 14px!important}
+body.portal-modern-v2 #modalKpiMaster .modal-body{padding:10px 12px!important;max-height:72vh!important;overflow:auto!important}
+body.portal-modern-v2 #modalKpiMaster .modal-footer{padding:8px 10px!important}
+body.portal-modern-v2 #modalKpiMasterBody{display:flex;flex-direction:column;gap:6px}
+body.portal-modern-v2 #modalKpiMasterBody .master-list-row{
+  margin:0!important;
+  padding:9px 10px!important;
+  border:1px solid var(--v2-border)!important;
+  border-radius:11px!important;
+  background:var(--v2-surface-2)!important;
+  box-shadow:none!important;
+  transition:border-color .18s ease,background .18s ease,transform .18s ease!important;
+}
+body.portal-modern-v2 #modalKpiMasterBody .master-list-row:hover{border-color:rgba(99,91,255,.25)!important;background:rgba(99,91,255,.035)!important;transform:translateY(-1px)}
+body.portal-modern-v2 #modalKpiMasterBody .master-list-row .btn-link{font-size:.73rem!important}
+body.portal-modern-v2 #modalKpiMasterBody .master-list-row .small{font-size:.61rem!important}
+body.portal-modern-v2 #modalKpiMasterBody .badge-status{font-size:.58rem!important;padding:4px 7px!important}
+
+/* 5) IDENTIDAD DE MARCA DEL SIDEBAR */
+body.portal-modern-v2 #sidebar > .p-4:first-child{padding:14px 15px!important}
+body.portal-modern-v2 #sidebar > .p-4:first-child > div:first-child{align-items:flex-start!important}
+</style>
+
+<style id="ajuste-logo-responsive-red7-final">
+/* ================================================================
+   AJUSTE FINAL DEL ENCABEZADO LC — RESPONSIVO POR CONTENEDOR
+   - Mismo lenguaje visual y tamaño proporcional en login y dashboard.
+   - El logo se adapta al ancho real de cada contenedor.
+   - En el dashboard se elimina completamente el cuadro de fondo.
+   ================================================================ */
+.lc-brand-logo-shell,
+.lc-sidebar-logo-shell{
+  container-type:inline-size;
+}
+
+.lc-text-logo{
+  width:100%!important;
+  max-width:none!important;
+  gap:clamp(8px,1.55cqw,16px)!important;
+}
+
+.lc-text-logo-mark{
+  width:clamp(58px,15.2cqw,96px)!important;
+  height:clamp(58px,15.2cqw,96px)!important;
+  min-width:clamp(58px,15.2cqw,96px)!important;
+  border-width:clamp(2px,.45cqw,3px)!important;
+}
+
+.lc-text-logo-mark::before{inset:clamp(6px,1.45cqw,9px)!important}
+.lc-text-logo-mark::after{inset:clamp(11px,2.75cqw,17px)!important}
+
+.lc-text-logo-initials{
+  font-size:clamp(1.55rem,6.1cqw,2.65rem)!important;
+}
+
+.lc-text-logo-main{
+  gap:clamp(5px,1.45cqw,10px)!important;
+}
+
+.lc-text-logo-lc{
+  font-size:clamp(.9rem,3.9cqw,1.65rem)!important;
+}
+
+.lc-text-logo-title{
+  font-size:clamp(1rem,6.0cqw,2.55rem)!important;
+  letter-spacing:.015em!important;
+}
+
+.lc-text-logo-tech{
+  margin-top:clamp(4px,1.25cqw,7px)!important;
+  font-size:clamp(.86rem,5.0cqw,2.15rem)!important;
+}
+
+.lc-text-logo-line{
+  height:clamp(2px,.58cqw,3px)!important;
+  margin-top:clamp(6px,1.9cqw,11px)!important;
+}
+
+.lc-text-logo-line::before,
+.lc-text-logo-line::after{
+  width:clamp(6px,1.35cqw,8px)!important;
+  height:clamp(6px,1.35cqw,8px)!important;
+}
+
+.lc-text-logo-sub{
+  margin-top:clamp(5px,1.25cqw,7px)!important;
+  font-size:clamp(.36rem,1.55cqw,.78rem)!important;
+  line-height:1.2!important;
+  white-space:normal!important;
+}
+
+/* Dashboard: logo limpio, sin cuadro, borde ni sombra. */
+.lc-sidebar-logo-shell{
+  min-height:0!important;
+  padding:4px 0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+.lc-sidebar-text-logo{
+  gap:clamp(8px,1.55cqw,16px)!important;
+  max-width:none!important;
+}
+
+/* La marca del dashboard conserva la misma escala tipográfica proporcional. */
+.lc-sidebar-text-logo .lc-text-logo-mark{
+  width:clamp(58px,15.2cqw,96px)!important;
+  height:clamp(58px,15.2cqw,96px)!important;
+  min-width:clamp(58px,15.2cqw,96px)!important;
+}
+.lc-sidebar-text-logo .lc-text-logo-initials{font-size:clamp(1.55rem,6.1cqw,2.65rem)!important}
+.lc-sidebar-text-logo .lc-text-logo-lc{font-size:clamp(.9rem,3.9cqw,1.65rem)!important}
+.lc-sidebar-text-logo .lc-text-logo-title{font-size:clamp(1rem,6.0cqw,2.55rem)!important}
+.lc-sidebar-text-logo .lc-text-logo-tech{font-size:clamp(.86rem,5.0cqw,2.15rem)!important}
+.lc-sidebar-text-logo .lc-text-logo-line{height:clamp(2px,.58cqw,3px)!important;margin-top:clamp(6px,1.9cqw,11px)!important}
+.lc-sidebar-text-logo .lc-text-logo-sub{font-size:clamp(.36rem,1.55cqw,.78rem)!important;margin-top:clamp(5px,1.25cqw,7px)!important}
+
+/* ================================================================
+   FONDO REAL DEL LOGIN — img/red7.webp
+   La imagen pasa a ser el fondo principal de toda la pantalla.
+   ================================================================ */
+body.portal-modern-v2 #login-overlay{
+  background:
+    radial-gradient(circle at 12% 12%,rgba(99,91,255,.16),transparent 28%),
+    radial-gradient(circle at 88% 85%,rgba(6,182,212,.13),transparent 30%),
+    linear-gradient(135deg,rgba(8,13,28,.68),rgba(14,22,41,.60)),
+    url('img/red7.webp') center center / cover no-repeat!important;
+}
+
+@media(max-width:575px){
+  .lc-mobile-logo-shell{width:100%!important;max-width:100%!important;padding:6px 4px!important}
+  .lc-text-logo{gap:8px!important}
+  .lc-text-logo-sub{font-size:clamp(.35rem,1.5cqw,.62rem)!important}
+}
+</style>
+
+
+<style id="ajuste-final-logo-uniforme-red7">
+/* === LOGO FINAL: MISMO TAMAÑO TIPOGRÁFICO ===
+   LC, SOLUCIONES y TECNOLÓGICAS comparten la misma escala de letra.
+   Se mantiene la adaptación al ancho del contenedor. */
+.lc-text-logo-main,
+.lc-text-logo-tech{font-size:clamp(1.12rem,5.3cqw,2.3rem)!important;line-height:.96!important;}
+.lc-text-logo-lc{font-size:inherit!important;line-height:inherit!important;font-weight:950!important;}
+.lc-text-logo-title{font-size:inherit!important;line-height:inherit!important;font-weight:950!important;}
+.lc-text-logo-tech{font-weight:950!important;}
+
+/* En el login hay más espacio: hacemos el logo claramente mayor. */
+.lc-login-logo-shell .lc-text-logo{
+  max-width:100%!important;
+  transform:scale(1.10);
+  transform-origin:center center;
+}
+@media(max-width:991px){
+  .lc-login-logo-shell .lc-text-logo{transform:scale(1.04);}
+}
+@media(max-width:575px){
+  .lc-login-logo-shell .lc-text-logo{transform:scale(1.0);}
+}
+
+/* El dashboard usa exactamente la misma escala proporcional, sin tarjeta de fondo. */
+.lc-sidebar-text-logo .lc-text-logo-main,
+.lc-sidebar-text-logo .lc-text-logo-tech{
+  font-size:clamp(.82rem,4.55cqw,1.68rem)!important;
+}
+
+/* === FONDO RED7 VISIBLE ===
+   Elimina el panel azul que estaba cubriendo la imagen en la columna izquierda. */
+body.portal-modern-v2 #login-overlay{
+  background:
+    linear-gradient(135deg,rgba(8,13,28,.22),rgba(14,22,41,.16)),
+    url('img/red7.webp') center center / cover no-repeat!important;
+}
+
+body.portal-modern-v2 #login-overlay .brand-section-spectacular{
+  background:transparent!important;
+  background-color:transparent!important;
+}
+
+/* Elimina también los dos halos que reforzaban el azul sobre la fotografía. */
+body.portal-modern-v2 #login-overlay .brand-section-spectacular > .position-absolute{
+  opacity:0!important;
+  background:transparent!important;
+}
+
+/* El contenedor general del login deja pasar el fondo fotográfico. */
+body.portal-modern-v2 #login-overlay .login-split-card-pro{
+  background:rgba(255,255,255,.06)!important;
+  border-color:rgba(255,255,255,.22)!important;
+  box-shadow:0 20px 70px rgba(0,0,0,.28)!important;
+}
+</style>
+
+<style id="login-dark-icon-fix">
+html[data-bs-theme="dark"] #loginForm .input-group-pro .input-group-text,
+body.dark-mode #loginForm .input-group-pro .input-group-text {
+  background: transparent !important; background-color: transparent !important;
+  background-image: none !important; border-color: transparent !important;
+  box-shadow: none !important; color: #94a3b8 !important;
+}
+html[data-bs-theme="dark"] #loginForm .input-group-pro > button,
+body.dark-mode #loginForm .input-group-pro > button {
+  background: transparent !important; background-color: transparent !important;
+  background-image: none !important; border-color: transparent !important;
+  box-shadow: none !important; color: #94a3b8 !important;
+}
+html[data-bs-theme="dark"] #loginForm .input-group-pro > button:hover,
+body.dark-mode #loginForm .input-group-pro > button:hover {
+  background: transparent !important; background-color: transparent !important;
+  color: #e2e8f0 !important;
+}
+</style>
+
+<style id="server-welcome-animation">
+.server-welcome{position:relative;display:none;min-height:74px;margin-top:10px;align-items:center;justify-content:center;gap:10px;overflow:visible;}
+#server-connection-status.is-welcome .server-welcome{display:flex;animation:serverWelcomeIn .42s cubic-bezier(.2,.85,.2,1) both;}
+.server-welcome-burst{position:absolute;left:50%;top:50%;width:78px;height:78px;transform:translate(-50%,-50%) scale(.35);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.98) 0 4%,rgba(103,232,249,.92) 7%,rgba(34,211,238,.48) 19%,rgba(34,211,238,.14) 42%,transparent 68%),repeating-conic-gradient(from 0deg,rgba(255,255,255,0) 0 8deg,rgba(103,232,249,.9) 9deg 11deg,rgba(255,255,255,0) 12deg 24deg);filter:blur(.2px);opacity:0;animation:serverLightBurst 1.25s ease-out .04s both;pointer-events:none;}
+.server-robot{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:15px;color:#67e8f9;background:linear-gradient(145deg,rgba(6,182,212,.18),rgba(37,99,235,.12));border:1px solid rgba(103,232,249,.34);box-shadow:0 0 24px rgba(34,211,238,.25),inset 0 1px 0 rgba(255,255,255,.08);animation:serverRobotBounce .9s ease-in-out .12s both;}
+.server-robot > .fa-robot{font-size:1.6rem;filter:drop-shadow(0 0 8px rgba(103,232,249,.55));}
+.server-robot-hand{position:absolute;right:-9px;top:2px;font-size:1.05rem;color:#fff;filter:drop-shadow(0 0 8px rgba(255,255,255,.58));transform-origin:70% 80%;animation:serverRobotWave .72s ease-in-out .28s 3 both;}
+.server-welcome-text{position:relative;z-index:2;font-size:.9rem;font-weight:950;letter-spacing:.16em;color:#fff;text-shadow:0 0 12px rgba(103,232,249,.42);animation:serverWelcomeText .5s ease-out .18s both;}
+@keyframes serverWelcomeIn{from{opacity:0;transform:translateY(10px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes serverLightBurst{0%{opacity:0;transform:translate(-50%,-50%) scale(.25) rotate(0deg)}18%{opacity:1}58%{opacity:.85;transform:translate(-50%,-50%) scale(1) rotate(50deg)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.55) rotate(110deg)}}
+@keyframes serverRobotBounce{0%{transform:translateY(10px) scale(.82);opacity:0}55%{transform:translateY(-3px) scale(1.04);opacity:1}100%{transform:translateY(0) scale(1)}}
+@keyframes serverRobotWave{0%,100%{transform:rotate(18deg)}25%{transform:rotate(-22deg)}50%{transform:rotate(26deg)}75%{transform:rotate(-15deg)}}
+@keyframes serverWelcomeText{0%{opacity:0;transform:translateX(8px)}100%{opacity:1;transform:translateX(0)}}
+@media(max-width:575px){.server-welcome{min-height:64px;gap:8px;margin-top:7px}.server-robot{width:44px;height:44px;border-radius:13px}.server-robot > .fa-robot{font-size:1.35rem}.server-robot-hand{right:-8px;top:1px;font-size:.95rem}.server-welcome-text{font-size:.76rem;letter-spacing:.12em}.server-welcome-burst{width:68px;height:68px}}
+@media(prefers-reduced-motion:reduce){.server-welcome,.server-welcome-burst,.server-robot,.server-robot-hand,.server-welcome-text{animation:none!important}#server-connection-status.is-welcome .server-welcome{display:flex}.server-welcome-burst{opacity:.35;transform:translate(-50%,-50%) scale(1)}}
+</style>
 </head>
 <body>
 
@@ -2171,13 +2635,31 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
          MODIFICAR AQUÍ PARA CAMBIAR EL DISEÑO DEL LOGIN
          ═══════════════════════════════════════════════════════════════ -->
     <div id="server-connection-status" aria-live="polite">
-        <div class="server-connection-card">
-            <div class="mb-2"><i class="fa-solid fa-server text-primary fs-2"></i></div>
+        <div class="server-connection-card" role="dialog" aria-modal="true" aria-label="Conectando al servidor">
+            <div class="server-connection-logo-wrap">
+                <div class="lc-text-logo server-connection-logo" role="img" aria-label="LC SOLUCIONES TECNOLÓGICAS">
+                    <div class="lc-text-logo-mark"><span class="lc-text-logo-initials">L<span class="c">C</span></span></div>
+                    <div class="lc-text-logo-copy">
+                        <div class="lc-text-logo-main"><span class="lc-text-logo-lc">LC</span><span class="lc-text-logo-title">SOLUCIONES</span></div>
+                        <div class="lc-text-logo-tech">TECNOLÓGICAS</div>
+                        <div class="server-connection-logo-line lc-text-logo-line">
+                            <div id="server-connection-fill" class="server-connection-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="server-connection-title">Conectando al servidor</div>
             <div id="server-connection-message" class="server-connection-substatus">Iniciando conexión...</div>
             <div id="server-connection-percent" class="server-connection-percent">1%</div>
-            <div class="server-connection-track"><div id="server-connection-fill" class="server-connection-fill"></div></div>
             <div id="server-connection-online" class="server-connection-online">ESPERANDO CONEXIÓN...</div>
+     <div class="server-welcome" aria-live="polite">
+       <div class="server-welcome-burst" aria-hidden="true"></div>
+       <div class="server-robot" aria-hidden="true">
+         <i class="fa-solid fa-robot"></i>
+         <i class="fa-solid fa-hand server-robot-hand"></i>
+       </div>
+       <div class="server-welcome-text">¡BIENVENIDO!</div>
+     </div>
         </div>
     </div>
 
@@ -2186,19 +2668,21 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         <div class="card login-split-card-pro rounded-4 overflow-hidden w-100 my-auto position-relative z-1 shadow-lg" style="max-width: 980px; max-height: 90vh;">
             <div class="row g-0 h-100">
                 <!-- SECCIÓN IZQUIERDA: MARCA Y BIENVENIDA -->
-                <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-between p-5 text-white brand-section-spectacular position-relative overflow-hidden">
+                <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-between p-4 p-xl-5 text-white brand-section-spectacular position-relative overflow-hidden">
                     <div class="position-absolute rounded-circle opacity-30" style="top: -10%; left: -10%; width: 280px; height: 280px; background: rgba(37, 99, 235, 0.4); filter: blur(60px); pointer-events: none;"></div>
                     <div class="position-absolute rounded-circle opacity-20" style="bottom: -10%; right: -10%; width: 300px; height: 300px; background: rgba(255, 133, 27, 0.3); filter: blur(70px); pointer-events: none;"></div>
 
-                    <div class="position-relative z-1 d-flex align-items-center gap-3">
-                        <div class="p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-20 shadow-sm login-brand-icon-wrap">
-                            <i class="fa-solid fa-share-nodes fs-3 login-brand-icon"></i>
-                        </div>
-                        <div>
-                            <h4 class="fw-bold mb-0 tracking-wide text-white" style="font-size: 1.15rem; letter-spacing: -0.3px;">
-                                <span style="color: #ff851b;">LC</span> SOLUCIONES TECNOLÓGICAS
-                            </h4>
-                            <span class="small text-white-50">Enterprise Resource Planning</span>
+                    <div class="position-relative z-1 d-flex align-items-center">
+                        <div class="lc-brand-logo-shell lc-login-logo-shell">
+                            <div class="lc-text-logo" role="img" aria-label="LC SOLUCIONES TECNOLÓGICAS — ARQUITECTURA DE REDES Y SOLUCIONES DIGITALES">
+                                <div class="lc-text-logo-mark"><span class="lc-text-logo-initials">L<span class="c">C</span></span></div>
+                                <div class="lc-text-logo-copy">
+                                    <div class="lc-text-logo-main"><span class="lc-text-logo-lc">LC</span><span class="lc-text-logo-title">SOLUCIONES</span></div>
+                                    <div class="lc-text-logo-tech">TECNOLÓGICAS</div>
+                                    <div class="lc-text-logo-line"></div>
+                                    <div class="lc-text-logo-sub">ARQUITECTURA DE REDES Y SOLUCIONES DIGITALES</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -2238,11 +2722,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
                     <div class="position-absolute top-0 end-0 m-3 m-sm-3 d-flex align-items-center justify-content-end gap-2" style="z-index: 10;">
 
                         <!-- Botón Tema (ahora en el login) -->
-                        <button class="btn btn-light rounded-circle border shadow-sm d-flex align-items-center justify-content-center" 
-                                id="theme-toggle-login" onclick="toggleTheme()" title="Cambiar Tema" 
-                                style="width: 40px; height: 40px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);">
-                            <i class="fa-solid fa-moon text-secondary" id="theme-icon-login"></i>
-                        </button>
+                        
 
                         <!-- INDICADOR: ESTADO DE CONEXIÓN CON SERVIDOR -->
                         <div id="gs-connection-badge" class="d-flex align-items-center gap-1 px-2 py-1 rounded-pill shadow-sm d-none" 
@@ -2257,13 +2737,17 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
                         </div>
                     </div>
                     <div class="d-lg-none text-center mb-3">
-                        <div class="p-3 bg-primary bg-opacity-10 rounded-circle d-inline-block text-primary mb-2 border border-primary border-opacity-25">
-                            <i class="fa-solid fa-network-wired fs-2 text-primary"></i>
+                        <div class="lc-brand-logo-shell lc-mobile-logo-shell">
+                            <div class="lc-text-logo" role="img" aria-label="LC SOLUCIONES TECNOLÓGICAS — ARQUITECTURA DE REDES Y SOLUCIONES DIGITALES">
+                                <div class="lc-text-logo-mark"><span class="lc-text-logo-initials">L<span class="c">C</span></span></div>
+                                <div class="lc-text-logo-copy">
+                                    <div class="lc-text-logo-main"><span class="lc-text-logo-lc">LC</span><span class="lc-text-logo-title">SOLUCIONES</span></div>
+                                    <div class="lc-text-logo-tech">TECNOLÓGICAS</div>
+                                    <div class="lc-text-logo-line"></div>
+                                    <div class="lc-text-logo-sub">ARQUITECTURA DE REDES Y SOLUCIONES DIGITALES</div>
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="fw-bold mb-0 text-dark" style="font-size: 1.1rem;">
-                            <span style="color: #ff851b;">LC</span> SOLUCIONES TECNOLÓGICAS
-                        </h4>
-                        <p class="text-muted small mb-0">Sistema Integrado ERP</p>
                     </div>
 
                     <div>
@@ -2335,11 +2819,18 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
          ═══════════════════════════════════════════════════════════════ -->
     <aside id="sidebar">
         <div class="p-4 d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center gap-2">
-                <i class="fa-solid fa-network-wired text-primary fs-3"></i>
-                <span class="fw-bold fs-5 tracking-tight">LC Soluciones</span>
+            <div class="lc-sidebar-logo-shell" aria-label="LC SOLUCIONES TECNOLÓGICAS">
+                <div class="lc-text-logo lc-sidebar-text-logo" role="img" aria-label="LC SOLUCIONES TECNOLÓGICAS — ARQUITECTURA DE REDES Y SOLUCIONES DIGITALES">
+                    <div class="lc-text-logo-mark"><span class="lc-text-logo-initials">L<span class="c">C</span></span></div>
+                    <div class="lc-text-logo-copy">
+                        <div class="lc-text-logo-main"><span class="lc-text-logo-lc">LC</span><span class="lc-text-logo-title">SOLUCIONES</span></div>
+                        <div class="lc-text-logo-tech">TECNOLÓGICAS</div>
+                        <div class="lc-text-logo-line"></div>
+                        <div class="lc-text-logo-sub">ARQUITECTURA DE REDES Y SOLUCIONES DIGITALES</div>
+                    </div>
+                </div>
             </div>
-            <button class="btn-close d-lg-none" onclick="toggleSidebar()"></button>
+            <button type="button" class="btn sidebar-mobile-close d-lg-none" onclick="toggleSidebar()" aria-label="Ocultar menú" title="Ocultar menú"><i class="fa-solid fa-chevron-left"></i></button>
         </div>
 
         <div class="px-3 mb-2">
@@ -2366,7 +2857,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
                 <a href="#facturacion" class="nav-link" onclick="switchTab('facturacion')"><i class="fa-solid fa-file-invoice-dollar"></i><span>Facturación</span></a><a href="#creditos" class="nav-link" onclick="switchTab('creditos')"><i class="fa-solid fa-credit-card"></i><span>Créditos y Cuotas</span></a><a href="#pagos" class="nav-link" onclick="switchTab('pagos')"><i class="fa-solid fa-money-bill-transfer"></i><span>Pagos</span></a><a href="#bancos" class="nav-link" onclick="switchTab('bancos')"><i class="fa-solid fa-building-columns"></i><span>Datos Bancarios</span></a><a href="#gastos" class="nav-link" onclick="switchTab('gastos')"><i class="fa-solid fa-wallet"></i><span>Control de Gastos</span></a>
             </div></div>
             <div class="menu-group"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-people-roof"></i>Familia y Registros</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-                <a href="#familia" class="nav-link" onclick="switchTab('familia')"><i class="fa-solid fa-house-user"></i><span>Familia</span></a><a href="#historialmedico" class="nav-link" onclick="switchTab('historialmedico')"><i class="fa-solid fa-notes-medical"></i><span>Historial Médico</span></a><a href="#manutencion" class="nav-link" onclick="switchTab('manutencion')"><i class="fa-solid fa-hand-holding-dollar"></i><span>Manutención</span></a><a href="#registrosescolares" class="nav-link" onclick="switchTab('registrosescolares')"><i class="fa-solid fa-school"></i><span>Registros Escolares</span></a>
+                <a href="#familia" class="nav-link" onclick="switchTab('familia')"><i class="fa-solid fa-house-user"></i><span>Familia</span></a><a href="#historialmedico" class="nav-link" onclick="switchTab('historialmedico')"><i class="fa-solid fa-notes-medical"></i><span>Historial Médico</span></a><a href="#manutencion" class="nav-link" onclick="switchTab('manutencion')"><i class="fa-solid fa-hand-holding-dollar"></i><span>Manutención</span></a><a href="#registrosescolares" class="nav-link" onclick="switchTab('registrosescolares')"><i class="fa-solid fa-school"></i><span>Registros Escolares</span></a><a href="#vehiculos" class="nav-link" onclick="switchTab('vehiculos')"><i class="fa-solid fa-car-side"></i><span>Vehículos</span></a>
             </div></div>
             <div class="menu-group btn-master-only"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-network-wired"></i>Infraestructura</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items"><a href="#mikrotik" class="nav-link btn-master-only" onclick="switchTab('mikrotik')"><i class="fa-solid fa-tower-broadcast"></i><span>Mikrotik</span></a></div></div>
         </nav>
@@ -2416,13 +2907,9 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
                 </div>
             </div>
 
-		<!-- ═══════════════════════════════════════════════════════════════
-         BOTON PARA CAMBIAR DE TEMA ESTA DESACTIVADO
-         ═══════════════════════════════════════════════════════════════ -->
+		
             <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-icon btn-light rounded-circle border shadow-sm" id="theme-toggle" onclick="toggleTheme()" title="Cambiar Tema">
-    			<i class="fa-solid fa-moon text-secondary"></i>
-				</button>
+                
                 <button type="button" class="btn btn-icon btn-light rounded-circle border shadow-sm position-relative" id="top-notif-toggle" onclick="switchTab('notificaciones')" title="Notificaciones" aria-label="Notificaciones">
                     <i class="fa-solid fa-bell text-secondary"></i>
                     <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle d-none" id="top-notif-count" style="font-size:.58rem;min-width:17px;padding:2px 4px;line-height:1;z-index:2;">0</span>
@@ -4649,6 +5136,93 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
 </section>
 
 
+
+<section id="sec-vehiculos" class="tab-content d-none">
+  <div class="veh-shell">
+    <div class="veh-toolbar">
+      <div><h5 class="fw-bold m-0"><i class="fa-solid fa-car-side text-primary me-2"></i>Vehículos</h5><small class="text-muted">Registro completo de carros y motos, combustible, mantenimiento y documentos asociados.</small></div>
+      <div class="d-flex gap-2 flex-wrap">
+        <button type="button" class="btn btn-primary btn-sm" onclick="abrirFormularioVehiculo()" data-perm-module="vehiculos" data-perm-action="agregar"><i class="fa-solid fa-plus me-1"></i>Nuevo vehículo</button>
+      </div>
+    </div>
+    <div class="family-reg-section">
+      <div class="family-reg-head"><div><div class="title"><i class="fa-solid fa-magnifying-glass text-primary me-2"></i>Buscar vehículos</div><div class="sub">Busque por placa, marca, modelo, propietario, VIN, serial, tipo o cualquier dato registrado.</div></div><button type="button" class="btn btn-sm btn-outline-danger" onclick="limpiarFiltroVehiculos()"><i class="fa-solid fa-broom me-1"></i>Limpiar</button></div>
+      <div class="family-reg-body"><input id="vehiculos-filtro" class="form-control form-control-sm" placeholder="Placa, marca, modelo, propietario, serial, VIN..." oninput="renderVehiculosModulo()"></div>
+    </div>
+    <div id="vehiculos-listado" class="d-grid gap-2"></div>
+    <div id="vehiculos-vacio" class="text-center text-muted py-5 d-none"><i class="fa-solid fa-car-side fa-2x opacity-25 mb-2"></i><div>No hay vehículos registrados.</div></div>
+  </div>
+</section>
+
+<div id="vehiculoFormModal" class="vehiculos-overlay" aria-hidden="true">
+  <div class="vehiculos-card wide">
+    <div class="vehiculos-head"><div><div id="vehiculoFormTitle" class="title"><i class="fa-solid fa-car-side text-primary me-2"></i>Nuevo vehículo</div><small>Registro general del vehículo y datos de propiedad.</small></div><button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarFormularioVehiculo()"><i class="fa-solid fa-xmark"></i></button></div>
+    <form id="formVehiculo" onsubmit="guardarVehiculo(event)">
+      <input type="hidden" id="vehiculo-id">
+      <div class="vehiculos-body">
+        <div class="veh-section-title"><i class="fa-solid fa-id-card text-primary"></i> Identificación y datos del vehículo</div>
+        <div class="row g-2">
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Clase *</label><select id="vehiculo-clase" class="form-select form-control-pro" required><option value="Automóvil">Automóvil</option><option value="Motocicleta">Motocicleta</option><option value="Camión">Camión</option><option value="Camioneta">Camioneta</option><option value="Autobús">Autobús</option><option value="Otro">Otro</option></select></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Tipo *</label><input id="vehiculo-tipo" class="form-control form-control-pro" placeholder="Sedán, SUV, moto..."></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Placa *</label><input id="vehiculo-placa" class="form-control form-control-pro text-uppercase" required></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Marca *</label><input id="vehiculo-marca" class="form-control form-control-pro" required></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Modelo *</label><input id="vehiculo-modelo" class="form-control form-control-pro" required></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Año</label><input id="vehiculo-anio" type="number" class="form-control form-control-pro" min="1900" max="2100"></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Color</label><input id="vehiculo-color" class="form-control form-control-pro"></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Uso</label><input id="vehiculo-uso" class="form-control form-control-pro" placeholder="Particular..." value="Particular"></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Servicio</label><input id="vehiculo-servicio" class="form-control form-control-pro" placeholder="Privado..."></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">VIN / NIV</label><input id="vehiculo-vin" class="form-control form-control-pro"></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Serial carrocería</label><input id="vehiculo-carroceria" class="form-control form-control-pro"></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Serial motor</label><input id="vehiculo-motor" class="form-control form-control-pro"></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">N.º registro</label><input id="vehiculo-registro" class="form-control form-control-pro"></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Fecha registro</label><input id="vehiculo-fecha-registro" type="date" class="form-control form-control-pro"></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Capacidad nominal</label><input id="vehiculo-capacidad-nominal" class="form-control form-control-pro"></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Puestos</label><input id="vehiculo-puestos" type="number" class="form-control form-control-pro" min="1"></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Peso / tara</label><input id="vehiculo-peso" class="form-control form-control-pro"></div>
+          <div class="col-6 col-md-2"><label class="form-label small fw-semibold">Carga</label><input id="vehiculo-carga" class="form-control form-control-pro"></div>
+        </div>
+        <div class="veh-section-title mt-3"><i class="fa-solid fa-user text-primary"></i> Titular / propiedad</div>
+        <div class="row g-2">
+          <div class="col-md-4"><label class="form-label small fw-semibold">Titular / propietario</label><input id="vehiculo-propietario" class="form-control form-control-pro"></div>
+          <div class="col-md-3"><label class="form-label small fw-semibold">Cédula / RIF</label><input id="vehiculo-documento-propietario" class="form-control form-control-pro"></div>
+          <div class="col-md-5"><label class="form-label small fw-semibold">Domicilio</label><input id="vehiculo-domicilio" class="form-control form-control-pro"></div>
+          <div class="col-md-3"><label class="form-label small fw-semibold">Familiar asociado</label><select id="vehiculo-familia" class="form-select form-control-pro"></select></div>
+          <div class="col-md-3"><label class="form-label small fw-semibold">Documento de propiedad</label><input id="vehiculo-documento-propiedad" class="form-control form-control-pro" placeholder="Título / compra / origen"></div>
+          <div class="col-md-2"><label class="form-label small fw-semibold">Fecha adquisición</label><input id="vehiculo-fecha-adquisicion" type="date" class="form-control form-control-pro"></div>
+          <div class="col-md-2"><label class="form-label small fw-semibold">Origen</label><input id="vehiculo-origen" class="form-control form-control-pro" placeholder="Nacional / importado"></div>
+          <div class="col-md-2"><label class="form-label small fw-semibold">Gravamen</label><select id="vehiculo-gravamen" class="form-select form-control-pro"><option value="No">No</option><option value="Sí">Sí</option></select></div>
+        </div>
+        <div class="veh-section-title mt-3"><i class="fa-solid fa-shield-halved text-primary"></i> Documentos, seguro y control</div>
+        <div class="row g-2">
+          <div class="col-md-3"><label class="form-label small fw-semibold">Aseguradora</label><input id="vehiculo-aseguradora" class="form-control form-control-pro"></div>
+          <div class="col-md-2"><label class="form-label small fw-semibold">Póliza</label><input id="vehiculo-poliza" class="form-control form-control-pro"></div>
+          <div class="col-md-2"><label class="form-label small fw-semibold">Vence póliza</label><input id="vehiculo-venc-poliza" type="date" class="form-control form-control-pro"></div>
+          <div class="col-md-2"><label class="form-label small fw-semibold">Revisión / inspección</label><input id="vehiculo-revision" class="form-control form-control-pro"></div>
+          <div class="col-md-2"><label class="form-label small fw-semibold">Vence revisión</label><input id="vehiculo-venc-revision" type="date" class="form-control form-control-pro"></div>
+          <div class="col-md-1"><label class="form-label small fw-semibold">Estado</label><select id="vehiculo-estado" class="form-select form-control-pro"><option>Activo</option><option>Vendido</option><option>Inactivo</option></select></div>
+          <div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea id="vehiculo-observaciones" class="form-control form-control-pro" rows="2"></textarea></div>
+        </div>
+        <div class="vehiculos-note mt-2"><i class="fa-solid fa-circle-info me-1"></i>Los campos de identificación siguen los datos habituales del Certificado de Registro/Título venezolano: marca, modelo, año, color, seriales, uso, servicio, clase, capacidad, puestos, peso/tara, tipo, placa y número de registro; se agregan VIN/NIV, seguro y control de vencimientos para el historial personal.</div>
+      </div>
+      <div class="vehiculos-foot"><button type="button" class="btn btn-outline-secondary" onclick="cerrarFormularioVehiculo()">Cancelar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar vehículo</button></div>
+    </form>
+  </div>
+</div>
+
+<div id="vehiculoCombustibleModal" class="vehiculos-overlay" aria-hidden="true">
+  <div class="vehiculos-card">
+    <div class="vehiculos-head"><div><div id="combustibleFormTitle" class="title"><i class="fa-solid fa-gas-pump text-primary me-2"></i>Registrar combustible</div><small id="combustibleFormSub">Surtido asociado al vehículo.</small></div><button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarFormularioCombustible()"><i class="fa-solid fa-xmark"></i></button></div>
+    <form onsubmit="guardarCombustibleVehiculo(event)"><input type="hidden" id="combustible-id"><input type="hidden" id="combustible-vehiculo-id"><div class="vehiculos-body"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Vehículo</label><input id="combustible-vehiculo-label" class="form-control form-control-pro" readonly></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input id="combustible-fecha" type="date" class="form-control form-control-pro" required></div><div class="col-md-3"><label class="form-label small fw-semibold">Estación</label><input id="combustible-estacion" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Combustible *</label><select id="combustible-tipo" class="form-select form-control-pro" required><option>Gasolina 91</option><option>Gasolina 95</option><option>Diésel</option><option>GLP</option><option>Eléctrico</option><option>Otro</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Litros / unidades *</label><input id="combustible-cantidad" type="number" step="0.01" min="0" class="form-control form-control-pro" required oninput="calcularCombustibleMontoUI()"></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Precio unitario</label><input id="combustible-precio" type="number" step="0.01" min="0" class="form-control form-control-pro" oninput="calcularCombustibleMontoUI()"></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Monto</label><input id="combustible-monto" type="number" step="0.01" min="0" class="form-control form-control-pro"></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Moneda</label><select id="combustible-moneda" class="form-select form-control-pro"><option>USD</option><option>VES</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Tasa Bs/US$</label><input id="combustible-tasa" type="number" step="0.0001" min="0" class="form-control form-control-pro"></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Kilometraje</label><input id="combustible-km" type="number" step="0.1" min="0" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Método de pago</label><input id="combustible-metodo" class="form-control form-control-pro"></div><div class="col-md-9"><label class="form-label small fw-semibold">Observaciones</label><input id="combustible-observaciones" class="form-control form-control-pro"></div></div></div><div class="vehiculos-foot"><button type="button" class="btn btn-outline-secondary" onclick="cerrarFormularioCombustible()">Cancelar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar surtido</button></div></form>
+  </div>
+</div>
+
+<div id="vehiculoMantenimientoModal" class="vehiculos-overlay" aria-hidden="true">
+  <div class="vehiculos-card wide">
+    <div class="vehiculos-head"><div><div id="mantenimientoFormTitle" class="title"><i class="fa-solid fa-screwdriver-wrench text-primary me-2"></i>Registrar mantenimiento</div><small id="mantenimientoFormSub">Servicio o mantenimiento asociado al vehículo.</small></div><button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarFormularioMantenimiento()"><i class="fa-solid fa-xmark"></i></button></div>
+    <form onsubmit="guardarMantenimientoVehiculo(event)"><input type="hidden" id="mantenimiento-id"><input type="hidden" id="mantenimiento-vehiculo-id"><div class="vehiculos-body"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Vehículo</label><input id="mantenimiento-vehiculo-label" class="form-control form-control-pro" readonly></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input id="mantenimiento-fecha" type="date" class="form-control form-control-pro" required></div><div class="col-md-3"><label class="form-label small fw-semibold">Mantenimiento *</label><select id="mantenimiento-tipo" class="form-select form-control-pro"><option>Aceite motor</option><option>Aceite caja / transmisión</option><option>Dirección / hidráulico</option><option>Refrigerante</option><option>Frenos</option><option>Filtros</option><option>Batería</option><option>Neumáticos</option><option>Suspensión</option><option>Alineación y balanceo</option><option>Correas</option><option>Bujías</option><option>Aire acondicionado</option><option>Revisión / inspección</option><option>Lavado / estética</option><option>Otro</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Componente / detalle</label><input id="mantenimiento-componente" class="form-control form-control-pro" placeholder="Marca, referencia, pieza..."></div><div class="col-md-2"><label class="form-label small fw-semibold">Kilometraje</label><input id="mantenimiento-km" type="number" step="0.1" min="0" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Costo</label><input id="mantenimiento-costo" type="number" step="0.01" min="0" class="form-control form-control-pro"></div><div class="col-md-2"><label class="form-label small fw-semibold">Moneda</label><select id="mantenimiento-moneda" class="form-select form-control-pro"><option>USD</option><option>VES</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Taller / proveedor</label><input id="mantenimiento-taller" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Próximo kilometraje</label><input id="mantenimiento-proximo-km" type="number" step="0.1" min="0" class="form-control form-control-pro"></div><div class="col-md-3"><label class="form-label small fw-semibold">Próxima fecha</label><input id="mantenimiento-proxima-fecha" type="date" class="form-control form-control-pro"></div><div class="col-12"><label class="form-label small fw-semibold">Descripción / observaciones</label><textarea id="mantenimiento-observaciones" class="form-control form-control-pro" rows="3"></textarea></div></div></div><div class="vehiculos-foot"><button type="button" class="btn btn-outline-secondary" onclick="cerrarFormularioMantenimiento()">Cancelar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar mantenimiento</button></div></form>
+  </div>
+</div>
+
 <!-- NUEVA SECCIÓN: HORARIO ESCOLAR -->
 <div id="horarioEscolarFormOverlay" class="horario-escolar-overlay" aria-hidden="true">
   <div class="horario-escolar-card">
@@ -6177,7 +6751,10 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         materiashorarios: [],
         tareas: [],
         recordatorios: [],
-        trabajos_manuales: []
+        trabajos_manuales: [],
+        vehiculos: [],
+        vehiculoscombustible: [],
+        vehiculosmantenimiento: []
     };
 
     let currentUser = null;
@@ -6498,6 +7075,9 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         addTarea:'tareas', updateTarea:'tareas', deleteTarea:'tareas',
         addRecordatorio:'recordatorios', updateRecordatorio:'recordatorios', deleteRecordatorio:'recordatorios', updateRecordatorioEstado:'recordatorios',
         addGasto:'gastos', updateGasto:'gastos', deleteGasto:'gastos', updateGastoEstado:'gastos',
+        addVehiculo:'vehiculos', updateVehiculo:'vehiculos', deleteVehiculo:'vehiculos',
+        addVehiculoCombustible:'vehiculoscombustible', updateVehiculoCombustible:'vehiculoscombustible', deleteVehiculoCombustible:'vehiculoscombustible',
+        addVehiculoMantenimiento:'vehiculosmantenimiento', updateVehiculoMantenimiento:'vehiculosmantenimiento', deleteVehiculoMantenimiento:'vehiculosmantenimiento',
         addTrabajoManual:'trabajos_manuales', updateTrabajoManual:'trabajos_manuales', deleteTrabajoManual:'trabajos_manuales'
     };
     const _tablaIdLocal = {
@@ -6505,7 +7085,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         facturas:'id_factura', creditos:'id_cuota', pagos:'id_pago', notificaciones:'id_notificacion',
         auditoria:'id_auditoria', familia:'id_familia', historialmedico:'id_historial_medico',
         recordatoriosmedicinas:'id_recordatorio', manutencion:'id_manutencion',
-        registrosescolares:'id_registro_escolar', horariosescolares:'id_horario_escolar', materiashorarios:'id_materia_horario', tareas:'id_tarea', recordatorios:'id_recordatorio', gastos:'id_gasto', trabajos_manuales:'id_trabajo'
+        registrosescolares:'id_registro_escolar', horariosescolares:'id_horario_escolar', materiashorarios:'id_materia_horario', tareas:'id_tarea', recordatorios:'id_recordatorio', gastos:'id_gasto', vehiculos:'id_vehiculo', vehiculoscombustible:'id_combustible', vehiculosmantenimiento:'id_mantenimiento', trabajos_manuales:'id_trabajo'
     };
     function _normalizarFilaLocal_(v){
         if(!v || typeof v!=='object') return v;
@@ -6626,6 +7206,9 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
             case 'tareas': render(renderTareasModulo); break;
             case 'recordatorios': render(renderRecordatoriosModulo); break;
             case 'gastos': render(renderGastosModulo); break;
+            case 'vehiculos': render(renderVehiculosModulo); break;
+            case 'vehiculoscombustible': render(renderVehiculosModulo); break;
+            case 'vehiculosmantenimiento': render(renderVehiculosModulo); break;
             case 'trabajos_manuales': render(renderTrabajosManuales); break;
         }
         if(['updatePerfilCliente','registrarPagoCliente','confirmarPago'].includes(action)){
@@ -6658,23 +7241,26 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         const percent=document.getElementById('server-connection-percent');
         const message=document.getElementById('server-connection-message');
         const online=document.getElementById('server-connection-online');
+        const progressLine=document.querySelector('.server-connection-logo-line');
         let progreso=1;
         const pintar=()=>{
             if(fill) fill.style.width=progreso+'%';
             if(percent) percent.textContent=progreso+'%';
+            if(progressLine) progressLine.classList.toggle('is-complete',progreso>=100);
         };
         pintar();
         if(message) message.textContent='Conectando...';
         if(online) online.textContent='CONECTANDO...';
         const timer=setInterval(()=>{
-            if(progreso<92){progreso=Math.min(92,progreso+7);pintar();}
-        },80);
+            if(progreso<92){progreso=Math.min(92,progreso+1);pintar();}
+        },45);
         const ok=await comprobarConexionGAS();
         clearInterval(timer);
         progreso=100;pintar();
+        overlay?.classList.add('is-welcome');
         if(message) message.textContent=ok?'Servidor conectado correctamente':'Portal listo — la conexión se reintentará automáticamente';
         if(online){online.textContent=ok?'EN LÍNEA':'REINTENTO AUTOMÁTICO';online.style.color=ok?'#16a34a':'#f59e0b';}
-        setTimeout(()=>overlay?.classList.add('is-hidden'),300);
+        setTimeout(()=>overlay?.classList.add('is-hidden'),1900);
         return ok;
     }
 
@@ -7561,6 +8147,219 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
     </div>
   </div>
 </div>
+
+
+
+
+<style id="ajuste-ancho-tecnologicas-final">
+/* TECNOLÓGICAS debe ocupar el mismo largo visual que LC SOLUCIONES,
+   manteniendo exactamente la misma altura/tamaño tipográfico. */
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-copy,
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-copy{
+  min-width:0!important;
+}
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-tech,
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-tech{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  white-space:nowrap!important;
+  transform-origin:left center!important;
+  transform:scaleX(1.12)!important;
+}
+@media(max-width:575px){
+  body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-tech,
+  body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-tech{
+    transform:scaleX(1.12)!important;
+  }
+}
+</style>
+
+
+<style id="ajuste-ancho-logo-arquitectura">
+/* ================================================================
+   AJUSTE DE ANCHO DEL LOGO
+   LC SOLUCIONES TECNOLÓGICAS se escala horizontalmente para ocupar
+   el mismo ancho visual que ARQUITECTURA DE REDES Y SOLUCIONES DIGITALES.
+   Se conserva la altura tipográfica original.
+   ================================================================ */
+.lc-text-logo-copy{min-width:0;flex:1 1 auto;width:100%;overflow:visible;}
+.lc-text-logo-main,
+.lc-text-logo-tech,
+.lc-text-logo-sub{transform-origin:left center;}
+.lc-text-logo-main,
+.lc-text-logo-tech{width:max-content!important;}
+.lc-text-logo-sub{display:block!important;width:100%!important;max-width:100%!important;}
+
+@media(max-width:575px){
+  .lc-text-logo-copy{min-width:0;}
+}
+</style>
+
+
+
+<style id="ajuste-final-logo-mobile-dark-icons">
+/* AJUSTES FINALES SOLICITADOS — SOLO LOGO MÓVIL + ICONOS DEL LOGIN EN OSCURO */
+@media (max-width:575px){
+  /* Logo móvil: texto limpio, sin sombra y LC unido visualmente a SOLUCIONES. */
+  body.portal-modern-v2 .lc-mobile-logo-shell .lc-text-logo-title,
+  body.portal-modern-v2 .lc-mobile-logo-shell .lc-text-logo-tech,
+  body.portal-modern-v2 .lc-mobile-logo-shell .lc-text-logo-sub{
+    text-shadow:none!important;
+  }
+  body.portal-modern-v2 .lc-mobile-logo-shell .lc-text-logo-main{
+    justify-content:flex-start!important;
+    gap:1px!important;
+  }
+}
+
+/* El texto del logo principal queda limpio también cuando se muestra fuera del móvil. */
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-title,
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-tech{
+  text-shadow:none!important;
+}
+
+/* Modo oscuro: los recuadros de usuario, contraseña y ojo usan superficie oscura,
+   evitando cualquier fondo blanco heredado de Bootstrap. */
+html[data-bs-theme="dark"] #loginForm .input-group-pro .input-group-text,
+html[data-bs-theme="dark"] #loginForm .input-group-pro > button,
+body.dark-mode #loginForm .input-group-pro .input-group-text,
+body.dark-mode #loginForm .input-group-pro > button{
+  background-color:#0f172a!important;
+  background-image:none!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  color:#94a3b8!important;
+}
+
+html[data-bs-theme="dark"] #loginForm .input-group-pro > button:hover,
+html[data-bs-theme="dark"] #loginForm .input-group-pro > button:focus,
+body.dark-mode #loginForm .input-group-pro > button:hover,
+body.dark-mode #loginForm .input-group-pro > button:focus{
+  background-color:#172033!important;
+  color:#e2e8f0!important;
+}
+</style>
+
+
+<style id="ajuste-final-sidebar-tema-dispositivo">
+/* ================================================================
+   SIDEBAR — ADAPTACIÓN FINAL AL TEMA DEL DISPOSITIVO
+   Solo ajusta la apariencia del menú lateral; no modifica módulos.
+   ================================================================ */
+
+/* TEMA CLARO */
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar{
+  background:linear-gradient(180deg,#ffffff 0%,#f8fafc 58%,#f1f5f9 100%)!important;
+  border-right:1px solid #e4e7ec!important;
+  color:#101828!important;
+  box-shadow:12px 0 34px rgba(15,23,42,.055)!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar>.p-4{
+  border-bottom:1px solid #e8ecf2!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .px-3.mb-2 small{
+  color:#667085!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link{
+  color:#475467!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link i{
+  background:rgba(37,99,235,.075)!important;
+  color:#2563eb!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link:hover{
+  background:rgba(37,99,235,.075)!important;
+  color:#101828!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link:hover i{
+  background:rgba(37,99,235,.13)!important;
+  color:#1d4ed8!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .menu-group-toggle{
+  color:#667085!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .menu-group-toggle>span>i{
+  color:#2563eb!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .menu-group-toggle:hover{
+  background:rgba(37,99,235,.055)!important;
+  color:#344054!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar>div.mt-auto{
+  background:rgba(15,23,42,.018)!important;
+  border-color:#e4e7ec!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar>div.mt-auto p{
+  color:#667085!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar>div.mt-auto .text-primary{
+  color:#4f46e5!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar>div.mt-auto a{
+  color:#667085!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 .sidebar-mobile-close{
+  background:#ffffff!important;
+  color:#475467!important;
+  border-color:#d0d5dd!important;
+}
+
+/* TEMA OSCURO */
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar{
+  background:linear-gradient(180deg,#10162b 0%,#0b1120 60%,#09101d 100%)!important;
+  border-right:1px solid rgba(255,255,255,.07)!important;
+  color:#ffffff!important;
+  box-shadow:18px 0 45px rgba(15,23,42,.12)!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .nav-link{
+  color:#aeb8cc!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .nav-link i{
+  background:rgba(255,255,255,.055)!important;
+  color:#aeb8cc!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .nav-link:hover{
+  background:rgba(255,255,255,.06)!important;
+  color:#ffffff!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .nav-link:hover i{
+  background:rgba(255,255,255,.09)!important;
+  color:#ffffff!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .menu-group-toggle{
+  color:#7f8aa3!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .menu-group-toggle>span>i{
+  color:#7f8aa3!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .menu-group-toggle:hover{
+  background:rgba(255,255,255,.035)!important;
+  color:#c6cee0!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar>div.mt-auto{
+  background:rgba(255,255,255,.025)!important;
+  border-color:rgba(255,255,255,.06)!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar>div.mt-auto p{
+  color:#7f8aa3!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar>div.mt-auto .text-primary{
+  color:#b4adff!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar>div.mt-auto a{
+  color:#8e99ad!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 .sidebar-mobile-close{
+  background:#11182a!important;
+  color:#cbd5e1!important;
+  border-color:#334155!important;
+}
+</style>
+
+
+
+
 </body></html>`;
         const w=window.open('','_blank','width=420,height=760'); if(!w){showToast('Ventana bloqueada','Permita ventanas emergentes para imprimir el comprobante.','warning');return;} w.document.open();w.document.write(html);w.document.close();
     }
@@ -7907,6 +8706,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
             pagos: 'Módulo de Pagos',
             bancos: 'Datos Bancarios',
             gastos: 'Control de Gastos',
+            vehiculos: 'Vehículos',
             notificaciones: 'Centro de Notificaciones',
             portal: 'Control del Portal',
             auditoria: 'Auditoría del Sistema',
@@ -7934,6 +8734,7 @@ body.erp-operacion-bloqueada{overflow:hidden !important;user-select:none !import
         if (tabId === 'manutencion') { renderManutencionModulo(); }
         if (tabId === 'registrosescolares') { renderRegistrosEscolaresModulo(); }
         if (tabId === 'gastos') { renderGastosModulo(); }
+        if (tabId === 'vehiculos') { renderVehiculosModulo(); }
 
         if (tabId === 'servicios' && currentUser) {
             setTimeout(function() { cargarPlanesServiciosCliente(); }, 50);
@@ -8133,35 +8934,25 @@ async function togglePortalStatus() {
 
 
     
-    // SECCIÓN: CAMBIO DE TEMA CLARO/OSCURO
-    const THEME_STORAGE_KEY = 'theme';
+    // SECCIÓN: TEMA AUTOMÁTICO SEGÚN EL DISPOSITIVO
+    const THEME_STORAGE_KEY = 'theme'; // Se conserva por compatibilidad, pero no se utiliza.
 
-    function aplicarTemaUI(theme, persistir = false) {
+    function aplicarTemaUI(theme) {
         const html = document.documentElement;
         const normalized = theme === 'dark' ? 'dark' : 'light';
         html.setAttribute('data-bs-theme', normalized);
         if (document.body) document.body.classList.toggle('dark-mode', normalized === 'dark');
-
-        const iconClass = normalized === 'dark'
-            ? 'fa-solid fa-sun text-warning'
-            : 'fa-solid fa-moon text-secondary';
-        document.querySelector('#theme-toggle i')?.setAttribute('class', iconClass);
-        document.getElementById('theme-icon-login')?.setAttribute('class', iconClass);
-
-        if (persistir) localStorage.setItem(THEME_STORAGE_KEY, normalized);
         if (typeof actualizarColoresCharts === 'function') actualizarColoresCharts(normalized === 'dark');
     }
 
     function obtenerTemaInicial() {
-        const saved = localStorage.getItem(THEME_STORAGE_KEY);
-        if (saved === 'dark' || saved === 'light') return saved;
         const systemDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
         return systemDark ? 'dark' : 'light';
     }
 
+    // El cambio manual queda deshabilitado: el tema siempre pertenece al dispositivo.
     function toggleTheme() {
-        const actual = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'dark' : 'light';
-        aplicarTemaUI(actual === 'dark' ? 'light' : 'dark', true);
+        aplicarTemaUI(obtenerTemaInicial());
     }
 
     function actualizarColoresCharts(isDarkMode) {
@@ -8187,22 +8978,19 @@ async function togglePortalStatus() {
         });
     }
 
-    // Restauración inicial: si el usuario eligió un tema manualmente, se conserva.
-    // En la primera apertura, se usa el tema del dispositivo.
-    (function inicializarTema() {
-        const initialTheme = obtenerTemaInicial();
-        const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-        aplicarTemaUI(initialTheme, false);
 
-        if (!savedTheme && window.matchMedia) {
-            const media = window.matchMedia('(prefers-color-scheme: dark)');
-            const aplicarCambioSistema = (ev) => aplicarTemaUI(ev.matches ? 'dark' : 'light', false);
-            media.addEventListener?.('change', aplicarCambioSistema);
-            media.addListener?.(aplicarCambioSistema);
+
+    // Inicialización y seguimiento permanente del tema del dispositivo.
+    (function inicializarTema() {
+        const media = window.matchMedia?.('(prefers-color-scheme: dark)');
+        const aplicar = () => aplicarTemaUI(media?.matches ? 'dark' : 'light');
+        aplicar();
+        if (media) {
+            media.addEventListener?.('change', aplicar);
+            media.addListener?.(aplicar);
         }
     })();
 
-    
     // SECCIÓN: CAMBIAR CONTRASEÑA
     
     function abrirModalCambiarPassword() {
@@ -8631,6 +9419,7 @@ async function eliminarEmpresa(id) {
         tareas:{label:'Tareas y Recordatorios',icon:'fa-list-check',actions:['leer','agregar','modificar','eliminar']},
         recordatorios:{label:'Recordatorios Personales',icon:'fa-bell-plus',actions:['leer','agregar','modificar','eliminar']},
         gastos:{label:'Control de Gastos',icon:'fa-wallet',actions:['leer','agregar','modificar','eliminar']},
+        vehiculos:{label:'Vehículos',icon:'fa-car-side',actions:['leer','agregar','modificar','eliminar']},
         recordatoriosmedicinas:{label:'Recordatorios de Medicinas',icon:'fa-pills',actions:['leer','agregar','modificar','eliminar']},
         perfil:{label:'Mi Perfil y Seguridad',icon:'fa-user-circle',actions:['modificar']}
     };
@@ -8640,7 +9429,7 @@ async function eliminarEmpresa(id) {
 
     function normalizarPermisosUsuario(raw){let p=raw;if(typeof p==='string'){try{p=JSON.parse(p)}catch(_){p={}}}if(Array.isArray(p)){const o={};p.forEach(k=>o[k]={leer:true});return o;}return p&&typeof p==='object'?p:{};}
     function obtenerParentescosDisponiblesPermisos(){const set=new Set();(Array.isArray(db?.familia)?db.familia:[]).forEach(f=>{const p=String(f?.parentesco||'').trim();if(p)set.add(p);});return ['Todos',...Array.from(set).sort((a,b)=>a.localeCompare(b,'es'))];}
-    const MODULOS_CON_ALCANCE_FAMILIAR=['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares'];
+    const MODULOS_CON_ALCANCE_FAMILIAR=['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','vehiculos'];
     function normalizarListaParentescosPermiso(raw){if(raw===undefined||raw===null)return null;const arr=Array.isArray(raw)?raw:[raw];const cleaned=arr.map(x=>String(x||'').trim()).filter(Boolean);if(!cleaned.length)return [];if(cleaned.some(x=>['todos','*'].includes(x.toLowerCase())))return ['Todos'];return [...new Set(cleaned)];}
     function obtenerPermisoAlcanceActual(current){return normalizarListaParentescosPermiso(current?.parentescos!==undefined?current.parentescos:current?.alcance_parentescos);}
     function obtenerPermisosActualesForm(){const out={};document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(cb=>{const m=cb.dataset.module;if(!cb.checked)return;out[m]={};(MATRIZ_PERMISOS_USUARIO[m]?.actions||[]).forEach(a=>{const ac=document.querySelector(`#usr-permisos-acciones input[data-module="${m}"][data-action="${a}"]`);if(ac?.checked)out[m][a]=true;});if(MODULOS_CON_ALCANCE_FAMILIAR.includes(m)){const scopes=[...document.querySelectorAll(`#usr-permisos-acciones input[data-scope-module="${m}"]:checked`)].map(x=>x.value).filter(Boolean);if(scopes.length)out[m].parentescos=scopes;}});return out;}
@@ -13781,6 +14570,75 @@ function imprimirHorarioEscolar(grupo){abrirImpresionHorarioEscolar(grupo,'impri
 function exportarHorarioEscolarPDF(grupo){abrirImpresionHorarioEscolar(grupo,'pdf');}
 async function compartirHorarioEscolar(grupo){const rows=obtenerHorarioEscolarGrupo_(grupo);if(!rows.length)return;const visibles=new Set(horarioDiasDesdeRows_(rows).map(x=>x[0]));const rowsVis=rows.filter(x=>visibles.has(horarioKey(x.dia)));const r=rows[0];const lineas=[`Horario escolar: ${r.nombre_estudiante||'Estudiante'}`,`Institución: ${r.institucion||'—'}`,`Membresía: ${r.membresia_institucion||'—'}`,`Sección: ${r.aula||r.seccion||'—'}`,`Período: ${r.periodo_escolar||'—'}`,'',...rowsVis.slice().sort((a,b)=>{const d=DIAS_HORARIO_ESCOLAR.findIndex(x=>x[0]===horarioKey(a.dia))-DIAS_HORARIO_ESCOLAR.findIndex(x=>x[0]===horarioKey(b.dia));return d||horarioOrdenHora(a.hora_inicio,b.hora_inicio);}).map(x=>`${horarioDiaLabel(x.dia)} ${horarioTimeVisual(x.hora_inicio)}-${horarioTimeVisual(x.hora_fin)} · ${x.materia||'—'} · ${x.docente||'Docente no indicado'}`)];const text=lineas.join('\n');try{if(navigator.share){await navigator.share({title:'Horario escolar - '+(r.nombre_estudiante||''),text});return;}if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);showSystemNotification('Horario copiado','El resumen del horario fue copiado al portapapeles para compartirlo.','success');return;}showSystemNotification('Compartir no disponible',text,'info');}catch(e){if(e?.name!=='AbortError')showSystemNotification('No se pudo compartir','El navegador no permitió compartir el horario.','warning');}}
 
+
+// ===================== CONTROL DE VEHÍCULOS =====================
+function vehEsc(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
+function vehNum(v){const n=Number(v);return Number.isFinite(n)?n:0;}
+function vehFechaHoy(){return new Date().toISOString().slice(0,10);}
+function vehiculoNombre(r){return [r.marca,r.modelo].filter(Boolean).join(' ')||'Vehículo';}
+function vehiculosPorId(id){return (Array.isArray(db?.vehiculos)?db.vehiculos:[]).find(v=>String(v.id_vehiculo)===String(id));}
+function vehiculosHistComb(id){return (Array.isArray(db?.vehiculoscombustible)?db.vehiculoscombustible:[]).filter(x=>String(x.id_vehiculo)===String(id)).sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||'')));}
+function vehiculosHistMant(id){return (Array.isArray(db?.vehiculosmantenimiento)?db.vehiculosmantenimiento:[]).filter(x=>String(x.id_vehiculo)===String(id)).sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||'')));}
+function limpiarFiltroVehiculos(){const e=document.getElementById('vehiculos-filtro');if(e)e.value='';renderVehiculosModulo();}
+function vehFormatMoney(v,c){const n=vehNum(v);return (c||'USD').toUpperCase()==='VES'?'Bs '+n.toFixed(2):'$'+n.toFixed(2);}
+function vehKms(v){return v===''||v===null||v===undefined?'—':Number(v).toLocaleString('es-VE',{maximumFractionDigits:1});}
+function renderVehiculosModulo(){
+  if(!protegerAccionUsuario('vehiculos','leer'))return;
+  const list=document.getElementById('vehiculos-listado');const empty=document.getElementById('vehiculos-vacio');if(!list)return;
+  const rows=Array.isArray(db?.vehiculos)?db.vehiculos:[];const q=String(document.getElementById('vehiculos-filtro')?.value||'').trim().toLowerCase();
+  const campos=v=>[v.id_vehiculo,v.placa,v.marca,v.modelo,v.anio,v.color,v.serial_carroceria,v.serial_motor,v.vin_niv,v.propietario_nombre,v.propietario_documento,v.tipo,v.clase,v.uso,v.servicio,v.id_familia,v.observaciones].join(' ').toLowerCase();
+  const filtered=rows.filter(v=>!q||campos(v).includes(q));
+  if(!filtered.length){list.innerHTML='';empty?.classList.remove('d-none');return;} empty?.classList.add('d-none');
+  const puedeMod=permisosUsuarioTieneModulo('vehiculos','modificar'),puedeAdd=permisosUsuarioTieneModulo('vehiculos','agregar'),puedeDel=permisosUsuarioTieneModulo('vehiculos','eliminar');
+  list.innerHTML=filtered.map(v=>{
+    const fuel=vehiculosHistComb(v.id_vehiculo),mant=vehiculosHistMant(v.id_vehiculo);const fam=(db.familia||[]).find(f=>String(f.id_familia)===String(v.id_familia));
+    const totalComb= fuel.reduce((a,x)=>a+vehNum(x.monto),0); const totalMant=mant.reduce((a,x)=>a+vehNum(x.costo),0);
+    return `<div class="veh-card">
+      <div class="veh-card-head"><div class="d-flex justify-content-between align-items-start gap-2 flex-wrap"><div><div class="veh-title"><i class="fa-solid ${String(v.clase||'').toLowerCase().includes('moto')?'fa-motorcycle':'fa-car-side'} text-primary me-2"></i>${vehEsc(vehiculoNombre(v))}</div><div class="veh-sub">Placa ${vehEsc(v.placa||'—')} · ${vehEsc(v.anio||'—')} · ${vehEsc(v.color||'—')}</div></div><div class="d-flex gap-1 flex-wrap"><span class="veh-badge blue">${vehEsc(v.clase||'Vehículo')}</span><span class="veh-badge green">${vehEsc(v.estado||'Activo')}</span></div></div></div>
+      <div class="veh-grid">
+        <div class="veh-meta"><div class="label">Propietario</div><div class="value">${vehEsc(v.propietario_nombre||'—')}</div></div>
+        <div class="veh-meta"><div class="label">Serial carrocería</div><div class="value">${vehEsc(v.serial_carroceria||v.vin_niv||'—')}</div></div>
+        <div class="veh-meta"><div class="label">Serial motor</div><div class="value">${vehEsc(v.serial_motor||'—')}</div></div>
+        <div class="veh-meta"><div class="label">Uso / Servicio</div><div class="value">${vehEsc([v.uso,v.servicio].filter(Boolean).join(' · ')||'—')}</div></div>
+        <div class="veh-meta"><div class="label">Familiar</div><div class="value">${vehEsc(fam?.nombre||'Uso general')}</div></div>
+        <div class="veh-meta"><div class="label">Último combustible</div><div class="value">${vehEsc(fuel[0]?.fecha||'—')}</div></div>
+        <div class="veh-meta"><div class="label">Último mantenimiento</div><div class="value">${vehEsc(mant[0]?.fecha||'—')}</div></div>
+        <div class="veh-meta"><div class="label">Registros</div><div class="value">${fuel.length} combustible · ${mant.length} mantenimiento</div></div>
+      </div>
+      <div class="veh-actions">
+        ${puedeAdd?`<button class="btn btn-sm btn-outline-primary" onclick="abrirFormularioCombustibleVehiculo('${vehEsc(v.id_vehiculo)}')"><i class="fa-solid fa-gas-pump me-1"></i>Combustible</button>`:''}
+        ${puedeAdd?`<button class="btn btn-sm btn-outline-warning" onclick="abrirFormularioMantenimientoVehiculo('${vehEsc(v.id_vehiculo)}')"><i class="fa-solid fa-screwdriver-wrench me-1"></i>Mantenimiento</button>`:''}
+        ${puedeMod?`<button class="btn btn-sm btn-outline-secondary" onclick="abrirFormularioVehiculo('${vehEsc(v.id_vehiculo)}')"><i class="fa-solid fa-pen me-1"></i>Editar</button>`:''}
+        <button class="btn btn-sm btn-outline-info" onclick="toggleHistorialVehiculo('${vehEsc(v.id_vehiculo)}')"><i class="fa-solid fa-clock-rotate-left me-1"></i>Historial</button>
+        ${puedeDel?`<button class="btn btn-sm btn-outline-danger" onclick="eliminarVehiculo('${vehEsc(v.id_vehiculo)}')"><i class="fa-solid fa-trash me-1"></i>Eliminar</button>`:''}
+      </div>
+      <div id="veh-history-${vehEsc(v.id_vehiculo)}" class="veh-history d-none">
+        <div class="veh-history-title"><div><strong class="small">Historial de ${vehEsc(vehiculoNombre(v))}</strong><div class="veh-sub">Combustible total registrado: ${vehFormatMoney(totalComb)} · Mantenimiento: ${vehFormatMoney(totalMant)}</div></div><button class="btn btn-sm btn-light border" onclick="toggleHistorialVehiculo('${vehEsc(v.id_vehiculo)}')"><i class="fa-solid fa-chevron-up"></i></button></div>
+        <div class="veh-history-grid">
+          <div class="veh-history-panel"><div class="head"><i class="fa-solid fa-gas-pump me-1"></i> Surtidos de combustible</div><div class="body">${fuel.length?`<div class="table-responsive"><table class="veh-table"><thead><tr><th>Fecha</th><th>Tipo</th><th>L</th><th>Km</th><th>Monto</th><th>Acc.</th></tr></thead><tbody>${fuel.map(x=>`<tr><td>${vehEsc(x.fecha||'—')}</td><td>${vehEsc(x.tipo_combustible||'—')}</td><td>${vehEsc(x.cantidad_litros||'—')}</td><td>${vehEsc(vehKms(x.kilometraje))}</td><td>${vehEsc(vehFormatMoney(x.monto,x.moneda))}</td><td><button class="btn btn-sm btn-link text-primary p-0" onclick="abrirFormularioCombustibleVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_combustible)}')" title="Editar"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-link text-danger p-0 ms-1" onclick="eliminarCombustibleVehiculo('${vehEsc(x.id_combustible)}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('')}</tbody></table></div>`:'<div class="veh-empty">No hay surtidos registrados.</div>'}</div></div>
+          <div class="veh-history-panel"><div class="head"><i class="fa-solid fa-screwdriver-wrench me-1"></i> Mantenimiento y servicios</div><div class="body">${mant.length?`<div class="table-responsive"><table class="veh-table"><thead><tr><th>Fecha</th><th>Tipo</th><th>Km</th><th>Costo</th><th>Próximo</th><th>Acc.</th></tr></thead><tbody>${mant.map(x=>`<tr><td>${vehEsc(x.fecha||'—')}</td><td>${vehEsc(x.tipo_mantenimiento||'—')}</td><td>${vehEsc(vehKms(x.kilometraje))}</td><td>${vehEsc(vehFormatMoney(x.costo,x.moneda))}</td><td>${vehEsc(x.proxima_fecha||x.proximo_km||'—')}</td><td><button class="btn btn-sm btn-link text-primary p-0" onclick="abrirFormularioMantenimientoVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_mantenimiento)}')" title="Editar"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-link text-danger p-0 ms-1" onclick="eliminarMantenimientoVehiculo('${vehEsc(x.id_mantenimiento)}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('')}</tbody></table></div>`:'<div class="veh-empty">No hay mantenimientos registrados.</div>'}</div></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function toggleHistorialVehiculo(id){const e=document.getElementById('veh-history-'+String(id));if(e)e.classList.toggle('d-none');}
+function vehiculoPersonaOptions(sel){const e=document.getElementById('vehiculo-familia');if(!e)return;const prev=sel||e.value||'';const fam=Array.isArray(db?.familia)?db.familia:[];e.innerHTML='<option value="">Uso general / sin familiar</option>'+fam.map(f=>`<option value="${vehEsc(f.id_familia)}">${vehEsc([f.nombre,f.parentesco].filter(Boolean).join(' · '))}</option>`).join('');if(prev&&[...e.options].some(o=>o.value===String(prev)))e.value=prev;}
+function vehSet(id,v){const e=document.getElementById(id);if(e)e.value=v??'';}
+function abrirFormularioVehiculo(id){if(!protegerAccionUsuario('vehiculos',id?'modificar':'agregar'))return;const m=document.getElementById('vehiculoFormModal');if(!m)return;const r=id?vehiculosPorId(id):null;const defaults={clase:'Automóvil',uso:'Particular',gravamen:'No',estado:'Activo'};Object.entries(defaults).forEach(([k,v])=>vehSet('vehiculo-'+k,r?.[k]??v));vehSet('vehiculo-id',r?.id_vehiculo||'');vehSet('vehiculo-tipo',r?.tipo||'');vehSet('vehiculo-placa',r?.placa||'');vehSet('vehiculo-marca',r?.marca||'');vehSet('vehiculo-modelo',r?.modelo||'');vehSet('vehiculo-anio',r?.anio||'');vehSet('vehiculo-color',r?.color||'');vehSet('vehiculo-servicio',r?.servicio||'');vehSet('vehiculo-vin',r?.vin_niv||'');vehSet('vehiculo-carroceria',r?.serial_carroceria||'');vehSet('vehiculo-motor',r?.serial_motor||'');vehSet('vehiculo-registro',r?.numero_registro||'');vehSet('vehiculo-fecha-registro',r?.fecha_registro_documento||'');vehSet('vehiculo-capacidad-nominal',r?.capacidad_nominal||'');vehSet('vehiculo-puestos',r?.capacidad_puestos||'');vehSet('vehiculo-peso',r?.peso_tara||'');vehSet('vehiculo-carga',r?.capacidad_carga||'');vehSet('vehiculo-propietario',r?.propietario_nombre||currentUser?.nombre_completo||'');vehSet('vehiculo-documento-propietario',r?.propietario_documento||'');vehSet('vehiculo-domicilio',r?.propietario_domicilio||currentUser?.direccion||'');vehiculoPersonaOptions(r?.id_familia||'');vehSet('vehiculo-documento-propiedad',r?.documento_propiedad||'');vehSet('vehiculo-fecha-adquisicion',r?.fecha_adquisicion||'');vehSet('vehiculo-origen',r?.origen||'');vehSet('vehiculo-aseguradora',r?.aseguradora||'');vehSet('vehiculo-poliza',r?.numero_poliza||'');vehSet('vehiculo-venc-poliza',r?.vencimiento_poliza||'');vehSet('vehiculo-revision',r?.revision_tecnica||'');vehSet('vehiculo-venc-revision',r?.vencimiento_revision||'');vehSet('vehiculo-observaciones',r?.observaciones||'');document.getElementById('vehiculoFormTitle').innerHTML=`<i class="fa-solid fa-car-side text-primary me-2"></i>${r?'Editar vehículo':'Nuevo vehículo'}`;m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
+function cerrarFormularioVehiculo(){const m=document.getElementById('vehiculoFormModal');m?.classList.remove('show');m?.setAttribute('aria-hidden','true');document.body.classList.remove('overflow-hidden');}
+async function guardarVehiculo(ev){ev.preventDefault();if(!protegerAccionUsuario('vehiculos',document.getElementById('vehiculo-id')?.value?'modificar':'agregar'))return;const id=String(document.getElementById('vehiculo-id')?.value||'');const v={id_vehiculo:id,clase:document.getElementById('vehiculo-clase')?.value||'',tipo:document.getElementById('vehiculo-tipo')?.value||'',placa:document.getElementById('vehiculo-placa')?.value.trim().toUpperCase()||'',marca:document.getElementById('vehiculo-marca')?.value.trim()||'',modelo:document.getElementById('vehiculo-modelo')?.value.trim()||'',anio:document.getElementById('vehiculo-anio')?.value||'',color:document.getElementById('vehiculo-color')?.value.trim()||'',uso:document.getElementById('vehiculo-uso')?.value.trim()||'',servicio:document.getElementById('vehiculo-servicio')?.value.trim()||'',vin_niv:document.getElementById('vehiculo-vin')?.value.trim()||'',serial_carroceria:document.getElementById('vehiculo-carroceria')?.value.trim()||'',serial_motor:document.getElementById('vehiculo-motor')?.value.trim()||'',numero_registro:document.getElementById('vehiculo-registro')?.value.trim()||'',fecha_registro_documento:document.getElementById('vehiculo-fecha-registro')?.value||'',capacidad_nominal:document.getElementById('vehiculo-capacidad-nominal')?.value.trim()||'',capacidad_puestos:document.getElementById('vehiculo-puestos')?.value||'',peso_tara:document.getElementById('vehiculo-peso')?.value.trim()||'',capacidad_carga:document.getElementById('vehiculo-carga')?.value.trim()||'',propietario_nombre:document.getElementById('vehiculo-propietario')?.value.trim()||'',propietario_documento:document.getElementById('vehiculo-documento-propietario')?.value.trim()||'',propietario_domicilio:document.getElementById('vehiculo-domicilio')?.value.trim()||'',id_familia:document.getElementById('vehiculo-familia')?.value||'',documento_propiedad:document.getElementById('vehiculo-documento-propiedad')?.value.trim()||'',fecha_adquisicion:document.getElementById('vehiculo-fecha-adquisicion')?.value||'',origen:document.getElementById('vehiculo-origen')?.value.trim()||'',gravamen:document.getElementById('vehiculo-gravamen')?.value||'No',aseguradora:document.getElementById('vehiculo-aseguradora')?.value.trim()||'',numero_poliza:document.getElementById('vehiculo-poliza')?.value.trim()||'',vencimiento_poliza:document.getElementById('vehiculo-venc-poliza')?.value||'',revision_tecnica:document.getElementById('vehiculo-revision')?.value.trim()||'',vencimiento_revision:document.getElementById('vehiculo-venc-revision')?.value||'',estado:document.getElementById('vehiculo-estado')?.value||'Activo',observaciones:document.getElementById('vehiculo-observaciones')?.value.trim()||''};if(!v.placa||!v.marca||!v.modelo){showSystemNotification('Datos incompletos','Placa, marca y modelo son obligatorios.','warning');return;}try{const action=id?'updateVehiculo':'addVehiculo';const r=await sendGasRequest(action,v,true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar el vehículo.');cerrarFormularioVehiculo();renderVehiculosModulo();showSystemNotification(id?'Vehículo actualizado':'Vehículo registrado',id?'El vehículo fue actualizado correctamente.':'El vehículo fue registrado correctamente.','success');}catch(err){showSystemNotification('No se pudo guardar',err.message||'Error de servidor.','danger');}}
+function abrirFormularioCombustibleVehiculo(vehiculoId,id){if(!protegerAccionUsuario('vehiculos',id?'modificar':'agregar'))return;const v=vehiculosPorId(vehiculoId);if(!v)return;const r=id?(db.vehiculoscombustible||[]).find(x=>String(x.id_combustible)===String(id)):null;['combustible-id','combustible-vehiculo-id'].forEach(x=>vehSet(x,''));vehSet('combustible-id',r?.id_combustible||'');vehSet('combustible-vehiculo-id',vehiculoId);vehSet('combustible-vehiculo-label',`${vehiculoNombre(v)} · ${v.placa||'—'}`);vehSet('combustible-fecha',r?.fecha||vehFechaHoy());vehSet('combustible-estacion',r?.estacion||'');vehSet('combustible-tipo',r?.tipo_combustible||'Gasolina 95');vehSet('combustible-cantidad',r?.cantidad_litros||'');vehSet('combustible-precio',r?.precio_litro||'');vehSet('combustible-monto',r?.monto||'');vehSet('combustible-moneda',r?.moneda||'USD');vehSet('combustible-tasa',r?.tasa_cambio||'');vehSet('combustible-km',r?.kilometraje||'');vehSet('combustible-metodo',r?.metodo_pago||'');vehSet('combustible-observaciones',r?.observaciones||'');document.getElementById('combustibleFormTitle').innerHTML=`<i class="fa-solid fa-gas-pump text-primary me-2"></i>${r?'Editar surtido':'Registrar combustible'}`;document.getElementById('combustibleFormSub').textContent=`${vehiculoNombre(v)} · Placa ${v.placa||'—'}`;calcularCombustibleMontoUI();const m=document.getElementById('vehiculoCombustibleModal');m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
+function cerrarFormularioCombustible(){const m=document.getElementById('vehiculoCombustibleModal');m?.classList.remove('show');m?.setAttribute('aria-hidden','true');document.body.classList.remove('overflow-hidden');}
+function calcularCombustibleMontoUI(){const q=vehNum(document.getElementById('combustible-cantidad')?.value),p=vehNum(document.getElementById('combustible-precio')?.value);const m=document.getElementById('combustible-monto');if(m&&q>0&&p>0)m.value=(q*p).toFixed(2);}
+async function guardarCombustibleVehiculo(ev){ev.preventDefault();const id=String(document.getElementById('combustible-id')?.value||''),vehiculoId=String(document.getElementById('combustible-vehiculo-id')?.value||'');if(!vehiculoId)return;const p={id_combustible:id,id_vehiculo:vehiculoId,fecha:document.getElementById('combustible-fecha')?.value||vehFechaHoy(),estacion:document.getElementById('combustible-estacion')?.value.trim()||'',tipo_combustible:document.getElementById('combustible-tipo')?.value||'Gasolina 95',cantidad_litros:document.getElementById('combustible-cantidad')?.value||'',precio_litro:document.getElementById('combustible-precio')?.value||'',monto:document.getElementById('combustible-monto')?.value||'',moneda:document.getElementById('combustible-moneda')?.value||'USD',tasa_cambio:document.getElementById('combustible-tasa')?.value||'',kilometraje:document.getElementById('combustible-km')?.value||'',metodo_pago:document.getElementById('combustible-metodo')?.value.trim()||'',observaciones:document.getElementById('combustible-observaciones')?.value.trim()||''};try{const action=id?'updateVehiculoCombustible':'addVehiculoCombustible';const r=await sendGasRequest(action,p,true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar el surtido.');cerrarFormularioCombustible();renderVehiculosModulo();showSystemNotification(id?'Surtido actualizado':'Surtido registrado',id?'El registro de combustible fue actualizado.':'El surtido de combustible fue registrado.','success');}catch(err){showSystemNotification('No se pudo guardar',err.message||'Error de servidor.','danger');}}
+async function eliminarCombustibleVehiculo(id){if(!protegerAccionUsuario('vehiculos','eliminar')||!(await confirmarAccionModal('Eliminar surtido','¿Eliminar este registro de combustible?')))return;try{const r=await sendGasRequest('deleteVehiculoCombustible',{id_combustible:id},true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar.');renderVehiculosModulo();showSystemNotification('Surtido eliminado','El registro de combustible fue eliminado.','success');}catch(e){showSystemNotification('No se pudo eliminar',e.message||'Error de servidor.','danger');}}
+function abrirFormularioMantenimientoVehiculo(vehiculoId,id){if(!protegerAccionUsuario('vehiculos',id?'modificar':'agregar'))return;const v=vehiculosPorId(vehiculoId);if(!v)return;const r=id?(db.vehiculosmantenimiento||[]).find(x=>String(x.id_mantenimiento)===String(id)):null;vehSet('mantenimiento-id',r?.id_mantenimiento||'');vehSet('mantenimiento-vehiculo-id',vehiculoId);vehSet('mantenimiento-vehiculo-label',`${vehiculoNombre(v)} · Placa ${v.placa||'—'}`);vehSet('mantenimiento-fecha',r?.fecha||vehFechaHoy());vehSet('mantenimiento-tipo',r?.tipo_mantenimiento||'Aceite motor');vehSet('mantenimiento-componente',r?.componente||'');vehSet('mantenimiento-km',r?.kilometraje||'');vehSet('mantenimiento-costo',r?.costo||'');vehSet('mantenimiento-moneda',r?.moneda||'USD');vehSet('mantenimiento-taller',r?.taller_proveedor||'');vehSet('mantenimiento-proximo-km',r?.proximo_km||'');vehSet('mantenimiento-proxima-fecha',r?.proxima_fecha||'');vehSet('mantenimiento-observaciones',r?.observaciones||r?.descripcion||'');document.getElementById('mantenimientoFormTitle').innerHTML=`<i class="fa-solid fa-screwdriver-wrench text-primary me-2"></i>${r?'Editar mantenimiento':'Registrar mantenimiento'}`;document.getElementById('mantenimientoFormSub').textContent=`${vehiculoNombre(v)} · Placa ${v.placa||'—'}`;const m=document.getElementById('vehiculoMantenimientoModal');m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
+function cerrarFormularioMantenimiento(){const m=document.getElementById('vehiculoMantenimientoModal');m?.classList.remove('show');m?.setAttribute('aria-hidden','true');document.body.classList.remove('overflow-hidden');}
+async function guardarMantenimientoVehiculo(ev){ev.preventDefault();const id=String(document.getElementById('mantenimiento-id')?.value||''),vehiculoId=String(document.getElementById('mantenimiento-vehiculo-id')?.value||'');if(!vehiculoId)return;const p={id_mantenimiento:id,id_vehiculo:vehiculoId,fecha:document.getElementById('mantenimiento-fecha')?.value||vehFechaHoy(),tipo_mantenimiento:document.getElementById('mantenimiento-tipo')?.value||'Otro',componente:document.getElementById('mantenimiento-componente')?.value.trim()||'',kilometraje:document.getElementById('mantenimiento-km')?.value||'',costo:document.getElementById('mantenimiento-costo')?.value||'',moneda:document.getElementById('mantenimiento-moneda')?.value||'USD',taller_proveedor:document.getElementById('mantenimiento-taller')?.value.trim()||'',proximo_km:document.getElementById('mantenimiento-proximo-km')?.value||'',proxima_fecha:document.getElementById('mantenimiento-proxima-fecha')?.value||'',observaciones:document.getElementById('mantenimiento-observaciones')?.value.trim()||''};try{const action=id?'updateVehiculoMantenimiento':'addVehiculoMantenimiento';const r=await sendGasRequest(action,p,true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar el mantenimiento.');cerrarFormularioMantenimiento();renderVehiculosModulo();showSystemNotification(id?'Mantenimiento actualizado':'Mantenimiento registrado',id?'El mantenimiento fue actualizado.':'El mantenimiento fue registrado.','success');}catch(err){showSystemNotification('No se pudo guardar',err.message||'Error de servidor.','danger');}}
+async function eliminarMantenimientoVehiculo(id){if(!protegerAccionUsuario('vehiculos','eliminar')||!(await confirmarAccionModal('Eliminar mantenimiento','¿Eliminar este registro de mantenimiento?')))return;try{const r=await sendGasRequest('deleteVehiculoMantenimiento',{id_mantenimiento:id},true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar.');renderVehiculosModulo();showSystemNotification('Mantenimiento eliminado','El registro fue eliminado.','success');}catch(e){showSystemNotification('No se pudo eliminar',e.message||'Error de servidor.','danger');}}
+async function eliminarVehiculo(id){if(!protegerAccionUsuario('vehiculos','eliminar')||!(await confirmarAccionModal('Eliminar vehículo','Se eliminará el vehículo y su historial asociado. ¿Continuar?')))return;try{const r=await sendGasRequest('deleteVehiculo',{id_vehiculo:id},true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar el vehículo.');renderVehiculosModulo();showSystemNotification('Vehículo eliminado','El vehículo y su historial asociado fueron eliminados.','success');}catch(e){showSystemNotification('No se pudo eliminar',e.message||'Error de servidor.','danger');}}
+
 // ===================== CONTROL DE GASTOS// ===================== CONTROL DE GASTOS =====================
 function gastoEsc(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
 function gastoNum(v){const n=Number(v);return Number.isFinite(n)?n:0;}
@@ -14350,7 +15208,154 @@ html[data-bs-theme="dark"] #usr-permisos-panel .bg-light{background:#172033!impo
         @media(max-width:767px){.agenda-table th:nth-child(4),.agenda-table td:nth-child(4){display:none}.agenda-table th,.agenda-table td{padding:9px 8px!important}.agenda-actions{justify-content:flex-start}.agenda-head{align-items:flex-start!important}}
         html[data-bs-theme="dark"] .agenda-search-results{box-shadow:0 18px 40px rgba(0,0,0,.45)}
         html[data-bs-theme="dark"] .agenda-status-solicitada{background:rgba(14,165,233,.15);color:#67e8f9}html[data-bs-theme="dark"] .agenda-status-pendiente{background:rgba(59,130,246,.15);color:#93c5fd}html[data-bs-theme="dark"] .agenda-status-reprogramada{background:rgba(245,158,11,.15);color:#fcd34d}html[data-bs-theme="dark"] .agenda-status-atendida{background:rgba(34,197,94,.15);color:#86efac}html[data-bs-theme="dark"] .agenda-status-rechazada{background:rgba(239,68,68,.15);color:#fca5a5}html[data-bs-theme="dark"] .agenda-status-cancelada{background:rgba(100,116,139,.18);color:#cbd5e1}
-</style></head><body><h1>${esc(f.nombre||'Familiar')}</h1><p><b>Parentesco:</b> ${esc(f.parentesco||'')}</p><p><b>Documento:</b> ${esc(f.documento||'')}</p><p><b>Fecha de nacimiento:</b> ${esc(f.fecha_nac||'')}</p><p><b>Teléfono:</b> ${esc(f.telefono||'')}</p><p><b>Correo:</b> ${esc(f.correo||'')}</p><p><b>Dirección:</b> ${esc(f.direccion||'')}</p><p><b>Notas:</b> ${esc(f.notas||'—')}</p>${items.some(x=>x[1])?'<h2>Documentos</h2><div class="grid">'+items.filter(x=>x[1]).map(x=>`<div class="doc"><h3>${esc(x[0])}</h3><img src="${x[1]}" alt="${esc(x[0])}"></div>`).join('')+'</div>':''}</body></html>`);w.document.close();setTimeout(()=>{w.focus();w.print();},700);
+</style>
+<style id="logo-alineacion-fibra-optica-final">
+/* ================================================================
+   AJUSTE FINAL DE ESCALA DEL LOGO
+   LC SOLUCIONES / TECNOLÓGICAS / ARQUITECTURA...
+   Las tres líneas se ajustan al mismo ancho visual de la línea azul.
+   Se aplica al login, dashboard y modal de conexión.
+   ================================================================ */
+.lc-text-logo-copy{width:100%!important;min-width:0!important;}
+.lc-text-logo-main,
+.lc-text-logo-tech,
+.lc-text-logo-sub{
+  transform-origin:left center!important;
+  transform-box:border-box!important;
+}
+
+/* ================================================================
+   FIBRA ÓPTICA AL COMPLETAR LA CONEXIÓN — 100%
+   ================================================================ */
+.server-connection-logo-line.is-complete .server-connection-fill{
+  background:linear-gradient(90deg,#06b6d4 0%,#38bdf8 38%,#ffffff 52%,#67e8f9 66%,#06b6d4 100%)!important;
+  background-size:220% 100%!important;
+  animation:fibraOpticaFlujo 1.05s linear infinite!important;
+  box-shadow:0 0 12px rgba(34,211,238,.72),0 0 25px rgba(56,189,248,.38)!important;
+}
+.server-connection-logo-line.is-complete .server-connection-fill::after{
+  content:"";
+  position:absolute;
+  top:-3px;
+  right:-28px;
+  width:56px;
+  height:10px;
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.10),rgba(255,255,255,.98),rgba(103,232,249,.95),transparent);
+  filter:blur(1.2px);
+  box-shadow:0 0 10px rgba(255,255,255,.9),0 0 20px rgba(34,211,238,.85);
+  animation:fibraOpticaDestello 1.05s ease-in-out infinite;
+}
+@keyframes fibraOpticaFlujo{
+  0%{background-position:110% 0;}
+  100%{background-position:-110% 0;}
+}
+@keyframes fibraOpticaDestello{
+  0%,100%{opacity:.45;transform:translateX(-36px) scaleX(.72);}
+  45%{opacity:1;transform:translateX(0) scaleX(1);}
+  75%{opacity:.72;transform:translateX(18px) scaleX(.86);}
+}
+@media(prefers-reduced-motion:reduce){
+  .server-connection-logo-line.is-complete .server-connection-fill,
+  .server-connection-logo-line.is-complete .server-connection-fill::after{animation:none!important;}
+}
+</style>
+
+
+<style id="ajuste-final-logo-y-login-oscuro-20260925">
+/* ================================================================
+   AJUSTE FINAL SOLICITADO
+   1) Logo móvil: sin sombra en el texto.
+   2) Logo móvil: LC queda pegado a SOLUCIONES.
+   3) Modo oscuro: iconos de usuario, contraseña y ojo sin fondos blancos.
+   ================================================================ */
+
+/* LOGO MÓVIL */
+@media (max-width:575px){
+  /* Quitar cualquier sombra del texto del logo. */
+  html .lc-mobile-logo-shell .lc-text-logo-lc,
+  html .lc-mobile-logo-shell .lc-text-logo-title,
+  html .lc-mobile-logo-shell .lc-text-logo-tech{
+    text-shadow:none!important;
+  }
+
+  /* LC y SOLUCIONES deben quedar prácticamente unidos. */
+  html .lc-mobile-logo-shell .lc-text-logo-main{
+    gap:2px!important;
+  }
+
+  /* Mantener el C naranja del isotipo LC, mientras la L queda negra en claro. */
+  html[data-bs-theme="light"] .lc-mobile-logo-shell .lc-text-logo-initials{
+    color:#000!important;
+  }
+  html[data-bs-theme="light"] .lc-mobile-logo-shell .lc-text-logo-initials .c{
+    color:#ff7a18!important;
+  }
+}
+
+/* MODO OSCURO — LOGIN */
+html[data-bs-theme="dark"] #loginForm .input-group-pro,
+body.dark-mode #loginForm .input-group-pro{
+  background:#1e293b!important;
+  border-color:#334155!important;
+}
+
+html[data-bs-theme="dark"] #loginForm .input-group-pro .input-group-text,
+body.dark-mode #loginForm .input-group-pro .input-group-text{
+  background-color:#1e293b!important;
+  background-image:none!important;
+  border:0!important;
+  color:#cbd5e1!important;
+  box-shadow:none!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+
+html[data-bs-theme="dark"] #loginForm .input-group-pro .form-control,
+body.dark-mode #loginForm .input-group-pro .form-control{
+  background-color:#1e293b!important;
+  background-image:none!important;
+  color:#f1f5f9!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+html[data-bs-theme="dark"] #loginForm .input-group-pro > button,
+body.dark-mode #loginForm .input-group-pro > button{
+  background-color:#1e293b!important;
+  background-image:none!important;
+  border:0!important;
+  color:#cbd5e1!important;
+  box-shadow:none!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+
+html[data-bs-theme="dark"] #loginForm .input-group-pro > button:hover,
+html[data-bs-theme="dark"] #loginForm .input-group-pro > button:focus,
+body.dark-mode #loginForm .input-group-pro > button:hover,
+body.dark-mode #loginForm .input-group-pro > button:focus{
+  background-color:#334155!important;
+  color:#f8fafc!important;
+  box-shadow:none!important;
+}
+
+html[data-bs-theme="dark"] #loginForm .input-group-pro:focus-within,
+body.dark-mode #loginForm .input-group-pro:focus-within{
+  background:#0f172a!important;
+  border-color:#3b82f6!important;
+}
+
+html[data-bs-theme="dark"] #loginForm .input-group-pro:focus-within .input-group-text,
+html[data-bs-theme="dark"] #loginForm .input-group-pro:focus-within .form-control,
+html[data-bs-theme="dark"] #loginForm .input-group-pro:focus-within > button,
+body.dark-mode #loginForm .input-group-pro:focus-within .input-group-text,
+body.dark-mode #loginForm .input-group-pro:focus-within .form-control,
+body.dark-mode #loginForm .input-group-pro:focus-within > button{
+  background:#0f172a!important;
+}
+</style>
+</head><body><h1>${esc(f.nombre||'Familiar')}</h1><p><b>Parentesco:</b> ${esc(f.parentesco||'')}</p><p><b>Documento:</b> ${esc(f.documento||'')}</p><p><b>Fecha de nacimiento:</b> ${esc(f.fecha_nac||'')}</p><p><b>Teléfono:</b> ${esc(f.telefono||'')}</p><p><b>Correo:</b> ${esc(f.correo||'')}</p><p><b>Dirección:</b> ${esc(f.direccion||'')}</p><p><b>Notas:</b> ${esc(f.notas||'—')}</p>${items.some(x=>x[1])?'<h2>Documentos</h2><div class="grid">'+items.filter(x=>x[1]).map(x=>`<div class="doc"><h3>${esc(x[0])}</h3><img src="${x[1]}" alt="${esc(x[0])}"></div>`).join('')+'</div>':''}</body></html>`);w.document.close();setTimeout(()=>{w.focus();w.print();},700);
     });
 }
 async function eliminarFamiliar(id){
@@ -14923,5 +15928,911 @@ html[data-bs-theme="dark"] .invoice-modal-header {
     </div>
 
 <div class="modal fade" id="familiaResumenModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content border-0 shadow-lg rounded-4"><div class="modal-header"><div><h5 class="modal-title fw-bold mb-1" id="familiaResumenTitulo">Resumen</h5><div class="small text-muted" id="familiaResumenSubtitulo"></div></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div><div class="modal-body"><div id="familiaResumenGrid" class="row g-2"></div></div><div class="modal-footer py-2"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark me-1"></i>Cerrar</button></div></div></div></div>
+<style id="portal-modern-v2">
+/* ═══════════════════════════════════════════════════════════════════
+   PORTAL MODERN V2 — CAPA VISUAL INTEGRAL
+   Solo presentación: no cambia IDs, funciones, permisos ni flujos.
+   ═══════════════════════════════════════════════════════════════════ */
+:root{
+  --v2-bg:#f4f7fb;
+  --v2-surface:#ffffff;
+  --v2-surface-2:#f8fafc;
+  --v2-text:#101828;
+  --v2-muted:#667085;
+  --v2-border:#e4e7ec;
+  --v2-primary:#635bff;
+  --v2-primary-2:#4f46e5;
+  --v2-cyan:#06b6d4;
+  --v2-success:#12b76a;
+  --v2-warning:#f79009;
+  --v2-danger:#f04438;
+  --v2-purple:#9b5cff;
+  --v2-shadow:0 10px 32px rgba(16,24,40,.07);
+  --v2-shadow-lg:0 24px 70px rgba(16,24,40,.14);
+  --v2-radius:18px;
+}
+html[data-bs-theme="dark"]{
+  --v2-bg:#0b1020;
+  --v2-surface:#11182a;
+  --v2-surface-2:#0f1728;
+  --v2-text:#f5f7fb;
+  --v2-muted:#98a2b3;
+  --v2-border:#25304a;
+  --v2-shadow:0 10px 32px rgba(0,0,0,.22);
+  --v2-shadow-lg:0 24px 70px rgba(0,0,0,.35);
+}
+body.portal-modern-v2{background:var(--v2-bg);color:var(--v2-text);letter-spacing:-.01em}
+body.portal-modern-v2 #main-content{background:
+  radial-gradient(circle at 85% 2%,rgba(99,91,255,.075),transparent 25%),
+  radial-gradient(circle at 15% 95%,rgba(6,182,212,.055),transparent 23%),
+  var(--v2-bg)!important;padding:20px 22px 28px!important}
+body.portal-modern-v2 .tab-content{animation:v2FadeIn .26s ease both}
+@keyframes v2FadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* SIDEBAR — navegación tipo command center */
+body.portal-modern-v2 #sidebar{
+  width:272px!important;background:linear-gradient(180deg,#10162b 0%,#0b1120 60%,#09101d 100%)!important;
+  border-right:1px solid rgba(255,255,255,.07)!important;box-shadow:18px 0 45px rgba(15,23,42,.12);
+  color:#fff;overflow-y:auto;scrollbar-width:thin;
+}
+body.portal-modern-v2 #sidebar>.p-4{padding:18px 18px 16px!important;border-bottom:1px solid rgba(255,255,255,.065)}
+body.portal-modern-v2 #sidebar>.p-4>div:first-child{gap:11px!important}
+body.portal-modern-v2 #sidebar>.p-4 .fa-network-wired{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;font-size:16px!important;color:#fff!important;background:linear-gradient(135deg,var(--v2-primary),#8b5cf6);box-shadow:0 10px 25px rgba(99,91,255,.28)}
+body.portal-modern-v2 #sidebar>.p-4 .tracking-tight{font-size:15px!important;color:#fff;letter-spacing:-.02em}
+body.portal-modern-v2 #sidebar .px-3.mb-2{padding:15px 16px 7px!important}
+body.portal-modern-v2 #sidebar .px-3.mb-2 small{font-size:.58rem!important;color:#98a2b3!important;letter-spacing:.12em!important}
+body.portal-modern-v2 #sidebar .nav-link{margin:3px 10px!important;padding:8px 10px!important;min-height:43px;border-radius:13px!important;color:#aeb8cc!important;font-size:.76rem;font-weight:650;gap:9px;position:relative;transition:.18s ease}
+body.portal-modern-v2 #sidebar .nav-link i{width:31px;height:31px;flex:0 0 31px;display:grid;place-items:center;border-radius:9px;background:rgba(255,255,255,.055);color:#aeb8cc;font-size:.74rem;transition:.18s ease}
+body.portal-modern-v2 #sidebar .nav-link:hover{background:rgba(255,255,255,.06)!important;color:#fff!important;transform:translateX(2px)}
+body.portal-modern-v2 #sidebar .nav-link:hover i{background:rgba(255,255,255,.09);color:#fff}
+body.portal-modern-v2 #sidebar .nav-link.active{background:linear-gradient(135deg,rgba(99,91,255,.95),rgba(79,70,229,.9))!important;color:#fff!important;box-shadow:0 10px 24px rgba(79,70,229,.28)!important}
+body.portal-modern-v2 #sidebar .nav-link.active:before{content:"";position:absolute;left:-1px;top:10px;bottom:10px;width:3px;border-radius:0 4px 4px 0;background:#fff}
+body.portal-modern-v2 #sidebar .nav-link.active i{background:rgba(255,255,255,.14);color:#fff}
+body.portal-modern-v2 #sidebar .menu-group{margin:7px 0}
+body.portal-modern-v2 #sidebar .menu-group-toggle{width:calc(100% - 20px);margin:3px 10px;padding:9px 10px;border:0;border-radius:12px;background:transparent;color:#7f8aa3;font-size:.65rem;font-weight:850;letter-spacing:.055em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+body.portal-modern-v2 #sidebar .menu-group-toggle span{display:flex;align-items:center;gap:8px}
+body.portal-modern-v2 #sidebar .menu-group-toggle>span>i{font-size:.76rem;color:#7f8aa3}
+body.portal-modern-v2 #sidebar .menu-group-toggle:hover{background:rgba(255,255,255,.035);color:#c6cee0}
+body.portal-modern-v2 #sidebar .menu-group-toggle .group-chevron{font-size:.6rem;transition:.18s ease}
+body.portal-modern-v2 #sidebar .menu-group-toggle[aria-expanded="true"] .group-chevron{transform:rotate(180deg)}
+body.portal-modern-v2 #sidebar .menu-group-items{padding-bottom:2px}
+body.portal-modern-v2 #sidebar>div.mt-auto{background:rgba(255,255,255,.025)!important;border-color:rgba(255,255,255,.06)!important}
+body.portal-modern-v2 #sidebar>div.mt-auto p{color:#7f8aa3!important;font-size:.56rem!important}
+body.portal-modern-v2 #sidebar>div.mt-auto .text-primary{color:#b4adff!important}
+body.portal-modern-v2 #sidebar>div.mt-auto a{color:#8e99ad!important}
+
+/* HEADER — barra flotante */
+body.portal-modern-v2 #main-content>header{
+  position:sticky;top:10px;z-index:900;margin-bottom:20px!important;padding:10px 13px 10px 15px!important;
+  border:1px solid rgba(228,231,236,.9)!important;border-radius:16px!important;
+  background:rgba(255,255,255,.86)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:0 12px 35px rgba(16,24,40,.07)!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #main-content>header{background:rgba(17,24,42,.82)!important;border-color:rgba(255,255,255,.07)!important}
+body.portal-modern-v2 #main-content>header .btn-icon{width:39px;height:39px;display:grid;place-items:center;border-radius:12px!important;background:var(--v2-surface)!important;border-color:var(--v2-border)!important;color:var(--v2-muted)!important;box-shadow:none!important}
+body.portal-modern-v2 #main-content>header .btn-icon:hover{color:var(--v2-primary)!important;border-color:rgba(99,91,255,.25)!important;box-shadow:0 8px 18px rgba(99,91,255,.12)!important}
+body.portal-modern-v2 #current-user-avatar{width:34px!important;height:34px!important;border:2px solid rgba(99,91,255,.2);box-shadow:0 4px 12px rgba(99,91,255,.14)!important}
+body.portal-modern-v2 #current-user-name{font-size:.75rem!important;color:var(--v2-text)!important}
+body.portal-modern-v2 #current-user-role{font-size:.57rem!important;color:var(--v2-muted)!important}
+body.portal-modern-v2 #page-title{font-size:1.02rem!important;color:var(--v2-text)!important;letter-spacing:-.02em}
+body.portal-modern-v2 #main-content>header small{font-size:.58rem!important;color:var(--v2-muted)!important}
+
+/* CONTENEDORES, CARDS Y TABLAS */
+body.portal-modern-v2 .card:not(.dashboard-kpi-card),
+body.portal-modern-v2 .family-card,
+body.portal-modern-v2 .service-card,
+body.portal-modern-v2 .bank-card,
+body.portal-modern-v2 .gastos-kpi,
+body.portal-modern-v2 .gastos-filtro-bar,
+body.portal-modern-v2 .recordatorios-filtro-bar,
+body.portal-modern-v2 .chart-card,
+body.portal-modern-v2 .dashboard-chart-card{
+  border-color:var(--v2-border)!important;border-radius:16px!important;box-shadow:var(--v2-shadow)!important;background:var(--v2-surface)!important}
+body.portal-modern-v2 .table-responsive,
+body.portal-modern-v2 .family-reg-table-wrap,
+body.portal-modern-v2 .gastos-table-wrap,
+body.portal-modern-v2 .recordatorios-table-wrap{border-radius:15px!important;border-color:var(--v2-border)!important;background:var(--v2-surface)!important;box-shadow:0 5px 20px rgba(16,24,40,.04)}
+body.portal-modern-v2 .table{--bs-table-bg:transparent;margin-bottom:0;font-size:.72rem}
+body.portal-modern-v2 .table thead th{background:linear-gradient(180deg,#fbfcfe,#f4f6f9)!important;color:#667085!important;border-bottom:1px solid var(--v2-border)!important;font-size:.59rem!important;letter-spacing:.065em;text-transform:uppercase;font-weight:850;padding:.62rem .7rem!important;white-space:nowrap}
+html[data-bs-theme="dark"] body.portal-modern-v2 .table thead th{background:#161f33!important;color:#98a2b3!important}
+body.portal-modern-v2 .table tbody td{padding:.58rem .7rem!important;border-color:#eef0f3!important;color:var(--v2-text);vertical-align:middle}
+html[data-bs-theme="dark"] body.portal-modern-v2 .table tbody td{border-color:#222c42!important}
+body.portal-modern-v2 .table tbody tr{transition:.16s ease}
+body.portal-modern-v2 .table tbody tr:hover{background:rgba(99,91,255,.035)!important}
+
+/* BOTONES — lenguaje visual unificado */
+body.portal-modern-v2 .btn{border-radius:10px;font-weight:700;letter-spacing:-.01em;transition:.18s ease;box-shadow:none}
+body.portal-modern-v2 .btn:hover{transform:translateY(-1px)}
+body.portal-modern-v2 .btn-primary{border-color:transparent!important;background:linear-gradient(135deg,var(--v2-primary),var(--v2-primary-2))!important;color:#fff!important;box-shadow:0 8px 18px rgba(99,91,255,.2)!important}
+body.portal-modern-v2 .btn-primary:hover{box-shadow:0 11px 24px rgba(99,91,255,.26)!important}
+body.portal-modern-v2 .btn-success{border-color:transparent!important;background:linear-gradient(135deg,#12b76a,#039855)!important;color:#fff!important}
+body.portal-modern-v2 .btn-warning{border-color:transparent!important;background:linear-gradient(135deg,#f79009,#dc6803)!important;color:#fff!important}
+body.portal-modern-v2 .btn-danger{border-color:transparent!important;background:linear-gradient(135deg,#f04438,#d92d20)!important;color:#fff!important}
+body.portal-modern-v2 .btn-outline-primary{color:var(--v2-primary)!important;border-color:rgba(99,91,255,.28)!important;background:rgba(99,91,255,.035)!important}
+body.portal-modern-v2 .btn-outline-primary:hover{color:#fff!important;background:var(--v2-primary)!important;border-color:var(--v2-primary)!important}
+body.portal-modern-v2 .btn-light{background:var(--v2-surface-2)!important;border-color:var(--v2-border)!important;color:var(--v2-text)!important}
+body.portal-modern-v2 .btn-icon{display:inline-grid;place-items:center}
+
+/* FORMULARIOS */
+body.portal-modern-v2 .form-label{font-size:.63rem!important;font-weight:800!important;letter-spacing:.035em;text-transform:uppercase;color:#667085!important;margin-bottom:5px!important}
+html[data-bs-theme="dark"] body.portal-modern-v2 .form-label{color:#98a2b3!important}
+body.portal-modern-v2 .form-control,
+body.portal-modern-v2 .form-select,
+body.portal-modern-v2 .input-group-pro,
+body.portal-modern-v2 textarea.form-control{
+  min-height:39px;border:1px solid #dfe3ea!important;border-radius:11px!important;background:var(--v2-surface)!important;color:var(--v2-text)!important;box-shadow:0 1px 2px rgba(16,24,40,.02)!important;font-size:.76rem!important;transition:.17s ease}
+html[data-bs-theme="dark"] body.portal-modern-v2 .form-control,
+html[data-bs-theme="dark"] body.portal-modern-v2 .form-select,
+html[data-bs-theme="dark"] body.portal-modern-v2 textarea.form-control{border-color:#2b3853!important;background:#0f1728!important;color:#f5f7fb!important}
+body.portal-modern-v2 .form-control:focus,
+body.portal-modern-v2 .form-select:focus,
+body.portal-modern-v2 textarea.form-control:focus{border-color:rgba(99,91,255,.55)!important;box-shadow:0 0 0 4px rgba(99,91,255,.09)!important}
+body.portal-modern-v2 .input-group-text{background:transparent!important;border-color:transparent!important;color:#98a2b3!important}
+body.portal-modern-v2 .form-check-input{border-color:#cfd5df;box-shadow:none}
+body.portal-modern-v2 .form-check-input:checked{background-color:var(--v2-primary);border-color:var(--v2-primary)}
+
+/* BADGES / PILLS */
+body.portal-modern-v2 .badge{border-radius:999px!important;font-weight:800;letter-spacing:.01em;padding:.32rem .55rem}
+body.portal-modern-v2 .alert{border-radius:13px!important;border-width:1px!important;box-shadow:none}
+
+/* MODALES — glass / command panel */
+body.portal-modern-v2 .modal-backdrop.show{opacity:.48;background:#111827}
+body.portal-modern-v2 .modal-dialog{margin:.65rem auto}
+body.portal-modern-v2 .modal-content{border:1px solid rgba(228,231,236,.94)!important;border-radius:20px!important;background:var(--v2-surface)!important;box-shadow:var(--v2-shadow-lg)!important;overflow:hidden}
+html[data-bs-theme="dark"] body.portal-modern-v2 .modal-content{border-color:#2b3853!important}
+body.portal-modern-v2 .modal-header:not(.invoice-modal-header),
+body.portal-modern-v2 .modal-header-pro:not(.invoice-modal-header){padding:13px 16px!important;background:linear-gradient(135deg,rgba(99,91,255,.10),rgba(6,182,212,.045))!important;border-bottom:1px solid var(--v2-border)!important}
+body.portal-modern-v2 .modal-title{font-size:.88rem!important;font-weight:850!important;color:var(--v2-text)!important;letter-spacing:-.02em}
+body.portal-modern-v2 .modal-body{background:var(--v2-surface)!important;color:var(--v2-text)}
+body.portal-modern-v2 .modal-footer:not(.invoice-modal-footer),
+body.portal-modern-v2 .modal-footer-pro{padding:9px 13px!important;background:var(--v2-surface-2)!important;border-top:1px solid var(--v2-border)!important}
+body.portal-modern-v2 .dropdown-menu{border:1px solid var(--v2-border)!important;border-radius:14px!important;box-shadow:var(--v2-shadow-lg)!important;background:var(--v2-surface)!important;padding:6px!important}
+body.portal-modern-v2 .dropdown-item{border-radius:9px!important;font-size:.72rem;padding:.5rem .62rem!important;color:var(--v2-text)!important}
+body.portal-modern-v2 .dropdown-item:hover{background:rgba(99,91,255,.07)!important}
+
+/* TOAST / NOTIFICACIONES */
+body.portal-modern-v2 .toast{border:1px solid var(--v2-border)!important;border-radius:14px!important;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(14px);box-shadow:var(--v2-shadow-lg)!important}
+body.portal-modern-v2 .toast-header{background:transparent!important;border-bottom:1px solid var(--v2-border)!important;font-size:.68rem}
+body.portal-modern-v2 .toast-body{font-size:.7rem;color:var(--v2-text)}
+body.portal-modern-v2 .notif-list-compact .notif-item-compact{border:1px solid var(--v2-border)!important;border-radius:14px!important;background:var(--v2-surface)!important;margin-bottom:7px;box-shadow:0 5px 16px rgba(16,24,40,.035)}
+body.portal-modern-v2 .notif-list-compact .notif-item-compact:hover{border-color:rgba(99,91,255,.28)!important;box-shadow:0 10px 25px rgba(99,91,255,.08)}
+body.portal-modern-v2 #top-notif-toggle{position:relative}
+body.portal-modern-v2 #top-notif-count{background:linear-gradient(135deg,#f04438,#d92d20)!important;box-shadow:0 3px 8px rgba(240,68,56,.25)}
+
+/* LOGIN — nueva estética sin tocar flujo */
+body.portal-modern-v2 #login-overlay{background:
+  radial-gradient(circle at 12% 12%,rgba(99,91,255,.28),transparent 28%),
+  radial-gradient(circle at 88% 85%,rgba(6,182,212,.22),transparent 30%),
+  linear-gradient(135deg,#080d1c 0%,#111a33 50%,#0e1629 100%)!important}
+body.portal-modern-v2 .login-split-card-pro{max-width:1020px!important;border-radius:28px!important;border:1px solid rgba(255,255,255,.1)!important;box-shadow:0 40px 100px rgba(0,0,0,.38)!important;background:rgba(255,255,255,.04)!important;backdrop-filter:blur(24px)!important}
+body.portal-modern-v2 .brand-section-spectacular{background:linear-gradient(145deg,#090d19,#131b36 48%,#342a80)!important}
+body.portal-modern-v2 .login-split-card-pro .input-group-pro{border-radius:13px!important;background:#f8fafc!important}
+body.portal-modern-v2 .login-split-card-pro .btn-pro-action{border-radius:13px!important;background:linear-gradient(135deg,var(--v2-primary),#7c3aed)!important;box-shadow:0 13px 28px rgba(99,91,255,.28)}
+
+/* DASHBOARD V2 */
+body.portal-modern-v2 #sec-dashboard .dashboard-hero{border:1px solid var(--v2-border)!important;border-radius:22px!important;background:
+  radial-gradient(circle at 88% 18%,rgba(99,91,255,.17),transparent 27%),
+  linear-gradient(135deg,rgba(255,255,255,.97),rgba(248,250,252,.92))!important;box-shadow:var(--v2-shadow)!important;padding:20px 22px!important}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sec-dashboard .dashboard-hero{background:radial-gradient(circle at 88% 18%,rgba(124,58,237,.22),transparent 27%),linear-gradient(135deg,#121a2e,#0e1525)!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-eyebrow{color:var(--v2-primary)!important;font-size:.58rem!important;letter-spacing:.13em}
+body.portal-modern-v2 #sec-dashboard .dashboard-title{font-size:1.48rem!important;font-weight:900!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-subtitle{font-size:.66rem!important;max-width:720px}
+body.portal-modern-v2 #sec-dashboard .dashboard-live{border:1px solid var(--v2-border)!important;border-radius:13px!important;background:var(--v2-surface)!important;font-size:.58rem!important;padding:8px 11px!important;box-shadow:0 5px 15px rgba(16,24,40,.05)!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-section-label{margin-top:5px!important;margin-bottom:8px!important;padding:0 2px}
+body.portal-modern-v2 #sec-dashboard .dashboard-section-label h6{font-size:.63rem!important;letter-spacing:.075em!important;color:var(--v2-text)!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-section-label span{font-size:.54rem!important;color:var(--v2-muted)!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-kpis{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:11px!important;margin-bottom:16px!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-kpi-card{border:1px solid var(--v2-border)!important;border-radius:17px!important;background:var(--v2-surface)!important;box-shadow:0 7px 20px rgba(16,24,40,.045)!important;padding:13px!important;min-height:88px}
+body.portal-modern-v2 #sec-dashboard .dashboard-kpi-card:hover{transform:translateY(-3px)!important;box-shadow:0 16px 34px rgba(99,91,255,.10)!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-kpi-card:before{width:4px!important;border-radius:0 4px 4px 0!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-kpi-icon{width:36px;height:36px;border-radius:11px;font-size:.8rem}
+body.portal-modern-v2 #sec-dashboard .dashboard-kpi-label{font-size:.53rem!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-kpi-value{font-size:1.1rem!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-kpi-meta{font-size:.5rem!important;margin-top:6px}
+body.portal-modern-v2 #sec-dashboard .dashboard-chart-toolbar{border:1px solid var(--v2-border)!important;border-radius:15px!important;background:var(--v2-surface)!important;box-shadow:var(--v2-shadow)!important;padding:10px 12px!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-range-switch .btn{border-radius:8px!important;font-size:.58rem!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-analytics-grid.three-col{grid-template-columns:1.06fr .94fr!important;gap:11px!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-analytics-grid.three-col .dashboard-chart-card:last-child{grid-column:1/-1}
+body.portal-modern-v2 #sec-dashboard .dashboard-analytics-grid:not(.three-col){grid-template-columns:1fr 1fr!important;gap:11px!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-chart-card{border-radius:17px!important;box-shadow:0 7px 20px rgba(16,24,40,.045)!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-chart-head{padding:11px 13px 9px!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-chart-title{font-size:.72rem!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-chart-sub{font-size:.53rem!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-chart-body{padding:9px 11px 11px!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-chart-wrap{height:225px!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-history-wrap{height:230px!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-agenda-strip{gap:10px!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-agenda-mini{border:1px solid var(--v2-border)!important;border-radius:15px!important;background:var(--v2-surface)!important;box-shadow:0 7px 20px rgba(16,24,40,.04)!important;padding:10px 11px!important}
+body.portal-modern-v2 #sec-dashboard .dashboard-agenda-mini .mini-icon{width:34px;height:34px;border-radius:10px;background:rgba(99,91,255,.09)!important;color:var(--v2-primary)!important}
+
+/* SECCIONES / CABECERAS */
+body.portal-modern-v2 .section-header,
+body.portal-modern-v2 .module-header,
+body.portal-modern-v2 .family-reg-section-head,
+body.portal-modern-v2 .card-header{border-radius:14px!important}
+body.portal-modern-v2 .section-header,
+body.portal-modern-v2 .module-header{background:linear-gradient(135deg,rgba(99,91,255,.075),rgba(6,182,212,.035))!important;border-color:var(--v2-border)!important}
+
+/* BARRAS DE BÚSQUEDA / FILTROS */
+body.portal-modern-v2 .input-group:not(.input-group-pro){border-radius:12px;overflow:hidden}
+body.portal-modern-v2 .input-group>.form-control{border-radius:0!important}
+body.portal-modern-v2 .search-container,
+body.portal-modern-v2 .filtro-bar,
+body.portal-modern-v2 .toolbar,
+body.portal-modern-v2 .recordatorios-filtro-bar,
+body.portal-modern-v2 .gastos-filtro-bar{box-shadow:0 5px 18px rgba(16,24,40,.035)!important}
+
+/* TABLAS ESPECÍFICAS DE CONTROL DE GASTOS */
+body.portal-modern-v2 .gasto-actions .btn,
+body.portal-modern-v2 .recordatorio-table-actions .btn{border-radius:9px!important;width:29px!important;height:29px!important}
+body.portal-modern-v2 .gastos-kpi{min-height:82px!important;padding:11px 13px!important;box-shadow:0 7px 18px rgba(16,24,40,.04)!important}
+
+/* RESPONSIVE */
+@media(max-width:1199px){
+  body.portal-modern-v2 #main-content{margin-left:0!important;padding:15px!important}
+  body.portal-modern-v2 #sidebar{box-shadow:20px 0 50px rgba(0,0,0,.32)}
+  body.portal-modern-v2 #sec-dashboard .dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body.portal-modern-v2 #sec-dashboard .dashboard-analytics-grid.three-col{grid-template-columns:1fr!important}
+  body.portal-modern-v2 #sec-dashboard .dashboard-analytics-grid.three-col .dashboard-chart-card:last-child{grid-column:auto}
+  body.portal-modern-v2 #sec-dashboard .dashboard-analytics-grid:not(.three-col){grid-template-columns:1fr!important}
+}
+@media(max-width:700px){
+  body.portal-modern-v2 #main-content{padding:11px!important}
+  body.portal-modern-v2 #main-content>header{top:6px;border-radius:14px!important;margin-bottom:13px!important}
+  body.portal-modern-v2 #sec-dashboard .dashboard-hero{padding:15px!important;border-radius:17px!important}
+  body.portal-modern-v2 #sec-dashboard .dashboard-title{font-size:1.14rem!important}
+  body.portal-modern-v2 #sec-dashboard .dashboard-kpis{grid-template-columns:1fr 1fr!important;gap:8px!important}
+  body.portal-modern-v2 #sec-dashboard .dashboard-kpi-card{padding:11px!important;min-height:82px}
+  body.portal-modern-v2 #sec-dashboard .dashboard-kpi-value{font-size:1rem!important}
+  body.portal-modern-v2 #sec-dashboard .dashboard-agenda-strip{grid-template-columns:1fr 1fr!important}
+  body.portal-modern-v2 .modal-dialog{margin:.35rem!important}
+  body.portal-modern-v2 .modal-content{border-radius:16px!important}
+}
+@media(max-width:420px){
+  body.portal-modern-v2 #sec-dashboard .dashboard-kpis{grid-template-columns:1fr!important}
+  body.portal-modern-v2 #sec-dashboard .dashboard-agenda-strip{grid-template-columns:1fr!important}
+}
+</style>
+<script id="portal-modern-v2-init">
+(function(){
+  function initModernPortalV2(){
+    document.body.classList.add('portal-modern-v2');
+    const dashboard=document.getElementById('sec-dashboard');
+    if(dashboard){
+      dashboard.classList.add('dashboard-v2');
+      dashboard.querySelectorAll('.dashboard-kpis,.dashboard-chart-toolbar,.dashboard-agenda-strip,.dashboard-analytics-grid').forEach(el=>el.classList.add('dashboard-v2-block'));
+      dashboard.querySelectorAll('.dashboard-chart-card').forEach((el,i)=>el.classList.add('dashboard-v2-card', 'dashboard-v2-card-'+(i+1)));
+    }
+    // Refuerza una sola capa de identidad visual sin sustituir manejadores existentes.
+    document.querySelectorAll('#sidebar .nav-link i').forEach((icon)=>icon.setAttribute('aria-hidden','true'));
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initModernPortalV2,{once:true});
+  else initModernPortalV2();
+})();
+</script>
+<style id="lc-logo-and-login-final-override">
+/* ================================================================
+   AJUSTE FINAL — LOGO LC + FONDO REAL RED7
+   Este bloque queda al final para vencer reglas anteriores.
+   ================================================================ */
+
+/* ---------- FONDO REAL DEL LOGIN: imagen visible ---------- */
+#login-overlay{
+  position:fixed!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+}
+
+#login-overlay::before{
+  content:"";
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  background-image:
+    linear-gradient(135deg,rgba(4,10,24,.10),rgba(4,10,24,.07)),
+    url('./img/red7.webp')!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  opacity:1!important;
+}
+
+/* Nada del panel izquierdo vuelve a pintar el fondo de azul. */
+body.portal-modern-v2 #login-overlay .brand-section-spectacular,
+body.portal-modern-v2 #login-overlay .brand-section-spectacular::before,
+body.portal-modern-v2 #login-overlay .brand-section-spectacular::after{
+  background:transparent!important;
+  background-image:none!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+}
+
+body.portal-modern-v2 #login-overlay .brand-section-spectacular > .position-absolute{
+  display:none!important;
+}
+
+/* El contenido del login permanece por encima de la fotografía. */
+body.portal-modern-v2 #login-overlay > .login-split-card-pro{
+  position:relative!important;
+  z-index:2!important;
+  background:rgba(255,255,255,.035)!important;
+  border-color:rgba(255,255,255,.16)!important;
+  box-shadow:0 30px 95px rgba(0,0,0,.38)!important;
+}
+
+/* ---------- LOGO PRINCIPAL: MÁS GRANDE Y AJUSTADO AL ANCHO ---------- */
+body.portal-modern-v2 .lc-login-logo-shell{
+  width:100%!important;
+  max-width:100%!important;
+  padding:4px 0!important;
+  container-type:inline-size!important;
+}
+
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo{
+  width:100%!important;
+  max-width:none!important;
+  gap:clamp(13px,2.4cqw,24px)!important;
+  align-items:center!important;
+}
+
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-mark{
+  width:clamp(92px,18cqw,132px)!important;
+  height:clamp(92px,18cqw,132px)!important;
+  min-width:clamp(92px,18cqw,132px)!important;
+  flex:0 0 auto!important;
+}
+
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-initials{
+  font-size:clamp(2rem,7.4cqw,3.35rem)!important;
+}
+
+/* LC + SOLUCIONES + TECNOLÓGICAS: MISMA ALTURA DE LETRA */
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-main,
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-tech{
+  font-size:clamp(1.45rem,6.2cqw,3.0rem)!important;
+  line-height:.94!important;
+  font-weight:950!important;
+  letter-spacing:-.018em!important;
+}
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-lc,
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-title,
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-tech{
+  font-size:inherit!important;
+  line-height:inherit!important;
+  font-weight:950!important;
+}
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-main{
+  gap:clamp(7px,1.35cqw,14px)!important;
+  align-items:baseline!important;
+  white-space:nowrap!important;
+}
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-line{
+  margin-top:clamp(8px,1.6cqw,12px)!important;
+}
+body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-sub{
+  font-size:clamp(.46rem,1.25cqw,.78rem)!important;
+}
+
+/* ---------- ENCABEZADO DEL MENÚ / DASHBOARD ---------- */
+body.portal-modern-v2 .lc-sidebar-logo-shell{
+  width:100%!important;
+  max-width:100%!important;
+  min-height:0!important;
+  padding:3px 0!important;
+  margin:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  container-type:inline-size!important;
+}
+
+body.portal-modern-v2 .lc-sidebar-text-logo{
+  width:100%!important;
+  max-width:none!important;
+  gap:clamp(8px,2.2cqw,14px)!important;
+}
+
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-mark{
+  width:clamp(64px,17cqw,88px)!important;
+  height:clamp(64px,17cqw,88px)!important;
+  min-width:clamp(64px,17cqw,88px)!important;
+}
+
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-initials{
+  font-size:clamp(1.7rem,7.2cqw,2.45rem)!important;
+}
+
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-main,
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-tech{
+  font-size:clamp(.9rem,5.25cqw,1.55rem)!important;
+  line-height:.94!important;
+  font-weight:950!important;
+  letter-spacing:-.018em!important;
+}
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-lc,
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-title,
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-tech{
+  font-size:inherit!important;
+  line-height:inherit!important;
+  font-weight:950!important;
+}
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-main{
+  gap:clamp(4px,1.2cqw,8px)!important;
+  align-items:baseline!important;
+  white-space:nowrap!important;
+}
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-line{
+  margin-top:clamp(5px,1.5cqw,8px)!important;
+}
+body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-sub{
+  font-size:clamp(.30rem,1.45cqw,.58rem)!important;
+}
+
+/* En pantallas pequeñas, el logo mantiene la misma altura tipográfica en las 3 palabras. */
+@media(max-width:575px){
+  body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo{
+    gap:7px!important;
+  }
+  body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-mark{
+    width:clamp(72px,22vw,92px)!important;
+    height:clamp(72px,22vw,92px)!important;
+    min-width:clamp(72px,22vw,92px)!important;
+  }
+  body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-main,
+  body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-tech{
+    font-size:clamp(.98rem,5.6vw,1.55rem)!important;
+  }
+  body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-main,
+  body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-tech{
+    font-size:clamp(.82rem,4.4vw,1.15rem)!important;
+  }
+}
+</style>
+
+
+<script id="ajuste-dinamico-ancho-logo-final">
+(function(){
+  let timer=0;
+  function ajustarTextoAlAncho(){
+    try{
+      document.querySelectorAll('.lc-text-logo').forEach(function(logo){
+        const copy=logo.querySelector('.lc-text-logo-copy');
+        const line=logo.querySelector('.lc-text-logo-line, .server-connection-logo-line');
+        const main=logo.querySelector('.lc-text-logo-main');
+        const tech=logo.querySelector('.lc-text-logo-tech');
+        const sub=logo.querySelector('.lc-text-logo-sub');
+        if(!copy||!line||!line.clientWidth)return;
+        const target=Math.max(1,line.clientWidth);
+        if(main){
+          main.style.transform='none';
+          main.style.width='100%';
+          main.style.maxWidth='100%';
+          main.style.display='flex';
+          main.style.justifyContent='flex-start';
+          main.style.alignItems='baseline';
+          main.style.gap='6px';
+        }
+        [tech,sub].forEach(function(row){
+          if(!row)return;
+          row.style.transform='none';
+          row.style.width='100%';
+          row.style.maxWidth='100%';
+          const text=(row.textContent||'').trim();
+          if(!text){row.style.letterSpacing='';return;}
+          row.style.letterSpacing='normal';
+          const natural=row.scrollWidth||row.getBoundingClientRect().width||target;
+          const gaps=Math.max(1,text.length-1);
+          const extra=(target-natural)/gaps;
+          const base=parseFloat(getComputedStyle(row).fontSize)||16;
+          row.style.letterSpacing=Math.max(-0.4,Math.min(8,extra)).toFixed(3)+'px';
+        });
+      });
+    }catch(e){console.debug('Ajuste visual del logo:',e&&e.message||e);}
+  }
+  function programar(){clearTimeout(timer);timer=setTimeout(ajustarTextoAlAncho,40);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',programar,{once:true});
+  else programar();
+  window.addEventListener('load',programar,{once:true});
+  window.addEventListener('resize',programar,{passive:true});
+})();
+</script>
+
+<style id="ajuste-final-logo-movil-oscuro-real">
+/* ================================================================
+   AJUSTE FINAL REAL — SOLO LOGO MÓVIL + ICONOS LOGIN EN OSCURO
+   ================================================================ */
+@media (max-width:575px){
+  /* MODO CLARO: L + SOLUCIONES + TECNOLÓGICAS sin sombra negra */
+  html[data-bs-theme="light"] .lc-mobile-logo-shell .lc-text-logo-initials,
+  html[data-bs-theme="light"] .lc-mobile-logo-shell .lc-text-logo-title,
+  html[data-bs-theme="light"] .lc-mobile-logo-shell .lc-text-logo-tech,
+  html:not([data-bs-theme="dark"]) body:not(.dark-mode) .lc-mobile-logo-shell .lc-text-logo-initials,
+  html:not([data-bs-theme="dark"]) body:not(.dark-mode) .lc-mobile-logo-shell .lc-text-logo-title,
+  html:not([data-bs-theme="dark"]) body:not(.dark-mode) .lc-mobile-logo-shell .lc-text-logo-tech{
+    color:#000!important;
+    text-shadow:none!important;
+  }
+
+  /* LC pegado a SOLUCIONES: no repartir el ancho entre ambos textos */
+  .lc-mobile-logo-shell .lc-text-logo-main{
+    justify-content:flex-start!important;
+    gap:4px!important;
+  }
+}
+
+/* MODO OSCURO: los tres iconos del login usan el mismo fondo oscuro del campo.
+   La regla debe ir después del fondo #f8fafc del login para que no vuelva a aparecer blanco. */
+html[data-bs-theme="dark"] body.portal-modern-v2 #login-overlay .login-split-card-pro .input-group-pro,
+html[data-bs-theme="dark"] body.portal-modern-v2 #login-overlay .login-split-card-pro .input-group-pro .input-group-text,
+html[data-bs-theme="dark"] body.portal-modern-v2 #login-overlay .login-split-card-pro .input-group-pro > button{
+  background:#0f1728!important;
+  background-color:#0f1728!important;
+  border-color:#2b3853!important;
+}
+
+html[data-bs-theme="dark"] body.portal-modern-v2 #login-overlay .login-split-card-pro .input-group-pro .input-group-text,
+html[data-bs-theme="dark"] body.portal-modern-v2 #login-overlay .login-split-card-pro .input-group-pro > button{
+  color:#98a2b3!important;
+  box-shadow:none!important;
+}
+
+html[data-bs-theme="dark"] body.portal-modern-v2 #login-overlay .login-split-card-pro .input-group-pro > button:hover,
+html[data-bs-theme="dark"] body.portal-modern-v2 #login-overlay .login-split-card-pro .input-group-pro > button:focus,
+html[data-bs-theme="dark"] body.portal-modern-v2 #login-overlay .login-split-card-pro .input-group-pro > button:active{
+  background:#162033!important;
+  background-color:#162033!important;
+  color:#cbd5e1!important;
+}
+
+html[data-bs-theme="dark"] body.portal-modern-v2 #login-overlay .login-split-card-pro .input-group-pro input.form-control{
+  background:#0f1728!important;
+  color:#f5f7fb!important;
+  border-color:transparent!important;
+}
+</style>
+<style id="ajuste-definitivo-sidebar-tema-dispositivo-final">
+/* ================================================================
+   BARRA LATERAL — OVERRIDE FINAL
+   Este bloque está al FINAL del documento para tener prioridad sobre
+   los estilos generales del portal que fuerzan la barra en oscuro.
+   ================================================================ */
+
+/* MODO CLARO */
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar{
+  background:linear-gradient(180deg,#ffffff 0%,#f8fafc 58%,#f1f5f9 100%) !important;
+  background-color:#ffffff !important;
+  border-right:1px solid #e4e7ec !important;
+  color:#101828 !important;
+  box-shadow:12px 0 34px rgba(15,23,42,.055) !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar>.p-4,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar>.p-4{
+  border-bottom-color:#e8ecf2 !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar>.p-4 .tracking-tight,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar>.p-4 .tracking-tight{
+  color:#101828 !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .px-3.mb-2 small,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .px-3.mb-2 small{
+  color:#667085 !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .nav-link{
+  color:#475467 !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link i,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .nav-link i{
+  color:#2563eb !important;
+  background:rgba(37,99,235,.075) !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link:hover,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .nav-link:hover{
+  background:rgba(37,99,235,.075) !important;
+  color:#101828 !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link:hover i,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .nav-link:hover i{
+  background:rgba(37,99,235,.13) !important;
+  color:#1d4ed8 !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link.active,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .nav-link.active{
+  color:#ffffff !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .menu-group-toggle,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .menu-group-toggle{
+  color:#667085 !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .menu-group-toggle>span>i,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .menu-group-toggle>span>i{
+  color:#2563eb !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .menu-group-toggle:hover,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .menu-group-toggle:hover{
+  background:rgba(37,99,235,.055) !important;
+  color:#344054 !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar>div.mt-auto,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar>div.mt-auto{
+  background:rgba(15,23,42,.018) !important;
+  border-color:#e4e7ec !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar>div.mt-auto p,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar>div.mt-auto p{
+  color:#667085 !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar>div.mt-auto a,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar>div.mt-auto a{
+  color:#667085 !important;
+}
+
+html[data-bs-theme="light"] body.portal-modern-v2 .sidebar-mobile-close,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 .sidebar-mobile-close{
+  background:#ffffff !important;
+  color:#475467 !important;
+  border-color:#d0d5dd !important;
+}
+
+/* MODO OSCURO */
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar,
+body.dark-mode body.portal-modern-v2 #sidebar{
+  background:linear-gradient(180deg,#10162b 0%,#0b1120 60%,#09101d 100%) !important;
+  background-color:#0b1120 !important;
+  border-right:1px solid rgba(255,255,255,.07) !important;
+  color:#ffffff !important;
+  box-shadow:18px 0 45px rgba(15,23,42,.12) !important;
+}
+
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .nav-link,
+body.dark-mode body.portal-modern-v2 #sidebar .nav-link{
+  color:#aeb8cc !important;
+}
+
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .nav-link i,
+body.dark-mode body.portal-modern-v2 #sidebar .nav-link i{
+  background:rgba(255,255,255,.055) !important;
+  color:#aeb8cc !important;
+}
+
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .nav-link:hover,
+body.dark-mode body.portal-modern-v2 #sidebar .nav-link:hover{
+  background:rgba(255,255,255,.06) !important;
+  color:#ffffff !important;
+}
+
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .nav-link:hover i,
+body.dark-mode body.portal-modern-v2 #sidebar .nav-link:hover i{
+  background:rgba(255,255,255,.09) !important;
+  color:#ffffff !important;
+}
+
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .menu-group-toggle,
+body.dark-mode body.portal-modern-v2 #sidebar .menu-group-toggle{
+  color:#7f8aa3 !important;
+}
+
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .menu-group-toggle>span>i,
+body.dark-mode body.portal-modern-v2 #sidebar .menu-group-toggle>span>i{
+  color:#7f8aa3 !important;
+}
+
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar>div.mt-auto,
+body.dark-mode body.portal-modern-v2 #sidebar>div.mt-auto{
+  background:rgba(255,255,255,.025) !important;
+  border-color:rgba(255,255,255,.06) !important;
+}
+</style>
+
+<style id="ajuste-final-logo-sidebar-y-conexion-dispositivo">
+/* ================================================================
+   AJUSTE FINAL — LOGO DEL MENÚ + MODAL DE CONEXIÓN AL SERVIDOR
+   Sigue el tema real del dispositivo. No altera funciones.
+   ================================================================ */
+
+/* ========================= BARRA LATERAL ========================= */
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .lc-sidebar-logo-shell{
+  background:linear-gradient(145deg,#ffffff,#f4f7fb)!important;
+  border-color:#dbe4ef!important;
+  box-shadow:0 10px 24px rgba(15,23,42,.08),inset 0 1px 0 rgba(255,255,255,.95)!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-initials,
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-title,
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-tech{
+  color:#111111!important;
+  text-shadow:none!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-initials .c{color:#ff7a18!important;}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-sub{color:#475467!important;text-shadow:none!important;}
+
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .lc-sidebar-logo-shell{
+  background:linear-gradient(145deg,rgba(10,25,49,.98),rgba(19,55,91,.96))!important;
+  border-color:rgba(56,189,248,.24)!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-initials,
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-title,
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-tech{
+  color:#ffffff!important;
+  text-shadow:0 2px 8px rgba(0,0,0,.35)!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-initials .c{color:#ff7a18!important;}
+
+@media (prefers-color-scheme: light){
+  body.portal-modern-v2 #sidebar .lc-sidebar-logo-shell{
+    background:linear-gradient(145deg,#ffffff,#f4f7fb)!important;
+    border-color:#dbe4ef!important;
+    box-shadow:0 10px 24px rgba(15,23,42,.08),inset 0 1px 0 rgba(255,255,255,.95)!important;
+  }
+  body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-initials,
+  body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-title,
+  body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-tech{
+    color:#111111!important;
+    text-shadow:none!important;
+  }
+  body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-initials .c{color:#ff7a18!important;}
+  body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-sub{color:#475467!important;text-shadow:none!important;}
+}
+@media (prefers-color-scheme: dark){
+  body.portal-modern-v2 #sidebar .lc-sidebar-logo-shell{
+    background:linear-gradient(145deg,rgba(10,25,49,.98),rgba(19,55,91,.96))!important;
+    border-color:rgba(56,189,248,.24)!important;
+  }
+  body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-initials,
+  body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-title,
+  body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-tech{
+    color:#ffffff!important;
+    text-shadow:0 2px 8px rgba(0,0,0,.35)!important;
+  }
+  body.portal-modern-v2 #sidebar .lc-sidebar-text-logo .lc-text-logo-initials .c{color:#ff7a18!important;}
+}
+
+/* ================== MODAL CONEXIÓN AL SERVIDOR ================== */
+html[data-bs-theme="light"] #server-connection-status{
+  background:rgba(241,245,249,.88)!important;
+  color:#0f172a!important;
+}
+html[data-bs-theme="light"] #server-connection-status .server-connection-card{
+  background:rgba(255,255,255,.96)!important;
+  border-color:#dbe3ec!important;
+  box-shadow:0 30px 90px rgba(15,23,42,.18)!important;
+  color:#0f172a!important;
+}
+html[data-bs-theme="light"] #server-connection-status .server-connection-logo .lc-text-logo-title,
+html[data-bs-theme="light"] #server-connection-status .server-connection-logo .lc-text-logo-tech,
+html[data-bs-theme="light"] #server-connection-status .server-connection-logo .lc-text-logo-initials{
+  color:#111111!important;
+  text-shadow:none!important;
+}
+html[data-bs-theme="light"] #server-connection-status .server-connection-logo .lc-text-logo-initials .c{color:#ff7a18!important;}
+html[data-bs-theme="light"] #server-connection-status .server-connection-logo .lc-text-logo-line{
+  background:rgba(37,99,235,.10)!important;
+  box-shadow:0 0 10px rgba(37,99,235,.12)!important;
+}
+html[data-bs-theme="light"] #server-connection-status .server-connection-fill{
+  background:linear-gradient(90deg,#2563eb,#06b6d4)!important;
+  box-shadow:0 0 12px rgba(37,99,235,.35)!important;
+}
+html[data-bs-theme="light"] #server-connection-status .server-connection-title{color:#111827!important;text-shadow:none!important;}
+html[data-bs-theme="light"] #server-connection-status .server-connection-substatus{color:#64748b!important;}
+html[data-bs-theme="light"] #server-connection-status .server-connection-percent{color:#2563eb!important;text-shadow:0 0 18px rgba(37,99,235,.18)!important;}
+html[data-bs-theme="light"] #server-connection-status .server-connection-online{color:#16a34a!important;}
+
+html[data-bs-theme="dark"] #server-connection-status{
+  background:rgba(2,6,23,.88)!important;
+  color:#fff!important;
+}
+html[data-bs-theme="dark"] #server-connection-status .server-connection-card{
+  background:rgba(8,13,28,.92)!important;
+  border-color:rgba(255,255,255,.12)!important;
+  box-shadow:0 30px 100px rgba(0,0,0,.48)!important;
+  color:#fff!important;
+}
+html[data-bs-theme="dark"] #server-connection-status .server-connection-logo .lc-text-logo-title,
+html[data-bs-theme="dark"] #server-connection-status .server-connection-logo .lc-text-logo-tech,
+html[data-bs-theme="dark"] #server-connection-status .server-connection-logo .lc-text-logo-initials{
+  color:#ffffff!important;
+}
+html[data-bs-theme="dark"] #server-connection-status .server-connection-logo .lc-text-logo-initials .c{color:#ff7a18!important;}
+
+@media (prefers-color-scheme: light){
+  #server-connection-status{background:rgba(241,245,249,.88)!important;color:#0f172a!important;}
+  #server-connection-status .server-connection-card{background:rgba(255,255,255,.96)!important;border-color:#dbe3ec!important;box-shadow:0 30px 90px rgba(15,23,42,.18)!important;color:#0f172a!important;}
+  #server-connection-status .server-connection-logo .lc-text-logo-title,
+  #server-connection-status .server-connection-logo .lc-text-logo-tech,
+  #server-connection-status .server-connection-logo .lc-text-logo-initials{color:#111111!important;text-shadow:none!important;}
+  #server-connection-status .server-connection-logo .lc-text-logo-initials .c{color:#ff7a18!important;}
+  #server-connection-status .server-connection-logo .lc-text-logo-line{background:rgba(37,99,235,.10)!important;box-shadow:0 0 10px rgba(37,99,235,.12)!important;}
+  #server-connection-status .server-connection-fill{background:linear-gradient(90deg,#2563eb,#06b6d4)!important;box-shadow:0 0 12px rgba(37,99,235,.35)!important;}
+  #server-connection-status .server-connection-title{color:#111827!important;text-shadow:none!important;}
+  #server-connection-status .server-connection-substatus{color:#64748b!important;}
+  #server-connection-status .server-connection-percent{color:#2563eb!important;text-shadow:0 0 18px rgba(37,99,235,.18)!important;}
+  #server-connection-status .server-connection-online{color:#16a34a!important;}
+}
+@media (prefers-color-scheme: dark){
+  #server-connection-status{background:rgba(2,6,23,.88)!important;color:#fff!important;}
+  #server-connection-status .server-connection-card{background:rgba(8,13,28,.92)!important;border-color:rgba(255,255,255,.12)!important;box-shadow:0 30px 100px rgba(0,0,0,.48)!important;color:#fff!important;}
+  #server-connection-status .server-connection-logo .lc-text-logo-title,
+  #server-connection-status .server-connection-logo .lc-text-logo-tech,
+  #server-connection-status .server-connection-logo .lc-text-logo-initials{color:#ffffff!important;}
+  #server-connection-status .server-connection-logo .lc-text-logo-initials .c{color:#ff7a18!important;}
+}
+</style>
+
+
+<style id="server-welcome-light-final">
+/* ÚLTIMO AJUSTE — ROBOT + BIENVENIDO DEL MODAL DE CONEXIÓN */
+html[data-bs-theme="light"] #server-connection-status .server-robot{
+  color:#2563eb!important;
+  background:linear-gradient(145deg,rgba(37,99,235,.12),rgba(6,182,212,.10))!important;
+  border-color:rgba(37,99,235,.28)!important;
+  box-shadow:0 0 24px rgba(37,99,235,.16),inset 0 1px 0 rgba(255,255,255,.95)!important;
+}
+html[data-bs-theme="light"] #server-connection-status .server-robot > .fa-robot{
+  color:#2563eb!important;
+  filter:drop-shadow(0 0 8px rgba(37,99,235,.28))!important;
+}
+html[data-bs-theme="light"] #server-connection-status .server-robot-hand{
+  color:#f59e0b!important;
+  filter:drop-shadow(0 0 7px rgba(245,158,11,.28))!important;
+}
+html[data-bs-theme="light"] #server-connection-status .server-welcome-text{
+  color:#111827!important;
+  text-shadow:none!important;
+  background:linear-gradient(90deg,#111827,#2563eb)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+}
+html[data-bs-theme="light"] #server-connection-status .server-welcome-burst{
+  background:radial-gradient(circle,rgba(255,255,255,.98) 0 4%,rgba(96,165,250,.92) 7%,rgba(37,99,235,.35) 19%,rgba(6,182,212,.12) 42%,transparent 68%),repeating-conic-gradient(from 0deg,rgba(255,255,255,0) 0 8deg,rgba(37,99,235,.65) 9deg 11deg,rgba(255,255,255,0) 12deg 24deg)!important;
+}
+
+html[data-bs-theme="dark"] #server-connection-status .server-welcome-text{
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  background:none!important;
+  text-shadow:0 0 12px rgba(103,232,249,.42)!important;
+}
+
+@media (prefers-color-scheme: light){
+  #server-connection-status .server-robot{
+    color:#2563eb!important;
+    background:linear-gradient(145deg,rgba(37,99,235,.12),rgba(6,182,212,.10))!important;
+    border-color:rgba(37,99,235,.28)!important;
+    box-shadow:0 0 24px rgba(37,99,235,.16),inset 0 1px 0 rgba(255,255,255,.95)!important;
+  }
+  #server-connection-status .server-robot > .fa-robot{color:#2563eb!important;filter:drop-shadow(0 0 8px rgba(37,99,235,.28))!important;}
+  #server-connection-status .server-robot-hand{color:#f59e0b!important;filter:drop-shadow(0 0 7px rgba(245,158,11,.28))!important;}
+  #server-connection-status .server-welcome-text{
+    color:#111827!important;text-shadow:none!important;
+    background:linear-gradient(90deg,#111827,#2563eb)!important;
+    -webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;
+  }
+  #server-connection-status .server-welcome-burst{
+    background:radial-gradient(circle,rgba(255,255,255,.98) 0 4%,rgba(96,165,250,.92) 7%,rgba(37,99,235,.35) 19%,rgba(6,182,212,.12) 42%,transparent 68%),repeating-conic-gradient(from 0deg,rgba(255,255,255,0) 0 8deg,rgba(37,99,235,.65) 9deg 11deg,rgba(255,255,255,0) 12deg 24deg)!important;
+  }
+}
+</style>
 </body>
 </html>
