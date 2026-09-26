@@ -2843,7 +2843,7 @@ body.dark-mode #loginForm .input-group-pro > button:hover {
             <div class="menu-group"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-cubes"></i>General</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
                 <a href="#agenda" class="nav-link" onclick="switchTab('agenda')"><i class="fa-solid fa-calendar-check"></i><span>Agenda</span></a>
 <a href="#tareas" class="nav-link" onclick="switchTab('tareas')"><i class="fa-solid fa-list-check"></i><span>Tareas</span></a>
-<a href="#recordatorios" class="nav-link" onclick="switchTab('recordatorios')"><i class="fa-solid fa-bell-plus"></i><span>Recordatorios</span></a>
+<a href="#recordatorios" class="nav-link" onclick="switchTab('recordatorios')"><i class="fa-solid fa-calendar-check"></i><span>Recordatorios</span></a>
             </div></div>
             <div class="menu-group"> <button type="button" class="menu-group-toggle" onclick="toggleMenuGroup(this)" aria-expanded="false"><span><i class="fa-solid fa-briefcase"></i>Administración</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
                 <a href="#empresas" class="nav-link view-admin-master" onclick="switchTab('empresas')"><i class="fa-solid fa-building"></i><span>Gestión Empresas</span></a>
@@ -4312,7 +4312,7 @@ body.dark-mode #loginForm .input-group-pro > button:hover {
 <section id="sec-recordatorios" class="tab-content d-none">
   <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
     <div>
-      <h5 class="fw-bold m-0"><i class="fa-solid fa-bell-plus text-primary me-2"></i>Recordatorios</h5>
+      <h5 class="fw-bold m-0"><i class="fa-solid fa-calendar-check text-primary me-2"></i>Recordatorios</h5>
       <small class="text-muted">Organiza compromisos, búsquedas, citas, trabajos y cualquier pendiente personal con avisos por Telegram.</small>
     </div>
     <button class="btn btn-primary" type="button" onclick="abrirFormularioRecordatorio()"><i class="fa-solid fa-plus me-1"></i>Nuevo recordatorio</button>
@@ -9417,7 +9417,7 @@ async function eliminarEmpresa(id) {
         manutencion:{label:'Manutención',icon:'fa-hand-holding-dollar',actions:['leer','agregar','modificar','eliminar']},
         registrosescolares:{label:'Registros Escolares',icon:'fa-school',actions:['leer','agregar','modificar','eliminar']},
         tareas:{label:'Tareas y Recordatorios',icon:'fa-list-check',actions:['leer','agregar','modificar','eliminar']},
-        recordatorios:{label:'Recordatorios Personales',icon:'fa-bell-plus',actions:['leer','agregar','modificar','eliminar']},
+        recordatorios:{label:'Recordatorios Personales',icon:'fa-calendar-check',actions:['leer','agregar','modificar','eliminar']},
         gastos:{label:'Control de Gastos',icon:'fa-wallet',actions:['leer','agregar','modificar','eliminar']},
         vehiculos:{label:'Vehículos',icon:'fa-car-side',actions:['leer','agregar','modificar','eliminar']},
         recordatoriosmedicinas:{label:'Recordatorios de Medicinas',icon:'fa-pills',actions:['leer','agregar','modificar','eliminar']},
@@ -16834,5 +16834,134 @@ html[data-bs-theme="dark"] #server-connection-status .server-welcome-text{
   }
 }
 </style>
+
+
+<style id="ajuste-final-tema-sidebar-vehiculos-recordatorios-v22">
+/* ================================================================
+   AJUSTES FINALES V22 — SOLO CORRECCIONES VISUALES
+   1) Eliminar por completo el recuadro del logo del encabezado lateral.
+   2) Hacer visible Recordatorios en claro y oscuro.
+   3) Corregir encabezado del formulario de vehículos en oscuro.
+   4) Hacer legible el módulo activo en tema claro.
+   ================================================================ */
+
+/* 1) LOGO DEL ENCABEZADO DEL MENÚ — SIN RECUADRO */
+body.portal-modern-v2 #sidebar .lc-sidebar-logo-shell,
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .lc-sidebar-logo-shell,
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar .lc-sidebar-logo-shell{
+  background:transparent!important;
+  background-color:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+/* 2) RECORDATORIOS — MISMA PALETA QUE LOS DEMÁS ICONOS */
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar a[href="#recordatorios"] > i,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar a[href="#recordatorios"] > i{
+  background:rgba(37,99,235,.075)!important;
+  color:#2563eb!important;
+  border:1px solid rgba(37,99,235,.10)!important;
+  box-shadow:none!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar a[href="#recordatorios"] > i,
+body.dark-mode body.portal-modern-v2 #sidebar a[href="#recordatorios"] > i{
+  background:rgba(255,255,255,.055)!important;
+  color:#aeb8cc!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar a[href="#recordatorios"]:hover > i,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar a[href="#recordatorios"]:hover > i{
+  background:rgba(37,99,235,.13)!important;
+  color:#1d4ed8!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sidebar a[href="#recordatorios"]:hover > i,
+body.dark-mode body.portal-modern-v2 #sidebar a[href="#recordatorios"]:hover > i{
+  background:rgba(255,255,255,.09)!important;
+  color:#ffffff!important;
+}
+/* Encabezado del módulo: mismo azul del sistema en claro y neutral en oscuro. */
+html[data-bs-theme="light"] body.portal-modern-v2 #sec-recordatorios .fa-calendar-check,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sec-recordatorios .fa-calendar-check{
+  color:#2563eb!important;
+  filter:none!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 #sec-recordatorios .fa-calendar-check,
+body.dark-mode body.portal-modern-v2 #sec-recordatorios .fa-calendar-check{
+  color:#aeb8cc!important;
+  filter:none!important;
+}
+
+/* 3) FORMULARIO DE VEHÍCULOS — ENCABEZADO OSCURO LEGIBLE */
+html[data-bs-theme="dark"] body.portal-modern-v2 .vehiculos-card .vehiculos-head,
+html[data-bs-theme="dark"] body.portal-modern-v2 .vehiculos-card .vehiculos-head,
+body.dark-mode body.portal-modern-v2 .vehiculos-card .vehiculos-head{
+  background:linear-gradient(135deg,#111c2e,#132238)!important;
+  background-color:#111c2e!important;
+  border-bottom-color:#263244!important;
+  color:#e5edf7!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 .vehiculos-card .vehiculos-head .title,
+body.dark-mode body.portal-modern-v2 .vehiculos-card .vehiculos-head .title{
+  color:#e5edf7!important;
+}
+html[data-bs-theme="dark"] body.portal-modern-v2 .vehiculos-card .vehiculos-head small,
+body.dark-mode body.portal-modern-v2 .vehiculos-card .vehiculos-head small{
+  color:#94a3b8!important;
+}
+
+/* 4) MÓDULO ACTIVO — TEMA CLARO: TEXTO OSCURO Y LEGIBLE */
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link.active,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .nav-link.active,
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .menu-group-items .nav-link.active,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .menu-group-items .nav-link.active{
+  background:linear-gradient(135deg,#e0e7ff,#dbeafe)!important;
+  color:#1e3a8a!important;
+  border:1px solid rgba(59,130,246,.18)!important;
+  box-shadow:0 8px 18px rgba(37,99,235,.10)!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link.active:before,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .nav-link.active:before{
+  background:#2563eb!important;
+}
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .nav-link.active > i,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .nav-link.active > i,
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar .menu-group-items .nav-link.active > i,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar .menu-group-items .nav-link.active > i{
+  background:#c7d2fe!important;
+  color:#1d4ed8!important;
+  border-color:rgba(37,99,235,.18)!important;
+  box-shadow:none!important;
+}
+
+/* El estado activo de Recordatorios conserva su icono legible también en claro. */
+html[data-bs-theme="light"] body.portal-modern-v2 #sidebar a[href="#recordatorios"].active > i,
+html:not([data-bs-theme="dark"]) body:not(.dark-mode) body.portal-modern-v2 #sidebar a[href="#recordatorios"].active > i{
+  background:#fde68a!important;
+  color:#92400e!important;
+  border-color:#fcd34d!important;
+}
+</style>
+
 </body>
 </html>
+<style id="ajuste-final-tamano-textos-menu-v24">
+/* Texto de módulos y encabezados de grupos más legible. */
+body.portal-modern-v2 #sidebar .nav-link{
+  font-size:.86rem!important;
+  font-weight:700!important;
+}
+body.portal-modern-v2 #sidebar .menu-group-toggle{
+  font-size:.74rem!important;
+  font-weight:850!important;
+  letter-spacing:.065em!important;
+}
+body.portal-modern-v2 #sidebar .px-3.mb-2 small{
+  font-size:.67rem!important;
+  font-weight:800!important;
+  letter-spacing:.13em!important;
+}
+</style>
