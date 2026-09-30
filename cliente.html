@@ -12,7 +12,16 @@
         } catch(e) {}
     })();
     
-    function clienteCoincideTrabajoManual(t,c){return !!t&&!!c&&(String(t.id_cliente||'')===String(c.id_cliente||'')||String(t.codigo_cliente||'')===String(c.codigo_cliente||''));}
+    function formatoMontoPortal(valor, moneda='USD') {
+    const n=Number(valor);
+    if(!Number.isFinite(n)) return '0,00 '+(String(moneda||'USD').toUpperCase()==='VES'?'Bs':String(moneda||'USD').toUpperCase());
+    const m=String(moneda||'USD').trim().toUpperCase();
+    const sigla=m==='VES'?'Bs':m==='COP'?'COP':m==='USDT'?'USDT':'USD';
+    return new Intl.NumberFormat('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n)+' '+sigla;
+}
+function simboloMontoPortal(moneda='USD'){const m=String(moneda||'USD').trim().toUpperCase();return m==='VES'?'Bs':m==='COP'?'COP':m==='USDT'?'USDT':'USD';}
+
+function clienteCoincideTrabajoManual(t,c){return !!t&&!!c&&(String(t.id_cliente||'')===String(c.id_cliente||'')||String(t.codigo_cliente||'')===String(c.codigo_cliente||''));}
 
     function obtenerTrabajosManualesCliente(c){return (Array.isArray(db?.trabajos_manuales)?db.trabajos_manuales:[]).filter(t=>clienteCoincideTrabajoManual(t,c));}
 
@@ -2125,6 +2134,7 @@ html[data-bs-theme="dark"] #modalUsuario .perm-action-pill,html[data-bs-theme="d
 #modalUsuario .perm-sidebar-title span,#modalUsuario .perm-detail-title span { font-weight: 800; color: var(--text-main); }
 #modalUsuario .perm-sidebar-title small,#modalUsuario .perm-detail-title small { color: var(--text-muted); }
 #modalUsuario .perm-module-list { display: flex; flex-direction: column; overflow: auto; }
+#modalUsuario .perm-studio-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
 #modalUsuario .perm-module-card { width: 100%; cursor: pointer; }
 #modalUsuario .perm-module-card.selected { border-color: rgba(37,99,235,.55) !important; background: rgba(37,99,235,.09) !important; box-shadow: inset 3px 0 0 #2563eb; }
 #modalUsuario .perm-module-card.active { border-color: #2563eb !important; background: rgba(37,99,235,.12) !important; box-shadow: inset 3px 0 0 #2563eb; }
@@ -2218,6 +2228,25 @@ html[data-bs-theme="dark"] #modalUsuario .perm-module-sidebar,html[data-bs-theme
 #modalUsuario .perm-client-search { margin-top: 3px !important; padding: .25rem .4rem !important; }
 #modalUsuario .perm-client-list { max-height: 88px !important; margin-top: 3px !important; gap: 2px !important; }
 #modalUsuario .perm-client-list label { padding: 3px 5px !important; border-radius: 6px !important; }
+@media (min-width:768px){
+  #modalUsuario .perm-studio-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
+  #modalUsuario .perm-module-sidebar { min-width:0 !important; }
+}
+@media (max-width:767px){
+  #modalUsuario .perm-detail-panel { display:none !important; }
+  #modalUsuario .perm-studio-grid { grid-template-columns:1fr !important; }
+  #modalUsuario .perm-module-sidebar { border-right:0 !important; border-bottom:0 !important; }
+  #modalUsuario .perm-module-list { display:grid !important; grid-template-columns:1fr 1fr !important; max-height:none !important; height:auto !important; overflow:visible !important; gap:5px !important; }
+  #modalUsuario .perm-module-card { min-height:38px !important; padding:7px 8px !important; }
+}
+#permisoModuloMovilModal { position:fixed; inset:0; z-index:2055; display:none; align-items:center; justify-content:center; padding:12px; background:rgba(15,23,42,.62); backdrop-filter:blur(3px); }
+#permisoModuloMovilModal.show { display:flex; }
+#permisoModuloMovilModal .permiso-modulo-movil-card { width:min(96vw,520px); max-height:90vh; overflow:auto; background:var(--bg-card,#fff); color:var(--text-main,#111827); border:1px solid var(--border-color,#e2e8f0); border-radius:16px; box-shadow:0 24px 70px rgba(0,0,0,.28); }
+#permisoModuloMovilModal .permiso-modulo-movil-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 14px; background:var(--bg-card,#fff); border-bottom:1px solid var(--border-color,#e2e8f0); }
+#permisoModuloMovilModal .permiso-modulo-movil-body { padding:10px; }
+#permisoModuloMovilModal .permiso-modulo-movil-body .perm-config-card { display:block !important; margin:0 !important; background:var(--surface-soft) !important; }
+#permisoModuloMovilModal .permiso-modulo-movil-foot { display:flex; justify-content:flex-end; gap:7px; padding:10px 14px; border-top:1px solid var(--border-color,#e2e8f0); }
+html[data-bs-theme="dark"] #permisoModuloMovilModal .permiso-modulo-movil-card,html[data-bs-theme="dark"] #permisoModuloMovilModal .permiso-modulo-movil-head { background:#0f172a; }
 #modalUsuario .usr-form-footer { grid-column: 1/-1 !important; grid-row: 4 !important; margin-top: 6px !important; padding-top: 6px !important; gap: 6px !important; min-height: 39px !important; }
 #modalUsuario .usr-form-footer .btn { padding: .34rem .72rem !important; border-radius: 7px !important; }
 @media (max-width:980px) {
@@ -2720,6 +2749,19 @@ html[data-bs-theme="dark"] .invoice-modal-header { color: #ffffff !important; }
 .recordatorio-form-body { padding: 16px; }
 .recordatorio-modal-foot { position: sticky; bottom: 0; display: flex; justify-content: flex-end; gap: 8px; padding: 12px 16px; background: var(--bg-card,#fff); border-top: 1px solid var(--border-color,#e2e8f0); }
 .recordatorio-telegram-box { border: 1px solid rgba(37,99,235,.18); background: rgba(37,99,235,.05); border-radius: 13px; padding: 11px 12px; }
+.recordatorio-visibilidad-box { border:1px solid rgba(37,99,235,.18); background:rgba(37,99,235,.045); border-radius:13px; padding:11px 12px; }
+.recordatorio-permisos-list { margin-top:7px; }
+.recordatorio-perm-user { display:grid; grid-template-columns:14px minmax(0,1fr); align-items:center; gap:6px; padding:6px 7px; border:1px solid var(--border-color,#e2e8f0); background:var(--bg-card,#fff); border-radius:8px; cursor:pointer; }
+.recordatorio-perm-user small { display:block; color:var(--text-muted,#64748b); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.recordatorio-perm-user input { margin:0; }
+.recordatorio-permisos-seleccionados-wrap { margin-top:7px; }
+.recordatorio-permisos-seleccionados { display:flex; flex-wrap:wrap; gap:5px; min-height:28px; }
+.recordatorio-perm-selected { display:flex; align-items:center; gap:6px; max-width:100%; padding:4px 6px 4px 8px; border:1px solid var(--border-color,#e2e8f0); border-radius:8px; background:var(--bg-card,#fff); }
+.recordatorio-perm-selected span { min-width:0; }
+.recordatorio-perm-selected strong,.recordatorio-perm-selected small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:220px; }
+.recordatorio-perm-selected small { color:var(--text-muted,#64748b); font-size:.68rem; }
+.recordatorio-perm-selected .btn { width:23px; height:23px; padding:0; display:inline-flex; align-items:center; justify-content:center; border-radius:6px; font-size:.62rem; flex:0 0 auto; }
+.recordatorio-permisos-resultados-wrap,.recordatorio-permisos-seleccionados-wrap{margin-top:8px}.recordatorio-permisos-resultados,.recordatorio-permisos-seleccionados{display:flex;flex-direction:column;gap:5px}.recordatorio-permisos-resultados{max-height:210px;overflow:auto;padding-right:3px}.recordatorio-perm-user,.recordatorio-perm-selected{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 9px;border:1px solid var(--border-color,#e2e8f0);border-radius:9px;background:var(--bg-card,#fff)}.recordatorio-perm-user{cursor:pointer}.recordatorio-perm-user:hover{border-color:rgba(37,99,235,.45);background:rgba(37,99,235,.035)}.recordatorio-perm-user>span,.recordatorio-perm-selected>span{min-width:0;display:flex;flex-direction:column}.recordatorio-perm-user strong,.recordatorio-perm-selected strong{font-size:.68rem}.recordatorio-perm-user small,.recordatorio-perm-selected small{font-size:.59rem;color:var(--text-muted,#64748b);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.recordatorio-perm-user input{margin:0;flex:0 0 auto}.recordatorio-perm-selected .btn{width:25px;height:25px;padding:0;display:inline-flex;align-items:center;justify-content:center;font-size:.6rem}.recordatorio-permisos-seleccionados{max-height:145px;overflow:auto;padding-right:3px}
 .recordatorio-view-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; padding: 16px; }
 .recordatorio-view-field { border: 1px solid var(--border-color,#e2e8f0); border-radius: 11px; padding: 10px; }
 .recordatorio-view-field.full { grid-column: 1/-1; }
@@ -3418,7 +3460,50 @@ body { min-width: 0; overflow-x: hidden; }
 
 /* Ajuste final: modal de cierre de sesión compacto en escritorio */
 @media (min-width: 992px){#modalConfirmLogout .modal-dialog{max-width:360px}#modalConfirmLogout .modal-content{padding:12px!important}#modalConfirmLogout .modal-body{padding:8px!important}#modalConfirmLogout .modal-body p{margin-bottom:12px!important}#modalConfirmLogout .modal-body .mb-2{margin-bottom:8px!important}}
-</style></head>
+</style><style id="ajuste-permisos-modulos-final">
+@media (min-width:768px){#modalUsuario .perm-studio-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;}#modalUsuario .perm-module-list{max-height:430px!important;overflow-y:auto!important;}}
+@media (max-width:767px){#modalUsuario .perm-studio-grid{grid-template-columns:1fr!important;}#modalUsuario .perm-module-list{display:flex!important;flex-direction:column!important;max-height:280px!important;height:auto!important;overflow-y:auto!important;overflow-x:hidden!important;gap:4px!important;padding-right:5px!important;}#modalUsuario .perm-module-card{min-height:38px!important;flex:0 0 auto!important;}}
+</style>
+<style id="sueldos-salarios-estilos">
+#sec-sueldos .sueldos-kpi-grid .task-kpi-card{padding:10px 12px;border-radius:12px;gap:9px;box-shadow:0 5px 16px rgba(15,23,42,.045)}
+#sec-sueldos .sueldos-kpi-grid .task-kpi-icon{width:34px;height:34px;border-radius:9px;font-size:.74rem}
+#sec-sueldos .sueldos-kpi-grid .task-kpi-label{font-size:.61rem}#sec-sueldos .sueldos-kpi-grid .task-kpi-value{font-size:1.05rem}
+#sec-sueldos .sueldos-grupo{margin-bottom:10px}.sueldos-grupo-head{display:flex;align-items:center;justify-content:space-between;padding:8px 11px;border:1px solid var(--border-color);border-radius:12px 12px 0 0;background:var(--bg-card);font-weight:800;font-size:.74rem}.sueldos-grupo-tabla{border:1px solid var(--border-color);border-top:0;border-radius:0 0 12px 12px;overflow:auto}.sueldos-table{min-width:820px;font-size:.68rem}.sueldos-table th{font-size:.59rem!important;padding:7px 8px!important}.sueldos-table td{font-size:.68rem;padding:7px 8px;vertical-align:middle}.sueldos-actions{display:flex;gap:3px}.sueldos-actions .btn{width:27px;height:27px;padding:0;display:inline-flex;align-items:center;justify-content:center;font-size:.62rem}.sueldos-ingreso .sueldos-grupo-head{border-left:4px solid #16a34a}.sueldos-egreso .sueldos-grupo-head{border-left:4px solid #dc2626}.sueldos-form-card{width:min(980px,96vw)}.sueldos-kpi-collapse{width:100%;border:1px solid var(--border-color,#e2e8f0);background:var(--bg-card,#fff);border-radius:12px;padding:10px 12px;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:8px;text-align:left;box-shadow:0 5px 16px rgba(15,23,42,.045);font-weight:800;font-size:.74rem;color:var(--text-color,#0f172a)}.sueldos-kpi-total{font-size:.92rem}.sueldos-kpi-chevron{font-size:.65rem;transition:transform .18s ease;color:var(--text-muted,#64748b)}.sueldos-kpi-collapse.open .sueldos-kpi-chevron{transform:rotate(180deg)}.sueldos-kpi-detail{border:1px solid var(--border-color,#e2e8f0);border-top:0;border-radius:0 0 12px 12px;background:var(--bg-card,#fff);padding:6px 10px}.sueldos-kpi-detail .sueldos-kpi-row{display:flex;justify-content:space-between;gap:10px;padding:5px 2px;font-size:.67rem;border-bottom:1px solid rgba(148,163,184,.18)}.sueldos-kpi-detail .sueldos-kpi-row:last-child{border-bottom:0}.sueldos-kpi-detail .sueldos-kpi-row strong{font-size:.69rem}
+</style><style id="sueldos-recibo-estilos">.sueldo-recibo-box{border:1px dashed var(--border-color,#cbd5e1);border-radius:10px;padding:9px;background:rgba(37,99,235,.025)}.sueldo-recibo-preview{display:flex;align-items:center;gap:8px;max-width:420px}.sueldo-recibo-preview img{width:74px;height:54px;object-fit:cover;border-radius:7px;border:1px solid var(--border-color,#e2e8f0)}.sueldo-recibo-preview span{font-size:.68rem;color:var(--text-muted,#64748b)}</style><script>
+/* Formato monetario global del portal: 1.000,00 */
+function formatearNumeroPortal(valor){
+  const n=Number(valor);
+  if(!Number.isFinite(n)) return '0,00';
+  return new Intl.NumberFormat('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
+}
+</script>
+<script>
+(function(){
+  const _toFixedPortal=Number.prototype.toFixed;
+  Number.prototype.toFixed=function(digits){
+    const out=_toFixedPortal.call(this,digits);
+    if(Number(digits)!==2) return out;
+    const parts=String(out).split('.');
+    return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+','+(parts[1]||'00');
+  };
+})();
+</script>
+
+<style id="sueldos-filtros-linea-final">
+.sueldos-filtros-linea{display:flex;align-items:flex-end;gap:10px;flex-wrap:nowrap;width:100%;}
+.sueldos-filtro-item{flex:0 0 145px;min-width:0;}
+.sueldos-filtro-anio{flex-basis:105px;}
+.sueldos-filtro-busqueda{flex:1 1 230px;min-width:180px;}
+.sueldos-filtros-linea .form-label{white-space:nowrap;}
+.sueldos-filtros-linea .form-select,.sueldos-filtros-linea .form-control{min-height:34px;}
+@media(max-width:767px){
+  .sueldos-filtros-linea{flex-wrap:wrap;gap:8px;}
+  .sueldos-filtro-item{flex:1 1 calc(50% - 8px);}
+  .sueldos-filtro-anio{flex-basis:auto;}
+  .sueldos-filtro-busqueda{flex:1 1 100%;min-width:0;}
+}
+</style>
+</head>
 <!-- VERSION Servidor 2026.1.2 -->
 <body>
 <!-- ═══════════════════════════════════════════════════════════════
@@ -3626,7 +3711,7 @@ body { min-width: 0; overflow-x: hidden; }
 <a class="nav-link" href="#auditoria" onclick="switchTab('auditoria')"><i class="fa-solid menu-subicon menu-subicon-auditoria fa-shield-halved"></i><span>Auditoría</span></a>
 </div></div>
 <div class="menu-group"> <button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-coins menu-group-icon menu-group-icon-finanzas"></i>Finanzas</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link" href="#facturacion" onclick="switchTab('facturacion')"><i class="fa-solid menu-subicon menu-subicon-facturacion fa-file-invoice-dollar"></i><span>Facturación</span></a><a class="nav-link" href="#creditos" onclick="switchTab('creditos')"><i class="fa-solid menu-subicon menu-subicon-creditos fa-hand-holding-dollar"></i><span>Créditos y Cuotas</span></a><a class="nav-link" href="#pagos" onclick="switchTab('pagos')"><i class="fa-solid menu-subicon menu-subicon-pagos fa-money-bill-transfer"></i><span>Pagos</span></a><a class="nav-link" href="#bancos" onclick="switchTab('bancos')"><i class="fa-solid menu-subicon menu-subicon-bancos fa-building-columns"></i><span>Datos Bancarios</span></a><a class="nav-link" href="#gastos" onclick="switchTab('gastos')"><i class="fa-solid menu-subicon menu-subicon-gastos fa-chart-pie"></i><span>Control de Gastos</span></a>
+<a class="nav-link" href="#facturacion" onclick="switchTab('facturacion')"><i class="fa-solid menu-subicon menu-subicon-facturacion fa-file-invoice-dollar"></i><span>Facturación</span></a><a class="nav-link" href="#creditos" onclick="switchTab('creditos')"><i class="fa-solid menu-subicon menu-subicon-creditos fa-hand-holding-dollar"></i><span>Créditos y Cuotas</span></a><a class="nav-link" href="#pagos" onclick="switchTab('pagos')"><i class="fa-solid menu-subicon menu-subicon-pagos fa-money-bill-transfer"></i><span>Pagos</span></a><a class="nav-link" href="#bancos" onclick="switchTab('bancos')"><i class="fa-solid menu-subicon menu-subicon-bancos fa-building-columns"></i><span>Datos Bancarios</span></a><a class="nav-link" href="#gastos" onclick="switchTab('gastos')"><i class="fa-solid menu-subicon menu-subicon-gastos fa-chart-pie"></i><span>Control de Gastos</span></a><a class="nav-link" href="#sueldos" onclick="switchTab('sueldos')"><i class="fa-solid menu-subicon fa-money-check-dollar"></i><span>Sueldos y Salarios</span></a>
 </div></div>
 <div class="menu-group"> <button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-people-roof menu-group-icon menu-group-icon-familia"></i>Familia y Registros</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
 <a class="nav-link" href="#familia" onclick="switchTab('familia')"><i class="fa-solid menu-subicon menu-subicon-familia fa-people-roof"></i><span>Familia</span></a><a class="nav-link" href="#historialmedico" onclick="switchTab('historialmedico')"><i class="fa-solid menu-subicon menu-subicon-historialmedico fa-heart-pulse"></i><span>Historial Médico</span></a><a class="nav-link" href="#manutencion" onclick="switchTab('manutencion')"><i class="fa-solid menu-subicon menu-subicon-manutencion fa-hand-holding-dollar"></i><span>Manutención</span></a><a class="nav-link" href="#registrosescolares" onclick="switchTab('registrosescolares')"><i class="fa-solid menu-subicon menu-subicon-registrosescolares fa-school"></i><span>Registros Escolares</span></a><a class="nav-link" href="#vehiculos" onclick="switchTab('vehiculos')"><i class="fa-solid menu-subicon menu-subicon-vehiculos fa-car-side"></i><span>Vehículos</span></a>
@@ -4291,6 +4376,14 @@ body { min-width: 0; overflow-x: hidden; }
 </div>
 <div class="col-12"><label class="form-label small fw-semibold">Mensaje adicional para Telegram</label><textarea class="form-control form-control-pro" id="recordatorio-mensaje" placeholder="Información extra que quieres ver en la notificación..." rows="3"></textarea></div>
 <div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea class="form-control form-control-pro" id="recordatorio-observaciones" placeholder="Notas adicionales para tu control personal..." rows="2"></textarea></div>
+<div class="col-12 d-none" id="recordatorio-permisos-visibilidad-wrap">
+<div class="recordatorio-visibilidad-box">
+<div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-2"><div><div class="fw-semibold"><i class="fa-solid fa-user-shield text-primary me-1"></i>Usuarios autorizados para ver este recordatorio</div><small class="text-muted">Seleccione uno o varios usuarios que tengan permiso de lectura en Recordatorios. El creador siempre conserva el acceso.</small></div><span class="badge rounded-pill text-bg-light border" id="recordatorio-permisos-count">0 seleccionados</span></div>
+<div class="row g-2 align-items-center"><div class="col-12 col-md"><input class="form-control form-control-sm" id="recordatorio-permisos-busqueda" placeholder="Buscar usuario por cualquier dato..." type="search"/></div><div class="col-12 col-md-auto d-flex gap-2"><button type="button" class="btn btn-sm btn-primary" onclick="buscarUsuariosRecordatorioVisibilidad()"><i class="fa-solid fa-magnifying-glass me-1"></i>Buscar</button><button type="button" class="btn btn-sm btn-outline-danger" onclick="limpiarBusquedaUsuariosRecordatorioVisibilidad()"><i class="fa-solid fa-eraser me-1"></i>Limpiar</button></div></div>
+<div class="recordatorio-permisos-resultados-wrap"><div class="small fw-semibold text-muted mb-1">Resultados de búsqueda</div><div class="recordatorio-permisos-resultados" id="recordatorio-permisos-resultados"><div class="small text-muted py-2">Use BUSCAR para localizar usuarios.</div></div></div>
+<div class="recordatorio-permisos-seleccionados-wrap"><div class="small fw-semibold text-muted mb-1">Usuarios seleccionados</div><div class="recordatorio-permisos-seleccionados" id="recordatorio-permisos-seleccionados"><div class="small text-muted py-1">No hay usuarios seleccionados.</div></div></div>
+</div>
+</div>
 </div>
 </form>
 </div>
@@ -4917,6 +5010,24 @@ body { min-width: 0; overflow-x: hidden; }
 <div id="gastos-listado"></div>
 <div class="d-none" id="gastos-tbody"></div>
 </section>
+<section class="tab-content d-none" id="sec-sueldos">
+<div class="sueldos-shell">
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+<div><h5 class="fw-bold m-0"><i class="fa-solid fa-money-check-dollar text-primary me-2"></i>Sueldos y Salarios</h5><small class="text-muted">Registro de ingresos y egresos relacionados con sueldos, salarios y compensaciones por empresa.</small></div>
+<button class="btn btn-primary" data-perm-action="agregar" data-perm-module="sueldos" onclick="abrirFormularioSueldo()" type="button"><i class="fa-solid fa-plus me-1"></i>Nuevo movimiento</button>
+</div>
+<div class="row g-2 mb-3 sueldos-kpi-grid">
+<div class="col-12 col-md-4"><button type="button" class="sueldos-kpi-collapse" onclick="toggleKpiSueldos_('ingresos')"><span><i class="fa-solid fa-arrow-down text-success me-2"></i>Ingresos</span><span class="sueldos-kpi-total" id="sueldos-kpi-ingresos-total"></span><i class="fa-solid fa-chevron-down sueldos-kpi-chevron" id="sueldos-kpi-ingresos-chevron"></i></button><div class="sueldos-kpi-detail d-none" id="sueldos-kpi-ingresos-detail"></div></div>
+<div class="col-12 col-md-4"><button type="button" class="sueldos-kpi-collapse" onclick="toggleKpiSueldos_('egresos')"><span><i class="fa-solid fa-arrow-up text-danger me-2"></i>Egresos</span><span class="sueldos-kpi-total" id="sueldos-kpi-egresos-total"></span><i class="fa-solid fa-chevron-down sueldos-kpi-chevron" id="sueldos-kpi-egresos-chevron"></i></button><div class="sueldos-kpi-detail d-none" id="sueldos-kpi-egresos-detail"></div></div>
+<div class="col-12 col-md-4"><button type="button" class="sueldos-kpi-collapse" onclick="toggleKpiSueldos_('neto')"><span><i class="fa-solid fa-scale-balanced text-primary me-2"></i>Neto</span><span class="sueldos-kpi-total" id="sueldos-kpi-neto-total"></span><i class="fa-solid fa-chevron-down sueldos-kpi-chevron" id="sueldos-kpi-neto-chevron"></i></button><div class="sueldos-kpi-detail d-none" id="sueldos-kpi-neto-detail"></div></div>
+</div>
+<div class="family-reg-section mb-3">
+<div class="family-reg-head"><div><div class="title"><i class="fa-solid fa-calendar-days text-primary me-2"></i>Sueldos por mes</div><div class="sub">El mes actual se muestra automáticamente. Seleccione otro mes y año para consultar registros anteriores.</div></div><button class="btn btn-sm btn-outline-danger" onclick="limpiarFiltroSueldos()" type="button"><i class="fa-solid fa-broom me-1"></i>Limpiar</button></div>
+<div class="family-reg-body"><div class="sueldos-filtros-linea"><div class="sueldos-filtro-item"><label class="form-label small fw-semibold mb-1">Mes</label><select class="form-select form-select-sm" id="sueldos-filtro-mes" onchange="renderSueldosModulo()"></select></div><div class="sueldos-filtro-item sueldos-filtro-anio"><label class="form-label small fw-semibold mb-1">Año</label><select class="form-select form-select-sm" id="sueldos-filtro-anio" onchange="renderSueldosModulo()"></select></div><div class="sueldos-filtro-item"><label class="form-label small fw-semibold mb-1">Desde</label><input class="form-control form-control-sm" id="sueldos-filtro-desde" type="date" onchange="renderSueldosModulo()"/></div><div class="sueldos-filtro-item"><label class="form-label small fw-semibold mb-1">Hasta</label><input class="form-control form-control-sm" id="sueldos-filtro-hasta" type="date" onchange="renderSueldosModulo()"/></div><div class="sueldos-filtro-busqueda"><label class="form-label small fw-semibold mb-1">Buscar</label><div class="input-group input-group-sm"><span class="input-group-text bg-transparent"><i class="fa-solid fa-magnifying-glass"></i></span><input class="form-control" id="sueldos-filtro" oninput="renderSueldosModulo()" placeholder="Buscar..."/></div></div></div></div>
+</div>
+<div id="sueldos-listado"></div>
+</div>
+</section>
 <section class="tab-content d-none" id="sec-vehiculos">
 <div class="veh-shell">
 <div class="veh-toolbar">
@@ -4990,13 +5101,13 @@ body { min-width: 0; overflow-x: hidden; }
 <div aria-hidden="true" class="vehiculos-overlay" id="vehiculoCombustibleModal">
 <div class="vehiculos-card">
 <div class="vehiculos-head"><div><div class="title" id="combustibleFormTitle"><i class="fa-solid fa-gas-pump text-primary me-2"></i>Registrar combustible</div><small id="combustibleFormSub">Surtido asociado al vehículo.</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarFormularioCombustible()" type="button"><i class="fa-solid fa-xmark"></i></button></div>
-<form onsubmit="guardarCombustibleVehiculo(event)"><input id="combustible-id" type="hidden"/><input id="combustible-vehiculo-id" type="hidden"/><div class="vehiculos-body"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Vehículo</label><input class="form-control form-control-pro" id="combustible-vehiculo-label" readonly=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control form-control-pro" id="combustible-fecha" required="" type="date"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Estación</label><input class="form-control form-control-pro" id="combustible-estacion"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Combustible *</label><select class="form-select form-control-pro" id="combustible-tipo" required=""><option>Gasolina 91</option><option>Gasolina 95</option><option>Diésel</option><option>GLP</option><option>Eléctrico</option><option>Otro</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Litros / unidades *</label><input class="form-control form-control-pro" id="combustible-cantidad" min="0" oninput="calcularCombustibleMontoUI()" required="" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Precio unitario</label><input class="form-control form-control-pro" id="combustible-precio" min="0" oninput="calcularCombustibleMontoUI()" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Monto</label><input class="form-control form-control-pro" id="combustible-monto" min="0" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Moneda</label><select class="form-select form-control-pro" id="combustible-moneda"><option>USD</option><option>VES</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Tasa Bs/US$</label><input class="form-control form-control-pro" id="combustible-tasa" min="0" step="0.0001" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Kilometraje</label><input class="form-control form-control-pro" id="combustible-km" min="0" step="0.1" type="number"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Método de pago</label><input class="form-control form-control-pro" id="combustible-metodo"/></div><div class="col-md-9"><label class="form-label small fw-semibold">Observaciones</label><input class="form-control form-control-pro" id="combustible-observaciones"/></div></div></div><div class="vehiculos-foot"><button class="btn btn-outline-secondary" onclick="cerrarFormularioCombustible()" type="button">Cancelar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar surtido</button></div></form>
+<form onsubmit="guardarCombustibleVehiculo(event)"><input id="combustible-id" type="hidden"/><input id="combustible-vehiculo-id" type="hidden"/><div class="vehiculos-body"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Vehículo</label><input class="form-control form-control-pro" id="combustible-vehiculo-label" readonly=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control form-control-pro" id="combustible-fecha" required="" type="date"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Estación</label><input class="form-control form-control-pro" id="combustible-estacion"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Combustible *</label><select class="form-select form-control-pro" id="combustible-tipo" required=""><option>Gasolina 91</option><option>Gasolina 95</option><option>Diésel</option><option>GLP</option><option>Eléctrico</option><option>Otro</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Litros / unidades *</label><input class="form-control form-control-pro" id="combustible-cantidad" min="0" oninput="calcularCombustibleMontoUI()" required="" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Precio unitario</label><input class="form-control form-control-pro" id="combustible-precio" min="0" oninput="calcularCombustibleMontoUI()" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Monto</label><input class="form-control form-control-pro" id="combustible-monto" min="0" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Moneda</label><select class="form-select form-control-pro" id="combustible-moneda"><option value="USD">USD</option><option value="VES">Bs</option><option value="COP">COP</option><option value="USDT">USDT</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Tasa Bs/US$</label><input class="form-control form-control-pro" id="combustible-tasa" min="0" step="0.0001" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Kilometraje</label><input class="form-control form-control-pro" id="combustible-km" min="0" step="0.1" type="number"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Método de pago</label><input class="form-control form-control-pro" id="combustible-metodo"/></div><div class="col-md-9"><label class="form-label small fw-semibold">Observaciones</label><input class="form-control form-control-pro" id="combustible-observaciones"/></div></div></div><div class="vehiculos-foot"><button class="btn btn-outline-secondary" onclick="cerrarFormularioCombustible()" type="button">Cancelar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar surtido</button></div></form>
 </div>
 </div>
 <div aria-hidden="true" class="vehiculos-overlay" id="vehiculoMantenimientoModal">
 <div class="vehiculos-card wide">
 <div class="vehiculos-head"><div><div class="title" id="mantenimientoFormTitle"><i class="fa-solid fa-user-gear text-primary me-2"></i>Registrar mantenimiento</div><small id="mantenimientoFormSub">Servicio o mantenimiento asociado al vehículo.</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarFormularioMantenimiento()" type="button"><i class="fa-solid fa-xmark"></i></button></div>
-<form onsubmit="guardarMantenimientoVehiculo(event)"><input id="mantenimiento-id" type="hidden"/><input id="mantenimiento-vehiculo-id" type="hidden"/><div class="vehiculos-body"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Vehículo</label><input class="form-control form-control-pro" id="mantenimiento-vehiculo-label" readonly=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control form-control-pro" id="mantenimiento-fecha" required="" type="date"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Mantenimiento *</label><select class="form-select form-control-pro" id="mantenimiento-tipo"><option>Aceite motor</option><option>Aceite caja / transmisión</option><option>Dirección / hidráulico</option><option>Refrigerante</option><option>Frenos</option><option>Filtros</option><option>Batería</option><option>Neumáticos</option><option>Suspensión</option><option>Alineación y balanceo</option><option>Correas</option><option>Bujías</option><option>Aire acondicionado</option><option>Revisión / inspección</option><option>Lavado / estética</option><option>Otro</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Componente / detalle</label><input class="form-control form-control-pro" id="mantenimiento-componente" placeholder="Marca, referencia, pieza..."/></div><div class="col-md-2"><label class="form-label small fw-semibold">Kilometraje</label><input class="form-control form-control-pro" id="mantenimiento-km" min="0" step="0.1" type="number"/></div><div class="col-md-2"><label class="form-label small fw-semibold">Costo</label><input class="form-control form-control-pro" id="mantenimiento-costo" min="0" step="0.01" type="number"/></div><div class="col-md-2"><label class="form-label small fw-semibold">Moneda</label><select class="form-select form-control-pro" id="mantenimiento-moneda"><option>USD</option><option>VES</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Taller / proveedor</label><input class="form-control form-control-pro" id="mantenimiento-taller"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Próximo kilometraje</label><input class="form-control form-control-pro" id="mantenimiento-proximo-km" min="0" step="0.1" type="number"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Próxima fecha</label><input class="form-control form-control-pro" id="mantenimiento-proxima-fecha" type="date"/></div><div class="col-12"><label class="form-label small fw-semibold">Descripción / observaciones</label><textarea class="form-control form-control-pro" id="mantenimiento-observaciones" rows="3"></textarea></div></div></div><div class="vehiculos-foot"><button class="btn btn-outline-secondary" onclick="cerrarFormularioMantenimiento()" type="button">Cancelar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar mantenimiento</button></div></form>
+<form onsubmit="guardarMantenimientoVehiculo(event)"><input id="mantenimiento-id" type="hidden"/><input id="mantenimiento-vehiculo-id" type="hidden"/><div class="vehiculos-body"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Vehículo</label><input class="form-control form-control-pro" id="mantenimiento-vehiculo-label" readonly=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control form-control-pro" id="mantenimiento-fecha" required="" type="date"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Mantenimiento *</label><select class="form-select form-control-pro" id="mantenimiento-tipo"><option>Aceite motor</option><option>Aceite caja / transmisión</option><option>Dirección / hidráulico</option><option>Refrigerante</option><option>Frenos</option><option>Filtros</option><option>Batería</option><option>Neumáticos</option><option>Suspensión</option><option>Alineación y balanceo</option><option>Correas</option><option>Bujías</option><option>Aire acondicionado</option><option>Revisión / inspección</option><option>Lavado / estética</option><option>Otro</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Componente / detalle</label><input class="form-control form-control-pro" id="mantenimiento-componente" placeholder="Marca, referencia, pieza..."/></div><div class="col-md-2"><label class="form-label small fw-semibold">Kilometraje</label><input class="form-control form-control-pro" id="mantenimiento-km" min="0" step="0.1" type="number"/></div><div class="col-md-2"><label class="form-label small fw-semibold">Costo</label><input class="form-control form-control-pro" id="mantenimiento-costo" min="0" step="0.01" type="number"/></div><div class="col-md-2"><label class="form-label small fw-semibold">Moneda</label><select class="form-select form-control-pro" id="mantenimiento-moneda"><option value="USD">USD</option><option value="VES">Bs</option><option value="COP">COP</option><option value="USDT">USDT</option></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Taller / proveedor</label><input class="form-control form-control-pro" id="mantenimiento-taller"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Próximo kilometraje</label><input class="form-control form-control-pro" id="mantenimiento-proximo-km" min="0" step="0.1" type="number"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Próxima fecha</label><input class="form-control form-control-pro" id="mantenimiento-proxima-fecha" type="date"/></div><div class="col-12"><label class="form-label small fw-semibold">Descripción / observaciones</label><textarea class="form-control form-control-pro" id="mantenimiento-observaciones" rows="3"></textarea></div></div></div><div class="vehiculos-foot"><button class="btn btn-outline-secondary" onclick="cerrarFormularioMantenimiento()" type="button">Cancelar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar mantenimiento</button></div></form>
 </div>
 </div>
 <!-- NUEVA SECCIÓN: HORARIO ESCOLAR -->
@@ -5078,6 +5189,30 @@ body { min-width: 0; overflow-x: hidden; }
 </div>
 </div>
 <!-- FORMULARIO servidorTO -->
+<div aria-hidden="true" class="gastos-overlay" id="sueldoFormModal">
+<div class="gastos-form-card sueldos-form-card">
+<div class="recordatorio-modal-head"><div><div class="fw-bold" id="sueldoFormTitle"><i class="fa-solid fa-money-check-dollar text-primary me-2"></i>Nuevo movimiento de sueldo</div><small class="text-muted">Registre un ingreso o egreso y relacione la empresa correspondiente.</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarFormularioSueldo()" type="button"><i class="fa-solid fa-xmark"></i></button></div>
+<form id="formSueldo" onsubmit="guardarSueldo(event)"><input id="sueldo-id" type="hidden"/><div class="recordatorio-form-body">
+<div class="row g-2">
+<div class="col-6 col-md-3"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control form-control-pro" id="sueldo-fecha" type="date" required></div>
+<div class="col-6 col-md-3"><label class="form-label small fw-semibold">Tipo *</label><select class="form-select form-control-pro" id="sueldo-tipo" required><option>Ingreso</option><option>Egreso</option></select></div>
+<div class="col-12 col-md-3"><label class="form-label small fw-semibold">Empresa pagadora *</label><select class="form-select form-control-pro" id="sueldo-empresa" required></select></div><div class="col-12 col-md-3"><label class="form-label small fw-semibold">Persona / familiar asociado</label><select class="form-select form-control-pro" id="sueldo-familia"><option value="">Propio usuario</option></select></div>
+<div class="col-12 col-md-3"><label class="form-label small fw-semibold">Concepto *</label><select class="form-select form-control-pro" id="sueldo-concepto" required><option value="Sueldo">Sueldo</option><option value="Bono">Bono</option><option value="Comisión">Comisión</option><option value="Extra">Extra</option><option value="Otros ingresos">Otros ingresos</option><option value="Anticipo">Anticipo</option><option value="Pago">Pago</option><option value="Descuento">Descuento</option><option value="Otro egreso">Otro egreso</option></select></div>
+<div class="col-6 col-md-3"><label class="form-label small fw-semibold">Período desde</label><input class="form-control form-control-pro" id="sueldo-periodo-desde" type="date"></div>
+<div class="col-6 col-md-3"><label class="form-label small fw-semibold">Período hasta</label><input class="form-control form-control-pro" id="sueldo-periodo-hasta" type="date"></div>
+<div class="col-6 col-md-2"><label class="form-label small fw-semibold">Moneda *</label><select class="form-select form-control-pro" id="sueldo-moneda"><option value="USD">USD</option><option value="VES">VES</option><option value="COP">COP</option><option value="USDT">USDT</option></select></div>
+<div class="col-6 col-md-2"><label class="form-label small fw-semibold">Monto *</label><input class="form-control form-control-pro" id="sueldo-monto" type="number" min="0.01" step="0.01" required></div>
+<div class="col-6 col-md-2"><label class="form-label small fw-semibold">Tasa de cambio</label><input class="form-control form-control-pro" id="sueldo-tasa" type="number" min="0" step="0.000001"></div>
+<div class="col-6 col-md-3"><label class="form-label small fw-semibold">Estado *</label><select class="form-select form-control-pro" id="sueldo-estado"><option>Pagado</option><option>Pendiente</option><option>Anulado</option></select></div>
+<div class="col-6 col-md-3"><label class="form-label small fw-semibold">Método de pago</label><input class="form-control form-control-pro" id="sueldo-metodo" placeholder="Transferencia, efectivo..."></div>
+<div class="col-6 col-md-3"><label class="form-label small fw-semibold">Cuenta / referencia</label><input class="form-control form-control-pro" id="sueldo-cuenta" placeholder="Banco, cuenta o billetera"></div>
+<div class="col-6 col-md-3"><label class="form-label small fw-semibold">Referencia</label><input class="form-control form-control-pro" id="sueldo-referencia"></div>
+<div class="col-12"><label class="form-label small fw-semibold">Descripción / detalle</label><textarea class="form-control form-control-pro" id="sueldo-descripcion" rows="2" placeholder="Detalle del sueldo, bono, comisión, anticipo, pago, etc."></textarea></div>
+<div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea class="form-control form-control-pro" id="sueldo-observaciones" rows="2"></textarea></div>
+<div class="col-12"><div class="sueldo-recibo-box"><div class="d-flex align-items-center justify-content-between gap-2 flex-wrap"><label class="form-label small fw-semibold mb-0">Recibo / comprobante</label><button type="button" class="btn btn-sm btn-outline-danger d-none" id="sueldo-recibo-eliminar" onclick="eliminarReciboSueldoFormulario()"><i class="fa-solid fa-trash me-1"></i>Eliminar recibo</button></div><input accept="image/*" class="form-control form-control-pro mt-1" id="sueldo-recibo-input" onchange="previsualizarReciboSueldo(this)" type="file"><input id="sueldo-recibo-quitar" type="hidden" value="0"><div class="small text-muted mt-1">Opcional · se comprime automáticamente para ocupar el menor espacio posible.</div><div id="sueldo-recibo-preview" class="mt-2"></div></div></div>
+</div></div>
+<div class="recordatorio-modal-foot"><button class="btn btn-outline-secondary" onclick="cerrarFormularioSueldo()" type="button">Cancelar</button><button class="btn btn-primary" data-perm-action="agregar" data-perm-module="sueldos" type="submit"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar</button></div>
+</form></div></div>
 <div aria-hidden="true" class="gastos-overlay" id="gastoFormModal">
 <div class="gastos-form-card">
 <div class="recordatorio-modal-head"><div><div class="fw-bold" id="gastoFormTitle">Nuevo movimiento</div><small class="text-muted">Registre ingresos, egresos, cuentas por cobrar o cuentas por pagar.</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarFormularioGasto()" type="button"><i class="fa-solid fa-xmark"></i></button></div>
@@ -5087,7 +5222,7 @@ body { min-width: 0; overflow-x: hidden; }
 <div class="col-6 col-lg-3"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control" id="gasto-fecha" required="" type="date"/></div>
 <div class="col-6 col-lg-3"><label class="form-label small fw-semibold">Tipo *</label><select class="form-select" id="gasto-tipo" onchange="actualizarEstadosGastoUI()" required=""><option>Ingreso</option><option>Egreso</option><option>Cuenta por cobrar</option><option>Cuenta por pagar</option></select></div>
 <div class="col-6 col-lg-3"><label class="form-label small fw-semibold">Estado</label><select class="form-select" id="gasto-estado"><option>Registrado</option><option>Pendiente</option><option>Cobrado</option><option>Pagado</option><option>Anulado</option></select></div>
-<div class="col-6 col-lg-3"><label class="form-label small fw-semibold">Moneda *</label><select class="form-select" id="gasto-moneda"><option>USD</option><option>VES</option></select></div>
+<div class="col-6 col-lg-3"><label class="form-label small fw-semibold">Moneda *</label><select class="form-select" id="gasto-moneda"><option value="USD">USD</option><option value="VES">Bs</option><option value="COP">COP</option><option value="USDT">USDT</option></select></div>
 <div class="col-6 col-md-3"><label class="form-label small fw-semibold">Monto *</label><input class="form-control" id="gasto-monto" min="0" required="" step="0.01" type="number"/></div>
 <div class="col-6 col-md-3"><label class="form-label small fw-semibold">Tasa Bs/US$</label><input class="form-control" id="gasto-tasa" min="0" placeholder="Opcional" step="0.0001" type="number"/></div>
 <div class="col-6 col-md-3"><label class="form-label small fw-semibold">Fecha vencimiento</label><input class="form-control" id="gasto-vencimiento" type="date"/></div>
@@ -5105,6 +5240,7 @@ body { min-width: 0; overflow-x: hidden; }
 </form>
 </div>
 </div>
+<div aria-hidden="true" class="gastos-overlay" id="sueldoViewModal"><div class="gastos-form-card"><div class="recordatorio-modal-head"><div><div class="fw-bold" id="sueldoViewTitle">Movimiento</div><small class="text-muted" id="sueldoViewSub"></small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarResumenSueldo()" type="button"><i class="fa-solid fa-xmark"></i></button></div><div class="recordatorio-view-grid" id="sueldoViewGrid"></div><div class="recordatorio-modal-foot"><button class="btn btn-outline-secondary" onclick="cerrarResumenSueldo()" type="button">Cerrar</button></div></div></div>
 <div aria-hidden="true" class="gastos-overlay" id="gastoViewModal"><div class="gastos-form-card"><div class="recordatorio-modal-head"><div><div class="fw-bold" id="gastoViewTitle">Movimiento</div><small class="text-muted" id="gastoViewSub"></small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarResumenGasto()" type="button"><i class="fa-solid fa-xmark"></i></button></div><div class="recordatorio-view-grid" id="gastoViewGrid"></div><div class="recordatorio-modal-foot"><button class="btn btn-outline-secondary" onclick="cerrarResumenGasto()" type="button">Cerrar</button></div></div></div>
 <section class="tab-content d-none" id="sec-familia">
 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
@@ -5177,7 +5313,7 @@ body { min-width: 0; overflow-x: hidden; }
 <div class="col-md-5"><label class="form-label small fw-semibold">Beneficiario *</label><select class="form-select form-control-pro" id="man_persona" required=""></select></div>
 <div class="col-md-3"><label class="form-label small fw-semibold">Fecha del pago *</label><input class="form-control form-control-pro" id="man_fecha_pago" required="" type="date"/></div>
 <div class="col-md-2"><label class="form-label small fw-semibold">Monto *</label><input class="form-control form-control-pro" id="man_monto" min="0" required="" step="0.01" type="number"/></div>
-<div class="col-md-2"><label class="form-label small fw-semibold">Moneda</label><select class="form-select form-control-pro" id="man_moneda"><option>USD</option><option>VES</option><option>EUR</option><option>COP</option></select></div>
+<div class="col-md-2"><label class="form-label small fw-semibold">Moneda</label><select class="form-select form-control-pro" id="man_moneda"><option value="USD">USD</option><option value="VES">Bs</option><option value="COP">COP</option><option value="USDT">USDT</option></select></div>
 <div class="col-md-3"><label class="form-label small fw-semibold">Método de pago *</label><select class="form-select form-control-pro" id="man_tipo" required=""><option>Transferencia bancaria</option><option>Pago móvil</option><option>Efectivo</option><option>Depósito</option><option>Zelle</option><option>Binance / USDT</option><option>Cheque</option><option>Otro</option></select></div>
 <div class="col-md-3"><label class="form-label small fw-semibold">Banco / entidad</label><input class="form-control form-control-pro" id="man_banco" placeholder="Banco, plataforma o entidad"/></div>
 <div class="col-md-3"><label class="form-label small fw-semibold">Referencia / comprobante</label><input class="form-control form-control-pro" id="man_referencia" placeholder="Número de operación"/></div>
@@ -5617,6 +5753,14 @@ body { min-width: 0; overflow-x: hidden; }
 </div>
 </div>
 </div>
+<!-- MODAL MÓVIL: CONFIGURACIÓN DE MÓDULO -->
+<div aria-hidden="true" id="permisoModuloMovilModal" role="dialog">
+  <div class="permiso-modulo-movil-card">
+    <div class="permiso-modulo-movil-head"><div><div class="fw-bold" id="permisoModuloMovilTitle">Configuración del módulo</div><small class="text-muted">Acciones y alcance</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarPermisoModuloMovil()" type="button"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="permiso-modulo-movil-body" id="permisoModuloMovilBody"></div>
+    <div class="permiso-modulo-movil-foot"><button class="btn btn-primary btn-sm" onclick="cerrarPermisoModuloMovil()" type="button">Aplicar</button></div>
+  </div>
+</div>
 <!-- MODAL: DETALLE DE USUARIO -->
 <div class="modal fade" id="modalVerUsuario" tabindex="-1">
 <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -5966,7 +6110,7 @@ body { min-width: 0; overflow-x: hidden; }
 <option selected="" value="USD">USD — Dólar</option>
 <option value="VES">VES — Bolívar</option>
 <option value="EUR">EUR — Euro</option>
-<option value="COP">COP — Peso colombiano</option>
+<option value="COP">COP — Peso colombiano</option><option value="USDT">USDT</option>
 </select>
 </div>
 <div class="col-md-5">
@@ -6472,14 +6616,14 @@ body { min-width: 0; overflow-x: hidden; }
     const SUPABASE_URL = 'https://paslwsarwcqgrzvantjb.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_C3QK8alfi1YD1rd6zgrOmw_iyOato6u';
 
-    const SUPABASE_TABLES={auditoria:'Auditoria',empresas:'Empresas',usuarios:'Usuarios',clientes:'Clientes',facturas:'Facturas',creditos:'Creditos',pagos:'Pagos',notificaciones:'Notificaciones',bancos:'Bancos',familia:'Familia',historialmedico:'HistorialMedico',recordatoriosmedicinas:'RecordatoriosMedicinas',manutencion:'Manutencion',registrosescolares:'RegistrosEscolares',horariosescolares:'HorariosEscolares',materiashorarios:'MateriasHorarios',tareas:'Tareas',recordatorios:'Recordatorios',gastos:'Gastos',vehiculos:'Vehiculos',vehiculoscombustible:'VehiculosCombustible',vehiculosmantenimiento:'VehiculosMantenimiento',trabajos_manuales:'TrabajosManuales',agenda:'Agenda',agendaconfig:'AgendaConfig',config:'Config',servicios:'Servicios',ordenes:'Ordenes'};
-    const SUPABASE_ID_FIELDS={auditoria:'id_auditoria',empresas:'id_empresa',usuarios:'id_usuario',clientes:'id_cliente',facturas:'id_factura',creditos:'id_cuota',pagos:'id_pago',notificaciones:'id_notificacion',bancos:'id_banco',familia:'id_familia',historialmedico:'id_historial_medico',recordatoriosmedicinas:'id_recordatorio',manutencion:'id_manutencion',registrosescolares:'id_registro_escolar',horariosescolares:'id_horario_escolar',materiashorarios:'id_materia_horario',tareas:'id_tarea',recordatorios:'id_recordatorio',gastos:'id_gasto',vehiculos:'id_vehiculo',vehiculoscombustible:'id_combustible',vehiculosmantenimiento:'id_mantenimiento',trabajos_manuales:'id_trabajo',agenda:'id_agenda',servicios:'id_servicio',ordenes:'id_orden'};
+    const SUPABASE_TABLES={auditoria:'Auditoria',empresas:'Empresas',usuarios:'Usuarios',clientes:'Clientes',facturas:'Facturas',creditos:'Creditos',pagos:'Pagos',notificaciones:'Notificaciones',bancos:'Bancos',familia:'Familia',historialmedico:'HistorialMedico',recordatoriosmedicinas:'RecordatoriosMedicinas',manutencion:'Manutencion',registrosescolares:'RegistrosEscolares',horariosescolares:'HorariosEscolares',materiashorarios:'MateriasHorarios',tareas:'Tareas',recordatorios:'Recordatorios',gastos:'Gastos',vehiculos:'Vehiculos',vehiculoscombustible:'VehiculosCombustible',vehiculosmantenimiento:'VehiculosMantenimiento',trabajos_manuales:'TrabajosManuales',sueldos:'SueldosSalarios',agenda:'Agenda',agendaconfig:'AgendaConfig',config:'Config',servicios:'Servicios',ordenes:'Ordenes'};
+    const SUPABASE_ID_FIELDS={auditoria:'id_auditoria',empresas:'id_empresa',usuarios:'id_usuario',clientes:'id_cliente',facturas:'id_factura',creditos:'id_cuota',pagos:'id_pago',notificaciones:'id_notificacion',bancos:'id_banco',familia:'id_familia',historialmedico:'id_historial_medico',recordatoriosmedicinas:'id_recordatorio',manutencion:'id_manutencion',registrosescolares:'id_registro_escolar',horariosescolares:'id_horario_escolar',materiashorarios:'id_materia_horario',tareas:'id_tarea',recordatorios:'id_recordatorio',gastos:'id_gasto',vehiculos:'id_vehiculo',vehiculoscombustible:'id_combustible',vehiculosmantenimiento:'id_mantenimiento',trabajos_manuales:'id_trabajo',sueldos:'id_sueldo',agenda:'id_agenda',servicios:'id_servicio',ordenes:'id_orden'};
     function sbHeaders(extra={}){return {apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json',...extra};}
     function sbUrl(t,q=''){return SUPABASE_URL+'/rest/v1/'+encodeURIComponent(t)+(q?'?'+q:'');}
     function sbEnc(v){return encodeURIComponent(String(v??''));}
     function sbId(){return crypto?.randomUUID?crypto.randomUUID():'sb-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);}
     function sbPriv(){return ['master','admin','administrador'].includes(String(currentUser?.rol||'').trim().toLowerCase());}
-    function sbKeyAction(a){const m={addAuditoria:'auditoria',clearAuditoria:'auditoria',addEmpresa:'empresas',updateEmpresa:'empresas',deleteEmpresa:'empresas',addUsuario:'usuarios',updateUsuario:'usuarios',deleteUsuario:'usuarios',changePassword:'usuarios',updateUserProfile:'usuarios',addCliente:'clientes',updateCliente:'clientes',updateClientStatus:'clientes',deleteCliente:'clientes',addFactura:'facturas',updateFactura:'facturas',deleteFactura:'facturas',addCredito:'creditos',updateCredito:'creditos',deleteCredito:'creditos',addPago:'pagos',addNotificacion:'notificaciones',updateNotificacion:'notificaciones',deleteNotificacion:'notificaciones',markNotificationRead:'notificaciones',addBanco:'bancos',updateBanco:'bancos',deleteBanco:'bancos',addFamilia:'familia',updateFamilia:'familia',deleteFamilia:'familia',addHistorialMedico:'historialmedico',updateHistorialMedico:'historialmedico',deleteHistorialMedico:'historialmedico',addRecordatorioMedicina:'recordatoriosmedicinas',updateRecordatorioMedicina:'recordatoriosmedicinas',deleteRecordatorioMedicina:'recordatoriosmedicinas',addManutencion:'manutencion',updateManutencion:'manutencion',deleteManutencion:'manutencion',addRegistroEscolar:'registrosescolares',updateRegistroEscolar:'registrosescolares',deleteRegistroEscolar:'registrosescolares',guardarHorarioEscolar:'horariosescolares',actualizarHorarioEscolar:'horariosescolares',deleteHorarioEscolar:'horariosescolares',addMateriaHorario:'materiashorarios',updateMateriaHorario:'materiashorarios',deleteMateriaHorario:'materiashorarios',addTarea:'tareas',updateTarea:'tareas',deleteTarea:'tareas',marcarTareaRealizada:'tareas',addRecordatorio:'recordatorios',updateRecordatorio:'recordatorios',deleteRecordatorio:'recordatorios',updateRecordatorioEstado:'recordatorios',addGasto:'gastos',updateGasto:'gastos',deleteGasto:'gastos',updateGastoEstado:'gastos',addVehiculo:'vehiculos',updateVehiculo:'vehiculos',deleteVehiculo:'vehiculos',addVehiculoCombustible:'vehiculoscombustible',updateVehiculoCombustible:'vehiculoscombustible',deleteVehiculoCombustible:'vehiculoscombustible',addVehiculoMantenimiento:'vehiculosmantenimiento',updateVehiculoMantenimiento:'vehiculosmantenimiento',deleteVehiculoMantenimiento:'vehiculosmantenimiento',addTrabajoManual:'trabajos_manuales',updateTrabajoManual:'trabajos_manuales',deleteTrabajoManual:'trabajos_manuales',addAgenda:'agenda',updateAgenda:'agenda',updateCitaAgenda:'agenda',atenderCitaAgenda:'agenda',deleteCitaAgenda:'agenda',guardarAgendaConfig:'agendaconfig',updateConfig:'config',guardarTelegramPortalConfig:'config',probarTelegramPortal:'config',crearOrdenServicioAdmin:'ordenes',deleteOrdenServicioAdmin:'ordenes',addServicio:'servicios',updateServicio:'servicios',deleteServicio:'servicios'};return m[a]||null;}
+    function sbKeyAction(a){const m={addAuditoria:'auditoria',clearAuditoria:'auditoria',addEmpresa:'empresas',updateEmpresa:'empresas',deleteEmpresa:'empresas',addUsuario:'usuarios',updateUsuario:'usuarios',deleteUsuario:'usuarios',changePassword:'usuarios',updateUserProfile:'usuarios',addCliente:'clientes',updateCliente:'clientes',updateClientStatus:'clientes',deleteCliente:'clientes',addFactura:'facturas',updateFactura:'facturas',deleteFactura:'facturas',addCredito:'creditos',updateCredito:'creditos',deleteCredito:'creditos',addPago:'pagos',addNotificacion:'notificaciones',updateNotificacion:'notificaciones',deleteNotificacion:'notificaciones',markNotificationRead:'notificaciones',addBanco:'bancos',updateBanco:'bancos',deleteBanco:'bancos',addFamilia:'familia',updateFamilia:'familia',deleteFamilia:'familia',addHistorialMedico:'historialmedico',updateHistorialMedico:'historialmedico',deleteHistorialMedico:'historialmedico',addRecordatorioMedicina:'recordatoriosmedicinas',updateRecordatorioMedicina:'recordatoriosmedicinas',deleteRecordatorioMedicina:'recordatoriosmedicinas',addManutencion:'manutencion',updateManutencion:'manutencion',deleteManutencion:'manutencion',addRegistroEscolar:'registrosescolares',updateRegistroEscolar:'registrosescolares',deleteRegistroEscolar:'registrosescolares',guardarHorarioEscolar:'horariosescolares',actualizarHorarioEscolar:'horariosescolares',deleteHorarioEscolar:'horariosescolares',addMateriaHorario:'materiashorarios',updateMateriaHorario:'materiashorarios',deleteMateriaHorario:'materiashorarios',addTarea:'tareas',updateTarea:'tareas',deleteTarea:'tareas',marcarTareaRealizada:'tareas',addRecordatorio:'recordatorios',updateRecordatorio:'recordatorios',deleteRecordatorio:'recordatorios',updateRecordatorioEstado:'recordatorios',addGasto:'gastos',updateGasto:'gastos',deleteGasto:'gastos',updateGastoEstado:'gastos',addVehiculo:'vehiculos',updateVehiculo:'vehiculos',deleteVehiculo:'vehiculos',addVehiculoCombustible:'vehiculoscombustible',updateVehiculoCombustible:'vehiculoscombustible',deleteVehiculoCombustible:'vehiculoscombustible',addVehiculoMantenimiento:'vehiculosmantenimiento',updateVehiculoMantenimiento:'vehiculosmantenimiento',deleteVehiculoMantenimiento:'vehiculosmantenimiento',addTrabajoManual:'trabajos_manuales',updateTrabajoManual:'trabajos_manuales',deleteTrabajoManual:'trabajos_manuales',addSueldo:'sueldos',updateSueldo:'sueldos',deleteSueldo:'sueldos',addAgenda:'agenda',updateAgenda:'agenda',updateCitaAgenda:'agenda',atenderCitaAgenda:'agenda',deleteCitaAgenda:'agenda',guardarAgendaConfig:'agendaconfig',updateConfig:'config',guardarTelegramPortalConfig:'config',probarTelegramPortal:'config',crearOrdenServicioAdmin:'ordenes',deleteOrdenServicioAdmin:'ordenes',addServicio:'servicios',updateServicio:'servicios',deleteServicio:'servicios'};return m[a]||null;}
     function usuarioGestionGlobalModulo_(modulo,u=currentUser){
         if(!u || String(u.rol||'').trim().toLowerCase()==='cliente') return false;
         if(sbPriv()) return true;
@@ -6613,7 +6757,7 @@ function filtroNotificacionesClienteSupabase_(cliente){
             (db?.clientes||[]).find(c=>String(c.codigo_cliente||'')===String(u.codigo_cliente||''));
         const codigo=String(u.codigo_cliente||client?.codigo_cliente||'').trim();
         const cid=String(u.id_cliente||client?.id_cliente||'').trim();
-        const byUser=new Set(['usuarios','notificaciones','auditoria','tareas','recordatorios','gastos']);
+        const byUser=new Set(['usuarios','notificaciones','auditoria','tareas','recordatorios','gastos','sueldos']);
         const familyOwned=new Set(['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento']);
         const byCodigo=new Set(['trabajos_manuales','ordenes']);
         const byCliente=new Set(['facturas','pagos','creditos']);
@@ -6725,6 +6869,7 @@ function filtroNotificacionesClienteSupabase_(cliente){
         const permisoKey=permisoDirecto ? key : (permisoHereda ? 'registrosescolares' : key);
         const cfg=permisoDirecto||permisoHereda;
         const alcances=obtenerAlcancesPermisoUsuario(u,permisoKey);
+        if(key==='recordatorios')return data.filter(r=>usuarioPuedeVerRecordatorio_(r,u)||alcances.includes('todos'));
         if(alcances.includes('todos'))return data;
         if(!cfg||typeof cfg!=='object')return data.filter(r=>filaCoincidePropiosPermiso_(key,r,sourceDb,u));
         const idsPropios=alcances.includes('propios');
@@ -6878,6 +7023,7 @@ function filtroNotificacionesClienteSupabase_(cliente){
         tareas: [],
         recordatorios: [],
         trabajos_manuales: [],
+        sueldos: [],
         vehiculos: [],
         vehiculoscombustible: [],
         vehiculosmantenimiento: []
@@ -7386,14 +7532,15 @@ async function sincronizarConservidor() {
         addVehiculo:'vehiculos', updateVehiculo:'vehiculos', deleteVehiculo:'vehiculos',
         addVehiculoCombustible:'vehiculoscombustible', updateVehiculoCombustible:'vehiculoscombustible', deleteVehiculoCombustible:'vehiculoscombustible',
         addVehiculoMantenimiento:'vehiculosmantenimiento', updateVehiculoMantenimiento:'vehiculosmantenimiento', deleteVehiculoMantenimiento:'vehiculosmantenimiento',
-        addTrabajoManual:'trabajos_manuales', updateTrabajoManual:'trabajos_manuales', deleteTrabajoManual:'trabajos_manuales'
+        addTrabajoManual:'trabajos_manuales', updateTrabajoManual:'trabajos_manuales', deleteTrabajoManual:'trabajos_manuales',
+        addSueldo:'sueldos', updateSueldo:'sueldos', deleteSueldo:'sueldos'
     };
     const _tablaIdLocal = {
         empresas:'id_empresa', bancos:'id_banco', usuarios:'id_usuario', clientes:'id_cliente',
         facturas:'id_factura', creditos:'id_cuota', pagos:'id_pago', notificaciones:'id_notificacion',
         auditoria:'id_auditoria', familia:'id_familia', historialmedico:'id_historial_medico',
         recordatoriosmedicinas:'id_recordatorio', manutencion:'id_manutencion',
-        registrosescolares:'id_registro_escolar', horariosescolares:'id_horario_escolar', materiashorarios:'id_materia_horario', tareas:'id_tarea', recordatorios:'id_recordatorio', gastos:'id_gasto', vehiculos:'id_vehiculo', vehiculoscombustible:'id_combustible', vehiculosmantenimiento:'id_mantenimiento', trabajos_manuales:'id_trabajo'
+        registrosescolares:'id_registro_escolar', horariosescolares:'id_horario_escolar', materiashorarios:'id_materia_horario', tareas:'id_tarea', recordatorios:'id_recordatorio', gastos:'id_gasto', vehiculos:'id_vehiculo', vehiculoscombustible:'id_combustible', vehiculosmantenimiento:'id_mantenimiento', trabajos_manuales:'id_trabajo', sueldos:'id_sueldo'
     };
     function _normalizarFilaLocal_(v){
         if(!v || typeof v!=='object') return v;
@@ -7738,9 +7885,21 @@ async function sincronizarConservidor() {
         return p;
     }
 
+    function preservarFechaRegistroOriginal_(action,payload,key){
+        const p={...(payload||{})};
+        if(!/^update/i.test(String(action||'')) || !key)return p;
+        const idField=_tablaIdLocal[key];
+        const id=idField?String(p[idField]||'').trim():'';
+        if(!id)return p;
+        const filas=Array.isArray(db?.[key])?db[key]:[];
+        const original=filas.find(r=>String(r?.[idField]||'')===id);
+        if(original && original.fecha_registro) p.fecha_registro=original.fecha_registro;
+        return p;
+    }
+
     async function ejecutarOperacionSupabase(action,payload={},syncAfter=false,timeoutMs=6000,showNetworkError=true){
         const mutacion=esOperacionMutacion_(action);
-        try{let result={success:true,data:{}};const key=sbKeyAction(action);
+        try{let result={success:true,data:{}};const key=sbKeyAction(action);payload=preservarFechaRegistroOriginal_(action,payload,key);
         if(action==='registrarClienteUnificado'){
             const cliente={...(payload?.cliente||{})};
             const usuario={...(payload?.usuario||{})};
@@ -7803,7 +7962,7 @@ async function sincronizarConservidor() {
             for(const b of bs){
                 const slot=String(b?.dia||'')+'|'+String(b?.hora_inicio||'')+'|'+String(b?.hora_fin||'');
                 const old=bySlot.get(slot);
-                const row={...p,...b,id_grupo_horario:g};delete row.bloques;delete row.items;delete row.__actor;delete row.id_horario_escolar;delete row.row_id;
+                const row={...p,...b,id_grupo_horario:g};delete row.bloques;delete row.items;delete row.__actor;delete row.id_horario_escolar;delete row.row_id;if(old?.fecha_registro)row.fecha_registro=old.fecha_registro;
                 if(old?.id_horario_escolar){
                     const saved=await sbUpdate('horariosescolares',old.id_horario_escolar,row);
                     used.add(String(old.id_horario_escolar));items.push(saved||{...old,...row});
@@ -8204,7 +8363,7 @@ async function cargarBootstrapInicial_(){
         const pagosContext=isClient ? (db.pagos||[]).filter(p=>registroPerteneceCliente(p,clientObj)) : (db.pagos||[]);
         const conf=pagosContext.filter(p=>estado(p.estado_validacion)==='confirmado');
         const porMoneda={}; conf.forEach(p=>{const m=String(p.moneda_pago||((p.monto_pago_bs? 'VES':'USD'))).trim().toUpperCase()||'USD';porMoneda[m]=(porMoneda[m]||0)+Number(p.monto_pago||0);});
-        const fmtMonto=(m,v)=>new Intl.NumberFormat('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(Number(v)||0)+' '+({USD:'$',VES:'Bs',EUR:'€',COP:'COP'}[m]||m);
+        const fmtMonto=(m,v)=>new Intl.NumberFormat('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(Number(v)||0)+' '+({USD:'$',VES:'Bs',EUR:'€',COP:'COP',USDT:'USDT'}[m]||m);
         const incomeOrder=['USD','VES','EUR','COP']; const incomeParts=incomeOrder.filter(m=>porMoneda[m]!=null).map(m=>fmtMonto(m,porMoneda[m]));
         renderMasterDashboardOperativo();
     }
@@ -8946,6 +9105,7 @@ html[data-bs-theme="dark"] body.portal-modern-v2 .sidebar-mobile-close{
             pagos: 'Módulo de Pagos',
             bancos: 'Datos Bancarios',
             gastos: 'Control de Gastos',
+            sueldos: 'Sueldos y Salarios',
             vehiculos: 'Vehículos',
             notificaciones: 'Centro de Notificaciones',
             portal: 'Control del Portal',
@@ -8974,6 +9134,7 @@ html[data-bs-theme="dark"] body.portal-modern-v2 .sidebar-mobile-close{
         if (tabId === 'manutencion') { renderManutencionModulo(); }
         if (tabId === 'registrosescolares') { renderRegistrosEscolaresModulo(); }
         if (tabId === 'gastos') { renderGastosModulo(); }
+        if (tabId === 'sueldos') { renderSueldosModulo(); }
         if (tabId === 'vehiculos') { renderVehiculosModulo(); }
 
         if (tabId === 'servicios' && currentUser) {
@@ -9666,14 +9827,15 @@ async function eliminarEmpresa(id) {
         tareas:{label:'Tareas y Recordatorios',icon:'fa-list-check',actions:['leer','agregar','modificar','eliminar']},
         recordatorios:{label:'Recordatorios Personales',icon:'fa-calendar-check',actions:['leer','agregar','modificar','eliminar']},
         gastos:{label:'Control de Gastos',icon:'fa-wallet',actions:['leer','agregar','modificar','eliminar']},
+        sueldos:{label:'Sueldos y Salarios',icon:'fa-money-check-dollar',actions:['leer','agregar','modificar','eliminar']},
         vehiculos:{label:'Vehículos',icon:'fa-car-side',actions:['leer','agregar','modificar','eliminar']},
         recordatoriosmedicinas:{label:'Recordatorios de Medicinas',icon:'fa-pills',actions:['leer','agregar','modificar','eliminar']},
         perfil:{label:'Mi Perfil y Seguridad',icon:'fa-user-circle',actions:['modificar']}
     };
     const ACCION_LABELS_USUARIO={leer:'Lectura',agregar:'Escritura',modificar:'Modificar',eliminar:'Eliminar'};
     const ALCANCE_LABELS_USUARIO={propios:'Propios',parentesco:'Por parentesco',personalizados:'Personalizados',todos:'Todos'};
-    const MODULOS_CON_ALCANCE_USUARIO=['usuarios','clientes','agenda','facturacion','creditos','pagos','bancos','notificaciones','auditoria','tareas','recordatorios','gastos','familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento','trabajos_manuales','ordenes'];
-    const MODULOS_CON_PARENTESCO_USUARIO=['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento'];
+    const MODULOS_CON_ALCANCE_USUARIO=['usuarios','clientes','agenda','facturacion','creditos','pagos','bancos','notificaciones','auditoria','tareas','recordatorios','gastos','familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento','trabajos_manuales','sueldos','ordenes'];
+    const MODULOS_CON_PARENTESCO_USUARIO=['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento','sueldos'];
 
     function escaparTextoPermisoUsuario(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
     function normalizarAlcancesPermisoUsuario(raw){
@@ -9814,7 +9976,7 @@ async function eliminarEmpresa(id) {
     function obtenerAlcancePermisoUsuario(u,modulo){return obtenerAlcancesPermisoUsuario(u,modulo)[0]||'propios';}
     function obtenerParentescosDisponiblesPermisos(){const set=new Set();(Array.isArray(db?.familia)?db.familia:[]).forEach(f=>{const p=String(f?.parentesco||'').trim();if(p)set.add(p);});return Array.from(set).sort((a,b)=>a.localeCompare(b,'es'));}
     function obtenerClientesDisponiblesPermisos(){return (Array.isArray(db?.clientes)?db.clientes:[]).filter(c=>c?.id_cliente||c?.codigo_cliente).sort((a,b)=>String(a?.nombre_completo||a?.codigo_cliente||'').localeCompare(String(b?.nombre_completo||b?.codigo_cliente||''),'es'));}
-    const MODULOS_CON_ALCANCE_FAMILIAR=['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento'];
+    const MODULOS_CON_ALCANCE_FAMILIAR=['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento','sueldos'];
     function obtenerPermisoAlcanceActual(current,key){return normalizarAlcancesPermisoUsuario(current?.alcances!==undefined?current.alcances:(current?.alcance!==undefined?current.alcance:current?.alcance_usuarios));}
     function obtenerPermisosActualesForm(){
         const out={};
@@ -9852,12 +10014,37 @@ async function eliminarEmpresa(id) {
         const q=String(block.querySelector('.perm-client-search')?.value||'').trim().toLowerCase();
         block.querySelectorAll('[data-cliente-option]').forEach(el=>{el.style.display=!q||String(el.getAttribute('data-cliente-search')||'').toLowerCase().includes(q)?'':'none';});
     }
+    function cerrarPermisoModuloMovil(){
+        const modal=document.getElementById('permisoModuloMovilModal');if(!modal)return;
+        const clone=modal.querySelector('[data-mobile-perm-clone]');
+        const originalKey=modal.dataset.module||'';
+        const original=document.querySelector(`#usr-permisos-acciones [data-action-block="${originalKey}"]`);
+        if(clone&&original){
+            clone.querySelectorAll('input').forEach(src=>{
+                const sel=src.dataset.action?`input[data-module="${originalKey}"][data-action="${src.dataset.action}"]`:src.dataset.scopeModule?`input[data-scope-module="${originalKey}"][value="${src.value}"]`:src.dataset.parentescoModule?`input[data-parentesco-module="${originalKey}"][value="${CSS.escape(src.value)}"]`:src.dataset.clientePermModule?null:null;
+                if(sel){const dst=original.querySelector(sel);if(dst)dst.checked=src.checked;}
+            });
+            original.querySelectorAll('input[data-action],input[data-scope-module],input[data-parentesco-module],input[data-cliente-perm-module]').forEach(x=>x.dispatchEvent(new Event('change',{bubbles:false})));
+        }
+        modal.classList.remove('show');modal.setAttribute('aria-hidden','true');modal.innerHTML='';document.body.classList.remove('overflow-hidden');
+        actualizarHiddenPermisosUsuario();
+    }
+    function abrirPermisoModuloMovil_(key,block){
+        const modal=document.getElementById('permisoModuloMovilModal');if(!modal||!block)return;
+        const cfg=MATRIZ_PERMISOS_USUARIO[key]||{};
+        modal.dataset.module=key;
+        modal.innerHTML='<div class="permiso-modulo-movil-card"><div class="permiso-modulo-movil-head"><div><div class="fw-bold"><i class="fa-solid '+cfg.icon+' text-primary me-1"></i>'+escaparTextoPermisoUsuario(cfg.label||key)+'</div><small class="text-muted">Acciones y alcance</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarPermisoModuloMovil()" type="button"><i class="fa-solid fa-xmark"></i></button></div><div class="permiso-modulo-movil-body"></div><div class="permiso-modulo-movil-foot"><button class="btn btn-primary btn-sm" onclick="cerrarPermisoModuloMovil()" type="button">Aplicar</button></div></div>';
+        const body=modal.querySelector('.permiso-modulo-movil-body'),copy=block.cloneNode(true);copy.classList.remove('d-none');copy.removeAttribute('id');copy.setAttribute('data-mobile-perm-clone','1');body.appendChild(copy);
+        modal.classList.add('show');modal.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');
+    }
     function seleccionarModuloPermisoUsuario(key){
-        const cb=document.querySelector(`#usr-permisos-modulos input[data-module="${key}"]`);if(!cb?.checked)return;
+        const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);
+        if(!block)return;
         document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));
-        const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);if(block)block.classList.remove('d-none');
+        block.classList.remove('d-none');
         document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.toggle('active',c.dataset.module===key));
         actualizarResumenPermisosUsuario();
+        if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)abrirPermisoModuloMovil_(key,block);
     }
     function renderBloqueAccionesPermisoUsuario(key,cfg,current){
         const acts=document.getElementById('usr-permisos-acciones');if(!acts)return;
@@ -10354,7 +10541,7 @@ async function eliminarCliente(id) {
           + '<section class="invoice-section"><div class="invoice-section-title"><i class="fa-regular fa-user"></i> Cliente</div>'
           + row('Nombre', c.nombre_completo) + row('Documento', c.documento_id) + row('Dirección', c.direccion || f.direccion || 'N/A', 'invoice-kv-address') + '</section>'
           + '<section class="invoice-section"><div class="invoice-section-title"><i class="fa-solid fa-server"></i> Servicio</div>'
-          + row('Servicio', servicio) + row('Monto', '$'+Number(f.monto_total || 0).toFixed(2)) + '</section>'
+          + row('Servicio', servicio) + row('Monto', formatoMontoPortal(f.monto_total,f.moneda_factura||'USD')) + '</section>'
           + '<section class="invoice-section"><div class="invoice-section-title"><i class="fa-solid fa-money-bill-transfer"></i> Información del pago</div>'
           + row('Fecha pago', fechaPago) + row('Método', metodo) + row('Referencia', referencia) + row('Banco emisor', bancoOrigen) + row('Banco receptor', bancoDestino) + row('Monto pagado (Bs)', 'Bs '+montoPagoBs.toFixed(2)) + row('Tasa Binance', tasaBinance > 0 ? 'Bs '+tasaBinance.toFixed(2)+' / USDT' : 'N/A') + '</section>'
           + '<section class="invoice-section"><div class="invoice-section-title"><i class="fa-regular fa-note-sticky"></i> Observaciones</div><div class="invoice-note">'+esc(notas)+'</div></section>'
@@ -11156,7 +11343,7 @@ async function guardarCredito(e) {
             ${mostrarCampoResumenPago('Banco de destino', payload.banco_destino)}
             ${mostrarCampoResumenPago('Referencia / confirmación', payload.referencia)}
             ${mostrarCampoResumenPago('Tasa P2P Binance', Number(payload.tasa_binance_p2p || 0).toFixed(2) + ' VES/USDT')}
-            ${mostrarCampoResumenPago('Monto reportado', '$' + Number(payload.monto_pago || 0).toFixed(2), 'text-success')}
+            ${mostrarCampoResumenPago('Monto reportado', formatoMontoPortal(payload.monto_pago,payload.moneda_pago||'USD'), 'text-success')}
             <div class="col-12">
                 <div class="pago-resumen-section">Resumen de la factura — IVA 16%</div>
                 <div class="pago-resumen-finanzas">
@@ -11856,7 +12043,7 @@ function convertirFechaPortalAInputDate(v){
 }
 function actualizarSimboloMonedaFactura(){
     const m=document.getElementById('fac_moneda')?.value||'USD';
-    const s={USD:'$',VES:'Bs',EUR:'€',COP:'$' }[m]||m;
+    const s={USD:'USD',VES:'Bs',COP:'COP',USDT:'USDT'}[m]||m;
     const el=document.getElementById('fac_monto_simbolo'); if(el) el.textContent=s;
 }
 document.addEventListener('DOMContentLoaded',()=>{const m=document.getElementById('fac_moneda');m?.addEventListener('change',actualizarSimboloMonedaFactura);actualizarSimboloMonedaFactura();});
@@ -14326,7 +14513,148 @@ function recordatorioEstadoClase(v){const s=String(v||'Pendiente').trim().toLowe
 function recordatorioEstadoIcono(v){const s=String(v||'Pendiente').trim().toLowerCase();return s==='realizada'?'fa-circle-check':(s==='en tránsito'?'fa-person-running':'fa-clock');}
 function recordatorioParseFechaRegistro(v){const s=String(v??'').trim();if(!s)return 0;let m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:,?\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?)?/i);if(m){let h=+(m[4]||0),mi=+(m[5]||0),ss=+(m[6]||0),ap=String(m[7]||'').toUpperCase();if(ap==='PM'&&h<12)h+=12;if(ap==='AM'&&h===12)h=0;return new Date(+m[3],+m[2]-1,+m[1],h,mi,ss).getTime();}m=s.match(/^(\d{4})-(\d{2})-(\d{2})(?:T|\s)(\d{2}):(\d{2})(?::(\d{2}))?/);if(m)return new Date(+m[1],+m[2]-1,+m[3],+m[4],+m[5],+(m[6]||0)).getTime();return 0;}
 function limpiarFiltroRecordatorios(){const i=document.getElementById('recordatorios-filtro');if(i)i.value='';renderRecordatoriosModulo();}
-function abrirFormularioRecordatorio(id){if(!protegerAccionUsuario('recordatorios',id?'modificar':'agregar'))return;const m=document.getElementById('recordatorioFormModal');if(!m)return;const r=id?(db.recordatorios||[]).find(x=>String(x.id_recordatorio)===String(id)):null;document.getElementById('recordatorio-id').value=r?.id_recordatorio||'';document.getElementById('recordatorio-titulo').value=r?.titulo||'';document.getElementById('recordatorio-tipo').value=r?.tipo||'Compromiso';document.getElementById('recordatorio-descripcion').value=r?.descripcion||'';document.getElementById('recordatorio-fecha').value=r?.fecha_recordatorio||'';document.getElementById('recordatorio-hora').value=(String(r?.hora_recordatorio||'').match(/^\d{1,2}:\d{2}/)||[''])[0];document.getElementById('recordatorio-prioridad').value=r?.prioridad||'Normal';document.getElementById('recordatorio-estado').value=r?.estado||'Pendiente';document.getElementById('recordatorio-ubicacion').value=r?.ubicacion||'';document.getElementById('recordatorio-chat').value=r?.telegram_chat_id||'';document.getElementById('recordatorio-telegram').checked=String(r?.telegram_activo||'true').toLowerCase()!=='false';document.getElementById('recordatorio-antes-valor').value=r?.telegram_antes_intervalo_valor??30;document.getElementById('recordatorio-antes-unidad').value=r?.telegram_antes_intervalo_unidad||'minutos';document.getElementById('recordatorio-antes-cantidad').value=r?.telegram_antes_cantidad??1;document.getElementById('recordatorio-despues-valor').value=r?.telegram_despues_intervalo_valor??30;document.getElementById('recordatorio-despues-unidad').value=r?.telegram_despues_intervalo_unidad||'minutos';document.getElementById('recordatorio-despues-cantidad').value=r?.telegram_despues_cantidad??0;document.getElementById('recordatorio-mensaje').value=r?.mensaje_telegram||'';document.getElementById('recordatorio-observaciones').value=r?.observaciones||'';document.getElementById('recordatorioFormTitle').textContent=r?'Editar recordatorio':'Nuevo recordatorio';bootstrap.Modal.getOrCreateInstance(m,{backdrop:false,keyboard:true,focus:true}).show();setTimeout(()=>document.getElementById('recordatorio-titulo')?.focus(),120);}
+function normalizarUsuariosPermitidosRecordatorio_(raw){
+    let arr=raw;
+    if(typeof arr==='string'){
+        const t=arr.trim();
+        if(!t)return [];
+        try{arr=JSON.parse(t);}catch(_){arr=t.split(',').map(x=>x.trim()).filter(Boolean);}
+    }
+    if(!Array.isArray(arr))arr=arr?[arr]:[];
+    const seen=new Set();
+    return arr.map(v=>{
+        if(v&&typeof v==='object') return {
+            id_usuario:String(v.id_usuario||v.id||'').trim(),
+            nombre_completo:String(v.nombre_completo||v.nombre||'').trim(),
+            username:String(v.username||'').trim(),
+            email:String(v.email||'').trim()
+        };
+        return {id_usuario:String(v||'').trim(),nombre_completo:'',username:'',email:''};
+    }).filter(v=>v.id_usuario&&!seen.has(v.id_usuario)&&seen.add(v.id_usuario));
+}
+function indiceBusquedaUsuarioRecordatorio_(u){
+    if(!u||typeof u!=='object')return '';
+    const valores=[];
+    const recorrer=v=>{
+        if(v===null||v===undefined)return;
+        if(Array.isArray(v)){v.forEach(recorrer);return;}
+        if(typeof v==='object'){Object.values(v).forEach(recorrer);return;}
+        const x=String(v).trim();if(x)valores.push(x);
+    };
+    recorrer(u);
+    return valores.join(' ').toLowerCase();
+}
+function obtenerUsuariosRecordatorioSeleccionables_(){
+    return (Array.isArray(db?.usuarios)?db.usuarios:[]).filter(u=>{
+        if(!u)return false;
+        const rol=String(u.rol||'').trim().toLowerCase();
+        const estado=String(u.estado||'Activo').trim().toLowerCase();
+        return rol!=='master'&&!['inactivo','inactive','desactivado'].includes(estado);
+    }).sort((a,b)=>String(a.nombre_completo||a.username||a.email||'').localeCompare(String(b.nombre_completo||b.username||b.email||''),'es'));
+}
+function _recordatorioSeleccionadosSet_(){
+    if(!(window._recordatorioUsuariosSeleccionados instanceof Set))window._recordatorioUsuariosSeleccionados=new Set();
+    return window._recordatorioUsuariosSeleccionados;
+}
+function actualizarContadorUsuariosRecordatorio_(){
+    const n=_recordatorioSeleccionadosSet_().size;
+    const el=document.getElementById('recordatorio-permisos-count');
+    if(el)el.textContent=n+' seleccionado'+(n===1?'':'s');
+}
+function usuarioRecordatorioPorId_(id){
+    const sid=String(id||'');
+    return obtenerUsuariosRecordatorioSeleccionables_().find(u=>String(u.id_usuario||'')===sid)||
+           (Array.isArray(db?.usuarios)?db.usuarios:[]).find(u=>String(u.id_usuario||'')===sid)||null;
+}
+function renderUsuariosSeleccionadosRecordatorio_(){
+    const box=document.getElementById('recordatorio-permisos-seleccionados');if(!box)return;
+    const ids=[..._recordatorioSeleccionadosSet_()];
+    if(!ids.length){box.innerHTML='<div class="small text-muted py-1">No hay usuarios seleccionados.</div>';return;}
+    box.innerHTML=ids.map(id=>{
+        const u=usuarioRecordatorioPorId_(id);
+        const nombre=String(u?.nombre_completo||u?.username||id);
+        const sub=String(u?.username||u?.email||id);
+        return '<div class="recordatorio-perm-selected"><span><strong>'+recordatorioEscape(nombre)+'</strong><small>'+recordatorioEscape(sub)+'</small></span><button type="button" class="btn btn-sm btn-outline-danger" title="Quitar" onclick="quitarUsuarioSeleccionadoRecordatorio_(\''+recordatorioEscape(id)+'\')"><i class="fa-solid fa-xmark"></i></button></div>';
+    }).join('');
+}
+function renderResultadosUsuariosRecordatorio_(usuarios){
+    const box=document.getElementById('recordatorio-permisos-resultados');if(!box)return;
+    if(!usuarios.length){box.innerHTML='<div class="small text-muted py-2">No se encontraron usuarios con esa búsqueda.</div>';return;}
+    const seleccionados=_recordatorioSeleccionadosSet_();
+    box.innerHTML=usuarios.map(u=>{
+        const id=String(u.id_usuario||'');
+        const nombre=String(u.nombre_completo||u.username||id);
+        const sub=String(u.username||u.email||id);
+        const checked=seleccionados.has(id);
+        return '<label class="recordatorio-perm-user"><input type="checkbox" '+(checked?'checked ':'')+'data-recordatorio-user-id="'+recordatorioEscape(id)+'"><span><strong>'+recordatorioEscape(nombre)+'</strong><small>'+recordatorioEscape(sub)+'</small></span></label>';
+    }).join('');
+    box.querySelectorAll('input[data-recordatorio-user-id]').forEach(cb=>cb.addEventListener('change',()=>{
+        const id=String(cb.getAttribute('data-recordatorio-user-id')||'').trim();
+        if(!id)return;
+        if(cb.checked)_recordatorioSeleccionadosSet_().add(id);else _recordatorioSeleccionadosSet_().delete(id);
+        renderUsuariosSeleccionadosRecordatorio_();
+        actualizarContadorUsuariosRecordatorio_();
+    }));
+}
+async function cargarUsuariosRecordatorioParaBusqueda_(){
+    try{
+        const frescos=await sbSelect('usuarios',{limit:10000,order:'nombre_completo.asc'});
+        if(Array.isArray(frescos)){db.usuarios=frescos;guardarDBLocalSeguro_();return frescos;}
+    }catch(_){ }
+    try{await sincronizarConservidor();}catch(_){ }
+    return obtenerUsuariosRecordatorioSeleccionables_();
+}
+async function buscarUsuariosRecordatorioVisibilidad(){
+    const input=document.getElementById('recordatorio-permisos-busqueda');
+    const q=String(input?.value||'').trim().toLowerCase();
+    const result=document.getElementById('recordatorio-permisos-resultados');
+    if(!result)return;
+    if(!q){result.innerHTML='<div class="small text-muted py-2">Escriba un dato para buscar.</div>';return;}
+    result.innerHTML='<div class="small text-muted py-2"><i class="fa-solid fa-spinner fa-spin me-1"></i>Buscando usuarios...</div>';
+    const usuarios=await cargarUsuariosRecordatorioParaBusqueda_();
+    const currentId=String(currentUser?.id_usuario||'').trim();
+    const seleccionados=_recordatorioSeleccionadosSet_();
+    const matches=usuarios.filter(u=>{
+        const id=String(u?.id_usuario||'').trim();
+        return id&&id!==currentId&&!seleccionados.has(id)&&indiceBusquedaUsuarioRecordatorio_(u).includes(q);
+    });
+    renderResultadosUsuariosRecordatorio_(matches);
+}
+function limpiarBusquedaUsuariosRecordatorioVisibilidad(){
+    const input=document.getElementById('recordatorio-permisos-busqueda');if(input)input.value='';
+    const result=document.getElementById('recordatorio-permisos-resultados');if(result)result.innerHTML='<div class="small text-muted py-2">Use BUSCAR para localizar usuarios.</div>';
+}
+function quitarUsuarioSeleccionadoRecordatorio_(id){
+    _recordatorioSeleccionadosSet_().delete(String(id||''));
+    renderUsuariosSeleccionadosRecordatorio_();
+    actualizarContadorUsuariosRecordatorio_();
+}
+function filtrarUsuariosRecordatorioVisibilidad(){return buscarUsuariosRecordatorioVisibilidad();}
+function cargarUsuariosRecordatorioVisibilidad_(recordatorio=null){
+    const wrap=document.getElementById('recordatorio-permisos-visibilidad-wrap');
+    if(!wrap)return;
+    const rol=String(currentUser?.rol||'').trim().toLowerCase();
+    const puede=['master','administrador','admin'].includes(rol);
+    wrap.classList.toggle('d-none',!puede);
+    if(!puede)return;
+    window._recordatorioUsuariosSeleccionados=new Set(normalizarUsuariosPermitidosRecordatorio_(recordatorio?.usuarios_permitidos).map(x=>String(x.id_usuario||'')).filter(Boolean));
+    const input=document.getElementById('recordatorio-permisos-busqueda');if(input)input.value='';
+    const result=document.getElementById('recordatorio-permisos-resultados');if(result)result.innerHTML='<div class="small text-muted py-2">Use BUSCAR para localizar usuarios.</div>';
+    renderUsuariosSeleccionadosRecordatorio_();
+    actualizarContadorUsuariosRecordatorio_();
+}
+function obtenerUsuariosPermitidosRecordatorioDesdeForm_(){
+    const ids=_recordatorioSeleccionadosSet_();
+    return [...ids].map(id=>{const u=(db.usuarios||[]).find(x=>String(x.id_usuario||'')===String(id));return {id_usuario:String(id),nombre_completo:String(u?.nombre_completo||''),username:String(u?.username||''),email:String(u?.email||'')};}).filter(x=>x.id_usuario);
+}
+function usuarioPuedeVerRecordatorio_(r,u=currentUser){
+    if(!r||!u)return false;
+    const uid=String(u.id_usuario||'').trim();
+    if(!uid)return false;
+    if(String(r.id_usuario||'').trim()===uid)return true;
+    return normalizarUsuariosPermitidosRecordatorio_(r.usuarios_permitidos).some(x=>String(x.id_usuario||'').trim()===uid);
+}
+function abrirFormularioRecordatorio(id){if(!protegerAccionUsuario('recordatorios',id?'modificar':'agregar'))return;const m=document.getElementById('recordatorioFormModal');if(!m)return;const r=id?(db.recordatorios||[]).find(x=>String(x.id_recordatorio)===String(id)):null;document.getElementById('recordatorio-id').value=r?.id_recordatorio||'';document.getElementById('recordatorio-titulo').value=r?.titulo||'';document.getElementById('recordatorio-tipo').value=r?.tipo||'Compromiso';document.getElementById('recordatorio-descripcion').value=r?.descripcion||'';document.getElementById('recordatorio-fecha').value=r?.fecha_recordatorio||'';document.getElementById('recordatorio-hora').value=(String(r?.hora_recordatorio||'').match(/^\d{1,2}:\d{2}/)||[''])[0];document.getElementById('recordatorio-prioridad').value=r?.prioridad||'Normal';document.getElementById('recordatorio-estado').value=r?.estado||'Pendiente';document.getElementById('recordatorio-ubicacion').value=r?.ubicacion||'';document.getElementById('recordatorio-chat').value=r?.telegram_chat_id||'';document.getElementById('recordatorio-telegram').checked=String(r?.telegram_activo||'true').toLowerCase()!=='false';document.getElementById('recordatorio-antes-valor').value=r?.telegram_antes_intervalo_valor??30;document.getElementById('recordatorio-antes-unidad').value=r?.telegram_antes_intervalo_unidad||'minutos';document.getElementById('recordatorio-antes-cantidad').value=r?.telegram_antes_cantidad??1;document.getElementById('recordatorio-despues-valor').value=r?.telegram_despues_intervalo_valor??30;document.getElementById('recordatorio-despues-unidad').value=r?.telegram_despues_intervalo_unidad||'minutos';document.getElementById('recordatorio-despues-cantidad').value=r?.telegram_despues_cantidad??0;document.getElementById('recordatorio-mensaje').value=r?.mensaje_telegram||'';document.getElementById('recordatorio-observaciones').value=r?.observaciones||'';cargarUsuariosRecordatorioVisibilidad_(r);document.getElementById('recordatorioFormTitle').textContent=r?'Editar recordatorio':'Nuevo recordatorio';bootstrap.Modal.getOrCreateInstance(m,{backdrop:false,keyboard:true,focus:true}).show();setTimeout(()=>document.getElementById('recordatorio-titulo')?.focus(),120);}
 function cerrarFormularioRecordatorio(){const m=document.getElementById('recordatorioFormModal');if(m)bootstrap.Modal.getInstance(m)?.hide();}
 async function guardarRecordatorioPersonal(ev){
     ev.preventDefault();
@@ -14356,6 +14684,7 @@ async function guardarRecordatorioPersonal(ev){
         telegram_despues_cantidad:String(Math.max(0,Math.min(20,Number(document.getElementById('recordatorio-despues-cantidad').value||0)))),
         mensaje_telegram:document.getElementById('recordatorio-mensaje').value.trim(),
         observaciones:document.getElementById('recordatorio-observaciones').value.trim(),
+        usuarios_permitidos:JSON.stringify(obtenerUsuariosPermitidosRecordatorioDesdeForm_()),
         fecha_registro:ahora
     };
 
@@ -14402,7 +14731,7 @@ cell(r.observaciones||'—','recordatorio-col-observaciones recordatorio-col-wra
 '<td class="recordatorio-table-cell recordatorio-col-actions">'+acciones+'</td></tr>';
 }
 function renderRecordatoriosGrupo_(id,rows,vacio){const c=document.getElementById(id);if(!c)return;if(!rows.length){c.innerHTML='<div class="recordatorios-table-wrap"><table class="recordatorios-table mb-0"><tbody><tr><td colspan="9" class="recordatorios-table-empty">'+recordatorioEscape(vacio)+'</td></tr></tbody></table></div>';return;}c.innerHTML='<div class="recordatorios-table-wrap"><table class="recordatorios-table mb-0"><thead><tr><th>Título</th><th>Tipo</th><th>Fecha</th><th>Hora</th><th>Detalle</th><th>Ubicación</th><th>Mensaje adicional</th><th>Observaciones</th><th>Acciones</th></tr></thead><tbody>'+rows.map(renderRecordatorioCard_).join('')+'</tbody></table></div>'; }
-function renderRecordatoriosModulo(){const base=Array.isArray(db?.recordatorios)?db.recordatorios:[];const q=String(document.getElementById('recordatorios-filtro')?.value||'').trim().toLowerCase();const campos=r=>[r.id_recordatorio,r.titulo,r.tipo,r.descripcion,r.fecha_recordatorio,r.hora_recordatorio,r.prioridad,r.ubicacion,r.estado,r.telegram_chat_id,r.mensaje_telegram,r.observaciones,r.fecha_registro].join(' ').toLowerCase();const rows=base.filter(r=>!q||campos(r).includes(q)).sort((a,b)=>recordatorioParseFechaRegistro(b.fecha_registro)-recordatorioParseFechaRegistro(a.fecha_registro));const pend=rows.filter(r=>String(r.estado||'Pendiente')==='Pendiente'),trans=rows.filter(r=>String(r.estado||'Pendiente')==='En tránsito'),done=rows.filter(r=>String(r.estado||'Pendiente')==='Realizada');document.getElementById('recordatorios-count-pendientes')?.replaceChildren(document.createTextNode(pend.length));document.getElementById('recordatorios-count-transito')?.replaceChildren(document.createTextNode(trans.length));document.getElementById('recordatorios-count-realizadas')?.replaceChildren(document.createTextNode(done.length));renderRecordatoriosGrupo_('recordatorios-pendientes',pend,'No hay recordatorios pendientes.');renderRecordatoriosGrupo_('recordatorios-transito',trans,'No hay recordatorios en tránsito.');renderRecordatoriosGrupo_('recordatorios-realizadas',done,'No hay recordatorios realizados.');}
+function renderRecordatoriosModulo(){const base=(Array.isArray(db?.recordatorios)?db.recordatorios:[]).filter(r=>sbPriv()||usuarioPuedeVerRecordatorio_(r,currentUser)||obtenerAlcancesPermisoUsuario(currentUser,'recordatorios').includes('todos'));const q=String(document.getElementById('recordatorios-filtro')?.value||'').trim().toLowerCase();const campos=r=>[r.id_recordatorio,r.titulo,r.tipo,r.descripcion,r.fecha_recordatorio,r.hora_recordatorio,r.prioridad,r.ubicacion,r.estado,r.telegram_chat_id,r.mensaje_telegram,r.observaciones,r.fecha_registro].join(' ').toLowerCase();const rows=base.filter(r=>!q||campos(r).includes(q)).sort((a,b)=>recordatorioParseFechaRegistro(b.fecha_registro)-recordatorioParseFechaRegistro(a.fecha_registro));const pend=rows.filter(r=>String(r.estado||'Pendiente')==='Pendiente'),trans=rows.filter(r=>String(r.estado||'Pendiente')==='En tránsito'),done=rows.filter(r=>String(r.estado||'Pendiente')==='Realizada');document.getElementById('recordatorios-count-pendientes')?.replaceChildren(document.createTextNode(pend.length));document.getElementById('recordatorios-count-transito')?.replaceChildren(document.createTextNode(trans.length));document.getElementById('recordatorios-count-realizadas')?.replaceChildren(document.createTextNode(done.length));renderRecordatoriosGrupo_('recordatorios-pendientes',pend,'No hay recordatorios pendientes.');renderRecordatoriosGrupo_('recordatorios-transito',trans,'No hay recordatorios en tránsito.');renderRecordatoriosGrupo_('recordatorios-realizadas',done,'No hay recordatorios realizados.');}
 
 function tareaResumenEscape(v){return escMod(v??'—');}
 function tareaResumenFecha(v){const x=String(v??'').trim();if(!x)return'—';return typeof formatearFechaTareaVisual==='function'?formatearFechaTareaVisual(x):x;}
@@ -14525,11 +14854,85 @@ function vehiculosPorId(id){return (Array.isArray(db?.vehiculos)?db.vehiculos:[]
 function vehiculosHistComb(id){return (Array.isArray(db?.vehiculoscombustible)?db.vehiculoscombustible:[]).filter(x=>String(x.id_vehiculo)===String(id)).sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||'')));}
 function vehiculosHistMant(id){return (Array.isArray(db?.vehiculosmantenimiento)?db.vehiculosmantenimiento:[]).filter(x=>String(x.id_vehiculo)===String(id)).sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||'')));}
 function limpiarFiltroVehiculos(){const e=document.getElementById('vehiculos-filtro');if(e)e.value='';renderVehiculosModulo();}
-function vehFormatMoney(v,c){const n=vehNum(v);return (c||'USD').toUpperCase()==='VES'?'Bs '+n.toFixed(2):'$'+n.toFixed(2);}
+function vehFormatMoney(v,c){return formatoMontoPortal(v,c||'USD');}
 function vehKms(v){return v===''||v===null||v===undefined?'—':Number(v).toLocaleString('es-VE',{maximumFractionDigits:1});}
 function vehiculosVisiblesPorAlcanceFamilia_(rows){
   return filtrarFilasPorAlcanceFamiliar_('vehiculos',rows,db,currentUser);
 }
+
+function sueldoNum(v){const n=Number(v);return Number.isFinite(n)?n:0;}
+function sueldoEsc(v){return escMod(v??'—');}
+function sueldoEmpresaNombre(id){const r=(db.empresas||[]).find(x=>String(x.id_empresa||'')===String(id||''));return r?.nombre_empresa||'Empresa no encontrada';}
+function sueldoSimbolo(moneda){const m=String(moneda||'USD').toUpperCase();return m==='VES'?'Bs ':m==='COP'?'COP ':m==='USDT'?'USDT ':'$';}
+function sueldoMontoVisual(r){return formatoMontoPortal(r.monto,r.moneda||'USD');}
+function cargarFamiliaSueldo_(selected=''){const s=document.getElementById('sueldo-familia');if(!s)return;const rows=Array.isArray(db?.familia)?db.familia:[];s.innerHTML='<option value="">Propio usuario</option>'+rows.map(f=>'<option value="'+sueldoEsc(f.id_familia||f.id||'')+'">'+sueldoEsc(f.nombre||'Familiar')+' · '+sueldoEsc(f.parentesco||'')+'</option>').join('');if(selected)s.value=selected;}
+function cargarEmpresasSueldo_(selected=''){const s=document.getElementById('sueldo-empresa');if(!s)return;const rows=Array.isArray(db?.empresas)?db.empresas:[];s.innerHTML='<option value="">Seleccione empresa...</option>'+rows.map(e=>'<option value="'+sueldoEsc(e.id_empresa)+'">'+sueldoEsc(e.nombre_empresa||e.razon_social||e.id_empresa)+'</option>').join('');if(selected)s.value=selected;}
+function toggleKpiSueldos_(tipo){const detail=document.getElementById('sueldos-kpi-'+tipo+'-detail');const btn=detail?.previousElementSibling;if(!detail||!btn)return;const open=detail.classList.toggle('d-none')===false;btn.classList.toggle('open',open);}
+
+function prepararFiltrosSueldos_(rows){
+  const mesEl=document.getElementById('sueldos-filtro-mes'),anioEl=document.getElementById('sueldos-filtro-anio');
+  if(!mesEl||!anioEl)return;
+  const meses=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  const hoy=new Date(),mesActual=String(hoy.getMonth()+1),anioActual=String(hoy.getFullYear());
+  const mesPrev=String(mesEl.value||'').trim(),anioPrev=String(anioEl.value||'').trim();
+  if(!mesEl.options.length)mesEl.innerHTML=meses.map((m,i)=>'<option value="'+String(i+1)+'">'+m+'</option>').join('');
+  const anios=new Set([anioActual]);
+  (Array.isArray(rows)?rows:[]).forEach(r=>{const m=String(r?.fecha||'').match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);if(m)anios.add(m[1]);});
+  const lista=[...anios].sort((a,b)=>Number(b)-Number(a));
+  anioEl.innerHTML=lista.map(y=>'<option value="'+y+'">'+y+'</option>').join('');
+  mesEl.value=mesPrev||mesActual;
+  anioEl.value=anioPrev&&lista.includes(anioPrev)?anioPrev:anioActual;
+}
+function limpiarFiltroSueldos(){
+  const i=document.getElementById('sueldos-filtro');if(i)i.value='';
+  const d=document.getElementById('sueldos-filtro-desde'),h2=document.getElementById('sueldos-filtro-hasta');if(d)d.value='';if(h2)h2.value='';
+  const m=document.getElementById('sueldos-filtro-mes'),a=document.getElementById('sueldos-filtro-anio'),h=new Date();
+  if(m)m.value=String(h.getMonth()+1);if(a)a.value=String(h.getFullYear());
+  renderSueldosModulo();
+}
+function renderSueldosModulo(){
+  if(!protegerAccionUsuario('sueldos','leer'))return;
+  const rows=Array.isArray(db?.sueldos)?db.sueldos:[];const valid=rows.filter(r=>String(r.estado||'Pagado').toLowerCase()!=='anulado');
+  prepararFiltrosSueldos_(valid);
+  const mesSel=String(document.getElementById('sueldos-filtro-mes')?.value||String(new Date().getMonth()+1));
+  const anioSel=String(document.getElementById('sueldos-filtro-anio')?.value||String(new Date().getFullYear()));
+  const desdeSel=String(document.getElementById('sueldos-filtro-desde')?.value||'').trim();
+  const hastaSel=String(document.getElementById('sueldos-filtro-hasta')?.value||'').trim();
+  const porMes=r=>{const m=String(r?.fecha||'').match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);return !!m&&m[1]===anioSel&&String(Number(m[2]))===String(Number(mesSel));};
+  const porRango=r=>{
+    const fecha=String(r?.fecha||'').trim().slice(0,10);
+    if(!/^\d{4}-\d{1,2}-\d{1,2}$/.test(fecha))return false;
+    const f=fecha.replace(/^(\d{4})-(\d{1,2})-(\d{1,2})$/,(_,y,m,d)=>y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0'));
+    if(desdeSel&&f<desdeSel)return false;
+    if(hastaSel&&f>hastaSel)return false;
+    return true;
+  };
+  const usarRango=!!(desdeSel||hastaSel);
+  const rowsMes=valid.filter(usarRango?porRango:porMes);
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  const resumen={USD:{ing:0,egr:0},VES:{ing:0,egr:0},COP:{ing:0,egr:0},USDT:{ing:0,egr:0}};
+  rowsMes.forEach(r=>{const mon=String(r.moneda||'USD').toUpperCase();if(!resumen[mon])return;const tipo=String(r.tipo_movimiento||r.tipo||'Ingreso').toLowerCase();const n=sueldoNum(r.monto);if(tipo==='egreso')resumen[mon].egr+=n;else resumen[mon].ing+=n;});
+  const detalle=(tipo)=>['USD','VES','COP','USDT'].map(mon=>{const v=tipo==='ingresos'?resumen[mon].ing:tipo==='egresos'?resumen[mon].egr:resumen[mon].ing-resumen[mon].egr;return '<div class="sueldos-kpi-row"><span>'+sueldoSimbolo(mon)+'</span><strong>'+formatoMontoPortal(v,mon)+'</strong></div>';}).join('');
+  set('sueldos-kpi-ingresos-total','');set('sueldos-kpi-egresos-total','');set('sueldos-kpi-neto-total','');
+  const d1=document.getElementById('sueldos-kpi-ingresos-detail');if(d1)d1.innerHTML=detalle('ingresos');const d2=document.getElementById('sueldos-kpi-egresos-detail');if(d2)d2.innerHTML=detalle('egresos');const d3=document.getElementById('sueldos-kpi-neto-detail');if(d3)d3.innerHTML=detalle('neto');
+  const q=String(document.getElementById('sueldos-filtro')?.value||'').trim().toLowerCase();
+  const fields=r=>[r.id_sueldo,r.fecha,r.periodo_desde,r.periodo_hasta,r.tipo_movimiento,r.concepto,r.categoria,r.id_empresa,r.empresa_nombre,r.monto,r.moneda,r.estado,r.metodo_pago,r.cuenta,r.referencia,r.descripcion,r.observaciones,r.fecha_registro].join(' ').toLowerCase();
+  const data=rowsMes.filter(r=>!q||fields(r).includes(q)).sort((a,b)=>String(b.fecha_registro||b.fecha||'').localeCompare(String(a.fecha_registro||a.fecha||'')));
+  const grupos=[{tipo:'Ingreso',label:'Ingresos',icon:'fa-arrow-down',cls:'sueldos-ingreso',empty:'No hay ingresos registrados para este mes.'},{tipo:'Egreso',label:'Egresos',icon:'fa-arrow-up',cls:'sueldos-egreso',empty:'No hay egresos registrados para este mes.'}];
+  const out=document.getElementById('sueldos-listado');if(!out)return;
+  const acciones=r=>{let h='<button type="button" class="btn btn-sm btn-outline-info" title="Ver" onclick="abrirResumenSueldo(\''+sueldoEsc(r.id_sueldo)+'\')"><i class="fa-solid fa-eye"></i></button>';if(protegerAccionUsuario('sueldos','modificar')&&String(r.estado||'')!=='Anulado')h+='<button type="button" class="btn btn-sm btn-outline-primary" title="Editar" onclick="abrirFormularioSueldo(\''+sueldoEsc(r.id_sueldo)+'\')"><i class="fa-solid fa-pen"></i></button>';if(protegerAccionUsuario('sueldos','eliminar'))h+='<button type="button" class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="eliminarSueldo(\''+sueldoEsc(r.id_sueldo)+'\')"><i class="fa-solid fa-trash"></i></button>';return h;};
+  const tabla=(lista,g)=>'<div class="sueldos-grupo-tabla"><table class="table table-hover mb-0 sueldos-table"><thead><tr><th>Fecha</th><th>Empresa</th><th>Concepto</th><th>Período</th><th>Monto</th><th>Estado</th><th>Referencia</th><th>Acciones</th></tr></thead><tbody>'+(lista.length?lista.map(r=>'<tr><td class="text-nowrap">'+sueldoEsc(r.fecha||'—')+'</td><td>'+sueldoEsc(r.empresa_nombre||sueldoEmpresaNombre(r.id_empresa))+'</td><td><div class="fw-semibold">'+sueldoEsc(r.concepto||'—')+'</div>'+(r.descripcion?'<div class="small text-muted">'+sueldoEsc(r.descripcion)+'</div>':'')+'</td><td class="text-nowrap">'+sueldoEsc((r.periodo_desde||'')+(r.periodo_hasta?' → '+r.periodo_hasta:'' )||'—')+'</td><td class="text-nowrap fw-bold">'+sueldoEsc(sueldoMontoVisual(r))+'</td><td>'+sueldoEsc(r.estado||'Pagado')+'</td><td>'+sueldoEsc(r.referencia||'—')+'</td><td><div class="sueldos-actions">'+acciones(r)+'</div></td></tr>').join(''):'<tr><td colspan="8" class="text-center text-muted py-3">'+g.empty+'</td></tr>')+'</tbody></table></div>';
+  out.innerHTML=grupos.map(g=>{const lista=data.filter(r=>String(r.tipo_movimiento||r.tipo||'Ingreso')===g.tipo);return '<div class="sueldos-grupo '+g.cls+'"><div class="sueldos-grupo-head"><div class="d-flex align-items-center gap-2"><i class="fa-solid '+g.icon+'"></i><span>'+g.label+'</span><span class="badge bg-light text-dark border">'+lista.length+'</span></div></div>'+tabla(lista,g)+'</div>';}).join('');
+}
+async function comprimirReciboSueldo(file){return new Promise((resolve,reject)=>{if(!file||!String(file.type||'').startsWith('image/'))return reject(new Error('Seleccione una imagen válida.'));const rd=new FileReader();rd.onerror=()=>reject(new Error('No se pudo leer el recibo.'));rd.onload=e=>{const img=new Image();img.onerror=()=>reject(new Error('No se pudo procesar la imagen.'));img.onload=()=>{const max=900,scale=Math.min(1,max/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);let out=c.toDataURL('image/webp',.42);if(!out.startsWith('data:image/webp'))out=c.toDataURL('image/jpeg',.48);resolve(out);};img.src=e.target.result;};rd.readAsDataURL(file);});}
+async function previsualizarReciboSueldo(input){const file=input?.files?.[0];if(!file)return;try{const data=await comprimirReciboSueldo(file);const p=document.getElementById('sueldo-recibo-preview');if(p)p.innerHTML='<div class="sueldo-recibo-preview"><img src="'+escaparAttrFamilia(data)+'" alt="Recibo"><span>Recibo listo para guardar · imagen comprimida</span></div>';const rm=document.getElementById('sueldo-recibo-eliminar');if(rm)rm.classList.remove('d-none');const q=document.getElementById('sueldo-recibo-quitar');if(q)q.value='0';input.dataset.compressed=data;}catch(err){showSystemNotification('Recibo no válido',err.message||'No se pudo procesar la imagen.','warning');input.value='';}}
+function eliminarReciboSueldoFormulario(){const input=document.getElementById('sueldo-recibo-input');if(input){input.value='';delete input.dataset.compressed;}const p=document.getElementById('sueldo-recibo-preview');if(p)p.innerHTML='';const rm=document.getElementById('sueldo-recibo-eliminar');if(rm)rm.classList.add('d-none');const q=document.getElementById('sueldo-recibo-quitar');if(q)q.value='1';}
+function abrirFormularioSueldo(id){if(!protegerAccionUsuario('sueldos',id?'modificar':'agregar'))return;const m=document.getElementById('sueldoFormModal');if(!m)return;const r=id?(db.sueldos||[]).find(x=>String(x.id_sueldo)===String(id)):null;const set=(e,v)=>{const el=document.getElementById(e);if(el)el.value=v??'';};set('sueldo-id',r?.id_sueldo||'');set('sueldo-fecha',r?.fecha||fechaInputVenezuela(new Date()));set('sueldo-tipo',r?.tipo_movimiento||'Ingreso');set('sueldo-concepto',r?.concepto||'Sueldo');cargarEmpresasSueldo_(r?.id_empresa||'');cargarFamiliaSueldo_(r?.id_familia||'');set('sueldo-periodo-desde',r?.periodo_desde||'');set('sueldo-periodo-hasta',r?.periodo_hasta||'');set('sueldo-moneda',r?.moneda||'USD');set('sueldo-monto',r?.monto??'');set('sueldo-tasa',r?.tasa_cambio??'');set('sueldo-estado',r?.estado||'Pagado');set('sueldo-metodo',r?.metodo_pago||'');set('sueldo-cuenta',r?.cuenta||'');set('sueldo-referencia',r?.referencia||'');set('sueldo-descripcion',r?.descripcion||'');set('sueldo-observaciones',r?.observaciones||'');set('sueldo-recibo-quitar','0');const inp=document.getElementById('sueldo-recibo-input');if(inp){inp.value='';delete inp.dataset.compressed;}const prev=document.getElementById('sueldo-recibo-preview');const rm=document.getElementById('sueldo-recibo-eliminar');if(prev)prev.innerHTML=r?.recibo_imagen?'<div class="sueldo-recibo-preview"><img src="'+escaparAttrFamilia(r.recibo_imagen)+'" alt="Recibo"><span>Recibo guardado</span></div>':'';if(rm)rm.classList.toggle('d-none',!r?.recibo_imagen);document.getElementById('sueldoFormTitle').innerHTML='<i class="fa-solid fa-money-check-dollar text-primary me-2"></i>'+(r?'Editar movimiento':'Nuevo movimiento de sueldo');m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
+function cerrarFormularioSueldo(){const m=document.getElementById('sueldoFormModal');if(m)m.classList.remove('show');m?.setAttribute('aria-hidden','true');document.body.classList.remove('overflow-hidden');}
+async function guardarSueldo(e){e.preventDefault();const id=String(document.getElementById('sueldo-id')?.value||'').trim();if(!protegerAccionUsuario('sueldos',id?'modificar':'agregar'))return;const val=x=>String(document.getElementById(x)?.value||'').trim();const empresaId=val('sueldo-empresa');const empresa=(db.empresas||[]).find(x=>String(x.id_empresa||'')===empresaId);const monto=Number(val('sueldo-monto')||0);if(!val('sueldo-fecha')||!empresaId||!val('sueldo-concepto')||monto<=0){showSystemNotification('Datos incompletos','Fecha, empresa, concepto y monto son obligatorios.','warning');return;}const reciboInput=document.getElementById('sueldo-recibo-input');const quitarRecibo=val('sueldo-recibo-quitar')==='1';const reciboNuevo=reciboInput?.dataset?.compressed||'';const actual=id?(db.sueldos||[]).find(x=>String(x.id_sueldo)===id):null;const payload={id_sueldo:id||sbId(),id_usuario:currentUser?.id_usuario||'',id_empresa:empresaId,empresa_nombre:empresa?.nombre_empresa||'',id_familia:val('sueldo-familia')||actual?.id_familia||'',fecha:val('sueldo-fecha'),tipo_movimiento:val('sueldo-tipo'),concepto:val('sueldo-concepto'),periodo_desde:val('sueldo-periodo-desde'),periodo_hasta:val('sueldo-periodo-hasta'),moneda:val('sueldo-moneda')||'USD',monto,tasa_cambio:Number(val('sueldo-tasa')||0),estado:val('sueldo-estado')||'Pagado',metodo_pago:val('sueldo-metodo'),cuenta:val('sueldo-cuenta'),referencia:val('sueldo-referencia'),descripcion:val('sueldo-descripcion'),observaciones:val('sueldo-observaciones'),fecha_registro:actual?.fecha_registro||formatearFechaHoraPortal(new Date())};if(reciboNuevo)payload.recibo_imagen=reciboNuevo;else if(quitarRecibo)payload.recibo_imagen=null;try{const r=await ejecutarOperacionSupabase(id?'updateSueldo':'addSueldo',payload,true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar.');cerrarFormularioSueldo();renderSueldosModulo();showSystemNotification(id?'Movimiento actualizado':'Movimiento registrado',id?'El movimiento fue actualizado correctamente.':'El movimiento fue registrado correctamente.','success');}catch(err){showSystemNotification('No se pudo guardar',err.message||'Error de Servidor.','danger');}}
+async function eliminarSueldo(id){if(!protegerAccionUsuario('sueldos','eliminar')||!(await confirmarAccionModal('Eliminar movimiento','¿Eliminar este movimiento de sueldo o salario?')))return;try{const r=await ejecutarOperacionSupabase('deleteSueldo',{id_sueldo:id},true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar.');renderSueldosModulo();showSystemNotification('Movimiento eliminado','El movimiento fue eliminado correctamente.','success');}catch(err){showSystemNotification('No se pudo eliminar',err.message||'Error de Servidor.','danger');}}
+function abrirResumenSueldo(id){if(!protegerAccionUsuario('sueldos','leer'))return;const r=(db.sueldos||[]).find(x=>String(x.id_sueldo)===String(id));if(!r)return;const c=[['ID',r.id_sueldo],['Fecha',r.fecha],['Tipo',r.tipo_movimiento],['Empresa',r.empresa_nombre||sueldoEmpresaNombre(r.id_empresa)],['Concepto',r.concepto],['Período',(r.periodo_desde||'—')+(r.periodo_hasta?' → '+r.periodo_hasta:'')],['Monto',sueldoMontoVisual(r)],['Estado',r.estado],['Método',r.metodo_pago||'—'],['Cuenta',r.cuenta||'—'],['Referencia',r.referencia||'—'],['Descripción',r.descripcion||'—',true],['Observaciones',r.observaciones||'—',true],['Recibo',r.recibo_imagen?'Adjunto disponible':'Sin recibo'],['Fecha registro',r.fecha_registro||'—']];const g=document.getElementById('sueldoViewGrid');if(g)g.innerHTML=c.map(([l,v,full])=>'<div class="recordatorio-view-field'+(full?' full':'')+'"><div class="recordatorio-view-label">'+sueldoEsc(l)+'</div><div class="recordatorio-view-value">'+sueldoEsc(v)+'</div></div>').join('');document.getElementById('sueldoViewTitle').textContent=r.concepto||'Movimiento';document.getElementById('sueldoViewSub').textContent=(r.tipo_movimiento||'Movimiento')+' · '+(r.id_sueldo||'');const m=document.getElementById('sueldoViewModal');if(m){m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}}
+function cerrarResumenSueldo(){const m=document.getElementById('sueldoViewModal');if(m)m.classList.remove('show');m?.setAttribute('aria-hidden','true');document.body.classList.remove('overflow-hidden');}
 
 function renderVehiculosModulo(){
   if(!protegerAccionUsuario('vehiculos','leer'))return;
@@ -14628,7 +15031,9 @@ function renderGastosModulo(){
   const tableFor=(lista,g)=>'<div class="gastos-grupo-tabla family-reg-table-wrap"><table class="table table-hover family-reg-table gastos-table mb-0"><thead><tr><th>Fecha</th><th>Categoría</th><th>Tercero</th><th>Descripción</th><th>Monto</th><th>Vence</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>'+(
     lista.length?lista.map(r=>{
       const st=String(r.estado||'Registrado');
-      const amount=(String(r.moneda||'USD').toUpperCase()==='VES'?'Bs ':'$')+gastoNum(r.monto).toFixed(2);
+      const moneda=String(r.moneda||'USD').toUpperCase();
+      const simbolo=moneda==='VES'?'Bs ':moneda==='COP'?'COP ':'$';
+      const amount=simbolo+gastoNum(r.monto).toFixed(2);
       return '<tr><td class="text-nowrap">'+gastoEsc(r.fecha||'—')+'</td><td>'+gastoEsc(r.categoria||'—')+(r.subcategoria?'<div class="small text-muted">'+gastoEsc(r.subcategoria)+'</div>':'')+'</td><td>'+gastoEsc(r.tercero||'—')+'</td><td><div class="fw-semibold">'+gastoEsc(r.descripcion||'—')+'</div>'+(r.ubicacion?'<div class="small text-muted"><i class="fa-solid fa-location-dot me-1"></i>'+gastoEsc(r.ubicacion)+'</div>':'')+'</td><td class="text-nowrap fw-bold">'+gastoEsc(amount)+'</td><td class="text-nowrap">'+gastoEsc(r.fecha_vencimiento||'—')+'</td><td><span class="gasto-status-compact">'+gastoEsc(st)+'</span></td><td><div class="gasto-actions">'+actionsFor(r)+'</div></td></tr>';
     }).join(''):'<tr><td colspan="8" class="text-center text-muted py-3">'+g.empty+'</td></tr>')+'</tbody></table></div>';
   out.innerHTML=grupos.map(g=>{
@@ -14643,7 +15048,7 @@ function actualizarEstadosGastoUI(){const tipo=document.getElementById('gasto-ti
 async function guardarGastoPersonal(e){e.preventDefault();const id=String(document.getElementById('gasto-id')?.value||'').trim();if(!protegerAccionUsuario('gastos',id?'modificar':'agregar'))return;const val=id=>String(document.getElementById(id)?.value||'').trim();const tipo=val('gasto-tipo');const estadoActual=val('gasto-estado');const estadosValidos={Ingreso:['Registrado','Anulado'],Egreso:['Registrado','Anulado'],'Cuenta por cobrar':['Pendiente','Cobrado','Anulado'],'Cuenta por pagar':['Pendiente','Pagado','Anulado']};const estado=estadosValidos[tipo]?.includes(estadoActual)?estadoActual:(tipo==='Cuenta por cobrar'||tipo==='Cuenta por pagar'?'Pendiente':'Registrado');const fecha=val('gasto-fecha');const vencimiento=val('gasto-vencimiento');if((tipo==='Cuenta por cobrar'||tipo==='Cuenta por pagar')&&!vencimiento){showSystemNotification('Vencimiento requerido','Indique la fecha de vencimiento para registrar una cuenta por cobrar o por pagar.','warning');return;}const payload={id_gasto:id||('servidor-LOCAL-'+Date.now()+'-'+Math.random().toString(36).slice(2,8)),id_usuario:currentUser?.id_usuario||'',fecha:fecha,tipo:tipo,estado:estado,categoria:val('gasto-categoria'),subcategoria:val('gasto-subcategoria'),tercero:val('gasto-tercero'),documento_referencia:val('gasto-referencia'),descripcion:val('gasto-descripcion'),moneda:val('gasto-moneda')||'USD',monto:Number(val('gasto-monto')||0),tasa_cambio:Number(val('gasto-tasa')||0),fecha_vencimiento:vencimiento,metodo_pago:val('gasto-metodo'),cuenta:val('gasto-cuenta'),ubicacion:val('gasto-ubicacion'),observaciones:val('gasto-observaciones'),fecha_registro:formatearFechaHoraPortal(new Date())};if(!payload.fecha||!payload.tipo||!payload.categoria||!payload.descripcion||payload.monto<=0){showSystemNotification('Datos incompletos','Fecha, tipo, categoría, descripción y monto son obligatorios.','warning');return;}try{const action=id?'updateGasto':'addGasto';const r=await ejecutarOperacionSupabase(action,payload,true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar.');cerrarFormularioGasto();renderGastosModulo();showSystemNotification(id?'Movimiento actualizado':'Movimiento registrado',id?'El movimiento fue actualizado correctamente.':'El movimiento fue registrado correctamente.','success');}catch(err){showSystemNotification('No se pudo guardar',err.message||'Error de servidor.','danger');}}
 async function eliminarGasto(id){if(!protegerAccionUsuario('gastos','eliminar')||!(await confirmarAccionModal('Eliminar movimiento','¿Eliminar este movimiento?')))return;try{const r=await ejecutarOperacionSupabase('deleteGasto',{id_gasto:id},true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar.');renderGastosModulo();showSystemNotification('Movimiento eliminado','El movimiento fue eliminado correctamente.','success');}catch(err){showSystemNotification('No se pudo eliminar',err.message||'Error de servidor.','danger');}}
 async function cambiarEstadoGasto(id,estado){if(!protegerAccionUsuario('gastos','modificar'))return;try{const r=await ejecutarOperacionSupabase('updateGastoEstado',{id_gasto:id,estado:estado},true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo actualizar.');renderGastosModulo();showSystemNotification('Estado actualizado','El movimiento ahora está '+estado.toLowerCase()+'.','success');}catch(err){showSystemNotification('No se pudo actualizar',err.message||'Error de servidor.','danger');}}
-function abrirResumenGasto(id){if(!protegerAccionUsuario('gastos','leer'))return;const r=(db.gastos||[]).find(x=>String(x.id_gasto)===String(id));if(!r)return;const c=[['ID',r.id_gasto],['Fecha',r.fecha],['Tipo',r.tipo],['Estado',r.estado],['Categoría',r.categoria],['Subcategoría',r.subcategoria||'—'],['Tercero',r.tercero||'—'],['Documento / referencia',r.documento_referencia||'—'],['Descripción',r.descripcion||'—',true],['Monto',(r.moneda||'USD')+' '+gastoNum(r.monto).toFixed(2)],['Tasa',r.tasa_cambio||'—'],['Vencimiento',r.fecha_vencimiento||'—'],['Método',r.metodo_pago||'—'],['Cuenta',r.cuenta||'—'],['Ubicación',r.ubicacion||'—'],['Observaciones',r.observaciones||'—',true],['Fecha registro',r.fecha_registro||'—']];const grid=document.getElementById('gastoViewGrid');if(grid)grid.innerHTML=c.map(([l,v,full])=>'<div class="recordatorio-view-field'+(full?' full':'')+'"><div class="recordatorio-view-label">'+gastoEsc(l)+'</div><div class="recordatorio-view-value">'+gastoEsc(v)+'</div></div>').join('');document.getElementById('gastoViewTitle').textContent=r.descripcion||'Movimiento';document.getElementById('gastoViewSub').textContent=(r.tipo||'Movimiento')+' · '+(r.id_gasto||'');const m=document.getElementById('gastoViewModal');if(m){m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}}
+function abrirResumenGasto(id){if(!protegerAccionUsuario('gastos','leer'))return;const r=(db.gastos||[]).find(x=>String(x.id_gasto)===String(id));if(!r)return;const c=[['ID',r.id_gasto],['Fecha',r.fecha],['Tipo',r.tipo],['Estado',r.estado],['Categoría',r.categoria],['Subcategoría',r.subcategoria||'—'],['Tercero',r.tercero||'—'],['Documento / referencia',r.documento_referencia||'—'],['Descripción',r.descripcion||'—',true],['Monto',formatoMontoPortal(r.monto,r.moneda||'USD')],['Tasa',r.tasa_cambio||'—'],['Vencimiento',r.fecha_vencimiento||'—'],['Método',r.metodo_pago||'—'],['Cuenta',r.cuenta||'—'],['Ubicación',r.ubicacion||'—'],['Observaciones',r.observaciones||'—',true],['Fecha registro',r.fecha_registro||'—']];const grid=document.getElementById('gastoViewGrid');if(grid)grid.innerHTML=c.map(([l,v,full])=>'<div class="recordatorio-view-field'+(full?' full':'')+'"><div class="recordatorio-view-label">'+gastoEsc(l)+'</div><div class="recordatorio-view-value">'+gastoEsc(v)+'</div></div>').join('');document.getElementById('gastoViewTitle').textContent=r.descripcion||'Movimiento';document.getElementById('gastoViewSub').textContent=(r.tipo||'Movimiento')+' · '+(r.id_gasto||'');const m=document.getElementById('gastoViewModal');if(m){m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}}
 function cerrarResumenGasto(){const m=document.getElementById('gastoViewModal');if(m)m.classList.remove('show');m?.setAttribute('aria-hidden','true');document.body.classList.remove('overflow-hidden');}
 
 let dbFamilia = [];
@@ -15694,5 +16099,6 @@ inicializarFamiliaDesdeservidor();
 </div>
 <div aria-hidden="true" class="modal fade" id="familiaResumenModal" tabindex="-1"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content border-0 shadow-lg rounded-4"><div class="modal-header"><div><h5 class="modal-title fw-bold mb-1" id="familiaResumenTitulo">Resumen</h5><div class="small text-muted" id="familiaResumenSubtitulo"></div></div><button aria-label="Cerrar" class="btn-close" data-bs-dismiss="modal" type="button"></button></div><div class="modal-body"><div class="row g-2" id="familiaResumenGrid"></div></div><div class="modal-footer py-2"><button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button"><i class="fa-solid fa-xmark me-1"></i>Cerrar</button></div></div></div></div>
 
+<script>document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('permisoModuloMovilModal')?.classList.contains('show'))cerrarPermisoModuloMovil();});</script>
 </body>
 </html>
