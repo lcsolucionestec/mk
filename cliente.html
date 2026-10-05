@@ -292,7 +292,6 @@ body.dark-mode .input-group-pro .form-control,
 body.dark-mode input[type="file"],
         html[data-bs-theme="dark"] input[type="file"] { background-color: #0f172a !important; color: #94a3b8 !important; }
 body.dark-mode select.form-select,
-        html[data-bs-theme="dark"] select.form-select { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%230f172a' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important; }
 body.dark-mode #login-overlay .bg-white,
         html[data-bs-theme="dark"] #login-overlay .bg-white { background-color: #1e293b !important; color: #f1f5f9 !important; }
 body.dark-mode #login-overlay .text-dark,
@@ -3361,7 +3360,8 @@ body { min-width: 0; overflow-x: hidden; }
 @media (min-width: 992px) { #main-content { min-height: var(--portal-vh); } .modal-dialog { min-height: 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
 /* CORRECCION EXCLUSIVA: MODAL DE TAREAS
-   El modal se reubica directamente bajo <body> al abrirse.
+   El modal se reubica directamente bajo <body>
+<script>document.addEventListener('DOMContentLoaded',()=>{try{inicializarChatNotificaciones_();}catch(e){}});</script> al abrirse.
    Esto evita que quede atrapado dentro de #sec-tareas (d-none/stacking contexts). */
 #tareaFormModal.tarea-modal-viewport {
   position: fixed !important;
@@ -3528,109 +3528,49 @@ function formatearNumeroPortal(valor){
 #usr-permisos-modulos .perm-module-category-title i{width:15px;text-align:center;color:#2563eb;}
 @media(max-width:767px){.ops-menu-category-title{padding-left:12px;}#usr-permisos-modulos .perm-module-category-title{padding-top:10px;}}
 </style>
-<style id="menu-iconos-colores-v1">
-/* ================================================================
-   MENÚ PRINCIPAL — ICONOS A COLOR
-   Cada grupo y submódulo conserva un color propio y visible.
-   No modifica la navegación ni la funcionalidad del portal.
-   ================================================================ */
-#sidebar .nav-link > i,
-#sidebar .menu-group-toggle > span > i,
-#sidebar .ops-menu-category-title > i{
-  --menu-icon-color:#2563eb;
-  color:var(--menu-icon-color)!important;
-  transition:color .18s ease,background .18s ease,transform .18s ease,box-shadow .18s ease;
+<style id="permisos-universales-menu-v2">
+/* Permisos universales: todos los módulos/submódulos usan la misma escala visual. */
+#sidebar .nav-link > span,#sidebar .menu-group-toggle > span{font-size:.76rem !important;font-weight:700;}
+#sidebar .nav-link > i,#sidebar .menu-group-toggle .menu-group-icon{font-size:.86rem !important;}
+#sidebar .nav-link{min-height:32px;}
+</style>
+<style id="tema-colores-iconos-chat-v3">
+/* Tema claro/oscuro: superficies, texto, bordes y controles coherentes. */
+:root{
+  --ui-bg:#f5f7fb;--ui-surface:#ffffff;--ui-surface-2:#f8fafc;--ui-text:#172033;--ui-muted:#64748b;--ui-border:#dbe3ef;
+}
+html[data-bs-theme="dark"]{
+  --ui-bg:#0b1120;--ui-surface:#162033;--ui-surface-2:#0f172a;--ui-text:#f1f5f9;--ui-muted:#a8b4c7;--ui-border:#334155;
+}
+html,body{background:var(--ui-bg);color:var(--ui-text);}
+body,body.portal-modern-v2{background-color:var(--ui-bg)!important;color:var(--ui-text)!important;}
+.card,.family-reg-section,.kpi-card,.table-custom,.modal-content,.dropdown-menu,.list-group-item{background-color:var(--ui-surface);color:var(--ui-text);border-color:var(--ui-border);}
+.text-dark,h1,h2,h3,h4,h5,h6,.fw-bold,.fw-semibold{color:var(--ui-text);}
+.text-muted,small.text-muted,.text-secondary{color:var(--ui-muted)!important;}
+.form-control,.form-select,.form-control-pro,.form-select-pro,.input-group-pro,textarea{background-color:var(--ui-surface-2)!important;color:var(--ui-text)!important;border-color:var(--ui-border)!important;}
+.form-control::placeholder,.form-control-pro::placeholder,textarea::placeholder{color:var(--ui-muted)!important;opacity:.85;}
+.form-control:focus,.form-select:focus,.form-control-pro:focus,.form-select-pro:focus,textarea:focus{background-color:var(--ui-surface)!important;color:var(--ui-text)!important;border-color:#60a5fa!important;}
+.table,.table-custom{--bs-table-color:var(--ui-text);--bs-table-bg:transparent;--bs-table-border-color:var(--ui-border);color:var(--ui-text);}
+.table-light,.bg-light{background-color:var(--ui-surface-2)!important;color:var(--ui-text)!important;}
+.alert-light{background-color:var(--ui-surface-2)!important;color:var(--ui-text)!important;border-color:var(--ui-border)!important;}
+/* Selectores desplegables: flecha nativa, única y de tamaño normal. */
+select{
+  -webkit-appearance:auto !important;
+  appearance:auto !important;
+  background-image:none !important;
+  background-position:initial !important;
+  background-repeat:initial !important;
+  background-size:initial !important;
 }
 
-/* Menú principal */
-#sidebar .sidebar-main-nav > .nav-link[href="#dashboard"] > i{--menu-icon-color:#2563eb;}
-
-/* Grupos principales */
-#sidebar .menu-group-icon-general{--menu-icon-color:#6366f1;}
-#sidebar .menu-group-icon-administracion{--menu-icon-color:#7c3aed;}
-#sidebar .menu-group-icon-finanzas{--menu-icon-color:#059669;}
-#sidebar .menu-group-icon-familia{--menu-icon-color:#ec4899;}
-#sidebar .menu-group-icon-infraestructura{--menu-icon-color:#0891b2;}
-
-/* Categorías de módulos nuevos */
-#sidebar .ops-menu-category-title:nth-of-type(1) > i{--menu-icon-color:#2563eb;}
-#sidebar .ops-menu-category-title:nth-of-type(2) > i{--menu-icon-color:#7c3aed;}
-#sidebar .ops-menu-category-title:nth-of-type(3) > i{--menu-icon-color:#dc2626;}
-#sidebar .ops-menu-category-title:nth-of-type(4) > i{--menu-icon-color:#ea580c;}
-
-/* Subgrupos de módulos nuevos */
-#sidebar .ops-menu-group:nth-of-type(1) .menu-group-icon{--menu-icon-color:#0ea5e9;}
-#sidebar .ops-menu-group:nth-of-type(2) .menu-group-icon{--menu-icon-color:#16a34a;}
-#sidebar .ops-menu-group:nth-of-type(3) .menu-group-icon{--menu-icon-color:#f59e0b;}
-#sidebar .ops-menu-group:nth-of-type(4) .menu-group-icon{--menu-icon-color:#8b5cf6;}
-#sidebar .ops-menu-group:nth-of-type(5) .menu-group-icon{--menu-icon-color:#14b8a6;}
-#sidebar .ops-menu-group:nth-of-type(6) .menu-group-icon{--menu-icon-color:#ef4444;}
-#sidebar .ops-menu-group:nth-of-type(7) .menu-group-icon{--menu-icon-color:#f97316;}
-
-/* Submenús existentes */
-#sidebar .nav-link[href="#agenda"] > i{--menu-icon-color:#3b82f6;}
-#sidebar .nav-link[href="#tareas"] > i{--menu-icon-color:#8b5cf6;}
-#sidebar .nav-link[href="#recordatorios"] > i{--menu-icon-color:#f59e0b;}
-#sidebar .nav-link[href="#empresas"] > i{--menu-icon-color:#6366f1;}
-#sidebar .nav-link[href="#usuarios"] > i{--menu-icon-color:#7c3aed;}
-#sidebar .nav-link[href="#clientes"] > i{--menu-icon-color:#ec4899;}
-#sidebar .nav-link[href="#servicios"] > i{--menu-icon-color:#0891b2;}
-#sidebar .nav-link[href="#portal"] > i{--menu-icon-color:#06b6d4;}
-#sidebar .nav-link[href="#auditoria"] > i{--menu-icon-color:#64748b;}
-#sidebar .nav-link[href="#facturacion"] > i{--menu-icon-color:#2563eb;}
-#sidebar .nav-link[href="#creditos"] > i{--menu-icon-color:#16a34a;}
-#sidebar .nav-link[href="#pagos"] > i{--menu-icon-color:#059669;}
-#sidebar .nav-link[href="#bancos"] > i{--menu-icon-color:#0ea5e9;}
-#sidebar .nav-link[href="#gastos"] > i{--menu-icon-color:#f97316;}
-#sidebar .nav-link[href="#sueldos"] > i{--menu-icon-color:#eab308;}
-#sidebar .nav-link[href="#familia"] > i{--menu-icon-color:#ec4899;}
-#sidebar .nav-link[href="#historialmedico"] > i{--menu-icon-color:#ef4444;}
-#sidebar .nav-link[href="#manutencion"] > i{--menu-icon-color:#10b981;}
-#sidebar .nav-link[href="#registrosescolares"] > i{--menu-icon-color:#2563eb;}
-#sidebar .nav-link[href="#vehiculos"] > i{--menu-icon-color:#f97316;}
-#sidebar .nav-link[href="#mikrotik"] > i{--menu-icon-color:#06b6d4;}
-#sidebar .nav-link[href="#tecnicos"] > i{--menu-icon-color:#0ea5e9;}
-#sidebar .nav-link[href="#trabajoscampo"] > i{--menu-icon-color:#16a34a;}
-#sidebar .nav-link[href="#instalaciones"] > i{--menu-icon-color:#2563eb;}
-#sidebar .nav-link[href="#soportetecnico"] > i{--menu-icon-color:#8b5cf6;}
-#sidebar .nav-link[href="#inventarios"] > i{--menu-icon-color:#f59e0b;}
-#sidebar .nav-link[href="#almacenes"] > i{--menu-icon-color:#d97706;}
-#sidebar .nav-link[href="#vgt"] > i{--menu-icon-color:#ea580c;}
-#sidebar .nav-link[href="#centrooperativo"] > i{--menu-icon-color:#14b8a6;}
-#sidebar .nav-link[href="#oficina"] > i{--menu-icon-color:#6366f1;}
-#sidebar .nav-link[href="#contabilidad"] > i{--menu-icon-color:#7c3aed;}
-#sidebar .nav-link[href="#administracion"] > i{--menu-icon-color:#0891b2;}
-#sidebar .nav-link[href="#salud"] > i{--menu-icon-color:#dc2626;}
-#sidebar .nav-link[href="#talleres"] > i{--menu-icon-color:#f97316;}
-
-/* Fondo suave del icono para que el color se mantenga visible en ambos temas. */
-#sidebar .nav-link > i,
-#sidebar .menu-group-toggle > span > i{
-  background:color-mix(in srgb,var(--menu-icon-color) 10%,transparent)!important;
-  border-radius:8px;
-}
-
-/* Categorías y grupos también conservan su color al pasar el cursor. */
-#sidebar .menu-group-toggle:hover > span > i,
-#sidebar .ops-menu-category-title:hover > i{
-  color:var(--menu-icon-color)!important;
-  transform:translateY(-1px) scale(1.04);
-}
-
-/* Los submenús activos mantienen su color en vez de volverse blancos. */
-#sidebar .nav-link.active > i{
-  color:var(--menu-icon-color)!important;
-  background:color-mix(in srgb,var(--menu-icon-color) 18%,#ffffff)!important;
-  border-color:color-mix(in srgb,var(--menu-icon-color) 28%,transparent)!important;
-}
-
-/* Los chevrons son indicadores de navegación y permanecen discretos. */
-#sidebar .group-chevron{color:var(--text-muted)!important;background:transparent!important;}
-
-@supports not (color:color-mix(in srgb,red 20%,transparent)){
-  #sidebar .nav-link > i,
-  #sidebar .menu-group-toggle > span > i{background:rgba(37,99,235,.10)!important;}
-}
+/* Ventana de conversación de notificaciones. */
+#notif-chat-popup{position:fixed;right:18px;bottom:18px;width:min(430px,calc(100vw - 24px));z-index:360000;display:none;}
+#notif-chat-popup.is-visible{display:block;animation:notifChatIn .2s ease-out;}
+#notif-chat-popup .notif-chat-card{background:var(--ui-surface);color:var(--ui-text);border:1px solid var(--ui-border);border-radius:18px;box-shadow:0 18px 55px rgba(15,23,42,.28);overflow:hidden;}
+#notif-chat-popup .notif-chat-head{padding:12px 14px;background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(124,58,237,.10));border-bottom:1px solid var(--ui-border);}
+#notif-chat-popup .notif-chat-body{padding:14px;max-height:260px;overflow:auto;}
+#notif-chat-popup .notif-chat-bubble{padding:10px 12px;border-radius:14px;background:var(--ui-surface-2);border:1px solid var(--ui-border);white-space:pre-wrap;word-break:break-word;}
+@keyframes notifChatIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
 </style>
 </head>
 <!-- VERSION Servidor 2026.1.2 -->
@@ -3639,7 +3579,7 @@ function formatearNumeroPortal(valor){
          CONTENEDOR DE TOAST NOTIFICATIONS
          NO MODIFICAR - Se usa para mostrar notificaciones del sistema
          ═══════════════════════════════════════════════════════════════ -->
-<div id="toast-container"></div>
+<div id="notif-chat-popup" aria-live="polite" aria-atomic="true"><div class="notif-chat-card"><div class="notif-chat-head d-flex align-items-center justify-content-between gap-2"><div><div class="fw-bold" id="notif-chat-title">Nueva notificación</div><small class="text-muted" id="notif-chat-from">Nuevo mensaje</small></div><button type="button" class="btn btn-sm btn-outline-secondary" onclick="cerrarNotificacionChat()"><i class="fa-solid fa-xmark"></i></button></div><div class="notif-chat-body"><div class="notif-chat-bubble" id="notif-chat-message"></div><div class="small text-muted mt-2" id="notif-chat-date"></div><textarea class="form-control form-control-sm mt-3" id="notif-chat-input" rows="2" placeholder="Escriba su respuesta..."></textarea></div><div class="p-2 border-top d-flex justify-content-end gap-2"><button type="button" class="btn btn-sm btn-outline-success" id="notif-chat-read"><i class="fa-solid fa-check me-1"></i>Marcar leída</button><button type="button" class="btn btn-sm btn-primary" id="notif-chat-reply"><i class="fa-solid fa-paper-plane me-1"></i>Enviar respuesta</button></div></div></div><div id="toast-container"></div>
 <div class="sidebar-backdrop" onclick="toggleSidebar()"></div>
 <!-- ═══════════════════════════════════════════════════════════════
          SECCIÓN: LOGIN OVERLAY - PANTALLA DE INICIO DE SESIÓN
@@ -3826,57 +3766,38 @@ function formatearNumeroPortal(valor){
 <div class="sidebar-nav-wrapper">
 <nav class="nav flex-column sidebar-main-nav">
 <a class="nav-link active" href="#dashboard" onclick="switchTab('dashboard')"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
-<div class="menu-group"> <button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-compass-drafting menu-group-icon menu-group-icon-general"></i>General</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link" href="#agenda" onclick="switchTab('agenda')"><i class="fa-solid menu-subicon menu-subicon-agenda fa-calendar-days"></i><span>Agenda</span></a>
-<a class="nav-link" href="#tareas" onclick="switchTab('tareas')"><i class="fa-solid menu-subicon menu-subicon-tareas fa-list-check"></i><span>Tareas</span></a>
-<a class="nav-link" href="#recordatorios" onclick="switchTab('recordatorios')"><i class="fa-solid menu-subicon menu-subicon-recordatorios fa-bell"></i><span>Recordatorios</span></a>
+<div class="ops-menu-category-title"><i class="fa-solid fa-user-gear"></i><span>Administración y Seguridad</span></div>
+<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-user-gear menu-group-icon"></i>Administración</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
+<a class="nav-link" href="#empresas" onclick="switchTab('empresas')"><i class="fa-solid menu-subicon fa-building"></i><span>Gestión Empresas</span></a>
+<a class="nav-link" href="#usuarios" onclick="switchTab('usuarios')"><i class="fa-solid menu-subicon fa-user-shield"></i><span>Usuarios y Permisos</span></a>
+<a class="nav-link" href="#clientes" onclick="switchTab('clientes')"><i class="fa-solid menu-subicon fa-users"></i><span>Gestión Clientes</span></a>
+<a class="nav-link" href="#servicios" onclick="switchTab('servicios')"><i class="fa-solid menu-subicon fa-box-open"></i><span>Planes y Servicios</span></a>
+<a class="nav-link" href="#portal" onclick="switchTab('portal')"><i class="fa-solid menu-subicon fa-globe"></i><span>Control del Portal</span></a>
+<a class="nav-link" href="#auditoria" onclick="switchTab('auditoria')"><i class="fa-solid menu-subicon fa-shield-halved"></i><span>Auditoría</span></a>
+<a class="nav-link" href="#mikrotik" onclick="switchTab('mikrotik')"><i class="fa-solid menu-subicon fa-tower-broadcast"></i><span>Mikrotik</span></a>
 </div></div>
-<div class="menu-group"> <button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-user-gear menu-group-icon menu-group-icon-administracion"></i>Administración</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link view-admin-master" href="#empresas" onclick="switchTab('empresas')"><i class="fa-solid menu-subicon menu-subicon-empresas fa-building"></i><span>Gestión Empresas</span></a>
-<a class="nav-link view-admin-master" href="#usuarios" onclick="switchTab('usuarios')"><i class="fa-solid menu-subicon menu-subicon-usuarios fa-user-shield"></i><span>Usuarios y Permisos</span></a>
-<a class="nav-link view-admin-master" href="#clientes" onclick="switchTab('clientes')"><i class="fa-solid menu-subicon menu-subicon-clientes fa-users"></i><span>Gestión Clientes</span></a>
-<a class="nav-link" href="#servicios" onclick="switchTab('servicios')"><i class="fa-solid menu-subicon menu-subicon-servicios fa-box-open"></i><span>Planes y Servicios</span></a>
-<a class="nav-link view-admin-master" href="#portal" onclick="switchTab('portal')"><i class="fa-solid menu-subicon menu-subicon-portal fa-globe"></i><span>Control del Portal</span></a>
-<a class="nav-link" href="#auditoria" onclick="switchTab('auditoria')"><i class="fa-solid menu-subicon menu-subicon-auditoria fa-shield-halved"></i><span>Auditoría</span></a>
+<div class="ops-menu-category-title"><i class="fa-solid fa-coins"></i><span>Finanzas y Gestión Económica</span></div>
+<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-coins menu-group-icon"></i>Finanzas</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
+<a class="nav-link" href="#facturacion" onclick="switchTab('facturacion')"><i class="fa-solid menu-subicon fa-file-invoice-dollar"></i><span>Facturación</span></a><a class="nav-link" href="#creditos" onclick="switchTab('creditos')"><i class="fa-solid menu-subicon fa-credit-card"></i><span>Créditos y Cuotas</span></a><a class="nav-link" href="#pagos" onclick="switchTab('pagos')"><i class="fa-solid menu-subicon fa-money-bill-transfer"></i><span>Pagos</span></a><a class="nav-link" href="#bancos" onclick="switchTab('bancos')"><i class="fa-solid menu-subicon fa-building-columns"></i><span>Datos Bancarios</span></a><a class="nav-link" href="#gastos" onclick="switchTab('gastos')"><i class="fa-solid menu-subicon fa-chart-pie"></i><span>Control de Gastos</span></a><a class="nav-link" href="#sueldos" onclick="switchTab('sueldos')"><i class="fa-solid menu-subicon fa-money-check-dollar"></i><span>Sueldos y Salarios</span></a>
 </div></div>
-<div class="menu-group"> <button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-coins menu-group-icon menu-group-icon-finanzas"></i>Finanzas</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link" href="#facturacion" onclick="switchTab('facturacion')"><i class="fa-solid menu-subicon menu-subicon-facturacion fa-file-invoice-dollar"></i><span>Facturación</span></a><a class="nav-link" href="#creditos" onclick="switchTab('creditos')"><i class="fa-solid menu-subicon menu-subicon-creditos fa-hand-holding-dollar"></i><span>Créditos y Cuotas</span></a><a class="nav-link" href="#pagos" onclick="switchTab('pagos')"><i class="fa-solid menu-subicon menu-subicon-pagos fa-money-bill-transfer"></i><span>Pagos</span></a><a class="nav-link" href="#bancos" onclick="switchTab('bancos')"><i class="fa-solid menu-subicon menu-subicon-bancos fa-building-columns"></i><span>Datos Bancarios</span></a><a class="nav-link" href="#gastos" onclick="switchTab('gastos')"><i class="fa-solid menu-subicon menu-subicon-gastos fa-chart-pie"></i><span>Control de Gastos</span></a><a class="nav-link" href="#sueldos" onclick="switchTab('sueldos')"><i class="fa-solid menu-subicon fa-money-check-dollar"></i><span>Sueldos y Salarios</span></a>
+<div class="ops-menu-category-title"><i class="fa-solid fa-compass"></i><span>Gestión Personal y Servicios</span></div>
+<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-users menu-group-icon"></i>Gestión Personal</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
+<a class="nav-link" href="#agenda" onclick="switchTab('agenda')"><i class="fa-solid menu-subicon fa-calendar-days"></i><span>Agenda</span></a><a class="nav-link" href="#tareas" onclick="switchTab('tareas')"><i class="fa-solid menu-subicon fa-list-check"></i><span>Tareas</span></a><a class="nav-link" href="#recordatorios" onclick="switchTab('recordatorios')"><i class="fa-solid menu-subicon fa-bell"></i><span>Recordatorios</span></a><a class="nav-link" href="#notificaciones" onclick="switchTab('notificaciones')"><i class="fa-solid menu-subicon fa-bell-concierge"></i><span>Notificaciones</span></a><a class="nav-link" href="#familia" onclick="switchTab('familia')"><i class="fa-solid menu-subicon fa-people-roof"></i><span>Familia</span></a><a class="nav-link" href="#historialmedico" onclick="switchTab('historialmedico')"><i class="fa-solid menu-subicon fa-heart-pulse"></i><span>Historial Médico</span></a><a class="nav-link" href="#manutencion" onclick="switchTab('manutencion')"><i class="fa-solid menu-subicon fa-hand-holding-dollar"></i><span>Manutención</span></a><a class="nav-link" href="#registrosescolares" onclick="switchTab('registrosescolares')"><i class="fa-solid menu-subicon fa-school"></i><span>Registros Escolares</span></a><a class="nav-link" href="#recordatoriosmedicinas" onclick="switchTab('recordatoriosmedicinas')"><i class="fa-solid menu-subicon fa-pills"></i><span>Recordatorios de Medicinas</span></a><a class="nav-link" href="#vehiculos" onclick="switchTab('vehiculos')"><i class="fa-solid menu-subicon fa-car-side"></i><span>Vehículos</span></a>
 </div></div>
-<div class="menu-group"> <button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-people-roof menu-group-icon menu-group-icon-familia"></i>Familia y Registros</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link" href="#familia" onclick="switchTab('familia')"><i class="fa-solid menu-subicon menu-subicon-familia fa-people-roof"></i><span>Familia</span></a><a class="nav-link" href="#historialmedico" onclick="switchTab('historialmedico')"><i class="fa-solid menu-subicon menu-subicon-historialmedico fa-heart-pulse"></i><span>Historial Médico</span></a><a class="nav-link" href="#manutencion" onclick="switchTab('manutencion')"><i class="fa-solid menu-subicon menu-subicon-manutencion fa-hand-holding-dollar"></i><span>Manutención</span></a><a class="nav-link" href="#registrosescolares" onclick="switchTab('registrosescolares')"><i class="fa-solid menu-subicon menu-subicon-registrosescolares fa-school"></i><span>Registros Escolares</span></a><a class="nav-link" href="#vehiculos" onclick="switchTab('vehiculos')"><i class="fa-solid menu-subicon menu-subicon-vehiculos fa-car-side"></i><span>Vehículos</span></a>
-</div></div>
-<div class="menu-group btn-master-only"> <button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-network-wired menu-group-icon menu-group-icon-infraestructura"></i>Infraestructura</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items"><a class="nav-link btn-master-only" href="#mikrotik" onclick="switchTab('mikrotik')"><i class="fa-solid menu-subicon menu-subicon-mikrotik fa-tower-broadcast"></i><span>Mikrotik</span></a></div></div>
 <div class="ops-menu-category-title"><i class="fa-solid fa-screwdriver-wrench"></i><span>Operaciones Técnicas</span></div>
 <div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-helmet-safety menu-group-icon"></i>Campo y Soporte</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link" href="#tecnicos" onclick="switchTab('tecnicos')"><i class="fa-solid menu-subicon fa-helmet-safety"></i><span>Técnicos</span></a>
-<a class="nav-link" href="#trabajoscampo" onclick="switchTab('trabajoscampo')"><i class="fa-solid menu-subicon fa-person-digging"></i><span>Trabajos de Campo</span></a>
-<a class="nav-link" href="#instalaciones" onclick="switchTab('instalaciones')"><i class="fa-solid menu-subicon fa-network-wired"></i><span>Instalaciones</span></a>
-<a class="nav-link" href="#soportetecnico" onclick="switchTab('soportetecnico')"><i class="fa-solid menu-subicon fa-headset"></i><span>Soporte Técnico</span></a>
+<a class="nav-link" href="#tecnicos" onclick="switchTab('tecnicos')"><i class="fa-solid menu-subicon fa-helmet-safety"></i><span>Técnicos</span></a><a class="nav-link" href="#trabajoscampo" onclick="switchTab('trabajoscampo')"><i class="fa-solid menu-subicon fa-person-digging"></i><span>Trabajos de Campo</span></a><a class="nav-link" href="#instalaciones" onclick="switchTab('instalaciones')"><i class="fa-solid menu-subicon fa-network-wired"></i><span>Instalaciones</span></a><a class="nav-link" href="#soportetecnico" onclick="switchTab('soportetecnico')"><i class="fa-solid menu-subicon fa-headset"></i><span>Soporte Técnico</span></a>
 </div></div>
 <div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-boxes-stacked menu-group-icon"></i>Inventario y Logística</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link" href="#inventarios" onclick="switchTab('inventarios')"><i class="fa-solid menu-subicon fa-boxes-stacked"></i><span>Inventarios</span></a>
-<a class="nav-link" href="#almacenes" onclick="switchTab('almacenes')"><i class="fa-solid menu-subicon fa-warehouse"></i><span>Almacenes</span></a>
+<a class="nav-link" href="#inventarios" onclick="switchTab('inventarios')"><i class="fa-solid menu-subicon fa-boxes-stacked"></i><span>Inventarios</span></a><a class="nav-link" href="#almacenes" onclick="switchTab('almacenes')"><i class="fa-solid menu-subicon fa-warehouse"></i><span>Almacenes</span></a><a class="nav-link" href="#oficina" onclick="switchTab('oficina')"><i class="fa-solid menu-subicon fa-building-circle-check"></i><span>Oficina</span></a>
 </div></div>
-<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-road menu-group-icon"></i>Proyectos y VGT</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link" href="#vgt" onclick="switchTab('vgt')"><i class="fa-solid menu-subicon fa-road"></i><span>VGT / Posteaduras</span></a>
-</div></div>
-<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-magnifying-glass-chart menu-group-icon"></i>Consultas y Control</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link" href="#centrooperativo" onclick="switchTab('centrooperativo')"><i class="fa-solid menu-subicon fa-magnifying-glass-chart"></i><span>Centro Operativo</span></a>
-</div></div>
+<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-road menu-group-icon"></i>Proyectos y Control</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items"><a class="nav-link" href="#vgt" onclick="switchTab('vgt')"><i class="fa-solid menu-subicon fa-road"></i><span>VGT / Posteaduras</span></a><a class="nav-link" href="#centrooperativo" onclick="switchTab('centrooperativo')"><i class="fa-solid menu-subicon fa-magnifying-glass-chart"></i><span>Centro Operativo</span></a></div></div>
 <div class="ops-menu-category-title"><i class="fa-solid fa-briefcase"></i><span>Gestión Empresarial</span></div>
-<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-building-circle-check menu-group-icon"></i>Oficina y Administración</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link" href="#oficina" onclick="switchTab('oficina')"><i class="fa-solid menu-subicon fa-building-circle-check"></i><span>Oficina</span></a>
-<a class="nav-link" href="#contabilidad" onclick="switchTab('contabilidad')"><i class="fa-solid menu-subicon fa-calculator"></i><span>Contabilidad</span></a>
-<a class="nav-link" href="#administracion" onclick="switchTab('administracion')"><i class="fa-solid menu-subicon fa-briefcase"></i><span>Administración Integral</span></a>
-</div></div>
+<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-briefcase menu-group-icon"></i>Administración Empresarial</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items"><a class="nav-link" href="#contabilidad" onclick="switchTab('contabilidad')"><i class="fa-solid menu-subicon fa-calculator"></i><span>Contabilidad</span></a><a class="nav-link" href="#administracion" onclick="switchTab('administracion')"><i class="fa-solid menu-subicon fa-briefcase"></i><span>Administración Integral</span></a></div></div>
 <div class="ops-menu-category-title"><i class="fa-solid fa-heart-pulse"></i><span>Salud y Asistencia</span></div>
-<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-notes-medical menu-group-icon"></i>Gestión de Salud</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link" href="#salud" onclick="switchTab('salud')"><i class="fa-solid menu-subicon fa-notes-medical"></i><span>Gestión de Salud</span></a>
-</div></div>
+<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-notes-medical menu-group-icon"></i>Gestión de Salud</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items"><a class="nav-link" href="#salud" onclick="switchTab('salud')"><i class="fa-solid menu-subicon fa-notes-medical"></i><span>Gestión de Salud</span></a></div></div>
 <div class="ops-menu-category-title"><i class="fa-solid fa-car-wrench"></i><span>Servicios Especializados</span></div>
-<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-screwdriver-wrench menu-group-icon"></i>Taller y Reparaciones</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
-<a class="nav-link" href="#talleres" onclick="switchTab('talleres')"><i class="fa-solid menu-subicon fa-screwdriver-wrench"></i><span>Taller de Reparaciones</span></a>
-</div></div>
+<div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-screwdriver-wrench menu-group-icon"></i>Taller y Reparaciones</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items"><a class="nav-link" href="#talleres" onclick="switchTab('talleres')"><i class="fa-solid menu-subicon fa-screwdriver-wrench"></i><span>Taller de Reparaciones</span></a></div></div>
 </nav>
 </div>
 <!-- FOOTER SIDEBAR -->
@@ -5261,7 +5182,7 @@ function formatearNumeroPortal(valor){
 <div aria-hidden="true" class="vehiculos-overlay" id="vehiculoCombustibleModal">
 <div class="vehiculos-card">
 <div class="vehiculos-head"><div><div class="title" id="combustibleFormTitle"><i class="fa-solid fa-gas-pump text-primary me-2"></i>Registrar combustible</div><small id="combustibleFormSub">Surtido asociado al vehículo.</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarFormularioCombustible()" type="button"><i class="fa-solid fa-xmark"></i></button></div>
-<form onsubmit="guardarCombustibleVehiculo(event)"><input id="combustible-id" type="hidden"/><input id="combustible-vehiculo-id" type="hidden"/><div class="vehiculos-body"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Vehículo</label><input class="form-control form-control-pro" id="combustible-vehiculo-label" readonly=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control form-control-pro" id="combustible-fecha" required="" type="date"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Estación</label><input class="form-control form-control-pro" id="combustible-estacion"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Combustible *</label><select class="form-select form-control-pro" id="combustible-tipo" required=""><option>Gasolina 91</option><option>Gasolina 95</option><option>Diésel</option><option>GLP</option><option>Eléctrico</option><option>Otro</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Litros / unidades *</label><input class="form-control form-control-pro" id="combustible-cantidad" min="0" oninput="calcularCombustibleMontoUI()" required="" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Precio unitario</label><input class="form-control form-control-pro" id="combustible-precio" min="0" oninput="calcularCombustibleMontoUI()" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Monto</label><input class="form-control form-control-pro" id="combustible-monto" min="0" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Moneda</label><select class="form-select form-control-pro" id="combustible-moneda"><option value="USD">USD</option><option value="VES">Bs</option><option value="COP">COP</option><option value="USDT">USDT</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Tasa Bs/US$</label><input class="form-control form-control-pro" id="combustible-tasa" min="0" step="0.0001" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Kilometraje</label><input class="form-control form-control-pro" id="combustible-km" min="0" step="0.1" type="number"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Método de pago</label><input class="form-control form-control-pro" id="combustible-metodo"/></div><div class="col-md-9"><label class="form-label small fw-semibold">Observaciones</label><input class="form-control form-control-pro" id="combustible-observaciones"/></div></div></div><div class="vehiculos-foot"><button class="btn btn-outline-secondary" onclick="cerrarFormularioCombustible()" type="button">Cancelar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar surtido</button></div></form>
+<form onsubmit="guardarCombustibleVehiculo(event)"><input id="combustible-id" type="hidden"/><input id="combustible-vehiculo-id" type="hidden"/><div class="vehiculos-body"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Vehículo</label><input class="form-control form-control-pro" id="combustible-vehiculo-label" readonly=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control form-control-pro" id="combustible-fecha" required="" type="date"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Estación</label><input class="form-control form-control-pro" id="combustible-estacion"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Combustible *</label><select class="form-select form-control-pro" id="combustible-tipo" required=""><option>Gasolina 91</option><option>Gasolina 95</option><option>Diésel</option><option>GLP</option><option>Eléctrico</option><option>Otro</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Litros / unidades *</label><input class="form-control form-control-pro" id="combustible-cantidad" min="0" oninput="calcularCombustibleMontoUI()" required="" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Precio unitario</label><input class="form-control form-control-pro" id="combustible-precio" min="0" oninput="calcularCombustibleMontoUI()" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Monto</label><input class="form-control form-control-pro" id="combustible-monto" min="0" step="0.01" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Moneda</label><select class="form-select form-control-pro" id="combustible-moneda" onchange="calcularCombustibleMontoUI()"><option value="USD">USD</option><option value="VES">Bs</option><option value="COP">COP</option><option value="USDT">USDT</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Tasa Bs/US$</label><input class="form-control form-control-pro" id="combustible-tasa" min="0" step="0.0001" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Kilometraje</label><input class="form-control form-control-pro" id="combustible-km" min="0" step="0.1" type="number"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Método de pago</label><input class="form-control form-control-pro" id="combustible-metodo"/></div><div class="col-md-9"><label class="form-label small fw-semibold">Observaciones</label><input class="form-control form-control-pro" id="combustible-observaciones"/></div></div></div><div class="vehiculos-foot"><button class="btn btn-outline-secondary" onclick="cerrarFormularioCombustible()" type="button">Cancelar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar surtido</button></div></form>
 </div>
 </div>
 <div aria-hidden="true" class="vehiculos-overlay" id="vehiculoMantenimientoModal">
@@ -5421,7 +5342,11 @@ function formatearNumeroPortal(valor){
 <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: AUDITORÍA — Historial de Actividad del Sistema
              ═══════════════════════════════════════════════════════════════ -->
-<section class="tab-content d-none" id="sec-historialmedico"><div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-heart-pulse text-primary me-2"></i>Historial Médico</h5><small class="text-muted">Consultas, diagnósticos, órdenes médicas y seguimiento.</small></div><button class="btn btn-primary" onclick="abrirFormularioHistorialMedico()"><i class="fa-solid fa-plus me-1"></i>Nuevo registro</button></div><div class="row g-3 mb-3"><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Registros médicos</div><div class="sub">Historial clínico registrado</div></div><i class="fa-solid fa-file-medical text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-total">0</div><small class="text-muted">Total de registros</small></div></div></div><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Órdenes médicas</div><div class="sub">Registros con indicaciones</div></div><i class="fa-solid fa-file-prescription text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-ordenes">0</div><small class="text-muted">Con orden registrada</small></div></div></div><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Medicinas activas</div><div class="sub">Recordatorios habilitados</div></div><i class="fa-solid fa-pills text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-meds">0</div><small class="text-muted">Tratamientos activos</small></div></div></div></div><div class="d-none" id="hm-form-host"><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Registrar consulta / orden médica</div><div class="sub">Asocia el registro con el cliente o un integrante de Familia.</div></div></div><div class="family-reg-body"><form id="formHistorialMedico" onsubmit="guardarHistorialMedico(event)"><input id="hm_id" type="hidden"/><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Persona / paciente *</label><select class="form-select form-control-pro" id="hm_persona" required=""></select></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control form-control-pro" id="hm_fecha" required="" type="date"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Profesional</label><input class="form-control form-control-pro" id="hm_profesional" placeholder="Dr./Dra. Nombre"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Especialidad</label><input class="form-control form-control-pro" id="hm_especialidad"/></div><div class="col-md-4"><label class="form-label small fw-semibold">Diagnóstico</label><input class="form-control form-control-pro" id="hm_diagnostico"/></div><div class="col-md-4"><label class="form-label small fw-semibold">Próximo control</label><input class="form-control form-control-pro" id="hm_proximo_control" type="date"/></div><div class="col-12"><label class="form-label small fw-semibold">Orden médica / tratamiento</label><textarea class="form-control form-control-pro" id="hm_orden" rows="3"></textarea></div><div class="col-md-6"><label class="form-label small fw-semibold">Alergias</label><textarea class="form-control form-control-pro" id="hm_alergias" rows="2"></textarea></div><div class="col-md-6"><label class="form-label small fw-semibold">Antecedentes</label><textarea class="form-control form-control-pro" id="hm_antecedentes" rows="2"></textarea></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea class="form-control form-control-pro" id="hm_observaciones" rows="2"></textarea></div></div><div class="d-flex justify-content-end gap-2 mt-3"><button class="btn btn-light border" onclick="limpiarFormularioHistorialMedico()" type="button">Limpiar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar registro</button></div></form></div></div></div><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Recordatorios de medicinas</div><div class="sub">Telegram enviará avisos automáticos según los horarios registrados.</div></div><button class="btn btn-sm btn-outline-primary" onclick="abrirFormularioRecordatorioMedicina()"><i class="fa-solid fa-plus me-1"></i>Agregar medicina</button></div><div class="family-reg-body"><div class="d-none" id="med-form-host"><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Agregar medicina / recordatorio</div><div class="sub">Configure el medicamento, dosis, horarios y período del tratamiento.</div></div></div><div class="family-reg-body"><form id="formRecordatorioMedicina" onsubmit="guardarRecordatorioMedicina(event)"><input id="med_id" type="hidden"/><div class="row g-2"><div class="col-md-3"><label class="form-label small fw-semibold">Persona *</label><select class="form-select form-control-pro" id="med_persona" required=""></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Medicamento *</label><input class="form-control form-control-pro" id="med_medicamento" required=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Dosis *</label><input class="form-control form-control-pro" id="med_dosis" placeholder="1 tableta" required=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Vía</label><input class="form-control form-control-pro" id="med_via"/></div><div class="col-md-2"><label class="form-label small fw-semibold">Frecuencia</label><input class="form-control form-control-pro" id="med_frecuencia"/></div><div class="col-md-4"><label class="form-label small fw-semibold">Horarios *</label><input class="form-control form-control-pro" id="med_horarios" placeholder="08:00 AM, 04:00 PM" required=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Inicio</label><input class="form-control form-control-pro" id="med_inicio" type="date"/></div><div class="col-md-2"><label class="form-label small fw-semibold">Fin</label><input class="form-control form-control-pro" id="med_fin" type="date"/></div><div class="col-md-2"><label class="form-label small fw-semibold">Estado</label><select class="form-select form-control-pro" id="med_estado"><option>Activo</option><option>Inactivo</option></select></div><div class="col-md-4"><label class="form-label small fw-semibold">Indicaciones</label><input class="form-control form-control-pro" id="med_indicaciones"/></div></div><div class="d-flex justify-content-end mt-2"><button class="btn btn-primary btn-sm"><i class="fa-solid fa-bell me-1"></i>Guardar recordatorio</button></div></form></div></div></div><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Paciente</th><th>Medicamento</th><th>Dosis</th><th>Horarios</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="hm-med-tbody"></tbody></table></div></div></div><div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Historial registrado</div><div class="sub">Consulta y administra los registros médicos.</div></div></div><div class="family-reg-body"><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Fecha</th><th>Paciente</th><th>Profesional</th><th>Especialidad</th><th>Diagnóstico</th><th>Orden médica</th><th>Acciones</th></tr></thead><tbody id="hm-tbody"></tbody></table></div></div></div></section>
+<section class="tab-content d-none" id="sec-historialmedico"><div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-heart-pulse text-primary me-2"></i>Historial Médico</h5><small class="text-muted">Consultas, diagnósticos, órdenes médicas y seguimiento.</small></div><button class="btn btn-primary" onclick="abrirFormularioHistorialMedico()"><i class="fa-solid fa-plus me-1"></i>Nuevo registro</button></div><div class="row g-3 mb-3"><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Registros médicos</div><div class="sub">Historial clínico registrado</div></div><i class="fa-solid fa-file-medical text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-total">0</div><small class="text-muted">Total de registros</small></div></div></div><div class="col-md-4"><div class="family-reg-section h-100"><div class="family-reg-head"><div><div class="title">Órdenes médicas</div><div class="sub">Registros con indicaciones</div></div><i class="fa-solid fa-file-prescription text-primary"></i></div><div class="family-reg-body"><div class="fs-3 fw-bold" id="hm-kpi-ordenes">0</div><small class="text-muted">Con orden registrada</small></div></div></div><div class="d-none" id="hm-form-host"><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Registrar consulta / orden médica</div><div class="sub">Asocia el registro con el cliente o un integrante de Familia.</div></div></div><div class="family-reg-body"><form id="formHistorialMedico" onsubmit="guardarHistorialMedico(event)"><input id="hm_id" type="hidden"/><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Persona / paciente *</label><select class="form-select form-control-pro" id="hm_persona" required=""></select></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control form-control-pro" id="hm_fecha" required="" type="date"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Profesional</label><input class="form-control form-control-pro" id="hm_profesional" placeholder="Dr./Dra. Nombre"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Especialidad</label><input class="form-control form-control-pro" id="hm_especialidad"/></div><div class="col-md-4"><label class="form-label small fw-semibold">Diagnóstico</label><input class="form-control form-control-pro" id="hm_diagnostico"/></div><div class="col-md-4"><label class="form-label small fw-semibold">Próximo control</label><input class="form-control form-control-pro" id="hm_proximo_control" type="date"/></div><div class="col-12"><label class="form-label small fw-semibold">Orden médica / tratamiento</label><textarea class="form-control form-control-pro" id="hm_orden" rows="3"></textarea></div><div class="col-md-6"><label class="form-label small fw-semibold">Alergias</label><textarea class="form-control form-control-pro" id="hm_alergias" rows="2"></textarea></div><div class="col-md-6"><label class="form-label small fw-semibold">Antecedentes</label><textarea class="form-control form-control-pro" id="hm_antecedentes" rows="2"></textarea></div><div class="col-12"><label class="form-label small fw-semibold">Observaciones</label><textarea class="form-control form-control-pro" id="hm_observaciones" rows="2"></textarea></div></div><div class="d-flex justify-content-end gap-2 mt-3"><button class="btn btn-light border" onclick="limpiarFormularioHistorialMedico()" type="button">Limpiar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar registro</button></div></form></div></div></div></div></div></div><div class="family-reg-section"><div class="family-reg-head"><div><div class="title">Historial registrado</div><div class="sub">Consulta y administra los registros médicos.</div></div></div><div class="family-reg-body"><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Fecha</th><th>Paciente</th><th>Profesional</th><th>Especialidad</th><th>Diagnóstico</th><th>Orden médica</th><th>Acciones</th></tr></thead><tbody id="hm-tbody"></tbody></table></div></div></div></section>
+<section class="tab-content d-none" id="sec-recordatoriosmedicinas">
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><div><h5 class="fw-bold m-0"><i class="fa-solid fa-pills text-primary me-2"></i>Recordatorios de Medicinas</h5><small class="text-muted">Configure y administre los recordatorios de medicamentos y sus horarios.</small></div><button class="btn btn-primary" onclick="abrirFormularioRecordatorioMedicina()"><i class="fa-solid fa-plus me-1"></i>Agregar medicina</button></div>
+<div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Recordatorios de medicinas</div><div class="sub">Telegram enviará avisos automáticos según los horarios registrados.</div></div><button class="btn btn-sm btn-outline-primary" onclick="abrirFormularioRecordatorioMedicina()"><i class="fa-solid fa-plus me-1"></i>Agregar medicina</button></div><div class="family-reg-body"><div class="d-none" id="med-form-host"><div class="family-reg-section mb-3"><div class="family-reg-head"><div><div class="title">Agregar medicina / recordatorio</div><div class="sub">Configure el medicamento, dosis, horarios y período del tratamiento.</div></div></div><div class="family-reg-body"><form id="formRecordatorioMedicina" onsubmit="guardarRecordatorioMedicina(event)"><input id="med_id" type="hidden"/><div class="row g-2"><div class="col-md-3"><label class="form-label small fw-semibold">Persona *</label><select class="form-select form-control-pro" id="med_persona" required=""></select></div><div class="col-md-3"><label class="form-label small fw-semibold">Medicamento *</label><input class="form-control form-control-pro" id="med_medicamento" required=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Dosis *</label><input class="form-control form-control-pro" id="med_dosis" placeholder="1 tableta" required=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Vía</label><input class="form-control form-control-pro" id="med_via"/></div><div class="col-md-2"><label class="form-label small fw-semibold">Frecuencia</label><input class="form-control form-control-pro" id="med_frecuencia"/></div><div class="col-md-4"><label class="form-label small fw-semibold">Horarios *</label><input class="form-control form-control-pro" id="med_horarios" placeholder="08:00 AM, 04:00 PM" required=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Inicio</label><input class="form-control form-control-pro" id="med_inicio" type="date"/></div><div class="col-md-2"><label class="form-label small fw-semibold">Fin</label><input class="form-control form-control-pro" id="med_fin" type="date"/></div><div class="col-md-2"><label class="form-label small fw-semibold">Estado</label><select class="form-select form-control-pro" id="med_estado"><option>Activo</option><option>Inactivo</option></select></div><div class="col-md-4"><label class="form-label small fw-semibold">Indicaciones</label><input class="form-control form-control-pro" id="med_indicaciones"/></div></div><div class="d-flex justify-content-end mt-2"><button class="btn btn-primary btn-sm"><i class="fa-solid fa-bell me-1"></i>Guardar recordatorio</button></div></form></div></div></div><div class="family-reg-table-wrap"><table class="table table-hover family-reg-table mb-0"><thead><tr><th>Paciente</th><th>Medicamento</th><th>Dosis</th><th>Horarios</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="med-tbody"></tbody></table>
+</section>
 <section class="tab-content d-none" id="sec-manutencion">
 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
 <div>
@@ -6926,7 +6851,7 @@ function filtroNotificacionesClienteSupabase_(cliente){
         const codigo=String(u.codigo_cliente||client?.codigo_cliente||'').trim();
         const cid=String(u.id_cliente||client?.id_cliente||'').trim();
         const byUser=new Set(['usuarios','notificaciones','auditoria','tareas','recordatorios','gastos','sueldos']);
-        const familyOwned=new Set(['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento']);
+        const familyOwned=new Set();
         const byCodigo=new Set(['trabajos_manuales','ordenes']);
         const byCliente=new Set(['facturas','pagos','creditos']);
         const agenda=new Set(['agenda']);
@@ -7028,36 +6953,24 @@ function filtroNotificacionesClienteSupabase_(cliente){
         if(!u||sbPriv()||!data.length)return data;
         if(!MODULOS_CON_ALCANCE_USUARIO.includes(key))return data;
         const permisosUsuario=permisosEfectivosUsuario(u)||{};
-        // HorariosEscolares se muestra y se administra desde Registros Escolares.
-        // Cuando el usuario no tiene un permiso independiente de HorariosEscolares,
-        // hereda el mismo alcance de Registros Escolares para no perder los horarios
-        // por el simple hecho de que la tabla use un módulo técnico separado.
-        const permisoDirecto=permisosUsuario[key];
-        const permisoHereda=key==='horariosescolares'&&!permisoDirecto ? permisosUsuario.registrosescolares : null;
-        const permisoKey=permisoDirecto ? key : (permisoHereda ? 'registrosescolares' : key);
-        const cfg=permisoDirecto||permisoHereda;
-        const alcances=obtenerAlcancesPermisoUsuario(u,permisoKey);
+        const cfg=permisosUsuario[key]&&typeof permisosUsuario[key]==='object'?permisosUsuario[key]:null;
+        const alcances=obtenerAlcancesPermisoUsuario(u,key);
+        if(!cfg)return [];
         if(key==='recordatorios')return data.filter(r=>usuarioPuedeVerRecordatorio_(r,u)||alcances.includes('todos'));
         if(alcances.includes('todos'))return data;
-        if(!cfg||typeof cfg!=='object')return data.filter(r=>filaCoincidePropiosPermiso_(key,r,sourceDb,u));
         const idsPropios=alcances.includes('propios');
-        const idsParents=alcances.includes('parentesco')&&MODULOS_CON_PARENTESCO_USUARIO.includes(permisoKey);
+        const idsParent=alcances.includes('parentesco');
         const idsCustom=alcances.includes('personalizados');
         const selected=idsCustom?clientesSeleccionadosPermiso_(sourceDb,cfg):{ids:new Set(),codes:new Set()};
-        const idsFamiliaParents=idsParents?idsFamiliaPorParentescosPermiso_(sourceDb,cfg,null):new Set();
-        const idsVehPropios=idsParents||key.startsWith('vehiculos')?new Set((Array.isArray(sourceDb?.vehiculos)?sourceDb.vehiculos:[]).filter(v=>{
-            const fid=String(v?.id_familia||'').trim();return idsFamiliaParents.has(fid)||(idsPropios&&idsFamiliaPropiosUsuario_(sourceDb,u).has(fid));
-        }).map(v=>String(v?.id_vehiculo||'').trim()).filter(Boolean)):new Set();
-        const idsFamiliaProp=idsPropios?idsFamiliaPropiosUsuario_(sourceDb,u):new Set();
+        const idsFamiliaParent=idsParent?idsFamiliaPorParentescosPermiso_(sourceDb,cfg,idsCustom?selected:null):new Set();
         return data.filter(row=>{
             if(idsPropios&&filaCoincidePropiosPermiso_(key,row,sourceDb,u))return true;
-            if(idsCustom&&filaCoincidePersonalizadosPermiso_(key,row,sourceDb,selected))return true;
-            if(idsParents){
-                if(String(key).startsWith('vehiculos')){
-                    if(idsVehPropios.has(String(row?.id_vehiculo||'').trim()))return true;
-                }else if(row?.id_familia&&idsFamiliaParents.has(String(row.id_familia).trim()))return true;
-                else if(key==='familia'&&idsFamiliaParents.has(String(row?.id_familia||row?.id||'').trim()))return true;
+            if(idsParent){
+                const fid=String(row?.id_familia||'').trim();
+                if(fid&&idsFamiliaParent.has(fid))return true;
+                if(key==='familia'&&idsFamiliaParent.has(String(row?.id_familia||row?.id||'').trim()))return true;
             }
+            if(idsCustom&&filaCoincidePersonalizadosPermiso_(key,row,sourceDb,selected))return true;
             return false;
         });
     }
@@ -7219,6 +7132,50 @@ function filtroNotificacionesClienteSupabase_(cliente){
     // ACTUALIZACIÓN EN SEGUNDO PLANO DE NOTIFICACIONES
     // Las notificaciones se consultan directamente desde Servidor.
     // la lectura se hace directamente desde la tabla Notificaciones.
+    let _notifKnownIds = new Set();
+    let _notifKnownReady = false;
+    let _notifChatCurrentId = '';
+    function notificacionEsEntrante_(n){
+        if(!currentUser||!n)return false;
+        const norm=v=>String(v??'').trim().toLowerCase();
+        const refs=[currentUser.id_usuario,currentUser.codigo_cliente,currentUser.id_cliente,currentUser.documento_id,currentUser.email,currentUser.correo,currentUser.username].filter(Boolean).map(norm);
+        const destino=[n.id_usuario,n.id_cliente,n.codigo_cliente,n.cliente_id,n.destinatario_id].filter(Boolean).map(norm);
+        const rol=norm(currentUser.rol), rd=norm(n.rol_destino);
+        const esDestino=destino.some(x=>refs.includes(x)) || (rol==='cliente' && destino.includes('master')) || (['master','admin','administrador'].includes(rol)&&rd.includes('master'));
+        if(!esDestino)return false;
+        const em=norm(n.emisor_id||n.id_emisor||'');
+        return !em || !refs.includes(em);
+    }
+    function cerrarNotificacionChat(){document.getElementById('notif-chat-popup')?.classList.remove('is-visible');_notifChatCurrentId='';}
+    function mostrarNotificacionChat_(n){
+        if(!n||!notificacionEsEntrante_(n))return;
+        const box=document.getElementById('notif-chat-popup');if(!box)return;
+        _notifChatCurrentId=String(n.id_notificacion||'');
+        document.getElementById('notif-chat-title').textContent=String(n.titulo||'Nueva notificación');
+        document.getElementById('notif-chat-from').textContent='De: '+String(n.emisor_id||'Usuario');
+        document.getElementById('notif-chat-message').textContent=String(n.mensaje||'');
+        document.getElementById('notif-chat-date').textContent=notifFecha_(n.fecha||n.fecha_hora);
+        const read=document.getElementById('notif-chat-read'),reply=document.getElementById('notif-chat-reply');
+        if(read)read.onclick=()=>{const id=_notifChatCurrentId;marcarNotificacionComoLeida(id).finally(cerrarNotificacionChat);};
+        if(reply)reply.onclick=async()=>{const id=_notifChatCurrentId;const x=(db.notificaciones||[]).find(q=>String(q.id_notificacion||'')===id);const input=document.getElementById('notif-chat-input');const mensaje=String(input?.value||'').trim();if(!x||!mensaje)return showSystemNotification('Respuesta requerida','Escriba un mensaje antes de enviar.','warning');if(!protegerAccionUsuario('notificaciones','agregar'))return;const isClient=String(currentUser?.rol||'').trim().toLowerCase()==='cliente';const destino=isClient?'MASTER':String(x.emisor_id||'MASTER');const payload={id_notificacion:'NOT-'+Date.now(),id_usuario:destino,emisor_id:currentUser?.codigo_cliente||currentUser?.id_usuario||'USUARIO',rol_destino:isClient?'Master':'Usuario',tipo:'Respuesta',titulo:String(x.titulo||'Notificación').startsWith('Re:')?String(x.titulo):'Re: '+String(x.titulo||'Notificación'),mensaje,fecha:formatearFechaHoraPortal(new Date()),leido:'NO'};reply.disabled=true;try{const r=await ejecutarOperacionSupabase('addNotificacion',payload,false,35000,true);if(!r?.success)throw new Error(r?.message||'El servidor no confirmó el envío.');db.notificaciones.unshift(payload);if(input)input.value='';renderNotificaciones();showSystemNotification('Respuesta enviada','La respuesta fue enviada correctamente.','success');}catch(e){showSystemNotification('No se pudo enviar',e.message||'El servidor no confirmó el envío.','danger');}finally{reply.disabled=false;}};
+        box.classList.add('is-visible');
+    }
+    function prepararRespuestaUniversal_(n){
+        abrirModalNuevaNotificacion();
+        const isClient=String(currentUser?.rol||'').trim().toLowerCase()==='cliente';
+        const target=String(n.emisor_id||'MASTER');
+        const sel=document.getElementById('notif_cliente');
+        if(sel&&!isClient){let found=[...sel.options].find(o=>String(o.value)===target);if(!found){const u=(db.usuarios||[]).find(x=>[x.id_usuario,x.codigo_cliente,x.username,x.email,x.correo].some(v=>String(v||'')===target));if(u){const o=document.createElement('option');o.value=target;o.textContent='👤 '+(u.nombre_completo||u.username||target);sel.appendChild(o);}}sel.value=target;}
+        const t=document.getElementById('notif_titulo');if(t)t.value=String(n.titulo||'').startsWith('Re:')?String(n.titulo):'Re: '+String(n.titulo||'Notificación');
+        const m=document.getElementById('notif_mensaje');if(m)m.focus();
+    }
+    function detectarNuevasNotificaciones_(fresh){
+        const arr=Array.isArray(fresh)?fresh:[];
+        if(!_notifKnownReady){_notifKnownIds=new Set(arr.map(n=>String(n.id_notificacion||'')));_notifKnownReady=true;return;}
+        const nuevas=arr.filter(n=>{const id=String(n.id_notificacion||'');return id&&!_notifKnownIds.has(id)&&String(n.leido||'').toUpperCase()!=='SI'&&notificacionEsEntrante_(n);});
+        arr.forEach(n=>{const id=String(n.id_notificacion||'');if(id)_notifKnownIds.add(id);});
+        if(nuevas.length){mostrarNotificacionChat_(nuevas.sort((a,b)=>parseFechaAuditoria(a?.fecha||a?.fecha_hora)-parseFechaAuditoria(b?.fecha||b?.fecha_hora)).at(-1));}
+    }
     let _notifRefreshBusy = false;
     async function actualizarNotificacionesEnSegundoPlano(){
         if(!currentUser || document.visibilityState==='hidden' || _notifRefreshBusy)return;
@@ -7229,6 +7186,7 @@ function filtroNotificacionesClienteSupabase_(cliente){
             else {
                 const data=await sbSelect('notificaciones',{limit:5000});
                 db.notificaciones=Array.isArray(data)?data:[];
+                detectarNuevasNotificaciones_(db.notificaciones);
                 renderNotificaciones();
             }
         }catch(e){console.debug('Actualización de notificaciones Servidor:',e?.message||e);}
@@ -7515,6 +7473,7 @@ function filtroNotificacionesClienteSupabase_(cliente){
         iniciarConexionInicial();
         initInactivityTimer();
         updatePortalUI();
+        actualizarVisibilidadMenuPorPermisos();
     });
 
     // SECCIÓN: TOAST NOTIFICATIONS - NOTIFICACIONES ELEGANTES
@@ -9243,7 +9202,29 @@ html[data-bs-theme="dark"] body.portal-modern-v2 .sidebar-mobile-close{
     function toggleMenuGroup(btn){if(!btn)return;const items=btn.parentElement?.querySelector('.menu-group-items');if(!items)return;const open=items.classList.toggle('show');btn.setAttribute('aria-expanded',open?'true':'false');}
     function abrirGrupoMenuActivo(tabId){const link=document.querySelector('#sidebar a[href="#'+String(tabId||'')+'"]');const group=link?.closest('.menu-group');const btn=group?.querySelector('.menu-group-toggle');const items=group?.querySelector('.menu-group-items');if(btn&&items){items.classList.add('show');btn.setAttribute('aria-expanded','true');}}
 
+    function actualizarVisibilidadMenuPorPermisos(){
+        const nav=document.querySelector('#sidebar .sidebar-main-nav');if(!nav)return;
+        const isMaster=String(currentUser?.rol||'').trim().toLowerCase()==='master';
+        nav.querySelectorAll('.nav-link[href]').forEach(link=>{
+            const m=String(link.getAttribute('href')||'').replace(/^#/,'');
+            if(!m)return;
+            const visible=isMaster||m==='dashboard'||puedeAccederModuloUsuario(m);
+            link.style.display=visible?'':'none';
+        });
+        nav.querySelectorAll('.menu-group').forEach(group=>{
+            const children=[...group.querySelectorAll(':scope > .menu-group-items > .nav-link')];
+            const visible=children.some(x=>x.style.display!=='none');
+            group.style.display=visible?'':'none';
+        });
+        nav.querySelectorAll('.ops-menu-category-title').forEach(title=>{
+            let node=title.nextElementSibling,has=false;
+            while(node && !node.classList.contains('ops-menu-category-title')){if(node.classList.contains('menu-group')&&node.style.display!=='none'){has=true;break;}node=node.nextElementSibling;}
+            title.style.display=has?'':'none';
+        });
+    }
+
     function switchTab(tabId) {
+        actualizarVisibilidadMenuPorPermisos();
         tabId = String(tabId || 'dashboard');
         const previo=document.querySelector('.tab-content:not(.d-none)');
         const previoId=previo?.id ? previo.id.replace('sec-','') : '';
@@ -9300,6 +9281,7 @@ html[data-bs-theme="dark"] body.portal-modern-v2 .sidebar-mobile-close{
         if (tabId === 'portal') { cargarTelegramPortalConfigUI(); }
         if (tabId === 'agenda') { renderAgendaModulo(); if (String(currentUser?.rol||'').toLowerCase()==='master') cargarAgendaConfigUI(); }
         if (tabId === 'historialmedico') { renderHistorialMedicoModulo(); }
+        if (tabId === 'recordatoriosmedicinas') { renderRecordatoriosMedicinasModulo(); }
         if (tabId === 'tareas') { renderTareasModulo(); if(currentUser) sincronizarConservidor().then(()=>renderTareasModulo()).catch(()=>{}); }
         if (tabId === 'recordatorios') { renderRecordatoriosModulo(); if(currentUser) sincronizarConservidor().then(()=>renderRecordatoriosModulo()).catch(()=>{}); }
         if (tabId === 'manutencion') { renderManutencionModulo(); }
@@ -9357,6 +9339,7 @@ async function cargarNotificacionesClienteDirecto_(){
     try{
         const cliente=await resolverClienteActualSupabase_();
         if(!cliente){db.notificaciones=[];renderNotificaciones();return []}
+        detectarNuevasNotificaciones_(db.notificaciones);
         const refs=referenciasClienteNotificaciones_(cliente);
         const encontrados=new Map();
         const agregar=(rows)=>{for(const n of (Array.isArray(rows)?rows:[])){const id=String(n?.id_notificacion||'').trim();if(id)encontrados.set(id,n);}};
@@ -9978,377 +9961,116 @@ async function eliminarEmpresa(id) {
     }
 
     const MATRIZ_PERMISOS_USUARIO = {
-        dashboard:{label:'Dashboard',icon:'fa-chart-pie',actions:['leer']},
-        servicios:{label:'Planes y Servicios',icon:'fa-layer-group',actions:['leer','agregar','modificar','eliminar']},
-        empresas:{label:'Empresas',icon:'fa-building',actions:['leer','agregar','modificar','eliminar']},
-        usuarios:{label:'Usuarios y Permisos',icon:'fa-users-gear',actions:['leer','agregar','modificar','eliminar']},
-        clientes:{label:'Clientes',icon:'fa-address-book',actions:['leer','agregar','modificar','eliminar']},
-        agenda:{label:'Agenda y Citas',icon:'fa-calendar-check',actions:['leer','agregar','modificar','eliminar']},
-        facturacion:{label:'Facturacion',icon:'fa-file-invoice-dollar',actions:['leer','agregar','modificar','eliminar']},
-        creditos:{label:'Creditos y Cuotas',icon:'fa-credit-card',actions:['leer','agregar','modificar','eliminar']},
-        pagos:{label:'Pagos',icon:'fa-money-bill-transfer',actions:['leer','agregar','modificar','eliminar']},
-        bancos:{label:'Datos Bancarios',icon:'fa-building-columns',actions:['leer','agregar','modificar','eliminar']},
-        notificaciones:{label:'Notificaciones',icon:'fa-bell',actions:['leer','agregar','modificar','eliminar']},
-        auditoria:{label:'Auditoria',icon:'fa-clipboard-list',actions:['leer']},
-        portal:{label:'Portal',icon:'fa-globe',actions:['leer','modificar']},
-        mikrotik:{label:'Mikrotik',icon:'fa-tower-broadcast',actions:['leer','agregar','modificar','eliminar']},
-        familia:{label:'Familia',icon:'fa-house-user',actions:['leer','agregar','modificar','eliminar']},
-        historialmedico:{label:'Historial Médico',icon:'fa-notes-medical',actions:['leer','agregar','modificar','eliminar']},
-        manutencion:{label:'Manutención',icon:'fa-hand-holding-dollar',actions:['leer','agregar','modificar','eliminar']},
-        registrosescolares:{label:'Registros Escolares',icon:'fa-school',actions:['leer','agregar','modificar','eliminar']},
-        tareas:{label:'Tareas y Recordatorios',icon:'fa-list-check',actions:['leer','agregar','modificar','eliminar']},
-        recordatorios:{label:'Recordatorios Personales',icon:'fa-calendar-check',actions:['leer','agregar','modificar','eliminar']},
-        gastos:{label:'Control de Gastos',icon:'fa-wallet',actions:['leer','agregar','modificar','eliminar']},
-        sueldos:{label:'Sueldos y Salarios',icon:'fa-money-check-dollar',actions:['leer','agregar','modificar','eliminar']},
-        vehiculos:{label:'Vehículos',icon:'fa-car-side',actions:['leer','agregar','modificar','eliminar']},
-        recordatoriosmedicinas:{label:'Recordatorios de Medicinas',icon:'fa-pills',actions:['leer','agregar','modificar','eliminar']},
-tecnicos:{label:'Técnicos',icon:'fa-helmet-safety',actions:['leer','agregar','modificar','eliminar']},
-        inventarios:{label:'Inventarios',icon:'fa-boxes-stacked',actions:['leer','agregar','modificar','eliminar']},
-        almacenes:{label:'Almacenes',icon:'fa-warehouse',actions:['leer','agregar','modificar','eliminar']},
-        oficina:{label:'Oficina',icon:'fa-building-circle-check',actions:['leer','agregar','modificar','eliminar']},
-        trabajoscampo:{label:'Trabajos de Campo',icon:'fa-person-digging',actions:['leer','agregar','modificar','eliminar','asignar','aprobar','cerrar']},
-        instalaciones:{label:'Instalaciones',icon:'fa-network-wired',actions:['leer','agregar','modificar','eliminar','aprobar','cerrar']},
-        soportetecnico:{label:'Soporte Técnico',icon:'fa-headset',actions:['leer','agregar','modificar','eliminar','asignar','aprobar','cerrar']},
-        vgt:{label:'VGT / Posteaduras',icon:'fa-road',actions:['leer','agregar','modificar','eliminar','aprobar','cerrar']},
-        centrooperativo:{label:'Centro Operativo y Consultas',icon:'fa-magnifying-glass-chart',actions:['leer','agregar','modificar','eliminar','exportar']},
-        contabilidad:{label:'Contabilidad',icon:'fa-calculator',actions:['leer','agregar','modificar','eliminar','aprobar','cerrar','exportar','imprimir']},
-        administracion:{label:'Administración Integral',icon:'fa-briefcase',actions:['leer','agregar','modificar','eliminar','aprobar','cerrar','exportar','imprimir']},
-        salud:{label:'Gestión de Salud',icon:'fa-notes-medical',actions:['leer','agregar','modificar','eliminar','aprobar','cerrar','exportar','imprimir']},
-        talleres:{label:'Taller de Reparaciones',icon:'fa-screwdriver-wrench',actions:['leer','agregar','modificar','eliminar','asignar','aprobar','cerrar','exportar','imprimir']},
-        perfil:{label:'Mi Perfil y Seguridad',icon:'fa-user-circle',actions:['modificar']}
+        dashboard:{label:'Dashboard',icon:'fa-chart-pie'}, servicios:{label:'Planes y Servicios',icon:'fa-layer-group'},
+        empresas:{label:'Gestión Empresas',icon:'fa-building'}, usuarios:{label:'Usuarios y Permisos',icon:'fa-users-gear'}, clientes:{label:'Gestión Clientes',icon:'fa-address-book'},
+        agenda:{label:'Agenda y Citas',icon:'fa-calendar-check'}, facturacion:{label:'Facturación',icon:'fa-file-invoice-dollar'}, creditos:{label:'Créditos y Cuotas',icon:'fa-credit-card'},
+        pagos:{label:'Pagos',icon:'fa-money-bill-transfer'}, bancos:{label:'Datos Bancarios',icon:'fa-building-columns'}, notificaciones:{label:'Notificaciones',icon:'fa-bell'}, auditoria:{label:'Auditoría',icon:'fa-clipboard-list'},
+        portal:{label:'Control del Portal',icon:'fa-globe'}, mikrotik:{label:'Mikrotik',icon:'fa-tower-broadcast'}, familia:{label:'Familia',icon:'fa-people-roof'}, historialmedico:{label:'Historial Médico',icon:'fa-heart-pulse'},
+        manutencion:{label:'Manutención',icon:'fa-hand-holding-dollar'}, registrosescolares:{label:'Registros Escolares',icon:'fa-school'}, tareas:{label:'Tareas y Recordatorios',icon:'fa-list-check'}, recordatorios:{label:'Recordatorios',icon:'fa-bell'}, gastos:{label:'Control de Gastos',icon:'fa-chart-pie'},
+        sueldos:{label:'Sueldos y Salarios',icon:'fa-money-check-dollar'}, vehiculos:{label:'Vehículos',icon:'fa-car-side'}, recordatoriosmedicinas:{label:'Recordatorios de Medicinas',icon:'fa-pills'},
+        tecnicos:{label:'Técnicos',icon:'fa-helmet-safety'}, inventarios:{label:'Inventarios',icon:'fa-boxes-stacked'}, almacenes:{label:'Almacenes',icon:'fa-warehouse'}, oficina:{label:'Oficina',icon:'fa-building-circle-check'},
+        trabajoscampo:{label:'Trabajos de Campo',icon:'fa-person-digging'}, instalaciones:{label:'Instalaciones',icon:'fa-network-wired'}, soportetecnico:{label:'Soporte Técnico',icon:'fa-headset'}, vgt:{label:'VGT / Posteaduras',icon:'fa-road'},
+        centrooperativo:{label:'Centro Operativo y Consultas',icon:'fa-magnifying-glass-chart'}, contabilidad:{label:'Contabilidad',icon:'fa-calculator'}, administracion:{label:'Administración Integral',icon:'fa-briefcase'}, salud:{label:'Gestión de Salud',icon:'fa-notes-medical'}, talleres:{label:'Taller de Reparaciones',icon:'fa-screwdriver-wrench'},
+        perfil:{label:'Mi Perfil y Seguridad',icon:'fa-user-circle'}
     };
-    const ACCION_LABELS_USUARIO={leer:'Lectura',agregar:'Escritura',modificar:'Modificar',eliminar:'Eliminar',asignar:'Asignar',aprobar:'Aprobar',cerrar:'Cerrar'};
+    const PERM_ACTIONS_USUARIO=['leer','modificar','eliminar'];
+    const ACCION_LABELS_USUARIO={leer:'Lectura',modificar:'Modificar',eliminar:'Eliminar'};
     const ALCANCE_LABELS_USUARIO={propios:'Propios',parentesco:'Por parentesco',personalizados:'Personalizados',todos:'Todos'};
-    const MODULOS_CON_ALCANCE_USUARIO=['usuarios','clientes','agenda','facturacion','creditos','pagos','bancos','notificaciones','auditoria','tareas','recordatorios','gastos','familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento','trabajos_manuales','sueldos','ordenes','tecnicos','inventarios','almacenes','oficina','trabajoscampo','instalaciones','soportetecnico','vgt','centrooperativo','contabilidad','administracion','salud','talleres'];
+    const MODULOS_CON_ALCANCE_USUARIO=Object.keys(MATRIZ_PERMISOS_USUARIO);
     const MODULOS_CON_PARENTESCO_USUARIO=['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento','sueldos'];
+    const MODULOS_CON_ALCANCE_FAMILIAR=[...MODULOS_CON_PARENTESCO_USUARIO];
 
     function escaparTextoPermisoUsuario(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
     function normalizarAlcancesPermisoUsuario(raw){
-        const arr=Array.isArray(raw)?raw:(raw===undefined||raw===null||raw===''?[]:[raw]);
-        const out=[];
-        arr.forEach(v=>{
-            const x=String(v??'').trim().toLowerCase();
+        const arr=Array.isArray(raw)?raw:(raw===undefined||raw===null||raw===''?[]:[raw]); const out=[];
+        arr.forEach(v=>{const x=String(v??'').trim().toLowerCase();
             if(['todos','all','*'].includes(x))out.push('todos');
             else if(['parentesco','familia','familiar'].includes(x))out.push('parentesco');
             else if(['personalizados','personalizado','custom','clientes'].includes(x))out.push('personalizados');
             else if(['propios','propio','usuario','usuario_actual'].includes(x))out.push('propios');
         });
-        const uniq=[...new Set(out)];
-        return uniq.includes('todos')?['todos']:(uniq.length?uniq:['propios']);
+        const uniq=[...new Set(out)]; return uniq.includes('todos')?['todos']:(uniq.length?uniq:['propios']);
     }
     function alcancePermisoNormalizadoUsuario(v){return normalizarAlcancesPermisoUsuario(v)[0]||'propios';}
-    function normalizarListaParentescosPermiso(raw){
-        if(raw===undefined||raw===null)return [];
-        const arr=Array.isArray(raw)?raw:[raw];
-        const cleaned=arr.map(x=>String(x||'').trim()).filter(Boolean);
-        if(cleaned.some(x=>['todos','*'].includes(x.toLowerCase())))return ['Todos'];
-        return [...new Set(cleaned)];
-    }
+    function normalizarListaParentescosPermiso(raw){const arr=Array.isArray(raw)?raw:(raw===undefined||raw===null||raw===''?[]:[raw]);const cleaned=arr.map(x=>String(x??'').trim()).filter(Boolean);return cleaned.some(x=>['todos','*'].includes(x.toLowerCase()))?['Todos']:[...new Set(cleaned)];}
     function normalizarClientesPersonalizadosPermiso(raw){
-        const arr=Array.isArray(raw)?raw:(raw===undefined||raw===null||raw===''?[]:[raw]);
-        const out=[];
-        arr.forEach(v=>{
-            if(v&&typeof v==='object'){
-                const id=String(v.id_cliente||v.id||'').trim(),codigo=String(v.codigo_cliente||v.codigo||'').trim(),nombre=String(v.nombre_completo||v.nombre||'').trim();
-                if(id||codigo)out.push({id_cliente:id,codigo_cliente:codigo,nombre_completo:nombre});
-            }else{
-                const x=String(v||'').trim();if(x)out.push({id_cliente:x,codigo_cliente:x,nombre_completo:''});
-            }
-        });
+        const arr=Array.isArray(raw)?raw:(raw===undefined||raw===null||raw===''?[]:[raw]),out=[];
+        arr.forEach(v=>{if(v&&typeof v==='object'){const id=String(v.id_cliente||v.id||'').trim(),codigo=String(v.codigo_cliente||v.codigo||'').trim(),nombre=String(v.nombre_completo||v.nombre||'').trim();if(id||codigo)out.push({id_cliente:id,codigo_cliente:codigo,nombre_completo:nombre});}else{const x=String(v||'').trim();if(x)out.push({id_cliente:x,codigo_cliente:x,nombre_completo:''});}});
         const seen=new Set();return out.filter(v=>{const k=(v.id_cliente||'')+'|'+(v.codigo_cliente||'');if(seen.has(k))return false;seen.add(k);return true;});
     }
-    function permisosClientePorDefectoUsuario(){
-        return {
-            dashboard:{leer:true},
-            clientes:{leer:true,alcances:['propios']},
-            agenda:{leer:true,agregar:true,modificar:true,alcances:['propios']},
-            servicios:{leer:true,agregar:true,modificar:true},
-            auditoria:{leer:true},
-            facturacion:{leer:true,agregar:true,modificar:true,alcances:['propios']},
-            pagos:{leer:true,agregar:true,modificar:true,alcances:['propios']},
-            bancos:{leer:true,alcances:['propios']},
-            notificaciones:{leer:true,agregar:true,modificar:true,alcances:['propios']},
-            perfil:{modificar:true}
-        };
-    }
-    function aplicarPermisosPorRolUsuario(){
-        const rol=String(document.getElementById('usr_rol')?.value||'').trim().toLowerCase();
-        const id=String(document.getElementById('usr_id')?.value||'').trim();
-        if(id)return;
-        if(rol==='cliente')renderEditorPermisosUsuario(permisosClientePorDefectoUsuario());
-        else if(rol==='familia')renderEditorPermisosUsuario({familia:{leer:true,alcances:['propios']}});
-        else if(['administrador','vip','master','supervisor','tecnico','almacen','soporte'].includes(rol))renderEditorPermisosUsuario(permisosPredeterminadosPorRolUsuario({rol}));
-        else renderEditorPermisosUsuario({});
-    }
-
-    function normalizarPermisosUsuario(raw){
-        let p=raw;
-        if(typeof p==='string'){
-            let texto=p.trim();
-            for(let i=0;i<2&&texto;i++){
-                try{p=JSON.parse(texto);}catch(_){p={};break;}
-                if(typeof p==='string')texto=p.trim();else break;
-            }
-        }
-        const normalizarCfg=(cfg)=>{
-            const out={};
-            if(Array.isArray(cfg)){
-                cfg.forEach(a=>{const k=String(a||'').trim().toLowerCase();if(['leer','ver','agregar','modificar','eliminar'].includes(k))out[k]=true;});
-                return out;
-            }
-            if(!cfg||typeof cfg!=='object')return out;
-            ['leer','ver','agregar','modificar','eliminar'].forEach(a=>{if(cfg[a]===true||String(cfg[a]??'').toLowerCase()==='true')out[a]=true;});
-            const legacyScopes=cfg.alcances!==undefined?cfg.alcances:(cfg.alcance!==undefined?cfg.alcance:(cfg.alcance_usuarios!==undefined?cfg.alcance_usuarios:undefined));
-            out.alcances=normalizarAlcancesPermisoUsuario(legacyScopes);
-            if(cfg.parentescos!==undefined)out.parentescos=normalizarListaParentescosPermiso(cfg.parentescos);
-            else if(cfg.alcance_parentescos!==undefined)out.parentescos=normalizarListaParentescosPermiso(cfg.alcance_parentescos);
-            if(cfg.clientes_personalizados!==undefined)out.clientes_personalizados=normalizarClientesPersonalizadosPermiso(cfg.clientes_personalizados);
-            else if(cfg.clientes!==undefined)out.clientes_personalizados=normalizarClientesPersonalizadosPermiso(cfg.clientes);
-            return out;
-        };
-        if(Array.isArray(p)){
-            const o={};
-            p.forEach(item=>{
-                if(typeof item==='string'){const k=normalizarModuloPermisoUsuario(item);if(k)o[k]={leer:true};return;}
-                if(item&&typeof item==='object'){
-                    const key=normalizarModuloPermisoUsuario(item.modulo??item.module??item.key??item.nombre??'');
-                    if(key)o[key]=normalizarCfg(item);
-                }
-            });
-            return o;
-        }
-        if(!p||typeof p!=='object')return {};
-        const out={};
-        Object.entries(p).forEach(([mod,rawCfg])=>{const key=normalizarModuloPermisoUsuario(mod);if(key)out[key]=normalizarCfg(rawCfg);});
-        return out;
-    }
+    function permisosClientePorDefectoUsuario(){return {dashboard:{leer:true},clientes:{leer:true,alcances:['propios']},agenda:{leer:true,modificar:true,alcances:['propios']},servicios:{leer:true,modificar:true,alcances:['todos']},auditoria:{leer:true,alcances:['propios']},facturacion:{leer:true,modificar:true,alcances:['propios']},pagos:{leer:true,modificar:true,alcances:['propios']},bancos:{leer:true,alcances:['propios']},notificaciones:{leer:true,modificar:true,alcances:['propios']},perfil:{modificar:true}};}
     function permisosPredeterminadosPorRolUsuario(u){
         const rol=String(u?.rol||'').trim().toLowerCase();
-        if(rol==='master'||rol==='administrador'||rol==='vip'){
-            return Object.fromEntries(Object.entries(MATRIZ_PERMISOS_USUARIO).map(([k,c])=>[
-                k,{...Object.fromEntries(c.actions.map(a=>[a,true])),...(MODULOS_CON_ALCANCE_USUARIO.includes(k)?{alcances:['todos']}:{})}
-            ]));
-        }
+        if(rol==='master'||rol==='administrador'||rol==='vip')return Object.fromEntries(Object.keys(MATRIZ_PERMISOS_USUARIO).map(k=>[k,{leer:true,modificar:true,eliminar:true,alcances:['todos']}]));
         if(rol==='cliente')return permisosClientePorDefectoUsuario();
-        if(rol==='familia')return {familia:{leer:true,alcances:['propios']}};
-        const fullOps=['tecnicos','inventarios','almacenes','oficina','trabajoscampo','instalaciones','soportetecnico','vgt'];
-        if(['supervisor'].includes(rol))return Object.fromEntries(fullOps.map(k=>[k,{leer:true,agregar:true,modificar:true,eliminar:true,asignar:true,aprobar:true,cerrar:true,alcances:['todos']}])) ;
-        if(['tecnico'].includes(rol))return {
-            dashboard:{leer:true},tecnicos:{leer:true,modificar:true,alcances:['propios']},inventarios:{leer:true,agregar:true,modificar:true,alcances:['propios']},
-            almacenes:{leer:true,agregar:true,alcances:['propios']},trabajoscampo:{leer:true,modificar:true,agregar:true,alcances:['propios']},
-            instalaciones:{leer:true,agregar:true,modificar:true,alcances:['propios']},soportetecnico:{leer:true,agregar:true,modificar:true,alcances:['propios']},vgt:{leer:true,agregar:true,modificar:true,alcances:['propios']},perfil:{modificar:true}
-        };
-        if(['almacen'].includes(rol))return {dashboard:{leer:true},inventarios:{leer:true,agregar:true,modificar:true,eliminar:true,alcances:['todos']},almacenes:{leer:true,agregar:true,modificar:true,eliminar:true,alcances:['todos']},oficina:{leer:true,agregar:true,modificar:true,alcances:['todos']},trabajoscampo:{leer:true,alcances:['todos']},perfil:{modificar:true}};
-        if(['soporte'].includes(rol))return {dashboard:{leer:true},soportetecnico:{leer:true,agregar:true,modificar:true,eliminar:true,asignar:true,cerrar:true,alcances:['todos']},trabajoscampo:{leer:true,agregar:true,modificar:true,alcances:['todos']},instalaciones:{leer:true,alcances:['todos']},perfil:{modificar:true}};
+        if(['supervisor'].includes(rol)){const mods=['tecnicos','inventarios','almacenes','oficina','trabajoscampo','instalaciones','soportetecnico','vgt','centrooperativo'];return Object.fromEntries(mods.map(k=>[k,{leer:true,modificar:true,eliminar:true,alcances:['todos']}]));}
+        if(rol==='tecnico')return Object.fromEntries(['dashboard','tecnicos','inventarios','trabajoscampo','instalaciones','soportetecnico','vgt','perfil'].map(k=>[k,{leer:true,modificar:k!=='dashboard',alcances:['propios']}]));
+        if(rol==='almacen')return Object.fromEntries(['dashboard','inventarios','almacenes','oficina','trabajoscampo','perfil'].map(k=>[k,{leer:true,modificar:k!=='dashboard',eliminar:k==='inventarios'||k==='almacenes',alcances:['todos']}]));
+        if(rol==='soporte')return Object.fromEntries(['dashboard','soportetecnico','trabajoscampo','instalaciones','perfil'].map(k=>[k,{leer:true,modificar:k!=='dashboard',eliminar:k==='soportetecnico',alcances:['todos']}]));
         return {};
     }
+    function normalizarPermisosUsuario(raw){
+        let p=raw;if(typeof p==='string'){let t=p.trim();for(let i=0;i<2&&t;i++){try{p=JSON.parse(t);}catch(_){p={};break;}if(typeof p==='string')t=p.trim();else break;}}
+        const normalizarCfg=(cfg)=>{const out={};
+            if(Array.isArray(cfg)){cfg.forEach(a=>{const k=String(a||'').trim().toLowerCase();if(k==='ver')out.leer=true;else if(k==='agregar'||k==='asignar'||k==='aprobar'||k==='cerrar')out.modificar=true;else if(PERM_ACTIONS_USUARIO.includes(k))out[k]=true;});out.alcances=['propios'];return out;}
+            if(!cfg||typeof cfg!=='object')return out;
+            ['leer','ver','agregar','modificar','eliminar','asignar','aprobar','cerrar'].forEach(a=>{if(cfg[a]===true||String(cfg[a]??'').toLowerCase()==='true'){if(a==='ver')out.leer=true;else if(['agregar','asignar','aprobar','cerrar'].includes(a))out.modificar=true;else out[a]=true;}});
+            const rawScopes=cfg.alcances!==undefined?cfg.alcances:(cfg.alcance!==undefined?cfg.alcance:cfg.alcance_usuarios);out.alcances=normalizarAlcancesPermisoUsuario(rawScopes);
+            if(cfg.clientes_personalizados!==undefined)out.clientes_personalizados=normalizarClientesPersonalizadosPermiso(cfg.clientes_personalizados);else if(cfg.clientes!==undefined)out.clientes_personalizados=normalizarClientesPersonalizadosPermiso(cfg.clientes);
+            if(cfg.parentescos!==undefined)out.parentescos=normalizarListaParentescosPermiso(cfg.parentescos);
+            return out;
+        };
+        if(Array.isArray(p)){const o={};p.forEach(item=>{if(typeof item==='string'){const k=normalizarModuloPermisoUsuario(item);if(k)o[k]={leer:true,alcances:['propios']};}else if(item&&typeof item==='object'){const key=normalizarModuloPermisoUsuario(item.modulo??item.module??item.key??item.nombre??'');if(key)o[key]=normalizarCfg(item);}});return o;}
+        if(!p||typeof p!=='object')return {};const out={};Object.entries(p).forEach(([mod,cfg])=>{const key=normalizarModuloPermisoUsuario(mod);if(key)out[key]=normalizarCfg(cfg);});return out;
+    }
     function permisosEfectivosUsuario(u){
-        if(!u)return {};
-        const explicit=normalizarPermisosUsuario(u.permisos),rol=String(u?.rol||'').trim().toLowerCase();
-        if(rol==='cliente'){
-            const base=permisosClientePorDefectoUsuario();
-            const legacy={dashboard:{leer:true},clientes:{leer:true,agregar:true,modificar:true},agenda:{leer:true,agregar:true,modificar:true},servicios:{leer:true,agregar:true,modificar:true},auditoria:{leer:true},facturacion:{leer:true,agregar:true,modificar:true},pagos:{leer:true,agregar:true,modificar:true},bancos:{leer:true,agregar:true,modificar:true},notificaciones:{leer:true,agregar:true,modificar:true},perfil:{modificar:true}};
-            const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),keys=Object.keys(explicit||{});
-            const soloLegacy=!keys.length||(keys.length===Object.keys(legacy).length&&Object.keys(legacy).every(k=>same(explicit[k]||{},legacy[k])));
-            const merged=JSON.parse(JSON.stringify(base));
-            if(!soloLegacy)Object.entries(explicit||{}).forEach(([mod,cfg])=>{const key=normalizarModuloPermisoUsuario(mod);if(key)merged[key]={...(merged[key]||{}),...(cfg||{})};});
-            ['dashboard','agenda','servicios','auditoria','facturacion','pagos','bancos','perfil'].forEach(key=>{if(merged[key]&&typeof merged[key]==='object')delete merged[key].eliminar;});
-            return merged;
-        }
+        if(!u)return {};const explicit=normalizarPermisosUsuario(u.permisos),rol=String(u?.rol||'').trim().toLowerCase();
         if(Object.keys(explicit).length)return explicit;
         return permisosPredeterminadosPorRolUsuario(u);
     }
     function obtenerAlcancesPermisoUsuario(u,modulo){
-        const rol=String(u?.rol||'').trim().toLowerCase();
-        if(rol==='master')return ['todos'];
-        const key=normalizarModuloPermisoUsuario(modulo);
-        if(!MODULOS_CON_ALCANCE_USUARIO.includes(key))return ['todos'];
-        const p=permisosEfectivosUsuario(u)||{},cfg=p[key]&&typeof p[key]==='object'?p[key]:null;
-        if(!cfg)return ['propios'];
-        return normalizarAlcancesPermisoUsuario(cfg.alcances!==undefined?cfg.alcances:(cfg.alcance!==undefined?cfg.alcance:cfg.alcance_usuarios));
+        if(String(u?.rol||'').trim().toLowerCase()==='master')return ['todos'];
+        const key=normalizarModuloPermisoUsuario(modulo),p=permisosEfectivosUsuario(u)||{},cfg=p[key]&&typeof p[key]==='object'?p[key]:null;
+        return cfg?normalizarAlcancesPermisoUsuario(cfg.alcances):['propios'];
     }
     function obtenerAlcancePermisoUsuario(u,modulo){return obtenerAlcancesPermisoUsuario(u,modulo)[0]||'propios';}
-    function obtenerParentescosDisponiblesPermisos(){const set=new Set();(Array.isArray(db?.familia)?db.familia:[]).forEach(f=>{const p=String(f?.parentesco||'').trim();if(p)set.add(p);});return Array.from(set).sort((a,b)=>a.localeCompare(b,'es'));}
+    function obtenerParentescosDisponiblesPermisos(){const set=new Set();(Array.isArray(db?.familia)?db.familia:[]).forEach(f=>{const p=String(f?.parentesco||'').trim();if(p)set.add(p);});return [...set].sort((a,b)=>a.localeCompare(b,'es'));}
     function obtenerClientesDisponiblesPermisos(){return (Array.isArray(db?.clientes)?db.clientes:[]).filter(c=>c?.id_cliente||c?.codigo_cliente).sort((a,b)=>String(a?.nombre_completo||a?.codigo_cliente||'').localeCompare(String(b?.nombre_completo||b?.codigo_cliente||''),'es'));}
-    const MODULOS_CON_ALCANCE_FAMILIAR=['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento','sueldos'];
-    function obtenerPermisoAlcanceActual(current,key){return normalizarAlcancesPermisoUsuario(current?.alcances!==undefined?current.alcances:(current?.alcance!==undefined?current.alcance:current?.alcance_usuarios));}
+    function obtenerPermisoAlcanceActual(current){return normalizarAlcancesPermisoUsuario(current?.alcances!==undefined?current.alcances:current?.alcance);}
     function obtenerPermisosActualesForm(){
-        const out={};
-        document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(cb=>{
-            const m=cb.dataset.module;if(!cb.checked)return;
-            const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${m}"]`);
-            out[m]={};
-            (MATRIZ_PERMISOS_USUARIO[m]?.actions||[]).forEach(a=>{const ac=block?.querySelector(`input[data-module="${m}"][data-action="${a}"]`);if(ac?.checked)out[m][a]=true;});
-            if(MODULOS_CON_ALCANCE_USUARIO.includes(m)){
-                const scopes=[...block.querySelectorAll('input[data-scope-module="'+m+'"]:checked')].map(x=>x.value).filter(Boolean);
-                out[m].alcances=normalizarAlcancesPermisoUsuario(scopes.length?scopes:['propios']);
-                if(MODULOS_CON_PARENTESCO_USUARIO.includes(m))out[m].parentescos=[...block.querySelectorAll('input[data-parentesco-module="'+m+'"]:checked')].map(x=>x.value).filter(Boolean);
-                if(out[m].alcances.includes('personalizados')){
-                    out[m].clientes_personalizados=[...block.querySelectorAll('input[data-cliente-perm-module="'+m+'"]:checked')].map(x=>{try{return JSON.parse(x.value);}catch(_){return {id_cliente:x.value,codigo_cliente:x.value,nombre_completo:''};}});
-                }
-            }
-        });
-        return out;
+        const out={};document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(cb=>{const m=cb.dataset.module;if(!cb.checked)return;const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${m}"]`);out[m]={};PERM_ACTIONS_USUARIO.forEach(a=>{const ac=block?.querySelector(`input[data-module="${m}"][data-action="${a}"]`);if(ac?.checked)out[m][a]=true;});const scopes=[...block.querySelectorAll(`input[data-scope-module="${m}"]:checked`)].map(x=>x.value);out[m].alcances=normalizarAlcancesPermisoUsuario(scopes.length?scopes:['propios']);if(out[m].alcances.includes('personalizados'))out[m].clientes_personalizados=[...block.querySelectorAll('input[data-cliente-perm-module="'+m+'"]:checked')].map(x=>{try{return JSON.parse(x.value);}catch(_){return {id_cliente:x.value,codigo_cliente:x.value,nombre_completo:''};}});if(MODULOS_CON_PARENTESCO_USUARIO.includes(m))out[m].parentescos=[...block.querySelectorAll('input[data-parentesco-module="'+m+'"]:checked')].map(x=>x.value).filter(Boolean);});return out;
     }
     function actualizarHiddenPermisosUsuario(){const h=document.getElementById('usr_permisos_json');if(h)h.value=JSON.stringify(obtenerPermisosActualesForm());}
-    function cambiarAlcancesPermisoUsuario(modulo){
-        const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${modulo}"]`);if(!block)return;
-        const todos=block.querySelector('input[data-scope-module="'+modulo+'"][value="todos"]');
-        const others=[...block.querySelectorAll('input[data-scope-module="'+modulo+'"]')].filter(x=>x!==todos);
-        if(todos?.checked)others.forEach(x=>x.checked=false);
-        else if(others.some(x=>x.checked)&&todos)todos.checked=false;
-        const scopes=[...block.querySelectorAll('input[data-scope-module="'+modulo+'"]:checked')].map(x=>x.value);
-        block.querySelector('.perm-parentesco-picker')?.classList.toggle('d-none',!scopes.includes('parentesco'));
-        block.querySelector('.perm-clientes-picker')?.classList.toggle('d-none',!scopes.includes('personalizados'));
-        actualizarHiddenPermisosUsuario();
-    }
-    function cambiarAlcanceParentescoPermiso(modulo){cambiarAlcancesPermisoUsuario(modulo);}
-    function filtrarClientesPermisoUsuario(modulo){
-        const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${modulo}"]`);if(!block)return;
-        const q=String(block.querySelector('.perm-client-search')?.value||'').trim().toLowerCase();
-        block.querySelectorAll('[data-cliente-option]').forEach(el=>{el.style.display=!q||String(el.getAttribute('data-cliente-search')||'').toLowerCase().includes(q)?'':'none';});
-    }
-    function cerrarPermisoModuloMovil(){
-        const modal=document.getElementById('permisoModuloMovilModal');if(!modal)return;
-        const clone=modal.querySelector('[data-mobile-perm-clone]');
-        const originalKey=modal.dataset.module||'';
-        const original=document.querySelector(`#usr-permisos-acciones [data-action-block="${originalKey}"]`);
-        if(clone&&original){
-            clone.querySelectorAll('input').forEach(src=>{
-                const sel=src.dataset.action?`input[data-module="${originalKey}"][data-action="${src.dataset.action}"]`:src.dataset.scopeModule?`input[data-scope-module="${originalKey}"][value="${src.value}"]`:src.dataset.parentescoModule?`input[data-parentesco-module="${originalKey}"][value="${CSS.escape(src.value)}"]`:src.dataset.clientePermModule?null:null;
-                if(sel){const dst=original.querySelector(sel);if(dst)dst.checked=src.checked;}
-            });
-            original.querySelectorAll('input[data-action],input[data-scope-module],input[data-parentesco-module],input[data-cliente-perm-module]').forEach(x=>x.dispatchEvent(new Event('change',{bubbles:false})));
-        }
-        modal.classList.remove('show');modal.setAttribute('aria-hidden','true');modal.innerHTML='';document.body.classList.remove('overflow-hidden');
-        actualizarHiddenPermisosUsuario();
-    }
-    function abrirPermisoModuloMovil_(key,block){
-        const modal=document.getElementById('permisoModuloMovilModal');if(!modal||!block)return;
-        const cfg=MATRIZ_PERMISOS_USUARIO[key]||{};
-        modal.dataset.module=key;
-        modal.innerHTML='<div class="permiso-modulo-movil-card"><div class="permiso-modulo-movil-head"><div><div class="fw-bold"><i class="fa-solid '+cfg.icon+' text-primary me-1"></i>'+escaparTextoPermisoUsuario(cfg.label||key)+'</div><small class="text-muted">Acciones y alcance</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarPermisoModuloMovil()" type="button"><i class="fa-solid fa-xmark"></i></button></div><div class="permiso-modulo-movil-body"></div><div class="permiso-modulo-movil-foot"><button class="btn btn-primary btn-sm" onclick="cerrarPermisoModuloMovil()" type="button">Aplicar</button></div></div>';
-        const body=modal.querySelector('.permiso-modulo-movil-body'),copy=block.cloneNode(true);copy.classList.remove('d-none');copy.removeAttribute('id');copy.setAttribute('data-mobile-perm-clone','1');body.appendChild(copy);
-        modal.classList.add('show');modal.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');
-    }
-    function seleccionarModuloPermisoUsuario(key){
-        const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);
-        if(!block)return;
-        document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));
-        block.classList.remove('d-none');
-        document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.toggle('active',c.dataset.module===key));
-        actualizarResumenPermisosUsuario();
-        if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)abrirPermisoModuloMovil_(key,block);
-    }
-    function renderBloqueAccionesPermisoUsuario(key,cfg,current){
-        const acts=document.getElementById('usr-permisos-acciones');if(!acts)return;
-        const row=document.createElement('div');row.className='perm-config-card d-none';row.dataset.actionBlock=key;
-        const currentScopes=obtenerPermisoAlcanceActual(current,key);
-        const selectedPar=Array.isArray(current?.parentescos)?current.parentescos:[];
-        const selectedClients=normalizarClientesPersonalizadosPermiso(current?.clientes_personalizados);
-        let scopeHtml='';
-        if(MODULOS_CON_ALCANCE_USUARIO.includes(key)){
-            const opts=MODULOS_CON_PARENTESCO_USUARIO.includes(key)?['propios','parentesco','personalizados','todos']:['propios','personalizados','todos'];
-            scopeHtml='<div class="perm-scope-box"><div class="perm-scope-title"><i class="fa-solid fa-filter"></i> Alcance de información</div><div class="perm-scope-list">'+opts.map(v=>'<label class="perm-scope-pill"><input type="checkbox" data-scope-module="'+key+'" value="'+v+'" '+(currentScopes.includes(v)?'checked':'')+' onchange="cambiarAlcancesPermisoUsuario(\''+key+'\')"><span>'+ALCANCE_LABELS_USUARIO[v]+'</span></label>').join('')+'</div><div class="perm-scope-help">Puede combinar varios alcances. <b>Todos</b> anula los demás.</div></div>';
-            if(MODULOS_CON_PARENTESCO_USUARIO.includes(key)){
-                const available=obtenerParentescosDisponiblesPermisos(),sel=selectedPar.map(x=>String(x).trim().toLowerCase());
-                scopeHtml+='<div class="perm-parentesco-picker '+(currentScopes.includes('parentesco')?'':'d-none')+'"><span>Parentescos autorizados</span><div class="perm-parentesco-list">'+available.map(p=>'<label><input type="checkbox" data-parentesco-module="'+key+'" value="'+escaparTextoPermisoUsuario(p)+'" '+(sel.includes(String(p).trim().toLowerCase())?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"> '+escaparTextoPermisoUsuario(p)+'</label>').join('')+'</div></div>';
-            }
-            const clients=obtenerClientesDisponiblesPermisos();
-            const selectedKeys=new Set(selectedClients.map(c=>(c.id_cliente||'')+'|'+(c.codigo_cliente||'')));
-            scopeHtml+='<div class="perm-clientes-picker '+(currentScopes.includes('personalizados')?'':'d-none')+'"><div class="d-flex justify-content-between align-items-center gap-2"><span>Clientes autorizados</span><small class="text-muted">Seleccione uno o varios</small></div><input type="search" class="form-control form-control-sm perm-client-search" placeholder="Buscar cliente..." oninput="filtrarClientesPermisoUsuario(\''+key+'\')"><div class="perm-client-list">'+clients.map(c=>{const id=String(c.id_cliente||''),codigo=String(c.codigo_cliente||''),nombre=String(c.nombre_completo||codigo||id);const val=escaparTextoPermisoUsuario(JSON.stringify({id_cliente:id,codigo_cliente:codigo,nombre_completo:nombre}));const checked=selectedKeys.has(id+'|'+codigo);return '<label data-cliente-option data-cliente-search="'+escaparTextoPermisoUsuario((nombre+' '+codigo+' '+id).toLowerCase())+'"><input type="checkbox" data-cliente-perm-module="'+key+'" value="'+val+'" '+(checked?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"><span>'+escaparTextoPermisoUsuario(nombre)+'</span><small>'+escaparTextoPermisoUsuario(codigo||id)+'</small></label>';}).join('')+'</div></div>';
-        }
-        row.innerHTML='<div class="perm-config-head"><div><i class="fa-solid '+cfg.icon+' text-primary"></i><span>'+cfg.label+'</span></div><span class="perm-config-state">Configuración</span></div><div class="perm-actions">'+cfg.actions.map(a=>'<label class="perm-action-pill"><input type="checkbox" data-module="'+key+'" data-action="'+a+'" '+(current?.[a]?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"><span>'+ACCION_LABELS_USUARIO[a]+'</span></label>').join('')+'</div>'+scopeHtml;
-        acts.appendChild(row);
-    }
-    function actualizarAccionesPermisoUsuario(key){
-        const cb=document.querySelector(`#usr-permisos-modulos input[data-module="${key}"]`),block=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);if(!block)return;
-        if(cb?.checked){const checks=[...block.querySelectorAll('input[data-action]')];if(!checks.some(x=>x.checked)){const l=block.querySelector('input[data-action="leer"]');if(l)l.checked=true;}seleccionarModuloPermisoUsuario(key);}
-        else {block.classList.add('d-none');const next=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]:checked')].map(x=>x.dataset.module).find(x=>x!==key);if(next)seleccionarModuloPermisoUsuario(next);}
-        actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();
-    }
-    function actualizarResumenPermisosUsuario(){const out=document.getElementById('usr-permisos-resumen');if(!out)return;const checked=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]:checked')];out.textContent=checked.length+' módulo'+(checked.length===1?' autorizado':'s autorizados');}
+    function cambiarAlcancesPermisoUsuario(modulo){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${modulo}"]`);if(!block)return;const todos=block.querySelector(`input[data-scope-module="${modulo}"][value="todos"]`),others=[...block.querySelectorAll(`input[data-scope-module="${modulo}"]`)].filter(x=>x!==todos);if(todos?.checked)others.forEach(x=>x.checked=false);else if(others.some(x=>x.checked)&&todos)todos.checked=false;const scopes=[...block.querySelectorAll(`input[data-scope-module="${modulo}"]:checked`)].map(x=>x.value);block.querySelector('.perm-parentesco-picker')?.classList.toggle('d-none',!scopes.includes('parentesco'));block.querySelector('.perm-clientes-picker')?.classList.toggle('d-none',!scopes.includes('personalizados'));actualizarHiddenPermisosUsuario();}
+    function cambiarAlcanceParentescoPermisoUsuario(modulo){cambiarAlcancesPermisoUsuario(modulo);}
+    function filtrarClientesPermisoUsuario(modulo){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${modulo}"]`);if(!block)return;const q=String(block.querySelector('.perm-client-search')?.value||'').trim().toLowerCase();block.querySelectorAll('[data-cliente-option]').forEach(el=>{el.style.display=!q||String(el.getAttribute('data-cliente-search')||'').includes(q)?'':'none';});}
+    function cerrarPermisoModuloMovil(){const modal=document.getElementById('permisoModuloMovilModal');if(!modal)return;const clone=modal.querySelector('[data-mobile-perm-clone]'),key=modal.dataset.module||'',original=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);if(clone&&original){clone.querySelectorAll('input').forEach(src=>{let sel=src.dataset.action?`input[data-module="${key}"][data-action="${src.dataset.action}"]`:src.dataset.scopeModule?`input[data-scope-module="${key}"][value="${src.value}"]`:src.dataset.clientePermModule?`input[data-cliente-perm-module="${key}"][value="${src.value.replace(/"/g,'\\"')}"]`:null;if(sel){const dst=original.querySelector(sel);if(dst)dst.checked=src.checked;}});original.querySelectorAll('input[data-action],input[data-scope-module],input[data-cliente-perm-module]').forEach(x=>x.dispatchEvent(new Event('change',{bubbles:false})));}modal.classList.remove('show');modal.setAttribute('aria-hidden','true');modal.innerHTML='';document.body.classList.remove('overflow-hidden');actualizarHiddenPermisosUsuario();}
+    function abrirPermisoModuloMovil_(key,block){const modal=document.getElementById('permisoModuloMovilModal');if(!modal||!block)return;const cfg=MATRIZ_PERMISOS_USUARIO[key]||{};modal.dataset.module=key;modal.innerHTML='<div class="permiso-modulo-movil-card"><div class="permiso-modulo-movil-head"><div><div class="fw-bold"><i class="fa-solid '+cfg.icon+' text-primary me-1"></i>'+escaparTextoPermisoUsuario(cfg.label||key)+'</div><small class="text-muted">Permisos y alcance</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarPermisoModuloMovil()" type="button"><i class="fa-solid fa-xmark"></i></button></div><div class="permiso-modulo-movil-body"></div><div class="permiso-modulo-movil-foot"><button class="btn btn-primary btn-sm" onclick="cerrarPermisoModuloMovil()" type="button">Aplicar</button></div></div>';const body=modal.querySelector('.permiso-modulo-movil-body'),copy=block.cloneNode(true);copy.classList.remove('d-none');copy.removeAttribute('id');copy.setAttribute('data-mobile-perm-clone','1');body.appendChild(copy);modal.classList.add('show');modal.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
+    function seleccionarModuloPermisoUsuario(key){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);if(!block)return;document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));block.classList.remove('d-none');document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.toggle('active',c.dataset.module===key));actualizarResumenPermisosUsuario();if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)abrirPermisoModuloMovil_(key,block);}
+    function renderBloqueAccionesPermisoUsuario(key,cfg,current){const acts=document.getElementById('usr-permisos-acciones');if(!acts)return;const row=document.createElement('div');row.className='perm-config-card d-none';row.dataset.actionBlock=key;const scopes=obtenerPermisoAlcanceActual(current);const clients=obtenerClientesDisponiblesPermisos(),selected=normalizarClientesPersonalizadosPermiso(current?.clientes_personalizados),selectedKeys=new Set(selected.map(c=>(c.id_cliente||'')+'|'+(c.codigo_cliente||'')));const scopeHtml='<div class="perm-scope-box"><div class="perm-scope-title"><i class="fa-solid fa-filter"></i> Alcance de información</div><div class="perm-scope-list">'+['propios','parentesco','personalizados','todos'].filter(v=>v!=='parentesco'||MODULOS_CON_PARENTESCO_USUARIO.includes(key)).map(v=>'<label class="perm-scope-pill"><input type="checkbox" data-scope-module="'+key+'" value="'+v+'" '+(scopes.includes(v)?'checked':'')+' onchange="cambiarAlcancesPermisoUsuario(\''+key+'\')"><span>'+ALCANCE_LABELS_USUARIO[v]+'</span></label>').join('')+'</div><div class="perm-scope-help"><b>Todos</b> anula los demás alcances.</div></div>'+(MODULOS_CON_PARENTESCO_USUARIO.includes(key)?'<div class="perm-parentesco-picker '+(scopes.includes('parentesco')?'':'d-none')+'"><div class="d-flex justify-content-between align-items-center gap-2"><span>Parentescos autorizados</span><small class="text-muted">Seleccione uno o varios</small></div><div class="perm-parentesco-list">'+obtenerParentescosDisponiblesPermisos().map(p=>'<label><input type="checkbox" data-parentesco-module="'+key+'" value="'+escaparTextoPermisoUsuario(p)+'" '+(normalizarListaParentescosPermiso(current?.parentescos).map(x=>x.toLowerCase()).includes(String(p).toLowerCase())?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"> '+escaparTextoPermisoUsuario(p)+'</label>').join('')+'</div></div>':'')+'<div class="perm-clientes-picker '+(scopes.includes('personalizados')?'':'d-none')+'"><div class="d-flex justify-content-between align-items-center gap-2"><span>Registros personalizados</span><small class="text-muted">Seleccione uno o varios clientes</small></div><input type="search" class="form-control form-control-sm perm-client-search" placeholder="Buscar cliente..." oninput="filtrarClientesPermisoUsuario(\''+key+'\')"><div class="perm-client-list">'+clients.map(c=>{const id=String(c.id_cliente||''),codigo=String(c.codigo_cliente||''),nombre=String(c.nombre_completo||codigo||id),val=escaparTextoPermisoUsuario(JSON.stringify({id_cliente:id,codigo_cliente:codigo,nombre_completo:nombre})),checked=selectedKeys.has(id+'|'+codigo);return '<label data-cliente-option data-cliente-search="'+escaparTextoPermisoUsuario((nombre+' '+codigo+' '+id).toLowerCase())+'"><input type="checkbox" data-cliente-perm-module="'+key+'" value="'+val+'" '+(checked?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"><span>'+escaparTextoPermisoUsuario(nombre)+'</span><small>'+escaparTextoPermisoUsuario(codigo||id)+'</small></label>';}).join('')+'</div></div>';
+        row.innerHTML='<div class="perm-config-head"><div><i class="fa-solid '+cfg.icon+' text-primary"></i><span>'+cfg.label+'</span></div><span class="perm-config-state">Configuración</span></div><div class="perm-actions">'+PERM_ACTIONS_USUARIO.map(a=>'<label class="perm-action-pill"><input type="checkbox" data-module="'+key+'" data-action="'+a+'" '+(current?.[a]?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"><span>'+ACCION_LABELS_USUARIO[a]+'</span></label>').join('')+'</div>'+scopeHtml;acts.appendChild(row);}
+    function actualizarAccionesPermisoUsuario(key){const cb=document.querySelector(`#usr-permisos-modulos input[data-module="${key}"]`),block=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);if(!block)return;if(cb?.checked){const l=block.querySelector('input[data-action="leer"]');if(l&&!block.querySelector('input[data-action]:checked'))l.checked=true;seleccionarModuloPermisoUsuario(key);}else{block.classList.add('d-none');const next=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]:checked')].map(x=>x.dataset.module).find(x=>x!==key);if(next)seleccionarModuloPermisoUsuario(next);}actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
+    function actualizarResumenPermisosUsuario(){const out=document.getElementById('usr-permisos-resumen');if(out){const n=document.querySelectorAll('#usr-permisos-modulos input[data-module]:checked').length;out.textContent=n+' módulo'+(n===1?' autorizado':'s autorizados');}}
     const CATEGORIAS_PERMISOS_USUARIO=[
+        {id:'administracion',label:'Administración y Seguridad',icon:'fa-user-gear',modules:['empresas','usuarios','clientes','servicios','portal','auditoria']},
+        {id:'finanzas',label:'Finanzas y Cobros',icon:'fa-coins',modules:['facturacion','creditos','pagos','bancos','gastos','sueldos']},
+        {id:'gestion',label:'Gestión de Usuarios',icon:'fa-users',modules:['agenda','tareas','recordatorios','notificaciones','familia','historialmedico','manutencion','registrosescolares','recordatoriosmedicinas','vehiculos']},
         {id:'operaciones',label:'Operaciones Técnicas',icon:'fa-screwdriver-wrench',modules:['tecnicos','trabajoscampo','instalaciones','soportetecnico']},
-        {id:'inventario',label:'Inventario y Logística',icon:'fa-boxes-stacked',modules:['inventarios','almacenes']},
-        {id:'proyectos',label:'Proyectos y VGT',icon:'fa-road',modules:['vgt']},
-        {id:'consultas',label:'Consultas y Control',icon:'fa-magnifying-glass-chart',modules:['centrooperativo']},
-        {id:'empresa',label:'Gestión Empresarial',icon:'fa-briefcase',modules:['oficina','contabilidad','administracion']},
+        {id:'inventario',label:'Inventario y Logística',icon:'fa-boxes-stacked',modules:['inventarios','almacenes','oficina']},
+        {id:'proyectos',label:'Proyectos y Control',icon:'fa-road',modules:['vgt','centrooperativo']},
+        {id:'empresarial',label:'Gestión Empresarial',icon:'fa-briefcase',modules:['contabilidad','administracion']},
         {id:'salud',label:'Salud y Asistencia',icon:'fa-heart-pulse',modules:['salud']},
-        {id:'especializados',label:'Servicios Especializados',icon:'fa-car-wrench',modules:['talleres']}
+        {id:'especializados',label:'Servicios Especializados',icon:'fa-car-wrench',modules:['talleres']},
+        {id:'sistema',label:'Sistema e Infraestructura',icon:'fa-server',modules:['mikrotik','perfil']}
     ];
-    function renderEditorPermisosUsuario(raw={}){
-        const current=normalizarPermisosUsuario(raw),mods=document.getElementById('usr-permisos-modulos'),acts=document.getElementById('usr-permisos-acciones');if(!mods||!acts)return;
-        const gruposRenderizados=new Set();
-        mods.innerHTML=CATEGORIAS_PERMISOS_USUARIO.map(cat=>{
-            const disponibles=cat.modules.filter(k=>MATRIZ_PERMISOS_USUARIO[k]);
-            if(!disponibles.length)return '';
-            gruposRenderizados.add(...disponibles);
-            return '<div class="perm-module-category-title"><i class="fa-solid '+cat.icon+'"></i><span>'+escaparTextoPermisoUsuario(cat.label)+'</span></div>'+disponibles.map(k=>{const c=MATRIZ_PERMISOS_USUARIO[k];return '<div class="perm-module-card '+(current[k]?'selected':'')+'" data-module="'+k+'" onclick="seleccionarModuloPermisoUsuario(\''+k+'\')"><input type="checkbox" data-module="'+k+'" '+(current[k]?'checked':'')+' onchange="event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')" onclick="event.stopPropagation();seleccionarModuloPermisoUsuario(\''+k+'\')"><i class="fa-solid '+c.icon+'"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>';}).join('');
-        }).join('')+Object.entries(MATRIZ_PERMISOS_USUARIO).filter(([k])=>!gruposRenderizados.has(k)).map(([k,c])=>'<div class="perm-module-category-title"><i class="fa-solid fa-layer-group"></i><span>Otros módulos</span></div><div class="perm-module-card '+(current[k]?'selected':'')+'" data-module="'+k+'" onclick="seleccionarModuloPermisoUsuario(\''+k+'\')"><input type="checkbox" data-module="'+k+'" '+(current[k]?'checked':'')+' onchange="event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')" onclick="event.stopPropagation();seleccionarModuloPermisoUsuario(\''+k+'\')"><i class="fa-solid '+c.icon+'"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>').join('');
-        acts.innerHTML='';Object.entries(MATRIZ_PERMISOS_USUARIO).forEach(([k,c])=>renderBloqueAccionesPermisoUsuario(k,c,current[k]||{}));
-        const first=Object.keys(MATRIZ_PERMISOS_USUARIO).find(k=>current[k]);
-        document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(cb=>{if(cb.checked){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${cb.dataset.module}"]`);if(block){const scopes=[...block.querySelectorAll('input[data-scope-module]:checked')].map(x=>x.value);block.querySelector('.perm-parentesco-picker')?.classList.toggle('d-none',!scopes.includes('parentesco'));block.querySelector('.perm-clientes-picker')?.classList.toggle('d-none',!scopes.includes('personalizados'));}}});
-        if(first)seleccionarModuloPermisoUsuario(first);else document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));
-        actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();
-    }
-    function seleccionarTodosPermisosUsuario(){
-        const modules=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')];
-        const allSelected=modules.length>0 && modules.every(x=>x.checked);
-        if(allSelected){
-            document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(x=>x.checked=false);
-            document.querySelectorAll('#usr-permisos-acciones input[type="checkbox"]').forEach(x=>x.checked=false);
-            document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));
-            document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.remove('active','selected'));
-        }else{
-            document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(x=>x.checked=true);
-            document.querySelectorAll('#usr-permisos-acciones input[data-action]').forEach(x=>x.checked=true);
-            document.querySelectorAll('#usr-permisos-acciones input[data-scope-module]').forEach(x=>x.checked=String(x.value)==='todos');
-            document.querySelectorAll('#usr-permisos-acciones input[data-user-scope-module="recordatorios"]').forEach(x=>x.checked=x.value==='todos');
-            document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.add('selected'));
-            const first=Object.keys(MATRIZ_PERMISOS_USUARIO)[0];if(first)seleccionarModuloPermisoUsuario(first);
-        }
-        actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();
-    }
-    function actualizarBotonTodosPermisosUsuario(){
-        const btn=document.getElementById('btnPermisosTodos');if(!btn)return;
-        const modules=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')];
-        const allSelected=modules.length>0 && modules.every(x=>x.checked);
-        btn.classList.toggle('btn-secondary',allSelected);
-        btn.classList.toggle('btn-outline-secondary',!allSelected);
-        btn.innerHTML=allSelected?'<i class="fa-solid fa-xmark me-1"></i><span>Quitar selección</span>':'<i class="fa-solid fa-check-double me-1"></i><span>Seleccionar todos</span>';
-    }
+    function renderEditorPermisosUsuario(raw={}){const current=normalizarPermisosUsuario(raw),mods=document.getElementById('usr-permisos-modulos'),acts=document.getElementById('usr-permisos-acciones');if(!mods||!acts)return;const grupos=new Set();mods.innerHTML=CATEGORIAS_PERMISOS_USUARIO.map(cat=>{const ds=cat.modules.filter(k=>MATRIZ_PERMISOS_USUARIO[k]);if(!ds.length)return '';ds.forEach(k=>grupos.add(k));return '<div class="perm-module-category-title"><i class="fa-solid '+cat.icon+'"></i><span>'+escaparTextoPermisoUsuario(cat.label)+'</span></div>'+ds.map(k=>{const c=MATRIZ_PERMISOS_USUARIO[k];return '<div class="perm-module-card '+(current[k]?'selected':'')+'" data-module="'+k+'" onclick="seleccionarModuloPermisoUsuario(\''+k+'\')"><input type="checkbox" data-module="'+k+'" '+(current[k]?'checked':'')+' onchange="event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')" onclick="event.stopPropagation();seleccionarModuloPermisoUsuario(\''+k+'\')"><i class="fa-solid '+c.icon+'"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>';}).join('');}).join('')+Object.entries(MATRIZ_PERMISOS_USUARIO).filter(([k])=>!grupos.has(k)).map(([k,c])=>'<div class="perm-module-card '+(current[k]?'selected':'')+'" data-module="'+k+'" onclick="seleccionarModuloPermisoUsuario(\''+k+'\')"><input type="checkbox" data-module="'+k+'" '+(current[k]?'checked':'')+' onchange="event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')"><i class="fa-solid '+c.icon+'"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>').join('');acts.innerHTML='';Object.entries(MATRIZ_PERMISOS_USUARIO).forEach(([k,c])=>renderBloqueAccionesPermisoUsuario(k,c,current[k]||{}));const first=Object.keys(MATRIZ_PERMISOS_USUARIO).find(k=>current[k]);document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(cb=>{if(cb.checked){const b=document.querySelector(`#usr-permisos-acciones [data-action-block="${cb.dataset.module}"]`);if(b)b.classList.remove('d-none');}});if(first)seleccionarModuloPermisoUsuario(first);else document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
+    function seleccionarTodosPermisosUsuario(){const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')],all=ms.length>0&&ms.every(x=>x.checked);if(all){ms.forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones input[type="checkbox"]').forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.remove('active','selected'));}else{ms.forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-action]').forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-scope-module]').forEach(x=>x.checked=x.value==='todos');document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.add('selected'));const first=Object.keys(MATRIZ_PERMISOS_USUARIO)[0];if(first)seleccionarModuloPermisoUsuario(first);}actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
+    function actualizarBotonTodosPermisosUsuario(){const btn=document.getElementById('btnPermisosTodos');if(!btn)return;const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')],all=ms.length>0&&ms.every(x=>x.checked);btn.classList.toggle('btn-secondary',all);btn.classList.toggle('btn-outline-secondary',!all);btn.innerHTML=all?'<i class="fa-solid fa-xmark me-1"></i><span>Quitar selección</span>':'<i class="fa-solid fa-check-double me-1"></i><span>Seleccionar todos</span>';}
     function normalizarModuloPermisoUsuario(modulo){return String(modulo||'').trim().toLowerCase();}
-    function permisosUsuarioTieneModulo(modulo,accion='leer',u=currentUser){
-        if(!u)return false;
-        const rol=String(u.rol||'').trim().toLowerCase();
-        if(rol==='master')return true;
-        const aliases={facturas:'facturacion',factura:'facturacion',pagosclientes:'pagos',payment:'pagos'};
-        const key=normalizarModuloPermisoUsuario(aliases[normalizarModuloPermisoUsuario(modulo)]||modulo);
-        const act=String(accion||'leer').trim().toLowerCase();
-        const p=permisosEfectivosUsuario(u);
-        const moduloPerm=Object.keys(p).find(k=>normalizarModuloPermisoUsuario(k)===key);
-        const cfg=moduloPerm?p[moduloPerm]:null;
-        if(cfg&&typeof cfg==='object'){
-            if(cfg[act]===true||String(cfg[act]||'').toLowerCase()==='true')return true;
-            if(act==='leer'&&(cfg.ver===true||String(cfg.ver||'').toLowerCase()==='true'))return true;
-        }
-        return false;
-    }
-    function usuarioTieneCualquierPermisoModulo(modulo,u=currentUser){
-        if(!u)return false;
-        if(String(u.rol||'').trim().toLowerCase()==='master')return true;
-        const aliases={facturas:'facturacion',factura:'facturacion',pagosclientes:'pagos',payment:'pagos'};
-        const key=normalizarModuloPermisoUsuario(aliases[normalizarModuloPermisoUsuario(modulo)]||modulo);
-        const p=permisosEfectivosUsuario(u);
-        const k=Object.keys(p).find(x=>normalizarModuloPermisoUsuario(x)===key);
-        const cfg=k?p[k]:null;
-        if(cfg&&typeof cfg==='object')return Object.values(cfg).some(v=>v===true||String(v||'').toLowerCase()==='true');
-        return permisosUsuarioTieneModulo(key,'leer',u);
-    }
+    function permisosUsuarioTieneModulo(modulo,accion='leer',u=currentUser){if(!u)return false;const rol=String(u.rol||'').trim().toLowerCase();if(rol==='master')return true;const aliases={facturas:'facturacion',factura:'facturacion',pagosclientes:'pagos',payment:'pagos'};const key=normalizarModuloPermisoUsuario(aliases[normalizarModuloPermisoUsuario(modulo)]||modulo);let act=String(accion||'leer').trim().toLowerCase();if(['agregar','asignar','aprobar','cerrar'].includes(act))act='modificar';const p=permisosEfectivosUsuario(u),cfg=p[key];if(cfg&&typeof cfg==='object'){if(cfg[act]===true||String(cfg[act]||'').toLowerCase()==='true')return true;if(act==='leer'&&(cfg.ver===true||String(cfg.ver||'').toLowerCase()==='true'))return true;}return false;}
+    function usuarioTieneCualquierPermisoModulo(modulo,u=currentUser){if(!u)return false;if(String(u.rol||'').trim().toLowerCase()==='master')return true;const p=permisosEfectivosUsuario(u),key=normalizarModuloPermisoUsuario(modulo),cfg=p[key];return !!(cfg&&typeof cfg==='object'&&Object.entries(cfg).some(([k,v])=>PERM_ACTIONS_USUARIO.includes(k)&&v===true));}
     function puedeAccederModuloUsuario(modulo){return permisosUsuarioTieneModulo(modulo,'leer');}
-    function protegerAccionUsuario(modulo,accion,msg='No tiene permiso para realizar esta accion.'){if(window._registroPublicoCliente===true&&modulo==='clientes')return true;if(permisosUsuarioTieneModulo(modulo,accion))return true;return false;}
-
+    function protegerAccionUsuario(modulo,accion,msg='No tiene permiso para realizar esta acción.'){if(window._registroPublicoCliente===true&&modulo==='clientes')return true;if(permisosUsuarioTieneModulo(modulo,accion))return true;return false;}
     function abrirModalCrearUsuario() {
         if (!puedeGestionarUsuariosPorPermiso('agregar')) { showSystemNotification('Acceso restringido', 'No tiene permiso para crear usuarios.', 'warning'); return; }
         document.getElementById('formUsuario').reset();
@@ -11827,7 +11549,11 @@ function renderListaNotificacionesInline(rows){
     renderNotificaciones();
 }
 
-    function filtrarListaNotificacionesInline(){
+    function inicializarChatNotificaciones_(){
+    const b=document.getElementById('notif-chat-popup');
+    if(b) b.addEventListener('click',e=>{if(e.target===b)cerrarNotificacionChat();});
+}
+function filtrarListaNotificacionesInline(){
         renderNotificaciones();
     }
 
@@ -14374,7 +14100,7 @@ function abrirModalFamiliaRegistro(tipo,preparar=true){
     const host=document.getElementById(cfg.host); if(!host)return;
     let el=document.getElementById('modalFamiliaRegistroForm');
     if(!el){
-        el=document.createElement('div');el.id='modalFamiliaRegistroForm';el.className='modal fade';el.tabIndex=-1;el.setAttribute('aria-hidden','true');
+        el=document.createElement('div');el.id='modalFamiliaRegistroForm';el.className=['modal','fade'].filter(Boolean).join(' ');el.tabIndex=-1;el.setAttribute('aria-hidden','true');
         el.innerHTML='<div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content"><div class="modal-header"><div><h5 class="modal-title fw-bold mb-0" id="familiaRegistroModalTitulo"></h5><small class="text-muted">Complete toda la información y guarde el registro.</small></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div><div class="modal-body" id="familiaRegistroModalBody"></div></div></div>';
         document.body.appendChild(el);
         el.addEventListener('hidden.bs.modal',()=>{
@@ -14389,7 +14115,7 @@ function abrirModalFamiliaRegistro(tipo,preparar=true){
     if(preparar){
         const form=section.querySelector('form');
         if(form)form.reset();
-        personasSelect(tipo==='hm'?'hm_persona':tipo==='man'?'man_persona':'esc_persona');
+        personasSelect(tipo==='hm'?'hm_persona':tipo==='man'?'man_persona':tipo==='esc'?'esc_persona':'med_persona');
         if(tipo==='hm'){const e=document.getElementById('hm_fecha');if(e)e.value=fechaHoyModulo();}
         if(tipo==='man'){const d=document.getElementById('man_fecha_pago');if(d)d.value=fechaHoyModulo();const st=document.getElementById('man_estado');if(st)st.value='Pagado';const id=document.getElementById('man_id');if(id)id.value='';const bt=document.getElementById('man_btn_texto');if(bt)bt.textContent='Registrar pago';}
         if(tipo==='esc'){const st=document.getElementById('esc_estado');if(st)st.value='Activo';}
@@ -14416,10 +14142,11 @@ function limpiarFormularioRecordatorioMedicina(){abrirFormularioRecordatorioMedi
 function cargarRecordatorioMedicinaEnFormulario_(r){personasSelect('med_persona');prepararCampoFamilia_('med_persona',r.id_familia?'familia:'+r.id_familia:'');prepararCampoFamilia_('med_medicamento',r.medicamento);prepararCampoFamilia_('med_dosis',r.dosis);prepararCampoFamilia_('med_via',r.via_administracion);prepararCampoFamilia_('med_frecuencia',r.frecuencia);prepararCampoFamilia_('med_horarios',r.horarios);prepararCampoFamilia_('med_inicio',fechaMedicoParaInput_(r.fecha_inicio));prepararCampoFamilia_('med_fin',fechaMedicoParaInput_(r.fecha_fin));prepararCampoFamilia_('med_indicaciones',r.indicaciones);prepararCampoFamilia_('med_estado',r.estado||'Activo');prepararCampoFamilia_('med_id',r.id_recordatorio);}
 function verRecordatorioMedicina(id){if(!protegerAccionUsuario('recordatoriosmedicinas','leer'))return;const r=(db.recordatoriosmedicinas||[]).find(x=>String(x.id_recordatorio)===String(id));if(!r)return;cargarRecordatorioMedicinaEnFormulario_(r);abrirModalFamiliaRegistro('med',false);document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-eye text-primary me-2"></i>Ver medicina';setModoFormularioFamilia_('ver','med');}
 function editarRecordatorioMedicina(id){if(!protegerAccionUsuario('recordatoriosmedicinas','modificar'))return;const r=(db.recordatoriosmedicinas||[]).find(x=>String(x.id_recordatorio)===String(id));if(!r)return;cargarRecordatorioMedicinaEnFormulario_(r);abrirModalFamiliaRegistro('med',false);document.getElementById('familiaRegistroModalTitulo').innerHTML='<i class="fa-solid fa-pen-to-square text-primary me-2"></i>Editar medicina';setModoFormularioFamilia_('editar','med');}
-async function guardarRecordatorioMedicina(e){e.preventDefault();const id=String(document.getElementById('med_id')?.value||'').trim();if(!protegerAccionUsuario('recordatoriosmedicinas',id?'modificar':'agregar'))return;const p=resolverPersonaRegistro(document.getElementById('med_persona')?.value);if(!p){showSystemNotification('Paciente requerido','Seleccione una persona.','warning');return;}const original=id?(db.recordatoriosmedicinas||[]).find(x=>String(x.id_recordatorio)===id):null;const payload={id_recordatorio:id||'MEDREM-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',id_historial_medico:original?.id_historial_medico||'',nombre_persona:p.nombre,medicamento:document.getElementById('med_medicamento')?.value.trim()||'',dosis:document.getElementById('med_dosis')?.value.trim()||'',via_administracion:document.getElementById('med_via')?.value.trim()||'',frecuencia:document.getElementById('med_frecuencia')?.value.trim()||'',horarios:document.getElementById('med_horarios')?.value.trim()||'',fecha_inicio:document.getElementById('med_inicio')?.value||'',fecha_fin:document.getElementById('med_fin')?.value||'',indicaciones:document.getElementById('med_indicaciones')?.value.trim()||'',estado:document.getElementById('med_estado')?.value||'Activo',ultimo_recordatorio:original?.ultimo_recordatorio||'',fecha_registro:original?.fecha_registro||formatearFechaHoraPortal(new Date())};try{const r=await ejecutarOperacionSupabase(id?'updateRecordatorioMedicina':'addRecordatorioMedicina',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');renderHistorialMedicoModulo();cerrarModalFamiliaRegistro();showSystemNotification(id?'Medicina actualizada':'Medicina guardada',id?'El recordatorio fue actualizado correctamente.':'El recordatorio de medicina fue configurado.','success');}catch(err){showSystemNotification('Error al guardar',err.message||'No se pudo guardar.','danger');}}
-async function eliminarRecordatorioMedicina(id){if(!protegerAccionUsuario('recordatoriosmedicinas','eliminar')||!(await confirmarAccionModal('Eliminar recordatorio','¿Eliminar este recordatorio de medicina?')))return;try{const r=await ejecutarOperacionSupabase('deleteRecordatorioMedicina',{id_recordatorio:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');renderHistorialMedicoModulo();showSystemNotification('Recordatorio de medicina eliminado','El recordatorio de medicina fue eliminado correctamente.','success');}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
+async function guardarRecordatorioMedicina(e){e.preventDefault();const id=String(document.getElementById('med_id')?.value||'').trim();if(!protegerAccionUsuario('recordatoriosmedicinas',id?'modificar':'agregar'))return;const p=resolverPersonaRegistro(document.getElementById('med_persona')?.value);if(!p){showSystemNotification('Paciente requerido','Seleccione una persona.','warning');return;}const original=id?(db.recordatoriosmedicinas||[]).find(x=>String(x.id_recordatorio)===id):null;const payload={id_recordatorio:id||'MEDREM-'+Date.now(),id_usuario:currentUser?.id_usuario||'',codigo_cliente:p.codigo_cliente||'',id_familia:p.id_familia||'',id_historial_medico:original?.id_historial_medico||'',nombre_persona:p.nombre,medicamento:document.getElementById('med_medicamento')?.value.trim()||'',dosis:document.getElementById('med_dosis')?.value.trim()||'',via_administracion:document.getElementById('med_via')?.value.trim()||'',frecuencia:document.getElementById('med_frecuencia')?.value.trim()||'',horarios:document.getElementById('med_horarios')?.value.trim()||'',fecha_inicio:document.getElementById('med_inicio')?.value||'',fecha_fin:document.getElementById('med_fin')?.value||'',indicaciones:document.getElementById('med_indicaciones')?.value.trim()||'',estado:document.getElementById('med_estado')?.value||'Activo',ultimo_recordatorio:original?.ultimo_recordatorio||'',fecha_registro:original?.fecha_registro||formatearFechaHoraPortal(new Date())};try{const r=await ejecutarOperacionSupabase(id?'updateRecordatorioMedicina':'addRecordatorioMedicina',payload,false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar');renderRecordatoriosMedicinasModulo();cerrarModalFamiliaRegistro();showSystemNotification(id?'Medicina actualizada':'Medicina guardada',id?'El recordatorio fue actualizado correctamente.':'El recordatorio de medicina fue configurado.','success');}catch(err){showSystemNotification('Error al guardar',err.message||'No se pudo guardar.','danger');}}
+async function eliminarRecordatorioMedicina(id){if(!protegerAccionUsuario('recordatoriosmedicinas','eliminar')||!(await confirmarAccionModal('Eliminar recordatorio','¿Eliminar este recordatorio de medicina?')))return;try{const r=await ejecutarOperacionSupabase('deleteRecordatorioMedicina',{id_recordatorio:id},false,30000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar');renderRecordatoriosMedicinasModulo();showSystemNotification('Recordatorio de medicina eliminado','El recordatorio de medicina fue eliminado correctamente.','success');}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
 async function eliminarHistorialMedico(id){if(!protegerAccionUsuario('historialmedico','eliminar')||!(await confirmarAccionModal('Eliminar registro','¿Eliminar este registro médico?')))return;try{const r=await ejecutarOperacionSupabase('deleteHistorialMedico',{id_historial_medico:id},false,30000,true);if(!r?.success)throw new Error(r.message||'No se pudo eliminar');renderHistorialMedicoModulo();showSystemNotification('Registro médico eliminado','El registro médico fue eliminado correctamente.','success');}catch(e){showSystemNotification('Error',e.message||'No se pudo eliminar.','danger');}}
-function renderHistorialMedicoModulo(){const body=document.getElementById('hm-tbody');if(!body)return;const rows=Array.isArray(db?.historialmedico)?db.historialmedico:[],meds=Array.isArray(db?.recordatoriosmedicinas)?db.recordatoriosmedicinas:[];document.getElementById('hm-kpi-total')?.replaceChildren(document.createTextNode(rows.length));document.getElementById('hm-kpi-ordenes')?.replaceChildren(document.createTextNode(rows.filter(x=>String(x.orden_medica||'').trim()).length));document.getElementById('hm-kpi-meds')?.replaceChildren(document.createTextNode(meds.filter(x=>String(x.estado||'Activo').toLowerCase()==='activo').length));const v=x=>escMod(x||'—');body.innerHTML=rows.length?rows.map(r=>'<tr><td>'+v(r.fecha_registro)+'</td><td>'+v(r.nombre_persona)+'</td><td>'+v(r.profesional)+'</td><td>'+v(r.especialidad)+'</td><td>'+v(r.diagnostico)+'</td><td><div class="health-order-box">'+v(r.orden_medica)+'</div></td><td class="text-nowrap"><button class="btn btn-sm btn-outline-secondary me-1" title="Ver" onclick="verHistorialMedico(\''+escMod(r.id_historial_medico)+'\')"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-outline-primary me-1" title="Editar" onclick="editarHistorialMedico(\''+escMod(r.id_historial_medico)+'\')"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="eliminarHistorialMedico(\''+escMod(r.id_historial_medico)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="7" class="text-center text-muted py-4">No hay registros médicos.</td></tr>';const mb=document.getElementById('hm-med-tbody');if(mb)mb.innerHTML=meds.length?meds.map(r=>'<tr><td>'+v(r.nombre_persona)+'</td><td>'+v(r.medicamento)+'</td><td>'+v(r.dosis)+'</td><td>'+v(r.horarios)+'</td><td><span class="med-status '+(String(r.estado||'Activo').toLowerCase()==='activo'?'':'off')+'">'+v(r.estado||'Activo')+'</span></td><td class="text-nowrap"><button class="btn btn-sm btn-outline-secondary me-1" title="Ver" onclick="verRecordatorioMedicina(\''+escMod(r.id_recordatorio)+'\')"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-outline-primary me-1" title="Editar" onclick="editarRecordatorioMedicina(\''+escMod(r.id_recordatorio)+'\')"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="eliminarRecordatorioMedicina(\''+escMod(r.id_recordatorio)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="6" class="text-center text-muted py-4">No hay recordatorios configurados.</td></tr>';}
+function renderHistorialMedicoModulo(){const body=document.getElementById('hm-tbody');if(!body)return;const rows=Array.isArray(db?.historialmedico)?db.historialmedico:[];document.getElementById('hm-kpi-total')?.replaceChildren(document.createTextNode(rows.length));document.getElementById('hm-kpi-ordenes')?.replaceChildren(document.createTextNode(rows.filter(x=>String(x.orden_medica||'').trim()).length));const v=x=>escMod(x||'—');body.innerHTML=rows.length?rows.map(r=>'<tr><td>'+v(r.fecha_registro)+'</td><td>'+v(r.nombre_persona)+'</td><td>'+v(r.profesional)+'</td><td>'+v(r.especialidad)+'</td><td>'+v(r.diagnostico)+'</td><td><div class="health-order-box">'+v(r.orden_medica)+'</div></td><td class="text-nowrap"><button class="btn btn-sm btn-outline-secondary me-1" title="Ver" onclick="verHistorialMedico(\''+escMod(r.id_historial_medico)+'\')"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-outline-primary me-1" title="Editar" onclick="editarHistorialMedico(\''+escMod(r.id_historial_medico)+'\')"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="eliminarHistorialMedico(\''+escMod(r.id_historial_medico)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="7" class="text-center text-muted py-4">No hay registros médicos.</td></tr>';}
+function renderRecordatoriosMedicinasModulo(){const body=document.getElementById('med-tbody');if(!body)return;const meds=Array.isArray(db?.recordatoriosmedicinas)?db.recordatoriosmedicinas:[];const v=x=>escMod(x||'—');body.innerHTML=meds.length?meds.map(r=>'<tr><td>'+v(r.nombre_persona)+'</td><td>'+v(r.medicamento)+'</td><td>'+v(r.dosis)+'</td><td>'+v(r.horarios)+'</td><td><span class="med-status '+(String(r.estado||'Activo').toLowerCase()==='activo'?'active':'off')+'">'+v(r.estado||'Activo')+'</span></td><td class="text-nowrap"><button class="btn btn-sm btn-outline-secondary me-1" title="Ver" onclick="verRecordatorioMedicina(\''+escMod(r.id_recordatorio)+'\')"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-outline-primary me-1" title="Editar" onclick="editarRecordatorioMedicina(\''+escMod(r.id_recordatorio)+'\')"><i class="fa-solid fa-pen-to-square"></i></button><button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="eliminarRecordatorioMedicina(\''+escMod(r.id_recordatorio)+'\')"><i class="fa-solid fa-trash"></i></button></td></tr>').join(''):'<tr><td colspan="6" class="text-center text-muted py-4">No hay recordatorios configurados.</td></tr>';}
 
 let _tareasSeleccionadasTelegram = new Set();
 let _tareasCargaEnCurso = false;
@@ -15176,7 +14903,7 @@ function renderVehiculosModulo(){
       <div id="veh-history-${vehEsc(v.id_vehiculo)}" class="veh-history d-none">
         <div class="veh-history-title"><div><strong class="small">Historial de ${vehEsc(vehiculoNombre(v))}</strong><div class="veh-sub">Combustible total registrado: ${vehFormatMoney(totalComb)} · Mantenimiento: ${vehFormatMoney(totalMant)}</div></div><button class="btn btn-sm btn-light border" onclick="toggleHistorialVehiculo('${vehEsc(v.id_vehiculo)}')"><i class="fa-solid fa-chevron-up"></i></button></div>
         <div class="veh-history-grid">
-          <div class="veh-history-panel"><div class="head"><i class="fa-solid fa-gas-pump me-1"></i> Surtidos de combustible</div><div class="body">${fuel.length?`<div class="table-responsive"><table class="veh-table"><thead><tr><th>Fecha</th><th>Tipo</th><th>L</th><th>Km</th><th>Monto</th><th>Acc.</th></tr></thead><tbody>${fuel.map(x=>`<tr><td>${vehEsc(x.fecha||'—')}</td><td>${vehEsc(x.tipo_combustible||'—')}</td><td>${vehEsc(x.cantidad_litros||'—')}</td><td>${vehEsc(vehKms(x.kilometraje))}</td><td>${vehEsc(vehFormatMoney(x.monto,x.moneda))}</td><td><button class="btn btn-sm btn-link text-primary p-0" onclick="abrirFormularioCombustibleVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_combustible)}')" title="Editar"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-link text-danger p-0 ms-1" onclick="eliminarCombustibleVehiculo('${vehEsc(x.id_combustible)}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('')}</tbody></table></div>`:'<div class="veh-empty">No hay surtidos registrados.</div>'}</div></div>
+          <div class="veh-history-panel"><div class="head"><i class="fa-solid fa-gas-pump me-1"></i> Surtidos de combustible</div><div class="body">${fuel.length?`<div class="table-responsive"><table class="veh-table"><thead><tr><th>Fecha</th><th>Tipo</th><th>L</th><th>Km</th><th>Acc.</th></tr></thead><tbody>${fuel.map(x=>`<tr><td>${vehEsc(x.fecha||'—')}</td><td>${vehEsc(x.tipo_combustible||'—')}</td><td>${vehEsc(x.cantidad_litros||'—')}</td><td>${vehEsc(vehKms(x.kilometraje))}</td><td><button class="btn btn-sm btn-link text-primary p-0" onclick="abrirFormularioCombustibleVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_combustible)}')" title="Editar"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-link text-danger p-0 ms-1" onclick="eliminarCombustibleVehiculo('${vehEsc(x.id_combustible)}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('')}</tbody></table></div>`:'<div class="veh-empty">No hay surtidos registrados.</div>'}</div></div>
           <div class="veh-history-panel"><div class="head"><i class="fa-solid fa-user-gear me-1"></i> Mantenimiento y servicios</div><div class="body">${mant.length?`<div class="table-responsive"><table class="veh-table"><thead><tr><th>Fecha</th><th>Tipo</th><th>Km</th><th>Costo</th><th>Próximo</th><th>Acc.</th></tr></thead><tbody>${mant.map(x=>`<tr><td>${vehEsc(x.fecha||'—')}</td><td>${vehEsc(x.tipo_mantenimiento||'—')}</td><td>${vehEsc(vehKms(x.kilometraje))}</td><td>${vehEsc(vehFormatMoney(x.costo,x.moneda))}</td><td>${vehEsc(x.proxima_fecha||x.proximo_km||'—')}</td><td><button class="btn btn-sm btn-link text-primary p-0" onclick="abrirFormularioMantenimientoVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_mantenimiento)}')" title="Editar"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-link text-danger p-0 ms-1" onclick="eliminarMantenimientoVehiculo('${vehEsc(x.id_mantenimiento)}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('')}</tbody></table></div>`:'<div class="veh-empty">No hay mantenimientos registrados.</div>'}</div></div>
         </div>
       </div>
@@ -15191,7 +14918,7 @@ function cerrarFormularioVehiculo(){const m=document.getElementById('vehiculoFor
 async function guardarVehiculo(ev){ev.preventDefault();if(!protegerAccionUsuario('vehiculos',document.getElementById('vehiculo-id')?.value?'modificar':'agregar'))return;const id=String(document.getElementById('vehiculo-id')?.value||'');const v={id_vehiculo:id,clase:document.getElementById('vehiculo-clase')?.value||'',tipo:document.getElementById('vehiculo-tipo')?.value||'',placa:document.getElementById('vehiculo-placa')?.value.trim().toUpperCase()||'',marca:document.getElementById('vehiculo-marca')?.value.trim()||'',modelo:document.getElementById('vehiculo-modelo')?.value.trim()||'',anio:document.getElementById('vehiculo-anio')?.value||'',color:document.getElementById('vehiculo-color')?.value.trim()||'',uso:document.getElementById('vehiculo-uso')?.value.trim()||'',servicio:document.getElementById('vehiculo-servicio')?.value.trim()||'',vin_niv:document.getElementById('vehiculo-vin')?.value.trim()||'',serial_carroceria:document.getElementById('vehiculo-carroceria')?.value.trim()||'',serial_motor:document.getElementById('vehiculo-motor')?.value.trim()||'',numero_registro:document.getElementById('vehiculo-registro')?.value.trim()||'',fecha_registro_documento:document.getElementById('vehiculo-fecha-registro')?.value||'',capacidad_nominal:document.getElementById('vehiculo-capacidad-nominal')?.value.trim()||'',capacidad_puestos:document.getElementById('vehiculo-puestos')?.value||'',peso_tara:document.getElementById('vehiculo-peso')?.value.trim()||'',capacidad_carga:document.getElementById('vehiculo-carga')?.value.trim()||'',propietario_nombre:document.getElementById('vehiculo-propietario')?.value.trim()||'',propietario_documento:document.getElementById('vehiculo-documento-propietario')?.value.trim()||'',propietario_domicilio:document.getElementById('vehiculo-domicilio')?.value.trim()||'',id_familia:document.getElementById('vehiculo-familia')?.value||'',documento_propiedad:document.getElementById('vehiculo-documento-propiedad')?.value.trim()||'',fecha_adquisicion:document.getElementById('vehiculo-fecha-adquisicion')?.value||'',origen:document.getElementById('vehiculo-origen')?.value.trim()||'',gravamen:document.getElementById('vehiculo-gravamen')?.value||'No',aseguradora:document.getElementById('vehiculo-aseguradora')?.value.trim()||'',numero_poliza:document.getElementById('vehiculo-poliza')?.value.trim()||'',vencimiento_poliza:document.getElementById('vehiculo-venc-poliza')?.value||'',revision_tecnica:document.getElementById('vehiculo-revision')?.value.trim()||'',vencimiento_revision:document.getElementById('vehiculo-venc-revision')?.value||'',estado:document.getElementById('vehiculo-estado')?.value||'Activo',observaciones:document.getElementById('vehiculo-observaciones')?.value.trim()||''};if(!v.placa||!v.marca||!v.modelo){showSystemNotification('Datos incompletos','Placa, marca y modelo son obligatorios.','warning');return;}try{const action=id?'updateVehiculo':'addVehiculo';const r=await ejecutarOperacionSupabase(action,v,true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar el vehículo.');cerrarFormularioVehiculo();renderVehiculosModulo();showSystemNotification(id?'Vehículo actualizado':'Vehículo registrado',id?'El vehículo fue actualizado correctamente.':'El vehículo fue registrado correctamente.','success');}catch(err){showSystemNotification('No se pudo guardar',err.message||'Error de servidor.','danger');}}
 function abrirFormularioCombustibleVehiculo(vehiculoId,id){if(!protegerAccionUsuario('vehiculos',id?'modificar':'agregar'))return;const v=vehiculosPorId(vehiculoId);if(!v)return;const r=id?(db.vehiculoscombustible||[]).find(x=>String(x.id_combustible)===String(id)):null;['combustible-id','combustible-vehiculo-id'].forEach(x=>vehSet(x,''));vehSet('combustible-id',r?.id_combustible||'');vehSet('combustible-vehiculo-id',vehiculoId);vehSet('combustible-vehiculo-label',`${vehiculoNombre(v)} · ${v.placa||'—'}`);vehSet('combustible-fecha',r?.fecha||vehFechaHoy());vehSet('combustible-estacion',r?.estacion||'');vehSet('combustible-tipo',r?.tipo_combustible||'Gasolina 95');vehSet('combustible-cantidad',r?.cantidad_litros||'');vehSet('combustible-precio',r?.precio_litro||'');vehSet('combustible-monto',r?.monto||'');vehSet('combustible-moneda',r?.moneda||'USD');vehSet('combustible-tasa',r?.tasa_cambio||'');vehSet('combustible-km',r?.kilometraje||'');vehSet('combustible-metodo',r?.metodo_pago||'');vehSet('combustible-observaciones',r?.observaciones||'');document.getElementById('combustibleFormTitle').innerHTML=`<i class="fa-solid fa-gas-pump text-primary me-2"></i>${r?'Editar surtido':'Registrar combustible'}`;document.getElementById('combustibleFormSub').textContent=`${vehiculoNombre(v)} · Placa ${v.placa||'—'}`;calcularCombustibleMontoUI();const m=document.getElementById('vehiculoCombustibleModal');m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
 function cerrarFormularioCombustible(){const m=document.getElementById('vehiculoCombustibleModal');m?.classList.remove('show');m?.setAttribute('aria-hidden','true');document.body.classList.remove('overflow-hidden');}
-function calcularCombustibleMontoUI(){const q=vehNum(document.getElementById('combustible-cantidad')?.value),p=vehNum(document.getElementById('combustible-precio')?.value);const m=document.getElementById('combustible-monto');if(m&&q>0&&p>0)m.value=(q*p).toFixed(2);}
+function calcularCombustibleMontoUI(){const q=vehNum(document.getElementById('combustible-cantidad')?.value),p=vehNum(document.getElementById('combustible-precio')?.value),moneda=String(document.getElementById('combustible-moneda')?.value||'').trim();const m=document.getElementById('combustible-monto');if(!m)return;if(q>0&&p>0&&moneda)m.value=(q*p).toFixed(2);else m.value='';}
 async function guardarCombustibleVehiculo(ev){ev.preventDefault();const id=String(document.getElementById('combustible-id')?.value||''),vehiculoId=String(document.getElementById('combustible-vehiculo-id')?.value||'');if(!vehiculoId)return;const p={id_combustible:id,id_vehiculo:vehiculoId,fecha:document.getElementById('combustible-fecha')?.value||vehFechaHoy(),estacion:document.getElementById('combustible-estacion')?.value.trim()||'',tipo_combustible:document.getElementById('combustible-tipo')?.value||'Gasolina 95',cantidad_litros:document.getElementById('combustible-cantidad')?.value||'',precio_litro:document.getElementById('combustible-precio')?.value||'',monto:document.getElementById('combustible-monto')?.value||'',moneda:document.getElementById('combustible-moneda')?.value||'USD',tasa_cambio:document.getElementById('combustible-tasa')?.value||'',kilometraje:document.getElementById('combustible-km')?.value||'',metodo_pago:document.getElementById('combustible-metodo')?.value.trim()||'',observaciones:document.getElementById('combustible-observaciones')?.value.trim()||''};try{const action=id?'updateVehiculoCombustible':'addVehiculoCombustible';const r=await ejecutarOperacionSupabase(action,p,true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar el surtido.');cerrarFormularioCombustible();renderVehiculosModulo();showSystemNotification(id?'Surtido actualizado':'Surtido registrado',id?'El registro de combustible fue actualizado.':'El surtido de combustible fue registrado.','success');}catch(err){showSystemNotification('No se pudo guardar',err.message||'Error de servidor.','danger');}}
 async function eliminarCombustibleVehiculo(id){if(!protegerAccionUsuario('vehiculos','eliminar')||!(await confirmarAccionModal('Eliminar surtido','¿Eliminar este registro de combustible?')))return;try{const r=await ejecutarOperacionSupabase('deleteVehiculoCombustible',{id_combustible:id},true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar.');renderVehiculosModulo();showSystemNotification('Surtido eliminado','El registro de combustible fue eliminado.','success');}catch(e){showSystemNotification('No se pudo eliminar',e.message||'Error de servidor.','danger');}}
 function abrirFormularioMantenimientoVehiculo(vehiculoId,id){if(!protegerAccionUsuario('vehiculos',id?'modificar':'agregar'))return;const v=vehiculosPorId(vehiculoId);if(!v)return;const r=id?(db.vehiculosmantenimiento||[]).find(x=>String(x.id_mantenimiento)===String(id)):null;vehSet('mantenimiento-id',r?.id_mantenimiento||'');vehSet('mantenimiento-vehiculo-id',vehiculoId);vehSet('mantenimiento-vehiculo-label',`${vehiculoNombre(v)} · Placa ${v.placa||'—'}`);vehSet('mantenimiento-fecha',r?.fecha||vehFechaHoy());vehSet('mantenimiento-tipo',r?.tipo_mantenimiento||'Aceite motor');vehSet('mantenimiento-componente',r?.componente||'');vehSet('mantenimiento-km',r?.kilometraje||'');vehSet('mantenimiento-costo',r?.costo||'');vehSet('mantenimiento-moneda',r?.moneda||'USD');vehSet('mantenimiento-taller',r?.taller_proveedor||'');vehSet('mantenimiento-proximo-km',r?.proximo_km||'');vehSet('mantenimiento-proxima-fecha',r?.proxima_fecha||'');vehSet('mantenimiento-observaciones',r?.observaciones||r?.descripcion||'');document.getElementById('mantenimientoFormTitle').innerHTML=`<i class="fa-solid fa-user-gear text-primary me-2"></i>${r?'Editar mantenimiento':'Registrar mantenimiento'}`;document.getElementById('mantenimientoFormSub').textContent=`${vehiculoNombre(v)} · Placa ${v.placa||'—'}`;const m=document.getElementById('vehiculoMantenimientoModal');m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
@@ -15916,100 +15643,6 @@ body.dark-mode #loginForm .input-group-pro:focus-within > button{
 }
 </style>
 
-<style id="sidebar-icon-color-modern-v35">
-/* V35 — Iconos del menú principal: más modernos, coloridos y legibles en ambos temas. */
-#sidebar .nav-link > i,
-#sidebar .menu-group-toggle > span > i{
-  --menu-icon-color:#2563eb;
-  --menu-icon-bg:rgba(37,99,235,.10);
-  color:var(--menu-icon-color)!important;
-  background:var(--menu-icon-bg)!important;
-  border:1px solid color-mix(in srgb,var(--menu-icon-color) 16%,transparent)!important;
-  box-shadow:0 4px 10px color-mix(in srgb,var(--menu-icon-color) 10%,transparent)!important;
-}
-#sidebar .menu-group-toggle > span > i{
-  width:29px!important;height:29px!important;flex:0 0 29px!important;
-  display:inline-grid!important;place-items:center!important;border-radius:9px!important;
-  font-size:.76rem!important;margin-right:7px!important;vertical-align:-2px;
-}
-#sidebar .nav-link > i{border-radius:9px!important;}
-
-/* Dashboard */
-#sidebar > .sidebar-nav-wrapper > .sidebar-main-nav > a[href="#dashboard"] > i{--menu-icon-color:#2563eb;--menu-icon-bg:rgba(37,99,235,.12)}
-/* Grupos */
-#sidebar .menu-group-toggle .fa-compass{--menu-icon-color:#8b5cf6;--menu-icon-bg:rgba(139,92,246,.12)}
-#sidebar .menu-group-toggle .fa-screwdriver-wrench{--menu-icon-color:#6366f1;--menu-icon-bg:rgba(99,102,241,.12)}
-#sidebar .menu-group-toggle .fa-coins{--menu-icon-color:#059669;--menu-icon-bg:rgba(5,150,105,.12)}
-#sidebar .menu-group-toggle .fa-people-roof{--menu-icon-color:#ec4899;--menu-icon-bg:rgba(236,72,153,.12)}
-#sidebar .menu-group-toggle .fa-network-wired{--menu-icon-color:#0f766e;--menu-icon-bg:rgba(15,118,110,.12)}
-
-/* General */
-#sidebar a[href="#agenda"] > i{--menu-icon-color:#0ea5e9;--menu-icon-bg:rgba(14,165,233,.12)}
-#sidebar a[href="#tareas"] > i{--menu-icon-color:#16a34a;--menu-icon-bg:rgba(22,163,74,.12)}
-#sidebar a[href="#recordatorios"] > i{--menu-icon-color:#2563eb;--menu-icon-bg:rgba(37,99,235,.12)}
-
-/* Administración */
-#sidebar a[href="#empresas"] > i{--menu-icon-color:#0891b2;--menu-icon-bg:rgba(8,145,178,.12)}
-#sidebar a[href="#usuarios"] > i{--menu-icon-color:#7c3aed;--menu-icon-bg:rgba(124,58,237,.12)}
-#sidebar a[href="#clientes"] > i{--menu-icon-color:#0f766e;--menu-icon-bg:rgba(15,118,110,.12)}
-#sidebar a[href="#servicios"] > i{--menu-icon-color:#0284c7;--menu-icon-bg:rgba(2,132,199,.12)}
-#sidebar a[href="#portal"] > i{--menu-icon-color:#2563eb;--menu-icon-bg:rgba(37,99,235,.12)}
-#sidebar a[href="#auditoria"] > i{--menu-icon-color:#64748b;--menu-icon-bg:rgba(100,116,139,.13)}
-
-/* Finanzas */
-#sidebar a[href="#facturacion"] > i{--menu-icon-color:#f97316;--menu-icon-bg:rgba(249,115,22,.12)}
-#sidebar a[href="#creditos"] > i{--menu-icon-color:#8b5cf6;--menu-icon-bg:rgba(139,92,246,.12)}
-#sidebar a[href="#pagos"] > i{--menu-icon-color:#16a34a;--menu-icon-bg:rgba(22,163,74,.12)}
-#sidebar a[href="#bancos"] > i{--menu-icon-color:#0284c7;--menu-icon-bg:rgba(2,132,199,.12)}
-#sidebar a[href="#gastos"] > i{--menu-icon-color:#ef4444;--menu-icon-bg:rgba(239,68,68,.12)}
-
-/* Familia y Registros */
-#sidebar a[href="#familia"] > i{--menu-icon-color:#f97316;--menu-icon-bg:rgba(249,115,22,.12)}
-#sidebar a[href="#historialmedico"] > i{--menu-icon-color:#ef4444;--menu-icon-bg:rgba(239,68,68,.12)}
-#sidebar a[href="#manutencion"] > i{--menu-icon-color:#16a34a;--menu-icon-bg:rgba(22,163,74,.12)}
-#sidebar a[href="#registrosescolares"] > i{--menu-icon-color:#7c3aed;--menu-icon-bg:rgba(124,58,237,.12)}
-#sidebar a[href="#vehiculos"] > i{--menu-icon-color:#06b6d4;--menu-icon-bg:rgba(6,182,212,.12)}
-
-/* Infraestructura */
-#sidebar a[href="#mikrotik"] > i{--menu-icon-color:#2563eb;--menu-icon-bg:rgba(37,99,235,.12)}
-
-/* Colores permanecen vivos también en hover y cuando el módulo está activo. */
-#sidebar .nav-link:hover > i,
-#sidebar .menu-group-toggle:hover > span > i{
-  color:var(--menu-icon-color)!important;
-  background:color-mix(in srgb,var(--menu-icon-color) 16%,transparent)!important;
-  transform:translateY(-1px) scale(1.03);
-  box-shadow:0 6px 14px color-mix(in srgb,var(--menu-icon-color) 14%,transparent)!important;
-}
-#sidebar .nav-link.active > i{
-  color:var(--menu-icon-color)!important;
-  background:color-mix(in srgb,var(--menu-icon-color) 15%,#ffffff)!important;
-  border-color:color-mix(in srgb,var(--menu-icon-color) 24%,transparent)!important;
-  box-shadow:0 5px 13px color-mix(in srgb,var(--menu-icon-color) 18%,transparent)!important;
-}
-
-/* En tema oscuro conservamos el color de cada icono, con fondos un poco más luminosos. */
-html[data-bs-theme="dark"] #sidebar .nav-link > i,
-html[data-bs-theme="dark"] #sidebar .menu-group-toggle > span > i,
-body.dark-mode #sidebar .nav-link > i,
-body.dark-mode #sidebar .menu-group-toggle > span > i{
-  background:color-mix(in srgb,var(--menu-icon-color) 16%,#111827)!important;
-  border-color:color-mix(in srgb,var(--menu-icon-color) 26%,transparent)!important;
-  box-shadow:0 5px 14px color-mix(in srgb,var(--menu-icon-color) 14%,transparent)!important;
-}
-html[data-bs-theme="dark"] #sidebar .nav-link.active > i,
-body.dark-mode #sidebar .nav-link.active > i{
-  background:color-mix(in srgb,var(--menu-icon-color) 20%,#111827)!important;
-  color:var(--menu-icon-color)!important;
-}
-
-/* Fallback para navegadores sin color-mix: conserva color y fondo suaves. */
-@supports not (color: color-mix(in srgb, red 20%, transparent)){
-  #sidebar .nav-link > i,
-  #sidebar .menu-group-toggle > span > i{background:rgba(37,99,235,.10)!important;box-shadow:none!important}
-}
-</style>
-
 </head><body><h1>${esc(f.nombre||'Familiar')}</h1><p><b>Parentesco:</b> ${esc(f.parentesco||'')}</p><p><b>Documento:</b> ${esc(f.documento||'')}</p><p><b>Fecha de nacimiento:</b> ${esc(f.fecha_nac||'')}</p><p><b>Teléfono:</b> ${esc(f.telefono||'')}</p><p><b>Correo:</b> ${esc(f.correo||'')}</p><p><b>Dirección:</b> ${esc(f.direccion||'')}</p><p><b>Notas:</b> ${esc(f.notas||'—')}</p>${items.some(x=>x[1])?'<h2>Documentos</h2><div class="grid">'+items.filter(x=>x[1]).map(x=>`<div class="doc"><h3>${esc(x[0])}</h3><img src="${x[1]}" alt="${esc(x[0])}"></div>`).join('')+'</div>':''}</body></html>`);w.document.close();setTimeout(()=>{w.focus();w.print();},700);
     });
 }
@@ -16499,6 +16132,19 @@ window.abrirRegistroOps=abrirRegistroOps;window.renderOpsModulo=renderOpsModulo;
  window.abrirPlantillaVGTPoste=function(){const proyectos=A('vgtproyectos'), p=proyectos[0]||{};const html='<div class="ops-form-grid"><div class="ops-field"><label>Logo de empresa (URL)</label><input class="form-control form-control-sm" id="vgtp-logo"></div><div class="ops-field"><label>N.º VGT / identificación</label><input class="form-control form-control-sm" id="vgtp-numero"></div><div class="ops-field"><label>Proyecto</label><input class="form-control form-control-sm" id="vgtp-proyecto" value="'+E(p.nombre||'')+'"></div><div class="ops-field"><label>Coordenadas inicio</label><input class="form-control form-control-sm" id="vgtp-inicio" value="'+E((p.coordenada_inicio_lat??'')+', '+(p.coordenada_inicio_lon??''))+'"></div><div class="ops-field"><label>Coordenadas fin</label><input class="form-control form-control-sm" id="vgtp-fin" value="'+E((p.coordenada_final_lat??'')+', '+(p.coordenada_final_lon??''))+'"></div><div class="ops-field"><label>Cantidad de postas</label><input class="form-control form-control-sm" id="vgtp-postas" type="number" value="'+E(p.cantidad_postes_planificados||'')+'"></div><div class="ops-field"><label>Tipo de fibra</label><input class="form-control form-control-sm" id="vgtp-fibra"></div><div class="ops-field"><label>Longitud del proyecto</label><input class="form-control form-control-sm" id="vgtp-longitud" value="'+E(p.longitud_proyecto_km||'')+'"></div><div class="ops-field"><label>Teléfonos</label><input class="form-control form-control-sm" id="vgtp-telefonos"></div><div class="ops-field"><label>Correo</label><input class="form-control form-control-sm" id="vgtp-correo"></div></div><div class="d-flex justify-content-end gap-2 mt-3"><button class="btn btn-primary" type="button" id="btn-vgtp-generar">Generar / imprimir</button></div>';let m=document.getElementById('modalVGTPlantilla');if(!m){m=document.createElement('div');m.id='modalVGTPlantilla';m.className='modal fade';m.innerHTML='<div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Plantilla de identificación VGT · 15 × 10 cm</h5><button class="btn-close" data-bs-dismiss="modal" type="button"></button></div><div class="modal-body">'+html+'</div></div></div>';document.body.appendChild(m);}new bootstrap.Modal(m).show();document.getElementById('btn-vgtp-generar').onclick=()=>{const g=id=>document.getElementById(id)?.value||'';const logo=g('vgtp-logo');const body='<div id="vgt-print-area" class="vgt-label-preview">'+(logo?'<img src="'+E(logo)+'" style="max-width:55mm;max-height:14mm;object-fit:contain"><br>':'<div class="vgt-logo">SOLUCIONES TECNOLÓGICAS</div>')+'<div class="vgt-project">'+E(g('vgtp-proyecto')||'PROYECTO VGT')+'</div><div class="vgt-grid"><div><b>Inicio:</b> '+E(g('vgtp-inicio'))+'</div><div><b>Fin:</b> '+E(g('vgtp-fin'))+'</div><div><b>Postas:</b> '+E(g('vgtp-postas'))+'</div><div><b>Fibra:</b> '+E(g('vgtp-fibra'))+'</div><div><b>Longitud:</b> '+E(g('vgtp-longitud'))+'</div><div><b>Teléfonos:</b> '+E(g('vgtp-telefonos'))+'</div><div class="vgt-full"><b>Correo:</b> '+E(g('vgtp-correo'))+'</div></div><div class="vgt-code">VGT: '+E(g('vgtp-numero'))+'</div></div>';const w=window.open('','_blank','width=700,height=600');if(!w)return;w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Identificación VGT</title><style>@page{size:150mm 100mm;margin:0}html,body{margin:0;padding:0;width:150mm;height:100mm}body{font-family:Arial,sans-serif}'+document.querySelector('#portal-v3-extra-css')?.textContent+'</style></head><body>'+body+'<script>window.onload=()=>setTimeout(()=>window.print(),250);<\/script></body></html>');w.document.close();};};
  
 })();
+</script>
+<style id="menu-y-formularios-visual-final-v4">
+/* Única capa visual final del menú: mismo tamaño y color individual. */
+#sidebar .menu-group-toggle,#sidebar .menu-group-items .nav-link,#sidebar .ops-menu-category-title{font-size:.72rem!important;}
+#sidebar .menu-group-toggle{font-weight:850;}
+#sidebar .menu-group-items .nav-link{font-weight:650;}
+#sidebar a[href="#dashboard"]>i{--menu-icon-color:#2563eb}#sidebar a[href="#empresas"]>i{--menu-icon-color:#7c3aed}#sidebar a[href="#usuarios"]>i{--menu-icon-color:#059669}#sidebar a[href="#clientes"]>i{--menu-icon-color:#db2777}#sidebar a[href="#servicios"]>i{--menu-icon-color:#0891b2}#sidebar a[href="#portal"]>i{--menu-icon-color:#ea580c}#sidebar a[href="#auditoria"]>i{--menu-icon-color:#16a34a}#sidebar a[href="#mikrotik"]>i{--menu-icon-color:#dc2626}#sidebar a[href="#facturacion"]>i{--menu-icon-color:#ca8a04}#sidebar a[href="#creditos"]>i{--menu-icon-color:#0f766e}#sidebar a[href="#pagos"]>i{--menu-icon-color:#9333ea}#sidebar a[href="#bancos"]>i{--menu-icon-color:#0284c7}#sidebar a[href="#gastos"]>i{--menu-icon-color:#b45309}#sidebar a[href="#sueldos"]>i{--menu-icon-color:#e11d48}#sidebar a[href="#agenda"]>i{--menu-icon-color:#4f46e5}#sidebar a[href="#tareas"]>i{--menu-icon-color:#0d9488}#sidebar a[href="#recordatorios"]>i{--menu-icon-color:#c2410c}#sidebar a[href="#notificaciones"]>i{--menu-icon-color:#65a30d}#sidebar a[href="#familia"]>i{--menu-icon-color:#be123c}#sidebar a[href="#historialmedico"]>i{--menu-icon-color:#6d28d9}#sidebar a[href="#manutencion"]>i{--menu-icon-color:#0369a1}#sidebar a[href="#registrosescolares"]>i{--menu-icon-color:#15803d}#sidebar a[href="#recordatoriosmedicinas"]>i{--menu-icon-color:#c026d3}#sidebar a[href="#vehiculos"]>i{--menu-icon-color:#b91c1c}#sidebar a[href="#tecnicos"]>i{--menu-icon-color:#4338ca}#sidebar a[href="#trabajoscampo"]>i{--menu-icon-color:#047857}#sidebar a[href="#instalaciones"]>i{--menu-icon-color:#9a3412}#sidebar a[href="#soportetecnico"]>i{--menu-icon-color:#be185d}#sidebar a[href="#inventarios"]>i{--menu-icon-color:#0e7490}#sidebar a[href="#almacenes"]>i{--menu-icon-color:#2563eb}#sidebar a[href="#oficina"]>i{--menu-icon-color:#7c3aed}#sidebar a[href="#vgt"]>i{--menu-icon-color:#059669}#sidebar a[href="#centrooperativo"]>i{--menu-icon-color:#db2777}#sidebar a[href="#contabilidad"]>i{--menu-icon-color:#0891b2}#sidebar a[href="#administracion"]>i{--menu-icon-color:#ea580c}#sidebar a[href="#salud"]>i{--menu-icon-color:#16a34a}#sidebar a[href="#talleres"]>i{--menu-icon-color:#dc2626}
+#sidebar .menu-group-items .nav-link>i.menu-subicon{color:var(--menu-icon-color)!important;-webkit-text-fill-color:var(--menu-icon-color)!important;background:color-mix(in srgb,var(--menu-icon-color) 12%,transparent)!important;border-color:color-mix(in srgb,var(--menu-icon-color) 24%,transparent)!important;}
+#sidebar .menu-group-items .nav-link:hover>i.menu-subicon,#sidebar .menu-group-items .nav-link.active>i.menu-subicon{color:var(--menu-icon-color)!important;-webkit-text-fill-color:var(--menu-icon-color)!important;background:color-mix(in srgb,var(--menu-icon-color) 18%,transparent)!important;}
+#sidebar .menu-group-toggle>span>i.menu-group-icon,#sidebar .ops-menu-category-title>i{color:var(--menu-icon-color)!important;-webkit-text-fill-color:var(--menu-icon-color)!important;}
+</style>
+<script id="menu-colores-grupos-final-v4">
+(function(){const p=['#2563eb','#7c3aed','#059669','#db2777','#0891b2','#ea580c','#16a34a','#dc2626','#ca8a04','#0f766e','#9333ea','#0284c7'];function paint(){const s=document.getElementById('sidebar');if(!s)return;s.querySelectorAll('.menu-group-toggle>span>i.menu-group-icon').forEach((e,i)=>e.style.setProperty('--menu-icon-color',p[i%p.length]));s.querySelectorAll('.ops-menu-category-title>i').forEach((e,i)=>e.style.setProperty('--menu-icon-color',p[(i+4)%p.length]));}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',paint,{once:true});else paint();window.addEventListener('load',paint,{once:true});})();
 </script>
 </body>
 </html>
