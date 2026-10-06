@@ -3582,62 +3582,43 @@ select{
 </style>
 
 <style id="portal-mantenimiento-compacto-final">
-/* Modal Portal Cerrado: tamaño compacto, similar a las alertas de bienvenida/login */
-#modalPortalMantenimiento .modal-dialog {
-  width: min(350px, calc(100vw - 28px)) !important;
-  max-width: 350px !important;
-  margin: 1rem auto !important;
+/* Portal Cerrado: siempre por encima del login y de cualquier modal Bootstrap. */
+#modalPortalMantenimiento{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:500300 !important;
 }
-#modalPortalMantenimiento .modal-content {
-  padding: 12px !important;
-  border-radius: 16px !important;
+#modalPortalMantenimiento.show{display:block !important;}
+#modalPortalMantenimiento + .modal-backdrop,
+.modal-backdrop.portal-mantenimiento-backdrop{
+  z-index:500299 !important;
 }
-#modalPortalMantenimiento .modal-content > .position-relative {
-  margin-bottom: 10px !important;
+#modalPortalMantenimiento .modal-dialog{
+  position:relative !important;
+  z-index:500301 !important;
+  width:min(350px,calc(100vw - 28px)) !important;
+  max-width:350px !important;
+  margin:1rem auto !important;
 }
-#modalPortalMantenimiento .modal-content > .position-relative > div {
-  width: 58px !important;
-  height: 58px !important;
-  box-shadow: 0 6px 18px rgba(245,158,11,.20) !important;
+#modalPortalMantenimiento .modal-content{
+  position:relative !important;
+  z-index:500302 !important;
+  padding:12px !important;
+  border-radius:16px !important;
 }
-#modalPortalMantenimiento .modal-content > .position-relative > div i {
-  font-size: 1.35rem !important;
+#modalPortalMantenimiento .modal-content > .position-relative{margin-bottom:10px !important;}
+#modalPortalMantenimiento .modal-content > .position-relative > div{
+  width:58px !important;height:58px !important;
+  box-shadow:0 6px 18px rgba(245,158,11,.20) !important;
 }
-#modalPortalMantenimiento h4 {
-  font-size: 1rem !important;
-  margin-bottom: 6px !important;
-}
-#modalPortalMantenimiento p {
-  font-size: .76rem !important;
-  line-height: 1.4 !important;
-  margin-bottom: 8px !important;
-}
-#modalPortalMantenimiento .modal-content > .d-flex {
-  margin-top: 8px !important;
-  margin-bottom: 8px !important;
-}
-#modalPortalMantenimiento .modal-content > .p-3 {
-  padding: 8px 10px !important;
-  margin-bottom: 10px !important;
-}
-#modalPortalMantenimiento .modal-content > .p-3 small {
-  font-size: .56rem !important;
-}
-#modalPortalMantenimiento .modal-content > .p-3 a {
-  font-size: .82rem !important;
-}
-#modalPortalMantenimiento .modal-content > button {
-  padding: .48rem .65rem !important;
-  font-size: .74rem !important;
-  border-radius: 10px !important;
-}
-@media (max-width: 575.98px) {
-  #modalPortalMantenimiento .modal-dialog {
-    width: calc(100vw - 24px) !important;
-    max-width: 350px !important;
-    margin: .75rem auto !important;
-  }
-  #modalPortalMantenimiento .modal-content { padding: 10px !important; }
+#modalPortalMantenimiento .modal-content > .position-relative > div i{font-size:1.35rem !important;}
+#modalPortalMantenimiento h4{font-size:1.15rem !important;margin-bottom:.45rem !important;}
+#modalPortalMantenimiento p{font-size:.88rem !important;line-height:1.45 !important;margin-bottom:.7rem !important;}
+#modalPortalMantenimiento .modal-content > .d-flex{margin-top:.65rem !important;margin-bottom:.65rem !important;}
+#modalPortalMantenimiento .modal-content > .p-3{padding:.65rem !important;margin-bottom:.75rem !important;}
+#modalPortalMantenimiento .modal-content > button{padding:.55rem !important;border-radius:12px !important;}
+@media(max-width:575.98px){
+  #modalPortalMantenimiento .modal-dialog{width:min(330px,calc(100vw - 20px)) !important;max-width:330px !important;margin:.75rem auto !important;}
 }
 </style>
 </head>
@@ -7404,24 +7385,9 @@ function filtroNotificacionesClienteSupabase_(cliente){
 
             applyUserSession(found);
 
-            // La auditoría se registra directamente en Servidor.
+            // Registrar el inicio de sesión una sola vez, en hora local del dispositivo.
             try {
-                const audit = {
-                    id_auditoria: 'AUD-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
-                    fecha_hora: formatearFechaHoraPortal(new Date()),
-                    id_usuario: found.id_usuario || '',
-                    username: found.username || '',
-                    rol: found.rol || '',
-                    accion: 'LOGIN',
-                    entidad: 'Sistema',
-                    id_entidad: found.id_usuario || '',
-                    detalle: 'Inicio de sesión exitoso — Usuario: ' + (found.username || '') + ' (' + (found.rol || '') + ')',
-                    nivel: 'INFO'
-                };
-                db.auditoria = Array.isArray(db.auditoria) ? db.auditoria : [];
-                db.auditoria.unshift(audit);
-                guardarDBLocalSeguro_();
-                void enviarAuditoriaDirectaEnSegundoPlano_(audit);
+                registrarAuditoria('LOGIN','Sistema',found.id_usuario||'', 'Inicio de sesión exitoso — Usuario: '+(found.username||'')+' ('+(found.rol||'')+')', 'INFO');
             } catch (_) {}
 
             showToast('Bienvenido', 'Hola ' + (found.nombre_completo || found.username || '') + ', has iniciado sesión correctamente.', 'success');
@@ -7995,16 +7961,20 @@ async function sincronizarConservidor() {
     }
     function registrarAuditoriaEnSegundoPlano_(action,payload,result){
         if(!currentUser||action==='addAuditoria'||action==='getStats'||action==='getUserProfile'||!result?.success)return;
-        // Estas acciones ya tienen auditoría explícita en su flujo para evitar duplicados.
+        const accionTexto=String(action||'').trim();
+        const a=accionTexto.toLowerCase();
         const explicitas=new Set(['changePassword','deleteEmpresa','deleteUsuario','deleteUsuarioCascade','deleteCliente','confirmarPago','addPago','registrarPagoCliente','addCredito','deleteCredito','addNotificacion','deleteNotificacion']);
-        if(explicitas.has(String(action)))return;
+        if(explicitas.has(accionTexto))return;
+        const esCrudImportante=/^(add|create|update|delete|insert|edit|save|guardar)/i.test(accionTexto);
+        const esCambioImportante=['confirmarpago','registrarpagocliente','marcartarearealizada','atendercitaagenda','updateclientestatus','updategastestado','updaterecordatorioestado','passwordchange'].includes(a);
+        if(!esCrudImportante&&!esCambioImportante)return;
         try{
             const entidad={addFactura:'Factura',updateFactura:'Factura',deleteFactura:'Factura',addPago:'Pago',confirmarPago:'Pago',registrarPagoCliente:'Pago',addCliente:'Cliente',updateCliente:'Cliente',deleteCliente:'Cliente',updateClientStatus:'Cliente',addUsuario:'Usuario',updateUsuario:'Usuario',deleteUsuario:'Usuario',addEmpresa:'Empresa',updateEmpresa:'Empresa',deleteEmpresa:'Empresa',addBanco:'Banco',updateBanco:'Banco',deleteBanco:'Banco',addCredito:'Credito',updateCredito:'Credito',deleteCredito:'Credito',addNotificacion:'Notificacion',updateNotificacion:'Notificacion',deleteNotificacion:'Notificacion',addFamilia:'Familia',updateFamilia:'Familia',deleteFamilia:'Familia',addHistorialMedico:'HistorialMedico',updateHistorialMedico:'HistorialMedico',deleteHistorialMedico:'HistorialMedico',addManutencion:'Manutencion',updateManutencion:'Manutencion',deleteManutencion:'Manutencion',addRegistroEscolar:'RegistroEscolar',updateRegistroEscolar:'RegistroEscolar',deleteRegistroEscolar:'RegistroEscolar',guardarHorarioEscolar:'HorarioEscolar',deleteHorarioEscolar:'HorarioEscolar',addTarea:'Tarea',updateTarea:'Tarea',deleteTarea:'Tarea',marcarTareaRealizada:'Tarea',addTrabajoManual:'TrabajoManual',updateTrabajoManual:'TrabajoManual',deleteTrabajoManual:'TrabajoManual'};
-            const actor=currentUser,a=String(action).toLowerCase();
+            const actor=currentUser;
             const id=result?.data?.factura?.id_factura||result?.data?.id_factura||payload?.id_factura||payload?.id_pago||payload?.id_cliente||payload?.id_usuario||payload?.id_empresa||payload?.id_familia||payload?.id_tarea||'';
             const ref=payload?.nombre_cliente||payload?.nombre_completo||payload?.cliente_nombre||payload?.codigo_cliente||'';
-            const audit={id_auditoria:'AUD-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),fecha_hora:formatearFechaHoraPortal(new Date()),id_usuario:actor.id_usuario||'',username:actor.username||'',rol:actor.rol||'',accion:a.startsWith('delete')?'DELETE':(a.startsWith('update')?'UPDATE':'CREATE'),entidad:entidad[action]||action,id_entidad:String(id||''),detalle:'Operación completada — Acción: '+action+(ref?' — Referencia: '+String(ref):''),nivel:'INFO'};
-            enviarAuditoriaDirectaEnSegundoPlano_(audit);
+            const accion=a.startsWith('delete')?'DELETE':(a.startsWith('update')||a.startsWith('edit')||a.startsWith('save')||a.startsWith('guardar')?'UPDATE':'CREATE');
+            registrarAuditoria(accion,entidad[accionTexto]||accionTexto,id||'', 'Cambio importante — Acción: '+accionTexto+(ref?' — Referencia: '+String(ref):''), accion==='DELETE'?'WARNING':'INFO');
         }catch(e){console.debug('Auditoría automática:',e?.message||e);}
     }
 
@@ -8267,11 +8237,10 @@ async function cargarBootstrapInicial_(){
         const actor=currentUser?{...currentUser}:null;
         try {
             if(actor) {
-                const registro={id_auditoria:'AUD-'+Date.now(),fecha_hora:formatearFechaHoraAuditoria(new Date()),id_usuario:actor.id_usuario||'ANONIMO',username:actor.username||'ANONIMO',rol:actor.rol||'ANONIMO',accion:'LOGOUT',entidad:'Sistema',id_entidad:actor.id_usuario||'',detalle:'Cierre de sesión — Usuario: '+(actor.username||''),nivel:'INFO',__actor:actor};
-                db.auditoria.unshift(registro);
+                // Registrar antes de limpiar currentUser para conservar el actor real.
                 registrarAuditoria('LOGOUT','Sistema',actor.id_usuario||'', 'Cierre de sesión — Usuario: '+(actor.username||''), 'INFO');
             }
-        } catch(e) { console.warn('No se pudo preparar el cierre de sesión para servidor:',e); }
+        } catch(e) { console.warn('No se pudo registrar el cierre de sesión para servidor:',e); }
         currentUser=null;
         if (_notifPollingTimer) {
             clearInterval(_notifPollingTimer);
@@ -8446,7 +8415,6 @@ async function cargarBootstrapInicial_(){
         }
         if (passIcon) passIcon.className = 'fa-solid fa-eye';
 
-        registrarAuditoria('VIEW', 'Perfil', currentUser.id_usuario, 'Consulta del perfil propio — Usuario: ' + (currentUser.username || linkedUser.username || ''), 'INFO');
         window.cleanErpModalLayers?.(); modalPerfil.show();
     }
 
@@ -9385,12 +9353,11 @@ function actualizarVistaDashboardPorPermiso(){
         document.getElementById('page-title').innerText = titles[tabId] || 'Plataforma ERP';
         // Auditoría de navegación para TODOS los usuarios autenticados, sin importar su rol.
         if(currentUser && typeof registrarAuditoria==='function'){
-            registrarAuditoria('VIEW','Modulo',tabId,'Acceso al módulo: '+(titles[tabId]||tabId),'INFO');
         }
         // Al abrir Auditoría se consulta directamente el servidor para mostrar
         // también los movimientos registrados desde otra sesión o dispositivo.
         if(tabId==='auditoria' && currentUser){
-            setTimeout(()=>recargarAuditoriaServidor_(),50);
+            abrirAuditoriaServidor_();
         }
 
         // Auto-cargar datos para el rol Cliente al navegar entre pestañas
@@ -10411,14 +10378,30 @@ async function eliminarUsuario(id) {
         }
     }
 
+    function mostrarModalPortalCerrado_(){
+        const modal=document.getElementById('modalPortalMantenimiento');
+        if(!modal)return;
+        const instancia=bootstrap.Modal.getOrCreateInstance(modal,{backdrop:true,keyboard:true,focus:true,scroll:false});
+        modal.classList.remove('show');
+        modal.style.display='';
+        modal.setAttribute('aria-hidden','true');
+        instancia.show();
+        requestAnimationFrame(()=>{
+            const dialog=modal.querySelector('.modal-dialog');
+            if(dialog)dialog.style.zIndex='500301';
+            const backdrops=[...document.querySelectorAll('.modal-backdrop')];
+            const backdrop=backdrops.at(-1);
+            if(backdrop){backdrop.classList.add('portal-mantenimiento-backdrop');backdrop.style.zIndex='500299';}
+        });
+    }
+
     async function abrirRegistroPublicoControlado(){
         const boton=document.getElementById('btn-mostrar-registro');
         if(boton)boton.disabled=true;
         try{
             const activo=await obtenerEstadoPortalPublicoServidor();
             if(!activo){
-                const modal=document.getElementById('modalPortalMantenimiento');
-                if(modal)bootstrap.Modal.getOrCreateInstance(modal,{backdrop:true,keyboard:true,focus:true}).show();
+                mostrarModalPortalCerrado_();
                 return;
             }
             window._portalPublicoValidado=true;
@@ -10439,8 +10422,7 @@ async function eliminarUsuario(id) {
         if(publico&&!id&&!window._portalPublicoValidado){
             const activo=await obtenerEstadoPortalPublicoServidor();
             if(!activo){
-                const modal=document.getElementById('modalPortalMantenimiento');
-                if(modal)bootstrap.Modal.getOrCreateInstance(modal,{backdrop:true,keyboard:true,focus:true}).show();
+                mostrarModalPortalCerrado_();
                 return;
             }
         }
@@ -12389,41 +12371,55 @@ function copiarTodosDatosBanco(id){const b=(db.bancos||[]).find(function(x){retu
     }
 
     function registrarAuditoria(accion, entidad, idEntidad, detalle, nivel = 'INFO') {
-        const registro = {
-            id_auditoria: 'AUD-' + Date.now() + '-' + Math.random().toString(36).slice(2,8),
-            fecha_hora: formatearFechaHoraAuditoria(new Date()),
-            id_usuario: currentUser ? currentUser.id_usuario : 'ANONIMO',
-            username: currentUser ? currentUser.username : 'ANONIMO',
-            rol: currentUser ? currentUser.rol : 'ANONIMO',
-            accion: accion,
-            entidad: entidad,
-            id_entidad: idEntidad || '',
-            detalle: detalle,
-            nivel: nivel
+        const accionNormalizada=String(accion||'').trim().toUpperCase();
+        if(accionNormalizada==='VIEW')return null;
+        const actor=currentUser||{};
+        const registro={
+            id_auditoria:'AUD-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),
+            fecha_hora:formatearFechaHoraAuditoria(new Date()),
+            id_usuario:actor.id_usuario||'ANONIMO',
+            username:actor.username||'ANONIMO',
+            rol:actor.rol||'ANONIMO',
+            accion:accionNormalizada||'UPDATE',
+            entidad:String(entidad||'Sistema'),
+            id_entidad:String(idEntidad||''),
+            detalle:String(detalle||''),
+            nivel:String(nivel||'INFO').toUpperCase()
         };
-        db.auditoria = Array.isArray(db.auditoria) ? db.auditoria : [];
+        db.auditoria=Array.isArray(db.auditoria)?db.auditoria:[];
         db.auditoria.unshift(registro);
         guardarDBLocalSeguro_();
-        enviarAuditoriaDirectaEnSegundoPlano_(registro);
+        if(document.getElementById('audit-tbody'))renderAuditoria();
+        void enviarAuditoriaDirectaEnSegundoPlano_(registro).then(ok=>{
+            if(ok&&document.getElementById('audit-tbody'))renderAuditoria();
+        });
+        return registro;
     }
 
-    // Recarga exclusivamente la auditoría desde el servidor. Esto evita que la
-    // pantalla de Auditoría dependa de una caché local antigua después de
-    // eliminar, actualizar o crear registros. El Master recibe todo el
-    // historial; los clientes solo reciben sus propios registros.
+    let _auditoriaCargaId_=0;
     async function recargarAuditoriaServidor_(){
         if(!currentUser)return false;
+        const carga=++_auditoriaCargaId_;
         try{
-            const filas=await sbSelect('auditoria',{limit:10000});
+            const filas=await sbSelect('auditoria',{limit:10000,order:'fecha_hora.desc'});
+            if(carga!==_auditoriaCargaId_)return false;
             db.auditoria=Array.isArray(filas)?filas:[];
             guardarDBLocalSeguro_();
             renderAuditoria();
             mostrarBadgeServidor(true);
             return true;
         }catch(e){
-            console.warn('No se pudo recargar Auditoría desde el servidor:',e?.message||e);
+            console.warn('No se pudo cargar Auditoría desde el servidor:',e?.message||e);
+            renderAuditoria();
+            mostrarBadgeServidor(false);
             return false;
         }
+    }
+
+    function abrirAuditoriaServidor_(){
+        if(!currentUser)return;
+        renderAuditoria();
+        void recargarAuditoriaServidor_();
     }
 
     function parseFechaAuditoria(valor) {
@@ -12480,7 +12476,7 @@ function copiarTodosDatosBanco(id){const b=(db.bancos||[]).find(function(x){retu
         const badgeClasses = {
             'LOGIN': 'audit-badge-login', 'LOGOUT': 'audit-badge-logout', 'CREATE': 'audit-badge-create',
             'UPDATE': 'audit-badge-update', 'DELETE': 'audit-badge-delete', 'PAYMENT': 'audit-badge-payment',
-            'STATUS_CHANGE': 'audit-badge-warning', 'VIEW': 'audit-badge-login'
+            'STATUS_CHANGE': 'audit-badge-warning'
         };
         const nivelClasses = { 'INFO': 'text-primary', 'WARNING': 'text-warning', 'ERROR': 'text-danger' };
         tbody.innerHTML = filas.map(r => {
@@ -12611,11 +12607,20 @@ function copiarTodosDatosBanco(id){const b=(db.bancos||[]).find(function(x){retu
     }
 
     async function limpiarAuditoria() {
-        if (!await confirmarAccionModal('Limpiar auditoría','Se eliminará todo el historial de auditoría. Esta acción no se puede deshacer.')) return;
-        db.auditoria = [];
-        renderAuditoria();
-        showToast('Auditoría', 'Historial limpiado.', 'warning');
-        ejecutarOperacionSupabase('clearAuditoria', {}, false, 30000, true);
+        if(!currentUser)return;
+        if(!await confirmarAccionModal('Limpiar auditoría','Se eliminará todo el historial de auditoría del servidor. Esta acción no se puede deshacer.'))return;
+        try{
+            const respuesta=await sbRpc('limpiar_auditoria',{p_actor_id:String(currentUser.id_usuario||'')});
+            const dato=Array.isArray(respuesta)?(respuesta[0]||{}):(respuesta||{});
+            if(String(dato.success)!=='true' && dato.success!==true)throw new Error(dato.message||'El servidor no confirmó la limpieza de la auditoría.');
+            db.auditoria=[];
+            guardarDBLocalSeguro_();
+            renderAuditoria();
+            showSystemNotification('Auditoría limpiada','Se eliminaron '+Number(dato.deleted||0).toLocaleString('es-ES')+' registros de auditoría del servidor.','success');
+        }catch(err){
+            await recargarAuditoriaServidor_();
+            showSystemNotification('No se pudo limpiar la auditoría',err?.message||'El servidor no confirmó la operación.','danger');
+        }
     }
 
     // DOCUMENTOS LEGALES DEL REGISTRO PÚBLICO
