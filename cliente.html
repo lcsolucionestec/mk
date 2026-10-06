@@ -3460,7 +3460,15 @@ body { min-width: 0; overflow-x: hidden; }
 
 /* Ajuste final: modal de cierre de sesión compacto en escritorio */
 @media (min-width: 992px){#modalConfirmLogout .modal-dialog{max-width:360px}#modalConfirmLogout .modal-content{padding:12px!important}#modalConfirmLogout .modal-body{padding:8px!important}#modalConfirmLogout .modal-body p{margin-bottom:12px!important}#modalConfirmLogout .modal-body .mb-2{margin-bottom:8px!important}}
-</style><style id="ajuste-permisos-modulos-final">
+</style>
+<style id="permisos-usuarios-compartidos">
+#modalUsuario .perm-usuarios-picker{margin-top:7px;padding:6px;border:1px solid var(--border-color);border-radius:8px;background:var(--surface-soft)}
+#modalUsuario .perm-user-list{display:flex;flex-direction:column;gap:4px;max-height:170px;overflow:auto;margin-top:5px;padding-right:2px}
+#modalUsuario .perm-user-list label{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:6px;padding:5px 6px;border:1px solid var(--border-color);border-radius:7px;background:var(--bg-card);font-size:.61rem;cursor:pointer}
+#modalUsuario .perm-user-list label small{color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#modalUsuario .perm-user-list input{margin:0}
+</style>
+<style id="ajuste-permisos-modulos-final">
 @media (min-width:768px){#modalUsuario .perm-studio-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;}#modalUsuario .perm-module-list{max-height:430px!important;overflow-y:auto!important;}}
 @media (max-width:767px){#modalUsuario .perm-studio-grid{grid-template-columns:1fr!important;}#modalUsuario .perm-module-list{display:flex!important;flex-direction:column!important;max-height:280px!important;height:auto!important;overflow-y:auto!important;overflow-x:hidden!important;gap:4px!important;padding-right:5px!important;}#modalUsuario .perm-module-card{min-height:38px!important;flex:0 0 auto!important;}}
 </style>
@@ -3571,6 +3579,66 @@ select{
 #notif-chat-popup .notif-chat-body{padding:14px;max-height:260px;overflow:auto;}
 #notif-chat-popup .notif-chat-bubble{padding:10px 12px;border-radius:14px;background:var(--ui-surface-2);border:1px solid var(--ui-border);white-space:pre-wrap;word-break:break-word;}
 @keyframes notifChatIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+</style>
+
+<style id="portal-mantenimiento-compacto-final">
+/* Modal Portal Cerrado: tamaño compacto, similar a las alertas de bienvenida/login */
+#modalPortalMantenimiento .modal-dialog {
+  width: min(350px, calc(100vw - 28px)) !important;
+  max-width: 350px !important;
+  margin: 1rem auto !important;
+}
+#modalPortalMantenimiento .modal-content {
+  padding: 12px !important;
+  border-radius: 16px !important;
+}
+#modalPortalMantenimiento .modal-content > .position-relative {
+  margin-bottom: 10px !important;
+}
+#modalPortalMantenimiento .modal-content > .position-relative > div {
+  width: 58px !important;
+  height: 58px !important;
+  box-shadow: 0 6px 18px rgba(245,158,11,.20) !important;
+}
+#modalPortalMantenimiento .modal-content > .position-relative > div i {
+  font-size: 1.35rem !important;
+}
+#modalPortalMantenimiento h4 {
+  font-size: 1rem !important;
+  margin-bottom: 6px !important;
+}
+#modalPortalMantenimiento p {
+  font-size: .76rem !important;
+  line-height: 1.4 !important;
+  margin-bottom: 8px !important;
+}
+#modalPortalMantenimiento .modal-content > .d-flex {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+#modalPortalMantenimiento .modal-content > .p-3 {
+  padding: 8px 10px !important;
+  margin-bottom: 10px !important;
+}
+#modalPortalMantenimiento .modal-content > .p-3 small {
+  font-size: .56rem !important;
+}
+#modalPortalMantenimiento .modal-content > .p-3 a {
+  font-size: .82rem !important;
+}
+#modalPortalMantenimiento .modal-content > button {
+  padding: .48rem .65rem !important;
+  font-size: .74rem !important;
+  border-radius: 10px !important;
+}
+@media (max-width: 575.98px) {
+  #modalPortalMantenimiento .modal-dialog {
+    width: calc(100vw - 24px) !important;
+    max-width: 350px !important;
+    margin: .75rem auto !important;
+  }
+  #modalPortalMantenimiento .modal-content { padding: 10px !important; }
+}
 </style>
 </head>
 <!-- VERSION Servidor 2026.1.2 -->
@@ -3718,7 +3786,7 @@ select{
 </form>
 <div class="text-center mt-3">
 <span class="text-muted small">¿No tienes cuenta?</span>
-<button class="btn btn-link text-primary fw-semibold small p-0 ms-1 text-decoration-none" id="btn-mostrar-registro" onclick="abrirModalCliente(null, true)" type="button">
+<button class="btn btn-link text-primary fw-semibold small p-0 ms-1 text-decoration-none" id="btn-mostrar-registro" onclick="abrirRegistroPublicoControlado()" type="button">
                                 Regístrate aquí
                             </button>
 </div>
@@ -3873,11 +3941,37 @@ select{
 </div>
 </div>
 </header>
+<style id="dashboard-sin-permiso-estilo">
+.dashboard-welcome-access{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 150px);padding:24px}
+.dashboard-welcome-card{width:min(920px,100%);position:relative;overflow:hidden;border:1px solid rgba(37,99,235,.14);border-radius:28px;background:linear-gradient(135deg,#ffffff 0%,#f5f9ff 52%,#eef5ff 100%);box-shadow:0 24px 70px rgba(30,64,175,.12);padding:clamp(28px,5vw,58px);text-align:center}
+.dashboard-welcome-card:before,.dashboard-welcome-card:after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.dashboard-welcome-card:before{width:260px;height:260px;right:-100px;top:-110px;background:rgba(37,99,235,.08)}
+.dashboard-welcome-card:after{width:220px;height:220px;left:-100px;bottom:-120px;background:rgba(14,165,233,.07)}
+.dashboard-welcome-icon{width:82px;height:82px;margin:0 auto 20px;border-radius:24px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;font-size:2rem;box-shadow:0 16px 34px rgba(37,99,235,.24);position:relative;z-index:1}
+.dashboard-welcome-eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:#2563eb;margin-bottom:8px;position:relative;z-index:1}
+.dashboard-welcome-title{font-size:clamp(1.65rem,3vw,2.45rem);font-weight:850;color:#172554;margin:0 0 12px;position:relative;z-index:1}
+.dashboard-welcome-text{max-width:680px;margin:0 auto;color:#64748b;font-size:1rem;line-height:1.75;position:relative;z-index:1}
+.dashboard-welcome-badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px;position:relative;z-index:1}
+.dashboard-welcome-badge{padding:9px 14px;border-radius:999px;background:#fff;border:1px solid #dbeafe;color:#334155;font-size:.78rem;font-weight:700;box-shadow:0 5px 16px rgba(15,23,42,.05)}
+.dashboard-welcome-note{margin:24px auto 0;max-width:620px;padding:13px 16px;border-radius:14px;background:rgba(255,255,255,.78);border:1px solid rgba(148,163,184,.18);color:#64748b;font-size:.78rem;position:relative;z-index:1}
+html[data-bs-theme="dark"] .dashboard-welcome-card{background:linear-gradient(135deg,#111827,#172554);border-color:rgba(96,165,250,.18)}
+html[data-bs-theme="dark"] .dashboard-welcome-title{color:#eff6ff} html[data-bs-theme="dark"] .dashboard-welcome-text,html[data-bs-theme="dark"] .dashboard-welcome-note{color:#cbd5e1} html[data-bs-theme="dark"] .dashboard-welcome-badge{background:#1e293b;border-color:#334155;color:#e2e8f0} 
+@media(max-width:575.98px){.dashboard-welcome-access{min-height:calc(100vh - 120px);padding:12px}.dashboard-welcome-card{border-radius:22px;padding:30px 20px}.dashboard-welcome-icon{width:68px;height:68px;font-size:1.65rem;border-radius:20px}.dashboard-welcome-text{font-size:.88rem}.dashboard-welcome-badge{font-size:.7rem;padding:8px 11px}}
+</style>
 <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: DASHBOARD GENERAL
              MODIFICAR KPIs AQUÍ - Líneas de tarjetas de métricas
              ═══════════════════════════════════════════════════════════════ -->
 <section class="tab-content active" id="sec-dashboard">
+<div class="dashboard-welcome-access d-none" id="dashboard-sin-permiso">
+<div class="dashboard-welcome-card">
+<div class="dashboard-welcome-icon"><i class="fa-solid fa-hand-sparkles"></i></div>
+<div class="dashboard-welcome-eyebrow">Bienvenido al portal</div>
+<h2 class="dashboard-welcome-title">Nos alegra tenerte aquí</h2>
+<p class="dashboard-welcome-text">Tu perfil está listo para trabajar con los módulos que te fueron habilitados. Desde el menú lateral puedes acceder a las herramientas disponibles para ti.</p>
+<div class="dashboard-welcome-badges"><span class="dashboard-welcome-badge"><i class="fa-solid fa-shield-halved me-1"></i>Acceso personalizado</span><span class="dashboard-welcome-badge"><i class="fa-solid fa-layer-group me-1"></i>Módulos habilitados</span><span class="dashboard-welcome-badge"><i class="fa-solid fa-lock-open me-1"></i>Según tus permisos</span></div>
+<div class="dashboard-welcome-note"><i class="fa-solid fa-circle-info text-primary me-1"></i>El Dashboard de indicadores no está habilitado para este perfil. Esta pantalla de bienvenida funciona como tu inicio.</div>
+</div></div>
 <div class="dashboard-hero">
 <div class="dashboard-hero-content">
 <div>
@@ -4142,7 +4236,7 @@ select{
              SECCIÓN: EMPRESAS — DIRECTORIO ÚNICO
              ═══════════════════════════════════════════════════════════════ -->
 <section class="tab-content d-none" id="sec-empresas">
-<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><h5 class="fw-bold m-0">Gestión Multiempresa</h5><div class="d-flex gap-2"><button class="btn btn-primary view-admin-master" data-perm-action="agregar" data-perm-module="empresas" onclick="abrirModalEmpresa()" type="button"><i class="fa-solid fa-plus me-1"></i>Registrar Empresa</button></div></div>
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><h5 class="fw-bold m-0">Gestión Multiempresa</h5><div class="d-flex gap-2"><button class="btn btn-primary view-admin-master" data-perm-action="agregar" data-perm-module="empresas" onclick="abrirModalEmpresa()" type="button"><i class="fa-solid fa-plus me-1"></i>Registrar Empresa</button><button class="btn btn-outline-primary d-none" id="btnMostrarEmpresasMaster" onclick="mostrarEmpresasMaster()" type="button"><i class="fa-solid fa-building me-1"></i>Mostrar empresas</button></div></div>
 <div class="text-center p-3 p-md-4 border border-dashed rounded-3 bg-light" id="emp-buscador-area"><div class="d-flex align-items-center gap-2 w-100"><div class="position-relative flex-grow-1 min-w-0"><i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i><input autocomplete="off" class="form-control ps-5" id="emp-input-busqueda" maxlength="80" placeholder="Buscar por cualquier dato de la empresa..." type="text"/></div><button class="btn btn-dark flex-shrink-0" onclick="buscarEmpresaGestion()" type="button">Buscar</button><button class="btn btn-danger flex-shrink-0" onclick="limpiarBusquedaInteligente('emp-input-busqueda','buscarEmpresaGestion')" title="Limpiar búsqueda" type="button">Limpiar</button></div><small class="text-muted d-block mt-2">Los registros aparecen únicamente después de realizar una búsqueda inteligente.</small></div>
 <div class="lc-directory d-none" id="emp-lista-todos"><div class="lc-directory-head"><div class="lc-directory-title"><i class="fa-solid fa-building text-primary"></i><span>Resultados de búsqueda</span><span class="lc-directory-count" id="emp-lista-contador">0</span></div></div><div class="lc-directory-scroll"><table class="table lc-directory-table align-middle"><thead><tr><th>ID</th><th>Empresa</th><th>RIF</th><th>Teléfono</th><th>Correo</th><th>Dirección</th><th>Estado</th><th class="lc-actions">Acciones</th></tr></thead><tbody id="emp-lista-tbody"></tbody></table></div></div>
 </section>
@@ -4150,7 +4244,7 @@ select{
              SECCIÓN: USUARIOS — DIRECTORIO ÚNICO
              ═══════════════════════════════════════════════════════════════ -->
 <section class="tab-content d-none" id="sec-usuarios">
-<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><h5 class="fw-bold m-0">Usuarios y Permisos</h5><div class="d-flex gap-2"><button class="btn btn-primary btn-master-only" data-perm-action="agregar" data-perm-module="usuarios" onclick="abrirModalCrearUsuario()" type="button"><i class="fa-solid fa-user-plus me-1"></i>Crear Usuario</button></div></div>
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><h5 class="fw-bold m-0">Usuarios y Permisos</h5><div class="d-flex gap-2"><button class="btn btn-primary btn-master-only" data-perm-action="agregar" data-perm-module="usuarios" onclick="abrirModalCrearUsuario()" type="button"><i class="fa-solid fa-user-plus me-1"></i>Crear Usuario</button><button class="btn btn-outline-primary d-none" id="btnMostrarUsuariosMaster" onclick="mostrarUsuariosMaster()" type="button"><i class="fa-solid fa-users me-1"></i>Mostrar usuarios</button></div></div>
 <div class="text-center p-3 p-md-4 border border-dashed rounded-3 bg-light" id="usr-buscador-area"><div class="d-flex align-items-center gap-2 w-100"><div class="position-relative flex-grow-1 min-w-0"><i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i><input autocomplete="off" class="form-control ps-5" id="usr-input-busqueda" maxlength="80" placeholder="Buscar por cualquier dato del usuario..." type="text"/></div><button class="btn btn-dark flex-shrink-0" onclick="buscarUsuarioGestion()" type="button">Buscar</button><button class="btn btn-danger flex-shrink-0" onclick="limpiarBusquedaInteligente('usr-input-busqueda','buscarUsuarioGestion')" title="Limpiar búsqueda" type="button">Limpiar</button></div><small class="text-muted d-block mt-2">Los registros aparecen únicamente después de realizar una búsqueda inteligente.</small></div>
 <div class="lc-directory d-none" id="usr-lista-todos"><div class="lc-directory-head"><div class="lc-directory-title"><i class="fa-solid fa-users-gear text-primary"></i><span>Resultados de búsqueda</span><span class="lc-directory-count" id="usr-lista-contador">0</span></div></div><div class="lc-directory-scroll"><table class="table lc-directory-table align-middle"><thead><tr><th>ID</th><th>Nombre</th><th>Usuario</th><th>Correo</th><th>Código Cliente</th><th>Rol</th><th>Estado</th><th class="lc-actions">Acciones</th></tr></thead><tbody id="usr-lista-tbody"></tbody></table></div></div>
 </section>
@@ -4158,7 +4252,7 @@ select{
              SECCIÓN: CLIENTES — DIRECTORIO ÚNICO
              ═══════════════════════════════════════════════════════════════ -->
 <section class="tab-content d-none" id="sec-clientes">
-<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><h5 class="fw-bold m-0">Gestión de Clientes</h5><div class="d-flex gap-2"><button class="btn btn-primary view-admin-master" data-perm-action="agregar" data-perm-module="clientes" onclick="abrirModalCliente()" type="button"><i class="fa-solid fa-plus me-1"></i>Registrar Cliente</button></div></div>
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2"><h5 class="fw-bold m-0">Gestión de Clientes</h5><div class="d-flex gap-2"><button class="btn btn-primary view-admin-master" data-perm-action="agregar" data-perm-module="clientes" onclick="abrirModalCliente()" type="button"><i class="fa-solid fa-plus me-1"></i>Registrar Cliente</button><button class="btn btn-outline-primary d-none" id="btnMostrarClientesMaster" onclick="mostrarClientesMaster()" type="button"><i class="fa-solid fa-users me-1"></i>Mostrar clientes</button></div></div>
 <div class="text-center p-3 p-md-4 border border-dashed rounded-3 bg-light" id="cli-buscador-area"><div class="d-flex align-items-center gap-2 w-100"><div class="position-relative flex-grow-1 min-w-0"><i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i><input autocomplete="off" class="form-control ps-5" id="cli-input-cedula" maxlength="80" placeholder="Buscar por cualquier dato del cliente..." type="text"/></div><button class="btn btn-dark flex-shrink-0" onclick="buscarClienteGestion()" type="button">Buscar</button><button class="btn btn-danger flex-shrink-0" onclick="limpiarBusquedaInteligente('cli-input-cedula','buscarClienteGestion')" title="Limpiar búsqueda" type="button">Limpiar</button></div><small class="text-muted d-block mt-2">Los registros aparecen únicamente después de realizar una búsqueda inteligente.</small></div>
 <div class="lc-directory d-none" id="cli-lista-todos"><div class="lc-directory-head"><div class="lc-directory-title"><i class="fa-solid fa-users text-primary"></i><span>Resultados de búsqueda</span><span class="lc-directory-count" id="cli-lista-contador">0</span></div></div><div class="lc-directory-scroll"><table class="table lc-directory-table align-middle"><thead><tr><th>Código</th><th>Nombre</th><th>Documento</th><th>Teléfono</th><th>Correo</th><th>Dirección</th><th>Estado Servicio</th><th class="lc-actions">Acciones</th></tr></thead><tbody id="cli-lista-tbody"></tbody></table></div></div>
 <div class="card mt-3 d-none" id="cli-trabajos-manuales"><div class="card-body p-3 p-md-4"><div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3"><div><h6 class="fw-bold mb-1"><i class="fa-solid fa-user-gear text-primary me-2"></i>Trabajos particulares del cliente</h6><small class="text-muted">Trabajos o servicios realizados fuera de los catálogos.</small></div><button class="btn btn-primary btn-sm" id="btn-agregar-trabajo-manual" onclick="abrirModalTrabajoManualDesdePerfil()" type="button"><i class="fa-solid fa-plus me-1"></i>Registrar trabajo</button></div><div id="cli-trabajos-manuales-lista"></div></div></div>
@@ -5828,7 +5922,7 @@ select{
 <div class="usr-permisos-compact usr-permisos-studio" id="usr-permisos-panel">
 <div class="usr-permisos-toolbar">
 <div><div class="fw-bold">Centro de permisos</div><div class="text-muted usr-help">Seleccione un módulo a la izquierda y configure sus acciones y alcances a la derecha. <span class="perm-legend"><b>Propios</b> = registros del usuario · <b>Por parentesco</b> = familiares autorizados · <b>Personalizados</b> = clientes elegidos · <b>Todos</b> = todos.</span></div></div>
-<div class="d-flex align-items-center gap-2"><span class="badge rounded-pill text-bg-light border" id="usr-permisos-resumen">0 módulos autorizados</span><button class="btn btn-outline-secondary btn-sm" id="btnPermisosTodos" onclick="seleccionarTodosPermisosUsuario()" type="button"><i class="fa-solid fa-check-double me-1"></i><span>Seleccionar todos</span></button></div>
+<div class="d-flex align-items-center gap-2 flex-wrap"><span class="badge rounded-pill text-bg-light border" id="usr-permisos-resumen">0 módulos autorizados</span><button class="btn btn-outline-primary btn-sm d-none" id="btnPermisosPreestablecidos" onclick="aplicarPermisosPreestablecidosUsuario()" type="button"><i class="fa-solid fa-wand-magic-sparkles me-1"></i><span>Preestablecidos</span></button><button class="btn btn-outline-secondary btn-sm" id="btnPermisosTodos" onclick="seleccionarTodosPermisosUsuario()" type="button"><i class="fa-solid fa-check-double me-1"></i><span>Seleccionar todos</span></button></div>
 </div>
 <div class="perm-studio-grid">
 <div class="perm-module-sidebar"><div class="perm-sidebar-title"><span>Módulos</span><small>Seleccione para configurar</small></div><div class="perm-module-list" id="usr-permisos-modulos"></div></div>
@@ -6715,11 +6809,10 @@ select{
     function sbUrl(t,q=''){return SUPABASE_URL+'/rest/v1/'+encodeURIComponent(t)+(q?'?'+q:'');}
     function sbEnc(v){return encodeURIComponent(String(v??''));}
     function sbId(){return crypto?.randomUUID?crypto.randomUUID():'sb-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);}
-    function sbPriv(){return ['master','admin','administrador'].includes(String(currentUser?.rol||'').trim().toLowerCase());}
+    function sbPriv(){return String(currentUser?.rol||'').trim().toLowerCase()==='master';}
     function sbKeyAction(a){const m={addAuditoria:'auditoria',clearAuditoria:'auditoria',addEmpresa:'empresas',updateEmpresa:'empresas',deleteEmpresa:'empresas',addUsuario:'usuarios',updateUsuario:'usuarios',deleteUsuario:'usuarios',changePassword:'usuarios',updateUserProfile:'usuarios',addCliente:'clientes',updateCliente:'clientes',updateClientStatus:'clientes',deleteCliente:'clientes',addFactura:'facturas',updateFactura:'facturas',deleteFactura:'facturas',addCredito:'creditos',updateCredito:'creditos',deleteCredito:'creditos',addPago:'pagos',addNotificacion:'notificaciones',updateNotificacion:'notificaciones',deleteNotificacion:'notificaciones',markNotificationRead:'notificaciones',addBanco:'bancos',updateBanco:'bancos',deleteBanco:'bancos',addFamilia:'familia',updateFamilia:'familia',deleteFamilia:'familia',addHistorialMedico:'historialmedico',updateHistorialMedico:'historialmedico',deleteHistorialMedico:'historialmedico',addRecordatorioMedicina:'recordatoriosmedicinas',updateRecordatorioMedicina:'recordatoriosmedicinas',deleteRecordatorioMedicina:'recordatoriosmedicinas',addManutencion:'manutencion',updateManutencion:'manutencion',deleteManutencion:'manutencion',addRegistroEscolar:'registrosescolares',updateRegistroEscolar:'registrosescolares',deleteRegistroEscolar:'registrosescolares',guardarHorarioEscolar:'horariosescolares',actualizarHorarioEscolar:'horariosescolares',deleteHorarioEscolar:'horariosescolares',addMateriaHorario:'materiashorarios',updateMateriaHorario:'materiashorarios',deleteMateriaHorario:'materiashorarios',addTarea:'tareas',updateTarea:'tareas',deleteTarea:'tareas',marcarTareaRealizada:'tareas',addRecordatorio:'recordatorios',updateRecordatorio:'recordatorios',deleteRecordatorio:'recordatorios',updateRecordatorioEstado:'recordatorios',addGasto:'gastos',updateGasto:'gastos',deleteGasto:'gastos',updateGastoEstado:'gastos',addVehiculo:'vehiculos',updateVehiculo:'vehiculos',deleteVehiculo:'vehiculos',addVehiculoCombustible:'vehiculoscombustible',updateVehiculoCombustible:'vehiculoscombustible',deleteVehiculoCombustible:'vehiculoscombustible',addVehiculoMantenimiento:'vehiculosmantenimiento',updateVehiculoMantenimiento:'vehiculosmantenimiento',deleteVehiculoMantenimiento:'vehiculosmantenimiento',addTrabajoManual:'trabajos_manuales',updateTrabajoManual:'trabajos_manuales',deleteTrabajoManual:'trabajos_manuales',addSueldo:'sueldos',updateSueldo:'sueldos',deleteSueldo:'sueldos',addAgenda:'agenda',updateAgenda:'agenda',updateCitaAgenda:'agenda',atenderCitaAgenda:'agenda',deleteCitaAgenda:'agenda',guardarAgendaConfig:'agendaconfig',updateConfig:'config',guardarTelegramPortalConfig:'config',probarTelegramPortal:'config',crearOrdenServicioAdmin:'ordenes',deleteOrdenServicioAdmin:'ordenes',addServicio:'servicios',updateServicio:'servicios',deleteServicio:'servicios'};return m[a]||null;}
     function usuarioGestionGlobalModulo_(modulo,u=currentUser){
-        if(!u || String(u.rol||'').trim().toLowerCase()==='cliente') return false;
-        if(sbPriv()) return true;
+        if(!u) return false;
         return usuarioTieneCualquierPermisoModulo(modulo,u);
     }
     function filtroOrCamposSupabase_(campos, valores){
@@ -6863,19 +6956,6 @@ function filtroNotificacionesClienteSupabase_(cliente){
         // Personalizados y Todos sin que Servidor descarte registros antes de evaluar el permiso.
         if(MODULOS_CON_ALCANCE_USUARIO.includes(key))return '';
 
-        if(!esCliente && alcances.includes('todos')){
-            if(key==='empresas' && usuarioGestionGlobalModulo_('empresas',u))return '';
-            if(key==='usuarios' && usuarioGestionGlobalModulo_('usuarios',u))return '';
-            if(key==='clientes' && (usuarioGestionGlobalModulo_('clientes',u)||usuarioGestionGlobalModulo_('facturas',u)||usuarioGestionGlobalModulo_('pagos',u)))return '';
-            if(['auditoria','bancos','notificaciones'].includes(key) && usuarioGestionGlobalModulo_(key,u))return '';
-            if(key==='facturas' && (usuarioGestionGlobalModulo_('facturacion',u)||usuarioGestionGlobalModulo_('pagos',u)))return '';
-            if(key==='pagos' && (usuarioGestionGlobalModulo_('pagos',u)||usuarioGestionGlobalModulo_('facturacion',u)))return '';
-            if(key==='creditos' && (usuarioGestionGlobalModulo_('creditos',u)||usuarioGestionGlobalModulo_('pagos',u)))return '';
-            if(key==='agenda' && usuarioGestionGlobalModulo_('agenda',u))return '';
-            if(['tareas','recordatorios','gastos'].includes(key) && usuarioGestionGlobalModulo_(key,u))return '';
-            if(['trabajos_manuales','ordenes'].includes(key) && usuarioGestionGlobalModulo_(key,u))return '';
-        }
-
         if(key==='clientes'){
             const vals=[u.codigo_cliente,u.id_cliente,u.documento_id,u.email,u.correo,
                 client?.codigo_cliente,client?.id_cliente,client?.documento_id,client?.correo]
@@ -6948,9 +7028,12 @@ function filtroNotificacionesClienteSupabase_(cliente){
         if(row.id_usuario_cliente){const uid=String(row.id_usuario_cliente).trim().toLowerCase();const users=Array.isArray(sourceDb?.usuarios)?sourceDb.usuarios:[];const linked=users.find(x=>String(x?.id_usuario||'').trim().toLowerCase()===uid);if(linked&&(selected.codes.has(String(linked?.codigo_cliente||'').trim().toLowerCase())||selected.ids.has(String(linked?.id_cliente||'').trim().toLowerCase())))return true;}
         return false;
     }
+    function usuariosSeleccionadosPermiso_(sourceDb,cfg){const selected=normalizarUsuariosCompartidosPermiso(cfg?.usuarios_compartidos);return {ids:new Set(selected.map(x=>String(x.id_usuario||'').trim().toLowerCase()).filter(Boolean)),usernames:new Set(selected.map(x=>String(x.username||'').trim().toLowerCase()).filter(Boolean))};}
+    function filaCoincideUsuariosCompartidosPermiso_(key,row,selected){if(!row||!selected)return false;const refs=[row.id_usuario,row.id_usuario_cliente,row.usuario_id,row.owner_id,row.creado_por,row.responsable_id].filter(v=>v!=null&&String(v).trim()!=='').map(v=>String(v).trim().toLowerCase());if(refs.some(v=>selected.ids.has(v)))return true;if(key==='usuarios'){const username=String(row.username||'').trim().toLowerCase();if(username&&selected.usernames.has(username))return true;}return false;}
     function filtrarFilasPorAlcanceUsuario_(key,rows,sourceDb=db,u=currentUser){
         const data=Array.isArray(rows)?rows:[];
-        if(!u||sbPriv()||!data.length)return data;
+        if(String(u?.rol||'').trim().toLowerCase()==='master')return data;
+        if(!u||!data.length)return data;
         if(!MODULOS_CON_ALCANCE_USUARIO.includes(key))return data;
         const permisosUsuario=permisosEfectivosUsuario(u)||{};
         const cfg=permisosUsuario[key]&&typeof permisosUsuario[key]==='object'?permisosUsuario[key]:null;
@@ -6961,7 +7044,9 @@ function filtroNotificacionesClienteSupabase_(cliente){
         const idsPropios=alcances.includes('propios');
         const idsParent=alcances.includes('parentesco');
         const idsCustom=alcances.includes('personalizados');
+        const idsUsuarios=alcances.includes('usuarios');
         const selected=idsCustom?clientesSeleccionadosPermiso_(sourceDb,cfg):{ids:new Set(),codes:new Set()};
+        const selectedUsers=idsUsuarios?usuariosSeleccionadosPermiso_(sourceDb,cfg):{ids:new Set(),usernames:new Set()};
         const idsFamiliaParent=idsParent?idsFamiliaPorParentescosPermiso_(sourceDb,cfg,idsCustom?selected:null):new Set();
         return data.filter(row=>{
             if(idsPropios&&filaCoincidePropiosPermiso_(key,row,sourceDb,u))return true;
@@ -6971,6 +7056,7 @@ function filtroNotificacionesClienteSupabase_(cliente){
                 if(key==='familia'&&idsFamiliaParent.has(String(row?.id_familia||row?.id||'').trim()))return true;
             }
             if(idsCustom&&filaCoincidePersonalizadosPermiso_(key,row,sourceDb,selected))return true;
+            if(idsUsuarios&&filaCoincideUsuariosCompartidosPermiso_(key,row,selectedUsers))return true;
             return false;
         });
     }
@@ -6984,6 +7070,7 @@ function filtroNotificacionesClienteSupabase_(cliente){
     async function sbInsert(key,row){const t=SUPABASE_TABLES[key]||key,d={...(row||{})},idf=SUPABASE_ID_FIELDS[key];if(idf&&!d[idf])d[idf]=sbId();const r=await fetch(sbUrl(t),{method:'POST',headers:sbHeaders({Prefer:'return=representation'}),body:JSON.stringify(d)}),x=await r.text();if(!r.ok)throw new Error('Servidor '+r.status+' — '+x);const a=x?JSON.parse(x):d;return Array.isArray(a)?a[0]:a;}
     async function sbUpdate(key,id,row){const t=SUPABASE_TABLES[key]||key,idf=SUPABASE_ID_FIELDS[key];if(!idf||!id)throw new Error('Falta el identificador del registro.');const d={...(row||{})};delete d[idf];const r=await fetch(sbUrl(t,idf+'=eq.'+sbEnc(id)),{method:'PATCH',headers:sbHeaders({Prefer:'return=representation'}),body:JSON.stringify(d)}),x=await r.text();if(!r.ok)throw new Error('Servidor '+r.status+' — '+x);const a=x?JSON.parse(x):[];return Array.isArray(a)?(a[0]||{[idf]:id,...d}):a;}
     async function sbDelete(key,id){const t=SUPABASE_TABLES[key]||key,idf=SUPABASE_ID_FIELDS[key];if(!idf||!id)throw new Error('Falta el identificador del registro.');const r=await fetch(sbUrl(t,idf+'=eq.'+sbEnc(id)),{method:'DELETE',headers:sbHeaders({Prefer:'return=representation'})}),x=await r.text();if(!r.ok)throw new Error('Servidor '+r.status+' — '+x);return x?JSON.parse(x):[];}
+    async function sbRpc(nombre,body={}){const r=await fetch(SUPABASE_URL+'/rest/v1/rpc/'+encodeURIComponent(nombre),{method:'POST',headers:sbHeaders({Prefer:'return=representation'}),body:JSON.stringify(body||{})});const x=await r.text();if(!r.ok)throw new Error('Servidor '+r.status+' — '+x);return x?JSON.parse(x):{};}
     async function sbUpdateByField(key,field,value,row){
         const t=SUPABASE_TABLES[key]||key;
         const r=await fetch(sbUrl(t,sbEnc(field)+'=eq.'+sbEnc(value)),{method:'PATCH',headers:sbHeaders({Prefer:'return=representation'}),body:JSON.stringify({...row||{}})});
@@ -7473,6 +7560,7 @@ function filtroNotificacionesClienteSupabase_(cliente){
         iniciarConexionInicial();
         initInactivityTimer();
         updatePortalUI();
+        sincronizarEstadoPortalDesdeServidor_();
         actualizarVisibilidadMenuPorPermisos();
     });
 
@@ -7883,16 +7971,32 @@ async function sincronizarConservidor() {
         badge.classList.toggle('d-none',!conectado);
     }
 
-    async function enviarAuditoriaDirectaEnSegundoPlano_(payload){
-        try{
-            if(!payload?.id_auditoria)return;
-            await sbInsert('auditoria',payload);
-        }catch(e){console.debug('Auditoría Servidor no persistida:',e?.message||e);}
+    // Cola de auditoría: nunca dependemos de un setTimeout aislado. Las
+    // auditorías se envían una por una y se reintentan para evitar que una
+    // navegación, recarga o respuesta lenta del servidor las deje fuera.
+    let _colaAuditoriaServidor_ = Promise.resolve();
+    function enviarAuditoriaDirectaEnSegundoPlano_(payload){
+        if(!payload?.id_auditoria)return Promise.resolve(false);
+        _colaAuditoriaServidor_ = _colaAuditoriaServidor_.then(async()=>{
+            let ultimoError=null;
+            for(let intento=1;intento<=3;intento++){
+                try{
+                    await sbInsert('auditoria',payload);
+                    return true;
+                }catch(e){
+                    ultimoError=e;
+                    if(intento<3) await new Promise(r=>setTimeout(r,700*intento));
+                }
+            }
+            console.debug('Auditoría Servidor no persistida tras 3 intentos:',ultimoError?.message||ultimoError);
+            return false;
+        });
+        return _colaAuditoriaServidor_;
     }
     function registrarAuditoriaEnSegundoPlano_(action,payload,result){
         if(!currentUser||action==='addAuditoria'||action==='getStats'||action==='getUserProfile'||!result?.success)return;
         // Estas acciones ya tienen auditoría explícita en su flujo para evitar duplicados.
-        const explicitas=new Set(['changePassword','deleteEmpresa','deleteUsuario','deleteCliente','confirmarPago','addPago','registrarPagoCliente','addCredito','deleteCredito','addNotificacion','deleteNotificacion']);
+        const explicitas=new Set(['changePassword','deleteEmpresa','deleteUsuario','deleteUsuarioCascade','deleteCliente','confirmarPago','addPago','registrarPagoCliente','addCredito','deleteCredito','addNotificacion','deleteNotificacion']);
         if(explicitas.has(String(action)))return;
         try{
             const entidad={addFactura:'Factura',updateFactura:'Factura',deleteFactura:'Factura',addPago:'Pago',confirmarPago:'Pago',registrarPagoCliente:'Pago',addCliente:'Cliente',updateCliente:'Cliente',deleteCliente:'Cliente',updateClientStatus:'Cliente',addUsuario:'Usuario',updateUsuario:'Usuario',deleteUsuario:'Usuario',addEmpresa:'Empresa',updateEmpresa:'Empresa',deleteEmpresa:'Empresa',addBanco:'Banco',updateBanco:'Banco',deleteBanco:'Banco',addCredito:'Credito',updateCredito:'Credito',deleteCredito:'Credito',addNotificacion:'Notificacion',updateNotificacion:'Notificacion',deleteNotificacion:'Notificacion',addFamilia:'Familia',updateFamilia:'Familia',deleteFamilia:'Familia',addHistorialMedico:'HistorialMedico',updateHistorialMedico:'HistorialMedico',deleteHistorialMedico:'HistorialMedico',addManutencion:'Manutencion',updateManutencion:'Manutencion',deleteManutencion:'Manutencion',addRegistroEscolar:'RegistroEscolar',updateRegistroEscolar:'RegistroEscolar',deleteRegistroEscolar:'RegistroEscolar',guardarHorarioEscolar:'HorarioEscolar',deleteHorarioEscolar:'HorarioEscolar',addTarea:'Tarea',updateTarea:'Tarea',deleteTarea:'Tarea',marcarTareaRealizada:'Tarea',addTrabajoManual:'TrabajoManual',updateTrabajoManual:'TrabajoManual',deleteTrabajoManual:'TrabajoManual'};
@@ -7900,7 +8004,7 @@ async function sincronizarConservidor() {
             const id=result?.data?.factura?.id_factura||result?.data?.id_factura||payload?.id_factura||payload?.id_pago||payload?.id_cliente||payload?.id_usuario||payload?.id_empresa||payload?.id_familia||payload?.id_tarea||'';
             const ref=payload?.nombre_cliente||payload?.nombre_completo||payload?.cliente_nombre||payload?.codigo_cliente||'';
             const audit={id_auditoria:'AUD-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),fecha_hora:formatearFechaHoraPortal(new Date()),id_usuario:actor.id_usuario||'',username:actor.username||'',rol:actor.rol||'',accion:a.startsWith('delete')?'DELETE':(a.startsWith('update')?'UPDATE':'CREATE'),entidad:entidad[action]||action,id_entidad:String(id||''),detalle:'Operación completada — Acción: '+action+(ref?' — Referencia: '+String(ref):''),nivel:'INFO'};
-            setTimeout(()=>enviarAuditoriaDirectaEnSegundoPlano_(audit),0);
+            enviarAuditoriaDirectaEnSegundoPlano_(audit);
         }catch(e){console.debug('Auditoría automática:',e?.message||e);}
     }
 
@@ -8102,6 +8206,7 @@ async function sincronizarConservidor() {
             result.data={items,id_grupo_horario:g};
         }
         else if(action==='deleteHorarioEscolar'){const g=String(payload?.id_grupo_horario||'');const rows=g?await sbSelect('horariosescolares',{limit:10000,filter:'id_grupo_horario=eq.'+sbEnc(g)}):[];for(const r of rows)if(r.id_horario_escolar)await sbDelete('horariosescolares',r.id_horario_escolar);result.data={id_grupo_horario:g,deleted_ids:rows.map(x=>x.id_horario_escolar)};}
+        else if(action==='deleteUsuarioCascade'){result.data=await sbRpc('eliminar_usuario_y_datos_relacionados',{p_id_usuario:String(payload?.id_usuario||''),p_actor_id:String(currentUser?.id_usuario||'')});}
         else if(action==='marcarTareaRealizada'){result.data=await sbUpdate('tareas',payload?.id_tarea,{estado:'Completada',proxima_ejecucion:'',ultima_ejecucion:payload?.ultima_ejecucion||formatearFechaHoraPortal(new Date())});}
         else if(action==='clearAuditoria'){if(!sbPriv())throw new Error('No autorizado para limpiar auditoría.');const rows=await sbSelect('auditoria',{limit:10000,filter:'id_auditoria=not.is.null'});for(const r of rows)if(r.id_auditoria)await sbDelete('auditoria',r.id_auditoria);result.data={deleted:rows.length};}
         else if(action==='guardarTelegramPortalConfig'){const rows=await sbSelect('config',{limit:10000});for(const [clave,valor] of [['telegram_bot_token',payload?.telegram_bot_token||''],['telegram_chat_id',payload?.telegram_chat_id||'']]){const old=rows.find(x=>String(x.clave)===clave);if(old)await sbUpdate('config',old.id_config||old.id, {clave,valor});else await sbInsert('config',{clave,valor});}result.data=payload;}
@@ -8148,7 +8253,7 @@ async function cargarBootstrapInicial_(){
         document.getElementById('login-overlay').classList.add('d-none');
 
         const moduloGuardado = localStorage.getItem('erp_current_module');
-        const moduloInicial = (!window._erpNuevaSesion && moduloGuardado && puedeAccederModuloUsuario(moduloGuardado)) ? moduloGuardado : 'dashboard';
+        const moduloInicial = (!window._erpNuevaSesion && moduloGuardado && (moduloGuardado==='dashboard' || puedeAccederModuloUsuario(moduloGuardado))) ? moduloGuardado : 'dashboard';
         if(moduloInicial !== moduloGuardado) localStorage.setItem('erp_current_module','dashboard');
         switchTab(moduloInicial);
         window._erpNuevaSesion = false;
@@ -9223,6 +9328,15 @@ html[data-bs-theme="dark"] body.portal-modern-v2 .sidebar-mobile-close{
         });
     }
 
+function actualizarVistaDashboardPorPermiso(){
+  const sec=document.getElementById('sec-dashboard'),welcome=document.getElementById('dashboard-sin-permiso');
+  if(!sec||!welcome)return;
+  const master=String(currentUser?.rol||'').trim().toLowerCase()==='master';
+  const permitido=master || permisosUsuarioTieneModulo('dashboard','leer');
+  sec.querySelectorAll(':scope > *:not(#dashboard-sin-permiso)').forEach(el=>el.classList.toggle('d-none',!permitido));
+  welcome.classList.toggle('d-none',permitido);
+}
+
     function switchTab(tabId) {
         actualizarVisibilidadMenuPorPermisos();
         tabId = String(tabId || 'dashboard');
@@ -9230,7 +9344,7 @@ html[data-bs-theme="dark"] body.portal-modern-v2 .sidebar-mobile-close{
         const previoId=previo?.id ? previo.id.replace('sec-','') : '';
         if(previoId && previoId!==tabId) limpiarBusquedaModuloInteligente(previoId);
         ocultarListasMostrarInteligentes();
-        if(currentUser && String(currentUser.rol||'').trim().toLowerCase()!=='master' && !puedeAccederModuloUsuario(tabId)){
+        if(currentUser && tabId!=='dashboard' && String(currentUser.rol||'').trim().toLowerCase()!=='master' && !puedeAccederModuloUsuario(tabId)){
             return false;
         }
         if(currentUser) localStorage.setItem('erp_current_module', tabId);
@@ -9273,6 +9387,11 @@ html[data-bs-theme="dark"] body.portal-modern-v2 .sidebar-mobile-close{
         if(currentUser && typeof registrarAuditoria==='function'){
             registrarAuditoria('VIEW','Modulo',tabId,'Acceso al módulo: '+(titles[tabId]||tabId),'INFO');
         }
+        // Al abrir Auditoría se consulta directamente el servidor para mostrar
+        // también los movimientos registrados desde otra sesión o dispositivo.
+        if(tabId==='auditoria' && currentUser){
+            setTimeout(()=>recargarAuditoriaServidor_(),50);
+        }
 
         // Auto-cargar datos para el rol Cliente al navegar entre pestañas
         const isClient = currentUser && String(currentUser.rol || '').toLowerCase() === 'cliente';
@@ -9306,6 +9425,7 @@ html[data-bs-theme="dark"] body.portal-modern-v2 .sidebar-mobile-close{
         }
 
         if (tabId === 'dashboard') {
+            actualizarVistaDashboardPorPermiso();
             updateKPIs();
             setTimeout(renderDashboardCharts, 100);
         }
@@ -9526,6 +9646,21 @@ function updatePortalUI() {
     }
 }
 
+async function sincronizarEstadoPortalDesdeServidor_(){
+    try{
+        const rows=await sbSelect('config',{limit:1,filter:'clave=eq.portal_activo',select:'clave,valor,fecha_modificacion'});
+        const row=Array.isArray(rows)?rows[0]:null;
+        if(!row)throw new Error('No existe la configuración portal_activo en el servidor.');
+        const activo=String(row.valor??'false').trim().toLowerCase()==='true';
+        localStorage.setItem('erp_portal_activo',activo?'true':'false');
+        updatePortalUI();
+        return activo;
+    }catch(err){
+        console.warn('No fue posible sincronizar el estado del portal desde el servidor:',err);
+        return null;
+    }
+}
+
 async function cargarTelegramPortalConfigUI(){
     if(!currentUser || String(currentUser.rol||'').trim().toLowerCase()!=='master')return;
     try{
@@ -9590,9 +9725,10 @@ async function togglePortalStatus() {
     if (statusText) statusText.innerText = nuevoEstado ? 'Activando portal...' : 'Desactivando portal...';
 
     try {
-        await ejecutarOperacionSupabase('updateConfig', { clave:'portal_activo', valor:valorStr });
-        localStorage.setItem('erp_portal_activo', valorStr);
-        updatePortalUI();
+        const respuesta=await ejecutarOperacionSupabase('updateConfig', { clave:'portal_activo', valor:valorStr, fecha_modificacion:formatearFechaHoraPortal(new Date()) });
+        if(!respuesta?.success)throw new Error(respuesta?.message||'No fue posible guardar el estado del portal.');
+        const verificado=await sincronizarEstadoPortalDesdeServidor_();
+        if(verificado===null || verificado!==nuevoEstado)throw new Error('El servidor no confirmó el nuevo estado del portal.');
         showToast('Portal actualizado', nuevoEstado ? 'El registro publico esta activo.' : 'El registro publico esta desactivado.', 'success');
     } catch (err) {
         toggle.checked = !nuevoEstado;
@@ -9752,7 +9888,16 @@ async function guardarNuevaContrasena(e) {
     function filtrarListaEmpresasInline(){filtrarDirectorioInline('empresas')}
     function filtrarListaUsuariosInline(){filtrarDirectorioInline('usuarios')}
     function filtrarListaClientesInline(){filtrarDirectorioInline('clientes')}
+function mostrarEmpresasMaster(){
+        if(!esMasterUsuarioGestion())return;
+        const input=document.getElementById('emp-input-busqueda');
+        if(input){input.value='';input.dataset.busquedaActiva='1';}
+        renderDirectorio('empresas',Array.isArray(db.empresas)?db.empresas:[],{scroll:true});
+    }
+
 function renderEmpresas(){
+        const btnMaster=document.getElementById('btnMostrarEmpresasMaster');
+        if(btnMaster)btnMaster.classList.toggle('d-none',!esMasterUsuarioGestion());
         const isClient=String(currentUser?.rol||'').trim().toLowerCase()==='cliente';
         if(isClient){ocultarDirectorio('empresas');return;}
         const input=document.getElementById('emp-input-busqueda');
@@ -9839,8 +9984,8 @@ async function eliminarEmpresa(id) {
 
     // SECCIÓN: USUARIOS Y PERMISOS - BÚSQUEDA INTELIGENTE + DETALLE
     
-    function esMasterUsuarioGestion() { return String(currentUser?.rol || '').trim().toLowerCase() === 'master'; }
-    function puedeGestionarUsuariosPorPermiso(accion='leer'){ return esMasterUsuarioGestion() || permisosUsuarioTieneModulo('usuarios',accion); }
+    function esMasterUsuarioGestion() { return String(currentUser?.rol||'').trim().toLowerCase()==='master'; }
+    function puedeGestionarUsuariosPorPermiso(accion='leer'){ return permisosUsuarioTieneModulo('usuarios',accion); }
 
     function esUsuarioGestionVisible(u) {
         if (!u) return false;
@@ -9864,7 +10009,17 @@ async function eliminarEmpresa(id) {
         return esUsuarioGestionVisible(u);
     }
 
+    function mostrarUsuariosMaster(){
+        if(!esMasterUsuarioGestion())return;
+        const input=document.getElementById('usr-input-busqueda');
+        if(input){input.value='';input.dataset.busquedaActiva='1';}
+        const rows=obtenerUsuariosVisiblesGestion();
+        renderDirectorio('usuarios',rows,{scroll:true});
+    }
+
     function renderUsuarios(){
+        const btnMaster=document.getElementById('btnMostrarUsuariosMaster');
+        if(btnMaster)btnMaster.classList.toggle('d-none',!esMasterUsuarioGestion());
         const isClient=String(currentUser?.rol||'').trim().toLowerCase()==='cliente';
         if(isClient&&!puedeGestionarUsuariosPorPermiso('leer')){ocultarDirectorio('usuarios');return;}
         const input=document.getElementById('usr-input-busqueda');
@@ -9975,7 +10130,7 @@ async function eliminarEmpresa(id) {
     };
     const PERM_ACTIONS_USUARIO=['leer','modificar','eliminar'];
     const ACCION_LABELS_USUARIO={leer:'Lectura',modificar:'Modificar',eliminar:'Eliminar'};
-    const ALCANCE_LABELS_USUARIO={propios:'Propios',parentesco:'Por parentesco',personalizados:'Personalizados',todos:'Todos'};
+    const ALCANCE_LABELS_USUARIO={propios:'Propios',parentesco:'Por parentesco',personalizados:'Personalizados',usuarios:'Usuarios',todos:'Todos'};
     const MODULOS_CON_ALCANCE_USUARIO=Object.keys(MATRIZ_PERMISOS_USUARIO);
     const MODULOS_CON_PARENTESCO_USUARIO=['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento','sueldos'];
     const MODULOS_CON_ALCANCE_FAMILIAR=[...MODULOS_CON_PARENTESCO_USUARIO];
@@ -9987,28 +10142,21 @@ async function eliminarEmpresa(id) {
             if(['todos','all','*'].includes(x))out.push('todos');
             else if(['parentesco','familia','familiar'].includes(x))out.push('parentesco');
             else if(['personalizados','personalizado','custom','clientes'].includes(x))out.push('personalizados');
+            else if(['usuarios','usuario_compartido','usuarios_compartidos','compartidos'].includes(x))out.push('usuarios');
             else if(['propios','propio','usuario','usuario_actual'].includes(x))out.push('propios');
         });
         const uniq=[...new Set(out)]; return uniq.includes('todos')?['todos']:(uniq.length?uniq:['propios']);
     }
     function alcancePermisoNormalizadoUsuario(v){return normalizarAlcancesPermisoUsuario(v)[0]||'propios';}
     function normalizarListaParentescosPermiso(raw){const arr=Array.isArray(raw)?raw:(raw===undefined||raw===null||raw===''?[]:[raw]);const cleaned=arr.map(x=>String(x??'').trim()).filter(Boolean);return cleaned.some(x=>['todos','*'].includes(x.toLowerCase()))?['Todos']:[...new Set(cleaned)];}
+    function normalizarUsuariosCompartidosPermiso(raw){const arr=Array.isArray(raw)?raw:(raw==null||raw===''?[]:[raw]),out=[];arr.forEach(v=>{if(v&&typeof v==='object'){const id=String(v.id_usuario||v.id||'').trim(),username=String(v.username||'').trim(),nombre=String(v.nombre_completo||v.nombre||'').trim();if(id||username)out.push({id_usuario:id,username,nombre_completo:nombre});}else{const x=String(v||'').trim();if(x)out.push({id_usuario:x,username:x,nombre_completo:''});}});const seen=new Set();return out.filter(v=>{const k=(v.id_usuario||'')+'|'+(v.username||'');if(seen.has(k))return false;seen.add(k);return true;});}
     function normalizarClientesPersonalizadosPermiso(raw){
         const arr=Array.isArray(raw)?raw:(raw===undefined||raw===null||raw===''?[]:[raw]),out=[];
         arr.forEach(v=>{if(v&&typeof v==='object'){const id=String(v.id_cliente||v.id||'').trim(),codigo=String(v.codigo_cliente||v.codigo||'').trim(),nombre=String(v.nombre_completo||v.nombre||'').trim();if(id||codigo)out.push({id_cliente:id,codigo_cliente:codigo,nombre_completo:nombre});}else{const x=String(v||'').trim();if(x)out.push({id_cliente:x,codigo_cliente:x,nombre_completo:''});}});
         const seen=new Set();return out.filter(v=>{const k=(v.id_cliente||'')+'|'+(v.codigo_cliente||'');if(seen.has(k))return false;seen.add(k);return true;});
     }
     function permisosClientePorDefectoUsuario(){return {dashboard:{leer:true},clientes:{leer:true,alcances:['propios']},agenda:{leer:true,modificar:true,alcances:['propios']},servicios:{leer:true,modificar:true,alcances:['todos']},auditoria:{leer:true,alcances:['propios']},facturacion:{leer:true,modificar:true,alcances:['propios']},pagos:{leer:true,modificar:true,alcances:['propios']},bancos:{leer:true,alcances:['propios']},notificaciones:{leer:true,modificar:true,alcances:['propios']},perfil:{modificar:true}};}
-    function permisosPredeterminadosPorRolUsuario(u){
-        const rol=String(u?.rol||'').trim().toLowerCase();
-        if(rol==='master'||rol==='administrador'||rol==='vip')return Object.fromEntries(Object.keys(MATRIZ_PERMISOS_USUARIO).map(k=>[k,{leer:true,modificar:true,eliminar:true,alcances:['todos']}]));
-        if(rol==='cliente')return permisosClientePorDefectoUsuario();
-        if(['supervisor'].includes(rol)){const mods=['tecnicos','inventarios','almacenes','oficina','trabajoscampo','instalaciones','soportetecnico','vgt','centrooperativo'];return Object.fromEntries(mods.map(k=>[k,{leer:true,modificar:true,eliminar:true,alcances:['todos']}]));}
-        if(rol==='tecnico')return Object.fromEntries(['dashboard','tecnicos','inventarios','trabajoscampo','instalaciones','soportetecnico','vgt','perfil'].map(k=>[k,{leer:true,modificar:k!=='dashboard',alcances:['propios']}]));
-        if(rol==='almacen')return Object.fromEntries(['dashboard','inventarios','almacenes','oficina','trabajoscampo','perfil'].map(k=>[k,{leer:true,modificar:k!=='dashboard',eliminar:k==='inventarios'||k==='almacenes',alcances:['todos']}]));
-        if(rol==='soporte')return Object.fromEntries(['dashboard','soportetecnico','trabajoscampo','instalaciones','perfil'].map(k=>[k,{leer:true,modificar:k!=='dashboard',eliminar:k==='soportetecnico',alcances:['todos']}]));
-        return {};
-    }
+    function permisosPredeterminadosPorRolUsuario(){ return {}; }
     function normalizarPermisosUsuario(raw){
         let p=raw;if(typeof p==='string'){let t=p.trim();for(let i=0;i<2&&t;i++){try{p=JSON.parse(t);}catch(_){p={};break;}if(typeof p==='string')t=p.trim();else break;}}
         const normalizarCfg=(cfg)=>{const out={};
@@ -10018,37 +10166,50 @@ async function eliminarEmpresa(id) {
             const rawScopes=cfg.alcances!==undefined?cfg.alcances:(cfg.alcance!==undefined?cfg.alcance:cfg.alcance_usuarios);out.alcances=normalizarAlcancesPermisoUsuario(rawScopes);
             if(cfg.clientes_personalizados!==undefined)out.clientes_personalizados=normalizarClientesPersonalizadosPermiso(cfg.clientes_personalizados);else if(cfg.clientes!==undefined)out.clientes_personalizados=normalizarClientesPersonalizadosPermiso(cfg.clientes);
             if(cfg.parentescos!==undefined)out.parentescos=normalizarListaParentescosPermiso(cfg.parentescos);
+            if(cfg.usuarios_compartidos!==undefined)out.usuarios_compartidos=normalizarUsuariosCompartidosPermiso(cfg.usuarios_compartidos);
+            else if(cfg.usuarios!==undefined)out.usuarios_compartidos=normalizarUsuariosCompartidosPermiso(cfg.usuarios);
             return out;
         };
         if(Array.isArray(p)){const o={};p.forEach(item=>{if(typeof item==='string'){const k=normalizarModuloPermisoUsuario(item);if(k)o[k]={leer:true,alcances:['propios']};}else if(item&&typeof item==='object'){const key=normalizarModuloPermisoUsuario(item.modulo??item.module??item.key??item.nombre??'');if(key)o[key]=normalizarCfg(item);}});return o;}
         if(!p||typeof p!=='object')return {};const out={};Object.entries(p).forEach(([mod,cfg])=>{const key=normalizarModuloPermisoUsuario(mod);if(key)out[key]=normalizarCfg(cfg);});return out;
     }
     function permisosEfectivosUsuario(u){
-        if(!u)return {};const explicit=normalizarPermisosUsuario(u.permisos),rol=String(u?.rol||'').trim().toLowerCase();
-        if(Object.keys(explicit).length)return explicit;
-        return permisosPredeterminadosPorRolUsuario(u);
+        if(!u)return {};
+        return normalizarPermisosUsuario(u.permisos);
     }
-    function obtenerAlcancesPermisoUsuario(u,modulo){
-        if(String(u?.rol||'').trim().toLowerCase()==='master')return ['todos'];
+    function obtenerAlcancesPermisoUsuario(u,modulo){if(String(u?.rol||'').trim().toLowerCase()==='master')return ['todos'];
         const key=normalizarModuloPermisoUsuario(modulo),p=permisosEfectivosUsuario(u)||{},cfg=p[key]&&typeof p[key]==='object'?p[key]:null;
         return cfg?normalizarAlcancesPermisoUsuario(cfg.alcances):['propios'];
     }
     function obtenerAlcancePermisoUsuario(u,modulo){return obtenerAlcancesPermisoUsuario(u,modulo)[0]||'propios';}
     function obtenerParentescosDisponiblesPermisos(){const set=new Set();(Array.isArray(db?.familia)?db.familia:[]).forEach(f=>{const p=String(f?.parentesco||'').trim();if(p)set.add(p);});return [...set].sort((a,b)=>a.localeCompare(b,'es'));}
     function obtenerClientesDisponiblesPermisos(){return (Array.isArray(db?.clientes)?db.clientes:[]).filter(c=>c?.id_cliente||c?.codigo_cliente).sort((a,b)=>String(a?.nombre_completo||a?.codigo_cliente||'').localeCompare(String(b?.nombre_completo||b?.codigo_cliente||''),'es'));}
+    function obtenerUsuariosDisponiblesPermisos(){return (Array.isArray(db?.usuarios)?db.usuarios:[]).filter(u=>u?.id_usuario||u?.username).sort((a,b)=>String(a?.nombre_completo||a?.username||'').localeCompare(String(b?.nombre_completo||b?.username||''),'es'));}
+    function filtrarUsuariosPermisoUsuario(modulo){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${modulo}"]`);if(!block)return;const q=String(block.querySelector('.perm-user-search')?.value||'').trim().toLowerCase();block.querySelectorAll('[data-usuario-option]').forEach(el=>{el.style.display=!q||String(el.getAttribute('data-usuario-search')||'').includes(q)?'':'none';});}
     function obtenerPermisoAlcanceActual(current){return normalizarAlcancesPermisoUsuario(current?.alcances!==undefined?current.alcances:current?.alcance);}
     function obtenerPermisosActualesForm(){
-        const out={};document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(cb=>{const m=cb.dataset.module;if(!cb.checked)return;const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${m}"]`);out[m]={};PERM_ACTIONS_USUARIO.forEach(a=>{const ac=block?.querySelector(`input[data-module="${m}"][data-action="${a}"]`);if(ac?.checked)out[m][a]=true;});const scopes=[...block.querySelectorAll(`input[data-scope-module="${m}"]:checked`)].map(x=>x.value);out[m].alcances=normalizarAlcancesPermisoUsuario(scopes.length?scopes:['propios']);if(out[m].alcances.includes('personalizados'))out[m].clientes_personalizados=[...block.querySelectorAll('input[data-cliente-perm-module="'+m+'"]:checked')].map(x=>{try{return JSON.parse(x.value);}catch(_){return {id_cliente:x.value,codigo_cliente:x.value,nombre_completo:''};}});if(MODULOS_CON_PARENTESCO_USUARIO.includes(m))out[m].parentescos=[...block.querySelectorAll('input[data-parentesco-module="'+m+'"]:checked')].map(x=>x.value).filter(Boolean);});return out;
+        const out={};document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(cb=>{const m=cb.dataset.module;if(!cb.checked)return;const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${m}"]`);out[m]={};PERM_ACTIONS_USUARIO.forEach(a=>{const ac=block?.querySelector(`input[data-module="${m}"][data-action="${a}"]`);if(ac?.checked)out[m][a]=true;});const scopes=[...block.querySelectorAll(`input[data-scope-module="${m}"]:checked`)].map(x=>x.value);out[m].alcances=normalizarAlcancesPermisoUsuario(scopes.length?scopes:['propios']);if(out[m].alcances.includes('personalizados'))out[m].clientes_personalizados=[...block.querySelectorAll('input[data-cliente-perm-module="'+m+'"]:checked')].map(x=>{try{return JSON.parse(x.value);}catch(_){return {id_cliente:x.value,codigo_cliente:x.value,nombre_completo:''};}});if(out[m].alcances.includes('usuarios'))out[m].usuarios_compartidos=[...block.querySelectorAll('input[data-usuario-perm-module="'+m+'"]:checked')].map(x=>{try{return JSON.parse(x.value);}catch(_){return {id_usuario:x.value,username:x.value,nombre_completo:''};}});if(MODULOS_CON_PARENTESCO_USUARIO.includes(m))out[m].parentescos=[...block.querySelectorAll('input[data-parentesco-module="'+m+'"]:checked')].map(x=>x.value).filter(Boolean);});return out;
     }
     function actualizarHiddenPermisosUsuario(){const h=document.getElementById('usr_permisos_json');if(h)h.value=JSON.stringify(obtenerPermisosActualesForm());}
-    function cambiarAlcancesPermisoUsuario(modulo){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${modulo}"]`);if(!block)return;const todos=block.querySelector(`input[data-scope-module="${modulo}"][value="todos"]`),others=[...block.querySelectorAll(`input[data-scope-module="${modulo}"]`)].filter(x=>x!==todos);if(todos?.checked)others.forEach(x=>x.checked=false);else if(others.some(x=>x.checked)&&todos)todos.checked=false;const scopes=[...block.querySelectorAll(`input[data-scope-module="${modulo}"]:checked`)].map(x=>x.value);block.querySelector('.perm-parentesco-picker')?.classList.toggle('d-none',!scopes.includes('parentesco'));block.querySelector('.perm-clientes-picker')?.classList.toggle('d-none',!scopes.includes('personalizados'));actualizarHiddenPermisosUsuario();}
+    function cambiarAlcancesPermisoUsuario(modulo){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${modulo}"]`);if(!block)return;const todos=block.querySelector(`input[data-scope-module="${modulo}"][value="todos"]`),others=[...block.querySelectorAll(`input[data-scope-module="${modulo}"]`)].filter(x=>x!==todos);if(todos?.checked)others.forEach(x=>x.checked=false);else if(others.some(x=>x.checked)&&todos)todos.checked=false;const scopes=[...block.querySelectorAll(`input[data-scope-module="${modulo}"]:checked`)].map(x=>x.value);block.querySelector('.perm-parentesco-picker')?.classList.toggle('d-none',!scopes.includes('parentesco'));block.querySelector('.perm-clientes-picker')?.classList.toggle('d-none',!scopes.includes('personalizados'));block.querySelector('.perm-usuarios-picker')?.classList.toggle('d-none',!scopes.includes('usuarios'));actualizarHiddenPermisosUsuario();}
     function cambiarAlcanceParentescoPermisoUsuario(modulo){cambiarAlcancesPermisoUsuario(modulo);}
     function filtrarClientesPermisoUsuario(modulo){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${modulo}"]`);if(!block)return;const q=String(block.querySelector('.perm-client-search')?.value||'').trim().toLowerCase();block.querySelectorAll('[data-cliente-option]').forEach(el=>{el.style.display=!q||String(el.getAttribute('data-cliente-search')||'').includes(q)?'':'none';});}
     function cerrarPermisoModuloMovil(){const modal=document.getElementById('permisoModuloMovilModal');if(!modal)return;const clone=modal.querySelector('[data-mobile-perm-clone]'),key=modal.dataset.module||'',original=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);if(clone&&original){clone.querySelectorAll('input').forEach(src=>{let sel=src.dataset.action?`input[data-module="${key}"][data-action="${src.dataset.action}"]`:src.dataset.scopeModule?`input[data-scope-module="${key}"][value="${src.value}"]`:src.dataset.clientePermModule?`input[data-cliente-perm-module="${key}"][value="${src.value.replace(/"/g,'\\"')}"]`:null;if(sel){const dst=original.querySelector(sel);if(dst)dst.checked=src.checked;}});original.querySelectorAll('input[data-action],input[data-scope-module],input[data-cliente-perm-module]').forEach(x=>x.dispatchEvent(new Event('change',{bubbles:false})));}modal.classList.remove('show');modal.setAttribute('aria-hidden','true');modal.innerHTML='';document.body.classList.remove('overflow-hidden');actualizarHiddenPermisosUsuario();}
     function abrirPermisoModuloMovil_(key,block){const modal=document.getElementById('permisoModuloMovilModal');if(!modal||!block)return;const cfg=MATRIZ_PERMISOS_USUARIO[key]||{};modal.dataset.module=key;modal.innerHTML='<div class="permiso-modulo-movil-card"><div class="permiso-modulo-movil-head"><div><div class="fw-bold"><i class="fa-solid '+cfg.icon+' text-primary me-1"></i>'+escaparTextoPermisoUsuario(cfg.label||key)+'</div><small class="text-muted">Permisos y alcance</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarPermisoModuloMovil()" type="button"><i class="fa-solid fa-xmark"></i></button></div><div class="permiso-modulo-movil-body"></div><div class="permiso-modulo-movil-foot"><button class="btn btn-primary btn-sm" onclick="cerrarPermisoModuloMovil()" type="button">Aplicar</button></div></div>';const body=modal.querySelector('.permiso-modulo-movil-body'),copy=block.cloneNode(true);copy.classList.remove('d-none');copy.removeAttribute('id');copy.setAttribute('data-mobile-perm-clone','1');body.appendChild(copy);modal.classList.add('show');modal.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
     function seleccionarModuloPermisoUsuario(key){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);if(!block)return;document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));block.classList.remove('d-none');document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.toggle('active',c.dataset.module===key));actualizarResumenPermisosUsuario();if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)abrirPermisoModuloMovil_(key,block);}
-    function renderBloqueAccionesPermisoUsuario(key,cfg,current){const acts=document.getElementById('usr-permisos-acciones');if(!acts)return;const row=document.createElement('div');row.className='perm-config-card d-none';row.dataset.actionBlock=key;const scopes=obtenerPermisoAlcanceActual(current);const clients=obtenerClientesDisponiblesPermisos(),selected=normalizarClientesPersonalizadosPermiso(current?.clientes_personalizados),selectedKeys=new Set(selected.map(c=>(c.id_cliente||'')+'|'+(c.codigo_cliente||'')));const scopeHtml='<div class="perm-scope-box"><div class="perm-scope-title"><i class="fa-solid fa-filter"></i> Alcance de información</div><div class="perm-scope-list">'+['propios','parentesco','personalizados','todos'].filter(v=>v!=='parentesco'||MODULOS_CON_PARENTESCO_USUARIO.includes(key)).map(v=>'<label class="perm-scope-pill"><input type="checkbox" data-scope-module="'+key+'" value="'+v+'" '+(scopes.includes(v)?'checked':'')+' onchange="cambiarAlcancesPermisoUsuario(\''+key+'\')"><span>'+ALCANCE_LABELS_USUARIO[v]+'</span></label>').join('')+'</div><div class="perm-scope-help"><b>Todos</b> anula los demás alcances.</div></div>'+(MODULOS_CON_PARENTESCO_USUARIO.includes(key)?'<div class="perm-parentesco-picker '+(scopes.includes('parentesco')?'':'d-none')+'"><div class="d-flex justify-content-between align-items-center gap-2"><span>Parentescos autorizados</span><small class="text-muted">Seleccione uno o varios</small></div><div class="perm-parentesco-list">'+obtenerParentescosDisponiblesPermisos().map(p=>'<label><input type="checkbox" data-parentesco-module="'+key+'" value="'+escaparTextoPermisoUsuario(p)+'" '+(normalizarListaParentescosPermiso(current?.parentescos).map(x=>x.toLowerCase()).includes(String(p).toLowerCase())?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"> '+escaparTextoPermisoUsuario(p)+'</label>').join('')+'</div></div>':'')+'<div class="perm-clientes-picker '+(scopes.includes('personalizados')?'':'d-none')+'"><div class="d-flex justify-content-between align-items-center gap-2"><span>Registros personalizados</span><small class="text-muted">Seleccione uno o varios clientes</small></div><input type="search" class="form-control form-control-sm perm-client-search" placeholder="Buscar cliente..." oninput="filtrarClientesPermisoUsuario(\''+key+'\')"><div class="perm-client-list">'+clients.map(c=>{const id=String(c.id_cliente||''),codigo=String(c.codigo_cliente||''),nombre=String(c.nombre_completo||codigo||id),val=escaparTextoPermisoUsuario(JSON.stringify({id_cliente:id,codigo_cliente:codigo,nombre_completo:nombre})),checked=selectedKeys.has(id+'|'+codigo);return '<label data-cliente-option data-cliente-search="'+escaparTextoPermisoUsuario((nombre+' '+codigo+' '+id).toLowerCase())+'"><input type="checkbox" data-cliente-perm-module="'+key+'" value="'+val+'" '+(checked?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"><span>'+escaparTextoPermisoUsuario(nombre)+'</span><small>'+escaparTextoPermisoUsuario(codigo||id)+'</small></label>';}).join('')+'</div></div>';
-        row.innerHTML='<div class="perm-config-head"><div><i class="fa-solid '+cfg.icon+' text-primary"></i><span>'+cfg.label+'</span></div><span class="perm-config-state">Configuración</span></div><div class="perm-actions">'+PERM_ACTIONS_USUARIO.map(a=>'<label class="perm-action-pill"><input type="checkbox" data-module="'+key+'" data-action="'+a+'" '+(current?.[a]?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"><span>'+ACCION_LABELS_USUARIO[a]+'</span></label>').join('')+'</div>'+scopeHtml;acts.appendChild(row);}
+    function renderBloqueAccionesPermisoUsuario(key,cfg,current){
+        const acts=document.getElementById('usr-permisos-acciones');if(!acts)return;
+        const row=document.createElement('div');row.className='perm-config-card d-none';row.dataset.actionBlock=key;
+        const scopes=obtenerPermisoAlcanceActual(current);
+        const clients=obtenerClientesDisponiblesPermisos(),selected=normalizarClientesPersonalizadosPermiso(current?.clientes_personalizados),selectedKeys=new Set(selected.map(c=>(c.id_cliente||'')+'|'+(c.codigo_cliente||'')));
+        const sharedUsers=normalizarUsuariosCompartidosPermiso(current?.usuarios_compartidos),selectedUserKeys=new Set(sharedUsers.map(u=>(u.id_usuario||'')+'|'+(u.username||'')));
+        const scopeHtml='<div class="perm-scope-box"><div class="perm-scope-title"><i class="fa-solid fa-filter"></i> Alcance de información</div><div class="perm-scope-list">'+['propios','parentesco','personalizados','usuarios','todos'].filter(v=>v!=='parentesco'||MODULOS_CON_PARENTESCO_USUARIO.includes(key)).map(v=>'<label class="perm-scope-pill"><input type="checkbox" data-scope-module="'+key+'" value="'+v+'" '+(scopes.includes(v)?'checked':'')+' onchange="cambiarAlcancesPermisoUsuario(\''+key+'\')"><span>'+ALCANCE_LABELS_USUARIO[v]+'</span></label>').join('')+'</div><div class="perm-scope-help"><b>Todos</b> anula los demás alcances.</div></div>'
+        +(MODULOS_CON_PARENTESCO_USUARIO.includes(key)?'<div class="perm-parentesco-picker '+(scopes.includes('parentesco')?'':'d-none')+'"><div class="d-flex justify-content-between align-items-center gap-2"><span>Parentescos autorizados</span><small class="text-muted">Seleccione uno o varios</small></div><div class="perm-parentesco-list">'+obtenerParentescosDisponiblesPermisos().map(p=>'<label><input type="checkbox" data-parentesco-module="'+key+'" value="'+escaparTextoPermisoUsuario(p)+'" '+(normalizarListaParentescosPermiso(current?.parentescos).map(x=>x.toLowerCase()).includes(String(p).toLowerCase())?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"> '+escaparTextoPermisoUsuario(p)+'</label>').join('')+'</div></div>':'')
+        +'<div class="perm-clientes-picker '+(scopes.includes('personalizados')?'':'d-none')+'"><div class="d-flex justify-content-between align-items-center gap-2"><span>Registros personalizados</span><small class="text-muted">Seleccione uno o varios clientes</small></div><input type="search" class="form-control form-control-sm perm-client-search" placeholder="Buscar cliente..." oninput="filtrarClientesPermisoUsuario(\''+key+'\')"><div class="perm-client-list">'+clients.map(c=>{const id=String(c.id_cliente||''),codigo=String(c.codigo_cliente||''),nombre=String(c.nombre_completo||codigo||id),val=escaparTextoPermisoUsuario(JSON.stringify({id_cliente:id,codigo_cliente:codigo,nombre_completo:nombre})),checked=selectedKeys.has(id+'|'+codigo);return '<label data-cliente-option data-cliente-search="'+escaparTextoPermisoUsuario((nombre+' '+codigo+' '+id).toLowerCase())+'"><input type="checkbox" data-cliente-perm-module="'+key+'" value="'+val+'" '+(checked?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"><span>'+escaparTextoPermisoUsuario(nombre)+'</span><small>'+escaparTextoPermisoUsuario(codigo||id)+'</small></label>';}).join('')+'</div></div>'
+        +'<div class="perm-usuarios-picker '+(scopes.includes('usuarios')?'':'d-none')+'"><div class="d-flex justify-content-between align-items-center gap-2"><span>Usuarios autorizados</span><small class="text-muted">Seleccione uno o varios usuarios</small></div><input type="search" class="form-control form-control-sm perm-user-search" placeholder="Buscar usuario..." oninput="filtrarUsuariosPermisoUsuario(\''+key+'\')"><div class="perm-user-list">'+obtenerUsuariosDisponiblesPermisos().map(u=>{const id=String(u.id_usuario||''),username=String(u.username||''),nombre=String(u.nombre_completo||username||id),val=escaparTextoPermisoUsuario(JSON.stringify({id_usuario:id,username,nombre_completo:nombre})),checked=selectedUserKeys.has(id+'|'+username);return '<label data-usuario-option data-usuario-search="'+escaparTextoPermisoUsuario((nombre+' '+username+' '+id).toLowerCase())+'"><input type="checkbox" data-usuario-perm-module="'+key+'" value="'+val+'" '+(checked?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"><span>'+escaparTextoPermisoUsuario(nombre)+'</span><small>'+escaparTextoPermisoUsuario(username||id)+'</small></label>';}).join('')+'</div></div>';
+        row.innerHTML='<div class="perm-config-head"><div><i class="fa-solid '+cfg.icon+' text-primary"></i><span>'+cfg.label+'</span></div><span class="perm-config-state">Configuración</span></div><div class="perm-actions">'+PERM_ACTIONS_USUARIO.map(a=>'<label class="perm-action-pill"><input type="checkbox" data-module="'+key+'" data-action="'+a+'" '+(current?.[a]?'checked':'')+' onchange="actualizarHiddenPermisosUsuario()"><span>'+ACCION_LABELS_USUARIO[a]+'</span></label>').join('')+'</div>'+scopeHtml;
+        acts.appendChild(row);
+    }
     function actualizarAccionesPermisoUsuario(key){const cb=document.querySelector(`#usr-permisos-modulos input[data-module="${key}"]`),block=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);if(!block)return;if(cb?.checked){const l=block.querySelector('input[data-action="leer"]');if(l&&!block.querySelector('input[data-action]:checked'))l.checked=true;seleccionarModuloPermisoUsuario(key);}else{block.classList.add('d-none');const next=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]:checked')].map(x=>x.dataset.module).find(x=>x!==key);if(next)seleccionarModuloPermisoUsuario(next);}actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
     function actualizarResumenPermisosUsuario(){const out=document.getElementById('usr-permisos-resumen');if(out){const n=document.querySelectorAll('#usr-permisos-modulos input[data-module]:checked').length;out.textContent=n+' módulo'+(n===1?' autorizado':'s autorizados');}}
     const CATEGORIAS_PERMISOS_USUARIO=[
@@ -10067,10 +10228,12 @@ async function eliminarEmpresa(id) {
     function seleccionarTodosPermisosUsuario(){const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')],all=ms.length>0&&ms.every(x=>x.checked);if(all){ms.forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones input[type="checkbox"]').forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.remove('active','selected'));}else{ms.forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-action]').forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-scope-module]').forEach(x=>x.checked=x.value==='todos');document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.add('selected'));const first=Object.keys(MATRIZ_PERMISOS_USUARIO)[0];if(first)seleccionarModuloPermisoUsuario(first);}actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
     function actualizarBotonTodosPermisosUsuario(){const btn=document.getElementById('btnPermisosTodos');if(!btn)return;const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')],all=ms.length>0&&ms.every(x=>x.checked);btn.classList.toggle('btn-secondary',all);btn.classList.toggle('btn-outline-secondary',!all);btn.innerHTML=all?'<i class="fa-solid fa-xmark me-1"></i><span>Quitar selección</span>':'<i class="fa-solid fa-check-double me-1"></i><span>Seleccionar todos</span>';}
     function normalizarModuloPermisoUsuario(modulo){return String(modulo||'').trim().toLowerCase();}
-    function permisosUsuarioTieneModulo(modulo,accion='leer',u=currentUser){if(!u)return false;const rol=String(u.rol||'').trim().toLowerCase();if(rol==='master')return true;const aliases={facturas:'facturacion',factura:'facturacion',pagosclientes:'pagos',payment:'pagos'};const key=normalizarModuloPermisoUsuario(aliases[normalizarModuloPermisoUsuario(modulo)]||modulo);let act=String(accion||'leer').trim().toLowerCase();if(['agregar','asignar','aprobar','cerrar'].includes(act))act='modificar';const p=permisosEfectivosUsuario(u),cfg=p[key];if(cfg&&typeof cfg==='object'){if(cfg[act]===true||String(cfg[act]||'').toLowerCase()==='true')return true;if(act==='leer'&&(cfg.ver===true||String(cfg.ver||'').toLowerCase()==='true'))return true;}return false;}
+    function permisosUsuarioTieneModulo(modulo,accion='leer',u=currentUser){if(!u)return false;if(String(u.rol||'').trim().toLowerCase()==='master')return true;const aliases={facturas:'facturacion',factura:'facturacion',pagosclientes:'pagos',payment:'pagos'};const key=normalizarModuloPermisoUsuario(aliases[normalizarModuloPermisoUsuario(modulo)]||modulo);let act=String(accion||'leer').trim().toLowerCase();if(['agregar','asignar','aprobar','cerrar'].includes(act))act='modificar';const p=permisosEfectivosUsuario(u),cfg=p[key];if(cfg&&typeof cfg==='object'){if(cfg[act]===true||String(cfg[act]||'').toLowerCase()==='true')return true;if(act==='leer'&&(cfg.ver===true||String(cfg.ver||'').toLowerCase()==='true'))return true;}return false;}
     function usuarioTieneCualquierPermisoModulo(modulo,u=currentUser){if(!u)return false;if(String(u.rol||'').trim().toLowerCase()==='master')return true;const p=permisosEfectivosUsuario(u),key=normalizarModuloPermisoUsuario(modulo),cfg=p[key];return !!(cfg&&typeof cfg==='object'&&Object.entries(cfg).some(([k,v])=>PERM_ACTIONS_USUARIO.includes(k)&&v===true));}
     function puedeAccederModuloUsuario(modulo){return permisosUsuarioTieneModulo(modulo,'leer');}
     function protegerAccionUsuario(modulo,accion,msg='No tiene permiso para realizar esta acción.'){if(window._registroPublicoCliente===true&&modulo==='clientes')return true;if(permisosUsuarioTieneModulo(modulo,accion))return true;return false;}
+    function actualizarBotonPreestablecidosPermisosUsuario(esNuevo){const btn=document.getElementById('btnPermisosPreestablecidos');if(btn)btn.classList.toggle('d-none',!esNuevo);}
+    function aplicarPermisosPreestablecidosUsuario(){const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')];if(!ms.length)return;ms.forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-action]').forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-scope-module]').forEach(x=>x.checked=x.value==='propios');document.querySelectorAll('#usr-permisos-acciones input[data-parentesco-module],#usr-permisos-acciones input[data-cliente-perm-module],#usr-permisos-acciones input[data-usuario-perm-module]').forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.remove('d-none'));document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.add('selected'));const first=Object.keys(MATRIZ_PERMISOS_USUARIO)[0];if(first)seleccionarModuloPermisoUsuario(first);actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
     function abrirModalCrearUsuario() {
         if (!puedeGestionarUsuariosPorPermiso('agregar')) { showSystemNotification('Acceso restringido', 'No tiene permiso para crear usuarios.', 'warning'); return; }
         document.getElementById('formUsuario').reset();
@@ -10079,6 +10242,7 @@ async function eliminarEmpresa(id) {
         document.getElementById('usr_password').placeholder = 'Contraseña';
         document.getElementById('modalUsuarioTitle').innerHTML = '<i class="fa-solid fa-user-gear text-primary me-2"></i>Crear Usuario';
         renderEditorPermisosUsuario({});
+        actualizarBotonPreestablecidosPermisosUsuario(true);
         window.cleanErpModalLayers?.(); modalUsr.show();
     }
 
@@ -10096,6 +10260,7 @@ async function eliminarEmpresa(id) {
         document.getElementById('usr_rol').value = u.rol || '';
         document.getElementById('usr_estado').value = u.estado || '';
         renderEditorPermisosUsuario(permisosEfectivosUsuario(u));
+        actualizarBotonPreestablecidosPermisosUsuario(false);
         document.getElementById('modalUsuarioTitle').innerHTML = '<i class="fa-solid fa-user-gear text-primary me-2"></i>Modificar Usuario';
         window.cleanErpModalLayers?.(); modalUsr.show();
     }
@@ -10141,12 +10306,14 @@ async function eliminarUsuario(id) {
     if (!puedeGestionarUsuario(id)) { showSystemNotification('Acceso restringido', 'Por seguridad, no puede eliminar los datos de este usuario.', 'warning'); return; }
     if (!await confirmarAccionModal('Eliminar usuario','¿Está seguro de que desea eliminar este usuario? Esta acción no se puede deshacer.')) return;
     try {
-        const result = await ejecutarOperacionSupabase('deleteUsuario', {id_usuario:id}, false, 35000, true);
+        const usuarioEliminado=(db.usuarios||[]).find(x=>String(x.id_usuario||'')===String(id))||{};
+        const result = await ejecutarOperacionSupabase('deleteUsuarioCascade', {id_usuario:id}, true, 45000, true);
         if (!result?.success) throw new Error(result?.message || 'El servidor no confirmó la eliminación.');
-        db.usuarios = db.usuarios.filter(x => x.id_usuario !== id);
-        registrarAuditoria('DELETE', 'Usuario', id, 'Eliminación de usuario ID: ' + id, 'WARNING');
+        db.usuarios = (db.usuarios||[]).filter(x => String(x.id_usuario||'') !== String(id) && !(result?.data?.codigo_cliente && String(x.codigo_cliente||'')===String(result.data.codigo_cliente)));
+        await sincronizarConservidor();
         renderUsuarios();
-        showSystemNotification('Usuario eliminado', 'El usuario fue eliminado correctamente de servidor.', 'success');
+        const ref=result?.data?.codigo_cliente ? ' y el cliente vinculado '+String(result.data.codigo_cliente) : '';
+        showSystemNotification('Usuario eliminado', 'El usuario '+String(usuarioEliminado.username||id)+' fue eliminado junto con sus registros relacionados'+ref+'. La eliminación quedó registrada en auditoría.', 'success');
     } catch (err) {
         showSystemNotification('No se pudo eliminar', err.message || 'El servidor no confirmó la eliminación.', 'danger');
     }
@@ -10213,6 +10380,8 @@ async function eliminarUsuario(id) {
     }
 
     function renderClientes(){
+        const btnMaster=document.getElementById('btnMostrarClientesMaster');
+        if(btnMaster)btnMaster.classList.toggle('d-none',!esMasterUsuarioGestion());
         const isClient=String(currentUser?.rol||'').trim().toLowerCase()==='cliente';
         if(isClient){
             const cliente=resolverClienteActualSeguro_();
@@ -10228,7 +10397,54 @@ async function eliminarUsuario(id) {
         }
     }
 
-    function abrirModalCliente(id=null, publico=false){
+    async function obtenerEstadoPortalPublicoServidor(){
+        try{
+            const rows=await sbSelect('config',{limit:1,filter:'clave=eq.portal_activo',select:'clave,valor'});
+            if(!Array.isArray(rows)||!rows[0])throw new Error('No existe la configuración portal_activo en el servidor.');
+            const valor=String(rows[0].valor??'false').trim().toLowerCase();
+            const activo=valor==='true';
+            localStorage.setItem('erp_portal_activo',activo?'true':'false');
+            return activo;
+        }catch(err){
+            console.warn('No fue posible consultar el estado del portal público:',err);
+            return false;
+        }
+    }
+
+    async function abrirRegistroPublicoControlado(){
+        const boton=document.getElementById('btn-mostrar-registro');
+        if(boton)boton.disabled=true;
+        try{
+            const activo=await obtenerEstadoPortalPublicoServidor();
+            if(!activo){
+                const modal=document.getElementById('modalPortalMantenimiento');
+                if(modal)bootstrap.Modal.getOrCreateInstance(modal,{backdrop:true,keyboard:true,focus:true}).show();
+                return;
+            }
+            window._portalPublicoValidado=true;
+            await abrirModalCliente(null,true);
+        }finally{
+            if(boton)boton.disabled=false;
+        }
+    }
+
+    function mostrarClientesMaster(){
+        if(!esMasterUsuarioGestion())return;
+        const input=document.getElementById('cli-input-cedula');
+        if(input){input.value='';input.dataset.busquedaActiva='1';}
+        renderDirectorio('clientes',Array.isArray(db.clientes)?db.clientes:[],{scroll:true});
+    }
+
+    async function abrirModalCliente(id=null, publico=false){
+        if(publico&&!id&&!window._portalPublicoValidado){
+            const activo=await obtenerEstadoPortalPublicoServidor();
+            if(!activo){
+                const modal=document.getElementById('modalPortalMantenimiento');
+                if(modal)bootstrap.Modal.getOrCreateInstance(modal,{backdrop:true,keyboard:true,focus:true}).show();
+                return;
+            }
+        }
+        if(publico&&!id)window._portalPublicoValidado=false;
         if(!publico && !protegerAccionUsuario('clientes',id?'modificar':'agregar')) return;
         const form=document.getElementById('formCliente');
         form?.reset();
@@ -12188,7 +12404,26 @@ function copiarTodosDatosBanco(id){const b=(db.bancos||[]).find(function(x){retu
         db.auditoria = Array.isArray(db.auditoria) ? db.auditoria : [];
         db.auditoria.unshift(registro);
         guardarDBLocalSeguro_();
-        void enviarAuditoriaDirectaEnSegundoPlano_(registro);
+        enviarAuditoriaDirectaEnSegundoPlano_(registro);
+    }
+
+    // Recarga exclusivamente la auditoría desde el servidor. Esto evita que la
+    // pantalla de Auditoría dependa de una caché local antigua después de
+    // eliminar, actualizar o crear registros. El Master recibe todo el
+    // historial; los clientes solo reciben sus propios registros.
+    async function recargarAuditoriaServidor_(){
+        if(!currentUser)return false;
+        try{
+            const filas=await sbSelect('auditoria',{limit:10000});
+            db.auditoria=Array.isArray(filas)?filas:[];
+            guardarDBLocalSeguro_();
+            renderAuditoria();
+            mostrarBadgeServidor(true);
+            return true;
+        }catch(e){
+            console.warn('No se pudo recargar Auditoría desde el servidor:',e?.message||e);
+            return false;
+        }
     }
 
     function parseFechaAuditoria(valor) {
@@ -12540,22 +12775,22 @@ function copiarTodosDatosBanco(id){const b=(db.bancos||[]).find(function(x){retu
     function puedeGestionarPlanesAdmin(){
       const u=currentUser;
       if(!u) return false;
-      return psRole()==='master' || (typeof permisosUsuarioTieneModulo==='function' && permisosUsuarioTieneModulo('servicios','leer',u));
+      return typeof permisosUsuarioTieneModulo==='function' && permisosUsuarioTieneModulo('servicios','leer',u);
     }
     function puedeAgregarPlanServicio(){
       const u=currentUser;
       if(!u) return false;
-      return psRole()==='master' || (typeof permisosUsuarioTieneModulo==='function' && permisosUsuarioTieneModulo('servicios','agregar',u));
+      return typeof permisosUsuarioTieneModulo==='function' && permisosUsuarioTieneModulo('servicios','agregar',u);
     }
     function puedeModificarPlanServicio(){
       const u=currentUser;
       if(!u) return false;
-      return psRole()==='master' || (typeof permisosUsuarioTieneModulo==='function' && permisosUsuarioTieneModulo('servicios','modificar',u));
+      return typeof permisosUsuarioTieneModulo==='function' && permisosUsuarioTieneModulo('servicios','modificar',u);
     }
     function puedeEliminarPlanServicio(){
       const u=currentUser;
       if(!u) return false;
-      return psRole()==='master' || (typeof permisosUsuarioTieneModulo==='function' && permisosUsuarioTieneModulo('servicios','eliminar',u));
+      return typeof permisosUsuarioTieneModulo==='function' && permisosUsuarioTieneModulo('servicios','eliminar',u);
     }
 
     function obtenerPlantillaServicio(id){
@@ -14584,6 +14819,7 @@ function obtenerUsuariosPermitidosRecordatorioDesdeForm_(){
     return [...ids].map(id=>{const u=(db.usuarios||[]).find(x=>String(x.id_usuario||'')===String(id));return {id_usuario:String(id),nombre_completo:String(u?.nombre_completo||''),username:String(u?.username||''),email:String(u?.email||'')};}).filter(x=>x.id_usuario);
 }
 function usuarioPuedeVerRecordatorio_(r,u=currentUser){
+    if(String(u?.rol||'').trim().toLowerCase()==='master')return true;
     if(!r||!u)return false;
     const uid=String(u.id_usuario||'').trim();
     if(!uid)return false;
@@ -16101,7 +16337,6 @@ window.abrirRegistroOps=abrirRegistroOps;window.renderOpsModulo=renderOpsModulo;
  const idp=p=>p+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7);
  const extraMods=['centrooperativo','contabilidad','administracion','salud','talleres'];
  function extraPerm(mod,action='leer'){
-   const role=String(currentUser?.rol||'').trim().toLowerCase(); if(role==='master')return true;
    let p=currentUser?.permisos; if(typeof p==='string'){try{p=JSON.parse(p)}catch(_){p={}}}
    const x=p?.[mod]; return !!(x && (x[action]===true || x[action]==='true' || (action==='leer'&&x.ver===true)));
  }
@@ -16145,6 +16380,125 @@ window.abrirRegistroOps=abrirRegistroOps;window.renderOpsModulo=renderOpsModulo;
 </style>
 <script id="menu-colores-grupos-final-v4">
 (function(){const p=['#2563eb','#7c3aed','#059669','#db2777','#0891b2','#ea580c','#16a34a','#dc2626','#ca8a04','#0f766e','#9333ea','#0284c7'];function paint(){const s=document.getElementById('sidebar');if(!s)return;s.querySelectorAll('.menu-group-toggle>span>i.menu-group-icon').forEach((e,i)=>e.style.setProperty('--menu-icon-color',p[i%p.length]));s.querySelectorAll('.ops-menu-category-title>i').forEach((e,i)=>e.style.setProperty('--menu-icon-color',p[(i+4)%p.length]));}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',paint,{once:true});else paint();window.addEventListener('load',paint,{once:true});})();
+</script>
+
+<div class="modal fade" id="modalFiltrosPortal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fa-solid fa-filter text-primary me-2"></i>Filtrar información</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body"><div id="modalFiltrosPortalBody" class="row g-3"></div></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" id="btnLimpiarFiltrosPortal"><i class="fa-solid fa-broom me-1"></i>Limpiar</button>
+        <button type="button" class="btn btn-primary" id="btnAplicarFiltrosPortal"><i class="fa-solid fa-check me-1"></i>Aplicar filtros</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style id="filtros-portal-modal-limpio">
+.portal-filter-control-hidden{display:none!important}
+.portal-filter-legacy-hidden{display:none!important}
+.portal-filter-trigger{white-space:nowrap}
+#modalFiltrosPortalBody .portal-filter-field{display:block;width:100%}
+</style>
+<script id="filtros-portal-modal-controller">
+(function(){
+  const EXTRA_FILTER_IDS=['ps-catalogo-busqueda'];
+  const CONTAINER_SELECTORS=['.ops-consult-toolbar','.ps-catalog-filterbar','.recordatorios-filtro-bar','.family-reg-section','.gastos-filtro-bar','.filtros-linea','.sueldos-filtros-linea'];
+  const SPECIAL_PARENT={
+    'cred-lista-filtro':'.position-relative',
+    'man-filtro':'.card-body',
+    'man-filtro-campo':'.card-body',
+    'audit-filtro-texto':'.card-body',
+    'audit-filtro-nivel':'.card-body',
+    'audit-filtro-accion':'.card-body',
+    'audit-filtro-desde':'.card-body',
+    'audit-filtro-hasta':'.card-body',
+    'co-filtro-tecnologia':'.ops-consult-toolbar',
+    'co-filtro-tipo':'.ops-consult-toolbar',
+    'co-filtro-falla':'.ops-consult-toolbar',
+    'co-filtro-busqueda':'.ops-consult-toolbar',
+    'ps-catalogo-busqueda':'.ps-catalog-filterbar',
+    'adm-serv-filtro-categoria':'.ps-catalog-filterbar'
+  };
+  function controles(sec){
+    return [...sec.querySelectorAll('input,select')].filter(el=>{
+      const id=String(el.id||'').toLowerCase();
+      return (id.includes('filtro') || EXTRA_FILTER_IDS.includes(id)) && !el.closest('form');
+    });
+  }
+  function filtroContainer(el){
+    const id=String(el.id||'');
+    const special=SPECIAL_PARENT[id];
+    if(special){const n=el.closest(special);if(n)return n;}
+    for(const sel of CONTAINER_SELECTORS){const n=el.closest(sel);if(n)return n;}
+    return el.parentElement;
+  }
+  function headerPara(sec,container){
+    return sec.querySelector(':scope > .d-flex, :scope > .veh-shell > .veh-toolbar, :scope > .sueldos-shell > .d-flex, :scope > .ops-shell > .d-flex, :scope > .ops-shell > .ops-section-title, .card-header') || sec.firstElementChild;
+  }
+  function preparar(){
+    document.querySelectorAll('.tab-content').forEach(sec=>{
+      const cs=controles(sec);
+      if(!cs.length)return;
+      // Ocultar/eliminar visualmente todos los controles y contenedores del filtro antiguo.
+      const containers=[...new Set(cs.map(filtroContainer).filter(Boolean))];
+      containers.forEach(c=>c.classList.add('portal-filter-legacy-hidden'));
+      sec.querySelectorAll('button').forEach(b=>{
+        const oc=String(b.getAttribute('onclick')||'').toLowerCase();
+        if(oc.includes('limpiarfiltro')||oc.includes('limpiarfiltros'))b.classList.add('portal-filter-legacy-hidden');
+      });
+      if(sec.querySelector('.portal-filter-trigger'))return;
+      const head=headerPara(sec,containers[0]);
+      if(!head)return;
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.className='btn btn-outline-primary btn-sm portal-filter-trigger ms-auto';
+      btn.innerHTML='<i class="fa-solid fa-filter me-1"></i>Filtrar';
+      btn.addEventListener('click',()=>abrir(sec));
+      head.classList.add('d-flex','align-items-center','gap-2','flex-wrap');
+      head.appendChild(btn);
+    });
+  }
+  function abrir(sec){
+    const body=document.getElementById('modalFiltrosPortalBody');
+    if(!body)return;
+    body.innerHTML='';
+    const cs=controles(sec),row=document.createElement('div');
+    row.className='row g-3';
+    cs.forEach(src=>{
+      const col=document.createElement('div'); col.className='col-12 col-md-6';
+      const label=document.createElement('label'); label.className='form-label small fw-semibold';
+      const explicit=src.closest('.col-12,.col-6,.col-md-2,.col-md-3,.col-lg-2,.col-lg-4')?.querySelector('label');
+      label.textContent=explicit?.textContent?.trim() || src.getAttribute('placeholder') || src.id.replace(/-/g,' ');
+      const clone=src.cloneNode(true);
+      clone.removeAttribute('id'); clone.removeAttribute('name'); clone.removeAttribute('oninput'); clone.removeAttribute('onchange'); clone.removeAttribute('onkeydown');
+      clone.classList.remove('portal-filter-control-hidden','portal-filter-legacy-hidden'); clone.dataset.portalOriginalId=src.id; clone.classList.add('portal-filter-field');
+      if(src.type==='checkbox'||src.type==='radio')clone.checked=src.checked; else clone.value=src.value;
+      col.append(label,clone); row.appendChild(col);
+    });
+    body.appendChild(row);
+    const modalEl=document.getElementById('modalFiltrosPortal');
+    const modal=window.bootstrap?.Modal?.getOrCreateInstance(modalEl);
+    document.getElementById('btnLimpiarFiltrosPortal').onclick=()=>{
+      body.querySelectorAll('input,select').forEach(x=>{if(x.type==='checkbox'||x.type==='radio')x.checked=false;else x.value='';});
+    };
+    document.getElementById('btnAplicarFiltrosPortal').onclick=()=>{
+      body.querySelectorAll('[data-portal-original-id]').forEach(c=>{
+        const o=document.getElementById(c.dataset.portalOriginalId);if(!o)return;
+        if(c.type==='checkbox'||c.type==='radio')o.checked=c.checked;else o.value=c.value;
+        o.dispatchEvent(new Event(o.tagName==='SELECT'?'change':'input',{bubbles:true}));
+      });
+      modal?.hide();
+    };
+    modal?.show();
+  }
+  window.addEventListener('DOMContentLoaded',()=>setTimeout(preparar,0));
+  window.addEventListener('load',()=>setTimeout(preparar,50));
+  window.mostrarFiltrosPortal=abrir;
+})();
 </script>
 </body>
 </html>
