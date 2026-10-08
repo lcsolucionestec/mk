@@ -3992,8 +3992,16 @@ body > #pdModal.pd-overlay.show { display: flex !important; }
 .dashboard-welcome-badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px;position:relative;z-index:1}
 .dashboard-welcome-badge{padding:9px 14px;border-radius:999px;background:#fff;border:1px solid #dbeafe;color:#334155;font-size:.78rem;font-weight:700;box-shadow:0 5px 16px rgba(15,23,42,.05)}
 .dashboard-welcome-note{margin:24px auto 0;max-width:620px;padding:13px 16px;border-radius:14px;background:rgba(255,255,255,.78);border:1px solid rgba(148,163,184,.18);color:#64748b;font-size:.78rem;position:relative;z-index:1}.dashboard-welcome-context{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:760px;margin:14px auto 0;position:relative;z-index:1}.dashboard-welcome-context-item{display:flex;align-items:center;gap:10px;text-align:left;padding:11px 12px;border:1px solid rgba(148,163,184,.18);border-radius:14px;background:rgba(255,255,255,.72)}.dashboard-welcome-context-item>i{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:rgba(37,99,235,.08);color:#2563eb;font-size:.78rem;flex:0 0 auto}.dashboard-welcome-context-item span{display:block;font-size:.58rem;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:#64748b}.dashboard-welcome-context-item strong{display:block;margin-top:2px;font-size:.72rem;color:#334155;line-height:1.25}.dashboard-welcome-context-item strong{word-break:break-word}
-html[data-bs-theme="dark"] .dashboard-welcome-card{background:linear-gradient(135deg,#111827,#172554);border-color:rgba(96,165,250,.18)}
-html[data-bs-theme="dark"] .dashboard-welcome-title{color:#eff6ff} html[data-bs-theme="dark"] .dashboard-welcome-text,html[data-bs-theme="dark"] .dashboard-welcome-note{color:#cbd5e1} html[data-bs-theme="dark"] .dashboard-welcome-badge{background:#1e293b;border-color:#334155;color:#e2e8f0} html[data-bs-theme="dark"] .dashboard-welcome-context-item{background:#1e293b;border-color:#334155} html[data-bs-theme="dark"] .dashboard-welcome-context-item strong{color:#e2e8f0} 
+html[data-bs-theme="dark"] .dashboard-welcome-card,body.dark-mode .dashboard-welcome-card{background:linear-gradient(135deg,#111827,#172554);border-color:rgba(96,165,250,.18);color:#f8fafc}
+html[data-bs-theme="dark"] .dashboard-welcome-title,body.dark-mode .dashboard-welcome-title{color:#eff6ff} 
+html[data-bs-theme="dark"] .dashboard-welcome-eyebrow,body.dark-mode .dashboard-welcome-eyebrow{color:#60a5fa}
+html[data-bs-theme="dark"] .dashboard-welcome-text,html[data-bs-theme="dark"] .dashboard-welcome-note,body.dark-mode .dashboard-welcome-text,body.dark-mode .dashboard-welcome-note{color:#cbd5e1}
+html[data-bs-theme="dark"] .dashboard-welcome-badge,body.dark-mode .dashboard-welcome-badge{background:#1e293b;border-color:#334155;color:#e2e8f0}
+html[data-bs-theme="dark"] .dashboard-welcome-context-item,body.dark-mode .dashboard-welcome-context-item{background:#1e293b;border-color:#334155}
+html[data-bs-theme="dark"] .dashboard-welcome-context-item span,body.dark-mode .dashboard-welcome-context-item span{color:#94a3b8}
+html[data-bs-theme="dark"] .dashboard-welcome-context-item strong,body.dark-mode .dashboard-welcome-context-item strong{color:#e2e8f0}
+html[data-bs-theme="dark"] .dashboard-welcome-context-item>i,body.dark-mode .dashboard-welcome-context-item>i{background:rgba(96,165,250,.12);color:#60a5fa}
+html[data-bs-theme="dark"] .dashboard-welcome-note .text-primary,body.dark-mode .dashboard-welcome-note .text-primary{color:#60a5fa!important}
 @media(max-width:575.98px){.dashboard-welcome-access{min-height:calc(100vh - 120px);padding:12px}.dashboard-welcome-card{border-radius:22px;padding:30px 20px}.dashboard-welcome-icon{width:68px;height:68px;font-size:1.65rem;border-radius:20px}.dashboard-welcome-text{font-size:.88rem}.dashboard-welcome-badge{font-size:.7rem;padding:8px 11px}.dashboard-welcome-context{grid-template-columns:1fr 1fr}.dashboard-welcome-context-item{padding:9px 10px}}
 </style>
 <!-- ═══════════════════════════════════════════════════════════════
@@ -5974,6 +5982,14 @@ html[data-bs-theme="dark"] .dashboard-welcome-title{color:#eff6ff} html[data-bs-
 <option value="Inactivo">Inactivo</option>
 </select>
 </div>
+<div class="usr-form-field">
+<label class="form-label small fw-semibold">Inactividad de sesión</label>
+<div class="input-group usr-input-group">
+<input class="form-control form-control-pro" id="usr_tiempo_inactividad" type="number" min="5" max="1440" step="1" value="5" inputmode="numeric"/>
+<span class="input-group-text">min</span>
+</div>
+<small class="text-muted d-block mt-1" style="font-size:.6rem">5 minutos es el estándar. Puede aumentarlo para este usuario.</small>
+</div>
 <div class="usr-status-note"><i class="fa-solid fa-circle-info me-1 text-primary"></i>Los permisos se aplican según el rol y la configuración seleccionada.</div>
 </div>
 </div>
@@ -7582,13 +7598,17 @@ function filtroNotificacionesClienteSupabase_(cliente){
         // Variable global para contraseña visible
         _currentViewUserPassword = '';
 
-        // Restaurar sesión si existe y no ha expirado (5 minutos de inactividad)
+        // Restaurar sesión usando el tiempo de inactividad personalizado del usuario (5 minutos por defecto).
         const savedSession = localStorage.getItem('erp_session_user');
 
         const lastActivity = localStorage.getItem('erp_session_last_activity');
         const now = Date.now();
+        let tiempoRestauracionMs = 5 * 60 * 1000;
+        try {
+            if (savedSession) tiempoRestauracionMs = obtenerTiempoInactividadUsuario_(JSON.parse(savedSession)) * 60 * 1000;
+        } catch (_) {}
 
-        if (savedSession && lastActivity && (now - parseInt(lastActivity) < 5 * 60 * 1000)) {
+        if (savedSession && lastActivity && (now - parseInt(lastActivity) < tiempoRestauracionMs)) {
             try {
                 const userObj = JSON.parse(savedSession);
                 applyUserSession(userObj);
@@ -7716,15 +7736,22 @@ function filtroNotificacionesClienteSupabase_(cliente){
     // SECCIÓN: TEMPORIZADOR DE INACTIVIDAD
     // CIERRA SESIÓN AUTOMÁTICAMENTE DESPUÉS DE 5 MINUTOS SIN ACTIVIDAD
     
+    // Tiempo de inactividad personalizado por usuario. Si no existe el dato, se conserva el estándar de 5 minutos.
+    function obtenerTiempoInactividadUsuario_(usuario = currentUser) {
+        const n = Number(usuario?.tiempo_inactividad_minutos);
+        return Number.isFinite(n) && n >= 5 ? Math.min(Math.floor(n), 1440) : 5;
+    }
+
     function initInactivityTimer() {
         const resetTimer = () => {
             clearTimeout(inactivityTimer);
             if (currentUser) {
+                const minutos = obtenerTiempoInactividadUsuario_(currentUser);
                 localStorage.setItem('erp_session_last_activity', Date.now().toString());
                 inactivityTimer = setTimeout(() => {
                     showToast('Sesión Expirada', 'Cierre automático por inactividad.', 'warning', 6000);
                     confirmarLogout();
-                }, 5 * 60 * 1000);
+                }, minutos * 60 * 1000);
             }
         };
 
@@ -10302,6 +10329,7 @@ async function eliminarEmpresa(id) {
         document.getElementById('usr_id').value = '';
         document.getElementById('usr_password').required = true;
         document.getElementById('usr_password').placeholder = 'Contraseña';
+        document.getElementById('usr_tiempo_inactividad').value = '5';
         document.getElementById('modalUsuarioTitle').innerHTML = '<i class="fa-solid fa-user-gear text-primary me-2"></i>Crear Usuario';
         renderEditorPermisosUsuario({});
         actualizarBotonPreestablecidosPermisosUsuario(true);
@@ -10321,6 +10349,7 @@ async function eliminarEmpresa(id) {
         document.getElementById('usr_password').placeholder = 'Dejar vacío para conservar la contraseña actual';
         document.getElementById('usr_rol').value = u.rol || '';
         document.getElementById('usr_estado').value = u.estado || '';
+        document.getElementById('usr_tiempo_inactividad').value = obtenerTiempoInactividadUsuario_(u);
         renderEditorPermisosUsuario(permisosEfectivosUsuario(u));
         actualizarBotonPreestablecidosPermisosUsuario(false);
         document.getElementById('modalUsuarioTitle').innerHTML = '<i class="fa-solid fa-user-gear text-primary me-2"></i>Modificar Usuario';
@@ -10344,6 +10373,7 @@ async function guardarUsuario(e) {
         codigo_cliente: codigoValue,
         rol: document.getElementById('usr_rol').value,
         estado: document.getElementById('usr_estado').value,
+        tiempo_inactividad_minutos: obtenerTiempoInactividadUsuario_({tiempo_inactividad_minutos: document.getElementById('usr_tiempo_inactividad')?.value}),
         permisos: document.getElementById('usr_permisos_json')?.value || JSON.stringify({})
     };
     if(!id || passwordValue) payload.password=passwordValue;
@@ -16596,7 +16626,7 @@ function limpiarBusquedaOps(mod){const x=document.getElementById('ops-search-'+m
 // PROGRAMACIÓN DIARIA — agenda operativa de técnicos
 // ═══════════════════════════════════════════════════════════════
 let _pdRows=[], _pdTecnicos=[], _pdMunicipios=[], _pdAsignaciones=[], _pdHistorial=[];
-const PD_TIPOS=['Instalación','Avería','Cambio de domicilio','Retiro de equipos','Reubicación de equipos','Cambio de equipo','Cambio de antena','Cambio de fibra','Soporte técnico','Revisión preventiva','Mantenimiento','Visita técnica','Reconexión','Desconexión','Otro'];
+const PD_TIPOS=['Instalación','Avería','Cambio de domicilio','Retiro de equipos','Reubicación de equipos','Cambio de equipo','Cambio de antena','Cambio de fibra','Soporte técnico','Revisión preventiva','Mantenimiento','Visita técnica','Reconexión','Desconexión',"ONU's en LOSS",'Instalación de Mini UPS','Cambio de cable UTP','Despliegue de cable UTP','Cambio de conector RJ45','Configuración de Router',"Configuración de ONU'S",'Otro'];
 const PD_ESTADOS=['Pendiente','En curso','Realizada'];
 const PD_PRIORIDADES=['Urgente','Alta','Normal','Baja'];
 const pdEsc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
