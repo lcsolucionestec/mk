@@ -18012,26 +18012,67 @@ function resetNodeForm(){const form=$('elec-node-form');if(!form)return;form.res
 window.elecCancelNodeForm=function(){editingNodeId=null;resetNodeForm();closeNodeForm();};
 window.elecViewScript=function(id){const n=getNode(id);if(!n)return;const sc=scriptFor(n);modal('<div class="d-flex justify-content-between align-items-center gap-2 mb-3"><h5 class="mb-0">Script Netwatch</h5><button type="button" class="btn btn-sm btn-outline-secondary" aria-label="Cerrar" title="Cerrar" onclick="elecCloseModal()"><i class="fa-solid fa-xmark"></i></button></div><textarea class="form-control mb-3" id="elec-script-text" readonly spellcheck="false">'+esc(sc)+'</textarea><div class="d-flex gap-2"><button type="button" class="btn btn-primary" id="elec-script-copy-button" aria-label="Copiar script" title="Copiar script"><i class="fa-regular fa-copy"></i></button><button type="button" class="btn btn-outline-secondary" aria-label="Cerrar" title="Cerrar" onclick="elecCloseModal()"><i class="fa-solid fa-xmark"></i></button></div>');const box=$('elec-modal-root')?.querySelector('.elec-modal');const ta=$('elec-script-text');const copyBtn=$('elec-script-copy-button');if(copyBtn)copyBtn.onclick=()=>window.elecCopyScript(String(id));box?.classList.add('elec-script-modal');if(ta){const lines=Math.max(8,Math.min(20,sc.split('\n').length+2));ta.rows=lines;ta.style.height='min(32vh, 280px)';ta.style.minHeight='150px';ta.style.maxHeight='38vh';ta.style.width='100%';ta.style.whiteSpace='pre-wrap';ta.style.overflowWrap='anywhere';ta.style.resize='vertical';}};
 window.elecCloseModal=closeModal;
-window.elecNodeHistory=function(id){
- const n=getNode(id);if(!n)return;
- const nodeId=String(n.id_nodo_electricidad??''),ip=norm(n.ip_monitoreada||''),router=norm(n.router_origen||'MikroTik'),name=norm(n.nombre_nodo||'');
- const belongs=e=>{
-  const eventId=String(e.id_nodo_electricidad??e.nodo_id??e.id_nodo??'');
-  if(eventId&&nodeId&&eventId===nodeId)return true;
-  const eventIp=norm(e.ip_monitoreada||e.ip||'');
-  if(eventIp&&ip&&eventIp===ip){const eventRouter=norm(e.router_origen||e.router||'');return !eventRouter||eventRouter===router;}
-  const eventName=norm(e.nombre_nodo||'');
-  return !eventIp&&!eventId&&!!name&&eventName===name;
+window.elecNodeHistory=async function(id){
+ const node=getNode(id);
+ if(!node)return;
+ const nodeId=String(node.id_nodo_electricidad??'').trim();
+ const nodeIp=norm(node.ip_monitoreada||'');
+ const nodeRouter=norm(node.router_origen||'');
+ const nodeName=norm(node.nombre_nodo||'');
+ const escHtml=value=>esc(String(value??''));
+ const header=()=>'<div class="d-flex align-items-start justify-content-between gap-2 mb-3"><div><h5 class="mb-1"><i class="fa-solid fa-clock-rotate-left me-2 text-info"></i>Historial Netwatch del nodo</h5><div class="fw-semibold">'+escHtml(node.nombre_nodo||'Nodo sin nombre')+'</div><div class="small text-muted">'+escHtml(node.ip_monitoreada||'—')+' · '+escHtml(node.router_origen||'MikroTik')+'</div></div><button type="button" class="btn btn-sm btn-outline-secondary flex-shrink-0" title="Cerrar" aria-label="Cerrar" onclick="elecCloseModal()"><i class="fa-solid fa-xmark"></i></button></div>';
+ const styleBox=()=>{const box=$('elec-modal-root')?.querySelector('.elec-modal');if(box){box.style.width='min(1100px, 100%)';box.style.maxHeight='calc(100dvh - 24px)';box.style.padding='16px';box.style.overflow='auto';}};
+ const showMessage=message=>{
+  modal(header()+'<div class="alert alert-secondary mb-0" role="status">'+escHtml(message)+'</div><div class="d-flex justify-content-end mt-3"><button type="button" class="btn btn-secondary btn-sm" onclick="elecCloseModal()">Cerrar</button></div>');
+  styleBox();
  };
- const rows=events.filter(belongs).slice().sort((a,b)=>{const ta=new Date(a.fecha_evento||0).getTime(),tb=new Date(b.fecha_evento||0).getTime();return (Number.isFinite(tb)?tb:0)-(Number.isFinite(ta)?ta:0);});
- const isDown=e=>{const st=norm(e.estado_evento||e.estado||'');return st.includes('down')||st.includes('sin respuesta');};
- const upCount=rows.filter(e=>!isDown(e)).length,downCount=rows.filter(isDown).length;
- const rowHtml=rows.map(e=>{const down=isDown(e),detail=String(e.detalle||e.mensaje||e.observaciones||'').trim();const professional=norm(detail)==='netwatch detecto que el host volvio a responder.'?'El nodo volvió a responder y recuperó la conectividad.':norm(detail)==='netwatch detecto que el host dejo de responder; verificar si existe corte electrico.'?'El nodo dejó de responder. Se recomienda verificar la conectividad y la alimentación eléctrica.':detail;return '<tr><td class="text-nowrap">'+dateFmt(e.fecha_evento||e.created_at||e.fecha_registro)+'</td><td><span class="elec-status '+(down?'down':'up')+'"><i class="fa-solid '+(down?'fa-circle-exclamation':'fa-circle-check')+' me-1"></i>'+(down?'DOWN · Sin respuesta':'UP · Responde')+'</span></td><td>'+esc(e.router_origen||n.router_origen||'MikroTik')+'</td><td>'+esc(e.ip_monitoreada||n.ip_monitoreada||'—')+'</td><td style="min-width:220px;white-space:pre-wrap;overflow-wrap:anywhere">'+esc(professional||'Sin detalle adicional')+'</td></tr>';}).join('');
- modal('<div class="d-flex align-items-start justify-content-between gap-2 mb-3"><div><h5 class="mb-1"><i class="fa-solid fa-clock-rotate-left me-2 text-info"></i>Historial del nodo</h5><div class="fw-semibold">'+esc(n.nombre_nodo||'Nodo sin nombre')+'</div><div class="small text-muted">'+esc(n.ip_monitoreada||'—')+' · '+esc(n.router_origen||'MikroTik')+'</div></div><button type="button" class="btn btn-sm btn-outline-secondary flex-shrink-0" title="Cerrar" aria-label="Cerrar" onclick="elecCloseModal()"><i class="fa-solid fa-xmark"></i></button></div>'+
- '<div class="d-flex flex-wrap gap-2 mb-3"><span class="badge text-bg-secondary">Total: '+rows.length+'</span><span class="badge text-bg-success">UP: '+upCount+'</span><span class="badge text-bg-danger">DOWN: '+downCount+'</span></div>'+
- '<div class="small text-muted mb-2">Todos los eventos UP y DOWN encontrados para este nodo, ordenados del más reciente al más antiguo.</div>'+
- '<div class="elec-table-scroll" style="max-height:55vh;overflow:auto;border:1px solid var(--bs-border-color,#dee2e6);border-radius:8px"><table class="table table-sm table-hover align-middle mb-0"><thead><tr><th>Fecha y hora</th><th>Estado</th><th>Router</th><th>IP</th><th>Detalle</th></tr></thead><tbody>'+(rows.length?rowHtml:'<tr><td colspan="5" class="text-center text-muted py-4"><i class="fa-regular fa-folder-open me-2"></i>No hay eventos UP/DOWN registrados para este nodo.</td></tr>')+'</tbody></table></div><div class="d-flex justify-content-end mt-3"><button type="button" class="btn btn-secondary btn-sm" onclick="elecCloseModal()">Cerrar</button></div>');
- const box=$('elec-modal-root')?.querySelector('.elec-modal');if(box){box.style.width='min(1000px, 100%)';box.style.maxHeight='calc(100dvh - 24px)';box.style.padding='16px';}
+ modal(header()+'<div class="d-flex align-items-center gap-2 py-4 justify-content-center" role="status"><span class="spinner-border spinner-border-sm" aria-hidden="true"></span><span>Consultando historial del nodo…</span></div>');
+ styleBox();
+
+ let source=[];
+ try{
+  source=await sbSelect('eventosElectricidad',{limit:5000,order:'fecha_evento.desc'});
+ }catch(error){
+  console.error('No se pudo consultar el historial Netwatch del nodo:',error);
+  source=Array.isArray(events)?events:[];
+  if(!source.length){
+   showMessage('No se pudo consultar el historial en el servidor. Verifica la conexión y los permisos de lectura.');
+   return;
+  }
+ }
+ source=Array.isArray(source)?source:[];
+ const eventId=e=>String(e.id_nodo_electricidad??e.nodo_id??e.id_nodo??'').trim();
+ const eventIp=e=>norm(e.ip_monitoreada??e.ip??e.host??'');
+ const eventRouter=e=>norm(e.router_origen??e.router??'');
+ const eventName=e=>norm(e.nombre_nodo??e.host_name??'');
+ let rows=[];
+ if(nodeId)rows=source.filter(e=>eventId(e)===nodeId);
+ if(!rows.length&&nodeIp)rows=source.filter(e=>eventIp(e)===nodeIp&&(!eventRouter(e)||!nodeRouter||eventRouter(e)===nodeRouter));
+ if(!rows.length&&nodeName)rows=source.filter(e=>eventName(e)===nodeName&&(!eventIp(e)||!nodeIp||eventIp(e)===nodeIp));
+ const timestamp=e=>{const value=e.fecha_evento??e.created_at??e.fecha_registro??e.timestamp??null;const time=value?new Date(value).getTime():NaN;return Number.isFinite(time)?time:0;};
+ rows=rows.slice().sort((a,b)=>timestamp(b)-timestamp(a));
+ const isDown=e=>{const state=norm(e.estado_evento??e.estado??e.status??'');return state.includes('down')||state.includes('sin respuesta')||state.includes('no responde');};
+ const upCount=rows.filter(e=>!isDown(e)).length;
+ const downCount=rows.filter(isDown).length;
+ const rowHtml=rows.map(e=>{
+  const down=isDown(e);
+  const rawDetail=String(e.detalle??e.mensaje??e.observaciones??e.descripcion??'').trim();
+  const normalized=norm(rawDetail);
+  const detail=normalized==='netwatch detecto que el host volvio a responder.'
+   ?'El nodo volvió a responder y recuperó la conectividad.'
+   :normalized==='netwatch detecto que el host dejo de responder; verificar si existe corte electrico.'
+    ?'El nodo dejó de responder. Se recomienda verificar la conectividad y la alimentación eléctrica.'
+    :rawDetail;
+  return '<tr><td class="text-nowrap">'+escHtml(dateFmt(e.fecha_evento??e.created_at??e.fecha_registro??e.timestamp))+'</td><td><span class="elec-status '+(down?'down':'up')+'"><i class="fa-solid '+(down?'fa-circle-exclamation':'fa-circle-check')+' me-1"></i>'+(down?'DOWN · Sin respuesta':'UP · Responde')+'</span></td><td>'+escHtml(e.router_origen??e.router??node.router_origen??'MikroTik')+'</td><td>'+escHtml(e.ip_monitoreada??e.ip??e.host??node.ip_monitoreada??'—')+'</td><td style="min-width:220px;white-space:pre-wrap;overflow-wrap:anywhere">'+escHtml(detail||'Sin detalle adicional')+'</td></tr>';
+ }).join('');
+ const content=header()+
+  '<div class="d-flex flex-wrap gap-2 mb-3"><span class="badge text-bg-secondary">Total: '+rows.length+'</span><span class="badge text-bg-success">UP: '+upCount+'</span><span class="badge text-bg-danger">DOWN: '+downCount+'</span></div>'+
+  '<div class="small text-muted mb-2">Eventos registrados para este nodo, ordenados del más reciente al más antiguo.</div>'+
+  '<div class="elec-table-scroll" style="max-height:55vh;overflow:auto;border:1px solid var(--bs-border-color,#dee2e6);border-radius:8px"><table class="table table-sm table-hover align-middle mb-0"><thead><tr><th>Fecha y hora</th><th>Estado</th><th>Router</th><th>IP</th><th>Detalle</th></tr></thead><tbody>'+
+  (rows.length?rowHtml:'<tr><td colspan="5" class="text-center text-muted py-4"><i class="fa-regular fa-folder-open me-2"></i>No se encontraron eventos UP/DOWN para este nodo.</td></tr>')+
+  '</tbody></table></div><div class="d-flex justify-content-end mt-3"><button type="button" class="btn btn-secondary btn-sm" onclick="elecCloseModal()">Cerrar</button></div>';
+ modal(content);
+ styleBox();
 };
 async function copyPlainText(textValue){if(navigator.clipboard&&window.isSecureContext){try{await navigator.clipboard.writeText(textValue);return true;}catch(_){}}const ta=document.createElement('textarea');ta.value=textValue;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';ta.style.left='-9999px';document.body.appendChild(ta);ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);let ok=false;try{ok=document.execCommand('copy');}finally{ta.remove();}if(!ok)throw new Error('El navegador no permitió copiar automáticamente.');return true;}
 window.elecCopyScript=async function(id){const n=getNode(id);if(!n)return;const sc=scriptFor(n);try{await copyPlainText(sc);msg('Script copiado.');}catch(e){modal('<textarea class="form-control mb-3" id="elec-script-text" readonly spellcheck="false">'+esc(sc)+'</textarea><button class="btn btn-outline-secondary" aria-label="Cerrar" title="Cerrar" onclick="elecCloseModal()"><i class="fa-solid fa-xmark"></i></button>');const ta=$('elec-script-text');ta?.focus();ta?.select();}};
