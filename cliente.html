@@ -65,7 +65,13 @@ function clienteCoincideTrabajoManual(t,c){return !!t&&!!c&&(String(t.id_cliente
 [data-bs-theme="dark"] { --bg-main: #0b0f19; --bg-card: #1e293b; --bg-subtle: #111827; --text-main: #f8fafc; --text-muted: #94a3b8; --border-color: #334155; --primary-accent: #3b82f6; --glass-bg: rgba(30, 41, 59, 0.85); --glass-border: rgba(255, 255, 255, 0.08); --shadow-lg: 0 20px 60px -15px rgba(0, 0, 0, 0.5); }
 * { font-family: "Inter", sans-serif; }
 body { background-color: var(--bg-main); color: var(--text-main); overflow-x: hidden; transition: background-color 0.3s ease, color 0.3s ease; }
-#login-overlay { top: 0; left: 0; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; z-index: 99999; padding: 1.5rem; }
+/* Acceso sin sesión: la página queda inmovilizada; el login es la única superficie visible. */
+html:has(body:not(.erp-authenticated)) { height: 100% !important; overflow: hidden !important; overscroll-behavior: none !important; }
+body:not(.erp-authenticated) { position: fixed !important; inset: 0 !important; width: 100% !important; height: 100% !important; min-height: 0 !important; margin: 0 !important; overflow: hidden !important; overscroll-behavior: none !important; }
+body:not(.erp-authenticated) > *:not(#login-overlay):not(#server-connection-status):not(#modalCliente):not(#modalPortalMantenimiento):not(.modal-backdrop) { visibility: hidden !important; }
+body:not(.erp-authenticated) #login-overlay { visibility: visible !important; }
+#login-overlay { position: fixed !important; inset: 0 !important; width: 100vw !important; height: 100vh !important; height: 100dvh !important; min-height: 0 !important; max-height: none !important; box-sizing: border-box !important; display: flex; align-items: center; justify-content: center; z-index: 100000 !important; padding: 8px; overflow: hidden !important; background: #0f172a !important; isolation: isolate !important; }
+#login-overlay > .login-split-card-pro { width: min(100%, 760px) !important; max-height: calc(100dvh - 16px) !important; overflow-x: hidden !important; overflow-y: auto !important; overscroll-behavior: contain !important; }
 #modalDocumentoRegistro { position: fixed !important; inset: 0 !important; z-index: 400000 !important; isolation: isolate !important; }
 #modalDocumentoRegistro.show { display: block !important; z-index: 400000 !important; }
 #modalDocumentoRegistro + .modal-backdrop,
@@ -87,7 +93,7 @@ body { background-color: var(--bg-main); color: var(--text-main); overflow-x: hi
 #modalDocumentoRegistro .modal-footer .btn { font-size: .7rem !important; padding: .35rem .7rem !important; }
 #login-overlay .brand-section-spectacular,
 #login-overlay .brand-section-spectacular * { user-select: none; -webkit-user-select: none; }
-.login-split-card-pro { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.9) inset; border-radius: 1.5rem; width: 100%; max-width: 1000px; overflow: hidden; }
+.login-split-card-pro { background: #1e293b; background-color: #1e293b; backdrop-filter: none; -webkit-backdrop-filter: none; border: 1px solid var(--glass-border); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.9) inset; border-radius: 1.5rem; width: 100%; max-width: 1000px; overflow: hidden; }
 .brand-section-spectacular { background: linear-gradient(145deg, #090d16 0%, #111827 50%, #1e3a8a 100%); position: relative; overflow: hidden; }
 .input-group-pro { background-color: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 0.75rem; transition: all 0.25s ease; }
 .input-group-pro:focus-within { border-color: #2563eb; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08); background-color: #ffffff; }
@@ -408,7 +414,7 @@ body.dark-mode #gs-connection-badge,
 html[data-bs-theme="dark"] #theme-toggle-login i { color: #fbbf24 !important; }
 #modalFamiliar .modal-dialog { margin-top: 1rem; margin-bottom: 1rem; }
 #modalFamiliar { z-index: 200000 !important; }
-#modalCliente { z-index: 200000 !important; }
+#modalCliente { position: fixed !important; z-index: 500000 !important; }
 #modalFamiliaExpediente { z-index: 300000 !important; }
 #modalFamiliaExpediente .modal-dialog { z-index: 300001 !important; max-width: 1180px; }
 #modalFamiliaExpediente .modal-content-pro { position: relative; z-index: 300002 !important; background: var(--bg-card) !important; color: var(--text-main) !important; border: 1px solid var(--border-color) !important; }
@@ -518,7 +524,7 @@ body.erp-authenticated .modal-dialog { z-index: 1061 !important; }
 body.erp-authenticated .modal-content { position: relative; z-index: 1062 !important; }
 .bank-value { word-break: break-word; }
 #loginForm input:disabled { cursor: not-allowed; opacity: .7; }
-#server-connection-status { position: fixed; inset: 0; background: rgba(2,6,23,.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; z-index: 300000; padding: 20px; }
+#server-connection-status { position: fixed !important; inset: 0 !important; width: 100vw; height: 100vh; height: 100dvh; background: #020617; display: flex; align-items: center; justify-content: center; z-index: 2147483647 !important; padding: 20px; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
 #server-connection-status.is-hidden { display: none !important; }
 .server-connection-card { width: min(560px,94vw); background: rgba(8,13,28,.88); border: 1px solid rgba(255,255,255,.12); border-radius: 26px; padding: 34px 30px 28px; box-shadow: 0 30px 100px rgba(0,0,0,.48); text-align: center; color: #fff; }
 .server-connection-logo-wrap { width: 100%; display: flex; justify-content: center; overflow: hidden; }
@@ -1791,7 +1797,7 @@ body.portal-modern-v2 #sidebar > .p-4:first-child > div:first-child { align-item
 .lc-sidebar-text-logo .lc-text-logo-tech { font-size: clamp(.82rem,4.55cqw,1.68rem) !important; }
 body.portal-modern-v2 #login-overlay .brand-section-spectacular { background: transparent !important; background-color: transparent !important; }
 body.portal-modern-v2 #login-overlay .brand-section-spectacular > .position-absolute { opacity: 0 !important; background: transparent !important; }
-body.portal-modern-v2 #login-overlay .login-split-card-pro { background: rgba(255,255,255,.06) !important; border-color: rgba(255,255,255,.22) !important; box-shadow: 0 20px 70px rgba(0,0,0,.28) !important; }
+body.portal-modern-v2 #login-overlay .login-split-card-pro { background: #1e293b !important; background-color: #1e293b !important; border-color: rgba(255,255,255,.22) !important; box-shadow: 0 20px 70px rgba(0,0,0,.28) !important; }
 html[data-bs-theme="dark"] #loginForm .input-group-pro .input-group-text,
 body.dark-mode #loginForm .input-group-pro .input-group-text { background: transparent !important; background-color: transparent !important; background-image: none !important; border-color: transparent !important; box-shadow: none !important; color: #94a3b8 !important; }
 html[data-bs-theme="dark"] #loginForm .input-group-pro > button,
@@ -3079,7 +3085,7 @@ body.portal-modern-v2 #login-overlay .brand-section-spectacular,
 body.portal-modern-v2 #login-overlay .brand-section-spectacular::before,
 body.portal-modern-v2 #login-overlay .brand-section-spectacular::after { background: transparent !important; background-image: none !important; background-color: transparent !important; box-shadow: none !important; }
 body.portal-modern-v2 #login-overlay .brand-section-spectacular > .position-absolute { display: none !important; }
-body.portal-modern-v2 #login-overlay > .login-split-card-pro { position: relative !important; z-index: 2 !important; background: rgba(255,255,255,.035) !important; border-color: rgba(255,255,255,.16) !important; box-shadow: 0 30px 95px rgba(0,0,0,.38) !important; }
+body.portal-modern-v2 #login-overlay > .login-split-card-pro { position: relative !important; z-index: 2 !important; background: #1e293b !important; background-color: #1e293b !important; border-color: rgba(255,255,255,.16) !important; box-shadow: 0 30px 95px rgba(0,0,0,.38) !important; }
 body.portal-modern-v2 .lc-login-logo-shell { width: 100% !important; max-width: 100% !important; padding: 4px 0 !important; container-type: inline-size !important; }
 body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo { width: 100% !important; max-width: none !important; gap: clamp(13px,2.4cqw,24px) !important; align-items: center !important; }
 body.portal-modern-v2 .lc-login-logo-shell .lc-text-logo-mark { width: clamp(92px,18cqw,132px) !important; height: clamp(92px,18cqw,132px) !important; min-width: clamp(92px,18cqw,132px) !important; flex: 0 0 auto !important; }
@@ -3353,10 +3359,10 @@ body { min-width: 0; overflow-x: hidden; }
 .tarea-modal-viewport .tarea-modal-dialog { width: min(800px, calc(100vw - 2 * var(--modal-gutter))); max-width: 800px; max-height: calc(var(--portal-vh) - 2 * var(--modal-gutter)); margin: 0 !important; }
 .tarea-modal-viewport .tarea-modal-content { width: 100%; max-height: calc(var(--portal-vh) - 2 * var(--modal-gutter)); }
 .tarea-modal-viewport .tarea-modal-body { min-height: 0; overflow-y: auto; }
-#login-overlay { width: 100%; min-height: var(--portal-vh); height: auto; max-height: var(--portal-vh); overflow-y: auto; padding: clamp(10px, 2.5vw, 28px); box-sizing: border-box; }
-.login-split-card-pro { width: min(100%, 1000px); max-height: calc(var(--portal-vh) - 2 * clamp(10px, 2.5vw, 28px)); overflow: auto; }
+#login-overlay { width: 100vw !important; height: 100dvh !important; min-height: 0 !important; max-height: none !important; overflow: hidden !important; padding: 8px; box-sizing: border-box; }
+.login-split-card-pro { width: min(100%, 760px); max-height: calc(100dvh - 16px); overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; }
 @media (max-width: 991.98px) { #main-content { margin-left: 0; padding: clamp(12px, 2.5vw, 20px); } #sidebar { width: min(var(--sidebar-width), 88vw); } .kpi-card { padding: 1rem; } }
-@media (max-width: 767.98px) { :root { --modal-gutter: 8px; } #login-overlay { align-items: flex-start; justify-content: stretch; } .login-split-card-pro { margin: auto; max-height: none; overflow: visible; } .modal-dialog { width: calc(100% - 16px); max-width: none; margin: 8px auto; min-height: calc(var(--portal-vh) - 16px); } .modal-content { max-height: calc(var(--portal-vh) - 16px); border-radius: 14px; } .modal-header, .modal-footer { padding: .75rem .85rem; } .modal-body { padding: .85rem; } .modal-footer { flex-wrap: wrap; } .modal-footer .btn { flex: 1 1 auto; min-width: 110px; } .tarea-modal-viewport .tarea-modal-dialog { width: 100%; max-width: none; max-height: none; height: var(--portal-vh); } .tarea-modal-viewport .tarea-modal-content { max-height: none; height: var(--portal-vh); border-radius: 0; } .tarea-modal-viewport .tarea-modal-body { padding: 8px 10px !important; } #main-content { padding: 10px; } }
+@media (max-width: 767.98px) { :root { --modal-gutter: 8px; } #login-overlay { align-items: center !important; justify-content: center !important; } #login-overlay > .login-split-card-pro, .login-split-card-pro { margin: auto; max-height: calc(100dvh - 16px) !important; overflow-x: hidden !important; overflow-y: auto !important; } .modal-dialog { width: calc(100% - 16px); max-width: none; margin: 8px auto; min-height: calc(var(--portal-vh) - 16px); } .modal-content { max-height: calc(var(--portal-vh) - 16px); border-radius: 14px; } .modal-header, .modal-footer { padding: .75rem .85rem; } .modal-body { padding: .85rem; } .modal-footer { flex-wrap: wrap; } .modal-footer .btn { flex: 1 1 auto; min-width: 110px; } .tarea-modal-viewport .tarea-modal-dialog { width: 100%; max-width: none; max-height: none; height: var(--portal-vh); } .tarea-modal-viewport .tarea-modal-content { max-height: none; height: var(--portal-vh); border-radius: 0; } .tarea-modal-viewport .tarea-modal-body { padding: 8px 10px !important; } #main-content { padding: 10px; } }
 @media (max-width: 575.98px) { #main-content { padding: 8px; } .container, .container-fluid { --bs-gutter-x: .75rem; } .row { --bs-gutter-x: .65rem; } .table-custom th, .table-custom td { padding: 9px 10px; } .btn { white-space: normal; } }
 @media (orientation: landscape) and (max-width: 991.98px) { #login-overlay { align-items: flex-start; } .login-split-card-pro { max-height: calc(var(--portal-vh) - 12px); overflow-y: auto; } }
 @media (min-width: 992px) { #main-content { min-height: var(--portal-vh); } .modal-dialog { min-height: 0; } }
@@ -3462,6 +3468,13 @@ body { min-width: 0; overflow-x: hidden; }
 
 /* Ajuste final: modal de cierre de sesión compacto en escritorio */
 @media (min-width: 992px){#modalConfirmLogout .modal-dialog{max-width:360px}#modalConfirmLogout .modal-content{padding:12px!important}#modalConfirmLogout .modal-body{padding:8px!important}#modalConfirmLogout .modal-body p{margin-bottom:12px!important}#modalConfirmLogout .modal-body .mb-2{margin-bottom:8px!important}}
+
+@media (max-width: 767.98px) {
+  #login-overlay { padding: 8px !important; align-items: center !important; justify-content: center !important; }
+  #login-overlay > .login-split-card-pro { width: 100% !important; max-height: calc(100dvh - 16px) !important; overflow-x: hidden !important; overflow-y: auto !important; }
+  #login-overlay #loginForm { overscroll-behavior: contain; }
+}
+body.erp-authenticated #login-overlay { display: none !important; visibility: hidden !important; pointer-events: none !important; }
 </style>
 <style id="permisos-usuarios-compartidos">
 #modalUsuario .perm-usuarios-picker{margin-top:7px;padding:6px;border:1px solid var(--border-color);border-radius:8px;background:var(--surface-soft)}
@@ -3952,39 +3965,6 @@ html[data-bs-theme="dark"] #sec-electricidad .elec-kpi-icon.red,body.dark-mode #
 @media(max-width:575px){.pd-hero-actions{align-self:flex-start;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;padding:2px 0 4px}.pd-hero-actions .pd-icon-action{flex:0 0 36px!important}}
 </style>
 
-<style id="login-mobile-viewport-fix-v511">
-/* Corrección móvil: el login cubre el viewport visible incluso con el teclado abierto. */
-html, body { overscroll-behavior: none; }
-html:has(#login-overlay:not(.d-none)):not(:has(body.erp-authenticated)) { overflow: hidden !important; }
-body:not(.erp-authenticated) { overflow: hidden !important; overscroll-behavior: none !important; }
-#login-overlay {
-  position: fixed !important;
-  inset: 0 !important;
-  top: 0 !important; left: 0 !important; right: 0 !important;
-  width: 100% !important;
-  height: var(--login-visible-height, 100dvh) !important;
-  min-height: 0 !important;
-  max-height: var(--login-visible-height, 100dvh) !important;
-  box-sizing: border-box !important;
-  overflow: hidden !important;
-  overscroll-behavior: none !important;
-  touch-action: pan-x pan-y;
-  background: #0f172a !important;
-  z-index: 99999 !important;
-}
-#login-overlay::before { position: absolute !important; inset: 0 !important; }
-#login-overlay > .login-split-card-pro {
-  max-height: calc(var(--login-visible-height, 100dvh) - 16px) !important;
-}
-@media (max-width: 767.98px) {
-  #login-overlay { padding: 8px !important; align-items: center !important; }
-  #login-overlay > .login-split-card-pro { margin-top: 0 !important; margin-bottom: 0 !important; }
-  #loginForm { overscroll-behavior: none !important; }
-  #loginForm input, #loginForm button { scroll-margin: 0 !important; }
-  html, body { max-width: 100% !important; }
-}
-body.erp-authenticated #login-overlay { display: none !important; }
-</style>
 </head>
 <!-- VERSION Servidor 2026.1.2 — V39.8 filtros OPERACIONES TÉCNICAS unificados -->
 <body>
@@ -4026,7 +4006,7 @@ body.erp-authenticated #login-overlay { display: none !important; }
 </div>
 </div>
 </div>
-<div class="d-flex align-items-center justify-content-center p-3 p-sm-4 overflow-hidden w-100" id="login-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background-color: #0f172a;">
+<div class="d-flex align-items-center justify-content-center p-3 p-sm-4 overflow-hidden w-100" id="login-overlay" style="background-color: #0f172a;">
 <div class="card login-split-card-pro rounded-4 overflow-hidden w-100 my-auto position-relative z-1 shadow-lg" style="max-width: 980px; max-height: 90vh;">
 <div class="row g-0 h-100">
 <!-- SECCIÓN IZQUIERDA: MARCA Y BIENVENIDA -->
@@ -8308,6 +8288,15 @@ async function sincronizarConservidor() {
 
     async function iniciarConexionInicial(){
         const overlay=document.getElementById('server-connection-status');
+        // Mostrar el modal de progreso desde el inicio de la comprobación.
+        // Se reutiliza el elemento existente: no se crea un segundo modal.
+        overlay?.classList.remove('is-hidden','is-welcome','d-none');
+        if(overlay){
+            overlay.style.setProperty('display','flex','important');
+            overlay.style.setProperty('visibility','visible','important');
+            overlay.style.setProperty('opacity','1','important');
+        }
+        const inicioProgreso=Date.now();
         const fill=document.getElementById('server-connection-fill');
         const percent=document.getElementById('server-connection-percent');
         const message=document.getElementById('server-connection-message');
@@ -8328,23 +8317,39 @@ async function sincronizarConservidor() {
         // se completa para permitir el acceso al formulario.
         const timer=setInterval(()=>{
             if(progreso<92){progreso=Math.min(92,progreso+1);pintar();}
-        },45);
+        },25);
 
         let ok=false;
         try{ ok=await comprobarConexionservidor(); }
         catch(e){ console.warn('Error en la conexión inicial con Servidor:',e); }
-        finally{
-            clearInterval(timer);
-            // Completar siempre la animación; Servidor se vuelve a consultar
-            // cuando el usuario inicia sesión y durante la sincronización.
-            progreso=100;
-            pintar();
-        }
+        // Mantener el indicador visible el tiempo suficiente para que se perciba
+        // incluso si la respuesta del servidor es casi inmediata.
+        const restante=Math.max(0,2200-(Date.now()-inicioProgreso));
+        if(restante) await new Promise(resolve=>setTimeout(resolve,restante));
+        clearInterval(timer);
+        // Completar siempre la animación; el portal puede reintentar después.
+        progreso=100;
+        pintar();
 
         overlay?.classList.add('is-welcome');
         if(message) message.textContent=ok?'Servidor conectado correctamente':'Portal listo — la conexión se reintentará automáticamente';
         if(online){online.textContent=ok?'EN LÍNEA':'REINTENTO AUTOMÁTICO';online.style.color=ok?'#16a34a':'#f59e0b';}
-        setTimeout(()=>overlay?.classList.add('is-hidden'),1200);
+
+        // Al alcanzar el 100 %, el progreso deja de bloquear el formulario.
+        // La causa del bloqueo era mantener `display:flex !important` en línea:
+        // esa regla ganaba incluso después de añadir la clase is-hidden.
+        if(overlay){
+            overlay.style.setProperty('pointer-events','none','important');
+            // Dejar un instante el estado final visible, sin interceptar clics.
+            setTimeout(()=>{
+                overlay.classList.add('is-hidden');
+                overlay.classList.remove('is-welcome');
+                overlay.style.removeProperty('display');
+                overlay.style.removeProperty('visibility');
+                overlay.style.removeProperty('opacity');
+                overlay.style.removeProperty('pointer-events');
+            },350);
+        }
         return ok;
     }
 
@@ -10930,6 +10935,10 @@ async function eliminarUsuario(id) {
                 return;
             }
             window._portalPublicoValidado=true;
+            const modalRegistro=document.getElementById('modalCliente');
+            if(modalRegistro && modalRegistro.parentElement!==document.body){
+                document.body.appendChild(modalRegistro);
+            }
             await abrirModalCliente(null,true);
         }finally{
             if(boton)boton.disabled=false;
@@ -18102,7 +18111,7 @@ window.renderOpsModulo=function(mod){const result=renderOriginal?.apply(this,arg
 .modal.show .form-control,.modal.show .form-select{font-size:.8rem!important;min-height:36px!important;padding:6px 9px!important;border-radius:8px!important}
 .modal-backdrop.show{opacity:.48!important}
 /* Inicio de sesión: tarjeta mucho más proporcionada, sin alterar el fondo de pantalla. */
-#login-overlay .login-split-card-pro{width:min(760px,100%)!important;max-width:760px!important;max-height:calc(100dvh - 36px)!important;border-radius:18px!important;box-shadow:0 22px 60px rgba(0,0,0,.28)!important;overflow:auto!important}
+#login-overlay .login-split-card-pro{width:min(760px,100%)!important;max-width:760px!important;max-height:calc(100dvh - 16px)!important;border-radius:18px!important;box-shadow:0 22px 60px rgba(0,0,0,.28)!important;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain!important}
 #login-overlay .brand-section-spectacular{padding:1.35rem!important}
 #login-overlay .login-split-card-pro .p-4{padding:1.15rem!important}
 #login-overlay .login-split-card-pro .p-xl-5{padding:1.35rem!important}
@@ -18130,7 +18139,7 @@ window.renderOpsModulo=function(mod){const result=renderOriginal?.apply(this,arg
  .modal.show .modal-header{padding:10px 12px!important}
  .modal.show .modal-body{padding:12px!important}
  .modal.show .modal-footer{padding:9px 12px!important}
- #login-overlay .login-split-card-pro{width:100%!important;max-width:430px!important;max-height:calc(100dvh - 20px)!important}
+ #login-overlay .login-split-card-pro{width:100%!important;max-width:430px!important;max-height:calc(100dvh - 16px)!important;overflow-x:hidden!important;overflow-y:auto!important}
  #login-overlay .brand-section-spectacular{display:none!important}
  .tarea-summary-card{max-height:calc(100dvh - 16px)!important}
 }
@@ -18640,35 +18649,5 @@ body{padding-bottom:26px!important}
 </script>
 
 
-<script id="login-mobile-viewport-fix-script-v511">
-(function(){
-  const overlay = document.getElementById('login-overlay');
-  if (!overlay) return;
-  const root = document.documentElement;
-  function updateLoginViewport(){
-    if (document.body && document.body.classList.contains('erp-authenticated')) {
-      root.style.removeProperty('--login-visible-height');
-      return;
-    }
-    const vv = window.visualViewport;
-    const height = vv && vv.height ? vv.height : window.innerHeight;
-    root.style.setProperty('--login-visible-height', Math.max(240, Math.round(height)) + 'px');
-  }
-  updateLoginViewport();
-  window.addEventListener('resize', updateLoginViewport, {passive:true});
-  window.addEventListener('orientationchange', updateLoginViewport, {passive:true});
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', updateLoginViewport, {passive:true});
-    window.visualViewport.addEventListener('scroll', updateLoginViewport, {passive:true});
-  }
-  document.addEventListener('focusin', function(ev){
-    if (!document.body.classList.contains('erp-authenticated') && overlay.contains(ev.target)) {
-      updateLoginViewport();
-      window.setTimeout(updateLoginViewport, 80);
-      window.setTimeout(updateLoginViewport, 250);
-    }
-  });
-})();
-</script>
 </body>
 </html>
