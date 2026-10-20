@@ -3878,16 +3878,16 @@ html[data-bs-theme="dark"] #sec-electricidad .elec-kpi-icon.red,body.dark-mode #
 }
 #login-overlay .login-form-section> .text-center>p{font-size:.88rem!important;color:#667085!important;margin-bottom:26px!important;text-align:center!important}
 #login-overlay #loginForm{width:100%;max-width:390px;margin-inline:auto}
-#login-overlay #loginForm .form-label{display:block;color:#344054!important;font-size:.77rem!important;font-weight:750!important;letter-spacing:.015em;margin-bottom:7px!important}
-#login-overlay #loginForm .input-group-pro{
+html[data-bs-theme="light"] #login-overlay #loginForm .form-label{display:block;color:#344054!important;font-size:.77rem!important;font-weight:750!important;letter-spacing:.015em;margin-bottom:7px!important}
+html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro{
   min-height:51px!important;border:1px solid #d7deeb!important;border-radius:13px!important;background:#fff!important;
   box-shadow:0 2px 5px rgba(16,24,40,.025)!important;transition:border-color .18s,box-shadow .18s!important;
 }
-#login-overlay #loginForm .input-group-pro:focus-within{border-color:#818cf8!important;box-shadow:0 0 0 4px rgba(99,102,241,.12)!important}
-#login-overlay #loginForm .input-group-pro .input-group-text{color:#7c83a0!important;padding-left:15px!important}
-#login-overlay #loginForm .input-group-pro .form-control{min-height:49px!important;background:transparent!important;color:#101828!important;font-size:.9rem!important;letter-spacing:.01em}
-#login-overlay #loginForm .input-group-pro .form-control::placeholder{color:#98a2b3!important}
-#login-overlay #loginForm .input-group-pro button{color:#667085!important}
+html[data-bs-theme="light"] html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro:focus-within{border-color:#818cf8!important;box-shadow:0 0 0 4px rgba(99,102,241,.12)!important}
+html[data-bs-theme="light"] html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro .input-group-text{color:#7c83a0!important;padding-left:15px!important}
+html[data-bs-theme="light"] html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro .form-control{min-height:49px!important;background:transparent!important;color:#101828!important;font-size:.9rem!important;letter-spacing:.01em}
+html[data-bs-theme="light"] html[data-bs-theme="light"] html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro .form-control::placeholder{color:#98a2b3!important}
+html[data-bs-theme="light"] html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro button{color:#667085!important}
 #login-overlay #loginForm .btn-pro-action{
   min-height:51px!important;margin-top:9px!important;border:0!important;border-radius:13px!important;
   background:linear-gradient(105deg,#4f46e5 0%,#6366f1 50%,#0891b2 100%)!important;
@@ -18453,16 +18453,16 @@ window.renderOpsModulo=function(mod){const result=renderOriginal?.apply(this,arg
   #login-overlay .login-form-section span.text-muted{
     color:#e2e8f0 !important;
   }
-  #login-overlay .login-form-section .input-group-pro{
+  html[data-bs-theme="light"] #login-overlay .login-form-section .input-group-pro{
     background:#f8fafc !important;
     border-color:#cbd5e1 !important;
   }
-  #login-overlay .login-form-section .input-group-pro .form-control,
-  #login-overlay .login-form-section .input-group-pro .input-group-text,
-  #login-overlay .login-form-section .input-group-pro button{
+  html[data-bs-theme="light"] #login-overlay .login-form-section .input-group-pro .form-control,
+  html[data-bs-theme="light"] #login-overlay .login-form-section .input-group-pro .input-group-text,
+  html[data-bs-theme="light"] #login-overlay .login-form-section .input-group-pro button{
     color:#111827 !important;
   }
-  #login-overlay .login-form-section .input-group-pro .form-control::placeholder{color:#64748b !important;}
+  html[data-bs-theme="light"] #login-overlay .login-form-section .input-group-pro .form-control::placeholder{color:#64748b !important;}
   #login-overlay .login-form-section .border-light,
   #login-overlay .login-form-section .border-top{border-color:rgba(255,255,255,.18) !important;}
 }
@@ -19546,14 +19546,73 @@ body.dark-mode #login-overlay .login-form-section .lc-text-logo-lc,
 body.dark-mode #login-overlay .login-form-section .lc-text-logo-initials .c {color:#ff7a18!important;-webkit-text-fill-color:#ff7a18!important;}
 html[data-bs-theme="dark"] #login-overlay .login-form-section .lc-text-logo-sub,
 body.dark-mode #login-overlay .login-form-section .lc-text-logo-sub {color:#fdba74!important;-webkit-text-fill-color:#fdba74!important;text-shadow:none!important;}
-html[data-bs-theme="dark"] #login-overlay .login-form-section .input-group-pro,
-body.dark-mode #login-overlay .login-form-section .input-group-pro {background:#f8fafc!important;border-color:#cbd5e1!important;}
-html[data-bs-theme="dark"] #login-overlay .login-form-section .input-group-pro .form-control,
-html[data-bs-theme="dark"] #login-overlay .login-form-section .input-group-pro .input-group-text,
-html[data-bs-theme="dark"] #login-overlay .login-form-section .input-group-pro button,
-body.dark-mode #login-overlay .login-form-section .input-group-pro .form-control,
-body.dark-mode #login-overlay .login-form-section .input-group-pro .input-group-text,
-body.dark-mode #login-overlay .login-form-section .input-group-pro button {color:#111827!important;}
+/* LOGIN — CAMPOS DE CREDENCIALES ADAPTADOS AL TEMA REAL DEL DISPOSITIVO.
+   Los selectores incluyen ambos ID del formulario para prevalecer sobre los estilos base antiguos. */
+html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro,
+body:not(.dark-mode):not(.theme-dark) #login-overlay #loginForm .input-group-pro {
+  background:#ffffff!important;background-color:#ffffff!important;background-image:none!important;
+  border-color:#d7deeb!important;box-shadow:0 2px 5px rgba(16,24,40,.025)!important;color:#101828!important;
+}
+html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro .form-control,
+body:not(.dark-mode):not(.theme-dark) #login-overlay #loginForm .input-group-pro .form-control {
+  background:transparent!important;background-color:transparent!important;background-image:none!important;
+  color:#101828!important;-webkit-text-fill-color:#101828!important;caret-color:#101828!important;box-shadow:none!important;
+}
+html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro .input-group-text,
+html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro > button,
+body:not(.dark-mode):not(.theme-dark) #login-overlay #loginForm .input-group-pro .input-group-text,
+body:not(.dark-mode):not(.theme-dark) #login-overlay #loginForm .input-group-pro > button {
+  background:transparent!important;background-color:transparent!important;background-image:none!important;
+  color:#667085!important;-webkit-text-fill-color:#667085!important;border-color:transparent!important;box-shadow:none!important;
+}
+html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro .form-control::placeholder,
+body:not(.dark-mode):not(.theme-dark) #login-overlay #loginForm .input-group-pro .form-control::placeholder {color:#98a2b3!important;-webkit-text-fill-color:#98a2b3!important;opacity:1!important;}
+html[data-bs-theme="light"] #login-overlay #loginForm .input-group-pro:focus-within,
+body:not(.dark-mode):not(.theme-dark) #login-overlay #loginForm .input-group-pro:focus-within {border-color:#818cf8!important;box-shadow:0 0 0 4px rgba(99,102,241,.12)!important;}
+
+html[data-bs-theme="dark"] #login-overlay #loginForm .input-group-pro,
+body.dark-mode #login-overlay #loginForm .input-group-pro,
+body.theme-dark #login-overlay #loginForm .input-group-pro {
+  background:#0f172a!important;background-color:#0f172a!important;background-image:none!important;
+  border-color:#334155!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.22)!important;color:#f8fafc!important;
+}
+html[data-bs-theme="dark"] #login-overlay #loginForm .input-group-pro .form-control,
+body.dark-mode #login-overlay #loginForm .input-group-pro .form-control,
+body.theme-dark #login-overlay #loginForm .input-group-pro .form-control {
+  background:transparent!important;background-color:transparent!important;background-image:none!important;
+  color:#f8fafc!important;-webkit-text-fill-color:#f8fafc!important;caret-color:#f8fafc!important;box-shadow:none!important;
+}
+html[data-bs-theme="dark"] #login-overlay #loginForm .input-group-pro .input-group-text,
+html[data-bs-theme="dark"] #login-overlay #loginForm .input-group-pro > button,
+body.dark-mode #login-overlay #loginForm .input-group-pro .input-group-text,
+body.dark-mode #login-overlay #loginForm .input-group-pro > button,
+body.theme-dark #login-overlay #loginForm .input-group-pro .input-group-text,
+body.theme-dark #login-overlay #loginForm .input-group-pro > button {
+  background:transparent!important;background-color:transparent!important;background-image:none!important;
+  color:#cbd5e1!important;-webkit-text-fill-color:#cbd5e1!important;border-color:transparent!important;box-shadow:none!important;
+  -webkit-appearance:none!important;appearance:none!important;
+}
+html[data-bs-theme="dark"] #login-overlay #loginForm .input-group-pro:focus-within,
+body.dark-mode #login-overlay #loginForm .input-group-pro:focus-within,
+body.theme-dark #login-overlay #loginForm .input-group-pro:focus-within {
+  background:#0f172a!important;background-color:#0f172a!important;border-color:#60a5fa!important;
+  box-shadow:0 0 0 3px rgba(96,165,250,.18)!important;
+}
+html[data-bs-theme="dark"] #login-overlay #loginForm .input-group-pro .form-control::placeholder,
+body.dark-mode #login-overlay #loginForm .input-group-pro .form-control::placeholder,
+body.theme-dark #login-overlay #loginForm .input-group-pro .form-control::placeholder {
+  color:#94a3b8!important;-webkit-text-fill-color:#94a3b8!important;opacity:1!important;
+}
+/* Evita que el autocompletado del navegador pinte los campos oscuros de blanco. */
+html[data-bs-theme="dark"] #login-overlay #loginForm .input-group-pro .form-control:-webkit-autofill,
+html[data-bs-theme="dark"] #login-overlay #loginForm .input-group-pro .form-control:-webkit-autofill:hover,
+html[data-bs-theme="dark"] #login-overlay #loginForm .input-group-pro .form-control:-webkit-autofill:focus,
+body.dark-mode #login-overlay #loginForm .input-group-pro .form-control:-webkit-autofill,
+body.dark-mode #login-overlay #loginForm .input-group-pro .form-control:-webkit-autofill:hover,
+body.dark-mode #login-overlay #loginForm .input-group-pro .form-control:-webkit-autofill:focus {
+  -webkit-box-shadow:0 0 0 1000px #0f172a inset!important;
+  -webkit-text-fill-color:#f8fafc!important;caret-color:#f8fafc!important;
+}
 
 /* Panel informativo izquierdo: tarjetas compactas y consistentes con el fondo de marca. */
 #login-overlay .login-brand-overview {max-width:560px;margin-left:auto;margin-right:auto;width:100%;}
