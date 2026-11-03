@@ -1048,7 +1048,7 @@ html[data-bs-theme="dark"] .service-rate-pill, html[data-bs-theme="dark"] .servi
 html[data-bs-theme="dark"] .service-price, html[data-bs-theme="dark"] .service-total-usd{ color: var(--text-main) !important; }
 html[data-bs-theme="dark"] .service-bs, html[data-bs-theme="dark"] .service-total-bs{ color: var(--text-body) !important; }
 html[data-bs-theme="dark"] .service-category{ color: #93c5fd !important; }
-html[data-bs-theme="dark"] .bank-v2-field, html[data-bs-theme="dark"] .payment-summary-item, html[data-bs-theme="dark"] .familia-upload-card, html[data-bs-theme="dark"] .familia-file-preview, html[data-bs-theme="dark"] .familia-doc-thumb, html[data-bs-theme="dark"] #usr-permisos-panel .bg-light{ background: var(--surface-soft) !important; color: var(--text-main) !important; border-color: var(--border-color) !important; }
+
 html[data-bs-theme="dark"] .bank-v2-top{ background: linear-gradient(135deg,#172033,#1e293b) !important; border-color: var(--border-color) !important; }
 html[data-bs-theme="dark"] .bank-v2-value>span, html[data-bs-theme="dark"] .bank-v2-name{ color: var(--text-main) !important; }
 html[data-bs-theme="dark"] .bank-readonly-badge{ background: var(--soft-blue-bg) !important; border-color: var(--soft-blue-border) !important; color: var(--soft-blue-text) !important; }
@@ -1716,154 +1716,153 @@ html[data-bs-theme="dark"] #modalVerFactura .invoice-modal-header .btn-close-whi
 #sec-servicios .ps-admin-nav{ width: 100%; flex-basis: 100%; }
 #sec-servicios .ps-admin-nav .btn{ font-size: .64rem !important; padding: .4rem .45rem !important; }
 #sec-servicios .ps-admin-nav .btn span{ white-space: nowrap; }}
-#modalUsuario .usr-permisos-compact{ padding: 9px; background: var(--bg-card); border-radius: 14px; }
-#modalUsuario .usr-permisos-toolbar{ align-items: flex-start; padding: 0 0 8px; border-bottom: 1px solid var(--border-color); }
-#modalUsuario .perm-legend{ display: block; margin-top: 3px; font-size: .66rem; color: var(--text-muted); font-weight: 500; }
-#modalUsuario .perm-module-card{ display: flex; align-items: center; border: 1px solid var(--border-color); background: var(--surface-soft); line-height: 1.1; transition: .15s ease; }
-#modalUsuario .perm-module-card:hover{ border-color: rgba(37,99,235,.45); transform: translateY(-1px); }
-#modalUsuario .perm-module-card input{ flex: 0 0 auto; margin: 0; }
-#modalUsuario .perm-module-card i{ text-align: center; color: #2563eb; flex: 0 0 15px; }
-#modalUsuario .perm-module-card span{ min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-#modalUsuario #usr-permisos-acciones{ grid-template-columns: repeat(2,minmax(0,1fr)); gap: 7px; margin-top: 8px !important; }
-#modalUsuario #usr-permisos-acciones .perm-config-card{ border: 1px solid var(--border-color); }
-#modalUsuario .perm-config-head{ display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-#modalUsuario .perm-config-head>div{ display: flex; align-items: center; gap: 6px; font-weight: 800; min-width: 0; }
-#modalUsuario .perm-config-head>div span{ overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-#modalUsuario .perm-config-state{ text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); white-space: nowrap; }
-#modalUsuario .perm-actions{ display: flex; flex-wrap: wrap; }
-#modalUsuario .perm-action-pill{ display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); margin: 0; cursor: pointer; }
-#modalUsuario .perm-action-pill input{ margin: 0; }
-#modalUsuario .perm-scope-row{ display: grid; grid-template-columns: 58px minmax(0,1fr); align-items: center; gap: 7px; margin-top: 7px; padding-top: 7px; border-top: 1px dashed var(--border-color); }
-#modalUsuario .perm-scope-row label, #modalUsuario .perm-parentesco-picker>span{ font-size: .61rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; margin: 0; }
-#modalUsuario .perm-scope-row select{ font-size: .66rem; padding: .28rem .5rem; border-radius: 7px; min-height: 28px; }
-#modalUsuario .perm-parentesco-picker{ margin-top: 6px; }
-html[data-bs-theme="dark"] #modalUsuario .perm-module-card, html[data-bs-theme="dark"] #modalUsuario #usr-permisos-acciones .perm-config-card{ background: #111827; }
-html[data-bs-theme="dark"] #modalUsuario .perm-action-pill, html[data-bs-theme="dark"] #modalUsuario .perm-parentesco-list label{ background: #172033; }
-@media (max-width:767px){#modalUsuario #usr-permisos-acciones{ grid-template-columns: 1fr; }
-#modalUsuario .perm-module-card{ min-height: 32px; }
-#modalUsuario .usr-permisos-toolbar{ gap: 7px; }}
-<style id="permisos-usuario-alcances-profesional">
-#modalUsuario .usr-permisos-studio{ padding: 0 !important; background: var(--bg-card) !important; border-radius: 14px; overflow: hidden; }
-#modalUsuario .usr-permisos-studio .usr-permisos-toolbar{ border-bottom: 1px solid var(--border-color); margin: 0 !important; background: linear-gradient(135deg,rgba(37,99,235,.07),rgba(37,99,235,.015)); }
-#modalUsuario .perm-studio-grid{ display: grid; }
-#modalUsuario .perm-module-sidebar{ border-right: 1px solid var(--border-color); background: var(--surface-soft); }
-#modalUsuario .perm-sidebar-title, #modalUsuario .perm-detail-title{ display: flex; align-items: end; justify-content: space-between; gap: 8px; }
-#modalUsuario .perm-sidebar-title span, #modalUsuario .perm-detail-title span{ font-weight: 800; color: var(--text-main); }
-#modalUsuario .perm-sidebar-title small, #modalUsuario .perm-detail-title small{ color: var(--text-muted); }
-#modalUsuario .perm-module-list{ display: flex; flex-direction: column; overflow: auto; }
-#modalUsuario .perm-studio-grid{ grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
-#modalUsuario .perm-module-card{ width: 100%; cursor: pointer; }
-#modalUsuario .perm-module-card.selected{ border-color: rgba(37,99,235,.55) !important; background: rgba(37,99,235,.09) !important; box-shadow: inset 3px 0 0 #2563eb; }
-#modalUsuario .perm-module-card.active{ border-color: #2563eb !important; background: rgba(37,99,235,.12) !important; box-shadow: inset 3px 0 0 #2563eb; }
-#modalUsuario .perm-detail-panel{ min-width: 0; }
-#modalUsuario .perm-detail-title{ padding-bottom: 7px; border-bottom: 1px solid var(--border-color); }
-#modalUsuario #usr-permisos-acciones{ display: block !important; margin: 0 !important; }
-#modalUsuario #usr-permisos-acciones .perm-config-card{ background: var(--surface-soft) !important; }
-#modalUsuario .perm-scope-box{ border: 1px solid var(--border-color); background: var(--bg-card); }
-#modalUsuario .perm-scope-title{ font-weight: 800; color: var(--text-main); display: flex; align-items: center; gap: 5px; }
-#modalUsuario .perm-scope-list{ display: flex; flex-wrap: wrap; }
-#modalUsuario .perm-scope-pill{ display: inline-flex; align-items: center; gap: 4px; margin: 0; border: 1px solid var(--border-color); background: var(--surface-soft); cursor: pointer; }
-#modalUsuario .perm-scope-pill input{ margin: 0; }
-#modalUsuario .perm-scope-help{ color: var(--text-muted); }
-#modalUsuario .perm-parentesco-picker, #modalUsuario .perm-clientes-picker{ border-top: 1px dashed var(--border-color); }
-#modalUsuario .perm-parentesco-picker>span, #modalUsuario .perm-clientes-picker>span{ font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
-#modalUsuario .perm-parentesco-list{ display: flex; flex-wrap: wrap; overflow: auto; }
-#modalUsuario .perm-parentesco-list label{ display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--border-color); background: var(--surface-soft); margin: 0; }
-#modalUsuario .perm-parentesco-list input{ width: 11px; height: 11px; margin: 0; }
-#modalUsuario .perm-client-search{ border-radius: 8px; }
-#modalUsuario .perm-client-list{ display: flex; flex-direction: column; overflow: auto; padding-right: 2px; }
-#modalUsuario .perm-client-list label{ display: grid; grid-template-columns: 14px minmax(0,1fr) auto; align-items: center; gap: 5px; margin: 0; border: 1px solid var(--border-color); background: var(--surface-soft); cursor: pointer; }
-#modalUsuario .perm-client-list label small{ color: var(--text-muted); white-space: nowrap; }
-#modalUsuario .perm-client-list input{ width: 11px; height: 11px; margin: 0; }
-html[data-bs-theme="dark"] #modalUsuario .perm-module-sidebar, html[data-bs-theme="dark"] #modalUsuario .perm-scope-box, html[data-bs-theme="dark"] #modalUsuario .perm-client-list label, html[data-bs-theme="dark"] #modalUsuario .perm-parentesco-list label{ background: #111827; }
-@media (max-width:767px){#modalUsuario .perm-studio-grid{ grid-template-columns: 1fr; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:767px){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:767px){
 .perm-module-sidebar{ border-right: 0 !important; border-bottom: 1px solid var(--border-color); }
-#modalUsuario .perm-module-list{ display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); max-height: 180px; }
+
 .perm-detail-panel{ padding: 9px !important; }
 .perm-client-list{ max-height: 125px !important; }}
-#modalUsuario .modal-content-pro{ overflow: hidden; }
-#modalUsuario #formUsuario{ display: grid; align-items: start; }
-#modalUsuario #formUsuario>.usr-hero-panel{ grid-column: 1; grid-row: 1; margin: 0 0 9px !important; }
-#modalUsuario #formUsuario>.usr-section-block:nth-of-type(2){ grid-column: 1; grid-row: 2; margin: 0 !important; }
-#modalUsuario #formUsuario>.usr-section-block:nth-of-type(3){ grid-column: 1; grid-row: 3; margin: 0 !important; }
-#modalUsuario #formUsuario>.usr-section-block:nth-of-type(4){ grid-column: 2; grid-row: 1 / span 3; margin: 0 !important; min-width: 0; }
-#modalUsuario #formUsuario>.usr-form-footer{ grid-column: 1 / -1; grid-row: 4; margin-top: 12px !important; }
-#modalUsuario .usr-form-grid{ grid-template-columns: 1fr !important; }
-#modalUsuario .usr-form-field-wide{ grid-column: auto !important; }
-#modalUsuario .usr-permisos-studio{ display: flex; flex-direction: column; }
-#modalUsuario .perm-studio-grid{ flex: 1; }
-#modalUsuario #usr-permisos-acciones{ overflow: auto; padding-right: 2px; }
-#modalUsuario #usr-permisos-acciones .perm-config-card{ min-height: 100%; }
-@media (max-width:980px){#modalUsuario .modal-dialog{ max-width: 940px !important; }}
-@media (max-width:760px){#modalUsuario .modal-content-pro{ max-height: calc(100vh - .9rem); }
-#modalUsuario .modal-body-pro{ max-height: calc(100vh - 7rem) !important; padding: 9px !important; }
-#modalUsuario #formUsuario>.usr-hero-panel, #modalUsuario #formUsuario>.usr-section-block, #modalUsuario #formUsuario>.usr-form-footer{ margin-bottom: 9px !important; }
-#modalUsuario .perm-module-list{ max-height: 330px; }}
-#modalUsuario .modal-dialog{ max-width: 1180px !important; width: calc(100% - 22px) !important; margin: .55rem auto !important; height: calc(100vh - 1.1rem) !important; }
-#modalUsuario .modal-content-pro{ height: 100% !important; max-height: none !important; border-radius: 16px !important; }
-#modalUsuario .modal-header-pro{ padding: .55rem .9rem !important; min-height: 48px !important; }
-#modalUsuario .modal-title{ font-size: .92rem !important; }
-#modalUsuario .modal-body-pro{ padding: 8px 10px !important; height: calc(100% - 48px) !important; max-height: none !important; overflow: hidden !important; }
-#modalUsuario #formUsuario{ height: 100% !important; min-height: 0 !important; grid-template-columns: minmax(235px,.62fr) minmax(0,1.9fr) !important; grid-template-rows: auto auto minmax(0,1fr) auto !important; gap: 0 10px !important; }
-#modalUsuario .usr-hero-panel{ gap: 8px !important; padding: 7px 9px !important; margin-bottom: 5px !important; border-radius: 10px !important; }
-#modalUsuario .usr-avatar{ width: 34px !important; height: 34px !important; flex-basis: 34px !important; border-radius: 9px !important; font-size: .82rem !important; }
-#modalUsuario .usr-section-divider{ margin: 5px 0 5px !important; font-size: .65rem !important; }
-#modalUsuario .usr-form-grid{ gap: 5px 7px !important; }
-#modalUsuario .form-control-pro, #modalUsuario .form-select-pro{ min-height: 30px !important; padding: .28rem .48rem !important; border-radius: 7px !important; }
-#modalUsuario .usr-input-group .input-group-text{ padding: .25rem .4rem !important; border-radius: 7px 0 0 7px !important; }
-#modalUsuario .usr-input-group .form-control-pro{ border-radius: 0 7px 7px 0 !important; }
-#modalUsuario .usr-status-note{ padding: 5px 7px !important; border-radius: 7px !important; }
-#modalUsuario .usr-permisos-studio{ min-height: 0 !important; height: 100% !important; max-height: none !important; border-radius: 11px !important; }
-#modalUsuario .usr-permisos-studio .usr-permisos-toolbar{ padding: 7px 9px !important; min-height: 42px !important; }
-#modalUsuario .perm-studio-grid{ height: calc(100% - 43px) !important; min-height: 0 !important; grid-template-columns: 185px minmax(0,1fr) !important; }
-#modalUsuario .perm-module-sidebar{ padding: 6px !important; min-height: 0 !important; overflow: hidden !important; }
-#modalUsuario .perm-sidebar-title, #modalUsuario .perm-detail-title{ margin-bottom: 5px !important; }
-#modalUsuario .perm-module-list{ height: calc(100% - 26px) !important; max-height: none !important; overflow-y: auto !important; gap: 3px !important; padding-right: 3px !important; }
-#modalUsuario .perm-module-card{ min-height: 29px !important; padding: 4px 6px !important; gap: 5px !important; border-radius: 7px !important; }
-#modalUsuario .perm-module-card input{ width: 12px !important; height: 12px !important; }
-#modalUsuario .perm-module-card i{ width: 13px !important; }
-#modalUsuario .perm-detail-panel{ padding: 6px !important; min-height: 0 !important; overflow: hidden !important; }
-#modalUsuario #usr-permisos-acciones{ height: calc(100% - 25px) !important; min-height: 0 !important; overflow-y: auto !important; overflow-x: hidden !important; padding: 0 3px 3px 0 !important; }
-#modalUsuario #usr-permisos-acciones .perm-config-card{ padding: 7px !important; border-radius: 9px !important; }
-#modalUsuario .perm-config-head{ margin-bottom: 4px !important; }
-#modalUsuario .perm-actions{ gap: 3px !important; }
-#modalUsuario .perm-action-pill{ border-radius: 7px !important; }
-#modalUsuario .perm-scope-box{ margin-top: 5px !important; padding: 6px !important; border-radius: 8px !important; }
-#modalUsuario .perm-scope-list{ gap: 3px !important; margin-top: 4px !important; }
-#modalUsuario .perm-scope-pill{ border-radius: 7px !important; }
-#modalUsuario .perm-scope-pill input{ width: 10px !important; height: 10px !important; }
-#modalUsuario .perm-scope-help{ margin-top: 3px !important; }
-#modalUsuario .perm-parentesco-picker, #modalUsuario .perm-clientes-picker{ margin-top: 5px !important; padding-top: 5px !important; }
-#modalUsuario .perm-parentesco-list{ gap: 3px !important; margin-top: 3px !important; max-height: 76px !important; }
-#modalUsuario .perm-parentesco-list label{ border-radius: 7px !important; }
-#modalUsuario .perm-client-search{ margin-top: 3px !important; padding: .25rem .4rem !important; }
-#modalUsuario .perm-client-list{ max-height: 88px !important; margin-top: 3px !important; gap: 2px !important; }
-#modalUsuario .perm-client-list label{ padding: 3px 5px !important; border-radius: 6px !important; }
-@media (min-width:768px){#modalUsuario .perm-studio-grid{ grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; }
-#modalUsuario .perm-module-sidebar{ min-width:0 !important; }}
-@media (max-width:767px){#modalUsuario .perm-detail-panel{ display:none !important; }
-#modalUsuario .perm-studio-grid{ grid-template-columns:1fr !important; }
-#modalUsuario .perm-module-sidebar{ border-right:0 !important; border-bottom:0 !important; }
-#modalUsuario .perm-module-list{ display:grid !important; grid-template-columns:1fr 1fr !important; max-height:none !important; height:auto !important; overflow:visible !important; gap:5px !important; }
-#modalUsuario .perm-module-card{ min-height:38px !important; padding:7px 8px !important; }}
-#permisoModuloMovilModal{ position:fixed; inset:0; z-index:2055; display:none; align-items:center; justify-content:center; padding:12px; background:rgba(15,23,42,.62); backdrop-filter:blur(3px); }
-#permisoModuloMovilModal.show{ display:flex; }
-#permisoModuloMovilModal .permiso-modulo-movil-card{ width:min(96vw,520px); max-height:90vh; overflow:auto; background:var(--bg-card,#fff); color:var(--text-main,#111827); border:1px solid var(--border-color,#e2e8f0); border-radius:16px; box-shadow:0 24px 70px rgba(0,0,0,.28); }
-#permisoModuloMovilModal .permiso-modulo-movil-head{ position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 14px; background:var(--bg-card,#fff); border-bottom:1px solid var(--border-color,#e2e8f0); }
-#permisoModuloMovilModal .permiso-modulo-movil-body{ padding:10px; }
-#permisoModuloMovilModal .permiso-modulo-movil-body .perm-config-card{ display:block !important; margin:0 !important; background:var(--surface-soft) !important; }
-#permisoModuloMovilModal .permiso-modulo-movil-foot{ display:flex; justify-content:flex-end; gap:7px; padding:10px 14px; border-top:1px solid var(--border-color,#e2e8f0); }
-html[data-bs-theme="dark"] #permisoModuloMovilModal .permiso-modulo-movil-card, html[data-bs-theme="dark"] #permisoModuloMovilModal .permiso-modulo-movil-head{ background:#0f172a; }
-#modalUsuario .usr-form-footer{ grid-column: 1/-1 !important; grid-row: 4 !important; margin-top: 6px !important; padding-top: 6px !important; gap: 6px !important; min-height: 39px !important; }
-#modalUsuario .usr-form-footer .btn{ padding: .34rem .72rem !important; border-radius: 7px !important; }
-@media (max-width:980px){#modalUsuario #formUsuario{ grid-template-columns: minmax(210px,.6fr) minmax(0,1.4fr) !important; gap: 0 8px !important; }
-#modalUsuario .perm-studio-grid{ grid-template-columns: 165px minmax(0,1fr) !important; }}
-@media (max-width:760px){#modalUsuario .modal-dialog{ width: calc(100% - 10px) !important; height: calc(100vh - .5rem) !important; margin: .25rem auto !important; }
-#modalUsuario .modal-body-pro{ height: calc(100% - 48px) !important; overflow-y: auto !important; }
-#modalUsuario #formUsuario{ display: block !important; height: auto !important; min-height: 0 !important; }
-#modalUsuario .usr-permisos-studio{ height: 430px !important; min-height: 430px !important; margin-bottom: 7px !important; }
-#modalUsuario .perm-studio-grid{ height: calc(100% - 43px) !important; grid-template-columns: 145px minmax(0,1fr) !important; }
-#modalUsuario .usr-form-footer{ margin-top: 4px !important; }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:980px){}
+@media (max-width:760px){
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width:768px){
+}
+@media (max-width:767px){
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width:980px){
+}
+@media (max-width:760px){
+
+
+
+
+}
 .sidebar-mobile-close{ display: inline-flex !important; align-items: center !important; justify-content: center !important; }
 .sidebar-reopen{ position: fixed !important; top: 18px !important; left: 10px !important; z-index: 2100 !important; width: 38px !important; height: 38px !important; padding: 0 !important; display: none !important; align-items: center !important; justify-content: center !important; border: 1px solid var(--border-color) !important; border-radius: 10px !important; background: var(--bg-card) !important; color: var(--text-main) !important; box-shadow: 0 6px 18px rgba(15,23,42,.12) !important; }
 body.sidebar-collapsed #sidebar{ margin-left: calc(var(--sidebar-width) * -1) !important; }
@@ -2528,16 +2527,8 @@ body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-main{ gap: clamp(4px,1
 body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-line{ margin-top: clamp(5px,1.5cqw,8px) !important; }
 body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-sub{ font-size: clamp(.30rem,1.45cqw,.58rem) !important; }
 @media (max-width:575px){body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-main, body.portal-modern-v2 .lc-sidebar-text-logo .lc-text-logo-tech{ font-size: clamp(.82rem,4.4vw,1.15rem) !important; }}</style>
-<style id="permisos-usuarios-compartidos">#modalUsuario .perm-usuarios-picker{margin-top:7px;padding:6px;border:1px solid var(--border-color);border-radius:8px;background:var(--surface-soft)}
-#modalUsuario .perm-user-list{display:flex;flex-direction:column;gap:4px;max-height:170px;overflow:auto;margin-top:5px;padding-right:2px}
-#modalUsuario .perm-user-list label{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:6px;padding:5px 6px;border:1px solid var(--border-color);border-radius:7px;background:var(--bg-card);font-size:.61rem;cursor:pointer}
-#modalUsuario .perm-user-list label small{color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#modalUsuario .perm-user-list input{margin:0}</style>
-<style id="ajuste-permisos-modulos-final">@media (min-width:768px){#modalUsuario .perm-studio-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;}
-#modalUsuario .perm-module-list{max-height:430px!important;overflow-y:auto!important;}}
-@media (max-width:767px){#modalUsuario .perm-studio-grid{grid-template-columns:1fr!important;}
-#modalUsuario .perm-module-list{display:flex!important;flex-direction:column!important;max-height:280px!important;height:auto!important;overflow-y:auto!important;overflow-x:hidden!important;gap:4px!important;padding-right:5px!important;}
-#modalUsuario .perm-module-card{min-height:38px!important;flex:0 0 auto!important;}}</style>
+
+
 <style id="sueldos-salarios-estilos">#sec-sueldos .sueldos-kpi-grid .task-kpi-card{padding:10px 12px;border-radius:12px;gap:9px;box-shadow:0 5px 16px rgba(15,23,42,.045)}
 #sec-sueldos .sueldos-kpi-grid .task-kpi-icon{width:34px;height:34px;border-radius:9px;font-size:.74rem}
 #sec-sueldos .sueldos-kpi-grid .task-kpi-label{font-size:.61rem}
@@ -3727,6 +3718,302 @@ body[data-theme="dark"] .vehiculos-overlay .vehiculos-head .btn-outline-secondar
 @media(min-width:901px){.ld-detail-modal .modal-dialog{width:100vw!important;max-width:100vw!important}.ld-detail-page{grid-template-columns:minmax(0,1fr)!important}.ld-detail-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:600px){#laboratorio-odontologia-app:not(.d-none){min-height:calc(100dvh - 90px)}#laboratorio-odontologia-app{padding:12px}.ld-detail-modal .modal-header{padding:12px 14px}.ld-detail-modal .modal-body{padding:10px}.ld-detail-page{gap:10px}.ld-detail-hero,.ld-detail-section{padding:14px;border-radius:11px}.ld-detail-grid,.ld-detail-notes{grid-template-columns:1fr}.ld-detail-field{padding:10px 12px}.ld-detail-section-head{align-items:flex-start}.ld-detail-files{grid-template-columns:1fr}}
 
 </style>
+<style id="usuario-modal-reescrito-v1">
+/* Modal de usuarios: hoja única de presentación, sin reglas heredadas contradictorias. */
+#modalUsuario{--usr-accent:#2563eb;--usr-border:var(--border-color,#dbe3ef);--usr-panel:var(--bg-card,#fff);--usr-soft:var(--surface-soft,#f5f8fc);}
+#modalUsuario .modal-dialog{width:min(1660px,calc(100vw - 36px));max-width:1660px;margin:18px auto;height:calc(100dvh - 36px);}
+#modalUsuario .usr-modal-content{height:100%;max-height:100%;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--usr-border);border-radius:18px;background:var(--usr-panel);box-shadow:0 24px 70px rgba(15,23,42,.2);}
+#modalUsuario .usr-modal-header{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 20px;border-bottom:1px solid var(--usr-border);background:var(--usr-panel);}
+#modalUsuario .usr-header-icon{width:40px;height:40px;display:grid;place-items:center;flex:none;border-radius:12px;background:rgba(37,99,235,.11);color:var(--usr-accent);font-size:1rem;}
+#modalUsuario .usr-header-subtitle{display:block;margin-top:2px;color:var(--text-muted);font-size:.72rem;}
+#modalUsuario .usr-modal-body{flex:1 1 auto;min-height:0;overflow:auto;padding:16px 20px 18px;}
+#modalUsuario #formUsuario{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px 16px;align-items:stretch;}
+#modalUsuario #formUsuario>.usr-photo-panel{grid-column:1/-1;margin:0!important;}
+#modalUsuario #formUsuario>.usr-hero-panel{grid-column:1/-1;margin:0!important;}
+#modalUsuario #formUsuario>.usr-section-basic{grid-column:span 6;grid-row:auto;}
+#modalUsuario #formUsuario>.usr-section-security{grid-column:span 6;grid-row:auto;}
+#modalUsuario #formUsuario>.usr-section-permissions{grid-column:1/-1;grid-row:auto;min-width:0;}
+#modalUsuario #formUsuario>.usr-form-footer{grid-column:1/-1;grid-row:auto;}
+#modalUsuario .usr-hero-panel{display:flex;align-items:center;gap:13px;padding:13px 16px;border:1px solid rgba(37,99,235,.18);border-radius:14px;background:linear-gradient(110deg,rgba(37,99,235,.09),rgba(6,182,212,.035));}
+#modalUsuario .usr-avatar{width:43px;height:43px;flex:0 0 43px;display:grid;place-items:center;border-radius:12px;background:rgba(37,99,235,.13);color:var(--usr-accent);font-size:1.05rem;}
+#modalUsuario .usr-kicker{font-size:.62rem;font-weight:850;letter-spacing:.1em;color:var(--usr-accent);}
+#modalUsuario .usr-hero-title{margin-top:2px;color:var(--text-main);font-size:1rem;font-weight:850;line-height:1.25;}
+#modalUsuario .usr-help{margin-top:3px;color:var(--text-muted);font-size:.73rem;line-height:1.4;}
+#modalUsuario .usr-section-block{min-width:0;padding:13px 15px;border:1px solid var(--usr-border);border-radius:14px;background:var(--usr-panel);box-shadow:0 3px 12px rgba(15,23,42,.035);}
+#modalUsuario .usr-section-heading{display:flex;align-items:center;gap:9px;margin:0 0 12px;padding:0 0 10px;border-bottom:1px solid var(--usr-border);}
+#modalUsuario .usr-section-heading>div{display:grid;gap:2px;min-width:0;}
+#modalUsuario .usr-section-heading strong{color:var(--text-main);font-size:.84rem;font-weight:850;}
+#modalUsuario .usr-section-heading small{color:var(--text-muted);font-size:.67rem;}
+#modalUsuario .usr-section-icon{width:31px;height:31px;display:grid;place-items:center;flex:none;border-radius:9px;background:rgba(37,99,235,.09);color:var(--usr-accent);}
+#modalUsuario .usr-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px 13px;align-content:start;}
+#modalUsuario .usr-form-field{min-width:0;}
+#modalUsuario .usr-form-field-wide{grid-column:1/-1;}
+#modalUsuario .form-label{display:block;margin:0 0 5px;color:var(--text-main);font-size:.73rem;font-weight:750;line-height:1.3;}
+#modalUsuario .form-control-pro,#modalUsuario .form-select-pro{width:100%;min-width:0;min-height:39px;padding:8px 10px;border:1px solid var(--usr-border);border-radius:9px;background:var(--usr-panel);color:var(--text-main);font-size:.81rem;line-height:1.35;}
+#modalUsuario .form-control-pro:focus,#modalUsuario .form-select-pro:focus{border-color:rgba(37,99,235,.65);box-shadow:0 0 0 3px rgba(37,99,235,.11);}
+#modalUsuario .usr-input-group .input-group-text{display:flex;align-items:center;padding:8px 10px;border:1px solid var(--usr-border);border-right:0;border-radius:9px 0 0 9px;background:var(--usr-soft);color:var(--text-muted);}
+#modalUsuario .usr-input-group .form-control-pro{border-radius:0 9px 9px 0;}
+#modalUsuario .form-text{display:block;margin-top:4px;color:var(--text-muted);font-size:.65rem;line-height:1.35;}
+#modalUsuario .usr-alias-preview{display:flex;align-items:center;min-height:39px;background:var(--usr-soft);font-weight:700;overflow-wrap:anywhere;}
+#modalUsuario .usr-status-note{grid-column:1/-1;display:flex;align-items:flex-start;gap:8px;margin:0;padding:9px 11px;border:1px dashed var(--usr-border);border-radius:10px;background:var(--usr-soft);color:var(--text-muted);font-size:.68rem;line-height:1.4;}
+#modalUsuario .usr-status-note i{margin-top:1px;color:var(--usr-accent);}
+#modalUsuario .usr-photo-preview{width:62px;height:62px;border-radius:50%;object-fit:cover;border:2px solid var(--usr-border);}
+#modalUsuario .usr-permisos-studio{overflow:hidden;border:1px solid var(--usr-border);border-radius:14px;background:var(--usr-panel);}
+#modalUsuario .usr-permisos-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:13px 16px;border-bottom:1px solid var(--usr-border);background:linear-gradient(110deg,rgba(37,99,235,.07),rgba(6,182,212,.025));}
+#modalUsuario .usr-permissions-intro{flex:1 1 420px;min-width:240px;}
+#modalUsuario .usr-permissions-intro>strong{display:block;color:var(--text-main);font-size:.86rem;font-weight:850;}
+#modalUsuario .usr-permissions-intro p{margin:3px 0;color:var(--text-muted);font-size:.7rem;line-height:1.4;}
+#modalUsuario .usr-permissions-intro small{display:block;color:var(--text-muted);font-size:.63rem;line-height:1.4;}
+#modalUsuario .usr-permissions-tools{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;}
+#modalUsuario #usr-permisos-resumen{padding:7px 11px;background:rgba(37,99,235,.1);color:var(--usr-accent);font-size:.68rem;font-weight:800;}
+#modalUsuario .perm-studio-grid{display:grid;grid-template-columns:minmax(330px,34%) minmax(0,1fr);min-height:440px;}
+#modalUsuario .perm-module-sidebar{display:flex;flex-direction:column;gap:10px;min-width:0;min-height:0;padding:14px;border-right:1px solid var(--usr-border);background:var(--usr-soft);}
+#modalUsuario .perm-sidebar-title{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+#modalUsuario .perm-sidebar-title>div{display:grid;gap:2px;}
+#modalUsuario .perm-sidebar-title strong{color:var(--text-main);font-size:.79rem;font-weight:850;}
+#modalUsuario .perm-sidebar-title small{color:var(--text-muted);font-size:.64rem;}
+#modalUsuario .perm-sidebar-title>i{color:var(--usr-accent);font-size:1rem;}
+#modalUsuario .perm-module-search-wrap{position:relative;flex:none;}
+#modalUsuario .perm-module-search-wrap>i{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:.72rem;pointer-events:none;}
+#modalUsuario .perm-module-search-wrap input{min-height:35px;padding:7px 10px 7px 30px;border:1px solid var(--usr-border);border-radius:9px;background:var(--usr-panel);color:var(--text-main);font-size:.72rem;}
+#modalUsuario .perm-module-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:7px;min-height:0;max-height:430px;overflow:auto;padding:1px 4px 3px 1px;}
+#modalUsuario .perm-module-category-title{grid-column:1/-1;display:flex;align-items:center;gap:7px;margin:7px 0 0;padding:6px 3px 5px;border-bottom:1px solid var(--usr-border);color:var(--text-muted);font-size:.63rem;font-weight:850;letter-spacing:.055em;text-transform:uppercase;}
+#modalUsuario .perm-module-category-title:first-child{margin-top:0;}
+#modalUsuario .perm-module-category-title i{color:var(--usr-accent);}
+#modalUsuario .perm-module-card{display:flex;align-items:center;gap:7px;min-width:0;min-height:40px;padding:7px 8px;border:1px solid var(--usr-border);border-radius:9px;background:var(--usr-panel);color:var(--text-main);font-size:.69rem;line-height:1.25;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s;}
+#modalUsuario .perm-module-card:hover{border-color:rgba(37,99,235,.55);box-shadow:0 3px 10px rgba(37,99,235,.07);}
+#modalUsuario .perm-module-card input{width:15px;height:15px;flex:0 0 15px;margin:0;accent-color:var(--usr-accent);cursor:pointer;}
+#modalUsuario .perm-module-card>i{width:16px;flex:0 0 16px;text-align:center;color:var(--usr-accent);}
+#modalUsuario .perm-module-card span{min-width:0;overflow-wrap:anywhere;font-weight:650;}
+#modalUsuario .perm-module-card.selected,#modalUsuario .perm-module-card.active{border-color:var(--usr-accent);background:rgba(37,99,235,.09);box-shadow:inset 3px 0 0 var(--usr-accent);}
+#modalUsuario .perm-module-card[hidden],#modalUsuario .perm-module-category-title[hidden]{display:none!important;}
+#modalUsuario .perm-detail-panel{display:flex;flex-direction:column;gap:12px;min-width:0;min-height:440px;padding:16px 18px;overflow:auto;background:var(--usr-panel);}
+#modalUsuario .perm-detail-title{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 0 11px;border-bottom:1px solid var(--usr-border);}
+#modalUsuario .perm-detail-title>div{display:grid;gap:3px;min-width:0;}
+#modalUsuario .perm-detail-title strong{color:var(--text-main);font-size:.86rem;font-weight:850;}
+#modalUsuario .perm-detail-title small{color:var(--text-muted);font-size:.67rem;}
+#modalUsuario .perm-detail-hint{display:inline-flex;align-items:center;gap:6px;flex:none;padding:6px 9px;border-radius:8px;background:var(--usr-soft);color:var(--text-muted);font-size:.64rem;font-weight:750;}
+#modalUsuario #usr-permisos-acciones{display:block!important;min-width:0;margin:0!important;}
+#modalUsuario #usr-permisos-acciones .perm-config-card{display:block;min-width:0;margin:0!important;padding:14px!important;border:1px solid var(--usr-border)!important;border-radius:12px!important;background:var(--usr-soft)!important;}
+#modalUsuario #usr-permisos-acciones .perm-config-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;}
+#modalUsuario #usr-permisos-acciones .perm-config-head>div{display:flex;align-items:center;gap:8px;min-width:0;color:var(--text-main);font-size:.82rem;font-weight:850;}
+#modalUsuario #usr-permisos-acciones .perm-config-head>div i{color:var(--usr-accent);}
+#modalUsuario #usr-permisos-acciones .perm-config-state{padding:5px 8px;border-radius:20px;background:rgba(37,99,235,.1);color:var(--usr-accent);font-size:.6rem;font-weight:850;letter-spacing:.04em;text-transform:uppercase;}
+#modalUsuario #usr-permisos-acciones .perm-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+#modalUsuario #usr-permisos-acciones .perm-action-pill{display:inline-flex;align-items:center;gap:7px;min-height:36px;margin:0;padding:7px 11px;border:1px solid var(--usr-border);border-radius:9px;background:var(--usr-panel);color:var(--text-main);font-size:.7rem;font-weight:700;cursor:pointer;}
+#modalUsuario #usr-permisos-acciones .perm-action-pill input{width:15px;height:15px;margin:0;accent-color:var(--usr-accent);}
+#modalUsuario .perm-scope-box{margin-top:10px;padding:12px;border:1px solid var(--usr-border);border-radius:11px;background:var(--usr-panel);}
+#modalUsuario .perm-scope-title{display:flex;align-items:center;gap:7px;margin-bottom:9px;color:var(--text-main);font-size:.73rem;font-weight:850;}
+#modalUsuario .perm-scope-title i{color:var(--usr-accent);}
+#modalUsuario .perm-scope-list{display:flex;flex-wrap:wrap;gap:7px;}
+#modalUsuario .perm-scope-pill{display:inline-flex;align-items:center;gap:7px;min-height:34px;margin:0;padding:6px 10px;border:1px solid var(--usr-border);border-radius:9px;background:var(--usr-soft);color:var(--text-main);font-size:.68rem;font-weight:650;cursor:pointer;}
+#modalUsuario .perm-scope-pill input{width:14px;height:14px;margin:0;accent-color:var(--usr-accent);}
+#modalUsuario .perm-scope-help{margin-top:7px;color:var(--text-muted);font-size:.64rem;}
+#modalUsuario .perm-parentesco-picker,#modalUsuario .perm-clientes-picker,#modalUsuario .perm-usuarios-picker{margin-top:10px;padding:11px;border:1px solid var(--usr-border);border-radius:10px;background:var(--usr-panel);}
+#modalUsuario .perm-parentesco-picker>div:first-child,#modalUsuario .perm-clientes-picker>div:first-child,#modalUsuario .perm-usuarios-picker>div:first-child{margin-bottom:8px;}
+#modalUsuario .perm-parentesco-picker>div:first-child>span,#modalUsuario .perm-clientes-picker>div:first-child>span,#modalUsuario .perm-usuarios-picker>div:first-child>span{color:var(--text-main);font-size:.69rem;font-weight:850;}
+#modalUsuario .perm-parentesco-list{display:flex;flex-wrap:wrap;gap:6px;max-height:150px;overflow:auto;}
+#modalUsuario .perm-parentesco-list label{display:inline-flex;align-items:center;gap:6px;margin:0;padding:6px 9px;border:1px solid var(--usr-border);border-radius:8px;background:var(--usr-soft);color:var(--text-main);font-size:.66rem;}
+#modalUsuario .perm-parentesco-list input{width:14px;height:14px;margin:0;accent-color:var(--usr-accent);}
+#modalUsuario .perm-client-search,#modalUsuario .perm-user-search{min-height:35px;margin:0 0 8px;border:1px solid var(--usr-border);border-radius:8px;background:var(--usr-panel);color:var(--text-main);font-size:.72rem;}
+#modalUsuario .perm-client-list,#modalUsuario .perm-user-list{display:flex;flex-direction:column;gap:5px;max-height:180px;overflow:auto;padding-right:3px;}
+#modalUsuario .perm-client-list label,#modalUsuario .perm-user-list label{display:grid;grid-template-columns:16px minmax(0,1fr) minmax(60px,auto);align-items:center;gap:8px;margin:0;padding:7px 9px;border:1px solid var(--usr-border);border-radius:8px;background:var(--usr-soft);color:var(--text-main);font-size:.68rem;cursor:pointer;}
+#modalUsuario .perm-client-list label small,#modalUsuario .perm-user-list label small{overflow:hidden;color:var(--text-muted);font-size:.62rem;text-overflow:ellipsis;white-space:nowrap;}
+#modalUsuario .perm-client-list input,#modalUsuario .perm-user-list input{width:14px;height:14px;margin:0;accent-color:var(--usr-accent);}
+#modalUsuario .perm-editor-empty{display:flex;min-height:230px;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px;text-align:center;color:var(--text-muted);}
+#modalUsuario .perm-editor-empty>i{color:var(--usr-accent);font-size:1.7rem;}
+#modalUsuario .perm-editor-empty strong{color:var(--text-main);font-size:.88rem;}
+#modalUsuario .perm-editor-empty span{max-width:430px;font-size:.73rem;line-height:1.5;}
+#modalUsuario .usr-form-footer{position:sticky;bottom:-18px;z-index:3;display:flex;justify-content:flex-end;gap:9px;margin:0;padding:12px 0 2px;border-top:1px solid var(--usr-border);background:var(--usr-panel);}
+#modalUsuario .usr-form-footer .btn{min-width:130px;min-height:39px;border-radius:9px;}
+html[data-bs-theme="dark"] #modalUsuario .usr-modal-content{background:#0f172a;}
+html[data-bs-theme="dark"] #modalUsuario .usr-modal-header,html[data-bs-theme="dark"] #modalUsuario .usr-modal-body,html[data-bs-theme="dark"] #modalUsuario .usr-form-footer{background:#0f172a;}
+html[data-bs-theme="dark"] #modalUsuario .usr-section-block,html[data-bs-theme="dark"] #modalUsuario .usr-permisos-studio,html[data-bs-theme="dark"] #modalUsuario .perm-detail-panel{background:#111c2e;}
+html[data-bs-theme="dark"] #modalUsuario .perm-module-sidebar,html[data-bs-theme="dark"] #modalUsuario .usr-status-note{background:#0c1627;}
+html[data-bs-theme="dark"] #modalUsuario .form-control-pro,html[data-bs-theme="dark"] #modalUsuario .form-select-pro,html[data-bs-theme="dark"] #modalUsuario .perm-module-search-wrap input{background:#0b1424;color:#f1f5f9;border-color:#334155;}
+html[data-bs-theme="dark"] #modalUsuario .usr-alias-preview{background:#17243a;}
+html[data-bs-theme="dark"] #modalUsuario .perm-module-card,html[data-bs-theme="dark"] #modalUsuario .perm-action-pill,html[data-bs-theme="dark"] #modalUsuario .perm-scope-pill{background:#17243a;color:#f1f5f9;border-color:#334155;}
+html[data-bs-theme="dark"] #modalUsuario .perm-config-card,html[data-bs-theme="dark"] #modalUsuario .perm-scope-box,html[data-bs-theme="dark"] #modalUsuario .perm-parentesco-picker,html[data-bs-theme="dark"] #modalUsuario .perm-clientes-picker,html[data-bs-theme="dark"] #modalUsuario .perm-usuarios-picker{background:#0d192b!important;border-color:#334155!important;}
+@media(max-width:1100px){
+ #modalUsuario .modal-dialog{width:calc(100vw - 24px);height:calc(100dvh - 24px);margin:12px auto;}
+ #modalUsuario #formUsuario{grid-template-columns:repeat(6,minmax(0,1fr));}
+ #modalUsuario #formUsuario>.usr-section-basic,#modalUsuario #formUsuario>.usr-section-security{grid-column:span 3;}
+ #modalUsuario .perm-studio-grid{grid-template-columns:minmax(280px,36%) minmax(0,1fr);}
+ #modalUsuario .perm-module-list{grid-template-columns:1fr;}
+}
+@media(max-width:760px){
+ #modalUsuario .modal-dialog{width:100%;max-width:none;height:100dvh;margin:0;}
+ #modalUsuario .usr-modal-content{height:100dvh;border:0;border-radius:0;}
+ #modalUsuario .usr-modal-header{padding:10px 13px;}
+ #modalUsuario .usr-header-icon{width:35px;height:35px;border-radius:10px;}
+ #modalUsuario .usr-modal-body{padding:11px 12px 14px;}
+ #modalUsuario #formUsuario{grid-template-columns:minmax(0,1fr);gap:11px;}
+ #modalUsuario #formUsuario>.usr-section-basic,#modalUsuario #formUsuario>.usr-section-security,#modalUsuario #formUsuario>.usr-section-permissions{grid-column:1;}
+ #modalUsuario .usr-section-block{padding:11px;border-radius:12px;}
+ #modalUsuario .usr-form-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;}
+ #modalUsuario .usr-form-field-wide{grid-column:1/-1;}
+ #modalUsuario .perm-studio-grid{grid-template-columns:minmax(0,1fr);min-height:0;}
+ #modalUsuario .perm-module-sidebar{padding:11px;border-right:0;border-bottom:1px solid var(--usr-border);}
+ #modalUsuario .perm-module-list{grid-template-columns:repeat(2,minmax(0,1fr));max-height:250px;}
+ #modalUsuario .perm-detail-panel{min-height:260px;padding:12px;overflow:visible;}
+ #modalUsuario .perm-editor-empty{min-height:160px;}
+ #modalUsuario .usr-form-footer{position:sticky;bottom:-14px;padding:10px 0 2px;}
+ #modalUsuario .usr-form-footer .btn{flex:1;min-width:0;}
+}
+@media(max-width:430px){
+ #modalUsuario .usr-form-grid{grid-template-columns:minmax(0,1fr);}
+ #modalUsuario .usr-form-field-wide{grid-column:1;}
+ #modalUsuario .perm-module-list{grid-template-columns:minmax(0,1fr);max-height:230px;}
+ #modalUsuario .usr-permisos-toolbar{align-items:flex-start;}
+ #modalUsuario .usr-permissions-tools{width:100%;justify-content:flex-start;}
+ #modalUsuario .usr-permissions-tools .btn{flex:1 1 auto;}
+ #modalUsuario .perm-detail-title{align-items:flex-start;}
+ #modalUsuario .perm-detail-hint{display:none;}
+}
+
+/* Aviso de catálogo global visible únicamente para SuperMaster */
+#usr-permisos-modulos .perm-supermaster-catalog-note{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:13px 16px;margin:0 0 12px;border:1px solid var(--bs-primary-border-subtle,#b6d4fe);border-radius:12px;background:var(--bs-primary-bg-subtle,rgba(13,110,253,.07));color:var(--bs-body-color)}
+#usr-permisos-modulos .perm-supermaster-catalog-note>i{font-size:22px;color:var(--bs-primary,#0d6efd)}
+#usr-permisos-modulos .perm-supermaster-catalog-note span{display:flex;flex-direction:column;gap:2px}
+#usr-permisos-modulos .perm-supermaster-catalog-note small{font-size:12px;opacity:.8}
+</style>
+<style id="usuario-modal-escritorio-final-v2">
+/* Modal de usuarios: escritorio amplio y distribución de trabajo real. */
+#modalUsuario .modal-dialog,
+#modalUsuario .modal-dialog.modal-dialog-centered,
+#modalUsuario .modal-dialog.modal-dialog-scrollable{
+  width:calc(100vw - 28px)!important;max-width:none!important;height:calc(100dvh - 28px)!important;
+  max-height:calc(100dvh - 28px)!important;margin:14px auto!important;transform:none!important;
+}
+#modalUsuario .usr-modal-content{
+  width:100%;height:100%;max-height:100%;min-height:0;display:flex;flex-direction:column;
+  overflow:hidden;border-radius:16px;
+}
+#modalUsuario .usr-modal-header{min-height:66px;padding:12px 24px;flex:0 0 auto}
+#modalUsuario .usr-modal-body{flex:1 1 auto;min-height:0;max-height:none!important;overflow:auto;padding:20px 24px 22px}
+#modalUsuario #formUsuario{width:100%;max-width:none;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;align-items:stretch}
+#modalUsuario #formUsuario>.usr-photo-panel{grid-column:1/-1}
+#modalUsuario #formUsuario>.usr-hero-panel{grid-column:1/-1;margin:0!important;padding:15px 20px}
+#modalUsuario #formUsuario>.usr-section-basic{grid-column:span 6;min-width:0}
+#modalUsuario #formUsuario>.usr-section-security{grid-column:span 6;min-width:0}
+#modalUsuario #formUsuario>.usr-section-permissions{grid-column:1/-1;min-width:0}
+#modalUsuario #formUsuario>.usr-form-footer{grid-column:1/-1}
+#modalUsuario .usr-section-block{padding:18px 20px;border-radius:14px}
+#modalUsuario .usr-section-heading{margin-bottom:16px;padding-bottom:12px}
+#modalUsuario .usr-form-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 18px}
+#modalUsuario .usr-form-field-wide{grid-column:1/-1}
+#modalUsuario .form-label{font-size:.8rem;margin-bottom:7px}
+#modalUsuario .form-control-pro,#modalUsuario .form-select-pro{min-height:44px;padding:9px 12px;font-size:.88rem}
+#modalUsuario .usr-input-group .input-group-text{padding:9px 12px}
+#modalUsuario .usr-permisos-studio{width:100%;border-radius:14px}
+#modalUsuario .usr-permisos-toolbar{padding:16px 20px;gap:18px}
+#modalUsuario .usr-permissions-intro{flex:1 1 520px}
+#modalUsuario .usr-permissions-intro>strong{font-size:.95rem}
+#modalUsuario .usr-permissions-intro p{font-size:.78rem}
+#modalUsuario .usr-permissions-intro small{font-size:.7rem}
+#modalUsuario .usr-permissions-tools{gap:10px}
+#modalUsuario .perm-studio-grid{grid-template-columns:minmax(560px,44%) minmax(0,1fr);min-height:500px;max-height:none}
+#modalUsuario .perm-module-sidebar{padding:15px 16px;gap:10px;min-width:0}
+#modalUsuario .perm-sidebar-title strong{font-size:.9rem}
+#modalUsuario .perm-sidebar-title small{font-size:.72rem}
+#modalUsuario .perm-module-search-wrap input{min-height:42px;font-size:.8rem}
+#modalUsuario .perm-module-list{grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:7px;max-height:520px;overflow:auto;padding:2px 5px 4px 2px;align-content:start}
+#modalUsuario .perm-module-category-title{font-size:.68rem;padding:7px 4px 6px;margin-top:5px}
+#modalUsuario .perm-module-card{min-height:38px;height:auto;padding:6px 8px;gap:7px;font-size:.78rem;line-height:1.25;border-radius:8px;align-items:flex-start}
+#modalUsuario .perm-module-card input{width:15px;height:15px;flex:0 0 15px;margin-top:1px}
+#modalUsuario .perm-detail-panel{min-height:500px;padding:18px 22px;gap:13px;overflow:auto}
+#modalUsuario .perm-detail-title{padding-bottom:14px}
+#modalUsuario .perm-detail-title strong{font-size:1rem}
+#modalUsuario .perm-detail-title small{font-size:.74rem}
+#modalUsuario #usr-permisos-acciones>[data-action-block]{padding:15px 17px!important;margin-bottom:12px!important;border-radius:11px!important}
+#modalUsuario #usr-permisos-acciones .form-check{font-size:.82rem!important;margin:5px 12px 5px 0!important}
+#modalUsuario .perm-editor-empty{min-height:260px}
+#modalUsuario .usr-form-footer{position:sticky;bottom:-22px;z-index:5;padding:15px 0 2px;background:var(--usr-panel);border-top:1px solid var(--usr-border)}
+#modalUsuario .usr-form-footer .btn{min-width:160px;min-height:44px}
+@media(min-width:1500px){
+ #modalUsuario .perm-studio-grid{grid-template-columns:minmax(600px,44%) minmax(0,1fr)}
+ #modalUsuario .perm-module-list{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));max-height:600px}
+ #modalUsuario .usr-modal-body{padding:22px 30px 26px}
+ #modalUsuario #formUsuario{gap:18px}
+}
+@media(max-width:1050px) and (min-width:761px){
+ #modalUsuario .modal-dialog,#modalUsuario .modal-dialog.modal-dialog-centered,#modalUsuario .modal-dialog.modal-dialog-scrollable{width:calc(100vw - 20px)!important;height:calc(100dvh - 20px)!important;max-height:calc(100dvh - 20px)!important;margin:10px auto!important}
+ #modalUsuario #formUsuario>.usr-section-basic,#modalUsuario #formUsuario>.usr-section-security{grid-column:span 6}
+ #modalUsuario .perm-studio-grid{grid-template-columns:minmax(340px,42%) minmax(0,1fr)}
+ #modalUsuario .perm-module-list{grid-template-columns:repeat(auto-fit,minmax(165px,1fr))}
+ #modalUsuario .perm-detail-panel{padding:16px}
+}
+@media(max-width:760px){
+ #modalUsuario .modal-dialog,#modalUsuario .modal-dialog.modal-dialog-centered,#modalUsuario .modal-dialog.modal-dialog-scrollable{width:100vw!important;height:100dvh!important;max-height:100dvh!important;margin:0!important}
+ #modalUsuario .usr-modal-content{height:100dvh;border:0;border-radius:0}
+ #modalUsuario .usr-modal-header{padding:10px 14px;min-height:56px}
+ #modalUsuario .usr-modal-body{padding:12px 13px 16px}
+ #modalUsuario #formUsuario{grid-template-columns:minmax(0,1fr);gap:11px}
+ #modalUsuario #formUsuario>.usr-section-basic,#modalUsuario #formUsuario>.usr-section-security,#modalUsuario #formUsuario>.usr-section-permissions{grid-column:1}
+ #modalUsuario .usr-section-block{padding:12px}
+ #modalUsuario .usr-form-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ #modalUsuario .perm-studio-grid{grid-template-columns:minmax(0,1fr);min-height:0}
+ #modalUsuario .perm-module-sidebar{border-right:0;border-bottom:1px solid var(--usr-border);padding:12px}
+ #modalUsuario .perm-module-list{grid-template-columns:repeat(2,minmax(0,1fr));max-height:260px}
+ #modalUsuario .perm-detail-panel{min-height:260px;padding:13px;overflow:visible}
+ #modalUsuario .usr-form-footer{bottom:-16px;padding:10px 0 2px}
+ #modalUsuario .usr-form-footer .btn{flex:1;min-width:0}
+}
+@media(max-width:430px){#modalUsuario .usr-form-grid{grid-template-columns:minmax(0,1fr)}#modalUsuario .usr-form-field-wide{grid-column:1}#modalUsuario .perm-module-list{grid-template-columns:1fr}}
+/* Lectura clara de nombres completos: tarjetas compactas, no botones gigantes. */
+#modalUsuario .perm-module-card{justify-content:flex-start;}
+#modalUsuario .perm-module-card span{display:block;flex:1 1 auto;min-width:0;white-space:normal;word-break:normal;overflow-wrap:anywhere;line-height:1.3;font-size:.79rem;font-weight:700;}
+#modalUsuario .perm-module-card>i{margin-top:1px;}
+#modalUsuario .perm-module-category-title{line-height:1.2;}
+@media(min-width:1500px){#modalUsuario .perm-module-list{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}}
+
+/* Buscador de módulos: lupa en columna propia y texto con separación real. */
+#modalUsuario .perm-module-search-wrap{
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  width:100% !important;
+  min-width:0 !important;
+  isolation:isolate !important;
+}
+#modalUsuario .perm-module-search-wrap>i{
+  position:absolute !important;
+  left:14px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  z-index:2 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:16px !important;
+  height:16px !important;
+  margin:0 !important;
+  padding:0 !important;
+  line-height:16px !important;
+  text-align:center !important;
+  pointer-events:none !important;
+}
+#modalUsuario .perm-module-search-wrap input#usr-permisos-buscar{
+  position:relative !important;
+  display:block !important;
+  box-sizing:border-box !important;
+  flex:1 1 100% !important;
+  width:100% !important;
+  min-width:0 !important;
+  min-height:42px !important;
+  margin:0 !important;
+  padding:9px 12px 9px 44px !important;
+  text-indent:0 !important;
+  text-align:left !important;
+  line-height:1.35 !important;
+  background-image:none !important;
+}
+#modalUsuario .perm-module-search-wrap input#usr-permisos-buscar::placeholder{
+  opacity:1 !important;
+  text-align:left !important;
+}
+</style>
+
 </head>
 <!-- VERSION Servidor 2026.1.2 — V39.8 filtros OPERACIONES TÉCNICAS unificados -->
 <body>
@@ -6111,130 +6398,136 @@ html[data-bs-theme="dark"] .sports-management-table, body.dark-mode .sports-mana
 <div class="col-12 d-flex flex-wrap gap-2"><button class="btn btn-primary flex-grow-1 fw-semibold rounded-3" id="emp_btn_guardar" type="submit">Guardar empresa</button><button class="btn btn-light" data-bs-dismiss="modal" type="button">Cancelar</button></div>
 </div></form></div></div></div>
 </div>
-<!-- MODAL 6: Usuario -->
-<div class="modal fade" id="modalUsuario" tabindex="-1">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content modal-content-pro">
-<div class="modal-header modal-header-pro">
-<h5 class="modal-title fw-bold" id="modalUsuarioTitle"><i class="fa-solid fa-user-gear text-primary me-2"></i>Usuario</h5>
-<button class="btn-close" data-bs-dismiss="modal" type="button"></button>
-</div>
-<div class="modal-body modal-body-pro">
-<form id="formUsuario" onsubmit="guardarUsuario(event)">
-<input id="usr_id" type="hidden"/>
-<div class="usr-photo-panel border rounded-3 p-3 mb-3 d-none" id="usr-photo-panel">
-<div class="d-flex align-items-center gap-3 flex-wrap">
-<img id="usr-photo-preview" alt="Foto del usuario" src="https://ui-avatars.com/api/?name=Usuario&background=2563eb&color=fff" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid #e2e8f0"/>
-<div class="flex-grow-1" style="min-width:190px">
-<label class="form-label small fw-semibold" for="usr-photo-input">Foto de perfil del usuario</label>
-<input class="form-control form-control-pro" id="usr-photo-input" type="file" accept="image/jpeg,image/png,image/webp" onchange="portalSubirFotoPerfilDesdeInput_(this,this.dataset.targetRowId||'')"/>
-<small class="text-muted">Disponible al editar un usuario de su empresa.</small>
-</div>
-</div>
-</div>
-<div class="usr-hero-panel">
-<div class="usr-avatar"><i class="fa-solid fa-user-gear"></i></div>
-<div class="min-w-0">
-<div class="text-uppercase small fw-bold text-primary usr-kicker">Gestión de acceso</div>
-<div class="usr-hero-title">Datos del usuario y permisos</div>
-<div class="text-muted usr-help">Configure la cuenta, el rol, el estado y los accesos desde un único formulario.</div>
-</div>
-</div>
-<div class="usr-section-block">
-<div class="usr-section-divider"><span><i class="fa-solid fa-id-card text-primary me-2"></i>Información básica</span></div>
-<div class="usr-form-grid">
-<div class="usr-form-field usr-form-field-wide">
-<label class="form-label small fw-semibold">Nombre Completo</label>
-<input class="form-control form-control-pro" id="usr_nombre" required="" type="text"/>
-</div>
-<div class="usr-form-field">
-<label class="form-label small fw-semibold">Username</label>
-<div class="input-group usr-input-group">
-<span class="input-group-text"><i class="fa-solid fa-at"></i></span>
-<input class="form-control form-control-pro" id="usr_username" required="" type="text"/>
-</div>
-</div>
-<div class="usr-form-field">
-<label class="form-label small fw-semibold">Correo</label>
-<input class="form-control form-control-pro" id="usr_email" required="" type="email"/>
-</div>
-<div class="usr-form-field d-none" id="usr-company-wrap"><label class="form-label small fw-semibold">Empresa de destino *</label><select class="form-select form-select-pro" id="usr_empresa" onchange="actualizarAliasUsuario_()"><option value="">Seleccione una empresa</option></select></div>
-<div class="usr-form-field usr-form-field-wide"><label class="form-label small fw-semibold">Identificador de acceso</label><div class="form-control form-control-pro bg-light" id="usr_alias_preview">Se generará como usuario@dominio</div><small class="text-muted">El correo de contacto no se utiliza como nombre de inicio de sesión.</small></div>
-</div>
-</div>
-<div class="usr-section-block">
-<div class="usr-section-divider"><span><i class="fa-solid fa-shield-halved text-primary me-2"></i>Seguridad y estado</span></div>
-<div class="usr-form-grid">
-<div class="usr-form-field">
-<label class="form-label small fw-semibold">Contraseña</label>
-<div class="input-group usr-input-group">
-<span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
-<input class="form-control form-control-pro" id="usr_password" required="" type="password"/>
-</div>
-</div>
-<div class="usr-form-field">
-<label class="form-label small fw-semibold">Rol</label>
-<select class="form-select form-select-pro" id="usr_rol" onchange="aplicarPermisosPorRolUsuario()">
+<!-- MODAL 6: Usuario — formulario reorganizado -->
+<div class="modal fade" id="modalUsuario" tabindex="-1" aria-labelledby="modalUsuarioTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content modal-content-pro usr-modal-content">
+      <div class="modal-header modal-header-pro usr-modal-header">
+        <div class="d-flex align-items-center gap-2 min-w-0">
+          <span class="usr-header-icon"><i class="fa-solid fa-user-gear"></i></span>
+          <div class="min-w-0">
+            <h5 class="modal-title fw-bold mb-0" id="modalUsuarioTitle">Usuario</h5>
+            <small class="usr-header-subtitle">Administración de cuenta, módulos y permisos</small>
+          </div>
+        </div>
+        <button class="btn-close" data-bs-dismiss="modal" type="button" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body modal-body-pro usr-modal-body">
+        <form id="formUsuario" onsubmit="guardarUsuario(event)" autocomplete="off">
+          <input id="usr_id" type="hidden"/>
 
-<option value="Tecnico">Técnico</option>
-<option value="Administrador">Administrador</option>
-<option value="Supervisor">Supervisor</option>
-<option value="VIP">VIP</option>
-<option value="Almacen">Almacén</option>
-<option value="Soporte">Soporte Técnico</option>
-<option value="Cliente">Cliente</option>
-<option value="Familia">Familia</option>
-</select>
-</div>
-<div class="usr-form-field d-none" id="usr-tecnico-vinculo-wrap"><label class="form-label small fw-semibold">Vincular con técnico</label><select class="form-select form-select-pro" id="usr_tecnico_vinculado"><option value="">Seleccione un técnico registrado</option></select><small class="text-muted d-block mt-1" style="font-size:.6rem">El usuario verá únicamente las órdenes asignadas a este técnico.</small></div>
-<div class="usr-form-field usr-form-field-status">
-<label class="form-label small fw-semibold">Estado</label>
-<select class="form-select form-select-pro" id="usr_estado">
-<option value="Activo">Activo</option>
-<option value="Inactivo">Inactivo</option>
-</select>
-</div>
-<div class="usr-form-field">
-<label class="form-label small fw-semibold">Inactividad de sesión</label>
-<div class="input-group usr-input-group">
-<input class="form-control form-control-pro" id="usr_tiempo_inactividad" inputmode="numeric" max="1440" min="5" step="1" type="number" value="5"/>
-<span class="input-group-text">min</span>
-</div>
-<small class="text-muted d-block mt-1" style="font-size:.6rem">5 minutos es el estándar. Puede aumentarlo para este usuario.</small>
-</div>
-<div class="usr-status-note"><i class="fa-solid fa-circle-info me-1 text-primary"></i>Los permisos se aplican según el rol y la configuración seleccionada.</div>
-</div>
-</div>
-<div class="usr-section-block">
-<div class="usr-section-divider"><span><i class="fa-solid fa-key text-primary me-2"></i>Permisos personalizados</span></div>
-<div class="usr-permisos-compact usr-permisos-studio" id="usr-permisos-panel">
-<div class="usr-permisos-toolbar">
-<div><div class="fw-bold">Centro de permisos</div><div class="text-muted usr-help">Seleccione un módulo a la izquierda y configure sus acciones y alcances a la derecha. <span class="perm-legend"><b>Propios</b> = registros del usuario · <b>Por parentesco</b> = familiares autorizados · <b>Personalizados</b> = clientes elegidos · <b>Todos</b> = todos.</span></div></div>
-<div class="d-flex align-items-center gap-2 flex-wrap"><span class="badge rounded-pill text-bg-light border" id="usr-permisos-resumen">0 módulos autorizados</span><button class="btn btn-outline-primary btn-sm d-none" id="btnPermisosPreestablecidos" onclick="aplicarPermisosPreestablecidosUsuario()" type="button"><i class="fa-solid fa-wand-magic-sparkles me-1"></i><span>Preestablecidos</span></button><button class="btn btn-outline-secondary btn-sm" id="btnPermisosTodos" onclick="seleccionarTodosPermisosUsuario()" type="button"><i class="fa-solid fa-check-double me-1"></i><span>Seleccionar todos</span></button></div>
-</div>
-<div class="perm-studio-grid">
-<div class="perm-module-sidebar"><div class="perm-sidebar-title"><span>Módulos</span><small>Seleccione para configurar</small></div><div class="perm-module-list" id="usr-permisos-modulos"></div></div>
-<div class="perm-detail-panel"><div class="perm-detail-title"><span>Configuración del módulo</span><small>Acciones + alcance</small></div><div class="usr-permisos-acciones" id="usr-permisos-acciones"></div></div>
-</div>
-<input id="usr_permisos_json" type="hidden" value="{}"/>
-</div>
-</div>
-<div class="usr-form-footer">
-<button class="btn btn-light border fw-semibold rounded-3 px-4" data-bs-dismiss="modal" type="button">Cancelar</button>
-<button class="btn btn-primary fw-semibold rounded-3 px-4" type="submit"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar Usuario</button>
-</div>
-</form>
-</div>
-</div>
-</div>
-</div>
-<!-- MODAL MÓVIL: CONFIGURACIÓN DE MÓDULO -->
-<div aria-hidden="true" id="permisoModuloMovilModal" role="dialog">
-<div class="permiso-modulo-movil-card">
-<div class="permiso-modulo-movil-head"><div><div class="fw-bold" id="permisoModuloMovilTitle">Configuración del módulo</div><small class="text-muted">Acciones y alcance</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarPermisoModuloMovil()" type="button"><i class="fa-solid fa-xmark"></i></button></div>
-<div class="permiso-modulo-movil-body" id="permisoModuloMovilBody"></div>
-<div class="permiso-modulo-movil-foot"><button class="btn btn-primary btn-sm" onclick="cerrarPermisoModuloMovil()" type="button">Aplicar</button></div>
-</div>
+          <div class="usr-photo-panel border rounded-3 p-3 d-none" id="usr-photo-panel">
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+              <img id="usr-photo-preview" alt="Foto del usuario" src="https://ui-avatars.com/api/?name=Usuario&background=2563eb&color=fff" class="usr-photo-preview"/>
+              <div class="flex-grow-1 min-w-0">
+                <label class="form-label fw-semibold" for="usr-photo-input">Foto de perfil</label>
+                <input class="form-control form-control-pro" id="usr-photo-input" type="file" accept="image/jpeg,image/png,image/webp" onchange="portalSubirFotoPerfilDesdeInput_(this,this.dataset.targetRowId||'')"/>
+                <small class="text-muted">Disponible al editar un usuario de su empresa.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="usr-hero-panel">
+            <div class="usr-avatar"><i class="fa-solid fa-shield-user"></i></div>
+            <div class="min-w-0">
+              <div class="usr-kicker">GESTIÓN DE ACCESO</div>
+              <div class="usr-hero-title">Datos del usuario y configuración de acceso</div>
+              <div class="usr-help">Complete los datos y seleccione únicamente los módulos y acciones que correspondan a esta cuenta.</div>
+            </div>
+          </div>
+
+          <section class="usr-section-block usr-section-basic" aria-labelledby="usr-basic-title">
+            <div class="usr-section-heading" id="usr-basic-title"><span class="usr-section-icon"><i class="fa-solid fa-id-card"></i></span><div><strong>Información básica</strong><small>Identificación y empresa</small></div></div>
+            <div class="usr-form-grid">
+              <div class="usr-form-field usr-form-field-wide">
+                <label class="form-label" for="usr_nombre">Nombre completo</label>
+                <input class="form-control form-control-pro" id="usr_nombre" required type="text" placeholder="Nombre y apellido"/>
+              </div>
+              <div class="usr-form-field">
+                <label class="form-label" for="usr_username">Nombre de usuario</label>
+                <div class="input-group usr-input-group"><span class="input-group-text"><i class="fa-solid fa-at"></i></span><input class="form-control form-control-pro" id="usr_username" required type="text" placeholder="usuario"/></div>
+              </div>
+              <div class="usr-form-field">
+                <label class="form-label" for="usr_email">Correo de contacto</label>
+                <input class="form-control form-control-pro" id="usr_email" required type="email" placeholder="correo@dominio.com"/>
+              </div>
+              <div class="usr-form-field d-none" id="usr-company-wrap">
+                <label class="form-label" for="usr_empresa">Empresa de destino *</label>
+                <select class="form-select form-select-pro" id="usr_empresa" onchange="actualizarAliasUsuario_();renderEditorPermisosUsuario({})"><option value="">Seleccione una empresa</option></select>
+              </div>
+              <div class="usr-form-field usr-form-field-wide">
+                <label class="form-label" for="usr_alias_preview">Identificador de acceso</label>
+                <div class="form-control form-control-pro usr-alias-preview" id="usr_alias_preview">Se generará como usuario@dominio</div>
+                <small class="form-text">El correo de contacto no se utiliza como nombre de inicio de sesión.</small>
+              </div>
+            </div>
+          </section>
+
+          <section class="usr-section-block usr-section-security" aria-labelledby="usr-security-title">
+            <div class="usr-section-heading" id="usr-security-title"><span class="usr-section-icon"><i class="fa-solid fa-shield-halved"></i></span><div><strong>Seguridad y estado</strong><small>Rol, contraseña y sesión</small></div></div>
+            <div class="usr-form-grid">
+              <div class="usr-form-field">
+                <label class="form-label" for="usr_password">Contraseña</label>
+                <div class="input-group usr-input-group"><span class="input-group-text"><i class="fa-solid fa-lock"></i></span><input class="form-control form-control-pro" id="usr_password" required type="password" autocomplete="new-password" placeholder="Contraseña"/></div>
+              </div>
+              <div class="usr-form-field">
+                <label class="form-label" for="usr_rol">Rol del usuario</label>
+                <select class="form-select form-select-pro" id="usr_rol" onchange="aplicarPermisosPorRolUsuario()">
+                  <option value="Tecnico">Técnico</option><option value="Administrador">Administrador</option><option value="Supervisor">Supervisor</option><option value="VIP">VIP</option><option value="Almacen">Almacén</option><option value="Soporte">Soporte Técnico</option><option value="Cliente">Cliente</option><option value="Familia">Familia</option>
+                </select>
+              </div>
+              <div class="usr-form-field d-none" id="usr-tecnico-vinculo-wrap">
+                <label class="form-label" for="usr_tecnico_vinculado">Vincular con técnico</label>
+                <select class="form-select form-select-pro" id="usr_tecnico_vinculado"><option value="">Crear nuevo registro de técnico automáticamente</option></select>
+                <small class="form-text">El usuario verá únicamente las órdenes asignadas a este técnico.</small>
+              </div>
+              <div class="usr-form-field">
+                <label class="form-label" for="usr_estado">Estado de la cuenta</label>
+                <select class="form-select form-select-pro" id="usr_estado"><option value="Activo">Activo</option><option value="Inactivo">Inactivo</option></select>
+              </div>
+              <div class="usr-form-field">
+                <label class="form-label" for="usr_tiempo_inactividad">Cierre por inactividad</label>
+                <div class="input-group usr-input-group"><input class="form-control form-control-pro" id="usr_tiempo_inactividad" inputmode="numeric" max="1440" min="5" step="1" type="number" value="5"/><span class="input-group-text">minutos</span></div>
+                <small class="form-text">Mínimo 5 minutos. Puede aumentar el tiempo para este usuario.</small>
+              </div>
+              <div class="usr-status-note"><i class="fa-solid fa-circle-info"></i><span>El acceso efectivo depende de los módulos habilitados para la empresa y de los permisos asignados a este usuario.</span></div>
+            </div>
+          </section>
+
+          <section class="usr-section-block usr-section-permissions" aria-labelledby="usr-permissions-title">
+            <div class="usr-section-heading usr-permissions-heading" id="usr-permissions-title"><span class="usr-section-icon"><i class="fa-solid fa-key"></i></span><div><strong>Módulos y permisos</strong><small>Seleccione un módulo y configure sus acciones y alcance</small></div></div>
+            <div class="usr-permisos-studio" id="usr-permisos-panel">
+              <div class="usr-permisos-toolbar">
+                <div class="usr-permissions-intro"><strong>Centro de permisos</strong><p>Los módulos disponibles corresponden a la empresa seleccionada. Active los que tendrá este usuario y configure sus permisos.</p><small><b>Propios:</b> registros del usuario · <b>Por parentesco:</b> familiares autorizados · <b>Personalizados:</b> clientes elegidos · <b>Todos:</b> todos los registros.</small></div>
+                <div class="usr-permissions-tools">
+                  <span class="badge rounded-pill" id="usr-permisos-resumen">0 módulos autorizados</span>
+                  <button class="btn btn-outline-primary btn-sm d-none" id="btnPermisosPreestablecidos" onclick="aplicarPermisosPreestablecidosUsuario()" type="button"><i class="fa-solid fa-wand-magic-sparkles me-1"></i>Preestablecidos</button>
+                  <button class="btn btn-outline-secondary btn-sm" id="btnPermisosTodos" onclick="seleccionarTodosPermisosUsuario()" type="button"><i class="fa-solid fa-check-double me-1"></i>Seleccionar todos</button>
+                </div>
+              </div>
+              <div class="perm-studio-grid">
+                <aside class="perm-module-sidebar">
+                  <div class="perm-sidebar-title"><div><strong>Módulos disponibles</strong><small>Marque y seleccione para configurar</small></div><i class="fa-solid fa-layer-group"></i></div>
+                  <div class="perm-module-search-wrap"><i class="fa-solid fa-magnifying-glass"></i><input type="search" id="usr-permisos-buscar" class="form-control form-control-sm" placeholder="Buscar módulo..." oninput="filtrarModulosPermisosUsuario(this.value)" autocomplete="off"/></div>
+                  <div class="perm-module-list" id="usr-permisos-modulos" aria-label="Módulos habilitados para la empresa"></div>
+                </aside>
+                <section class="perm-detail-panel" aria-label="Configuración de permisos del módulo">
+                  <div class="perm-detail-title"><div><strong id="usr-perm-modulo-activo">Configuración del módulo</strong><small>Acciones y alcance de los registros</small></div><span class="perm-detail-hint"><i class="fa-solid fa-sliders"></i> Configuración</span></div>
+                  <div class="usr-permisos-acciones" id="usr-permisos-acciones"><div class="perm-editor-empty"><i class="fa-solid fa-hand-pointer"></i><strong>Seleccione un módulo</strong><span>Las acciones y los alcances aparecerán aquí.</span></div></div>
+                </section>
+              </div>
+              <input id="usr_permisos_json" type="hidden" value="{}"/>
+            </div>
+          </section>
+
+          <div class="usr-form-footer">
+            <button class="btn btn-light border fw-semibold" data-bs-dismiss="modal" type="button">Cancelar</button>
+            <button class="btn btn-primary fw-semibold" type="submit"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar usuario</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- MODAL: DETALLE DE USUARIO -->
 <div class="modal fade" id="modalVerUsuario" tabindex="-1">
@@ -7472,19 +7765,26 @@ function filtroNotificacionesClienteSupabase_(cliente){
       if(!u)return false;
       if(u.es_supermaster===true&&u.cuenta_protegida===true)return true;
       const key=portalClaveModuloEmpresa_(modulo);
-      if(key==='dashboard')return true;
-      const role=String(u.rol||'').trim().toLowerCase();
-      const esCuentaEmpresa=role==='master'||!!(u.empresa_row_id||u.empresa?.row_id);
-      if(!esCuentaEmpresa)return true;
-      const raw=Array.isArray(window._portalCompanyModules)?window._portalCompanyModules:[];
-      const empresaId=String(u.empresa_row_id||u.empresa?.row_id||'');
+      // Dashboard y perfil personal no forman parte de la licencia modular empresarial.
+      if(key==='dashboard'||key==='perfil')return true;
+      const empresaId=String(u.empresa_row_id||u.empresa?.row_id||'').trim();
+      // Toda cuenta operativa debe pertenecer a una empresa. Si falta el vínculo,
+      // se deniega el módulo en lugar de conceder acceso global por defecto.
+      if(!empresaId)return false;
+      let raw=[];
+      if(window._portalAdminBootstrapLoaded===true){
+        raw=Array.isArray(window._portalCompanyModules)?window._portalCompanyModules:[];
+      }else if(Array.isArray(u.modulos_habilitados)){
+        // portal-auth entrega una primera lista firmada mientras termina el bootstrap.
+        raw=u.modulos_habilitados;
+      }else{
+        raw=Array.isArray(window._portalCompanyModules)?window._portalCompanyModules:[];
+      }
       const keys=raw.filter(item=>{
         if(typeof item==='string')return true;
-        if(!item||typeof item!=='object')return false;
-        if(item.habilitado===false)return false;
-        const itemEmpresa=String(item.empresa_row_id||'');
-        return !itemEmpresa||itemEmpresa===empresaId;
-      }).map(item=>portalClaveModuloEmpresa_(typeof item==='string'?item:(item?.modulo_key||item?.module_key||''))).filter(Boolean);
+        if(!item||typeof item!=='object'||item.habilitado===false)return false;
+        return String(item.empresa_row_id||'').trim()===empresaId;
+      }).map(item=>portalClaveModuloEmpresa_(typeof item==='string'?item:(item?.modulo_key||item?.module_key||item?.key||''))).filter(Boolean);
       return keys.includes(key);
     }
     async function portalAdminCall_(body){
@@ -8833,6 +9133,12 @@ async function cargarBootstrapInicial_(){
 
     function applyUserSession(user) {
         currentUser = user;
+        // Cada sesión parte de su propia licencia empresarial: nunca reutilizar
+        // módulos en caché de la cuenta que cerró sesión anteriormente.
+        window._portalAdminBootstrapLoaded=false;
+        window._portalAdminBootstrap=null;
+        window._portalCompanyModules=Array.isArray(user?.modulos_habilitados)?user.modulos_habilitados.slice():[];
+        window._portalAdminModules=PORTAL_ADMIN_MODULES_;
         currentUserAuthAccessMode=user?.es_supermaster?'full':(user?.access_mode||currentUserAuthAccessMode||'full');
         hidratarDBLocal();
         localStorage.setItem('erp_session_user', JSON.stringify(user));
@@ -8910,6 +9216,10 @@ async function cargarBootstrapInicial_(){
             }
         } catch(e) { console.warn('No se pudo registrar el cierre de sesión para servidor:',e); }
         currentUser=null;
+        window._portalAdminBootstrapLoaded=false;
+        window._portalAdminBootstrap=null;
+        window._portalCompanyModules=[];
+        window._portalAdminModules=PORTAL_ADMIN_MODULES_;
         if (_notifPollingTimer) {
             clearInterval(_notifPollingTimer);
             _notifPollingTimer = null;
@@ -8941,20 +9251,20 @@ async function cargarBootstrapInicial_(){
         document.querySelectorAll('#sidebar .nav-link').forEach(el => {
             const href=String(el.getAttribute('href')||'').replace('#','');
             if(!href)return;
-            const visible=isMaster || usuarioTieneCualquierPermisoModulo(href,currentUser) || (href==='mikrotik' && isMaster);
+            const visible=esSuperMasterPortal_() || href==='dashboard' || usuarioTieneCualquierPermisoModulo(href,currentUser);
             el.style.display=visible?'':'none';
         });
         document.querySelectorAll('.view-admin-master').forEach(el => {
             if(el.matches('#sidebar .nav-link')) return;
             const nav=el.closest('[data-perm-module]');
-            if(nav){el.style.display=isMaster || permisosUsuarioTieneModulo(nav.dataset.permModule,nav.dataset.permAction||'leer')?'':'none';return;}
+            if(nav){const enabled=esSuperMasterPortal_()||portalEmpresaTieneModuloHabilitado_(nav.dataset.permModule,currentUser);el.style.display=enabled&&(esSuperMasterPortal_()||isMaster||permisosUsuarioTieneModulo(nav.dataset.permModule,nav.dataset.permAction||'leer'))?'':'none';return;}
             // Elementos administrativos sin módulo explícito: dejan de estar ocultos por rol; su propia acción valida permisos.
             el.style.display='';
         });
         document.querySelectorAll('.btn-master-only').forEach(el => {
-            if(el.closest('.menu-group')?.querySelector('a[href="#mikrotik"]')) { el.style.display=isMaster?'':'none'; return; }
+            if(el.closest('.menu-group')?.querySelector('a[href="#mikrotik"]')) { el.style.display=esSuperMasterPortal_()||(isMaster&&portalEmpresaTieneModuloHabilitado_('mikrotik',currentUser))?'':'none'; return; }
             const nav=el.closest('[data-perm-module]');
-            if(nav){el.style.display=isMaster || permisosUsuarioTieneModulo(nav.dataset.permModule,nav.dataset.permAction||'leer')?'':'none';return;}
+            if(nav){const enabled=esSuperMasterPortal_()||portalEmpresaTieneModuloHabilitado_(nav.dataset.permModule,currentUser);el.style.display=enabled&&(esSuperMasterPortal_()||isMaster||permisosUsuarioTieneModulo(nav.dataset.permModule,nav.dataset.permAction||'leer'))?'':'none';return;}
             el.style.display='';
         });
         document.querySelectorAll('#sidebar .menu-group').forEach(group=>{
@@ -10915,33 +11225,7 @@ async function eliminarEmpresa(id) {
     function cambiarAlcancesPermisoUsuario(modulo){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${modulo}"]`);if(!block)return;const todos=block.querySelector(`input[data-scope-module="${modulo}"][value="todos"]`),others=[...block.querySelectorAll(`input[data-scope-module="${modulo}"]`)].filter(x=>x!==todos);if(todos?.checked)others.forEach(x=>x.checked=false);else if(others.some(x=>x.checked)&&todos)todos.checked=false;const scopes=[...block.querySelectorAll(`input[data-scope-module="${modulo}"]:checked`)].map(x=>x.value);block.querySelector('.perm-parentesco-picker')?.classList.toggle('d-none',!scopes.includes('parentesco'));block.querySelector('.perm-clientes-picker')?.classList.toggle('d-none',!scopes.includes('personalizados'));block.querySelector('.perm-usuarios-picker')?.classList.toggle('d-none',!scopes.includes('usuarios'));actualizarHiddenPermisosUsuario();}
     function cambiarAlcanceParentescoPermisoUsuario(modulo){cambiarAlcancesPermisoUsuario(modulo);}
     function filtrarClientesPermisoUsuario(modulo){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${modulo}"]`);if(!block)return;const q=String(block.querySelector('.perm-client-search')?.value||'').trim().toLowerCase();block.querySelectorAll('[data-cliente-option]').forEach(el=>{el.style.display=!q||String(el.getAttribute('data-cliente-search')||'').includes(q)?'':'none';});}
-    function cerrarPermisoModuloMovil(){
- const modal=document.getElementById('permisoModuloMovilModal');if(!modal)return;
- const clone=modal.querySelector('[data-mobile-perm-clone]'),key=modal.dataset.module||'';
- const original=document.querySelector('#usr-permisos-acciones [data-action-block="'+key+'"]');
- if(clone&&original){
-  const keys=['action','scopeModule','parentescoModule','clientePermModule','usuarioPermModule'];
-  clone.querySelectorAll('input[type="checkbox"]').forEach(src=>{
-   const dst=[...original.querySelectorAll('input[type="checkbox"]')].find(candidate=>{
-    if(candidate.value!==src.value)return false;
-    return keys.every(k=>(candidate.dataset[k]||'')===(src.dataset[k]||''));
-   });
-   if(dst)dst.checked=src.checked;
-  });
-  const todos=original.querySelector('input[data-scope-module="'+key+'"][value="todos"]');
-  const scopes=[...original.querySelectorAll('input[data-scope-module="'+key+'"]')].filter(x=>x!==todos);
-  if(todos?.checked)scopes.forEach(x=>x.checked=false);else if(scopes.some(x=>x.checked)&&todos)todos.checked=false;
-  const selectedScopes=[...original.querySelectorAll('input[data-scope-module="'+key+'"]:checked')].map(x=>x.value);
-  original.querySelector('.perm-parentesco-picker')?.classList.toggle('d-none',!selectedScopes.includes('parentesco'));
-  original.querySelector('.perm-clientes-picker')?.classList.toggle('d-none',!selectedScopes.includes('personalizados'));
-  original.querySelector('.perm-usuarios-picker')?.classList.toggle('d-none',!selectedScopes.includes('usuarios'));
-  actualizarHiddenPermisosUsuario();
- }
- modal.classList.remove('show');modal.setAttribute('aria-hidden','true');modal.innerHTML='';document.body.classList.remove('overflow-hidden');
- actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();
-} 
-function abrirPermisoModuloMovil_(key,block){const modal=document.getElementById('permisoModuloMovilModal');if(!modal||!block)return;const cfg=MATRIZ_PERMISOS_USUARIO[key]||{};modal.dataset.module=key;modal.innerHTML='<div class="permiso-modulo-movil-card"><div class="permiso-modulo-movil-head"><div><div class="fw-bold"><i class="fa-solid '+cfg.icon+' text-primary me-1"></i>'+escaparTextoPermisoUsuario(cfg.label||key)+'</div><small class="text-muted">Permisos y alcance</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarPermisoModuloMovil()" type="button"><i class="fa-solid fa-xmark"></i></button></div><div class="permiso-modulo-movil-body"></div><div class="permiso-modulo-movil-foot"><button class="btn btn-primary btn-sm" onclick="cerrarPermisoModuloMovil()" type="button">Aplicar</button></div></div>';const body=modal.querySelector('.permiso-modulo-movil-body'),copy=block.cloneNode(true);copy.classList.remove('d-none');copy.removeAttribute('id');copy.setAttribute('data-mobile-perm-clone','1');body.appendChild(copy);copy.addEventListener('change',ev=>{const el=ev.target;if(!el.matches('input[data-scope-module]'))return;const all=copy.querySelector('input[data-scope-module="'+key+'"][value="todos"]'),others=[...copy.querySelectorAll('input[data-scope-module="'+key+'"]')].filter(x=>x!==all);if(all?.checked)others.forEach(x=>x.checked=false);else if(others.some(x=>x.checked)&&all)all.checked=false;const scopes=[...copy.querySelectorAll('input[data-scope-module="'+key+'"]:checked')].map(x=>x.value);copy.querySelector('.perm-parentesco-picker')?.classList.toggle('d-none',!scopes.includes('parentesco'));copy.querySelector('.perm-clientes-picker')?.classList.toggle('d-none',!scopes.includes('personalizados'));copy.querySelector('.perm-usuarios-picker')?.classList.toggle('d-none',!scopes.includes('usuarios'));});copy.addEventListener('input',ev=>{if(!ev.target.matches('.perm-client-search'))return;const q=String(ev.target.value||'').trim().toLowerCase();copy.querySelectorAll('[data-cliente-option]').forEach(el=>{el.style.display=!q||String(el.getAttribute('data-cliente-search')||'').includes(q)?'':'none';});});modal.classList.add('show');modal.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
-    function seleccionarModuloPermisoUsuario(key){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);if(!block)return;document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));block.classList.remove('d-none');document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.toggle('active',c.dataset.module===key));actualizarResumenPermisosUsuario();if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)abrirPermisoModuloMovil_(key,block);}
+    function seleccionarModuloPermisoUsuario(key){const block=document.querySelector(`#usr-permisos-acciones [data-action-block="${key}"]`);if(!block)return;document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));block.classList.remove('d-none');document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.toggle('active',c.dataset.module===key));actualizarResumenPermisosUsuario();const title=document.getElementById('usr-perm-modulo-activo');if(title)title.textContent=(MATRIZ_PERMISOS_USUARIO[key]?.label||key);}
     function renderBloqueAccionesPermisoUsuario(key,cfg,current){
         const acts=document.getElementById('usr-permisos-acciones');if(!acts)return;
         const row=document.createElement('div');row.className='perm-config-card d-none';row.dataset.actionBlock=key;
@@ -10972,18 +11256,100 @@ function abrirPermisoModuloMovil_(key,block){const modal=document.getElementById
         {id:'especializados',label:'Servicios Especializados',icon:'fa-car-wrench',modules:['talleres']},
         {id:'sistema',label:'Sistema e Infraestructura',icon:'fa-server',modules:['mikrotik','perfil']}
     ];
-    function renderEditorPermisosUsuario(raw={}){const current=normalizarPermisosUsuario(raw),mods=document.getElementById('usr-permisos-modulos'),acts=document.getElementById('usr-permisos-acciones');if(!mods||!acts)return;const grupos=new Set();mods.innerHTML=CATEGORIAS_PERMISOS_USUARIO.map(cat=>{const ds=cat.modules.filter(k=>MATRIZ_PERMISOS_USUARIO[k]);if(!ds.length)return '';ds.forEach(k=>grupos.add(k));return '<div class="perm-module-category-title"><i class="fa-solid '+cat.icon+'"></i><span>'+escaparTextoPermisoUsuario(cat.label)+'</span></div>'+ds.map(k=>{const c=MATRIZ_PERMISOS_USUARIO[k];return '<div class="perm-module-card '+(current[k]?'selected':'')+'" data-module="'+k+'" onclick="seleccionarModuloPermisoUsuario(\''+k+'\')"><input type="checkbox" data-module="'+k+'" '+(current[k]?'checked':'')+' onchange="event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')" onclick="event.stopPropagation();seleccionarModuloPermisoUsuario(\''+k+'\')"><i class="fa-solid '+c.icon+'"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>';}).join('');}).join('')+Object.entries(MATRIZ_PERMISOS_USUARIO).filter(([k])=>!grupos.has(k)).map(([k,c])=>'<div class="perm-module-card '+(current[k]?'selected':'')+'" data-module="'+k+'" onclick="seleccionarModuloPermisoUsuario(\''+k+'\')"><input type="checkbox" data-module="'+k+'" '+(current[k]?'checked':'')+' onchange="event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')"><i class="fa-solid '+c.icon+'"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>').join('');acts.innerHTML='';Object.entries(MATRIZ_PERMISOS_USUARIO).forEach(([k,c])=>renderBloqueAccionesPermisoUsuario(k,c,current[k]||{}));const first=Object.keys(MATRIZ_PERMISOS_USUARIO).find(k=>current[k]);document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(cb=>{if(cb.checked){const b=document.querySelector(`#usr-permisos-acciones [data-action-block="${cb.dataset.module}"]`);if(b)b.classList.remove('d-none');}});if(first)seleccionarModuloPermisoUsuario(first);else document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
-    function seleccionarTodosPermisosUsuario(){const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')],all=ms.length>0&&ms.every(x=>x.checked);if(all){ms.forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones input[type="checkbox"]').forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.remove('active','selected'));}else{ms.forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-action]').forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-scope-module]').forEach(x=>x.checked=x.value==='todos');document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.add('selected'));const first=Object.keys(MATRIZ_PERMISOS_USUARIO)[0];if(first)seleccionarModuloPermisoUsuario(first);}actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
+    function obtenerModulosHabilitadosFormularioUsuario_(empresaIdOverride=null){
+        const empresaId=String(empresaIdOverride||((esSuperMasterPortal_()?document.getElementById('usr_empresa')?.value:(currentUser?.empresa_row_id||currentUser?.empresa?.row_id))||'')).trim();
+        const allowed=new Set();
+        if(!empresaId)return allowed;
+        let rows=[];
+        if(window._portalAdminBootstrapLoaded===true){
+            rows=Array.isArray(window._portalCompanyModules)?window._portalCompanyModules:[];
+        }else if(Array.isArray(currentUser?.modulos_habilitados)){
+            rows=currentUser.modulos_habilitados;
+        }else{
+            rows=Array.isArray(window._portalCompanyModules)?window._portalCompanyModules:[];
+        }
+        rows.forEach(item=>{
+            if(typeof item==='string'){
+                // Las listas firmadas de la propia empresa contienen solo módulos activos.
+                if(!esSuperMasterPortal_())allowed.add(portalClaveModuloEmpresa_(item));
+                return;
+            }
+            if(!item||typeof item!=='object')return;
+            const enabled=item.habilitado??item.enabled??item.active;
+            if(enabled===false||String(enabled).toLowerCase()==='false'||String(enabled)==='0')return;
+            const rowCompany=String(item.empresa_row_id||item.company_row_id||item.company_id||'').trim();
+            if(rowCompany!==empresaId)return;
+            const key=item.modulo_key||item.module_key||item.key||item.modulo||'';
+            if(key)allowed.add(portalClaveModuloEmpresa_(key));
+        });
+        allowed.add('dashboard');
+        return allowed;
+    }
+    function filtrarModulosPermisosUsuario(valor=''){
+        const root=document.getElementById('usr-permisos-modulos');if(!root)return;
+        const q=String(valor||'').trim().toLocaleLowerCase('es');
+        root.querySelectorAll('.perm-module-card').forEach(card=>{card.hidden=!!q&&!card.textContent.toLocaleLowerCase('es').includes(q);});
+        root.querySelectorAll('.perm-module-category-title').forEach(head=>{
+            let node=head.nextElementSibling,visible=false;
+            while(node&&!node.classList.contains('perm-module-category-title')){if(node.classList.contains('perm-module-card')&&!node.hidden)visible=true;node=node.nextElementSibling;}
+            head.hidden=!visible;
+        });
+    }
+    function renderEditorPermisosUsuario(raw={},empresaIdOverride=null){
+        const current=normalizarPermisosUsuario(raw),mods=document.getElementById('usr-permisos-modulos'),acts=document.getElementById('usr-permisos-acciones');
+        if(!mods||!acts)return;
+        // SuperMaster administra el catálogo global: puede visualizar y configurar
+        // TODOS los módulos del portal, independientemente de los módulos contratados
+        // por la empresa seleccionada. Los demás administradores conservan el filtro.
+        const esSuperMaster=esSuperMasterPortal_();
+        const allowed=obtenerModulosHabilitadosFormularioUsuario_(empresaIdOverride);
+        const moduleSearch=document.getElementById('usr-permisos-buscar');if(moduleSearch)moduleSearch.value='';
+        const entries=esSuperMaster
+            ?Object.entries(MATRIZ_PERMISOS_USUARIO)
+            :Object.entries(MATRIZ_PERMISOS_USUARIO).filter(([key])=>allowed.has(portalClaveModuloEmpresa_(key)));
+        if(!entries.length){
+            const companySelected=!!String(empresaIdOverride||((esSuperMasterPortal_()?document.getElementById('usr_empresa')?.value:(currentUser?.empresa_row_id||currentUser?.empresa?.row_id))||'')).trim();
+            mods.innerHTML=companySelected
+              ? '<div class="perm-editor-empty"><i class="fa-solid fa-folder-open"></i><strong>Esta empresa no tiene módulos habilitados</strong><span>Solicite al administrador de la empresa que habilite los módulos correspondientes.</span></div>'
+              : '<div class="perm-editor-empty"><i class="fa-solid fa-building-circle-exclamation"></i><strong>Seleccione una empresa</strong><span>Al elegir la empresa aparecerán aquí sus módulos habilitados para asignarlos al usuario.</span></div>';
+            acts.innerHTML='<div class="perm-editor-empty perm-editor-empty-detail"><i class="fa-solid fa-shield-halved"></i><strong>Permisos por módulo</strong><span>Seleccione un módulo habilitado para configurar lectura, modificación, eliminación y alcance.</span></div>';
+            document.getElementById('usr_permisos_json').value='{}';
+            actualizarResumenPermisosUsuario();actualizarBotonTodosPermisosUsuario();
+            return;
+        }
+        const visibleKeys=new Set(entries.map(([key])=>key));
+        const grupos=new Set();
+        mods.innerHTML=(esSuperMaster?'<div class="perm-supermaster-catalog-note"><i class="fa-solid fa-crown"></i><span><strong>Catálogo global de módulos</strong><small>SuperMaster: todos los módulos y permisos están disponibles para asignación.</small></span></div>':'')+CATEGORIAS_PERMISOS_USUARIO.map(cat=>{
+            const ds=cat.modules.filter(k=>visibleKeys.has(k));
+            if(!ds.length)return '';
+            ds.forEach(k=>grupos.add(k));
+            return '<div class="perm-module-category-title"><i class="fa-solid '+cat.icon+'"></i><span>'+escaparTextoPermisoUsuario(cat.label)+'</span></div>'+ds.map(k=>{
+                const c=MATRIZ_PERMISOS_USUARIO[k];
+                return '<div class="perm-module-card '+(current[k]?'selected':'')+'" data-module="'+k+'" onclick="seleccionarModuloPermisoUsuario(\''+k+'\')"><input type="checkbox" data-module="'+k+'" '+(current[k]?'checked':'')+' onchange="event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')" onclick="event.stopPropagation();seleccionarModuloPermisoUsuario(\''+k+'\')"><i class="fa-solid '+c.icon+'"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>';
+            }).join('');
+        }).join('')+entries.filter(([k])=>!grupos.has(k)).map(([k,c])=>'<div class="perm-module-card '+(current[k]?'selected':'')+'" data-module="'+k+'" onclick="seleccionarModuloPermisoUsuario(\''+k+'\')"><input type="checkbox" data-module="'+k+'" '+(current[k]?'checked':'')+' onchange="event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')"><i class="fa-solid '+c.icon+'"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>').join('');
+        acts.innerHTML='';
+        entries.forEach(([k,c])=>renderBloqueAccionesPermisoUsuario(k,c,current[k]||{}));
+        const first=entries.find(([k])=>current[k])?.[0]||entries[0]?.[0];
+        document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(cb=>{
+            if(cb.checked){const b=document.querySelector('#usr-permisos-acciones [data-action-block="'+cb.dataset.module+'"]');if(b)b.classList.remove('d-none');}
+        });
+        if(first)seleccionarModuloPermisoUsuario(first);
+        else document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));
+        actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();
+    }
+    window.filtrarModulosPermisosUsuario=filtrarModulosPermisosUsuario;
+    function seleccionarTodosPermisosUsuario(){const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')],all=ms.length>0&&ms.every(x=>x.checked);if(all){ms.forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones input[type="checkbox"]').forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.remove('active','selected'));}else{ms.forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-action]').forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-scope-module]').forEach(x=>x.checked=x.value==='todos');document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.add('selected'));const first=ms.find(x=>x.checked)?.dataset.module;if(first)seleccionarModuloPermisoUsuario(first);}actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
     function actualizarBotonTodosPermisosUsuario(){const btn=document.getElementById('btnPermisosTodos');if(!btn)return;const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')],all=ms.length>0&&ms.every(x=>x.checked);btn.classList.toggle('btn-secondary',all);btn.classList.toggle('btn-outline-secondary',!all);btn.innerHTML=all?'<i class="fa-solid fa-xmark me-1"></i><span>Quitar selección</span>':'<i class="fa-solid fa-check-double me-1"></i><span>Seleccionar todos</span>';}
     function normalizarModuloPermisoUsuario(modulo){return String(modulo||'').trim().toLowerCase();}
     function permisosUsuarioTieneModulo(modulo,accion='leer',u=currentUser){if(!u)return false;const key=portalClaveModuloEmpresa_(normalizarModuloPermisoUsuario(modulo));if(!portalEmpresaTieneModuloHabilitado_(key,u))return false;if(u.es_supermaster===true&&u.cuenta_protegida===true)return true;if(String(u.rol||'').trim().toLowerCase()==='master')return true;let act=String(accion||'leer').trim().toLowerCase();if(['agregar','asignar','aprobar','cerrar'].includes(act))act='modificar';const rolTec=String(u.rol||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()==='tecnico';if(key==='programaciondiaria'&&rolTec&&String(u.id_tecnico_vinculado||'').trim()&&['leer','modificar'].includes(act))return true;const p=permisosEfectivosUsuario(u),cfg=p[key];if(cfg&&typeof cfg==='object'){if(cfg[act]===true||String(cfg[act]||'').toLowerCase()==='true')return true;if(act==='leer'&&(cfg.ver===true||String(cfg.ver||'').toLowerCase()==='true'))return true;}return false;}
     const permisosUsuarioTieneModuloInterno=permisosUsuarioTieneModulo;
     window.permisosUsuarioTieneModulo=(modulo,accion='leer',u)=>{const user=u||currentUser;if(String(modulo||'').toLowerCase()==='salud'){if(!user||!portalEmpresaTieneModuloHabilitado_('salud',user))return false;if(user.es_supermaster===true&&user.cuenta_protegida===true)return true;if(String(user.rol||'').trim().toLowerCase()==='master')return true;const cfg=permisosEfectivosUsuario(user)?.salud||{},yes=v=>v===true||String(v||'').toLowerCase()==='true';if(yes(cfg.administrar)||yes(cfg.todos))return true;const a=String(accion||'leer').toLowerCase();if(a==='leer')return yes(cfg.leer)||yes(cfg.ver)||yes(cfg.modificar);if(a==='agregar')return yes(cfg.agregar)||yes(cfg.modificar);if(a==='modificar')return yes(cfg.modificar);if(a==='eliminar')return yes(cfg.eliminar);return false;}return permisosUsuarioTieneModuloInterno(modulo,accion,user);};
-    function usuarioTieneCualquierPermisoModulo(modulo,u=currentUser){if(!u)return false;if(String(u.rol||'').trim().toLowerCase()==='master')return true;const p=permisosEfectivosUsuario(u),key=normalizarModuloPermisoUsuario(modulo),cfg=p[key];return !!(cfg&&typeof cfg==='object'&&Object.entries(cfg).some(([k,v])=>PERM_ACTIONS_USUARIO.includes(k)&&v===true));}
+    function usuarioTieneCualquierPermisoModulo(modulo,u=currentUser){if(!u)return false;if(!(u.es_supermaster===true&&u.cuenta_protegida===true)&&!portalEmpresaTieneModuloHabilitado_(modulo,u))return false;if(u.es_supermaster===true&&u.cuenta_protegida===true)return true;if(String(u.rol||'').trim().toLowerCase()==='master')return true;const p=permisosEfectivosUsuario(u),key=portalClaveModuloEmpresa_(normalizarModuloPermisoUsuario(modulo)),cfg=p[key];return !!(cfg&&typeof cfg==='object'&&Object.entries(cfg).some(([k,v])=>PERM_ACTIONS_USUARIO.includes(k)&&(v===true||String(v).toLowerCase()==='true')));}
     function puedeAccederModuloUsuario(modulo){return permisosUsuarioTieneModulo(modulo,'leer');}
     function protegerAccionUsuario(modulo,accion,msg='No tiene permiso para realizar esta acción.'){if(window._registroPublicoCliente===true&&modulo==='clientes')return true;if(permisosUsuarioTieneModulo(modulo,accion))return true;return false;}
     function actualizarBotonPreestablecidosPermisosUsuario(esNuevo){const btn=document.getElementById('btnPermisosPreestablecidos');if(btn)btn.classList.toggle('d-none',!esNuevo);}
-    function aplicarPermisosPreestablecidosUsuario(){const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')];if(!ms.length)return;ms.forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-action]').forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-scope-module]').forEach(x=>x.checked=x.value==='propios');document.querySelectorAll('#usr-permisos-acciones input[data-parentesco-module],#usr-permisos-acciones input[data-cliente-perm-module],#usr-permisos-acciones input[data-usuario-perm-module]').forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.remove('d-none'));document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.add('selected'));const first=Object.keys(MATRIZ_PERMISOS_USUARIO)[0];if(first)seleccionarModuloPermisoUsuario(first);actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
+    function aplicarPermisosPreestablecidosUsuario(){const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')];if(!ms.length)return;ms.forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-action]').forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-scope-module]').forEach(x=>x.checked=x.value==='propios');document.querySelectorAll('#usr-permisos-acciones input[data-parentesco-module],#usr-permisos-acciones input[data-cliente-perm-module],#usr-permisos-acciones input[data-usuario-perm-module]').forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.remove('d-none'));document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.add('selected'));const first=ms.find(x=>x.checked)?.dataset.module;if(first)seleccionarModuloPermisoUsuario(first);actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
     function cargarSelectorTecnicoVinculado_(selected='') {
  const sel=document.getElementById('usr_tecnico_vinculado');if(!sel)return;
  const allTechs=(db?.tecnicos||db?.Tecnicos||[]).filter(t=>t&&(t.id_tecnico||t.nombre_completo||t.nombre));
@@ -10999,8 +11365,17 @@ function abrirPermisoModuloMovil_(key,block){const modal=document.getElementById
  sel.value=seen.has(chosen)?chosen:'';
 }
     function aplicarPermisosPorRolUsuario(){const role=String(document.getElementById('usr_rol')?.value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();const wrap=document.getElementById('usr-tecnico-vinculo-wrap');if(wrap)wrap.classList.toggle('d-none',role!=='tecnico');if(role==='tecnico')cargarSelectorTecnicoVinculado_(document.getElementById('usr_tecnico_vinculado')?.value||'');} window.aplicarPermisosPorRolUsuario=aplicarPermisosPorRolUsuario;
-    function abrirModalCrearUsuario() {
+    async function abrirModalCrearUsuario() {
         if (!puedeGestionarUsuariosPorPermiso('agregar')) { showSystemNotification('Acceso restringido', 'No tiene permiso para crear usuarios.', 'warning'); return; }
+        // Cargar primero el catálogo empresarial y los módulos contratados; el editor
+        // no debe intentar dibujar permisos con una lista administrativa todavía vacía.
+        try {
+            if (!window._portalAdminBootstrapLoaded) await portalAdminBootstrap_();
+        } catch (loadError) {
+            console.error('[Usuarios] No se pudo cargar empresas y módulos:', loadError);
+            showSystemNotification('No se pudieron cargar los módulos', loadError?.message || 'Verifique la conexión con el servidor e intente nuevamente.', 'danger');
+            return;
+        }
         document.getElementById('formUsuario').reset();
         document.getElementById('usr_id').value = '';
         document.getElementById('usr-photo-panel')?.classList.add('d-none');
@@ -11042,7 +11417,7 @@ function abrirPermisoModuloMovil_(key,block){const modal=document.getElementById
         cargarSelectorTecnicoVinculado_(u.id_tecnico_vinculado||''); aplicarPermisosPorRolUsuario();
         document.getElementById('usr_estado').value = u.estado || '';
         document.getElementById('usr_tiempo_inactividad').value = obtenerTiempoInactividadUsuario_(u);
-        renderEditorPermisosUsuario(permisosEfectivosUsuario(u));
+        renderEditorPermisosUsuario(permisosEfectivosUsuario(u),u.empresa_row_id||u.empresa?.row_id||null);
         actualizarBotonPreestablecidosPermisosUsuario(false);
         document.getElementById('modalUsuarioTitle').innerHTML = '<i class="fa-solid fa-user-gear text-primary me-2"></i>Modificar Usuario';
         window.cleanErpModalLayers?.(); modalUsr.show();
@@ -11067,10 +11442,14 @@ async function guardarUsuario(e) {
         if(esSuperMasterPortal_()&&!document.getElementById('usr_empresa')?.value)throw new Error('Seleccione la empresa a la que pertenecerá este usuario.');
         payload.password=passwordValue;
         const companyId=esSuperMasterPortal_()?document.getElementById('usr_empresa').value:undefined;
-        const enabledRows=window._portalCompanyModules||[];
-        const enabledKeys=esSuperMasterPortal_()?enabledRows.filter(x=>String(x.empresa_row_id)===String(companyId)&&x.habilitado).map(x=>String(x.modulo_key)):enabledRows.map(x=>String(x));
-        const enabledSet=new Set(enabledKeys);
-        payload.permisos=Object.fromEntries(Object.entries(payload.permisos||{}).filter(([key])=>enabledSet.has(String(key).toLowerCase())));
+        // SuperMaster puede guardar permisos para cualquier módulo del catálogo.
+        // Para administradores normales se mantiene la restricción por módulos de empresa.
+        if(!esSuperMasterPortal_()){
+          const enabledRows=window._portalCompanyModules||[];
+          const enabledKeys=enabledRows.map(x=>portalClaveModuloEmpresa_(typeof x==='string'?x:(x?.modulo_key||x?.module_key||x?.key||'')));
+          const enabledSet=new Set(enabledKeys.filter(Boolean));
+          payload.permisos=Object.fromEntries(Object.entries(payload.permisos||{}).filter(([key])=>enabledSet.has(portalClaveModuloEmpresa_(key))));
+        }
         const result=await portalAdminCall_({action:'user_create',...(companyId?{empresa_row_id:companyId}:{}),usuario:payload});
         await portalAdminBootstrap_(true);
         if(role==='tecnico'){
@@ -16770,57 +17149,7 @@ body.logout-cleanup .modal-backdrop {
 @media(max-width:767px){.payment-summary-grid{grid-template-columns:1fr}}
 html[data-bs-theme="dark"] .master-pending-alert{background:linear-gradient(135deg,rgba(245,158,11,.12),#1e293b);border-color:#92400e}
 </style>
-<style id="usuario-form-compacto">
-/* Formulario de usuario: compacto, ordenado y responsive */
-#modalUsuario .modal-dialog{max-width:760px;width:calc(100% - 24px);}
-#modalUsuario .modal-content-pro{border-radius:18px;}
-#modalUsuario .modal-header-pro{padding:.9rem 1.2rem;}
-#modalUsuario .modal-body-pro{padding:1rem 1.2rem 1.05rem;max-height:78vh;overflow-y:auto;}
-#modalUsuario .modal-title{font-size:1rem;}
-#modalUsuario .form-label{margin-bottom:.28rem;}
-#modalUsuario .form-control-pro,#modalUsuario .form-select-pro{padding:.48rem .72rem;border-radius:9px;font-size:.86rem;}
-.usr-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;}
-.usr-form-field{min-width:0;}
-.usr-form-field-wide{grid-column:1/-1;}
-.usr-section-divider{display:flex;align-items:center;gap:10px;margin:14px 0 9px;color:var(--text-main);font-size:.8rem;font-weight:800;}
-.usr-section-divider:after{content:"";height:1px;flex:1;background:var(--border-color);}
-.usr-permisos-compact{border:1px solid var(--border-color);border-radius:12px;padding:10px;background:var(--bg-card);}
-.usr-permisos-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;}
-.usr-help{font-size:.68rem;}
-#usr-permisos-modulos .col-6{padding-left:4px;padding-right:4px;}
-#usr-permisos-modulos label{min-height:39px;padding:7px 8px!important;border-radius:9px!important;background:var(--surface-soft)!important;border-color:var(--border-color)!important;font-size:.7rem!important;transition:.15s ease;}
-#usr-permisos-modulos label:hover{border-color:rgba(37,99,235,.45)!important;background:rgba(37,99,235,.05)!important;}
-#usr-permisos-modulos .form-check-input{width:14px;height:14px;}
-#usr-permisos-acciones{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;}
-#usr-permisos-acciones>[data-action-block]{border:1px solid var(--border-color)!important;border-radius:9px!important;padding:7px 9px!important;margin:0!important;background:var(--surface-soft);}
-#usr-permisos-acciones>[data-action-block]>div:first-child{font-size:.68rem!important;margin-bottom:5px!important;}
-#usr-permisos-acciones .form-check{margin:0!important;font-size:.66rem!important;}
-#usr-permisos-acciones .form-check-input{margin-top:.15em;}
-.usr-form-footer{display:flex;justify-content:flex-end;margin-top:12px;padding-top:10px;border-top:1px solid var(--border-color);}
-html[data-bs-theme="dark"] #modalUsuario .form-control-pro,html[data-bs-theme="dark"] #modalUsuario .form-select-pro{background:#111827!important;color:var(--text-main)!important;border-color:var(--border-color)!important;}
-html[data-bs-theme="dark"] #modalUsuario .form-control-pro:focus,html[data-bs-theme="dark"] #modalUsuario .form-select-pro:focus{background:#172033!important;}
-@media(max-width:575px){#modalUsuario .modal-body-pro{padding:.85rem;max-height:82vh}.usr-form-grid{grid-template-columns:1fr}.usr-form-field-wide{grid-column:auto}#usr-permisos-acciones{grid-template-columns:1fr}.usr-permisos-toolbar{align-items:flex-start}.usr-form-footer .btn{width:100%;}}
-#modalUsuario .usr-hero-panel{display:flex;align-items:center;gap:12px;padding:12px 13px;margin-bottom:2px;border:1px solid var(--border-color);border-radius:14px;background:linear-gradient(135deg,rgba(37,99,235,.09),rgba(37,99,235,.025));}
-#modalUsuario .usr-avatar{width:42px;height:42px;flex:0 0 42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(37,99,235,.12);color:#2563eb;font-size:1rem;}
-#modalUsuario .usr-kicker{font-size:.62rem;letter-spacing:.09em;}
-#modalUsuario .usr-hero-title{font-size:1rem;font-weight:800;color:var(--text-main);line-height:1.15;margin-top:1px;}
-#modalUsuario .usr-section-block{margin-top:5px;}
-#modalUsuario .usr-section-divider{margin:12px 0 8px;font-size:.78rem;}
-#modalUsuario .usr-form-grid{gap:9px 12px;}
-#modalUsuario .usr-status-note{grid-column:1/-1;font-size:.72rem;color:var(--text-muted);padding:7px 9px;border:1px dashed var(--border-color);border-radius:9px;background:var(--bg-subtle);}
-#modalUsuario .usr-input-group .input-group-text{border:1px solid var(--border-color);border-right:0;background:var(--bg-subtle);color:var(--text-muted);border-radius:9px 0 0 9px;}
-#modalUsuario .usr-input-group .form-control-pro{border-left:0;border-radius:0 9px 9px 0;}
-#modalUsuario .usr-permisos-toolbar{padding:1px 0 8px;}
-#modalUsuario #usr-permisos-modulos label{font-size:.75rem!important;line-height:1.15;}
-#modalUsuario #usr-permisos-acciones .border{padding:8px!important;margin-bottom:7px!important;}
-#modalUsuario #usr-permisos-acciones .small.fw-bold{font-size:.74rem!important;}
-#modalUsuario #usr-permisos-acciones .form-check{font-size:.7rem!important;}
-#modalUsuario .usr-form-footer{gap:8px;}
-html[data-bs-theme="dark"] #modalUsuario .usr-hero-panel{background:linear-gradient(135deg,rgba(59,130,246,.14),rgba(30,41,59,.6));}
-html[data-bs-theme="dark"] #modalUsuario .usr-status-note{background:#111827;}
-html[data-bs-theme="dark"] #modalUsuario .usr-input-group .input-group-text{background:#111827;color:#94a3b8;}
-
-</style>
+<!-- Se elimina la hoja antigua usuario-form-compacto: limitaba el modal a 1180px y apilaba el escritorio. -->
 /* PERMISOS GRANULARES DE USUARIO */
 #usr-permisos-panel{border:1px solid var(--border-color);border-radius:12px;padding:12px;background:var(--bg-card);}
 #usr-permisos-panel label{cursor:pointer;}
@@ -17661,7 +17990,7 @@ window.sportsLoad=load;
 </div>
 </div>
 <div aria-hidden="true" class="modal fade" id="familiaResumenModal" tabindex="-1"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content border-0 shadow-lg rounded-4"><div class="modal-header"><div><h5 class="modal-title fw-bold mb-1" id="familiaResumenTitulo">Resumen</h5><div class="small text-muted" id="familiaResumenSubtitulo"></div></div><button aria-label="Cerrar" class="btn-close" data-bs-dismiss="modal" type="button"></button></div><div class="modal-body"><div class="row g-2" id="familiaResumenGrid"></div></div><div class="modal-footer py-2"><button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button"><i class="fa-solid fa-xmark me-1"></i>Cerrar</button></div></div></div></div>
-<script>document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('permisoModuloMovilModal')?.classList.contains('show'))cerrarPermisoModuloMovil();});</script>
+
 <script id="ops-vgt-v2-js">
 (function(){
 const esc2=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
@@ -20316,3 +20645,4 @@ const _saludOriginalSwitchTab=window.switchTab;window.switchTab=function(tab){co
 </script>
 </body>
 </html>
+
