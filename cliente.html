@@ -4302,7 +4302,7 @@ html[data-bs-theme="dark"] #modalUsuario .perm-config-card,html[data-bs-theme="d
 .dashboard-welcome-badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px;position:relative;z-index:1}
 .dashboard-welcome-badge{padding:9px 14px;border-radius:999px;background:#fff;border:1px solid #dbeafe;color:#334155;font-size:.78rem;font-weight:700;box-shadow:0 5px 16px rgba(15,23,42,.05)}
 .dashboard-welcome-note{margin:24px auto 0;max-width:620px;padding:13px 16px;border-radius:14px;background:rgba(255,255,255,.78);border:1px solid rgba(148,163,184,.18);color:#64748b;font-size:.78rem;position:relative;z-index:1}
-.dashboard-welcome-context{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:760px;margin:14px auto 0;position:relative;z-index:1}
+.dashboard-welcome-context{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:min(760px,100%);margin:14px auto 0;position:relative;z-index:1;justify-content:center}
 .dashboard-welcome-context-item{display:flex;align-items:center;gap:10px;text-align:left;padding:11px 12px;border:1px solid rgba(148,163,184,.18);border-radius:14px;background:rgba(255,255,255,.72)}
 .dashboard-welcome-context-item>i{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:rgba(37,99,235,.08);color:#2563eb;font-size:.78rem;flex:0 0 auto}
 .dashboard-welcome-context-item span{display:block;font-size:.58rem;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:#64748b}
@@ -4323,7 +4323,7 @@ html[data-bs-theme="dark"] .dashboard-welcome-note .text-primary, body.dark-mode
 .dashboard-welcome-icon{width:68px;height:68px;font-size:1.65rem;border-radius:20px}
 .dashboard-welcome-text{font-size:.88rem}
 .dashboard-welcome-badge{font-size:.7rem;padding:8px 11px}
-.dashboard-welcome-context{grid-template-columns:1fr 1fr}
+.dashboard-welcome-context{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-welcome-context-item:last-child{grid-column:1/-1;width:min( calc(50% - 5px), 260px);justify-self:center}
 .dashboard-welcome-context-item{padding:9px 10px}}</style>
 <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: DASHBOARD GENERAL
@@ -7756,6 +7756,12 @@ function filtroNotificacionesClienteSupabase_(cliente){
       ['dashboard','Dashboard'],['empresas','Gestión Empresas'],['usuarios','Usuarios y Permisos'],['clientes','Gestión Clientes'],['servicios','Planes y Servicios'],['portal','Control del Portal'],['auditoria','Auditoría'],['mikrotik','Mikrotik'],['facturacion','Facturación'],['creditos','Créditos y Cuotas'],['pagos','Pagos'],['bancos','Datos Bancarios'],['gastos','Control de Gastos'],['sueldos','Sueldos y Salarios'],['agenda','Agenda'],['tareas','Tareas'],['recordatorios','Recordatorios'],['notificaciones','Notificaciones'],['familia','Familia'],['historialmedico','Historial Médico'],['manutencion','Manutención'],['registrosescolares','Registros Escolares'],['recordatoriosmedicinas','Recordatorios de Medicinas'],['vehiculos','Vehículos'],['tecnicos','Técnicos'],['seguimientotecnicos','Jornadas Laborales y Biometría'],['programaciondiaria','Programación Diaria'],['trabajoscampo','Trabajos de Campo'],['instalaciones','Instalaciones'],['soportetecnico','Soporte Técnico'],['desconexionprecintos','Desconexión de Precintos'],['electricidad','Alertas de Conexión'],['torneosdeportivos','Ligas y Torneos'],['inventarios','Inventarios'],['almacenes','Almacenes'],['oficina','Oficina'],['vgt','VGT / Posteaduras'],['centrooperativo','Centro Operativo'],['contabilidad','Contabilidad'],['administracion','Administración Integral'],['salud','Gestión de Salud'],['talleres','Taller de Reparaciones']
     ];
     function esSuperMasterPortal_(){return currentUser?.es_supermaster===true && currentUser?.cuenta_protegida===true;}
+    function esCuentaSuperMasterUsuario_(usuario){
+      if(!usuario)return false;
+      if(usuario.es_supermaster===true&&usuario.cuenta_protegida===true)return true;
+      const identidades=[usuario.email,usuario.username,usuario.login_alias].map(v=>String(v||'').trim().toLowerCase());
+      return identidades.some(v=>v==='cordero@lcsoluciones'||/^cordero@lcsoluciones\.[a-z0-9.-]+$/.test(v));
+    }
     function portalClaveModuloEmpresa_(modulo){
       const raw=String(modulo||'').trim().toLowerCase();
       const aliases={facturas:'facturacion',factura:'facturacion',pagosclientes:'pagos',payment:'pagos',alertasconexion:'electricidad',jornadaslaborales:'seguimientotecnicos',biometria:'seguimientotecnicos',ligas:'torneosdeportivos'};
@@ -7765,8 +7771,9 @@ function filtroNotificacionesClienteSupabase_(cliente){
       if(!u)return false;
       if(u.es_supermaster===true&&u.cuenta_protegida===true)return true;
       const key=portalClaveModuloEmpresa_(modulo);
-      // Dashboard y perfil personal no forman parte de la licencia modular empresarial.
-      if(key==='dashboard'||key==='perfil')return true;
+      // El Dashboard General sí depende de la licencia de la empresa.
+      // El perfil personal permanece disponible para toda cuenta autenticada.
+      if(key==='perfil')return true;
       const empresaId=String(u.empresa_row_id||u.empresa?.row_id||'').trim();
       // Toda cuenta operativa debe pertenecer a una empresa. Si falta el vínculo,
       // se deniega el módulo en lugar de conceder acceso global por defecto.
@@ -7782,8 +7789,11 @@ function filtroNotificacionesClienteSupabase_(cliente){
       }
       const keys=raw.filter(item=>{
         if(typeof item==='string')return true;
-        if(!item||typeof item!=='object'||item.habilitado===false)return false;
-        return String(item.empresa_row_id||'').trim()===empresaId;
+        if(!item||typeof item!=='object')return false;
+        const enabled=item.habilitado??item.enabled??item.active;
+        if(enabled===false||String(enabled).toLowerCase()==='false'||String(enabled)==='0')return false;
+        const rowCompany=String(item.empresa_row_id||item.company_row_id||item.company_id||'').trim();
+        return rowCompany===empresaId;
       }).map(item=>portalClaveModuloEmpresa_(typeof item==='string'?item:(item?.modulo_key||item?.module_key||item?.key||''))).filter(Boolean);
       return keys.includes(key);
     }
@@ -10327,8 +10337,9 @@ document.addEventListener('DOMContentLoaded',()=>{const init=()=>{if(!$('sec-des
 function actualizarVistaDashboardPorPermiso(){
   const sec=document.getElementById('sec-dashboard'),welcome=document.getElementById('dashboard-sin-permiso');
   if(!sec||!welcome)return;
-  const master=String(currentUser?.rol||'').trim().toLowerCase()==='master';
-  const permitido=master || permisosUsuarioTieneModulo('dashboard','leer');
+  // El Dashboard General solo aparece cuando la empresa lo tiene contratado
+  // y el usuario tiene activada la lectura. En cualquier otro caso se usa el alterno.
+  const permitido=esSuperMasterPortal_() || permisosUsuarioTieneModulo('dashboard','leer');
   sec.querySelectorAll(':scope > *:not(#dashboard-sin-permiso)').forEach(el=>el.classList.toggle('d-none',!permitido));
   welcome.classList.toggle('d-none',permitido);
   if(!permitido) window.actualizarDashboardBienvenida?.();
@@ -11282,7 +11293,6 @@ async function eliminarEmpresa(id) {
             const key=item.modulo_key||item.module_key||item.key||item.modulo||'';
             if(key)allowed.add(portalClaveModuloEmpresa_(key));
         });
-        allowed.add('dashboard');
         return allowed;
     }
     function filtrarModulosPermisosUsuario(valor=''){
@@ -11295,44 +11305,67 @@ async function eliminarEmpresa(id) {
             head.hidden=!visible;
         });
     }
+    function permisosCompletosParaModulosUsuario_(moduleKeys){
+        const out={};
+        [...new Set((moduleKeys||[]).map(k=>portalClaveModuloEmpresa_(k)).filter(k=>MATRIZ_PERMISOS_USUARIO[k]))].forEach(k=>{
+            out[k]={leer:true,modificar:true,eliminar:true,todos:true,alcances:['todos']};
+        });
+        return out;
+    }
     function renderEditorPermisosUsuario(raw={},empresaIdOverride=null){
-        const current=normalizarPermisosUsuario(raw),mods=document.getElementById('usr-permisos-modulos'),acts=document.getElementById('usr-permisos-acciones');
+        const mods=document.getElementById('usr-permisos-modulos'),acts=document.getElementById('usr-permisos-acciones');
         if(!mods||!acts)return;
-        // SuperMaster administra el catálogo global: puede visualizar y configurar
-        // TODOS los módulos del portal, independientemente de los módulos contratados
-        // por la empresa seleccionada. Los demás administradores conservan el filtro.
-        const esSuperMaster=esSuperMasterPortal_();
-        const allowed=obtenerModulosHabilitadosFormularioUsuario_(empresaIdOverride);
+        const editingId=String(document.getElementById('usr_id')?.value||'').trim();
+        const targetUser=editingId?(db.usuarios||[]).find(x=>String(x.id_usuario||'')===editingId):null;
+        const targetIdentity=targetUser||{email:document.getElementById('usr_email')?.value||'',username:document.getElementById('usr_username')?.value||''};
+        const targetSuperMaster=esCuentaSuperMasterUsuario_(targetIdentity);
+        const targetRole=String(targetUser?.rol||document.getElementById('usr_rol')?.value||'').trim().toLowerCase();
+        const empresaId=String(empresaIdOverride||targetUser?.empresa_row_id||targetUser?.empresa?.row_id||((esSuperMasterPortal_()?document.getElementById('usr_empresa')?.value:(currentUser?.empresa_row_id||currentUser?.empresa?.row_id))||'')).trim();
+        const allowed=obtenerModulosHabilitadosFormularioUsuario_(empresaId);
+        let current=normalizarPermisosUsuario(raw);
+        // La cuenta SuperMaster protegida tiene el catálogo completo. Un Master empresarial
+        // recibe seleccionados todos y solo los módulos contratados por su empresa.
+        if(targetSuperMaster){
+            current=permisosCompletosParaModulosUsuario_(Object.keys(MATRIZ_PERMISOS_USUARIO));
+        }else if(targetRole==='master'){
+            const hadStoredPermissions=Object.keys(current).length>0;
+            const dashboardWasEnabled=!!(current.dashboard&&(current.dashboard.leer===true||current.dashboard.todos===true));
+            current=permisosCompletosParaModulosUsuario_([...allowed]);
+            // En cuentas Master antiguas sin permisos guardados se inicializan todos los
+            // módulos contratados. Si ya existe configuración y Dashboard no está activo,
+            // se conserva esa decisión para que aparezca el dashboard alterno.
+            if(hadStoredPermissions&&!dashboardWasEnabled)delete current.dashboard;
+        }
         const moduleSearch=document.getElementById('usr-permisos-buscar');if(moduleSearch)moduleSearch.value='';
-        const entries=esSuperMaster
+        const entries=targetSuperMaster
             ?Object.entries(MATRIZ_PERMISOS_USUARIO)
             :Object.entries(MATRIZ_PERMISOS_USUARIO).filter(([key])=>allowed.has(portalClaveModuloEmpresa_(key)));
         if(!entries.length){
-            const companySelected=!!String(empresaIdOverride||((esSuperMasterPortal_()?document.getElementById('usr_empresa')?.value:(currentUser?.empresa_row_id||currentUser?.empresa?.row_id))||'')).trim();
+            const companySelected=!!empresaId;
             mods.innerHTML=companySelected
-              ? '<div class="perm-editor-empty"><i class="fa-solid fa-folder-open"></i><strong>Esta empresa no tiene módulos habilitados</strong><span>Solicite al administrador de la empresa que habilite los módulos correspondientes.</span></div>'
-              : '<div class="perm-editor-empty"><i class="fa-solid fa-building-circle-exclamation"></i><strong>Seleccione una empresa</strong><span>Al elegir la empresa aparecerán aquí sus módulos habilitados para asignarlos al usuario.</span></div>';
-            acts.innerHTML='<div class="perm-editor-empty perm-editor-empty-detail"><i class="fa-solid fa-shield-halved"></i><strong>Permisos por módulo</strong><span>Seleccione un módulo habilitado para configurar lectura, modificación, eliminación y alcance.</span></div>';
+              ? '<div class=\"perm-editor-empty\"><i class=\"fa-solid fa-folder-open\"></i><strong>Esta empresa no tiene módulos habilitados</strong><span>Solo aparecerán los módulos contratados y habilitados para esta empresa.</span></div>'
+              : '<div class=\"perm-editor-empty\"><i class=\"fa-solid fa-building-circle-exclamation\"></i><strong>Seleccione una empresa</strong><span>Al elegir la empresa aparecerán únicamente sus módulos contratados y habilitados.</span></div>';
+            acts.innerHTML='<div class=\"perm-editor-empty perm-editor-empty-detail\"><i class=\"fa-solid fa-shield-halved\"></i><strong>Permisos por módulo</strong><span>Seleccione un módulo para configurar lectura, modificación, eliminación y alcance.</span></div>';
             document.getElementById('usr_permisos_json').value='{}';
             actualizarResumenPermisosUsuario();actualizarBotonTodosPermisosUsuario();
             return;
         }
         const visibleKeys=new Set(entries.map(([key])=>key));
         const grupos=new Set();
-        mods.innerHTML=(esSuperMaster?'<div class="perm-supermaster-catalog-note"><i class="fa-solid fa-crown"></i><span><strong>Catálogo global de módulos</strong><small>SuperMaster: todos los módulos y permisos están disponibles para asignación.</small></span></div>':'')+CATEGORIAS_PERMISOS_USUARIO.map(cat=>{
+        mods.innerHTML=(targetSuperMaster?'<div class=\"perm-supermaster-catalog-note\"><i class=\"fa-solid fa-crown\"></i><span><strong>Catálogo global de módulos</strong><small>Cuenta SuperMaster protegida: acceso completo a todos los módulos y permisos.</small></span></div>':'')+CATEGORIAS_PERMISOS_USUARIO.map(cat=>{
             const ds=cat.modules.filter(k=>visibleKeys.has(k));
             if(!ds.length)return '';
             ds.forEach(k=>grupos.add(k));
-            return '<div class="perm-module-category-title"><i class="fa-solid '+cat.icon+'"></i><span>'+escaparTextoPermisoUsuario(cat.label)+'</span></div>'+ds.map(k=>{
+            return '<div class=\"perm-module-category-title\"><i class=\"fa-solid '+cat.icon+'\"></i><span>'+escaparTextoPermisoUsuario(cat.label)+'</span></div>'+ds.map(k=>{
                 const c=MATRIZ_PERMISOS_USUARIO[k];
-                return '<div class="perm-module-card '+(current[k]?'selected':'')+'" data-module="'+k+'" onclick="seleccionarModuloPermisoUsuario(\''+k+'\')"><input type="checkbox" data-module="'+k+'" '+(current[k]?'checked':'')+' onchange="event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')" onclick="event.stopPropagation();seleccionarModuloPermisoUsuario(\''+k+'\')"><i class="fa-solid '+c.icon+'"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>';
+                return '<div class=\"perm-module-card '+(current[k]?'selected':'')+'\" data-module=\"'+k+'\" onclick=\"seleccionarModuloPermisoUsuario(\''+k+'\')\"><input type=\"checkbox\" data-module=\"'+k+'\" '+(current[k]?'checked':'')+' onchange=\"event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')\" onclick=\"event.stopPropagation();seleccionarModuloPermisoUsuario(\''+k+'\')\"><i class=\"fa-solid '+c.icon+'\"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>';
             }).join('');
-        }).join('')+entries.filter(([k])=>!grupos.has(k)).map(([k,c])=>'<div class="perm-module-card '+(current[k]?'selected':'')+'" data-module="'+k+'" onclick="seleccionarModuloPermisoUsuario(\''+k+'\')"><input type="checkbox" data-module="'+k+'" '+(current[k]?'checked':'')+' onchange="event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')"><i class="fa-solid '+c.icon+'"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>').join('');
+        }).join('')+entries.filter(([k])=>!grupos.has(k)).map(([k,c])=>'<div class=\"perm-module-card '+(current[k]?'selected':'')+'\" data-module=\"'+k+'\" onclick=\"seleccionarModuloPermisoUsuario(\''+k+'\')\"><input type=\"checkbox\" data-module=\"'+k+'\" '+(current[k]?'checked':'')+' onchange=\"event.stopPropagation();actualizarAccionesPermisoUsuario(\''+k+'\')\"><i class=\"fa-solid '+c.icon+'\"></i><span>'+escaparTextoPermisoUsuario(c.label)+'</span></div>').join('');
         acts.innerHTML='';
         entries.forEach(([k,c])=>renderBloqueAccionesPermisoUsuario(k,c,current[k]||{}));
         const first=entries.find(([k])=>current[k])?.[0]||entries[0]?.[0];
         document.querySelectorAll('#usr-permisos-modulos input[data-module]').forEach(cb=>{
-            if(cb.checked){const b=document.querySelector('#usr-permisos-acciones [data-action-block="'+cb.dataset.module+'"]');if(b)b.classList.remove('d-none');}
+            if(cb.checked){const b=document.querySelector('#usr-permisos-acciones [data-action-block=\"'+cb.dataset.module+'\"]');if(b)b.classList.remove('d-none');}
         });
         if(first)seleccionarModuloPermisoUsuario(first);
         else document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));
@@ -11342,7 +11375,23 @@ async function eliminarEmpresa(id) {
     function seleccionarTodosPermisosUsuario(){const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')],all=ms.length>0&&ms.every(x=>x.checked);if(all){ms.forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones input[type="checkbox"]').forEach(x=>x.checked=false);document.querySelectorAll('#usr-permisos-acciones [data-action-block]').forEach(b=>b.classList.add('d-none'));document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.remove('active','selected'));}else{ms.forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-action]').forEach(x=>x.checked=true);document.querySelectorAll('#usr-permisos-acciones input[data-scope-module]').forEach(x=>x.checked=x.value==='todos');document.querySelectorAll('#usr-permisos-modulos .perm-module-card').forEach(c=>c.classList.add('selected'));const first=ms.find(x=>x.checked)?.dataset.module;if(first)seleccionarModuloPermisoUsuario(first);}actualizarResumenPermisosUsuario();actualizarHiddenPermisosUsuario();actualizarBotonTodosPermisosUsuario();}
     function actualizarBotonTodosPermisosUsuario(){const btn=document.getElementById('btnPermisosTodos');if(!btn)return;const ms=[...document.querySelectorAll('#usr-permisos-modulos input[data-module]')],all=ms.length>0&&ms.every(x=>x.checked);btn.classList.toggle('btn-secondary',all);btn.classList.toggle('btn-outline-secondary',!all);btn.innerHTML=all?'<i class="fa-solid fa-xmark me-1"></i><span>Quitar selección</span>':'<i class="fa-solid fa-check-double me-1"></i><span>Seleccionar todos</span>';}
     function normalizarModuloPermisoUsuario(modulo){return String(modulo||'').trim().toLowerCase();}
-    function permisosUsuarioTieneModulo(modulo,accion='leer',u=currentUser){if(!u)return false;const key=portalClaveModuloEmpresa_(normalizarModuloPermisoUsuario(modulo));if(!portalEmpresaTieneModuloHabilitado_(key,u))return false;if(u.es_supermaster===true&&u.cuenta_protegida===true)return true;if(String(u.rol||'').trim().toLowerCase()==='master')return true;let act=String(accion||'leer').trim().toLowerCase();if(['agregar','asignar','aprobar','cerrar'].includes(act))act='modificar';const rolTec=String(u.rol||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()==='tecnico';if(key==='programaciondiaria'&&rolTec&&String(u.id_tecnico_vinculado||'').trim()&&['leer','modificar'].includes(act))return true;const p=permisosEfectivosUsuario(u),cfg=p[key];if(cfg&&typeof cfg==='object'){if(cfg[act]===true||String(cfg[act]||'').toLowerCase()==='true')return true;if(act==='leer'&&(cfg.ver===true||String(cfg.ver||'').toLowerCase()==='true'))return true;}return false;}
+    function permisosUsuarioTieneModulo(modulo,accion='leer',u=currentUser){
+      if(!u)return false;
+      const key=portalClaveModuloEmpresa_(normalizarModuloPermisoUsuario(modulo));
+      if(!portalEmpresaTieneModuloHabilitado_(key,u))return false;
+      if(u.es_supermaster===true&&u.cuenta_protegida===true)return true;
+      const p=permisosEfectivosUsuario(u),cfg=p[key];
+      // El Dashboard es una excepción deliberada: también el rol Master debe tener
+      // activada la lectura para ver el panel general; si no, verá el dashboard alterno.
+      if(key==='dashboard'){return !!(cfg&&typeof cfg==='object'&&(cfg.leer===true||String(cfg.leer||'').toLowerCase()==='true'||cfg.todos===true));}
+      if(String(u.rol||'').trim().toLowerCase()==='master')return true;
+      let act=String(accion||'leer').trim().toLowerCase();
+      if(['agregar','asignar','aprobar','cerrar'].includes(act))act='modificar';
+      const rolTec=String(u.rol||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()==='tecnico';
+      if(key==='programaciondiaria'&&rolTec&&String(u.id_tecnico_vinculado||'').trim()&&['leer','modificar'].includes(act))return true;
+      if(cfg&&typeof cfg==='object'){if(cfg[act]===true||String(cfg[act]||'').toLowerCase()==='true')return true;if(act==='leer'&&(cfg.ver===true||String(cfg.ver||'').toLowerCase()==='true'))return true;}
+      return false;
+    }
     const permisosUsuarioTieneModuloInterno=permisosUsuarioTieneModulo;
     window.permisosUsuarioTieneModulo=(modulo,accion='leer',u)=>{const user=u||currentUser;if(String(modulo||'').toLowerCase()==='salud'){if(!user||!portalEmpresaTieneModuloHabilitado_('salud',user))return false;if(user.es_supermaster===true&&user.cuenta_protegida===true)return true;if(String(user.rol||'').trim().toLowerCase()==='master')return true;const cfg=permisosEfectivosUsuario(user)?.salud||{},yes=v=>v===true||String(v||'').toLowerCase()==='true';if(yes(cfg.administrar)||yes(cfg.todos))return true;const a=String(accion||'leer').toLowerCase();if(a==='leer')return yes(cfg.leer)||yes(cfg.ver)||yes(cfg.modificar);if(a==='agregar')return yes(cfg.agregar)||yes(cfg.modificar);if(a==='modificar')return yes(cfg.modificar);if(a==='eliminar')return yes(cfg.eliminar);return false;}return permisosUsuarioTieneModuloInterno(modulo,accion,user);};
     function usuarioTieneCualquierPermisoModulo(modulo,u=currentUser){if(!u)return false;if(!(u.es_supermaster===true&&u.cuenta_protegida===true)&&!portalEmpresaTieneModuloHabilitado_(modulo,u))return false;if(u.es_supermaster===true&&u.cuenta_protegida===true)return true;if(String(u.rol||'').trim().toLowerCase()==='master')return true;const p=permisosEfectivosUsuario(u),key=portalClaveModuloEmpresa_(normalizarModuloPermisoUsuario(modulo)),cfg=p[key];return !!(cfg&&typeof cfg==='object'&&Object.entries(cfg).some(([k,v])=>PERM_ACTIONS_USUARIO.includes(k)&&(v===true||String(v).toLowerCase()==='true')));}
@@ -11442,13 +11491,14 @@ async function guardarUsuario(e) {
         if(esSuperMasterPortal_()&&!document.getElementById('usr_empresa')?.value)throw new Error('Seleccione la empresa a la que pertenecerá este usuario.');
         payload.password=passwordValue;
         const companyId=esSuperMasterPortal_()?document.getElementById('usr_empresa').value:undefined;
-        // SuperMaster puede guardar permisos para cualquier módulo del catálogo.
-        // Para administradores normales se mantiene la restricción por módulos de empresa.
-        if(!esSuperMasterPortal_()){
-          const enabledRows=window._portalCompanyModules||[];
-          const enabledKeys=enabledRows.map(x=>portalClaveModuloEmpresa_(typeof x==='string'?x:(x?.modulo_key||x?.module_key||x?.key||'')));
-          const enabledSet=new Set(enabledKeys.filter(Boolean));
+        const targetCompanyId=String(companyId||currentUser?.empresa_row_id||currentUser?.empresa?.row_id||'').trim();
+        const targetIsSuperMaster=esCuentaSuperMasterUsuario_({email:emailValue,username:usernameValue});
+        const enabledSet=obtenerModulosHabilitadosFormularioUsuario_(targetCompanyId);
+        if(targetIsSuperMaster){
+          payload.permisos=permisosCompletosParaModulosUsuario_(Object.keys(MATRIZ_PERMISOS_USUARIO));
+        }else{
           payload.permisos=Object.fromEntries(Object.entries(payload.permisos||{}).filter(([key])=>enabledSet.has(portalClaveModuloEmpresa_(key))));
+          if(role==='master'&&!Object.keys(payload.permisos).length)payload.permisos=permisosCompletosParaModulosUsuario_([...enabledSet]);
         }
         const result=await portalAdminCall_({action:'user_create',...(companyId?{empresa_row_id:companyId}:{}),usuario:payload});
         await portalAdminBootstrap_(true);
@@ -11469,6 +11519,14 @@ async function guardarUsuario(e) {
         }
         registrarAuditoria('CREATE','Usuario',result.user?.id_usuario||result.user?.row_id,'Creación de usuario: '+(result.user?.login_alias||usernameValue)+' ('+payload.rol+')','INFO');
         modalUsr.hide();renderUsuarios();showSystemNotification('Usuario creado','Cuenta creada correctamente. Acceso: '+(result.user?.login_alias||usernameValue),'success');return;
+      }
+      const targetCompanyId=String(existente?.empresa_row_id||existente?.empresa?.row_id||currentUser?.empresa_row_id||currentUser?.empresa?.row_id||'').trim();
+      const targetIsSuperMaster=esCuentaSuperMasterUsuario_(existente||{email:emailValue,username:usernameValue});
+      const enabledSet=obtenerModulosHabilitadosFormularioUsuario_(targetCompanyId);
+      if(targetIsSuperMaster){
+        payload.permisos=permisosCompletosParaModulosUsuario_(Object.keys(MATRIZ_PERMISOS_USUARIO));
+      }else{
+        payload.permisos=Object.fromEntries(Object.entries(payload.permisos||{}).filter(([key])=>enabledSet.has(portalClaveModuloEmpresa_(key))));
       }
       const legacyPayload={...payload,id_usuario:id,estado:document.getElementById('usr_estado').value,codigo_cliente:existente?.codigo_cliente||'',permisos:JSON.stringify(payload.permisos)};
       if(passwordValue)legacyPayload.password=passwordValue;
