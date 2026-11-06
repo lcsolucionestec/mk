@@ -4014,6 +4014,30 @@ html[data-bs-theme="dark"] #modalUsuario .perm-config-card,html[data-bs-theme="d
 }
 </style>
 
+
+<style id="portal-billing-enterprise-styles">
+#sec-facturacionempresas .card{border-radius:16px}
+#sec-facturacionempresas .card-header{padding:14px 16px}
+#sec-facturacionempresas .table{min-width:760px}
+#sec-facturacionempresas .table th{font-size:.72rem;white-space:nowrap;color:var(--text-muted,#64748b);text-transform:uppercase;letter-spacing:.035em}
+#sec-facturacionempresas .table td{font-size:.82rem;vertical-align:middle}
+#sec-facturacionempresas .form-label{font-size:.8rem;font-weight:650}
+#sec-facturacionempresas .table-responsive{border-radius:0 0 16px 16px}
+/* Política visual segura: la vista administrativa permanece cerrada hasta confirmar SuperMaster. */
+#sec-facturacionempresas:not([data-billing-role="supermaster"]) [data-billing-supermaster],
+#sec-facturacionempresas:not([data-billing-role="supermaster"]) .portal-fact-col-empresa{display:none!important}
+#sec-facturacionempresas[data-billing-role="master"] [data-billing-supermaster]{display:none!important}
+#portalFactVerFacturaModal .modal-content,#portalFactEditarFacturaModal .modal-content,#portalFactReportarPagoModal .modal-content{border-radius:18px}
+#portalFactVerFacturaModal .modal-body,#portalFactEditarFacturaModal .modal-body{max-height:72vh;overflow:auto}
+#portalFactReportarPagoModal .modal-body{max-height:70vh;overflow:auto}
+#portal-fact-suspension-notice{border-radius:14px;border-left:4px solid #dc3545}
+@media(max-width:767.98px){
+ #sec-facturacionempresas .card-header{align-items:flex-start}
+ #sec-facturacionempresas .table{min-width:700px}
+ #portalFactVerFacturaModal .modal-dialog,#portalFactEditarFacturaModal .modal-dialog,#portalFactReportarPagoModal .modal-dialog{margin:.5rem!important}
+ #portalFactVerFacturaModal .modal-body,#portalFactEditarFacturaModal .modal-body{max-height:calc(100dvh - 180px)}
+}
+</style>
 </head>
 <!-- VERSION Servidor 2026.1.2 — V39.8 filtros OPERACIONES TÉCNICAS unificados -->
 <body>
@@ -4183,6 +4207,7 @@ html[data-bs-theme="dark"] #modalUsuario .perm-config-card,html[data-bs-theme="d
 <div class="ops-menu-category-title"><i class="fa-solid fa-user-gear"></i><span>Administración y Seguridad</span></div>
 <div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-user-gear menu-group-icon"></i>Administración</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
 <a class="nav-link" href="#empresas" onclick="switchTab('empresas')"><i class="fa-solid menu-subicon fa-building"></i><span>Gestión Empresas</span></a>
+<a class="nav-link portal-billing-nav" href="#facturacionempresas" onclick="switchTab('facturacionempresas')" style="display:none"><i class="fa-solid menu-subicon fa-file-invoice-dollar"></i><span>Facturación de Empresas</span></a>
 <a class="nav-link" href="#usuarios" onclick="switchTab('usuarios')"><i class="fa-solid menu-subicon fa-user-shield"></i><span>Usuarios y Permisos</span></a>
 <a class="nav-link" href="#clientes" onclick="switchTab('clientes')"><i class="fa-solid menu-subicon fa-users"></i><span>Gestión Clientes</span></a>
 <a class="nav-link" href="#servicios" onclick="switchTab('servicios')"><i class="fa-solid menu-subicon fa-box-open"></i><span>Planes y Servicios</span></a>
@@ -4336,6 +4361,7 @@ html[data-bs-theme="dark"] .dashboard-welcome-note .text-primary, body.dark-mode
 <div class="dashboard-welcome-eyebrow">Bienvenido al portal</div>
 <h2 class="dashboard-welcome-title">Nos alegra tenerte aquí</h2>
 <p class="dashboard-welcome-text">Tu perfil está listo para trabajar con los módulos que te fueron habilitados. Desde el menú lateral puedes acceder a las herramientas disponibles para ti.</p>
+<div id="portal-billing-dashboard-alt" class="alert alert-warning d-none mt-3" role="status"><strong><i class="fa-solid fa-file-invoice-dollar me-2"></i>Facturación de la empresa</strong><div class="small my-2" id="portal-billing-dashboard-alt-text">Hay facturas pendientes de pago.</div><button class="btn btn-sm btn-outline-dark" type="button" onclick="switchTab('facturacionempresas')">Consultar facturas y pagos</button></div>
 <div class="dashboard-welcome-badges"><span class="dashboard-welcome-badge"><i class="fa-solid fa-shield-halved me-1"></i>Acceso personalizado</span><span class="dashboard-welcome-badge"><i class="fa-solid fa-layer-group me-1"></i>Módulos habilitados</span><span class="dashboard-welcome-badge"><i class="fa-solid fa-lock-open me-1"></i>Según tus permisos</span></div>
 <div aria-label="Información de sesión" class="dashboard-welcome-context">
 <div class="dashboard-welcome-context-item"><i class="fa-regular fa-calendar"></i><div><span>Fecha</span><strong id="dashboard-welcome-fecha">—</strong></div></div>
@@ -4344,6 +4370,7 @@ html[data-bs-theme="dark"] .dashboard-welcome-note .text-primary, body.dark-mode
 </div>
 <script>(function(){function fmtFecha(d){return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear();}function fmtHora(d){const h=d.getHours(),h12=h%12||12;return h12+':'+String(d.getMinutes()).padStart(2,'0')+':'+String(d.getSeconds()).padStart(2,'0')+' '+(h>=12?'PM':'AM');}function actualizar(){const d=new Date(),f=fmtFecha(d),h=fmtHora(d);document.getElementById('dashboard-welcome-fecha')?.replaceChildren(document.createTextNode(f));document.getElementById('dashboard-welcome-hora')?.replaceChildren(document.createTextNode(h));}async function pais(){const e=document.getElementById('dashboard-welcome-pais');if(!e)return;try{const r=await fetch('https://ipapi.co/json/',{cache:'no-store'});if(!r.ok)throw 0;const j=await r.json();e.textContent=j.country_name||j.country||'No disponible';}catch(_){e.textContent='No disponible';}}window.actualizarDashboardBienvenida=actualizar;actualizar();pais();setInterval(actualizar,1000);})();</script>
 </div></div>
+<div id="portal-billing-dashboard-main" class="alert alert-warning d-none mb-3" data-billing-master-only role="status"><div class="d-flex align-items-center justify-content-between flex-wrap gap-2"><div><strong><i class="fa-solid fa-file-invoice-dollar me-2"></i>Facturación de la empresa</strong><div class="small" id="portal-billing-dashboard-main-text">Hay facturas pendientes de pago.</div></div><button class="btn btn-sm btn-outline-dark" type="button" onclick="switchTab('facturacionempresas')">Consultar facturas</button></div></div>
 <div class="dashboard-hero">
 <div class="dashboard-hero-content">
 <div>
@@ -4603,6 +4630,111 @@ html[data-bs-theme="dark"] .dashboard-welcome-note .text-primary, body.dark-mode
 </div>
 </div>
 </div></section>
+<!-- ═══════════════════════════════════════════════════════════════
+             SECCIÓN: FACTURACIÓN DE EMPRESAS / SUSCRIPCIONES
+             Independiente de la facturación de clientes.
+             ═══════════════════════════════════════════════════════════════ -->
+<section class="tab-content d-none" id="sec-facturacionempresas" data-billing-role="pending">
+  <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+    <div><h5 class="fw-bold mb-1"><i class="fa-solid fa-file-invoice-dollar text-primary me-2"></i>Facturación de Empresas</h5><div class="small text-muted">Suscripciones, facturas empresariales, reportes y validación de pagos.</div></div>
+    <button class="btn btn-outline-primary btn-sm" type="button" onclick="portalFacturacionCargar_(true)"><i class="fa-solid fa-rotate me-1"></i>Actualizar información</button>
+  </div>
+  <div id="portal-facturacion-alerta" class="alert alert-info d-none" role="status"></div>
+  <div class="row g-3 mb-3" id="portal-facturacion-kpis" data-billing-supermaster>
+    <div class="col-6 col-xl-3"><div class="card h-100 border-0 shadow-sm"><div class="card-body"><div class="small text-muted">Facturas registradas</div><div class="fs-4 fw-bold" id="portal-fact-kpi-total">—</div></div></div></div>
+    <div class="col-6 col-xl-3"><div class="card h-100 border-0 shadow-sm"><div class="card-body"><div class="small text-muted">Pendientes por cobrar</div><div class="fs-4 fw-bold text-warning" id="portal-fact-kpi-pendientes">—</div></div></div></div>
+    <div class="col-6 col-xl-3"><div class="card h-100 border-0 shadow-sm"><div class="card-body"><div class="small text-muted">Pagos por validar</div><div class="fs-4 fw-bold text-primary" id="portal-fact-kpi-validar">—</div></div></div></div>
+    <div class="col-6 col-xl-3"><div class="card h-100 border-0 shadow-sm"><div class="card-body"><div class="small text-muted">Pagos confirmados</div><div class="fs-4 fw-bold text-success" id="portal-fact-kpi-confirmados">—</div></div></div></div>
+  </div>
+
+  <div class="card border-0 shadow-sm mb-3 d-none" id="portal-fact-supermaster-emitir" data-billing-supermaster>
+    <div class="card-header bg-transparent d-flex align-items-center justify-content-between flex-wrap gap-2"><div><strong><i class="fa-solid fa-file-circle-plus text-primary me-2"></i>Emitir factura manual</strong><div class="small text-muted">Las facturas automáticas también aparecerán en el listado al ser generadas por el servidor.</div></div><span class="badge text-bg-primary">Solo SuperMaster</span></div>
+    <div class="card-body">
+      <form id="portal-fact-form-emitir" onsubmit="portalFactCrearFactura_(event)">
+        <div class="row g-3">
+          <div class="col-12 col-md-6 col-xl-4"><label class="form-label">Empresa *</label><select class="form-select" id="portal-fact-empresa" required><option value="">Seleccione una empresa</option></select></div>
+          <div class="col-6 col-md-3 col-xl-2"><label class="form-label">Período</label><select class="form-select" id="portal-fact-periodo"><option value="mensual">Mensual</option><option value="trimestral">Trimestral</option><option value="semestral">Semestral</option><option value="anual">Anual</option></select></div>
+          <div class="col-6 col-md-3 col-xl-2"><label class="form-label">Moneda</label><select class="form-select" id="portal-fact-moneda"><option value="USD">USD</option><option value="VES">VES</option><option value="COP">COP</option><option value="USDT">USDT</option></select></div>
+          <div class="col-6 col-md-3 col-xl-2"><label class="form-label">Fecha de emisión *</label><input class="form-control" id="portal-fact-emision" type="date" required></div>
+          <div class="col-6 col-md-3 col-xl-2"><label class="form-label">Vencimiento *</label><input class="form-control" id="portal-fact-vencimiento" type="date" required></div>
+          <div class="col-6 col-md-3"><label class="form-label">Subtotal *</label><input class="form-control" id="portal-fact-subtotal" type="number" min="0.01" step="0.01" required></div>
+          <div class="col-6 col-md-3"><label class="form-label">Impuestos</label><input class="form-control" id="portal-fact-impuestos" type="number" min="0" step="0.01" value="0"></div>
+          <div class="col-12 col-md-6"><label class="form-label">Descripción / concepto</label><input class="form-control" id="portal-fact-descripcion" maxlength="500" placeholder="Servicio contratado, período o concepto"></div>
+          <div class="col-12 d-flex justify-content-end"><button class="btn btn-primary" id="portal-fact-btn-emitir" type="submit"><i class="fa-solid fa-file-circle-plus me-1"></i>Emitir factura</button></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="portal-fact-suspension-notice" class="alert alert-danger d-none mb-3" role="alert">
+    <div class="d-flex align-items-start gap-3"><i class="fa-solid fa-triangle-exclamation fs-4 mt-1"></i><div>
+      <strong>Servicio temporalmente suspendido por falta de pago</strong>
+      <div class="small mt-1">El acceso a los servicios de su empresa se encuentra limitado debido a una factura pendiente. Para solicitar la reactivación, reporte el pago desde esta sección y adjunte el comprobante correspondiente. Una vez que LC Soluciones Tecnológicas verifique y confirme el pago, deberá cerrar sesión e ingresar nuevamente para recuperar el acceso completo.</div>
+    </div></div>
+  </div>
+  <div class="card border-0 shadow-sm mb-3">
+    <div class="card-header bg-transparent d-flex align-items-center justify-content-between flex-wrap gap-2"><div><strong><i class="fa-solid fa-receipt text-primary me-2"></i>Facturas empresariales</strong><div class="small text-muted" id="portal-fact-lista-subtitulo">Facturas de la empresa y sus vencimientos.</div></div><div class="d-none" id="portal-fact-filtro-wrap" data-billing-supermaster><select class="form-select form-select-sm" id="portal-fact-filtro-empresa" onchange="portalFactRender_()"><option value="">Todas las empresas</option></select></div></div>
+    <div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Factura</th><th class="portal-fact-col-empresa d-none" data-billing-supermaster>Empresa</th><th>Emisión</th><th>Vencimiento</th><th>Concepto</th><th>Total</th><th>Estado</th><th>Acción</th></tr></thead><tbody id="portal-fact-invoices-body"><tr><td colspan="8" class="text-center text-muted py-4">Cargando facturas...</td></tr></tbody></table></div>
+  </div>
+
+  <div class="card border-0 shadow-sm mb-3 d-none" id="portal-fact-pendientes-validar" data-billing-supermaster>
+    <div class="card-header bg-transparent"><strong><i class="fa-solid fa-shield-check text-primary me-2"></i>Reportes de pago pendientes de validación</strong><div class="small text-muted">Verifique la referencia y el comprobante antes de confirmar el pago.</div></div>
+    <div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Empresa</th><th>Factura</th><th>Fecha de pago</th><th>Referencia</th><th>Comprobante</th><th>Importe</th><th>Acción</th></tr></thead><tbody id="portal-fact-pending-body"></tbody></table></div>
+  </div>
+
+  <div class="card border-0 shadow-sm" data-billing-supermaster>
+    <div class="card-header bg-transparent"><strong><i class="fa-solid fa-money-check-dollar text-success me-2"></i>Historial y reportes de pagos</strong><div class="small text-muted">Registro de pagos reportados y confirmados por el servidor.</div></div>
+    <div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th class="portal-fact-col-empresa d-none">Empresa</th><th>Factura</th><th>Fecha</th><th>Referencia</th><th>Importe</th><th>Estado</th><th>Comprobante</th></tr></thead><tbody id="portal-fact-payments-body"><tr><td colspan="7" class="text-center text-muted py-4">Cargando pagos...</td></tr></tbody></table></div>
+  </div>
+  <div class="small text-muted mt-3"><i class="fa-solid fa-circle-info me-1"></i>El sistema concede cinco días calendario de gracia después del vencimiento. La suspensión se aplica desde el servidor al finalizar ese período; reportar un pago no lo marca como pagado hasta que SuperMaster lo valide.</div>
+</section>
+
+<!-- Modal de detalle de factura empresarial -->
+<div class="modal fade" id="portalFactVerFacturaModal" tabindex="-1" aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg rounded-4">
+  <div class="modal-header"><div><h5 class="modal-title fw-bold"><i class="fa-solid fa-file-invoice text-primary me-2"></i>Detalle de factura</h5><div class="small text-muted">Información registrada en el servidor</div></div><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Cerrar"></button></div>
+  <div class="modal-body"><div id="portal-fact-ver-contenido" class="row g-3"></div></div>
+  <div class="modal-footer"><button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cerrar</button></div>
+ </div></div>
+</div>
+
+<!-- Modal de edición de factura empresarial -->
+<div class="modal fade" id="portalFactEditarFacturaModal" tabindex="-1" aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg rounded-4">
+  <form id="portal-fact-form-editar" onsubmit="portalFactGuardarEdicion_(event)">
+   <div class="modal-header"><div><h5 class="modal-title fw-bold"><i class="fa-solid fa-pen-to-square text-primary me-2"></i>Editar factura</h5><div class="small text-muted" id="portal-fact-editar-numero">Factura seleccionada</div></div><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Cerrar"></button></div>
+   <div class="modal-body"><input type="hidden" id="portal-fact-editar-id">
+    <div class="row g-3">
+     <div class="col-6"><label class="form-label">Fecha de emisión *</label><input class="form-control" id="portal-fact-editar-emision" type="date" required></div>
+     <div class="col-6"><label class="form-label">Fecha de vencimiento *</label><input class="form-control" id="portal-fact-editar-vencimiento" type="date" required></div>
+     <div class="col-6"><label class="form-label">Período</label><select class="form-select" id="portal-fact-editar-periodo"><option value="mensual">Mensual</option><option value="trimestral">Trimestral</option><option value="semestral">Semestral</option><option value="anual">Anual</option></select></div>
+     <div class="col-6"><label class="form-label">Moneda</label><select class="form-select" id="portal-fact-editar-moneda"><option value="USD">USD</option><option value="VES">VES</option><option value="COP">COP</option><option value="USDT">USDT</option></select></div>
+     <div class="col-6"><label class="form-label">Subtotal *</label><input class="form-control" id="portal-fact-editar-subtotal" type="number" min="0.01" step="0.01" required></div>
+     <div class="col-6"><label class="form-label">Impuestos</label><input class="form-control" id="portal-fact-editar-impuestos" type="number" min="0" step="0.01" required></div>
+     <div class="col-12"><label class="form-label">Descripción / concepto</label><input class="form-control" id="portal-fact-editar-descripcion" maxlength="500"></div>
+    </div>
+    <div class="alert alert-warning small mt-3 mb-0">Por seguridad contable, solo se pueden editar facturas que todavía no tengan pagos reportados o confirmados.</div>
+   </div><div class="modal-footer"><button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancelar</button><button class="btn btn-primary" id="portal-fact-btn-guardar-edicion" type="submit"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar cambios</button></div>
+  </form>
+ </div></div>
+</div>
+
+<!-- Modal de reporte de pago empresarial -->
+<div class="modal fade" id="portalFactReportarPagoModal" tabindex="-1" aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg rounded-4">
+  <form id="portal-fact-form-pago" onsubmit="portalFactRegistrarPago_(event)">
+   <div class="modal-header"><div><h5 class="modal-title fw-bold">Reportar pago empresarial</h5><div class="small text-muted" id="portal-fact-pago-factura-label">Factura seleccionada</div></div><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Cerrar"></button></div>
+   <div class="modal-body"><input type="hidden" id="portal-fact-pago-factura-id"><div class="alert alert-info py-2 small">El reporte quedará pendiente hasta que SuperMaster revise y confirme el pago.</div>
+    <div class="row g-3"><div class="col-6"><label class="form-label">Importe *</label><input class="form-control" id="portal-fact-pago-monto" type="number" min="0.01" step="0.01" required></div><div class="col-6"><label class="form-label">Moneda</label><input class="form-control" id="portal-fact-pago-moneda" readonly></div>
+    <div class="col-12"><label class="form-label">Fecha y hora del pago *</label><input class="form-control" id="portal-fact-pago-fecha" type="datetime-local" required></div>
+    <div class="col-12"><label class="form-label">Referencia / número de operación</label><input class="form-control" id="portal-fact-pago-referencia" maxlength="120"></div>
+    <div class="col-12"><label class="form-label">Enlace del comprobante</label><input class="form-control" id="portal-fact-pago-comprobante" type="url" placeholder="https://..."></div>
+    <div class="col-12"><label class="form-label">Observaciones</label><textarea class="form-control" id="portal-fact-pago-observaciones" rows="2" maxlength="500"></textarea></div></div>
+   </div><div class="modal-footer"><button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancelar</button><button class="btn btn-primary" id="portal-fact-btn-reportar" type="submit">Enviar reporte de pago</button></div>
+  </form>
+ </div></div>
+</div>
+
 <!-- ═══════════════════════════════════════════════════════════════
              SECCIÓN: EMPRESAS — DIRECTORIO ÚNICO
              ═══════════════════════════════════════════════════════════════ -->
@@ -6265,7 +6397,7 @@ html[data-bs-theme="dark"] .sports-management-table, body.dark-mode .sports-mana
 <div class="d-flex align-items-center gap-3 min-w-0">
 <div class="perfil-avatar"><i class="fa-solid fa-user"></i></div>
 <div class="min-w-0">
-<div class="small text-uppercase fw-bold opacity-75" style="letter-spacing:.08em">Cuenta y datos del cliente</div>
+<div class="small text-uppercase fw-bold opacity-75" style="letter-spacing:.08em">Cuenta y datos personales</div>
 <h5 class="modal-title fw-bold mb-0">Mi Perfil</h5>
 <div class="small text-white-50 mt-1">Administra tus datos de acceso y consulta la información registrada en la hoja de Clientes.</div>
 </div>
@@ -6319,11 +6451,11 @@ html[data-bs-theme="dark"] .sports-management-table, body.dark-mode .sports-mana
 <small class="text-muted">Utilice este identificador completo para iniciar sesión.</small>
 </div>
 <div class="col-md-6">
-<label class="form-label small fw-semibold">Password</label>
-<div class="perfil-field-wrap perfil-password-wrap"><i class="fa-solid fa-lock"></i><input autocomplete="current-password" class="form-control form-control-pro border-0 shadow-none" id="perfil_password" required="" type="password"/><button aria-label="Mostrar u ocultar contraseña" class="btn btn-link perfil-password-toggle" onclick="togglePerfilPassword()" type="button"><i class="fa-solid fa-eye" id="perfil_password_icon"></i></button></div>
+<label class="form-label small fw-semibold">Nueva contraseña (opcional)</label>
+<div class="perfil-field-wrap perfil-password-wrap"><i class="fa-solid fa-lock"></i><input autocomplete="new-password" class="form-control form-control-pro border-0 shadow-none" id="perfil_password" type="password" placeholder="Dejar en blanco para mantener la actual"/><button aria-label="Mostrar u ocultar contraseña" class="btn btn-link perfil-password-toggle" onclick="togglePerfilPassword()" type="button"><i class="fa-solid fa-eye" id="perfil_password_icon"></i></button></div>
 </div>
 </div>
-<div class="perfil-access-note mt-3"><i class="fa-solid fa-shield-halved"></i><span>El password se muestra oculto inicialmente. Usa el icono del ojo para visualizarlo.</span></div>
+<div class="perfil-access-note mt-3"><i class="fa-solid fa-shield-halved"></i><span>La nueva contraseña es opcional: déjala en blanco para conservar la actual. Usa el icono del ojo para visualizar lo que escribas.</span></div>
 </section>
 <section class="perfil-panel perfil-panel-save mt-3">
 <div class="perfil-save-note"><i class="fa-solid fa-circle-info"></i><span>Los campos de control se mantienen protegidos. Los datos editables del usuario conservan el comportamiento actual del sistema.</span></div>
@@ -7828,11 +7960,345 @@ function filtroNotificacionesClienteSupabase_(cliente){
         window._portalAdminModules=PORTAL_ADMIN_MODULES_;
       }
       window._portalAdminBootstrap=data;window._portalAdminBootstrapLoaded=true;
+      if(typeof portalFactDashboardAvisos_==='function'){window._portalBillingData=data;portalFactDashboardAvisos_();}
       if(typeof actualizarVisibilidadMenuPorPermisos==='function')actualizarVisibilidadMenuPorPermisos();
+      if(typeof portalFactAplicarVisibilidadMenu_==='function')portalFactAplicarVisibilidadMenu_();
       if(typeof renderEmpresas==='function'&&data.role==='supermaster')renderEmpresas();
       if(typeof renderUsuarios==='function'&&data.role!=='user')renderUsuarios();
       return data;
     }
+    // ═══════════════════════════════════════════════════════════════
+    // FACTURACIÓN DE EMPRESAS: interfaz conectada a portal-admin.
+    // Se mantiene separada de la facturación de clientes (sec-facturacion).
+    // ═══════════════════════════════════════════════════════════════════════
+    // FACTURACIÓN EMPRESARIAL — CONTROL DE VISTA Y OPERACIONES
+    // La vista administrativa se habilita únicamente después de validar
+    // el rol recibido del servidor. Nunca se muestra primero y se oculta después.
+    // ═══════════════════════════════════════════════════════════════════════
+    function portalFactRolMaster_(){
+      return String(currentUser?.rol||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase()==='master';
+    }
+    function portalFactEsAdmin_(){return esSuperMasterPortal_()||portalFactRolMaster_();}
+    function portalFactAccesoSoloPagos_(){return !esSuperMasterPortal_()&&currentUserAuthAccessMode==='payments_only';}
+    function portalFactAplicarVisibilidadMenu_(){
+      const link=document.querySelector('#sidebar a.portal-billing-nav');
+      if(link)link.style.display=portalFactEsAdmin_()?'':'none';
+    }
+    function portalFactEsc_(value){
+      return String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+    }
+    function portalFactFecha_(value){
+      if(!value)return '—';
+      const date=new Date(String(value).length===10?String(value)+'T12:00:00':value);
+      return Number.isNaN(date.getTime())?'—':date.toLocaleDateString('es-VE');
+    }
+    function portalFactDinero_(amount,currency){
+      const value=Number(amount||0),code=String(currency||'USD').toUpperCase();
+      try{return new Intl.NumberFormat('es-VE',{style:'currency',currency:code,maximumFractionDigits:2}).format(value);}
+      catch(_){return value.toFixed(2)+' '+code;}
+    }
+    function portalFactEstado_(invoice){
+      const state=String(invoice?.estado||'pendiente').toLowerCase();
+      if(state==='pagada')return '<span class="badge text-bg-success">Pagada</span>';
+      if(state==='anulada')return '<span class="badge text-bg-secondary">Anulada</span>';
+      if(state==='vencida')return '<span class="badge text-bg-danger">Vencida</span>';
+      if(invoice?.fecha_vencimiento){
+        const due=new Date(invoice.fecha_vencimiento+'T00:00:00');
+        const grace=new Date(due);grace.setDate(grace.getDate()+5);
+        const today=new Date();today.setHours(0,0,0,0);
+        if(grace<today)return '<span class="badge text-bg-danger">Vencida</span>';
+        if(due<today)return '<span class="badge text-bg-warning">En período de gracia</span>';
+      }
+      return '<span class="badge text-bg-warning">Pendiente</span>';
+    }
+    function portalFactComprobante_(url){
+      const value=String(url||'').trim();
+      if(!/^https?:\/\//i.test(value))return '<span class="text-muted">No adjunto</span>';
+      return '<a href="'+portalFactEsc_(value)+'" target="_blank" rel="noopener noreferrer">Ver comprobante <i class="fa-solid fa-arrow-up-right-from-square"></i></a>';
+    }
+    function portalFactCompanyName_(companyId){
+      const data=window._portalBillingData||{};
+      const company=(data.companies||[]).find(item=>String(item.row_id)===String(companyId));
+      return company?.nombre_empresa||data.company?.nombre_empresa||'Empresa';
+    }
+    function portalFactInvoice_(invoiceId){
+      return (window._portalBillingData?.invoices||[]).find(item=>String(item.row_id)===String(invoiceId))||null;
+    }
+    function portalFactNotice_(message,type='info'){
+      const element=document.getElementById('portal-facturacion-alerta');
+      if(!element)return;
+      element.className='alert alert-'+type;
+      element.textContent=message;
+      element.classList.remove('d-none');
+    }
+    function portalFactSetViewRole_(role){
+      const section=document.getElementById('sec-facturacionempresas');
+      if(!section)return;
+      const normalized=String(role||'pending').trim().toLowerCase();
+      section.dataset.billingRole=['supermaster','master'].includes(normalized)?normalized:'pending';
+    }
+    function portalFactDashboardAvisos_(){
+      const main=document.getElementById('portal-billing-dashboard-main');
+      const alternate=document.getElementById('portal-billing-dashboard-alt');
+      const targets=[main,alternate].filter(Boolean);
+      if(!portalFactRolMaster_()||esSuperMasterPortal_()){
+        targets.forEach(element=>element.classList.add('d-none'));
+        return;
+      }
+      const invoices=Array.isArray(window._portalBillingData?.invoices)?window._portalBillingData.invoices:[];
+      const count=invoices.filter(invoice=>['pendiente','vencida'].includes(String(invoice.estado||'').toLowerCase())).length;
+      const message=count
+        ?'Su empresa registra '+count+' factura(s) pendiente(s) de pago. Consulte los documentos y reporte el pago desde Facturación de Empresas.'
+        :'Su empresa no registra facturas pendientes de pago.';
+      targets.forEach(element=>{
+        element.classList.toggle('d-none',count===0);
+        const text=element.querySelector('[id$="-text"]');
+        if(text)text.textContent=message;
+      });
+    }
+    async function portalFacturacionCargar_(force=false){
+      if(!portalFactEsAdmin_())return;
+      // Se establece la vista provisional con el rol local antes de revelar la sección.
+      portalFactSetViewRole_(esSuperMasterPortal_()?'supermaster':'master');
+      const body=document.getElementById('portal-fact-invoices-body');
+      if(body&&(!window._portalBillingData||force))body.innerHTML='<tr><td colspan="8" class="text-center text-muted py-4"><i class="fa-solid fa-spinner fa-spin me-2"></i>Consultando la facturación...</td></tr>';
+      try{
+        const data=await portalAdminCall_({action:'bootstrap'});
+        const role=String(data.role||'').toLowerCase();
+        if(!['supermaster','master'].includes(role))throw new Error('El servidor no autorizó el acceso a la facturación empresarial.');
+        if(role==='supermaster'&&!esSuperMasterPortal_())throw new Error('El rol recibido no coincide con la sesión autorizada.');
+        if(role==='master'&&!portalFactRolMaster_())throw new Error('El rol recibido no coincide con la sesión autorizada.');
+        window._portalBillingData=data;
+        window._portalCompanyInvoices=Array.isArray(data.invoices)?data.invoices:[];
+        window._portalCompanyPayments=Array.isArray(data.payments)?data.payments:(Array.isArray(data.pendingPayments)?data.pendingPayments:[]);
+        portalFactSetViewRole_(role);
+        portalFactRender_();
+        portalFactDashboardAvisos_();
+      }catch(error){
+        portalFactSetViewRole_('pending');
+        if(body)body.innerHTML='<tr><td colspan="8" class="text-center text-danger py-4">'+portalFactEsc_(error.message||'No se pudo consultar la facturación.')+'</td></tr>';
+        portalFactNotice_(error.message||'No se pudo cargar la facturación empresarial.','danger');
+      }
+    }
+    function portalFactRender_(){
+      const data=window._portalBillingData||{};
+      const role=String(data.role||'').toLowerCase();
+      const isSuper=role==='supermaster'&&esSuperMasterPortal_();
+      const isMaster=role==='master'&&portalFactRolMaster_();
+      if(!isSuper&&!isMaster){portalFactSetViewRole_('pending');return;}
+      portalFactSetViewRole_(isSuper?'supermaster':'master');
+
+      document.querySelectorAll('[data-billing-supermaster]').forEach(element=>element.classList.toggle('d-none',!isSuper));
+      document.querySelectorAll('.portal-fact-col-empresa').forEach(element=>element.classList.toggle('d-none',!isSuper));
+      const suspension=document.getElementById('portal-fact-suspension-notice');
+      if(suspension)suspension.classList.toggle('d-none',!(isMaster&&portalFactAccesoSoloPagos_()));
+
+      const companies=Array.isArray(data.companies)?data.companies:[];
+      const invoices=Array.isArray(data.invoices)?data.invoices:[];
+      const payments=Array.isArray(data.payments)?data.payments:(Array.isArray(data.pendingPayments)?data.pendingPayments:[]);
+      const pending=Array.isArray(data.pendingPayments)?data.pendingPayments:payments.filter(payment=>payment.estado==='pendiente_confirmacion');
+      const filter=document.getElementById('portal-fact-filtro-empresa');
+      if(isSuper&&filter){
+        const selected=filter.value;
+        filter.innerHTML='<option value="">Todas las empresas</option>'+companies.map(company=>'<option value="'+portalFactEsc_(company.row_id)+'">'+portalFactEsc_(company.nombre_empresa)+'</option>').join('');
+        filter.value=selected;
+      }
+      const companySelect=document.getElementById('portal-fact-empresa');
+      if(isSuper&&companySelect){
+        const selected=companySelect.value;
+        companySelect.innerHTML='<option value="">Seleccione una empresa</option>'+companies.map(company=>'<option value="'+portalFactEsc_(company.row_id)+'">'+portalFactEsc_(company.nombre_empresa)+'</option>').join('');
+        companySelect.value=selected;
+      }
+      const selectedCompany=isSuper?(filter?.value||''):'';
+      const visibleInvoices=invoices.filter(invoice=>!selectedCompany||String(invoice.empresa_row_id)===selectedCompany);
+      const body=document.getElementById('portal-fact-invoices-body');
+      if(body){
+        const colspan=isSuper?8:7;
+        if(!visibleInvoices.length){
+          body.innerHTML='<tr><td colspan="'+colspan+'" class="text-center text-muted py-4">No hay facturas empresariales registradas.</td></tr>';
+        }else{
+          body.innerHTML=visibleInvoices.map(invoice=>{
+            const hasPayment=payments.some(payment=>String(payment.factura_row_id)===String(invoice.row_id));
+            const hasPending=payments.some(payment=>String(payment.factura_row_id)===String(invoice.row_id)&&payment.estado==='pendiente_confirmacion');
+            const companyCell=isSuper?'<td class="portal-fact-col-empresa">'+portalFactEsc_(portalFactCompanyName_(invoice.empresa_row_id))+'</td>':'';
+            let action='';
+            if(isSuper){
+              const locked=hasPayment||invoice.estado==='pagada';
+              const id=portalFactEsc_(invoice.row_id);
+              action='<div class="d-flex align-items-center gap-1 flex-nowrap">'+
+                '<button type="button" class="btn btn-sm btn-outline-primary" title="Ver factura" aria-label="Ver factura" onclick="portalFactVerFactura_(\''+id+'\')"><i class="fa-solid fa-eye"></i></button>'+
+                '<button type="button" class="btn btn-sm btn-outline-warning" title="Editar factura" aria-label="Editar factura" '+(locked?'disabled':'')+' onclick="portalFactAbrirEdicion_(\''+id+'\')"><i class="fa-solid fa-pen"></i></button>'+
+                '<button type="button" class="btn btn-sm btn-outline-danger" title="Eliminar factura" aria-label="Eliminar factura" '+(locked?'disabled':'')+' onclick="portalFactEliminar_(\''+id+'\')"><i class="fa-solid fa-trash"></i></button></div>';
+            }else if(['pendiente','vencida'].includes(String(invoice.estado||'').toLowerCase())&&!hasPending){
+              action='<button type="button" class="btn btn-sm btn-primary" onclick="portalFactAbrirReportePago_(\''+portalFactEsc_(invoice.row_id)+'\')"><i class="fa-solid fa-receipt me-1"></i>Reportar pago</button>';
+            }else if(hasPending){
+              action='<span class="small text-warning">Pago en validación</span>';
+            }else{
+              action='<span class="text-muted small">—</span>';
+            }
+            return '<tr><td><strong>'+portalFactEsc_(invoice.id_factura||'—')+'</strong></td>'+companyCell+
+              '<td>'+portalFactFecha_(invoice.fecha_emision)+'</td><td>'+portalFactFecha_(invoice.fecha_vencimiento)+'</td>'+ 
+              '<td>'+portalFactEsc_(invoice.descripcion||invoice.periodo_facturacion||'Suscripción')+'</td>'+ 
+              '<td class="text-nowrap fw-semibold">'+portalFactDinero_(invoice.total,invoice.moneda)+'</td><td>'+portalFactEstado_(invoice)+'</td><td>'+action+'</td></tr>';
+          }).join('');
+        }
+      }
+      const pendingBody=document.getElementById('portal-fact-pending-body');
+      if(isSuper&&pendingBody){
+        pendingBody.innerHTML=pending.length?pending.map(payment=>{
+          const invoice=portalFactInvoice_(payment.factura_row_id)||{};
+          return '<tr><td>'+portalFactEsc_(portalFactCompanyName_(payment.empresa_row_id))+'</td><td>'+portalFactEsc_(invoice.id_factura||payment.factura_row_id)+'</td>'+ 
+            '<td>'+portalFactFecha_(payment.fecha_pago)+'</td><td>'+portalFactEsc_(payment.referencia_pago||'—')+'</td>'+ 
+            '<td>'+portalFactComprobante_(payment.comprobante_url)+'</td><td class="text-nowrap">'+portalFactDinero_(payment.monto,payment.moneda)+'</td>'+ 
+            '<td><button type="button" class="btn btn-sm btn-success" onclick="portalFactConfirmarPago_(\''+portalFactEsc_(payment.row_id)+'\')"><i class="fa-solid fa-check me-1"></i>Confirmar</button></td></tr>';
+        }).join(''):'<tr><td colspan="7" class="text-center text-muted py-4">No hay pagos pendientes de validación.</td></tr>';
+      }
+      const paymentsBody=document.getElementById('portal-fact-payments-body');
+      if(isSuper&&paymentsBody){
+        const visiblePayments=payments.filter(payment=>!selectedCompany||String(payment.empresa_row_id)===selectedCompany);
+        paymentsBody.innerHTML=visiblePayments.length?visiblePayments.map(payment=>{
+          const invoice=portalFactInvoice_(payment.factura_row_id)||{};
+          const status=payment.estado==='confirmado'?'<span class="badge text-bg-success">Confirmado</span>':payment.estado==='pendiente_confirmacion'?'<span class="badge text-bg-warning">Pendiente de validación</span>':'<span class="badge text-bg-secondary">'+portalFactEsc_(payment.estado||'—')+'</span>';
+          return '<tr><td class="portal-fact-col-empresa">'+portalFactEsc_(portalFactCompanyName_(payment.empresa_row_id))+'</td><td>'+portalFactEsc_(invoice.id_factura||payment.factura_row_id)+'</td>'+ 
+            '<td>'+portalFactFecha_(payment.fecha_pago)+'</td><td>'+portalFactEsc_(payment.referencia_pago||'—')+'</td>'+ 
+            '<td class="text-nowrap">'+portalFactDinero_(payment.monto,payment.moneda)+'</td><td>'+status+'</td><td>'+portalFactComprobante_(payment.comprobante_url)+'</td></tr>';
+        }).join(''):'<tr><td colspan="7" class="text-center text-muted py-4">Todavía no hay pagos reportados.</td></tr>';
+      }
+      if(isSuper){
+        const open=invoices.filter(invoice=>['pendiente','vencida'].includes(String(invoice.estado||'').toLowerCase()));
+        const setText=(id,value)=>{const element=document.getElementById(id);if(element)element.textContent=String(value);};
+        setText('portal-fact-kpi-total',invoices.length);
+        setText('portal-fact-kpi-pendientes',open.length);
+        setText('portal-fact-kpi-validar',pending.length);
+        setText('portal-fact-kpi-confirmados',payments.filter(payment=>payment.estado==='confirmado').length);
+      }
+      const subtitle=document.getElementById('portal-fact-lista-subtitulo');
+      if(subtitle)subtitle.textContent=isSuper?'Control general de facturas de todas las empresas.':'Facturas y vencimientos correspondientes a '+(data.company?.nombre_empresa||'su empresa')+'.';
+    }
+    function portalFactVerFactura_(invoiceId){
+      if(!esSuperMasterPortal_())return;
+      const invoice=portalFactInvoice_(invoiceId);if(!invoice)return;
+      const fields=[['Empresa',portalFactCompanyName_(invoice.empresa_row_id)],['Número',invoice.id_factura||'—'],['Período',invoice.periodo_facturacion||'—'],
+        ['Fecha de emisión',portalFactFecha_(invoice.fecha_emision)],['Fecha de vencimiento',portalFactFecha_(invoice.fecha_vencimiento)],['Modalidad',invoice.modalidad||'—'],
+        ['Moneda',invoice.moneda||'—'],['Subtotal',portalFactDinero_(invoice.subtotal,invoice.moneda)],['Impuestos',portalFactDinero_(invoice.impuestos,invoice.moneda)],
+        ['Total',portalFactDinero_(invoice.total,invoice.moneda)],['Estado',String(invoice.estado||'pendiente')],['Descripción',invoice.descripcion||'—']];
+      document.getElementById('portal-fact-ver-contenido').innerHTML=fields.map(([label,value])=>'<div class="col-12 col-sm-6"><div class="small text-muted">'+portalFactEsc_(label)+'</div><div class="fw-semibold text-break">'+portalFactEsc_(value)+'</div></div>').join('');
+      bootstrap.Modal.getOrCreateInstance(document.getElementById('portalFactVerFacturaModal')).show();
+    }
+    function portalFactAbrirEdicion_(invoiceId){
+      if(!esSuperMasterPortal_())return;
+      const invoice=portalFactInvoice_(invoiceId);if(!invoice)return;
+      const hasPayment=(window._portalBillingData?.payments||[]).some(payment=>String(payment.factura_row_id)===String(invoice.row_id));
+      if(hasPayment||invoice.estado==='pagada'){portalFactNotice_('Esta factura tiene pagos asociados o ya fue pagada. Por seguridad contable, no se puede modificar.','warning');return;}
+      document.getElementById('portal-fact-editar-id').value=invoice.row_id;
+      document.getElementById('portal-fact-editar-numero').textContent=invoice.id_factura||'Factura';
+      document.getElementById('portal-fact-editar-emision').value=invoice.fecha_emision||'';
+      document.getElementById('portal-fact-editar-vencimiento').value=invoice.fecha_vencimiento||'';
+      document.getElementById('portal-fact-editar-periodo').value=invoice.periodo_facturacion||'mensual';
+      document.getElementById('portal-fact-editar-moneda').value=invoice.moneda||'USD';
+      document.getElementById('portal-fact-editar-subtotal').value=Number(invoice.subtotal||0);
+      document.getElementById('portal-fact-editar-impuestos').value=Number(invoice.impuestos||0);
+      document.getElementById('portal-fact-editar-descripcion').value=invoice.descripcion||'';
+      bootstrap.Modal.getOrCreateInstance(document.getElementById('portalFactEditarFacturaModal')).show();
+    }
+    async function portalFactGuardarEdicion_(event){
+      event.preventDefault();if(!esSuperMasterPortal_())return;
+      const button=document.getElementById('portal-fact-btn-guardar-edicion');button.disabled=true;
+      try{
+        const result=await portalAdminCall_({action:'invoice_update',factura_row_id:document.getElementById('portal-fact-editar-id').value,
+          fecha_emision:document.getElementById('portal-fact-editar-emision').value,fecha_vencimiento:document.getElementById('portal-fact-editar-vencimiento').value,
+          periodo_facturacion:document.getElementById('portal-fact-editar-periodo').value,moneda:document.getElementById('portal-fact-editar-moneda').value,
+          subtotal:Number(document.getElementById('portal-fact-editar-subtotal').value),impuestos:Number(document.getElementById('portal-fact-editar-impuestos').value||0),
+          descripcion:document.getElementById('portal-fact-editar-descripcion').value});
+        if(!result.success)throw new Error(result.message||'El servidor no confirmó los cambios.');
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('portalFactEditarFacturaModal')).hide();
+        portalFactNotice_('La factura fue actualizada correctamente.','success');await portalFacturacionCargar_(true);
+      }catch(error){portalFactNotice_(error.message||'No se pudo editar la factura.','danger');}
+      finally{button.disabled=false;}
+    }
+    async function portalFactEliminar_(invoiceId){
+      if(!esSuperMasterPortal_())return;
+      const invoice=portalFactInvoice_(invoiceId);if(!invoice)return;
+      const confirmed=window.confirm('¿Confirma la eliminación de la factura '+(invoice.id_factura||'seleccionada')+'? Esta operación no se puede deshacer y solo procede si no existen pagos asociados.');
+      if(!confirmed)return;
+      try{
+        const result=await portalAdminCall_({action:'invoice_delete',factura_row_id:invoiceId});
+        if(!result.success)throw new Error(result.message||'El servidor no confirmó la eliminación.');
+        portalFactNotice_('La factura fue eliminada correctamente.','success');await portalFacturacionCargar_(true);
+      }catch(error){portalFactNotice_(error.message||'No se pudo eliminar la factura.','danger');}
+    }
+    function portalFactAbrirReportePago_(invoiceId){
+      if(!portalFactRolMaster_())return;
+      const invoice=portalFactInvoice_(invoiceId);if(!invoice)return;
+      document.getElementById('portal-fact-pago-factura-id').value=invoice.row_id;
+      document.getElementById('portal-fact-pago-factura-label').textContent=(invoice.id_factura||'Factura')+' · '+portalFactDinero_(invoice.total,invoice.moneda);
+      document.getElementById('portal-fact-pago-monto').value=Number(invoice.total||0).toFixed(2);
+      document.getElementById('portal-fact-pago-moneda').value=invoice.moneda||'USD';
+      const now=new Date();now.setMinutes(now.getMinutes()-now.getTimezoneOffset());
+      document.getElementById('portal-fact-pago-fecha').value=now.toISOString().slice(0,16);
+      document.getElementById('portal-fact-pago-referencia').value='';
+      document.getElementById('portal-fact-pago-comprobante').value='';
+      document.getElementById('portal-fact-pago-observaciones').value='';
+      const modal=document.getElementById('portalFactReportarPagoModal');
+      if(window.bootstrap?.Modal)bootstrap.Modal.getOrCreateInstance(modal).show();
+      else portalFactNotice_('No se pudo abrir el formulario de pago. Actualice la página.','danger');
+    }
+    async function portalFactRegistrarPago_(event){
+      event.preventDefault();if(!portalFactRolMaster_())return;
+      const button=document.getElementById('portal-fact-btn-reportar');
+      const url=String(document.getElementById('portal-fact-pago-comprobante').value||'').trim();
+      if(url&&!/^https?:\/\//i.test(url)){portalFactNotice_('El comprobante debe ser un enlace HTTP o HTTPS válido.','warning');return;}
+      button.disabled=true;
+      try{
+        const result=await portalAdminCall_({action:'payment_report',factura_row_id:document.getElementById('portal-fact-pago-factura-id').value,
+          monto:Number(document.getElementById('portal-fact-pago-monto').value),moneda:document.getElementById('portal-fact-pago-moneda').value,
+          fecha_pago:new Date(document.getElementById('portal-fact-pago-fecha').value).toISOString(),referencia_pago:document.getElementById('portal-fact-pago-referencia').value,
+          comprobante_url:url,observaciones:document.getElementById('portal-fact-pago-observaciones').value});
+        if(!result.success)throw new Error('El servidor no confirmó el reporte.');
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('portalFactReportarPagoModal')).hide();
+        portalFactNotice_('El reporte de pago fue recibido y quedó pendiente de verificación por LC Soluciones Tecnológicas. El acceso completo se restablecerá una vez confirmado el pago.','success');
+        await portalFacturacionCargar_(true);
+      }catch(error){portalFactNotice_(error.message||'No se pudo reportar el pago.','danger');}
+      finally{button.disabled=false;}
+    }
+    async function portalFactConfirmarPago_(paymentId){
+      if(!esSuperMasterPortal_())return;
+      const buttons=[...document.querySelectorAll('#portal-fact-pending-body button')];buttons.forEach(button=>button.disabled=true);
+      try{
+        const result=await portalAdminCall_({action:'payment_confirm',pago_row_id:paymentId});
+        if(!result.success)throw new Error('El servidor no confirmó el pago.');
+        portalFactNotice_(result.company_reactivated?'Pago confirmado. La empresa fue reactivada porque no mantiene otras facturas vencidas.':'Pago confirmado. La empresa mantiene otras facturas fuera del período de gracia.','success');
+        await portalFacturacionCargar_(true);
+      }catch(error){portalFactNotice_(error.message||'No se pudo confirmar el pago.','danger');}
+      finally{buttons.forEach(button=>button.disabled=false);}
+    }
+    async function portalFactCrearFactura_(event){
+      event.preventDefault();if(!esSuperMasterPortal_())return;
+      const button=document.getElementById('portal-fact-btn-emitir');button.disabled=true;
+      try{
+        const result=await portalAdminCall_({action:'invoice_create',empresa_row_id:document.getElementById('portal-fact-empresa').value,
+          periodo_facturacion:document.getElementById('portal-fact-periodo').value,moneda:document.getElementById('portal-fact-moneda').value,
+          fecha_emision:document.getElementById('portal-fact-emision').value,fecha_vencimiento:document.getElementById('portal-fact-vencimiento').value,
+          subtotal:Number(document.getElementById('portal-fact-subtotal').value),impuestos:Number(document.getElementById('portal-fact-impuestos').value||0),
+          modalidad:'manual',descripcion:document.getElementById('portal-fact-descripcion').value});
+        if(!result.success)throw new Error('El servidor no confirmó la emisión.');
+        document.getElementById('portal-fact-form-emitir').reset();
+        document.getElementById('portal-fact-emision').value=new Date().toISOString().slice(0,10);
+        portalFactNotice_('Factura '+(result.invoice?.id_factura||'')+' emitida correctamente.','success');
+        await portalFacturacionCargar_(true);
+      }catch(error){portalFactNotice_(error.message||'No se pudo emitir la factura.','danger');}
+      finally{button.disabled=false;}
+    }
+    const portalFactInit_=()=>{
+      const section=document.getElementById('sec-facturacionempresas');
+      if(section)section.dataset.billingRole='pending';
+      const emission=document.getElementById('portal-fact-emision');
+      if(emission&&!emission.value)emission.value=new Date().toISOString().slice(0,10);
+      portalFactAplicarVisibilidadMenu_();
+    };
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',portalFactInit_,{once:true});
+    else portalFactInit_();
+
     async function sbAuth(username,password){
         const u=String(username??'').trim();
         const p=String(password??'');
@@ -8123,7 +8589,7 @@ function filtroNotificacionesClienteSupabase_(cliente){
                 if (auth?.code === 'INACTIVE') {
                     showLoginModalAlert('Cuenta inactiva', 'Consulte al Administrador para activar su cuenta.', 'warning');
                 } else if (auth?.code === 'COMPANY_SUSPENDED') {
-                    showLoginModalAlert('ACCESO SUSPENDIDO', 'LA EMPRESA TIENE UNA FACTURA VENCIDA. EL USUARIO MASTER PUEDE INGRESAR AL MÓDULO DE PAGOS PARA REGULARIZARLA.', 'warning');
+                    showLoginModalAlert('SERVICIO SUSPENDIDO TEMPORALMENTE', 'El acceso a la plataforma de su empresa se encuentra suspendido por una factura pendiente de pago. Comuníquese con el titular del servicio para que regularice el pago y gestione la reactivación de la cuenta.', 'warning');
                 } else if (auth?.code === 'RATE_LIMIT') {
                     showLoginModalAlert('INTENTOS EXCEDIDOS', 'POR SEGURIDAD, EL ACCESO ESTÁ TEMPORALMENTE BLOQUEADO. INTENTE NUEVAMENTE MÁS TARDE.', 'warning');
                 } else if (auth?.code === 'BAD_PASSWORD' || auth?.code === 'NOT_FOUND' || auth?.code === 'INVALID_CREDENTIALS') {
@@ -9141,6 +9607,13 @@ async function cargarBootstrapInicial_(){
         }finally{input.disabled=false;input.value='';}
     }
 
+    function portalIdentificadorVisibleUsuario_(user){
+        const alias=String(user?.login_alias||'').trim();
+        const username=String(user?.username||user?.usuario||'').trim();
+        // El identificador de acceso tiene prioridad sobre el correo de contacto.
+        return alias || username || String(user?.email||user?.correo||'').trim() || 'Usuario';
+    }
+
     function applyUserSession(user) {
         currentUser = user;
         // Cada sesión parte de su propia licencia empresarial: nunca reutilizar
@@ -9150,13 +9623,20 @@ async function cargarBootstrapInicial_(){
         window._portalCompanyModules=Array.isArray(user?.modulos_habilitados)?user.modulos_habilitados.slice():[];
         window._portalAdminModules=PORTAL_ADMIN_MODULES_;
         currentUserAuthAccessMode=user?.es_supermaster?'full':(user?.access_mode||currentUserAuthAccessMode||'full');
+        // Reiniciar los datos y la vista de facturación al cambiar de cuenta.
+        // Así nunca se reutilizan tarjetas o registros de una sesión anterior.
+        window._portalBillingData=null;
+        window._portalCompanyInvoices=[];
+        window._portalCompanyPayments=[];
+        portalFactSetViewRole_('pending');
+        portalFactDashboardAvisos_();
         hidratarDBLocal();
         localStorage.setItem('erp_session_user', JSON.stringify(user));
         localStorage.setItem('erp_session_last_activity', Date.now().toString());
 
         document.getElementById('current-user-name').innerText = user.nombre_completo;
         document.getElementById('current-user-role').innerText = 'Perfil: ' + user.rol;
-        document.getElementById('dropdown-user-email').innerText = user.email;
+        document.getElementById('dropdown-user-email').innerText = portalIdentificadorVisibleUsuario_(user);
         document.getElementById('current-user-avatar').src = portalAvatarFallbackSrc_(user);
         if(user?.foto_perfil_path&&user?.row_id) portalCargarFotoUsuario_(user.row_id,'current-user-avatar',user);
 
@@ -9170,7 +9650,7 @@ async function cargarBootstrapInicial_(){
 
         // Cada inicio de sesión comienza siempre en Dashboard, sin depender de los módulos permitidos.
         // Si Dashboard no tiene indicadores para el usuario, se muestra allí mismo la pantalla de bienvenida.
-        const moduloInicial = 'dashboard';
+        const moduloInicial = currentUserAuthAccessMode==='payments_only'&&!esSuperMasterPortal_() ? 'facturacionempresas' : 'dashboard';
         localStorage.setItem('erp_current_module', moduloInicial);
         switchTab(moduloInicial);
         window._erpNuevaSesion = false;
@@ -9261,7 +9741,8 @@ async function cargarBootstrapInicial_(){
         document.querySelectorAll('#sidebar .nav-link').forEach(el => {
             const href=String(el.getAttribute('href')||'').replace('#','');
             if(!href)return;
-            const visible=esSuperMasterPortal_() || href==='dashboard' || usuarioTieneCualquierPermisoModulo(href,currentUser);
+            const paymentOnly=currentUserAuthAccessMode==='payments_only'&&!esSuperMasterPortal_();
+            const visible=paymentOnly?href==='facturacionempresas':(esSuperMasterPortal_()||href==='dashboard'||usuarioTieneCualquierPermisoModulo(href,currentUser));
             el.style.display=visible?'':'none';
         });
         document.querySelectorAll('.view-admin-master').forEach(el => {
@@ -9283,6 +9764,11 @@ async function cargarBootstrapInicial_(){
             group.style.display=any?'':'none';
         });
         renderAllData();
+        if(currentUserAuthAccessMode==='payments_only'&&!esSuperMasterPortal_()){
+            const active=document.querySelector('.tab-content:not(.d-none)');
+            if(active?.id!=='sec-facturacionempresas')switchTab('facturacionempresas');
+            return;
+        }
         if(!isMaster){
             // Durante cualquier sincronización o refresco se conserva exactamente
             // el módulo que el usuario tiene visible. En especial, Dashboard es
@@ -9310,7 +9796,8 @@ async function cargarBootstrapInicial_(){
     // MODIFICAR CAMPOS AQUÍ PARA AGREGAR/QUITAR INFORMACIÓN DEL PERFIL
     
     function abrirModalPerfil() {
-        if (!protegerAccionUsuario('perfil','modificar')) return;
+        // Mi Perfil y Seguridad es una función personal de toda sesión autenticada;
+        // no depende de permisos de módulos ni del rol administrativo.
         if (!currentUser) return;
         document.getElementById('formPerfil').reset();
 
@@ -9397,7 +9884,7 @@ async function cargarBootstrapInicial_(){
         }
         if (usernameIcon) usernameIcon.className = 'fa-solid fa-eye';
         const loginAliasInput=document.getElementById('perfil_login_alias');
-        if(loginAliasInput)loginAliasInput.value=linkedUser.login_alias||currentUser.login_alias||'';
+        if(loginAliasInput)loginAliasInput.value=portalIdentificadorVisibleUsuario_(linkedUser)||portalIdentificadorVisibleUsuario_(currentUser);
 
         const passInput = document.getElementById('perfil_password');
         const passIcon = document.getElementById('perfil_password_icon');
@@ -9462,7 +9949,7 @@ async function cargarBootstrapInicial_(){
                 delete currentUser.password;
                 localStorage.setItem('erp_session_user',JSON.stringify(currentUser));
                 document.getElementById('current-user-name')?.replaceChildren(document.createTextNode(currentUser.nombre_completo||currentUser.username||''));
-                document.getElementById('dropdown-user-email')?.replaceChildren(document.createTextNode(currentUser.email||''));
+                document.getElementById('dropdown-user-email')?.replaceChildren(document.createTextNode(portalIdentificadorVisibleUsuario_(currentUser)));
                 modalPerfil.hide();
                 showSystemNotification('Perfil actualizado','Los datos de acceso fueron actualizados correctamente.','success');
             }catch(err){
@@ -9492,7 +9979,7 @@ async function cargarBootstrapInicial_(){
             delete currentUser.password;
             localStorage.setItem('erp_session_user',JSON.stringify(currentUser));
             document.getElementById('current-user-name')?.replaceChildren(document.createTextNode(currentUser.nombre_completo||''));
-            document.getElementById('dropdown-user-email')?.replaceChildren(document.createTextNode(currentUser.email||''));
+            document.getElementById('dropdown-user-email')?.replaceChildren(document.createTextNode(portalIdentificadorVisibleUsuario_(currentUser)));
             modalPerfil.hide();renderUsuarios();renderClientes();updateKPIs();
             showSystemNotification('Perfil actualizado','La información de Clientes y Usuarios fue actualizada correctamente en servidor.','success');
         }catch(err){
@@ -10347,8 +10834,14 @@ function actualizarVistaDashboardPorPermiso(){
 
     function switchTab(tabId) {
         actualizarVisibilidadMenuPorPermisos();
+        portalFactAplicarVisibilidadMenu_();
         tabId = String(tabId || 'dashboard');
-        if(currentUser&&tabId!=='dashboard'&&!esSuperMasterPortal_()&&!puedeAccederModuloUsuario(tabId)){
+        if(currentUser&&currentUserAuthAccessMode==='payments_only'&&!esSuperMasterPortal_()&&tabId!=='facturacionempresas'){
+            tabId='facturacionempresas';
+        }
+        const accesoFacturacionEmpresas = tabId==='facturacionempresas' && portalFactEsAdmin_();
+        if(tabId==='facturacionempresas')portalFactSetViewRole_(esSuperMasterPortal_()?'supermaster':'master');
+        if(currentUser&&tabId!=='dashboard'&&!esSuperMasterPortal_()&&!accesoFacturacionEmpresas&&!puedeAccederModuloUsuario(tabId)){
             showSystemNotification('Acceso restringido','Este módulo no está habilitado para su empresa.','warning');
             const fallback=document.querySelector('.tab-content:not(.d-none)');
             if(!fallback||fallback.id==='sec-'+tabId){document.querySelectorAll('.tab-content').forEach(el=>el.classList.add('d-none'));document.getElementById('sec-dashboard')?.classList.remove('d-none');}
@@ -10358,7 +10851,7 @@ function actualizarVistaDashboardPorPermiso(){
         const previoId=previo?.id ? previo.id.replace('sec-','') : '';
         if(previoId && previoId!==tabId) limpiarBusquedaModuloInteligente(previoId);
         ocultarListasMostrarInteligentes();
-        if(currentUser && tabId!=='dashboard' && String(currentUser.rol||'').trim().toLowerCase()!=='master' && !puedeAccederModuloUsuario(tabId)){
+        if(currentUser && tabId!=='dashboard' && !accesoFacturacionEmpresas && String(currentUser.rol||'').trim().toLowerCase()!=='master' && !puedeAccederModuloUsuario(tabId)){
             return false;
         }
         if(currentUser) localStorage.setItem('erp_current_module', tabId);
@@ -10382,6 +10875,7 @@ function actualizarVistaDashboardPorPermiso(){
             clientes: 'Gestión de Clientes',
             agenda: 'Agenda y Citas',
             facturacion: 'Gestión de Facturación',
+            facturacionempresas: 'Facturación de Empresas',
             creditos: 'Financiamientos y Créditos',
             pagos: 'Módulo de Pagos',
             bancos: 'Datos Bancarios',
@@ -10441,7 +10935,10 @@ function actualizarVistaDashboardPorPermiso(){
             }
         }
 
+        if (tabId === 'facturacionempresas') { portalFacturacionCargar_(true); }
+
         if (tabId === 'dashboard') {
+            portalFactDashboardAvisos_();
             actualizarVistaDashboardPorPermiso();
             updateKPIs();
             setTimeout(renderDashboardCharts, 100);
@@ -10829,7 +11326,7 @@ async function togglePortalStatus() {
 
 async function guardarNuevaContrasena(e) {
     e.preventDefault();
-    if (!protegerAccionUsuario('perfil','modificar')) return;
+    if (!currentUser) return;
     const curr = document.getElementById('pwd_current').value;
     const n1 = document.getElementById('pwd_new').value;
     const n2 = document.getElementById('pwd_confirm').value;
@@ -10896,7 +11393,7 @@ async function guardarNuevaContrasena(e) {
     function coincideDirectorio(r,q,campos){const query=normalizarDirectorioTexto(q);if(!query)return true;const digits=query.replace(/\D/g,'');return campos.some(c=>{const v=normalizarDirectorioTexto(r?.[c]);if(!v)return false;const d=v.replace(/\D/g,'');return v.includes(query)||(digits&&d.includes(digits));});}
     function datosDirectorio(tipo){if(tipo==='empresas')return {rows:()=>db.empresas||[],campos:['id_empresa','nombre_empresa','rif_fiscal','correo','email','telefono','direccion','estado','fecha_registro','contacto']};if(tipo==='usuarios')return {rows:()=>obtenerUsuariosVisiblesGestion(),campos:['id_usuario','nombre_completo','username','email','correo','codigo_cliente','documento_id','telefono','direccion','rol','estado','id_empresa','fecha_registro']};return {rows:()=>db.clientes||[],campos:['id_cliente','codigo_cliente','nombre_completo','documento_id','telefono','correo','direccion','estado_servicio','plan_contratado','fecha_registro']};}
     function registrosDirectorioFiltrados(tipo,q=''){const c=datosDirectorio(tipo);const rows=c.rows();return q?rows.filter(r=>coincideDirectorio(r,q,c.campos)):rows;}
-    function accionesDirectorio(tipo,r){const id=String(r?.id_empresa||r?.id_usuario||r?.id_cliente||'');let html='';if(tipo==='empresas'){if(permisosUsuarioTieneModulo('empresas','modificar'))html+=`<button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-2 me-1" onclick='event.stopPropagation();abrirModalEmpresa(${JSON.stringify(id)})' title="Editar"><i class="fa-solid fa-pen"></i></button>`;if(permisosUsuarioTieneModulo('empresas','eliminar'))html+=`<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick='event.stopPropagation();eliminarEmpresa(${JSON.stringify(id)})' title="Eliminar"><i class="fa-solid fa-trash"></i></button>`;}else if(tipo==='usuarios'){const master=esMasterUsuarioGestion();if(master||permisosUsuarioTieneModulo('usuarios','modificar'))html+=`<button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-2 me-1" onclick='event.stopPropagation();abrirModalEditarUsuario(${JSON.stringify(id)})' title="Editar"><i class="fa-solid fa-pen"></i></button>`;if(master||permisosUsuarioTieneModulo('usuarios','eliminar'))html+=`<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2 me-1" onclick='event.stopPropagation();eliminarUsuario(${JSON.stringify(id)})' title="Eliminar"><i class="fa-solid fa-trash"></i></button>`;html+=`<button class="btn btn-sm btn-outline-info py-0 px-2 rounded-2" onclick='event.stopPropagation();abrirModalVerUsuario(${JSON.stringify(id)})' title="Ver"><i class="fa-solid fa-eye"></i></button>`;}else{const cliente=String(currentUser?.rol||'').toLowerCase()==='cliente';if(!cliente&&permisosUsuarioTieneModulo('clientes','modificar'))html+=`<button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-2 me-1" onclick='event.stopPropagation();abrirModalCliente(${JSON.stringify(id)})' title="Editar"><i class="fa-solid fa-pen"></i></button>`;if(!cliente&&permisosUsuarioTieneModulo('clientes','eliminar'))html+=`<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick='event.stopPropagation();eliminarCliente(${JSON.stringify(id)})' title="Eliminar"><i class="fa-solid fa-trash"></i></button>`;}return html||'<span class="text-muted small"><i class="fa-solid fa-lock me-1"></i>Solo lectura</span>';}
+    function accionesDirectorio(tipo,r){const id=String(r?.id_empresa||r?.id_usuario||r?.id_cliente||'');let html='';if(tipo==='empresas'){if(esSuperMasterPortal_()||permisosUsuarioTieneModulo('empresas','modificar'))html+=`<button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-2 me-1" onclick='event.stopPropagation();abrirModalEmpresa(${JSON.stringify(id)})' title="Editar"><i class="fa-solid fa-pen"></i></button>`;if(esSuperMasterPortal_()||permisosUsuarioTieneModulo('empresas','eliminar'))html+=`<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick='event.stopPropagation();eliminarEmpresa(${JSON.stringify(id)})' title="Eliminar"><i class="fa-solid fa-trash"></i></button>`;}else if(tipo==='usuarios'){const master=esMasterUsuarioGestion();if(master||permisosUsuarioTieneModulo('usuarios','modificar'))html+=`<button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-2 me-1" onclick='event.stopPropagation();abrirModalEditarUsuario(${JSON.stringify(id)})' title="Editar"><i class="fa-solid fa-pen"></i></button>`;if(master||permisosUsuarioTieneModulo('usuarios','eliminar'))html+=`<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2 me-1" onclick='event.stopPropagation();eliminarUsuario(${JSON.stringify(id)})' title="Eliminar"><i class="fa-solid fa-trash"></i></button>`;html+=`<button class="btn btn-sm btn-outline-info py-0 px-2 rounded-2" onclick='event.stopPropagation();abrirModalVerUsuario(${JSON.stringify(id)})' title="Ver"><i class="fa-solid fa-eye"></i></button>`;}else{const cliente=String(currentUser?.rol||'').toLowerCase()==='cliente';if(!cliente&&permisosUsuarioTieneModulo('clientes','modificar'))html+=`<button class="btn btn-sm btn-outline-primary py-0 px-2 rounded-2 me-1" onclick='event.stopPropagation();abrirModalCliente(${JSON.stringify(id)})' title="Editar"><i class="fa-solid fa-pen"></i></button>`;if(!cliente&&permisosUsuarioTieneModulo('clientes','eliminar'))html+=`<button class="btn btn-sm btn-outline-danger py-0 px-2 rounded-2" onclick='event.stopPropagation();eliminarCliente(${JSON.stringify(id)})' title="Eliminar"><i class="fa-solid fa-trash"></i></button>`;}return html||'<span class="text-muted small"><i class="fa-solid fa-lock me-1"></i>Solo lectura</span>';}
     function renderDirectorio(tipo,rows,opts={}){const cfg={empresas:{area:'emp-lista-todos',body:'emp-lista-tbody',count:'emp-lista-contador'},usuarios:{area:'usr-lista-todos',body:'usr-lista-tbody',count:'usr-lista-contador'},clientes:{area:'cli-lista-todos',body:'cli-lista-tbody',count:'cli-lista-contador'}}[tipo];if(!cfg)return;const area=document.getElementById(cfg.area),tbody=document.getElementById(cfg.body),count=document.getElementById(cfg.count);if(!area||!tbody)return;const data=Array.isArray(rows)?rows:[];area.classList.remove('d-none');_directoriosVista[tipo]=true;if(count)count.textContent=data.length;let html='';if(!data.length){html='<tr><td colspan="8" class="lc-directory-empty"><i class="fa-regular fa-folder-open"></i>No se encontraron registros.</td></tr>';}else if(tipo==='empresas'){html=data.map(r=>`<tr><td class="lc-primary">${escDirectorio(r.id_empresa||'N/A')}</td><td class="lc-name" title="${escDirectorio(r.nombre_empresa)}">${escDirectorio(r.nombre_empresa||'N/A')}</td><td>${escDirectorio(r.rif_fiscal||'N/A')}</td><td>${escDirectorio(r.telefono||'N/A')}</td><td class="lc-muted">${escDirectorio(r.correo||'N/A')}</td><td class="lc-muted" title="${escDirectorio(r.direccion||'N/A')}">${escDirectorio(r.direccion||'N/A')}</td><td><span class="badge-status ${estadoClaseDirectorio(r.estado)}">${escDirectorio(r.estado||'N/A')}</span></td><td class="lc-actions">${accionesDirectorio(tipo,r)}</td></tr>`).join('');}else if(tipo==='usuarios'){html=data.map(r=>{const role=String(r.rol||'').toLowerCase();const roleClass=role==='master'?'bg-dark':role==='administrador'?'bg-primary':role==='vip'?'bg-warning text-dark':role==='familia'?'bg-info text-dark':'bg-success';return `<tr><td class="lc-primary">${escDirectorio(r.id_usuario||'N/A')}</td><td class="lc-name" title="${escDirectorio(r.nombre_completo)}">${escDirectorio(r.nombre_completo||'N/A')}</td><td>${escDirectorio(r.username||'N/A')}</td><td class="lc-muted">${escDirectorio(r.email||r.correo||'N/A')}</td><td>${escDirectorio(r.codigo_cliente||'N/A')}</td><td><span class="badge ${roleClass}">${escDirectorio(r.rol||'N/A')}</span></td><td><span class="badge-status ${estadoClaseDirectorio(r.estado)}">${escDirectorio(r.estado||'N/A')}</span></td><td class="lc-actions">${accionesDirectorio(tipo,r)}</td></tr>`}).join('');}else{html=data.map(r=>{const id=String(r.id_cliente||r.codigo_cliente||'');return `<tr class="cursor-pointer" onclick='seleccionarClienteDirectorio(${JSON.stringify(id)})'><td class="lc-primary">${escDirectorio(r.codigo_cliente||'N/A')}</td><td class="lc-name" title="${escDirectorio(r.nombre_completo)}">${escDirectorio(r.nombre_completo||'N/A')}</td><td>${escDirectorio(r.documento_id||'N/A')}</td><td>${escDirectorio(r.telefono||'N/A')}</td><td class="lc-muted">${escDirectorio(r.correo||'N/A')}</td><td class="lc-muted" title="${escDirectorio(r.direccion||'N/A')}">${escDirectorio(r.direccion||'N/A')}</td><td><span class="badge-status ${estadoClaseDirectorio(r.estado_servicio||'SOLVENTE')}">${escDirectorio(r.estado_servicio||'SOLVENTE')}</span></td><td class="lc-actions">${accionesDirectorio(tipo,r)}</td></tr>`}).join('');}tbody.innerHTML=html;if(opts.scroll)setTimeout(()=>area.scrollIntoView({behavior:'smooth',block:'start'}),80);}
     function ocultarDirectorio(tipo){
         const area={empresas:'emp-lista-todos',usuarios:'usr-lista-todos',clientes:'cli-lista-todos'}[tipo];
@@ -11017,8 +11514,40 @@ function renderEmpresas(){
     }
 
 async function eliminarEmpresa(id) {
-    if(!esSuperMasterPortal_())return;
-    showSystemNotification('Eliminación protegida','Para conservar usuarios, registros y relaciones empresariales, la eliminación definitiva está bloqueada en esta versión. Puede cambiar el estado de la empresa desde su ficha.','warning');
+    if(!esSuperMasterPortal_()){
+        showSystemNotification('Acceso restringido','La eliminación de empresas está reservada al SuperMaster.','warning');
+        return false;
+    }
+    const empresa=(db.empresas||[]).find(x=>String(x.id_empresa||'')===String(id||''));
+    if(!empresa){
+        showSystemNotification('Empresa no encontrada','Actualice el listado e inténtelo nuevamente.','warning');
+        return false;
+    }
+    const nombre=String(empresa.nombre_empresa||empresa.razon_social||id);
+    const confirmar=await confirmarAccionModal(
+        'Eliminar empresa definitivamente',
+        '¿Confirma que desea eliminar la empresa «'+nombre+'»? Esta acción no se puede deshacer. El servidor aplicará las relaciones y reglas de integridad que tenga configuradas para sus registros vinculados.'
+    );
+    if(!confirmar)return false;
+    try{
+        showSystemNotification('Eliminando empresa','Solicitando al servidor la eliminación definitiva...','info');
+        const result=await ejecutarOperacionSupabase('deleteEmpresa',{id_empresa:id},false,15000,true);
+        if(!result?.success)throw new Error(result?.message||'El servidor no confirmó la eliminación.');
+        if(!Array.isArray(result.data)||!result.data.some(row=>String(row.id_empresa||'')===String(id))){
+            throw new Error('El servidor no confirmó que la empresa haya sido eliminada. No se modificó el listado local.');
+        }
+        db.empresas=(db.empresas||[]).filter(x=>String(x.id_empresa||'')!==String(id));
+        if(Array.isArray(db.Empresas))db.Empresas=db.Empresas.filter(x=>String(x.id_empresa||'')!==String(id));
+        guardarDBLocalSeguro_();
+        renderEmpresas();
+        await sincronizarConservidor();
+        showSystemNotification('Empresa eliminada','La empresa «'+nombre+'» fue eliminada correctamente.','success');
+        return true;
+    }catch(error){
+        console.error('[Gestión de empresas] No se pudo eliminar:',error);
+        showSystemNotification('No se pudo eliminar la empresa',String(error?.message||error||'Error del servidor.'),'danger');
+        return false;
+    }
 }
 
 
