@@ -194,23 +194,29 @@ html[data-theme="dark"] footer .footer-socials .social-facebook:hover,html[data-
 
 /* Perfil profesional: sección personal integrada al diseño de LC */
 .professional-profile{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(37,99,235,.055),transparent 48%,rgba(6,182,212,.055))}
-.professional-layout{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:clamp(28px,5vw,68px);align-items:center}
+.professional-layout{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:clamp(28px,5vw,68px);align-items:stretch}
 .professional-intro h2{max-width:650px;margin:12px 0 18px;font-size:clamp(2rem,4vw,3.25rem);line-height:1.08;letter-spacing:-.045em}
 .professional-intro p{max-width:620px;color:var(--muted);line-height:1.8}
 .professional-intro .professional-lead{font-size:1.08rem;color:var(--ink);font-weight:550}
 .professional-contact{margin-top:16px;display:inline-flex;align-items:center;gap:10px}
-.professional-panel{padding:clamp(20px,3vw,30px);border:1px solid var(--line);border-radius:26px;background:var(--surface);box-shadow:var(--shadow)}
+.professional-panel{padding:clamp(20px,3vw,30px);border:1px solid var(--line);border-radius:26px;background:var(--surface);box-shadow:var(--shadow);box-sizing:border-box;height:100%;max-height:760px;min-height:0;display:flex;flex-direction:column;overflow:hidden}
 .professional-panel-head{display:flex;align-items:center;gap:10px;margin-bottom:20px;font-size:.82rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .professional-pulse{width:9px;height:9px;border-radius:50%;background:#3b82f6;box-shadow:0 0 0 5px rgba(59,130,246,.12)}
-.professional-skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.professional-skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;min-height:0;max-height:clamp(260px,46vh,470px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(59,130,246,.55) transparent;padding:2px 8px 5px 2px;scroll-padding-block:8px}.professional-skills::-webkit-scrollbar{width:7px}.professional-skills::-webkit-scrollbar-track{background:transparent;border-radius:99px}.professional-skills::-webkit-scrollbar-thumb{background:rgba(59,130,246,.42);border:2px solid transparent;background-clip:padding-box;border-radius:99px}.professional-skills::-webkit-scrollbar-thumb:hover{background:rgba(37,99,235,.72);border:2px solid transparent;background-clip:padding-box}
 .professional-skill{display:flex;gap:12px;align-items:flex-start;padding:15px 13px;border:1px solid var(--line);border-radius:16px;background:var(--surface2)}
 .professional-skill-icon{flex:0 0 34px;width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:rgba(59,130,246,.12);color:#3b82f6;font-size:1.15rem;font-weight:800}
 .professional-skill h3{margin:1px 0 5px;font-size:.94rem;color:var(--ink)}
 .professional-skill p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.55}
-.professional-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.professional-tags{flex:0 0 auto;display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .professional-tags span{padding:7px 11px;border:1px solid rgba(59,130,246,.2);border-radius:999px;background:rgba(59,130,246,.07);color:var(--ink);font-size:.75rem;font-weight:700}
+.professional-explorer{margin-top:22px;flex:0 0 auto}.professional-filter-label{display:block;margin:0 0 10px;color:var(--muted);font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.professional-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.professional-filter{border:1px solid var(--line);border-radius:999px;padding:9px 13px;background:var(--surface2);color:var(--ink);font:inherit;font-size:.75rem;font-weight:750;cursor:pointer;transition:background .2s,border-color .2s,color .2s,transform .2s}.professional-filter:hover{transform:translateY(-2px);border-color:#3b82f6}.professional-filter[aria-pressed="true"]{background:#2563eb;border-color:#2563eb;color:#fff;box-shadow:0 7px 18px rgba(37,99,235,.2)}
+.professional-results{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px;color:var(--muted);font-size:.73rem}.professional-results strong{color:var(--ink)}
+.professional-skill{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}.professional-skill:hover{transform:translateY(-3px);border-color:rgba(59,130,246,.48);box-shadow:0 12px 25px rgba(15,45,90,.08)}.professional-skill[hidden]{display:none!important}.professional-skill-icon{transition:transform .25s ease}.professional-skill:hover .professional-skill-icon{transform:rotate(-7deg) scale(1.07)}
+.professional-bottom{flex:0 0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:15px;margin-top:18px;padding-top:17px;border-top:1px solid var(--line)}.professional-bottom p{margin:0;color:var(--muted);font-size:.78rem;line-height:1.6}.professional-bottom a{font-size:.78rem;font-weight:800;color:#2563eb;text-decoration:none}.professional-bottom a:hover{text-decoration:underline}
+@media(prefers-reduced-motion:reduce){.professional-skill,.professional-filter,.professional-skill-icon{transition:none}}
 @media(max-width:900px){.professional-layout{grid-template-columns:1fr}.professional-intro{max-width:760px}}
-@media(max-width:560px){.professional-skills{grid-template-columns:1fr}.professional-panel{padding:18px}.professional-skill{padding:13px}}
+@media(max-width:560px){.professional-skills{grid-template-columns:1fr}.professional-panel{padding:18px}.professional-skill{padding:13px}.professional-filter{font-size:.7rem;padding:8px 11px}.professional-results{align-items:flex-start;flex-direction:column}.professional-bottom{align-items:flex-start;flex-direction:column}}
 
 </style></head>
 <body>
@@ -246,22 +252,36 @@ html[data-theme="dark"] footer .footer-socials .social-facebook:hover,html[data-
     <div class="professional-layout">
       <div class="professional-intro reveal">
         <div class="section-kicker">Perfil profesional</div>
-        <h2 id="professionalProfileTitle">Experiencia técnica para conectar y mantener infraestructuras en funcionamiento.</h2>
-        <p class="professional-lead">Enfoque profesional en telecomunicaciones, redes y conectividad, con experiencia en despliegue de fibra óptica, instalaciones inalámbricas, soporte técnico y atención de incidencias.</p>
-        <p>Mi trabajo combina actividades de campo y configuración de equipos: desde la instalación y revisión de infraestructura hasta el diagnóstico de fallas, las mediciones técnicas y el seguimiento de servicios de conectividad. Me interesa aportar soluciones confiables, trabajar con orden y contribuir a la continuidad operativa de cada proyecto.</p>
+        <h2 id="professionalProfileTitle">Tecnología, conectividad y desarrollo digital para resolver necesidades reales.</h2>
+        <p class="professional-lead">Perfil profesional orientado a telecomunicaciones, redes y desarrollo web, con capacidad para combinar trabajo de campo, configuración de infraestructura y creación de soluciones digitales. Mi enfoque integra la instalación y el diagnóstico de conectividad —fibra óptica, enlaces inalámbricos y equipos de red— con el diseño de sitios web, portales y herramientas de gestión adaptadas a las necesidades de empresas y profesionales. Me interesa participar en proyectos donde la tecnología ayude a mejorar la comunicación, organizar procesos, optimizar operaciones y ofrecer mejores servicios a los usuarios.</p>
+        <p>Puedo aportar en distintas etapas de un proyecto: comprender la necesidad, proponer una solución, realizar tareas de instalación o configuración, desarrollar la experiencia digital y brindar apoyo técnico. Busco que cada resultado sea práctico, claro, adaptable y sencillo de utilizar, tanto para el equipo de trabajo como para el cliente final.</p>
         <a class="btn btn-primary btn-blue-action professional-contact" href="https://wa.me/584245134562?text=Hola%2C%20he%20revisado%20tu%20perfil%20profesional%20y%20me%20gustar%C3%ADa%20conversar%20sobre%20una%20oportunidad%20laboral%20o%20colaboraci%C3%B3n." target="_blank" rel="noopener noreferrer">Conversar sobre una oportunidad <span aria-hidden="true">↗</span></a>
       </div>
       <div class="professional-panel reveal">
-        <div class="professional-panel-head"><span class="professional-pulse"></span><span>Áreas de experiencia y conocimiento</span></div>
-        <div class="professional-skills">
-          <article class="professional-skill"><span class="professional-skill-icon">⌁</span><div><h3>Fibra óptica</h3><p>Despliegue e instalación de cableado de fibra óptica, incluyendo tendidos ADSS y ASU.</p></div></article>
-          <article class="professional-skill"><span class="professional-skill-icon">◉</span><div><h3>Medición y diagnóstico</h3><p>Revisión de enlaces, mediciones de potencia óptica y pruebas con OTDR.</p></div></article>
-          <article class="professional-skill"><span class="professional-skill-icon">⌘</span><div><h3>Redes y MikroTik</h3><p>Configuración y soporte de routers, equipos de red y soluciones de conectividad.</p></div></article>
-          <article class="professional-skill"><span class="professional-skill-icon">⌁</span><div><h3>Enlaces inalámbricos</h3><p>Instalación, revisión y soporte de enlaces para conectividad de datos.</p></div></article>
-          <article class="professional-skill"><span class="professional-skill-icon">⚙</span><div><h3>Soporte y mantenimiento</h3><p>Atención de averías, mantenimiento de infraestructura y resolución de incidencias técnicas.</p></div></article>
-          <article class="professional-skill"><span class="professional-skill-icon">▤</span><div><h3>Supervisión y documentación</h3><p>Revisión de instalaciones, auditoría técnica y seguimiento de trabajos realizados.</p></div></article>
+        <div class="professional-panel-head"><span class="professional-pulse"></span><span>Explora mis áreas de experiencia</span></div>
+        <div class="professional-explorer">
+          <span class="professional-filter-label">Selecciona un área para filtrar las especialidades</span>
+          <div class="professional-filters" role="group" aria-label="Filtrar áreas profesionales">
+            <button class="professional-filter" type="button" data-profile-filter="all" aria-pressed="true">Todas</button>
+            <button class="professional-filter" type="button" data-profile-filter="telecom" aria-pressed="false">Telecomunicaciones</button>
+            <button class="professional-filter" type="button" data-profile-filter="web" aria-pressed="false">Desarrollo web</button>
+            <button class="professional-filter" type="button" data-profile-filter="digital" aria-pressed="false">Sistemas digitales</button>
+          </div>
+          <p class="professional-results" aria-live="polite"><span id="professionalResultsText">Mostrando <strong>9 especialidades</strong></span><span>Selecciona otra categoría para explorar</span></p>
         </div>
-        <div class="professional-tags"><span>Telecomunicaciones</span><span>Infraestructura</span><span>Conectividad</span><span>Soporte técnico</span></div>
+        <div class="professional-skills" id="professionalSkills">
+          <article class="professional-skill" data-profile-category="telecom"><span class="professional-skill-icon">⌁</span><div><h3>Fibra óptica</h3><p>Despliegue e instalación de cableado de fibra óptica, incluyendo tendidos ADSS y ASU.</p></div></article>
+          <article class="professional-skill" data-profile-category="telecom"><span class="professional-skill-icon">◉</span><div><h3>Medición y diagnóstico</h3><p>Revisión de enlaces, mediciones de potencia óptica y pruebas con OTDR.</p></div></article>
+          <article class="professional-skill" data-profile-category="telecom"><span class="professional-skill-icon">⌘</span><div><h3>Redes y MikroTik</h3><p>Configuración y soporte de routers, equipos de red y soluciones de conectividad.</p></div></article>
+          <article class="professional-skill" data-profile-category="telecom"><span class="professional-skill-icon">⌁</span><div><h3>Enlaces inalámbricos</h3><p>Instalación, revisión y soporte de enlaces para conectividad de datos.</p></div></article>
+          <article class="professional-skill" data-profile-category="telecom"><span class="professional-skill-icon">⚙</span><div><h3>Soporte y mantenimiento</h3><p>Atención de averías, mantenimiento de infraestructura y resolución de incidencias técnicas.</p></div></article>
+          <article class="professional-skill" data-profile-category="telecom"><span class="professional-skill-icon">▤</span><div><h3>Supervisión y documentación</h3><p>Revisión de instalaciones, auditoría técnica y seguimiento de trabajos realizados.</p></div></article>
+          <article class="professional-skill" data-profile-category="web"><span class="professional-skill-icon">⌘</span><div><h3>Diseño y desarrollo de sitios web</h3><p>Creación de páginas corporativas y profesionales, con diseño adaptable a móviles, presentación de servicios y canales de contacto.</p></div></article>
+          <article class="professional-skill" data-profile-category="web"><span class="professional-skill-icon">▣</span><div><h3>Portales y experiencias web</h3><p>Desarrollo de portales de atención, páginas para comercios, catálogos digitales y sitios para eventos o actividades.</p></div></article>
+          <article class="professional-skill" data-profile-category="digital"><span class="professional-skill-icon">⚙</span><div><h3>Sistemas y automatización digital</h3><p>Construcción de herramientas de gestión, formularios y módulos administrativos para organizar información y procesos.</p></div></article>
+        </div>
+        <div class="professional-bottom"><p><strong>¿Buscas un perfil técnico y digital?</strong><br/>Estoy disponible para conversar sobre oportunidades laborales y proyectos.</p><a href="https://wa.me/584245134562?text=Hola%2C%20he%20revisado%20tu%20perfil%20profesional%20y%20me%20gustar%C3%ADa%20conversar%20sobre%20una%20oportunidad%20laboral%20o%20colaboraci%C3%B3n." target="_blank" rel="noopener noreferrer">Hablemos por WhatsApp ↗</a></div>
+        <div class="professional-tags"><span>Telecomunicaciones</span><span>Infraestructura</span><span>Desarrollo web</span><span>Sistemas digitales</span><span>Conectividad</span></div>
       </div>
     </div>
   </div>
@@ -389,6 +409,7 @@ async function refreshRates(){
 const speedBackdrop=$('speedtestBackdrop');const speedFrame=$('speedtestFrame');const speedEmbedShell=$('speedtestEmbedShell');const speedStartPanel=$('speedtestStartPanel');const speedStartBtn=$('speedtestStartBtn');function openSpeedtest(){speedBackdrop.hidden=false;document.body.style.overflow='hidden';if(speedFrame&&speedFrame.getAttribute('src')==='about:blank'){speedFrame.src='about:blank'}if(speedStartPanel)speedStartPanel.hidden=false;if(speedEmbedShell)speedEmbedShell.hidden=true;if(speedStartBtn){speedStartBtn.disabled=false;speedStartBtn.textContent='Iniciar prueba'}}function startFastTest(){if(!speedFrame||!speedEmbedShell)return;speedStartBtn.disabled=true;speedStartBtn.textContent='Iniciando…';speedStartPanel.hidden=true;speedEmbedShell.hidden=false;speedFrame.src=speedFrame.dataset.src||'https://fast.com/es/';speedStartBtn.textContent='Prueba iniciada'}function closeSpeedtest(){speedBackdrop.hidden=true;if(speedFrame)speedFrame.src='about:blank';if(speedStartPanel)speedStartPanel.hidden=false;if(speedEmbedShell)speedEmbedShell.hidden=true;if(speedStartBtn){speedStartBtn.disabled=false;speedStartBtn.textContent='Iniciar prueba'}if($('lcRatesBackdrop').hidden&&$('gpsBackdrop').hidden&&$('networkBackdrop').hidden)document.body.style.overflow=''}$('speedtestBtn').addEventListener('click',openSpeedtest);if(speedStartBtn)speedStartBtn.addEventListener('click',startFastTest);$('speedtestClose').addEventListener('click',closeSpeedtest);speedBackdrop.addEventListener('click',e=>{if(e.target===speedBackdrop)closeSpeedtest()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!speedBackdrop.hidden)closeSpeedtest();if(!$('gpsBackdrop').hidden)closeGpsModal();if(!$('networkBackdrop').hidden)closeNetworkModal();if(!$('lcRatesBackdrop').hidden)closeRates()}});
 document.getElementById('contactForm').addEventListener('submit',event=>{event.preventDefault();const data=new FormData(event.currentTarget);const msg=`Hola, LC Soluciones Tecnológicas. Quisiera consultar sobre sus servicios.\n\nNombre: ${data.get('name')}\nEmpresa: ${data.get('company')||'No indicada'}\nServicio de interés: ${data.get('interest')}\nContacto: ${data.get('reply')||'No indicado'}\n\nDetalle del proyecto:\n${data.get('details')}`;const link='https://wa.me/584245134562?text='+encodeURIComponent(msg);document.getElementById('formNote').textContent='Se abrirá WhatsApp con tu consulta preparada. Podrás revisarla y enviarla cuando estés listo.';window.open(link,'_blank','noopener,noreferrer')});
+const profileFilters=[...document.querySelectorAll('[data-profile-filter]')];const profileSkills=[...document.querySelectorAll('[data-profile-category]')];const profileResults=document.getElementById('professionalResultsText');profileFilters.forEach(button=>button.addEventListener('click',()=>{const category=button.dataset.profileFilter;let visible=0;profileFilters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));profileSkills.forEach(card=>{const show=category==='all'||card.dataset.profileCategory===category;card.hidden=!show;if(show)visible++});const label=visible===1?'especialidad':'especialidades';profileResults.innerHTML='Mostrando <strong>'+visible+' '+label+'</strong>';}));
 })();
 </script>
 </body></html>
