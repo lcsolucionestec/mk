@@ -3616,6 +3616,55 @@ body[data-theme="dark"] .vehiculos-overlay .vehiculos-head .btn-outline-secondar
 }
 </style>
 
+<style id="vehiculos-dark-form-controls-and-titles">
+/* Mantiene legibles los títulos y controles de combustible/mantenimiento
+   cuando el tema activo se controla desde data-bs-theme. */
+html[data-bs-theme="dark"] .vehiculos-overlay .vehiculos-head,
+html[data-theme="dark"] .vehiculos-overlay .vehiculos-head,
+html.dark .vehiculos-overlay .vehiculos-head,
+body.dark-mode .vehiculos-overlay .vehiculos-head,
+body[data-theme="dark"] .vehiculos-overlay .vehiculos-head {
+  background:linear-gradient(135deg,#111c2e 0%,#172a43 100%) !important;
+  border-bottom-color:#334155 !important; color:#e5edf7 !important;
+}
+html[data-bs-theme="dark"] .vehiculos-overlay .vehiculos-head .title,
+html[data-theme="dark"] .vehiculos-overlay .vehiculos-head .title,
+html.dark .vehiculos-overlay .vehiculos-head .title,
+body.dark-mode .vehiculos-overlay .vehiculos-head .title,
+body[data-theme="dark"] .vehiculos-overlay .vehiculos-head .title { color:#f8fafc !important; }
+html[data-bs-theme="dark"] .vehiculos-overlay .vehiculos-head small,
+html[data-theme="dark"] .vehiculos-overlay .vehiculos-head small,
+html.dark .vehiculos-overlay .vehiculos-head small,
+body.dark-mode .vehiculos-overlay .vehiculos-head small,
+body[data-theme="dark"] .vehiculos-overlay .vehiculos-head small { color:#cbd5e1 !important; }
+html[data-bs-theme="dark"] .vehiculos-overlay .form-label,
+html[data-bs-theme="dark"] .vehiculos-overlay label,
+html[data-theme="dark"] .vehiculos-overlay .form-label,
+body.dark-mode .vehiculos-overlay .form-label { color:#e2e8f0 !important; }
+html[data-bs-theme="dark"] .vehiculos-overlay .form-control,
+html[data-bs-theme="dark"] .vehiculos-overlay .form-select,
+html[data-bs-theme="dark"] .vehiculos-overlay textarea,
+html[data-theme="dark"] .vehiculos-overlay .form-control,
+html[data-theme="dark"] .vehiculos-overlay .form-select,
+body.dark-mode .vehiculos-overlay .form-control,
+body.dark-mode .vehiculos-overlay .form-select {
+  color:#f8fafc !important; background-color:#172334 !important;
+  border-color:#475569 !important; color-scheme:dark;
+}
+html[data-bs-theme="dark"] .vehiculos-overlay .form-control::placeholder,
+html[data-theme="dark"] .vehiculos-overlay .form-control::placeholder,
+body.dark-mode .vehiculos-overlay .form-control::placeholder { color:#94a3b8 !important; opacity:1; }
+html[data-bs-theme="dark"] .vehiculos-overlay .form-select option,
+html[data-theme="dark"] .vehiculos-overlay .form-select option,
+body.dark-mode .vehiculos-overlay .form-select option { color:#f8fafc !important; background:#172334 !important; }
+html[data-bs-theme="dark"] .vehiculos-overlay .vehiculos-body,
+html[data-theme="dark"] .vehiculos-overlay .vehiculos-body,
+body.dark-mode .vehiculos-overlay .vehiculos-body { background:#0f172a !important; color:#e2e8f0 !important; }
+html[data-bs-theme="dark"] .vehiculos-overlay .vehiculos-foot,
+html[data-theme="dark"] .vehiculos-overlay .vehiculos-foot,
+body.dark-mode .vehiculos-overlay .vehiculos-foot { background:#111c2e !important; border-top-color:#334155 !important; }
+</style>
+
 <style id="electricity-energy-form-polish-v2">
 #sec-electricidad #elec-node-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:8px 10px;align-items:start}
 #sec-electricidad #elec-node-form>div{min-width:0}
@@ -4038,6 +4087,84 @@ html[data-bs-theme="dark"] #modalUsuario .perm-config-card,html[data-bs-theme="d
  #portalFactVerFacturaModal .modal-body,#portalFactEditarFacturaModal .modal-body{max-height:calc(100dvh - 180px)}
 }
 </style>
+
+<style id="vehiculos-history-table-dark-header-fix">
+/* El encabezado de las tablas no debe conservar el fondo blanco en tema oscuro. */
+body.dark-mode #sec-vehiculos .veh-history-panel .veh-table thead,
+body.dark-mode #sec-vehiculos .veh-history-panel .veh-table thead tr,
+body.dark-mode #sec-vehiculos .veh-history-panel .veh-table th,
+html.dark #sec-vehiculos .veh-history-panel .veh-table thead,
+html.dark #sec-vehiculos .veh-history-panel .veh-table thead tr,
+html.dark #sec-vehiculos .veh-history-panel .veh-table th,
+html[data-theme="dark"] #sec-vehiculos .veh-history-panel .veh-table thead,
+html[data-theme="dark"] #sec-vehiculos .veh-history-panel .veh-table thead tr,
+html[data-theme="dark"] #sec-vehiculos .veh-history-panel .veh-table th,
+html[data-bs-theme="dark"] #sec-vehiculos .veh-history-panel .veh-table thead,
+html[data-bs-theme="dark"] #sec-vehiculos .veh-history-panel .veh-table thead tr,
+html[data-bs-theme="dark"] #sec-vehiculos .veh-history-panel .veh-table th,
+body[data-theme="dark"] #sec-vehiculos .veh-history-panel .veh-table thead,
+body[data-theme="dark"] #sec-vehiculos .veh-history-panel .veh-table thead tr,
+body[data-theme="dark"] #sec-vehiculos .veh-history-panel .veh-table th {
+  background: #111c2e !important;
+  color: #cbd5e1 !important;
+  border-color: #263244 !important;
+}
+</style>
+
+
+<style id="lc-transport-form-session-fixes">
+/* Transporte Público: contornos permanentes y legibles en todos los formularios. */
+#tp-view .tp-field input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]),
+#tp-view .tp-field select,#tp-view .tp-field textarea,
+.tp-modal .tp-field input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="file"]),
+.tp-modal .tp-field select,.tp-modal .tp-field textarea,
+#tp-view .tp-company-wrap select,#tp-view .tp-filter input,.tp-modal .tp-model-presets select {
+ border:1.5px solid #cbd5e1!important;outline:none;background-color:#fff;color:#0f172a;box-shadow:inset 0 1px 2px rgba(15,23,42,.035);
+}
+#tp-view .tp-field input:focus,#tp-view .tp-field select:focus,#tp-view .tp-field textarea:focus,
+.tp-modal .tp-field input:focus,.tp-modal .tp-field select:focus,.tp-modal .tp-field textarea:focus,
+#tp-view .tp-company-wrap select:focus,#tp-view .tp-filter input:focus,.tp-modal .tp-model-presets select:focus {
+ border-color:#2563eb!important;box-shadow:0 0 0 3px rgba(37,99,235,.14)!important;
+}
+html[data-bs-theme="dark"] #tp-view .tp-field input,html[data-bs-theme="dark"] #tp-view .tp-field select,html[data-bs-theme="dark"] #tp-view .tp-field textarea,
+html[data-bs-theme="dark"] .tp-modal .tp-field input,html[data-bs-theme="dark"] .tp-modal .tp-field select,html[data-bs-theme="dark"] .tp-modal .tp-field textarea,
+body.dark-mode #tp-view .tp-field input,body.dark-mode #tp-view .tp-field select,body.dark-mode #tp-view .tp-field textarea,
+body.dark-mode .tp-modal .tp-field input,body.dark-mode .tp-modal .tp-field select,body.dark-mode .tp-modal .tp-field textarea {
+ border-color:#64748b!important;background-color:#0f172a!important;color:#f1f5f9!important;
+}
+html[data-bs-theme="dark"] #tp-view .tp-field input::placeholder,html[data-bs-theme="dark"] #tp-view .tp-field textarea::placeholder,html[data-bs-theme="dark"] .tp-modal .tp-field input::placeholder,html[data-bs-theme="dark"] .tp-modal .tp-field textarea::placeholder,body.dark-mode #tp-view .tp-field input::placeholder,body.dark-mode #tp-view .tp-field textarea::placeholder,body.dark-mode .tp-modal .tp-field input::placeholder,body.dark-mode .tp-modal .tp-field textarea::placeholder{color:#94a3b8!important;opacity:1}
+.lc-sidebar-datetime{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:5px 8px 9px;margin:0 16px 10px;border-bottom:1px solid rgba(148,163,184,.28);color:var(--text-muted,#64748b);font-variant-numeric:tabular-nums;text-align:center;line-height:1.35}
+.lc-sidebar-datetime #lc-sidebar-date{font-size:.76rem;font-weight:800;letter-spacing:.045em}.lc-sidebar-datetime #lc-sidebar-time{font-size:.75rem;font-weight:700;letter-spacing:.035em}
+html[data-bs-theme="dark"] .lc-sidebar-datetime,body.dark-mode .lc-sidebar-datetime{color:#cbd5e1;border-bottom-color:rgba(148,163,184,.22)}
+</style>
+
+<style id="lc-sidebar-clock-inline-and-sticky-header">
+/* Fecha y hora en una sola línea debajo del logotipo */
+#lc-sidebar-datetime{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:0!important;white-space:nowrap!important;padding:7px 8px 10px!important;margin:0 10px 10px!important;font-size:.74rem!important;line-height:1.25!important;font-variant-numeric:tabular-nums!important;}
+#lc-sidebar-date,#lc-sidebar-time{display:inline!important;font-size:inherit!important;font-weight:750!important;letter-spacing:0!important;}
+#lc-sidebar-date::after{content:",\00a0";}
+/* Barra superior persistente: título del módulo, notificaciones y usuario */
+#main-content>header{
+  position:fixed!important;
+  top:0!important;
+  left:calc(var(--sidebar-width,260px) + 1rem)!important;
+  right:1rem!important;
+  width:auto!important;
+  z-index:1040!important;
+  margin:0!important;
+  border-radius:0 0 12px 12px!important;
+  box-sizing:border-box!important;
+  isolation:isolate!important;
+  box-shadow:0 5px 18px rgba(15,23,42,.12)!important;
+}
+/* Reserva espacio para que el contenido no quede debajo de la barra fija */
+#main-content{padding-top:112px!important;}
+body.sidebar-collapsed #main-content>header{left:1rem!important;right:1rem!important;}
+@media(max-width:991.98px){
+  #main-content>header{left:1rem!important;right:1rem!important;}
+  #main-content{padding-top:112px!important;}
+}
+</style>
 </head>
 <!-- VERSION Servidor 2026.1.2 — V39.8 filtros OPERACIONES TÉCNICAS unificados -->
 <body>
@@ -4180,7 +4307,7 @@ html[data-bs-theme="dark"] #modalUsuario .perm-config-card,html[data-bs-theme="d
 <a aria-label="TikTok" data-social-network="tiktok" href="https://www.tiktok.com/" rel="noopener noreferrer" target="_blank" title="TikTok"><i aria-hidden="true" class="fa-brands fa-tiktok"></i></a>
 <a aria-label="WhatsApp" href="https://wa.me/584245134562" rel="noopener noreferrer" target="_blank" title="WhatsApp"><i aria-hidden="true" class="fa-brands fa-whatsapp"></i></a>
 <a aria-label="Telegram" data-social-network="telegram" href="https://t.me/" rel="noopener noreferrer" target="_blank" title="Telegram"><i aria-hidden="true" class="fa-brands fa-telegram"></i></a>
-<img alt="LC Soluciones Tecnológicas" class="lc-login-social-favicon" height="19" loading="eager" src="img/favicon.png" width="19"/>
+<a aria-label="Abrir sitio web de LC Soluciones Tecnológicas" class="lc-login-social-website" href="https://www.lcsolucionestec.com" rel="noopener noreferrer" target="_blank" title="www.lcsolucionestec.com"><img alt="LC Soluciones Tecnológicas" class="lc-login-social-favicon" height="19" loading="eager" src="img/favicon.png" width="19"/></a>
 </nav>
 <div class="lc-login-developer-credit">
 <span>Desarrollado por LC Soluciones Tecnológicas / Ing. José Cordero V2026</span>
@@ -4197,6 +4324,10 @@ html[data-bs-theme="dark"] #modalUsuario .perm-config-card,html[data-bs-theme="d
 <div class="p-4 d-flex align-items-center justify-content-between">
 <div aria-label="LC SOLUCIONES TECNOLÓGICAS" class="lc-sidebar-logo-shell" id="lc-sidebar-logo-target"></div>
 <button aria-label="Ocultar menú" class="btn sidebar-mobile-close" onclick="toggleSidebar()" title="Ocultar menú" type="button"><i class="fa-solid fa-chevron-left"></i></button>
+</div>
+<div class="lc-sidebar-datetime" id="lc-sidebar-datetime" aria-label="Fecha y hora local">
+  <span id="lc-sidebar-date">dd/mm/aaaa</span>
+  <span id="lc-sidebar-time">h:mm:ss tt</span>
 </div>
 <div class="px-3 mb-2">
 <small class="text-uppercase text-muted fw-semibold px-3" style="font-size: 0.7rem;">Menú Principal</small>
@@ -4222,6 +4353,33 @@ html[data-bs-theme="dark"] #modalUsuario .perm-config-card,html[data-bs-theme="d
 <div class="ops-menu-category-title"><i class="fa-solid fa-compass"></i><span>Gestión Personal y Servicios</span></div>
 <div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-users menu-group-icon"></i>Gestión Personal</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
 <a class="nav-link" href="#agenda" onclick="switchTab('agenda')"><i class="fa-solid menu-subicon fa-calendar-days"></i><span>Agenda</span></a><a class="nav-link" href="#tareas" onclick="switchTab('tareas')"><i class="fa-solid menu-subicon fa-list-check"></i><span>Tareas</span></a><a class="nav-link" href="#recordatorios" onclick="switchTab('recordatorios')"><i class="fa-solid menu-subicon fa-bell"></i><span>Recordatorios</span></a><a class="nav-link" href="#notificaciones" onclick="switchTab('notificaciones')"><i class="fa-solid menu-subicon fa-bell-concierge"></i><span>Notificaciones</span></a><a class="nav-link" href="#familia" onclick="switchTab('familia')"><i class="fa-solid menu-subicon fa-people-roof"></i><span>Familia</span></a><a class="nav-link" href="#historialmedico" onclick="switchTab('historialmedico')"><i class="fa-solid menu-subicon fa-heart-pulse"></i><span>Historial Médico</span></a><a class="nav-link" href="#manutencion" onclick="switchTab('manutencion')"><i class="fa-solid menu-subicon fa-hand-holding-dollar"></i><span>Manutención</span></a><a class="nav-link" href="#registrosescolares" onclick="switchTab('registrosescolares')"><i class="fa-solid menu-subicon fa-school"></i><span>Registros Escolares</span></a><a class="nav-link" href="#recordatoriosmedicinas" onclick="switchTab('recordatoriosmedicinas')"><i class="fa-solid menu-subicon fa-pills"></i><span>Recordatorios de Medicinas</span></a><a class="nav-link" href="#vehiculos" onclick="switchTab('vehiculos')"><i class="fa-solid menu-subicon fa-car-side"></i><span>Vehículos</span></a>
+</div></div>
+<div class="ops-menu-category-title"><i class="fa-solid fa-bus-simple"></i><span>Transporte y Movilidad</span></div>
+<div class="menu-group ops-menu-group" id="menu-group-transporte-publico"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-bus-simple menu-group-icon"></i>Transporte Público Extraurbano</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('resumen')"><i class="fa-solid menu-subicon fa-chart-pie"></i><span>Resumen</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Rutas')"><i class="fa-solid menu-subicon fa-route"></i><span>Rutas</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Paradas')"><i class="fa-solid menu-subicon fa-location-dot"></i><span>Paradas y terminales</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_RutaParadas')"><i class="fa-solid menu-subicon fa-map-location-dot"></i><span>Paradas por ruta</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Tarifas')"><i class="fa-solid menu-subicon fa-tags"></i><span>Tarifas</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Horarios')"><i class="fa-solid menu-subicon fa-clock"></i><span>Horarios</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Unidades')"><i class="fa-solid menu-subicon fa-bus"></i><span>Unidades</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Asientos')"><i class="fa-solid menu-subicon fa-chair"></i><span>Asientos por unidad</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Personal')"><i class="fa-solid menu-subicon fa-id-badge"></i><span>Personal</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Turnos')"><i class="fa-solid menu-subicon fa-calendar-days"></i><span>Turnos</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Viajes')"><i class="fa-solid menu-subicon fa-road"></i><span>Viajes y salidas</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_ViajeParadas')"><i class="fa-solid menu-subicon fa-route"></i><span>Itinerario de viajes</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Pasajeros')"><i class="fa-solid menu-subicon fa-users"></i><span>Pasajeros</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Reservas')"><i class="fa-solid menu-subicon fa-bookmark"></i><span>Reservas</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Boletos')"><i class="fa-solid menu-subicon fa-ticket"></i><span>Boletos</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Listines')"><i class="fa-solid menu-subicon fa-clipboard-check"></i><span>Listines y abordaje</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Abordajes')"><i class="fa-solid menu-subicon fa-person-walking-arrow-right"></i><span>Registro de abordajes</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Equipajes')"><i class="fa-solid menu-subicon fa-suitcase"></i><span>Equipajes</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Despachos')"><i class="fa-solid menu-subicon fa-truck-fast"></i><span>Despachos y llegadas</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Incidencias')"><i class="fa-solid menu-subicon fa-triangle-exclamation"></i><span>Incidencias</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Pagos')"><i class="fa-solid menu-subicon fa-money-bill-wave"></i><span>Pagos</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Caja')"><i class="fa-solid menu-subicon fa-cash-register"></i><span>Caja</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Gastos')"><i class="fa-solid menu-subicon fa-receipt"></i><span>Gastos operativos</span></a>
+<a class="nav-link" data-perm-action="leer" data-perm-module="transporte_publico" href="#transporte_publico" onclick="switchTab('transporte_publico');tpGo('TP_Auditoria')"><i class="fa-solid menu-subicon fa-shield-halved"></i><span>Auditoría</span></a>
 </div></div>
 <div class="ops-menu-category-title"><i class="fa-solid fa-screwdriver-wrench"></i><span>Operaciones Técnicas</span></div>
 <div class="menu-group ops-menu-group"><button aria-expanded="false" class="menu-group-toggle" onclick="toggleMenuGroup(this)" type="button"><span><i class="fa-solid fa-helmet-safety menu-group-icon"></i>Campo y Soporte</span><i class="fa-solid fa-chevron-down group-chevron"></i></button><div class="menu-group-items">
@@ -5723,6 +5881,29 @@ html[data-bs-theme="dark"] .dashboard-welcome-note .text-primary, body.dark-mode
 <div class="text-center text-muted py-5 d-none" id="vehiculos-vacio"><i class="fa-solid fa-car-side fa-2x opacity-25 mb-2"></i><div>No hay vehículos registrados.</div></div>
 </div>
 </section>
+
+<section class="tab-content d-none" id="sec-transporte_publico">
+ <div class="tp-shell">
+  <div class="tp-topbar">
+   <div><div class="tp-eyebrow">OPERACIONES DE TRANSPORTE</div><h2><i class="fa-solid fa-bus-simple"></i> Transporte Público Extraurbano</h2><p>Gestión integral de rutas interurbanas, unidades, horarios, pasajeros, boletos y operaciones.</p></div>
+   <div class="tp-top-actions"><div id="tp-company-wrap" class="tp-company-wrap d-none"><label>Empresa operadora</label><select id="tp-company" onchange="tpChangeCompany()"></select></div><button class="btn btn-outline-primary" type="button" onclick="tpLoad(true)"><i class="fa-solid fa-rotate me-1"></i>Actualizar</button></div>
+  </div>
+  <div id="tp-alert" class="tp-alert d-none"></div>
+  <div class="tp-nav" id="tp-nav"></div>
+  <div id="tp-view"></div>
+ </div>
+</section>
+<div class="tp-modal" id="tp-form-modal" aria-hidden="true"><div class="tp-modal-card"><div class="tp-modal-head"><div><strong id="tp-form-title">Registrar</strong><small id="tp-form-subtitle">Transporte Público</small></div><button type="button" onclick="tpCloseForm()"><i class="fa-solid fa-xmark"></i></button></div><form id="tp-form" onsubmit="tpSaveForm(event)"><div id="tp-form-fields" class="tp-form-grid"></div><div class="tp-modal-foot"><button type="button" class="btn btn-light" onclick="tpCloseForm()">Cancelar</button><button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar</button></div></form></div></div>
+<div class="tp-modal" id="tp-reservation-modal" aria-hidden="true"><div class="tp-modal-card" style="max-width:520px"><div class="tp-modal-head"><div><strong>Confirmar reserva y emitir boleto</strong><small>El pago se registrará en caja y se generará el listín.</small></div><button type="button" onclick="tpCloseReservation()"><i class="fa-solid fa-xmark"></i></button></div><form id="tp-reservation-form" onsubmit="tpCompleteReservationConversion(event)"><input type="hidden" id="tp-reservation-id"><div class="tp-form-grid"><label class="tp-field"><span>Método de pago *</span><select id="tp-reservation-method"><option value="efectivo">Efectivo</option><option value="punto">Punto de venta</option><option value="transferencia">Transferencia</option><option value="pago_movil">Pago móvil</option><option value="zelle">Zelle</option><option value="otro">Otro</option></select></label><label class="tp-field"><span>Referencia</span><input id="tp-reservation-reference"></label></div><div class="tp-modal-foot"><button type="button" class="btn btn-light" onclick="tpCloseReservation()">Cancelar</button><button type="submit" class="btn btn-primary"><i class="fa-solid fa-ticket me-1"></i>Confirmar y emitir</button></div></form></div></div>
+<div class="tp-modal" id="tp-sale-modal" aria-hidden="true"><div class="tp-modal-card tp-sale-card"><div class="tp-modal-head"><div><strong id="tp-sale-title">Emitir boleto</strong><small id="tp-sale-subtitle">Venta en taquilla</small></div><button type="button" onclick="tpCloseSale()"><i class="fa-solid fa-xmark"></i></button></div><form id="tp-sale-form" onsubmit="tpCompleteSale(event)"><input type="hidden" id="tp-sale-trip"><input type="hidden" id="tp-sale-seat"><div class="tp-form-grid">
+ <label class="tp-field"><span>Nombres *</span><input id="tp-sale-nombres" required maxlength="100"></label><label class="tp-field"><span>Apellidos *</span><input id="tp-sale-apellidos" required maxlength="100"></label>
+ <label class="tp-field"><span>Tipo documento</span><select id="tp-sale-doc-type"><option value="V">V</option><option value="E">E</option><option value="J">J</option><option value="P">Pasaporte</option></select></label><label class="tp-field"><span>N.º documento</span><input id="tp-sale-doc" maxlength="40"></label>
+ <label class="tp-field"><span>Teléfono</span><input id="tp-sale-phone" maxlength="40"></label><label class="tp-field"><span>Correo</span><input id="tp-sale-email" type="email"></label>
+ <label class="tp-field"><span>Origen *</span><select id="tp-sale-origin" required></select></label><label class="tp-field"><span>Destino *</span><select id="tp-sale-dest" required></select></label>
+ <label class="tp-field"><span>Tarifa / monto *</span><input id="tp-sale-amount" type="number" min="0" step="0.01" required></label><label class="tp-field"><span>Moneda</span><select id="tp-sale-currency"><option>USD</option><option>VES</option><option>COP</option><option>USDT</option></select></label>
+ <label class="tp-field"><span>Método de pago *</span><select id="tp-sale-method"><option value="efectivo">Efectivo</option><option value="punto">Punto de venta</option><option value="transferencia">Transferencia</option><option value="pago_movil">Pago móvil</option><option value="zelle">Zelle</option><option value="otro">Otro</option></select></label><label class="tp-field"><span>Referencia</span><input id="tp-sale-reference"></label>
+ </div><div class="tp-modal-foot"><button type="button" class="btn btn-light" onclick="tpCloseSale()">Cancelar</button><button type="button" class="btn btn-outline-warning" onclick="tpCreateReservation()"><i class="fa-solid fa-bookmark me-1"></i>Crear reserva</button><button type="submit" class="btn btn-primary"><i class="fa-solid fa-ticket me-1"></i>Emitir boleto</button></div></form></div></div>
+
 <div aria-hidden="true" class="vehiculos-overlay" id="vehiculoFormModal">
 <div class="vehiculos-card wide">
 <div class="vehiculos-head"><div><div class="title" id="vehiculoFormTitle"><i class="fa-solid fa-car-side text-primary me-2"></i>Nuevo vehículo</div><small>Registro general del vehículo y datos de propiedad.</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarFormularioVehiculo()" type="button"><i class="fa-solid fa-xmark"></i></button></div>
@@ -5780,7 +5961,7 @@ html[data-bs-theme="dark"] .dashboard-welcome-note .text-primary, body.dark-mode
 <div aria-hidden="true" class="vehiculos-overlay" id="vehiculoCombustibleModal">
 <div class="vehiculos-card">
 <div class="vehiculos-head"><div><div class="title" id="combustibleFormTitle"><i class="fa-solid fa-gas-pump text-primary me-2"></i>Registrar combustible</div><small id="combustibleFormSub">Surtido asociado al vehículo.</small></div><button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="cerrarFormularioCombustible()" type="button"><i class="fa-solid fa-xmark"></i></button></div>
-<form onsubmit="guardarCombustibleVehiculo(event)"><input id="combustible-id" type="hidden"/><input id="combustible-vehiculo-id" type="hidden"/><div class="vehiculos-body"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Vehículo</label><input class="form-control form-control-pro" id="combustible-vehiculo-label" readonly=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control form-control-pro" id="combustible-fecha" required="" type="date"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Estación</label><input class="form-control form-control-pro" id="combustible-estacion"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Combustible *</label><select class="form-select form-control-pro" id="combustible-tipo" required=""><option>Gasolina 91</option><option>Gasolina 95</option><option>Diésel</option><option>GLP</option><option>Eléctrico</option><option>Otro</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Litros / unidades *</label><input autocomplete="off" class="form-control form-control-pro" id="combustible-cantidad" inputmode="decimal" oninput="calcularCombustibleMontoUI(true)" required="" type="text"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Precio unitario</label><input autocomplete="off" class="form-control form-control-pro" id="combustible-precio" inputmode="decimal" oninput="calcularCombustibleMontoUI(true)" type="text"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Monto</label><input autocomplete="off" class="form-control form-control-pro" id="combustible-monto" inputmode="decimal" type="text"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Moneda</label><select class="form-select form-control-pro" id="combustible-moneda"><option value="USD">USD</option><option value="VES">VES</option><option value="COP">COP</option><option value="USDT">USDT</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Tasa VES/US$</label><input class="form-control form-control-pro" id="combustible-tasa" min="0" step="0.0001" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Kilometraje</label><input class="form-control form-control-pro" id="combustible-km" min="0" step="0.1" type="number"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Método de pago</label><input class="form-control form-control-pro" id="combustible-metodo"/></div><div class="col-md-9"><label class="form-label small fw-semibold">Observaciones</label><input class="form-control form-control-pro" id="combustible-observaciones"/></div></div></div><div class="vehiculos-foot"><button class="btn btn-outline-secondary" onclick="cerrarFormularioCombustible()" type="button">Cancelar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar surtido</button></div></form>
+<form onsubmit="guardarCombustibleVehiculo(event)"><input id="combustible-id" type="hidden"/><input id="combustible-vehiculo-id" type="hidden"/><div class="vehiculos-body"><div class="row g-2"><div class="col-md-4"><label class="form-label small fw-semibold">Vehículo</label><input class="form-control form-control-pro" id="combustible-vehiculo-label" readonly=""/></div><div class="col-md-2"><label class="form-label small fw-semibold">Fecha *</label><input class="form-control form-control-pro" id="combustible-fecha" required="" type="date"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Estación</label><input class="form-control form-control-pro" id="combustible-estacion"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Combustible *</label><select class="form-select form-control-pro" id="combustible-tipo" required=""><option>Gasolina 91</option><option>Gasolina 95</option><option>Diésel</option><option>GLP</option><option>Eléctrico</option><option>Otro</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Litros / unidades *</label><input autocomplete="off" class="form-control form-control-pro" id="combustible-cantidad" inputmode="decimal" required="" type="text"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Precio unitario</label><input autocomplete="off" class="form-control form-control-pro" id="combustible-precio" inputmode="decimal" type="text"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Monto</label><input autocomplete="off" class="form-control form-control-pro" id="combustible-monto" inputmode="decimal" type="text"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Moneda</label><select class="form-select form-control-pro" id="combustible-moneda"><option value="USD">USD</option><option value="VES">VES</option><option value="COP">COP</option><option value="USDT">USDT</option></select></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Tasa VES/US$</label><input class="form-control form-control-pro" id="combustible-tasa" min="0" step="0.0001" type="number"/></div><div class="col-6 col-md-2"><label class="form-label small fw-semibold">Kilometraje</label><input class="form-control form-control-pro" id="combustible-km" min="0" step="0.1" type="number"/></div><div class="col-md-3"><label class="form-label small fw-semibold">Método de pago</label><input class="form-control form-control-pro" id="combustible-metodo"/></div><div class="col-md-9"><label class="form-label small fw-semibold">Observaciones</label><input class="form-control form-control-pro" id="combustible-observaciones"/></div></div></div><div class="vehiculos-foot"><button class="btn btn-outline-secondary" onclick="cerrarFormularioCombustible()" type="button">Cancelar</button><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar surtido</button></div></form>
 </div>
 </div>
 <div aria-hidden="true" class="vehiculos-overlay" id="vehiculoMantenimientoModal">
@@ -7520,8 +7701,8 @@ html[data-bs-theme="dark"] .sports-management-table, body.dark-mode .sports-mana
     const SUPABASE_KEY = 'sb_publishable_C3QK8alfi1YD1rd6zgrOmw_iyOato6u';
     const SUPABASE_ANON_JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhc2x3c2Fyd2NxZ3J6dmFudGpiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0MzU3NjgsImV4cCI6MjEwNjAxMTc2OH0.qexVfvz1h1mH5-5vZU0eP3hIs6x4BSMZ3B1EuyB5iIg';
 
-    const SUPABASE_TABLES={pacientes:'Pacientes',embarazos:'Embarazos',embarazoscontroles:'EmbarazosControles',embarazosmedicamentos:'EmbarazosMedicamentos',embarazosexamenes:'EmbarazosExamenes',embarazosrecordatorios:'EmbarazosRecordatorios',embarazostomas:'EmbarazosTomas',programaciondiaria:'ProgramacionDiaria',programaciondiariatecnicos:'ProgramacionDiariaTecnicos',programaciondiariahistorial:'ProgramacionDiariaHistorial',programaciondiariamunicipios:'ProgramacionDiariaMunicipios',auditoria:'Auditoria',empresas:'Empresas',usuarios:'Usuarios',clientes:'Clientes',facturas:'Facturas',creditos:'Creditos',pagos:'Pagos',notificaciones:'Notificaciones',bancos:'Bancos',familia:'Familia',historialmedico:'HistorialMedico',recordatoriosmedicinas:'RecordatoriosMedicinas',registroTomasMedicinas:'RegistroTomasMedicinas',manutencion:'Manutencion',registrosescolares:'RegistrosEscolares',horariosescolares:'HorariosEscolares',materiashorarios:'MateriasHorarios',tareas:'Tareas',recordatorios:'Recordatorios',gastos:'Gastos',vehiculos:'Vehiculos',vehiculoscombustible:'VehiculosCombustible',vehiculosmantenimiento:'VehiculosMantenimiento',trabajos_manuales:'TrabajosManuales',sueldos:'SueldosSalarios',agenda:'Agenda',agendaconfig:'AgendaConfig',config:'Config',servicios:'Servicios',ordenes:'Ordenes',tecnicos:'Tecnicos',tecnicoscertificaciones:'TecnicosCertificaciones',tecnicosequipos:'TecnicosEquipos',gruposTrabajo:'GruposTrabajo',grupotrabajointegrantes:'GrupoTrabajoIntegrantes',trabajoscampo:'TrabajosCampo',trabajocampotecnicos:'TrabajoCampoTecnicos',trabajocampomateriales:'TrabajoCampoMateriales',trabajocampohistorial:'TrabajoCampoHistorial',trabajocampoequipos:'TrabajoCampoEquipos',trabajocampoevidencias:'TrabajoCampoEvidencias',instalaciones:'Instalaciones',instalacionesequipos:'InstalacionesEquipos',registrollamadas:'RegistroLlamadas',instalacionesfibra:'InstalacionesFibra',instalacionesradio:'InstalacionesRadio',soportetecnico:'SoporteTecnico',seguimientotecnicos:'SeguimientoTecnicos',inventarios:'Inventarios',inventarioexistencias:'InventarioExistencias',inventariomovimientos:'InventarioMovimientos',grupotrabajomateriales:'GrupoTrabajoMateriales',tipostrabajocampo:'TiposTrabajoCampo',tiposprogramaciondiaria:'TiposProgramacionDiaria',almacenes:'Almacenes',almacenubicaciones:'AlmacenUbicaciones',almacentransferencias:'AlmacenTransferencias',almacentransferenciadetalle:'AlmacenTransferenciaDetalle',asignacionestecnicos:'AsignacionesTecnicos',oficinasolicitudes:'OficinaSolicitudes',vgtoperadoras:'VGTOperadoras',vgtproyectos:'VGTProyectos',vgtrutas:'VGTRutas',vgttramos:'VGTTramos',vgtpostes:'VGTPostes',vgtposteocupaciones:'VGTPosteOcupaciones',vgtevidencias:'VGTEvidencias',nodosElectricidad:'NodosElectricidad',eventosElectricidad:'EventosElectricidad',reportelectricidad:'ReporteElectricidad',pruebasAutonomiaElectricidad:'PruebasAutonomiaElectricidad',desconexionprecintos:'DesconexionPrecintos',telegramBots:'BotsTelegramElectricidad'};
-    const SUPABASE_ID_FIELDS={embarazos:'row_id',embarazoscontroles:'row_id',embarazosmedicamentos:'row_id',embarazosexamenes:'row_id',embarazosrecordatorios:'row_id',embarazostomas:'row_id',desconexionprecintos:'id_desconexion_precinto',nodosElectricidad:'id_nodo_electricidad',pruebasAutonomiaElectricidad:'id_prueba',telegramBots:'id_bot_telegram',programaciondiaria:'id_programacion',programaciondiariatecnicos:'id_asignacion',programaciondiariahistorial:'id_historial',programaciondiariamunicipios:'id_municipio',auditoria:'id_auditoria',empresas:'id_empresa',usuarios:'id_usuario',clientes:'id_cliente',facturas:'id_factura',creditos:'id_cuota',pagos:'id_pago',notificaciones:'id_notificacion',bancos:'id_banco',familia:'id_familia',historialmedico:'id_historial_medico',recordatoriosmedicinas:'id_recordatorio',registroTomasMedicinas:'id_toma',manutencion:'id_manutencion',registrosescolares:'id_registro_escolar',horariosescolares:'id_horario_escolar',materiashorarios:'id_materia_horario',tareas:'id_tarea',recordatorios:'id_recordatorio',gastos:'id_gasto',vehiculos:'id_vehiculo',vehiculoscombustible:'id_combustible',vehiculosmantenimiento:'id_mantenimiento',trabajos_manuales:'id_trabajo',sueldos:'id_sueldo',agenda:'id_agenda',servicios:'id_servicio',ordenes:'id_orden',tecnicos:'id_tecnico',tecnicoscertificaciones:'id_certificacion',tecnicosequipos:'id_asignacion',gruposTrabajo:'id_grupo',grupotrabajointegrantes:'id_integrante',trabajoscampo:'id_trabajo_campo',trabajocampotecnicos:'id_asignacion',trabajocampomateriales:'id_detalle',trabajocampohistorial:'id_historial',trabajocampoequipos:'id_detalle',trabajocampoevidencias:'id_evidencia',instalaciones:'id_instalacion',instalacionesequipos:'id_equipo_instalacion',registrollamadas:'id_llamada',instalacionesfibra:'id_instalacion_fibra',instalacionesradio:'id_instalacion_radio',soportetecnico:'id_ticket',seguimientotecnicos:'id_seguimiento',inventarios:'id_inventario',inventarioexistencias:'id_existencia',inventariomovimientos:'id_movimiento',grupotrabajomateriales:'id_asignacion_grupo',tipostrabajocampo:'id_tipo_trabajo',tiposprogramaciondiaria:'id_tipo_trabajo',almacenes:'id_almacen',almacenubicaciones:'id_ubicacion',almacentransferencias:'id_transferencia',almacentransferenciadetalle:'id_detalle',asignacionestecnicos:'id_asignacion',oficinasolicitudes:'id_solicitud',tiposfallatecnica:'id_tipo_falla',ordenestrabajotecnico:'id_orden_trabajo',ordentrabajotecnicos:'id_asignacion',reportestecnicos:'id_reporte_tecnico',reportestecnicosmateriales:'id_detalle_reporte',contabilidadcuentas:'id_cuenta',contabilidadasientos:'id_asiento',contabilidadmovimientos:'id_movimiento',contabilidadterceros:'id_tercero',contabilidadperiodos:'id_periodo',contabilidadactivos:'id_activo',contabilidadimpuestos:'id_impuesto',contabilidadconciliaciones:'id_conciliacion',cuentasporpagar:'id_cxp',cuentasporcobrar:'id_cxc',ventasadministrativas:'id_venta',comprasadministrativas:'id_compra',presupuestosadministrativos:'id_presupuesto',balancesadministrativos:'id_balance',pacientes:'id_paciente',consultasmedicas:'id_consulta',signosvitales:'id_signos',diagnosticosmedicos:'id_diagnostico',ordenesmedicas:'id_orden_medica',medicamentosrecetados:'id_medicamento_recetado',examenesclinicos:'id_examen',archivosclinicos:'id_archivo_clinico',hospitalizaciones:'id_hospitalizacion',alergiaspacientes:'id_alergia',antecedentesmedicos:'id_antecedente',vacunaspacientes:'id_vacuna',tallerordenes:'id_orden_taller',tallerservicios:'id_servicio_taller',tallerrepuestos:'id_repuesto_taller',tallerinspecciones:'id_inspeccion',tallerhistorial:'id_historial_taller',vgtplantillas:'id_plantilla',vgtpostetemplates:'id_plantilla_poste',vgtoperadoras:'id_operadora',vgtproyectos:'id_proyecto',vgtrutas:'id_ruta',vgttramos:'id_tramo',vgtpostes:'id_poste',vgtposteocupaciones:'id_ocupacion',vgtevidencias:'id_evidencia',nodosElectricidad:'id_nodo_electricidad',eventosElectricidad:'id_evento_electricidad'};
+    const SUPABASE_TABLES={pacientes:'Pacientes',embarazos:'Embarazos',embarazoscontroles:'EmbarazosControles',embarazosmedicamentos:'EmbarazosMedicamentos',embarazosexamenes:'EmbarazosExamenes',embarazosrecordatorios:'EmbarazosRecordatorios',embarazostomas:'EmbarazosTomas',programaciondiaria:'ProgramacionDiaria',programaciondiariatecnicos:'ProgramacionDiariaTecnicos',programaciondiariahistorial:'ProgramacionDiariaHistorial',programaciondiariamunicipios:'ProgramacionDiariaMunicipios',auditoria:'Auditoria',empresas:'Empresas',usuarios:'Usuarios',clientes:'Clientes',facturas:'Facturas',creditos:'Creditos',pagos:'Pagos',notificaciones:'Notificaciones',bancos:'Bancos',familia:'Familia',historialmedico:'HistorialMedico',recordatoriosmedicinas:'RecordatoriosMedicinas',registroTomasMedicinas:'RegistroTomasMedicinas',manutencion:'Manutencion',registrosescolares:'RegistrosEscolares',horariosescolares:'HorariosEscolares',materiashorarios:'MateriasHorarios',tareas:'Tareas',recordatorios:'Recordatorios',gastos:'Gastos',vehiculos:'Vehiculos',vehiculoscombustible:'VehiculosCombustible',vehiculosmantenimiento:'VehiculosMantenimiento',trabajos_manuales:'TrabajosManuales',sueldos:'SueldosSalarios',agenda:'Agenda',agendaconfig:'AgendaConfig',config:'Config',servicios:'Servicios',ordenes:'Ordenes',tecnicos:'Tecnicos',tecnicoscertificaciones:'TecnicosCertificaciones',tecnicosequipos:'TecnicosEquipos',gruposTrabajo:'GruposTrabajo',grupotrabajointegrantes:'GrupoTrabajoIntegrantes',trabajoscampo:'TrabajosCampo',trabajocampotecnicos:'TrabajoCampoTecnicos',trabajocampomateriales:'TrabajoCampoMateriales',trabajocampohistorial:'TrabajoCampoHistorial',trabajocampoequipos:'TrabajoCampoEquipos',trabajocampoevidencias:'TrabajoCampoEvidencias',instalaciones:'Instalaciones',instalacionesequipos:'InstalacionesEquipos',registrollamadas:'RegistroLlamadas',instalacionesfibra:'InstalacionesFibra',instalacionesradio:'InstalacionesRadio',soportetecnico:'SoporteTecnico',seguimientotecnicos:'SeguimientoTecnicos',inventarios:'Inventarios',inventarioexistencias:'InventarioExistencias',inventariomovimientos:'InventarioMovimientos',grupotrabajomateriales:'GrupoTrabajoMateriales',tipostrabajocampo:'TiposTrabajoCampo',tiposprogramaciondiaria:'TiposProgramacionDiaria',almacenes:'Almacenes',almacenubicaciones:'AlmacenUbicaciones',almacentransferencias:'AlmacenTransferencias',almacentransferenciadetalle:'AlmacenTransferenciaDetalle',asignacionestecnicos:'AsignacionesTecnicos',oficinasolicitudes:'OficinaSolicitudes',vgtoperadoras:'VGTOperadoras',vgtproyectos:'VGTProyectos',vgtrutas:'VGTRutas',vgttramos:'VGTTramos',vgtpostes:'VGTPostes',vgtposteocupaciones:'VGTPosteOcupaciones',vgtevidencias:'VGTEvidencias',nodosElectricidad:'NodosElectricidad',eventosElectricidad:'EventosElectricidad',reportelectricidad:'ReporteElectricidad',pruebasAutonomiaElectricidad:'PruebasAutonomiaElectricidad',desconexionprecintos:'DesconexionPrecintos',telegramBots:'BotsTelegramElectricidad',TP_Rutas:'TP_Rutas',TP_Paradas:'TP_Paradas',TP_RutaParadas:'TP_RutaParadas',TP_Tarifas:'TP_Tarifas',TP_Horarios:'TP_Horarios',TP_Unidades:'TP_Unidades',TP_Asientos:'TP_Asientos',TP_Personal:'TP_Personal',TP_Turnos:'TP_Turnos',TP_Viajes:'TP_Viajes',TP_ViajeParadas:'TP_ViajeParadas',TP_ViajeAsientos:'TP_ViajeAsientos',TP_Pasajeros:'TP_Pasajeros',TP_Reservas:'TP_Reservas',TP_Boletos:'TP_Boletos',TP_Listines:'TP_Listines',TP_Abordajes:'TP_Abordajes',TP_Equipajes:'TP_Equipajes',TP_Despachos:'TP_Despachos',TP_Incidencias:'TP_Incidencias',TP_Pagos:'TP_Pagos',TP_Caja:'TP_Caja',TP_Gastos:'TP_Gastos',TP_Auditoria:'TP_Auditoria'};
+    const SUPABASE_ID_FIELDS={embarazos:'row_id',embarazoscontroles:'row_id',embarazosmedicamentos:'row_id',embarazosexamenes:'row_id',embarazosrecordatorios:'row_id',embarazostomas:'row_id',desconexionprecintos:'id_desconexion_precinto',nodosElectricidad:'id_nodo_electricidad',pruebasAutonomiaElectricidad:'id_prueba',telegramBots:'id_bot_telegram',programaciondiaria:'id_programacion',programaciondiariatecnicos:'id_asignacion',programaciondiariahistorial:'id_historial',programaciondiariamunicipios:'id_municipio',auditoria:'id_auditoria',empresas:'id_empresa',usuarios:'id_usuario',clientes:'id_cliente',facturas:'id_factura',creditos:'id_cuota',pagos:'id_pago',notificaciones:'id_notificacion',bancos:'id_banco',familia:'id_familia',historialmedico:'id_historial_medico',recordatoriosmedicinas:'id_recordatorio',registroTomasMedicinas:'id_toma',manutencion:'id_manutencion',registrosescolares:'id_registro_escolar',horariosescolares:'id_horario_escolar',materiashorarios:'id_materia_horario',tareas:'id_tarea',recordatorios:'id_recordatorio',gastos:'id_gasto',vehiculos:'id_vehiculo',vehiculoscombustible:'id_combustible',vehiculosmantenimiento:'id_mantenimiento',trabajos_manuales:'id_trabajo',sueldos:'id_sueldo',agenda:'id_agenda',servicios:'id_servicio',ordenes:'id_orden',tecnicos:'id_tecnico',tecnicoscertificaciones:'id_certificacion',tecnicosequipos:'id_asignacion',gruposTrabajo:'id_grupo',grupotrabajointegrantes:'id_integrante',trabajoscampo:'id_trabajo_campo',trabajocampotecnicos:'id_asignacion',trabajocampomateriales:'id_detalle',trabajocampohistorial:'id_historial',trabajocampoequipos:'id_detalle',trabajocampoevidencias:'id_evidencia',instalaciones:'id_instalacion',instalacionesequipos:'id_equipo_instalacion',registrollamadas:'id_llamada',instalacionesfibra:'id_instalacion_fibra',instalacionesradio:'id_instalacion_radio',soportetecnico:'id_ticket',seguimientotecnicos:'id_seguimiento',inventarios:'id_inventario',inventarioexistencias:'id_existencia',inventariomovimientos:'id_movimiento',grupotrabajomateriales:'id_asignacion_grupo',tipostrabajocampo:'id_tipo_trabajo',tiposprogramaciondiaria:'id_tipo_trabajo',almacenes:'id_almacen',almacenubicaciones:'id_ubicacion',almacentransferencias:'id_transferencia',almacentransferenciadetalle:'id_detalle',asignacionestecnicos:'id_asignacion',oficinasolicitudes:'id_solicitud',TP_Rutas:'row_id',TP_Paradas:'row_id',TP_RutaParadas:'row_id',TP_Tarifas:'row_id',TP_Horarios:'row_id',TP_Unidades:'row_id',TP_Asientos:'row_id',TP_Personal:'row_id',TP_Turnos:'row_id',TP_Viajes:'row_id',TP_ViajeParadas:'row_id',TP_ViajeAsientos:'row_id',TP_Pasajeros:'row_id',TP_Reservas:'row_id',TP_Boletos:'row_id',TP_Listines:'row_id',TP_Abordajes:'row_id',TP_Equipajes:'row_id',TP_Despachos:'row_id',TP_Incidencias:'row_id',TP_Pagos:'row_id',TP_Caja:'row_id',TP_Gastos:'row_id',TP_Auditoria:'row_id',tiposfallatecnica:'id_tipo_falla',ordenestrabajotecnico:'id_orden_trabajo',ordentrabajotecnicos:'id_asignacion',reportestecnicos:'id_reporte_tecnico',reportestecnicosmateriales:'id_detalle_reporte',contabilidadcuentas:'id_cuenta',contabilidadasientos:'id_asiento',contabilidadmovimientos:'id_movimiento',contabilidadterceros:'id_tercero',contabilidadperiodos:'id_periodo',contabilidadactivos:'id_activo',contabilidadimpuestos:'id_impuesto',contabilidadconciliaciones:'id_conciliacion',cuentasporpagar:'id_cxp',cuentasporcobrar:'id_cxc',ventasadministrativas:'id_venta',comprasadministrativas:'id_compra',presupuestosadministrativos:'id_presupuesto',balancesadministrativos:'id_balance',pacientes:'id_paciente',consultasmedicas:'id_consulta',signosvitales:'id_signos',diagnosticosmedicos:'id_diagnostico',ordenesmedicas:'id_orden_medica',medicamentosrecetados:'id_medicamento_recetado',examenesclinicos:'id_examen',archivosclinicos:'id_archivo_clinico',hospitalizaciones:'id_hospitalizacion',alergiaspacientes:'id_alergia',antecedentesmedicos:'id_antecedente',vacunaspacientes:'id_vacuna',tallerordenes:'id_orden_taller',tallerservicios:'id_servicio_taller',tallerrepuestos:'id_repuesto_taller',tallerinspecciones:'id_inspeccion',tallerhistorial:'id_historial_taller',vgtplantillas:'id_plantilla',vgtpostetemplates:'id_plantilla_poste',vgtoperadoras:'id_operadora',vgtproyectos:'id_proyecto',vgtrutas:'id_ruta',vgttramos:'id_tramo',vgtpostes:'id_poste',vgtposteocupaciones:'id_ocupacion',vgtevidencias:'id_evidencia',nodosElectricidad:'id_nodo_electricidad',eventosElectricidad:'id_evento_electricidad'};
     function portalLeerAuthSession_(){
         try { return JSON.parse(localStorage.getItem('portal_auth_session') || 'null'); }
         catch (_) { return null; }
@@ -7885,9 +8066,9 @@ function filtroNotificacionesClienteSupabase_(cliente){
     }
     let currentUserAuthAccessMode='full';
     const PORTAL_ADMIN_MODULES_=[
-      ['dashboard','Dashboard'],['empresas','Gestión Empresas'],['usuarios','Usuarios y Permisos'],['clientes','Gestión Clientes'],['servicios','Planes y Servicios'],['portal','Control del Portal'],['auditoria','Auditoría'],['mikrotik','Mikrotik'],['facturacion','Facturación'],['creditos','Créditos y Cuotas'],['pagos','Pagos'],['bancos','Datos Bancarios'],['gastos','Control de Gastos'],['sueldos','Sueldos y Salarios'],['agenda','Agenda'],['tareas','Tareas'],['recordatorios','Recordatorios'],['notificaciones','Notificaciones'],['familia','Familia'],['historialmedico','Historial Médico'],['manutencion','Manutención'],['registrosescolares','Registros Escolares'],['recordatoriosmedicinas','Recordatorios de Medicinas'],['vehiculos','Vehículos'],['tecnicos','Técnicos'],['seguimientotecnicos','Jornadas Laborales y Biometría'],['programaciondiaria','Programación Diaria'],['trabajoscampo','Trabajos de Campo'],['instalaciones','Instalaciones'],['soportetecnico','Soporte Técnico'],['desconexionprecintos','Desconexión de Precintos'],['electricidad','Alertas de Conexión'],['torneosdeportivos','Ligas y Torneos'],['inventarios','Inventarios'],['almacenes','Almacenes'],['oficina','Oficina'],['vgt','VGT / Posteaduras'],['centrooperativo','Centro Operativo'],['contabilidad','Contabilidad'],['administracion','Administración Integral'],['salud','Gestión de Salud'],['talleres','Taller de Reparaciones']
+      ['dashboard','Dashboard'],['empresas','Gestión Empresas'],['usuarios','Usuarios y Permisos'],['clientes','Gestión Clientes'],['servicios','Planes y Servicios'],['portal','Control del Portal'],['auditoria','Auditoría'],['mikrotik','Mikrotik'],['facturacion','Facturación'],['creditos','Créditos y Cuotas'],['pagos','Pagos'],['bancos','Datos Bancarios'],['gastos','Control de Gastos'],['sueldos','Sueldos y Salarios'],['agenda','Agenda'],['tareas','Tareas'],['recordatorios','Recordatorios'],['notificaciones','Notificaciones'],['familia','Familia'],['historialmedico','Historial Médico'],['manutencion','Manutención'],['registrosescolares','Registros Escolares'],['recordatoriosmedicinas','Recordatorios de Medicinas'],['vehiculos','Vehículos'],['tecnicos','Técnicos'],['seguimientotecnicos','Jornadas Laborales y Biometría'],['programaciondiaria','Programación Diaria'],['trabajoscampo','Trabajos de Campo'],['instalaciones','Instalaciones'],['soportetecnico','Soporte Técnico'],['desconexionprecintos','Desconexión de Precintos'],['electricidad','Alertas de Conexión'],['torneosdeportivos','Ligas y Torneos'],['inventarios','Inventarios'],['almacenes','Almacenes'],['oficina','Oficina'],['vgt','VGT / Posteaduras'],['centrooperativo','Centro Operativo'],['contabilidad','Contabilidad'],['administracion','Administración Integral'],['salud','Gestión de Salud'],['talleres','Taller de Reparaciones'],['transporte_publico','Transporte Público Extraurbano']
     ];
-    function esSuperMasterPortal_(){return currentUser?.es_supermaster===true && currentUser?.cuenta_protegida===true;}
+    function esSuperMasterPortal_(){return esCuentaSuperMasterUsuario_(currentUser);}
     function esCuentaSuperMasterUsuario_(usuario){
       if(!usuario)return false;
       if(usuario.es_supermaster===true&&usuario.cuenta_protegida===true)return true;
@@ -7896,12 +8077,12 @@ function filtroNotificacionesClienteSupabase_(cliente){
     }
     function portalClaveModuloEmpresa_(modulo){
       const raw=String(modulo||'').trim().toLowerCase();
-      const aliases={facturas:'facturacion',factura:'facturacion',pagosclientes:'pagos',payment:'pagos',alertasconexion:'electricidad',jornadaslaborales:'seguimientotecnicos',biometria:'seguimientotecnicos',ligas:'torneosdeportivos'};
+      const aliases={transporte:'transporte_publico',transportepublico:'transporte_publico',facturas:'facturacion',factura:'facturacion',pagosclientes:'pagos',payment:'pagos',alertasconexion:'electricidad',jornadaslaborales:'seguimientotecnicos',biometria:'seguimientotecnicos',ligas:'torneosdeportivos'};
       return aliases[raw]||raw;
     }
     function portalEmpresaTieneModuloHabilitado_(modulo,u=currentUser){
       if(!u)return false;
-      if(u.es_supermaster===true&&u.cuenta_protegida===true)return true;
+      if(esCuentaSuperMasterUsuario_(u))return true;
       const key=portalClaveModuloEmpresa_(modulo);
       // El Dashboard General sí depende de la licencia de la empresa.
       // El perfil personal permanece disponible para toda cuenta autenticada.
@@ -9683,6 +9864,12 @@ async function cargarBootstrapInicial_(){
                 panel.setAttribute('aria-hidden', 'true');
                 panel.removeAttribute('aria-modal');
             });
+            // Cerrar también los modales propios del módulo Transporte Público (no usan Bootstrap .modal).
+            document.querySelectorAll('.tp-modal').forEach(modal => {
+                modal.classList.remove('show');
+                modal.setAttribute('aria-hidden', 'true');
+                modal.style.removeProperty('display');
+            });
             document.querySelectorAll('.dropdown-menu.show, .pd-cliente-sugerencias.show, [role="listbox"].show').forEach(el => el.classList.remove('show'));
             document.querySelectorAll('.modal-backdrop, .offcanvas-backdrop').forEach(el => el.remove());
             document.body.classList.remove('modal-open', 'offcanvas-backdrop', 'logout-cleanup');
@@ -10502,6 +10689,8 @@ document.addEventListener('DOMContentLoaded',()=>{const init=()=>{if(!$('sec-des
 
 
 
+
+
 </body></html>`;
         const w=window.open('','_blank','width=420,height=760'); if(!w){showToast('Ventana bloqueada','Permita ventanas emergentes para imprimir el comprobante.','warning');return;} w.document.open();w.document.write(html);w.document.close();
     }
@@ -10890,7 +11079,7 @@ function actualizarVistaDashboardPorPermiso(){
             recordatorios: 'Recordatorios Personales',
             manutencion: 'Manutención Familiar',
             registrosescolares: 'Registros Escolares',
-            tecnicos:'Técnicos', seguimientotecnicos:'JORNADAS LABORAL Y BIOMETRIA', inventarios:'Inventarios', almacenes:'Almacenes', oficina:'Oficina', trabajoscampo:'Trabajos de Campo', instalaciones:'Instalaciones', soportetecnico:'Soporte Técnico', vgt:'VGT / Posteaduras', centrooperativo:'Centro Operativo', contabilidad:'Contabilidad', administracion:'Administración Integral', salud:'Gestión de Salud', talleres:'Taller de Reparaciones', electricidad:'Alertas de conexión'
+            tecnicos:'Técnicos', seguimientotecnicos:'JORNADAS LABORAL Y BIOMETRIA', inventarios:'Inventarios', almacenes:'Almacenes', oficina:'Oficina', trabajoscampo:'Trabajos de Campo', instalaciones:'Instalaciones', soportetecnico:'Soporte Técnico', vgt:'VGT / Posteaduras', centrooperativo:'Centro Operativo', contabilidad:'Contabilidad', administracion:'Administración Integral', salud:'Gestión de Salud', talleres:'Taller de Reparaciones', electricidad:'Alertas de conexión', transporte_publico:'Transporte Público Extraurbano'
         };
         document.getElementById('page-title').innerText = titles[tabId] || 'Plataforma ERP';
         // Auditoría de navegación para TODOS los usuarios autenticados, sin importar su rol.
@@ -10917,6 +11106,7 @@ function actualizarVistaDashboardPorPermiso(){
         if (tabId === 'gastos') { renderGastosModulo(); }
         if (tabId === 'sueldos') { renderSueldosModulo(); }
         if (tabId === 'vehiculos') { renderVehiculosModulo(); }
+        if (tabId === 'transporte_publico') { tpInit(); }
         if (tabId === 'programaciondiaria') { pdCargar(); }
         if (tabId === 'torneosdeportivos') { if (typeof window.sportsLoad === 'function') window.sportsLoad(); }
         if (['tecnicos','seguimientotecnicos','inventarios','almacenes','oficina','trabajoscampo','instalaciones','soportetecnico','vgt','centrooperativo','contabilidad','administracion','salud','talleres'].includes(tabId)) { renderOpsModulo(tabId); }
@@ -11694,13 +11884,13 @@ async function eliminarEmpresa(id) {
         sueldos:{label:'Sueldos y Salarios',icon:'fa-money-check-dollar'}, programaciondiaria:{label:'Programación Diaria',icon:'fa-calendar-day'}, vehiculos:{label:'Vehículos',icon:'fa-car-side'}, recordatoriosmedicinas:{label:'Recordatorios de Medicinas',icon:'fa-pills'},
         tecnicos:{label:'Técnicos',icon:'fa-helmet-safety'}, seguimientotecnicos:{label:'JORNADAS LABORAL Y BIOMETRIA',icon:'fa-clipboard-user'}, inventarios:{label:'Inventarios',icon:'fa-boxes-stacked'}, almacenes:{label:'Almacenes',icon:'fa-warehouse'}, oficina:{label:'Oficina',icon:'fa-building-circle-check'},
         trabajoscampo:{label:'Trabajos de Campo',icon:'fa-person-digging'}, instalaciones:{label:'Instalaciones',icon:'fa-network-wired'}, soportetecnico:{label:'Soporte Técnico',icon:'fa-headset'}, vgt:{label:'VGT / Posteaduras',icon:'fa-road'},
-        centrooperativo:{label:'Centro Operativo y Consultas',icon:'fa-magnifying-glass-chart'}, contabilidad:{label:'Contabilidad',icon:'fa-calculator'}, administracion:{label:'Administración Integral',icon:'fa-briefcase'}, salud:{label:'Gestión de Salud',icon:'fa-notes-medical'}, talleres:{label:'Taller de Reparaciones',icon:'fa-screwdriver-wrench'}, electricidad:{label:'Alertas de conexión',icon:'fa-bolt'}, desconexionprecintos:{label:'Desconexión de precintos',icon:'fa-link-slash'}, torneosdeportivos:{label:'Ligas y Torneos Deportivos',icon:'fa-trophy'},
+        centrooperativo:{label:'Centro Operativo y Consultas',icon:'fa-magnifying-glass-chart'}, contabilidad:{label:'Contabilidad',icon:'fa-calculator'}, administracion:{label:'Administración Integral',icon:'fa-briefcase'}, salud:{label:'Gestión de Salud',icon:'fa-notes-medical'}, talleres:{label:'Taller de Reparaciones',icon:'fa-screwdriver-wrench'}, transporte_publico:{label:'Transporte Público Extraurbano',icon:'fa-bus-simple'}, electricidad:{label:'Alertas de conexión',icon:'fa-bolt'}, desconexionprecintos:{label:'Desconexión de precintos',icon:'fa-link-slash'}, torneosdeportivos:{label:'Ligas y Torneos Deportivos',icon:'fa-trophy'},
         perfil:{label:'Mi Perfil y Seguridad',icon:'fa-user-circle'}
     };
     const PERM_ACTIONS_USUARIO=['leer','modificar','eliminar','todos'];
     const ACCION_LABELS_USUARIO={leer:'Lectura',modificar:'Modificar',eliminar:'Eliminar',todos:'Todos'};
     const ALCANCE_LABELS_USUARIO={propios:'Propios',parentesco:'Por parentesco',personalizados:'Personalizados',usuarios:'Usuarios',todos:'Todos'};
-    const MODULOS_CON_ALCANCE_USUARIO=Object.keys(MATRIZ_PERMISOS_USUARIO);
+    const MODULOS_CON_ALCANCE_USUARIO=Object.keys(MATRIZ_PERMISOS_USUARIO).filter(k=>k!=='transporte_publico');
     const MODULOS_CON_PARENTESCO_USUARIO=['familia','historialmedico','recordatoriosmedicinas','manutencion','registrosescolares','horariosescolares','materiashorarios','vehiculos','vehiculoscombustible','vehiculosmantenimiento','sueldos'];
     const MODULOS_CON_ALCANCE_FAMILIAR=[...MODULOS_CON_PARENTESCO_USUARIO];
 
@@ -11788,6 +11978,7 @@ async function eliminarEmpresa(id) {
         {id:'administracion',label:'Administración y Seguridad',icon:'fa-user-gear',modules:['empresas','usuarios','clientes','servicios','portal','auditoria']},
         {id:'finanzas',label:'Finanzas y Gestión Económica',icon:'fa-coins',modules:['facturacion','creditos','pagos','bancos','gastos','sueldos']},
         {id:'gestion',label:'Gestión Personal y Servicios',icon:'fa-users',modules:['agenda','tareas','recordatorios','notificaciones','familia','historialmedico','manutencion','registrosescolares','recordatoriosmedicinas','vehiculos']},
+        {id:'transporte',label:'Transporte y Movilidad',icon:'fa-bus-simple',modules:['transporte_publico']},
         {id:'operaciones',label:'Operaciones Técnicas',icon:'fa-screwdriver-wrench',modules:['tecnicos','seguimientotecnicos','programaciondiaria','trabajoscampo','instalaciones','soportetecnico','desconexionprecintos','electricidad','torneosdeportivos','centrooperativo']},
         {id:'inventario',label:'Inventario y Logística',icon:'fa-boxes-stacked',modules:['inventarios','almacenes','oficina']},
         {id:'proyectos',label:'Proyectos y Despliegue de Red',icon:'fa-road',modules:['vgt']},
@@ -11908,7 +12099,7 @@ async function eliminarEmpresa(id) {
       if(!u)return false;
       const key=portalClaveModuloEmpresa_(normalizarModuloPermisoUsuario(modulo));
       if(!portalEmpresaTieneModuloHabilitado_(key,u))return false;
-      if(u.es_supermaster===true&&u.cuenta_protegida===true)return true;
+      if(esCuentaSuperMasterUsuario_(u))return true;
       const p=permisosEfectivosUsuario(u),cfg=p[key];
       // El Dashboard es una excepción deliberada: también el rol Master debe tener
       // activada la lectura para ver el panel general; si no, verá el dashboard alterno.
@@ -17012,7 +17203,7 @@ async function compartirHorarioEscolar(grupo){const rows=obtenerHorarioEscolarGr
 
 // ===================== CONTROL DE VEHÍCULOS =====================
 function vehEsc(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
-function vehNum(v){const n=Number(v);return Number.isFinite(n)?n:0;}
+function vehNum(v){return typeof vehNumeroCombustible==='function'?vehNumeroCombustible(v):(Number.isFinite(Number(v))?Number(v):0);}
 function vehFechaHoy(){return fechaInputVenezuela(new Date());}
 function vehiculoNombre(r){return [r.marca,r.modelo].filter(Boolean).join(' ')||'Vehículo';}
 function vehiculosPorId(id){return (Array.isArray(db?.vehiculos)?db.vehiculos:[]).find(v=>String(v.id_vehiculo)===String(id));}
@@ -17020,6 +17211,7 @@ function vehiculosHistComb(id){return (Array.isArray(db?.vehiculoscombustible)?d
 function vehiculosHistMant(id){return (Array.isArray(db?.vehiculosmantenimiento)?db.vehiculosmantenimiento:[]).filter(x=>String(x.id_vehiculo)===String(id)).sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||'')));}
 function limpiarFiltroVehiculos(){const e=document.getElementById('vehiculos-filtro');if(e)e.value='';renderVehiculosModulo();}
 function vehFormatMoney(v,c){return formatoMontoPortal(v,c||'USD');}
+function vehResumenMonedas(registros,campo){const totales={};(registros||[]).forEach(r=>{const moneda=String(r?.moneda||'USD').toUpperCase();totales[moneda]=(totales[moneda]||0)+vehNum(r?.[campo]);});return Object.entries(totales).filter(([,monto])=>monto!==0).map(([moneda,monto])=>formatoMontoPortal(monto,moneda)).join(' · ')||'0,00 USD';}
 function vehKms(v){return v===''||v===null||v===undefined?'—':Number(v).toLocaleString('es-VE',{maximumFractionDigits:1});}
 function vehiculosVisiblesPorAlcanceFamilia_(rows){
   return filtrarFilasPorAlcanceFamiliar_('vehiculos',rows,db,currentUser);
@@ -17102,8 +17294,8 @@ function cerrarResumenSueldo(){const m=document.getElementById('sueldoViewModal'
 function mostrarDetalleVehiculoModal_(titulo,filas){let m=document.getElementById('vehiculoDetalleModal');if(!m){m=document.createElement('div');m.id='vehiculoDetalleModal';m.className='vehiculos-overlay';m.setAttribute('aria-hidden','true');document.body.appendChild(m);}const icon=String(titulo||'').toLowerCase().includes('combustible')?'fa-gas-pump':(String(titulo||'').toLowerCase().includes('mantenimiento')?'fa-screwdriver-wrench':'fa-car');m.innerHTML='<div class="vehiculos-card vehiculos-detail-card wide"><div class="vehiculos-head vehiculos-detail-head"><div class="veh-detail-title-wrap"><div class="veh-detail-icon"><i class="fa-solid '+icon+'"></i></div><div><div class="title">'+vehEsc(titulo)+'</div><small>Detalle de información registrada</small></div></div><button class="veh-detail-close" type="button" onclick="cerrarDetalleVehiculoModal_()"><i class="fa-solid fa-xmark"></i></button></div><div class="vehiculos-body vehiculos-detail-body"><div class="veh-detail-grid">'+filas.map(x=>'<div class="veh-detail-item"><div class="veh-detail-label">'+vehEsc(x[0])+'</div><div class="veh-detail-value">'+vehEsc(x[1]??'—')+'</div></div>').join('')+'</div></div><div class="vehiculos-foot vehiculos-detail-foot"><button class="btn btn-primary px-4" type="button" onclick="cerrarDetalleVehiculoModal_()"><i class="fa-solid fa-check me-1"></i>Cerrar</button></div></div>';m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
 function cerrarDetalleVehiculoModal_(){const m=document.getElementById('vehiculoDetalleModal');m?.classList.remove('show');m?.setAttribute('aria-hidden','true');document.body.classList.remove('overflow-hidden');}
 function verVehiculo(id){if(!protegerAccionUsuario('vehiculos','leer'))return;const v=vehiculosPorId(id);if(!v)return;mostrarDetalleVehiculoModal_('Detalle del vehículo',Object.entries(v).filter(([k])=>k!=='row_id').map(([k,val])=>[k.replaceAll('_',' '),val]));}
-function verCombustibleVehiculo(vehiculoId,id){if(!protegerAccionUsuario('vehiculos','leer'))return;const r=(db.vehiculoscombustible||[]).find(x=>String(x.id_combustible)===String(id));if(!r)return;mostrarDetalleVehiculoModal_('Detalle del combustible',Object.entries(r).filter(([k])=>k!=='row_id').map(([k,val])=>[k.replaceAll('_',' '),val]));}
-function verMantenimientoVehiculo(vehiculoId,id){if(!protegerAccionUsuario('vehiculos','leer'))return;const r=(db.vehiculosmantenimiento||[]).find(x=>String(x.id_mantenimiento)===String(id));if(!r)return;mostrarDetalleVehiculoModal_('Detalle del mantenimiento',Object.entries(r).filter(([k])=>k!=='row_id').map(([k,val])=>[k.replaceAll('_',' '),val]));}
+function verCombustibleVehiculo(vehiculoId,id){if(!protegerAccionUsuario('vehiculos','leer'))return;const r=(db.vehiculoscombustible||[]).find(x=>String(x.id_combustible)===String(id));if(!r)return;const moneda=String(r.moneda||'USD').toUpperCase();const camposImporte=new Set(['precio_litro','monto']);const camposCantidad=new Set(['cantidad_litros']);const filas=Object.entries(r).filter(([k])=>k!=='row_id').map(([k,val])=>[k.replaceAll('_',' '),camposImporte.has(k)&&String(val??'').trim()!==''?formatoMontoPortal(vehNumeroCombustible(val),moneda):camposCantidad.has(k)&&String(val??'').trim()!==''?vehNumeroMostrar(val,3):k==='moneda'?moneda:val]);mostrarDetalleVehiculoModal_('Detalle del combustible',filas);}
+function verMantenimientoVehiculo(vehiculoId,id){if(!protegerAccionUsuario('vehiculos','leer'))return;const r=(db.vehiculosmantenimiento||[]).find(x=>String(x.id_mantenimiento)===String(id));if(!r)return;const moneda=String(r.moneda||'USD').toUpperCase();mostrarDetalleVehiculoModal_('Detalle del mantenimiento',Object.entries(r).filter(([k])=>k!=='row_id').map(([k,val])=>[k.replaceAll('_',' '),k==='costo'&&String(val??'').trim()!==''?formatoMontoPortal(val,moneda):k==='moneda'?moneda:val]));}
 function renderVehiculosModulo(){
   if(!protegerAccionUsuario('vehiculos','leer'))return;
   const list=document.getElementById('vehiculos-listado');const empty=document.getElementById('vehiculos-vacio');if(!list)return;
@@ -17114,7 +17306,7 @@ function renderVehiculosModulo(){
   const puedeMod=permisosUsuarioTieneModulo('vehiculos','modificar'),puedeAdd=permisosUsuarioTieneModulo('vehiculos','agregar'),puedeDel=permisosUsuarioTieneModulo('vehiculos','eliminar');
   list.innerHTML=filtered.map(v=>{
     const fuel=vehiculosHistComb(v.id_vehiculo),mant=vehiculosHistMant(v.id_vehiculo);const fam=(db.familia||[]).find(f=>String(f.id_familia)===String(v.id_familia));
-    const totalComb= fuel.reduce((a,x)=>a+vehNum(x.monto),0); const totalMant=mant.reduce((a,x)=>a+vehNum(x.costo),0);
+    const totalComb=vehResumenMonedas(fuel,'monto'); const totalMant=vehResumenMonedas(mant,'costo');
     return `<div class="veh-card">
       <div class="veh-card-head"><div class="d-flex justify-content-between align-items-start gap-2 flex-wrap"><div><div class="veh-title"><i class="fa-solid ${String(v.clase||'').toLowerCase().includes('moto')?'fa-motorcycle':'fa-car-side'} text-primary me-2"></i>${vehEsc(vehiculoNombre(v))}</div><div class="veh-sub">Placa ${vehEsc(v.placa||'—')} · ${vehEsc(v.anio||'—')} · ${vehEsc(v.color||'—')}</div></div><div class="d-flex gap-1 flex-wrap"><span class="veh-badge blue">${vehEsc(v.clase||'Vehículo')}</span><span class="veh-badge green">${vehEsc(v.estado||'Activo')}</span></div></div></div>
       <div class="veh-grid">
@@ -17136,10 +17328,10 @@ function renderVehiculosModulo(){
         ${puedeDel?`<button class="btn btn-sm btn-outline-danger" onclick="eliminarVehiculo('${vehEsc(v.id_vehiculo)}')"><i class="fa-solid fa-trash me-1"></i>Eliminar</button>`:''}
       </div>
       <div id="veh-history-${vehEsc(v.id_vehiculo)}" class="veh-history d-none">
-        <div class="veh-history-title"><div><strong class="small">Historial de ${vehEsc(vehiculoNombre(v))}</strong><div class="veh-sub">Combustible total registrado: ${vehFormatMoney(totalComb)} · Mantenimiento: ${vehFormatMoney(totalMant)}</div></div><button class="btn btn-sm btn-light border" onclick="toggleHistorialVehiculo('${vehEsc(v.id_vehiculo)}')"><i class="fa-solid fa-chevron-up"></i></button></div>
+        <div class="veh-history-title"><div><strong class="small">Historial de ${vehEsc(vehiculoNombre(v))}</strong><div class="veh-sub">Combustible total registrado: ${vehEsc(totalComb)} · Mantenimiento: ${vehEsc(totalMant)}</div></div><button class="btn btn-sm btn-light border" onclick="toggleHistorialVehiculo('${vehEsc(v.id_vehiculo)}')"><i class="fa-solid fa-chevron-up"></i></button></div>
         <div class="veh-history-grid">
-          <div class="veh-history-panel"><div class="head"><i class="fa-solid fa-gas-pump me-1"></i> Surtidos de combustible</div><div class="body">${fuel.length?`<div class="table-responsive"><table class="veh-table"><thead><tr><th>Fecha</th><th>Tipo</th><th>L</th><th>Km</th><th>Acc.</th></tr></thead><tbody>${fuel.map(x=>`<tr><td>${vehEsc(x.fecha||'—')}</td><td>${vehEsc(x.tipo_combustible||'—')}</td><td>${vehEsc(x.cantidad_litros||'—')}</td><td>${vehEsc(vehKms(x.kilometraje))}</td><td><button class="btn btn-sm btn-link text-info p-0" onclick="verCombustibleVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_combustible)}')" title="Ver"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-link text-primary p-0 ms-1" onclick="abrirFormularioCombustibleVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_combustible)}')" title="Editar"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-link text-danger p-0 ms-1" onclick="eliminarCombustibleVehiculo('${vehEsc(x.id_combustible)}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('')}</tbody></table></div>`:'<div class="veh-empty">No hay surtidos registrados.</div>'}</div></div>
-          <div class="veh-history-panel"><div class="head"><i class="fa-solid fa-user-gear me-1"></i> Mantenimiento y servicios</div><div class="body">${mant.length?`<div class="table-responsive"><table class="veh-table"><thead><tr><th>Fecha</th><th>Tipo</th><th>Km</th><th>Costo</th><th>Próximo</th><th>Acc.</th></tr></thead><tbody>${mant.map(x=>`<tr><td>${vehEsc(x.fecha||'—')}</td><td>${vehEsc(x.tipo_mantenimiento||'—')}</td><td>${vehEsc(vehKms(x.kilometraje))}</td><td>${vehEsc(vehFormatMoney(x.costo,x.moneda))}</td><td>${vehEsc(x.proxima_fecha||x.proximo_km||'—')}</td><td><button class="btn btn-sm btn-link text-info p-0" onclick="verMantenimientoVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_mantenimiento)}')" title="Ver"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-link text-primary p-0 ms-1" onclick="abrirFormularioMantenimientoVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_mantenimiento)}')" title="Editar"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-link text-danger p-0 ms-1" onclick="eliminarMantenimientoVehiculo('${vehEsc(x.id_mantenimiento)}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('')}</tbody></table></div>`:'<div class="veh-empty">No hay mantenimientos registrados.</div>'}</div></div>
+          <div class="veh-history-panel"><div class="head"><i class="fa-solid fa-gas-pump me-1"></i> Surtidos de combustible</div><div class="body">${fuel.length?`<div class="table-responsive"><table class="veh-table"><thead><tr><th>Fecha</th><th>Tipo</th><th>L</th><th>Monto</th><th>Km</th><th>Acc.</th></tr></thead><tbody>${fuel.map(x=>`<tr><td>${vehEsc(x.fecha||'—')}</td><td>${vehEsc(x.tipo_combustible||'—')}</td><td>${vehEsc(x.cantidad_litros||'—')}</td><td class="text-nowrap">${vehEsc(x.monto!==undefined&&x.monto!==null&&String(x.monto).trim()!==''?formatoMontoPortal(vehNumeroCombustible(x.monto),x.moneda||'USD'):'—')}</td><td>${vehEsc(vehKms(x.kilometraje))}</td><td><button class="btn btn-sm btn-link text-info p-0" onclick="verCombustibleVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_combustible)}')" title="Ver"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-link text-primary p-0 ms-1" onclick="abrirFormularioCombustibleVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_combustible)}')" title="Editar"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-link text-danger p-0 ms-1" onclick="eliminarCombustibleVehiculo('${vehEsc(x.id_combustible)}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('')}</tbody></table></div>`:'<div class="veh-empty">No hay surtidos registrados.</div>'}</div></div>
+          <div class="veh-history-panel"><div class="head"><i class="fa-solid fa-user-gear me-1"></i> Mantenimiento y servicios</div><div class="body">${mant.length?`<div class="table-responsive"><table class="veh-table"><thead><tr><th>Fecha</th><th>Tipo</th><th>Km</th><th>Costo</th><th>Próximo</th><th>Acc.</th></tr></thead><tbody>${mant.map(x=>`<tr><td>${vehEsc(x.fecha||'—')}</td><td>${vehEsc(x.tipo_mantenimiento||'—')}</td><td>${vehEsc(vehKms(x.kilometraje))}</td><td>${vehEsc(formatoMontoPortal(x.costo||0,x.moneda||'USD'))}</td><td>${vehEsc(x.proxima_fecha||x.proximo_km||'—')}</td><td><button class="btn btn-sm btn-link text-info p-0" onclick="verMantenimientoVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_mantenimiento)}')" title="Ver"><i class="fa-solid fa-eye"></i></button><button class="btn btn-sm btn-link text-primary p-0 ms-1" onclick="abrirFormularioMantenimientoVehiculo('${vehEsc(v.id_vehiculo)}','${vehEsc(x.id_mantenimiento)}')" title="Editar"><i class="fa-solid fa-pen"></i></button><button class="btn btn-sm btn-link text-danger p-0 ms-1" onclick="eliminarMantenimientoVehiculo('${vehEsc(x.id_mantenimiento)}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('')}</tbody></table></div>`:'<div class="veh-empty">No hay mantenimientos registrados.</div>'}</div></div>
         </div>
       </div>
     </div>`;
@@ -17152,100 +17344,230 @@ function abrirFormularioVehiculo(id){if(!protegerAccionUsuario('vehiculos',id?'m
 function cerrarFormularioVehiculo(){const m=document.getElementById('vehiculoFormModal');m?.classList.remove('show');m?.setAttribute('aria-hidden','true');document.body.classList.remove('overflow-hidden');}
 async function guardarVehiculo(ev){ev.preventDefault();if(!protegerAccionUsuario('vehiculos',document.getElementById('vehiculo-id')?.value?'modificar':'agregar'))return;const id=String(document.getElementById('vehiculo-id')?.value||'');const v={id_vehiculo:id,clase:document.getElementById('vehiculo-clase')?.value||'',tipo:document.getElementById('vehiculo-tipo')?.value||'',placa:document.getElementById('vehiculo-placa')?.value.trim().toUpperCase()||'',marca:document.getElementById('vehiculo-marca')?.value.trim()||'',modelo:document.getElementById('vehiculo-modelo')?.value.trim()||'',anio:document.getElementById('vehiculo-anio')?.value||'',color:document.getElementById('vehiculo-color')?.value.trim()||'',uso:document.getElementById('vehiculo-uso')?.value.trim()||'',servicio:document.getElementById('vehiculo-servicio')?.value.trim()||'',vin_niv:document.getElementById('vehiculo-vin')?.value.trim()||'',serial_carroceria:document.getElementById('vehiculo-carroceria')?.value.trim()||'',serial_motor:document.getElementById('vehiculo-motor')?.value.trim()||'',numero_registro:document.getElementById('vehiculo-registro')?.value.trim()||'',fecha_registro_documento:document.getElementById('vehiculo-fecha-registro')?.value||'',capacidad_nominal:document.getElementById('vehiculo-capacidad-nominal')?.value.trim()||'',capacidad_puestos:document.getElementById('vehiculo-puestos')?.value||'',peso_tara:document.getElementById('vehiculo-peso')?.value.trim()||'',capacidad_carga:document.getElementById('vehiculo-carga')?.value.trim()||'',propietario_nombre:document.getElementById('vehiculo-propietario')?.value.trim()||'',propietario_documento:document.getElementById('vehiculo-documento-propietario')?.value.trim()||'',propietario_domicilio:document.getElementById('vehiculo-domicilio')?.value.trim()||'',id_familia:document.getElementById('vehiculo-familia')?.value||'',documento_propiedad:document.getElementById('vehiculo-documento-propiedad')?.value.trim()||'',fecha_adquisicion:document.getElementById('vehiculo-fecha-adquisicion')?.value||'',origen:document.getElementById('vehiculo-origen')?.value.trim()||'',gravamen:document.getElementById('vehiculo-gravamen')?.value||'No',aseguradora:document.getElementById('vehiculo-aseguradora')?.value.trim()||'',numero_poliza:document.getElementById('vehiculo-poliza')?.value.trim()||'',vencimiento_poliza:document.getElementById('vehiculo-venc-poliza')?.value||'',revision_tecnica:document.getElementById('vehiculo-revision')?.value.trim()||'',vencimiento_revision:document.getElementById('vehiculo-venc-revision')?.value||'',estado:document.getElementById('vehiculo-estado')?.value||'Activo',observaciones:document.getElementById('vehiculo-observaciones')?.value.trim()||''};if(!v.placa||!v.marca||!v.modelo){showSystemNotification('Datos incompletos','Placa, marca y modelo son obligatorios.','warning');return;}try{const action=id?'updateVehiculo':'addVehiculo';const r=await ejecutarOperacionSupabase(action,v,true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar el vehículo.');cerrarFormularioVehiculo();renderVehiculosModulo();showSystemNotification(id?'Vehículo actualizado':'Vehículo registrado',id?'El vehículo fue actualizado correctamente.':'El vehículo fue registrado correctamente.','success');}catch(err){showSystemNotification('No se pudo guardar',err.message||'Error de servidor.','danger');}}
 function abrirFormularioCombustibleVehiculo(vehiculoId,id){
-  if(!protegerAccionUsuario('vehiculos',id?'modificar':'agregar'))return;
-  const v=vehiculosPorId(vehiculoId);
-  if(!v)return;
-  const r=id?(db.vehiculoscombustible||[]).find(x=>String(x.id_combustible)===String(id)):null;
-  ['combustible-id','combustible-vehiculo-id'].forEach(x=>vehSet(x,''));
-  vehSet('combustible-id',r?.id_combustible||'');
-  vehSet('combustible-vehiculo-id',vehiculoId);
-  vehSet('combustible-vehiculo-label',`${vehiculoNombre(v)} · ${v.placa||'—'}`);
-  vehSet('combustible-fecha',r?.fecha||vehFechaHoy());
-  vehSet('combustible-estacion',r?.estacion||'');
-  vehSet('combustible-tipo',r?.tipo_combustible||'Gasolina 95');
-  vehSet('combustible-cantidad',vehNumeroMostrar(r?.cantidad_litros||''));
-  vehSet('combustible-precio',vehNumeroMostrar(r?.precio_litro||''));
-  vehSet('combustible-monto',vehNumeroMostrar(r?.monto||''));
-  vehSet('combustible-moneda',r?.moneda||'USD');
-  vehSet('combustible-tasa',r?.tasa_cambio||'');
-  vehSet('combustible-km',r?.kilometraje||'');
-  vehSet('combustible-metodo',r?.metodo_pago||'');
-  vehSet('combustible-observaciones',r?.observaciones||'');
-  document.getElementById('combustibleFormTitle').innerHTML=`<i class="fa-solid fa-gas-pump text-primary me-2"></i>${r?'Editar surtido':'Registrar combustible'}`;
-  document.getElementById('combustibleFormSub').textContent=`${vehiculoNombre(v)} · Placa ${v.placa||'—'}`;
+  const editando=!!id;
+  if(!protegerAccionUsuario('vehiculos',editando?'modificar':'agregar'))return;
+  const vehiculo=vehiculosPorId(vehiculoId);
+  if(!vehiculo){showSystemNotification('Vehículo no encontrado','No se pudo identificar el vehículo asociado.','warning');return;}
+  const registro=editando?(db.vehiculoscombustible||[]).find(x=>String(x.id_combustible)===String(id)):null;
+  if(editando&&!registro){showSystemNotification('Registro no encontrado','Actualiza el listado e inténtalo nuevamente.','warning');return;}
+
+  const valores={
+    'combustible-id':registro?.id_combustible||'',
+    'combustible-vehiculo-id':vehiculoId,
+    'combustible-vehiculo-label':`${vehiculoNombre(vehiculo)} · ${vehiculo.placa||'—'}`,
+    'combustible-fecha':registro?.fecha||vehFechaHoy(),
+    'combustible-estacion':registro?.estacion||'',
+    'combustible-tipo':registro?.tipo_combustible||'Gasolina 95',
+    'combustible-cantidad':registro?.cantidad_litros??'',
+    'combustible-precio':registro?.precio_litro??'',
+    'combustible-monto':registro?.monto??'',
+    'combustible-moneda':registro?.moneda||'USD',
+    'combustible-tasa':registro?.tasa_cambio??'',
+    'combustible-km':registro?.kilometraje??'',
+    'combustible-metodo':registro?.metodo_pago||'',
+    'combustible-observaciones':registro?.observaciones||''
+  };
+  Object.entries(valores).forEach(([campo,valor])=>vehSet(campo,valor));
+
   const cantidad=document.getElementById('combustible-cantidad');
   const precio=document.getElementById('combustible-precio');
   const monto=document.getElementById('combustible-monto');
-  if(cantidad)cantidad.oninput=()=>calcularCombustibleMontoUI(true);
-  if(cantidad)cantidad.onchange=()=>calcularCombustibleMontoUI(true);
-  if(precio)precio.oninput=()=>calcularCombustibleMontoUI(true);
-  if(precio)precio.onchange=()=>calcularCombustibleMontoUI(true);
-  if(monto){
-    monto.dataset.manual=(r?.monto!==undefined&&String(r.monto??'').trim()!=='')?'1':'0';
-    monto.oninput=()=>{monto.dataset.manual='1';};
-    monto.onchange=()=>{monto.dataset.manual='1';};
-  }
-  if(!r?.monto)calcularCombustibleMontoUI(false);
-  const m=document.getElementById('vehiculoCombustibleModal');
-  m.classList.add('show');
-  m.setAttribute('aria-hidden','false');
-  document.body.classList.add('overflow-hidden');
+  if(!cantidad||!precio||!monto)return;
+
+  // La última magnitud editada determina cuál de los otros valores se calcula.
+  const tieneMonto=String(registro?.monto??'').trim()!=='';
+  const tienePrecio=String(registro?.precio_litro??'').trim()!=='';
+  monto.dataset.lastEdited=tieneMonto&&!tienePrecio?'monto':'precio';
+  monto.dataset.manual=tieneMonto?'1':'0';
+
+  cantidad.oninput=()=>calcularCombustibleMontoUI('cantidad');
+  cantidad.onchange=()=>{
+    calcularCombustibleMontoUI('cantidad');
+    cantidad.value=vehNumeroMostrar(cantidad.value,3);
+  };
+  precio.oninput=()=>calcularCombustibleMontoUI('precio');
+  precio.onchange=()=>{
+    calcularCombustibleMontoUI('precio');
+    precio.value=vehFormatoMonto(vehNumeroCombustible(precio.value));
+  };
+  monto.oninput=()=>calcularCombustibleMontoUI('monto');
+  monto.onchange=()=>{
+    calcularCombustibleMontoUI('monto');
+    monto.value=monto.value.trim()===''?'':vehFormatoMonto(vehNumeroCombustible(monto.value));
+  };
+
+  // Al abrir un registro existente se conservan exactamente sus valores.
+  // En uno nuevo se calcula solo cuando ya hay datos suficientes.
+  if(!editando){monto.dataset.lastEdited='precio';monto.dataset.manual='0';}
+  else if(!tieneMonto&&tienePrecio){monto.dataset.lastEdited='precio';monto.dataset.manual='0';}
+  const titulo=document.getElementById('combustibleFormTitle');
+  const subtitulo=document.getElementById('combustibleFormSub');
+  if(titulo)titulo.innerHTML=`<i class="fa-solid fa-gas-pump text-primary me-2"></i>${editando?'Editar surtido':'Registrar combustible'}`;
+  if(subtitulo)subtitulo.textContent=`${vehiculoNombre(vehiculo)} · Placa ${vehiculo.placa||'—'}`;
+  const modal=document.getElementById('vehiculoCombustibleModal');
+  if(modal){modal.classList.add('show');modal.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
 }
 function cerrarFormularioCombustible(){
-  const m=document.getElementById('vehiculoCombustibleModal');
-  m?.classList.remove('show');
-  m?.setAttribute('aria-hidden','true');
+  const modal=document.getElementById('vehiculoCombustibleModal');
+  modal?.classList.remove('show');
+  modal?.setAttribute('aria-hidden','true');
   document.body.classList.remove('overflow-hidden');
 }
+
+/*
+ * Convierte importes escritos con separadores venezolanos o internacionales.
+ * Ejemplos: 2000, 2.000, 2.000,00, 2,000.00 y 2,5.
+ * Cuando solo hay un separador seguido de tres dígitos se interpreta como
+ * separador de miles; con uno o dos dígitos finales se interpreta como decimal.
+ */
 function vehNumeroCombustible(valor){
-  let texto=String(valor??'').trim().replace(/\s/g,'');
+  let texto=String(valor??'').trim();
   if(!texto)return 0;
-  texto=texto.replace(/[^0-9,.-]/g,'');
-  const ultimaComa=texto.lastIndexOf(','), ultimoPunto=texto.lastIndexOf('.');
+  texto=texto.replace(/\s+/g,'').replace(/[^0-9,.-]/g,'');
+  if(!texto||!/[0-9]/.test(texto))return 0;
+  const negativo=texto.startsWith('-');
+  texto=texto.replace(/-/g,'');
+  const ultimaComa=texto.lastIndexOf(',');
+  const ultimoPunto=texto.lastIndexOf('.');
+  let decimal='';
   if(ultimaComa>=0&&ultimoPunto>=0){
-    if(ultimaComa>ultimoPunto)texto=texto.replace(/\./g,'').replace(',','.');
-    else texto=texto.replace(/,/g,'');
-  }else if(ultimaComa>=0){
-    texto=texto.replace(/,/g,'.');
-  }else if((texto.match(/\./g)||[]).length>1){
-    texto=texto.replace(/\./g,'');
-  }else if(ultimoPunto>=0){
-    const parteDecimal=texto.slice(ultimoPunto+1);
-    if(parteDecimal.length===3)texto=texto.replace(/\./g,'');
+    const separadorDecimal=ultimaComa>ultimoPunto?',':'.';
+    const posicion=separadorDecimal===','?ultimaComa:ultimoPunto;
+    const decimales=texto.slice(posicion+1).replace(/[^0-9]/g,'');
+    const enteros=texto.slice(0,posicion).replace(/[^0-9]/g,'');
+    decimal=enteros+(decimales?'.'+decimales:'');
+  }else if(ultimaComa>=0||ultimoPunto>=0){
+    const sep=ultimaComa>=0?',':'.';
+    const partes=texto.split(sep);
+    const cola=partes[partes.length-1];
+    const esDecimal=partes.length===2&&cola.length>0&&cola.length<=2;
+    if(esDecimal){
+      decimal=partes[0].replace(/[^0-9]/g,'')+'.'+cola.replace(/[^0-9]/g,'');
+    }else{
+      decimal=partes.join('').replace(/[^0-9]/g,'');
+    }
+  }else{
+    decimal=texto.replace(/[^0-9]/g,'');
   }
-  const n=Number(texto);
-  return Number.isFinite(n)&&n>=0?n:0;
+  let numero=Number(decimal);
+  if(negativo)numero=-numero;
+  return Number.isFinite(numero)&&numero>=0?numero:0;
 }
-function vehNumeroMostrar(valor){
-  const n=vehNumeroCombustible(valor);
-  if(!String(valor??'').trim())return '';
-  return Number.isFinite(n)?n.toString().replace('.',','):'';
+function vehNumeroMostrar(valor,decimales=2){
+  if(String(valor??'').trim()==='')return '';
+  const numero=typeof valor==='number'?valor:vehNumeroCombustible(valor);
+  return Number.isFinite(numero)?new Intl.NumberFormat('es-VE',{minimumFractionDigits:0,maximumFractionDigits:decimales}).format(numero):'';
 }
-function calcularCombustibleMontoUI(recalcular=true){
+function vehFormatoMonto(valor){
+  const numero=typeof valor==='number'?valor:vehNumeroCombustible(valor);
+  return Number.isFinite(numero)?new Intl.NumberFormat('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(numero):'';
+}
+function calcularCombustibleMontoUI(origen){
   const cantidadEl=document.getElementById('combustible-cantidad');
   const precioEl=document.getElementById('combustible-precio');
   const montoEl=document.getElementById('combustible-monto');
   if(!cantidadEl||!precioEl||!montoEl)return;
-  if(!recalcular&&String(montoEl.value||'').trim()!=='')return;
-  if(recalcular)montoEl.dataset.manual='0';
   const cantidad=vehNumeroCombustible(cantidadEl.value);
-  const precio=vehNumeroCombustible(precioEl.value);
-  if(cantidad>0&&precio>0)montoEl.value=(cantidad*precio).toFixed(2).replace('.',',');
-  else if(!montoEl.dataset.manual||montoEl.dataset.manual==='0')montoEl.value='';
+  const precioTexto=String(precioEl.value??'').trim();
+  const montoTexto=String(montoEl.value??'').trim();
+  let precio=vehNumeroCombustible(precioTexto);
+  let monto=vehNumeroCombustible(montoTexto);
+
+  if(origen==='monto'){
+    montoEl.dataset.lastEdited='monto';
+    montoEl.dataset.manual='1';
+    if(cantidad>0&&montoTexto!=='')precioEl.value=vehFormatoMonto(monto/cantidad);
+    return;
+  }
+  if(origen==='precio'){
+    montoEl.dataset.lastEdited='precio';
+    montoEl.dataset.manual='0';
+    if(cantidad>0&&precioTexto!=='')montoEl.value=vehFormatoMonto(cantidad*precio);
+    return;
+  }
+  if(origen==='cantidad'){
+    if(cantidad<=0){
+      montoEl.value='';
+      return;
+    }
+    if(montoEl.dataset.lastEdited==='monto'&&montoTexto!==''){
+      monto=montoEl.dataset.manual==='1'?monto:vehNumeroCombustible(montoTexto);
+      precioEl.value=vehFormatoMonto(monto/cantidad);
+    }else if(precioTexto!==''){
+      monto=cantidad*precio;
+      montoEl.value=vehFormatoMonto(monto);
+      montoEl.dataset.manual='0';
+    }else if(montoTexto!==''){
+      montoEl.dataset.lastEdited='monto';
+      montoEl.dataset.manual='1';
+      precioEl.value=vehFormatoMonto(monto/cantidad);
+    }
+  }
 }
 async function guardarCombustibleVehiculo(ev){
   ev.preventDefault();
-  const id=String(document.getElementById('combustible-id')?.value||''),vehiculoId=String(document.getElementById('combustible-vehiculo-id')?.value||'');
-  if(!vehiculoId)return;
-  const original=id?(db.vehiculoscombustible||[]).find(x=>String(x.id_combustible)===id)||{}:{};
-  const val=(idEl,key,fallback='')=>{const v=document.getElementById(idEl)?.value;return String(v??'').trim()!==''?v:(original[key]??fallback);};
-  const q=vehNumeroCombustible(val('combustible-cantidad','cantidad_litros','0'));
-  const pUnit=vehNumeroCombustible(val('combustible-precio','precio_litro','0'));
-  const montoIngresado=String(document.getElementById('combustible-monto')?.value||'').trim();
-  const montoManual=vehNumeroCombustible(montoIngresado);
-  const montoFinal=montoIngresado!==''?montoManual:(q*pUnit);
-  const p={id_combustible:id,id_vehiculo:vehiculoId,fecha:val('combustible-fecha','fecha',vehFechaHoy()),estacion:val('combustible-estacion','estacion',''),tipo_combustible:val('combustible-tipo','tipo_combustible','Gasolina 95'),cantidad_litros:String(q),precio_litro:String(pUnit),monto:montoFinal.toFixed(2),moneda:val('combustible-moneda','moneda','USD'),tasa_cambio:val('combustible-tasa','tasa_cambio',''),kilometraje:val('combustible-km','kilometraje',''),metodo_pago:val('combustible-metodo','metodo_pago',''),observaciones:val('combustible-observaciones','observaciones','')};
-  try{const action=id?'updateVehiculoCombustible':'addVehiculoCombustible';const r=await ejecutarOperacionSupabase(action,p,true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo guardar el surtido.');cerrarFormularioCombustible();renderVehiculosModulo();showSystemNotification(id?'Surtido actualizado':'Surtido registrado',id?'El registro de combustible fue actualizado.':'El surtido de combustible fue registrado.','success');}catch(err){showSystemNotification('No se pudo guardar',err.message||'Error de servidor.','danger');}
+  const campo=id=>document.getElementById(id);
+  const valor=id=>String(campo(id)?.value??'').trim();
+  const id=valor('combustible-id');
+  const vehiculoId=valor('combustible-vehiculo-id');
+  if(!protegerAccionUsuario('vehiculos',id?'modificar':'agregar'))return;
+  if(!vehiculoId){showSystemNotification('No se pudo guardar','No se identificó el vehículo asociado al registro.','danger');return;}
+
+  const cantidadTexto=valor('combustible-cantidad');
+  const precioTexto=valor('combustible-precio');
+  const montoTexto=valor('combustible-monto');
+  const cantidad=vehNumeroCombustible(cantidadTexto);
+  let precio=vehNumeroCombustible(precioTexto);
+  let monto=vehNumeroCombustible(montoTexto);
+  const ultimoEditado=campo('combustible-monto')?.dataset.lastEdited||'';
+
+  if(!cantidadTexto||!(cantidad>0)){
+    showSystemNotification('Cantidad no válida','Indica una cantidad de litros o unidades mayor que cero.','warning');return;
+  }
+  if(ultimoEditado==='monto'&&montoTexto){
+    if(!(monto>0)){showSystemNotification('Monto no válido','El monto total debe ser mayor que cero.','warning');return;}
+    precio=monto/cantidad;
+  }else if(ultimoEditado==='precio'&&precioTexto){
+    if(!(precio>0)){showSystemNotification('Precio no válido','El precio unitario debe ser mayor que cero.','warning');return;}
+    monto=cantidad*precio;
+  }else if(precioTexto&&precio>0){
+    monto=cantidad*precio;
+  }else if(montoTexto&&monto>0){
+    precio=monto/cantidad;
+  }else{
+    showSystemNotification('Datos incompletos','Indica el precio unitario o el monto total. El otro valor se calculará automáticamente.','warning');return;
+  }
+  if(!Number.isFinite(precio)||!Number.isFinite(monto)||precio<=0||monto<=0){
+    showSystemNotification('Importes no válidos','Verifica la cantidad, el precio y el monto antes de guardar.','warning');return;
+  }
+
+  // Los campos de Supabase son TEXT: se envían números normalizados,
+  // sin puntos de miles ni comas decimales.
+  const payload={
+    id_combustible:id,
+    id_vehiculo:vehiculoId,
+    fecha:valor('combustible-fecha')||vehFechaHoy(),
+    estacion:valor('combustible-estacion'),
+    tipo_combustible:valor('combustible-tipo')||'Gasolina 95',
+    cantidad_litros:String(cantidad),
+    precio_litro:precio.toFixed(6),
+    monto:monto.toFixed(2),
+    moneda:valor('combustible-moneda')||'USD',
+    tasa_cambio:valor('combustible-tasa'),
+    kilometraje:valor('combustible-km'),
+    metodo_pago:valor('combustible-metodo'),
+    observaciones:valor('combustible-observaciones')
+  };
+  try{
+    const accion=id?'updateVehiculoCombustible':'addVehiculoCombustible';
+    const respuesta=await ejecutarOperacionSupabase(accion,payload,true,45000,true);
+    if(!respuesta?.success)throw new Error(respuesta?.message||'El servidor no confirmó el guardado del surtido.');
+    cerrarFormularioCombustible();
+    renderVehiculosModulo();
+    showSystemNotification(id?'Surtido actualizado':'Surtido registrado',id?'El registro de combustible fue actualizado correctamente.':'El surtido de combustible fue registrado correctamente.','success');
+  }catch(error){
+    showSystemNotification('No se pudo guardar',error?.message||'Error de servidor.','danger');
+  }
 }
 async function eliminarCombustibleVehiculo(id){if(!protegerAccionUsuario('vehiculos','eliminar')||!(await confirmarAccionModal('Eliminar surtido','¿Eliminar este registro de combustible?')))return;try{const r=await ejecutarOperacionSupabase('deleteVehiculoCombustible',{id_combustible:id},true,45000,true);if(!r?.success)throw new Error(r?.message||'No se pudo eliminar.');renderVehiculosModulo();showSystemNotification('Surtido eliminado','El registro de combustible fue eliminado.','success');}catch(e){showSystemNotification('No se pudo eliminar',e.message||'Error de servidor.','danger');}}
 function abrirFormularioMantenimientoVehiculo(vehiculoId,id){if(!protegerAccionUsuario('vehiculos',id?'modificar':'agregar'))return;const v=vehiculosPorId(vehiculoId);if(!v)return;const r=id?(db.vehiculosmantenimiento||[]).find(x=>String(x.id_mantenimiento)===String(id)):null;vehSet('mantenimiento-id',r?.id_mantenimiento||'');vehSet('mantenimiento-vehiculo-id',vehiculoId);vehSet('mantenimiento-vehiculo-label',`${vehiculoNombre(v)} · Placa ${v.placa||'—'}`);vehSet('mantenimiento-fecha',r?.fecha||vehFechaHoy());vehSet('mantenimiento-tipo',r?.tipo_mantenimiento||'Aceite motor');vehSet('mantenimiento-componente',r?.componente||'');vehSet('mantenimiento-km',r?.kilometraje||'');vehSet('mantenimiento-costo',r?.costo||'');vehSet('mantenimiento-moneda',r?.moneda||'USD');vehSet('mantenimiento-taller',r?.taller_proveedor||'');vehSet('mantenimiento-proximo-km',r?.proximo_km||'');vehSet('mantenimiento-proxima-fecha',r?.proxima_fecha||'');vehSet('mantenimiento-observaciones',r?.observaciones||r?.descripcion||'');document.getElementById('mantenimientoFormTitle').innerHTML=`<i class="fa-solid fa-user-gear text-primary me-2"></i>${r?'Editar mantenimiento':'Registrar mantenimiento'}`;document.getElementById('mantenimientoFormSub').textContent=`${vehiculoNombre(v)} · Placa ${v.placa||'—'}`;const m=document.getElementById('vehiculoMantenimientoModal');m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.classList.add('overflow-hidden');}
@@ -19999,7 +20321,7 @@ closeModal();msg('Valor agregado a la lista desplegable.');
 
 function modal(content){const root=$('elec-modal-root');if(!root)return;root.innerHTML='<div class="elec-modal-backdrop" role="presentation"><div class="elec-modal" role="dialog" aria-modal="true">'+content+'</div></div>';root.querySelector('.elec-modal-backdrop')?.addEventListener('click',e=>{if(e.target.classList.contains('elec-modal-backdrop'))closeModal();});}
 function closeModal(){const root=$('elec-modal-root');if(root){root.innerHTML='';root.style.zIndex='';}if(catalogFocusTrapModal&&catalogFocusTrapModal._focustrap){catalogFocusTrapModal._focustrap.activate();catalogFocusTrapModal=null;}}
-function scriptFor(n){const secret=NETWATCH_SECRET;const q=v=>String(v??'').replace(/\\/g,'\\\\').replace(/"/g,'\\"');const payload=status=>'{\\"secret\\":\\"'+q(secret)+'\\",\\"ip\\":\\"'+q(n.ip_monitoreada)+'\\",\\"bot_id\\":\\"'+q(n.id_bot_telegram||'')+'\\",\\"host\\":\\"'+q(n.ip_monitoreada)+'\\",\\"estado\\":\\"'+status+'\\",\\"router\\":\\"'+q(n.router_origen||'MikroTik')+'\\",\\"nombre_nodo\\":\\"'+q(n.nombre_nodo||'')+'\\",\\"municipio\\":\\"'+q(n.municipio||'')+'\\",\\"ubicacion\\":\\"'+q(n.ubicacion||'')+'\\",\\"tipo_equipo\\":\\"'+q(n.tipo_equipo||'Nodo de red')+'\\"}';const url='https://paslwsarwcqgrzvantjb.supabase.co/functions/v1/netwatch-electricidad';const block=status=>':local payload "'+payload(status)+'"; /tool fetch url="'+url+'" http-method=post http-header-field="Content-Type: application/json" http-data=$payload keep-result=no';return '/tool netwatch add host="'+q(n.ip_monitoreada)+'" type=simple comment="Electricidad - '+q(n.nombre_nodo||'Nodo')+'" down-script={'+block('down')+'} up-script={'+block('up')+'}';}
+function scriptFor(n){const secret=NETWATCH_SECRET;const q=v=>String(v??'').replace(/\\/g,'\\\\').replace(/"/g,'\\"');const payload=status=>'{\\"secret\\":\\"'+q(secret)+'\\",\\"ip\\":\\"'+q(n.ip_monitoreada)+'\\",\\"bot_id\\":\\"'+q(n.id_bot_telegram||'')+'\\",\\"host\\":\\"'+q(n.ip_monitoreada)+'\\",\\"estado\\":\\"'+status+'\\",\\"router\\":\\"'+q(n.router_origen||'MikroTik')+'\\",\\"nombre_nodo\\":\\"'+q(n.nombre_nodo||'')+'\\",\\"municipio\\":\\"'+q(n.municipio||'')+'\\",\\"ubicacion\\":\\"'+q(n.ubicacion||'')+'\\",\\"tipo_equipo\\":\\"'+q(n.tipo_equipo||'Nodo de red')+'\\"}';const url='https://paslwsarwcqgrzvantjb.supabase.co/functions/v1/netwatch-electricidad';const block=status=>':local payload "'+payload(status)+'"; /tool fetch url="'+url+'" http-method=post http-header-field="Content-Type: application/json" http-data=$payload output=none';return '/tool netwatch add host="'+q(n.ip_monitoreada)+'" type=simple comment="Electricidad - '+q(n.nombre_nodo||'Nodo')+'" down-script={'+block('down')+'} up-script={'+block('up')+'}';}
 function removeScriptFor(n){const q=v=>String(v??'').replace(/\\/g,'\\\\').replace(/"/g,'\\"');return '/tool netwatch remove [find where host="'+q(n.ip_monitoreada)+'" and comment="Electricidad - '+q(n.nombre_nodo||'Nodo')+'"]';}
 const nodeIdAt=i=>nodes[Number(i)]?.id_nodo_electricidad;window.elecViewScriptIndex=i=>window.elecViewScript(nodeIdAt(i));window.elecCopyScriptIndex=i=>window.elecCopyScript(nodeIdAt(i));window.elecNodeHistoryIndex=i=>window.elecNodeHistory(nodeIdAt(i));window.elecEditNodeIndex=i=>window.elecEditNode(nodeIdAt(i));window.elecDeleteNodeIndex=i=>window.elecDeleteNode(nodeIdAt(i));
 function cleanupNodeFormModal(){const form=$('elec-node-form'),home=$('elec-node-form-home'),root=$('elec-node-modal-root');if(form&&home)home.appendChild(form);if(home){home.hidden=true;home.style.display='none';home.classList.remove('electricity-panel','mb-3');}if(root)root.innerHTML='';}
@@ -21228,6 +21550,346 @@ window.ldAbrirProcedimiento=function(consultaId){if(!canAdd())return notify('No 
 window.ldGuardarProcedimiento=async function(e,consultaId){e.preventDefault();if(!canAdd())return notify('No tiene permiso para agregar procedimientos.','danger');const fd=new FormData(e.currentTarget);try{await api().sbInsert('OdontologiaProcedimientos',{consulta_id:consultaId,id_paciente:patientId(),empresa_row_id:companyId()||null,pieza_fdi:fd.get('pieza_fdi')||null,codigo_procedimiento:fd.get('codigo_procedimiento')||null,procedimiento:fd.get('procedimiento'),superficies:String(fd.get('superficies')||'').split(',').map(x=>x.trim()).filter(Boolean),fecha:fd.get('fecha')||dateNow(),odontologo:fd.get('odontologo')||null,materiales:fd.get('materiales')||null,estado:fd.get('estado'),costo:fd.get('costo')?Number(fd.get('costo')):null,observaciones:fd.get('observaciones')||null});await addHistory('procedimiento_odontologico',consultaId,String(fd.get('procedimiento')),'Odontología',fd.get('odontologo'));bootstrap.Modal.getInstance($('ld-modal'))?.hide();await loadPatientData();state.tab='historial';render();notify('Procedimiento odontológico registrado.');}catch(err){notify('No se pudo guardar el procedimiento: '+err.message,'danger');}};
 document.addEventListener('DOMContentLoaded',()=>{if(!$('ld-modal')){document.body.insertAdjacentHTML('beforeend','<div class="modal fade ld-detail-modal" id="ld-modal" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><div><div class="ld-modal-kicker">LC SOLUCIONES TECNOLÓGICAS · GESTIÓN DE SALUD</div><h5 class="modal-title">Detalle clínico</h5></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div><div class="modal-body"></div></div></div></div>');}});
 const _saludOriginalSwitchTab=window.switchTab;window.switchTab=function(tab){const out=_saludOriginalSwitchTab?.apply(this,arguments);if(String(tab)==='salud')window.mostrarGestionSaludInicio?.();return out;};
+})();
+</script>
+
+<style id="tp-module-styles">
+.tp-shell{--tp-line:var(--border-color,#e2e8f0);--tp-card:var(--bg-card,#fff);--tp-muted:var(--text-muted,#64748b);color:var(--text-main,#0f172a)}
+.tp-topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:18px;padding:22px;border:1px solid var(--tp-line);border-radius:20px;background:linear-gradient(120deg,rgba(37,99,235,.09),rgba(14,165,233,.025)),var(--tp-card)}
+.tp-topbar h2{font-size:1.35rem;font-weight:850;margin:3px 0 5px}.tp-topbar h2 i{color:var(--primary-accent,#2563eb);margin-right:8px}.tp-topbar p{margin:0;color:var(--tp-muted);font-size:.83rem}.tp-eyebrow{font-size:.62rem;letter-spacing:.14em;font-weight:850;color:var(--primary-accent,#2563eb)}
+.tp-top-actions{display:flex;align-items:flex-end;gap:9px;flex-wrap:wrap}.tp-company-wrap{min-width:220px}.tp-company-wrap label{display:block;font-size:.65rem;text-transform:uppercase;font-weight:800;color:var(--tp-muted);margin-bottom:4px}.tp-company-wrap select{width:100%;min-height:38px;border:1px solid var(--tp-line);border-radius:9px;padding:6px 10px;background:var(--tp-card);color:var(--text-main)}
+.tp-nav{display:flex;gap:7px;overflow-x:auto;padding:3px 0 13px;margin-bottom:10px;scrollbar-width:thin}
+/* Transporte: submódulos ubicados en el menú principal lateral */
+.tp-nav{display:none!important}.tp-nav button{border:1px solid var(--tp-line);background:var(--tp-card);color:var(--tp-muted);border-radius:10px;padding:9px 12px;white-space:nowrap;font-size:.75rem;font-weight:750}.tp-nav button.active{background:#2563eb;color:#fff;border-color:#2563eb}.tp-alert{border:1px solid #f59e0b55;background:#f59e0b12;color:var(--text-main);padding:11px 14px;border-radius:12px;margin-bottom:12px;font-size:.8rem}
+.tp-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.tp-kpi{background:var(--tp-card);border:1px solid var(--tp-line);border-radius:15px;padding:15px}.tp-kpi .k{font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tp-muted);font-weight:800}.tp-kpi .v{font-size:1.5rem;font-weight:850;margin-top:4px}.tp-kpi i{float:right;color:#2563eb;font-size:1.1rem}
+.tp-panel{background:var(--tp-card);border:1px solid var(--tp-line);border-radius:16px;padding:15px;margin-bottom:14px}.tp-panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.tp-panel-head h3{font-size:.95rem;font-weight:850;margin:0}.tp-panel-head p{font-size:.72rem;color:var(--tp-muted);margin:3px 0 0}.tp-table-wrap{overflow:auto}.tp-table{width:100%;border-collapse:collapse;font-size:.76rem;min-width:650px}.tp-table th{background:rgba(148,163,184,.09);color:var(--tp-muted);font-size:.64rem;text-transform:uppercase;letter-spacing:.05em;text-align:left;padding:10px;border-bottom:1px solid var(--tp-line);white-space:nowrap}.tp-table td{padding:10px;border-bottom:1px solid var(--tp-line);vertical-align:middle}.tp-table tr:last-child td{border-bottom:0}.tp-actions{display:flex;gap:5px;white-space:nowrap}.tp-actions button{border:1px solid var(--tp-line);background:transparent;border-radius:7px;padding:5px 8px;color:var(--text-main)}.tp-actions .danger{color:#ef4444}.tp-pill{display:inline-flex;border-radius:999px;padding:4px 8px;font-size:.64rem;font-weight:800;background:rgba(37,99,235,.1);color:#3b82f6}.tp-empty{text-align:center;color:var(--tp-muted);padding:30px 12px;font-size:.8rem}.tp-filter{display:flex;gap:8px;flex-wrap:wrap}.tp-filter input{max-width:300px}
+.tp-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;padding:16px}.tp-field{display:flex;flex-direction:column;gap:4px;min-width:0}.tp-field>span{font-size:.68rem;font-weight:800;color:var(--tp-muted)}.tp-field input,.tp-field select,.tp-field textarea{width:100%;min-width:0;border:1px solid var(--tp-line);border-radius:9px;padding:9px 10px;background:var(--bg-subtle,#f8fafc);color:var(--text-main);font-size:.78rem}.tp-field textarea{min-height:74px;resize:vertical}.tp-field.full{grid-column:1/-1}.tp-modal{position:fixed;inset:0;z-index:500500;background:rgba(2,6,23,.62);display:none;align-items:center;justify-content:center;padding:18px}.tp-modal.show{display:flex}.tp-modal-card{width:min(900px,96vw);max-height:94vh;overflow:auto;border:1px solid var(--tp-line);border-radius:18px;background:var(--bg-card,#fff);color:var(--text-main);box-shadow:0 25px 80px rgba(0,0,0,.3)}.tp-modal-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:14px 17px;background:var(--bg-card,#fff);border-bottom:1px solid var(--tp-line)}.tp-modal-head strong{display:block;font-size:.95rem}.tp-modal-head small{display:block;color:var(--tp-muted);font-size:.68rem;margin-top:2px}.tp-modal-head button{border:0;background:transparent;color:var(--text-main);font-size:1.1rem}.tp-modal-foot{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid var(--tp-line);background:var(--bg-card,#fff)}.tp-sale-card{width:min(760px,96vw)}
+.tp-trip-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.tp-trip-card{border:1px solid var(--tp-line);border-radius:14px;padding:13px;background:var(--tp-card)}.tp-trip-card h4{font-size:.88rem;font-weight:850;margin:0 0 5px}.tp-trip-meta{font-size:.7rem;color:var(--tp-muted);line-height:1.7}.tp-seat-map{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:12px}.tp-seat{border:1px solid var(--tp-line);border-radius:8px;padding:8px 3px;font-size:.68rem;font-weight:800;background:rgba(34,197,94,.12);color:#16a34a}.tp-seat.reservado{background:rgba(245,158,11,.16);color:#d97706}.tp-seat.ocupado{background:rgba(239,68,68,.13);color:#ef4444}.tp-seat.bloqueado{background:rgba(100,116,139,.16);color:var(--tp-muted)}.tp-seat:disabled{cursor:not-allowed;opacity:.8}.tp-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.65rem;color:var(--tp-muted);margin-top:9px}.tp-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;background:#22c55e}.tp-dot.amber{background:#f59e0b}.tp-dot.red{background:#ef4444}.tp-dot.gray{background:#94a3b8}
+@media(max-width:850px){.tp-topbar{flex-direction:column}.tp-top-actions{width:100%}.tp-company-wrap{flex:1}.tp-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.tp-trip-grid{grid-template-columns:1fr}}
+@media(max-width:575px){.tp-topbar{padding:15px}.tp-topbar h2{font-size:1.08rem}.tp-form-grid{grid-template-columns:1fr;padding:12px}.tp-field.full{grid-column:auto}.tp-modal{padding:0}.tp-modal-card{width:100%;height:100%;max-height:100%;border-radius:0}.tp-kpis{gap:8px}.tp-kpi{padding:11px}.tp-kpi .v{font-size:1.2rem}}
+html[data-bs-theme="dark"] .tp-field input,html[data-bs-theme="dark"] .tp-field select,html[data-bs-theme="dark"] .tp-field textarea{background:#0f172a;color:#f1f5f9;border-color:#334155}
+
+/* ===== Transporte Público: contraste y controles accesibles ===== */
+.tp-shell{color:var(--text-main,#0f172a)}
+.tp-shell .tp-panel,
+.tp-shell .tp-kpi,
+.tp-shell .tp-trip-card,
+.tp-shell .tp-modal-card{color:var(--text-main);background:var(--bg-card,#fff);border-color:var(--border-color,#dbe2ea)}
+.tp-shell .tp-panel{box-shadow:0 5px 18px rgba(15,23,42,.045)}
+.tp-shell .tp-field{padding:1px 0}
+.tp-shell .tp-field>span,
+.tp-shell .tp-company-wrap label{color:var(--text-main);font-weight:750;letter-spacing:.01em}
+.tp-shell .tp-field input,
+.tp-shell .tp-field select,
+.tp-shell .tp-field textarea,
+.tp-shell .tp-company-wrap select,
+.tp-shell input:not([type="checkbox"]):not([type="radio"]),
+.tp-shell select,
+.tp-shell textarea{
+  min-height:41px;border:1px solid var(--border-color,#cbd5e1);border-radius:10px;
+  background:var(--bg-subtle,#f8fafc);color:var(--text-main,#0f172a);
+  box-shadow:inset 0 1px 2px rgba(15,23,42,.035);transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease;
+}
+.tp-shell .tp-field textarea,.tp-shell textarea{min-height:88px;line-height:1.45}
+.tp-shell input::placeholder,.tp-shell textarea::placeholder{color:var(--text-muted,#64748b);opacity:.9}
+.tp-shell .tp-field input:hover,.tp-shell .tp-field select:hover,.tp-shell .tp-field textarea:hover,
+.tp-shell .tp-company-wrap select:hover,.tp-shell select:hover{
+  border-color:var(--primary-accent,#2563eb);background:var(--bg-card,#fff);color:var(--text-main,#0f172a)
+}
+.tp-shell .tp-field input:focus,.tp-shell .tp-field select:focus,.tp-shell .tp-field textarea:focus,
+.tp-shell .tp-company-wrap select:focus,.tp-shell select:focus,.tp-shell input:focus,.tp-shell textarea:focus{
+  outline:0;border-color:var(--primary-accent,#2563eb);box-shadow:0 0 0 3px rgba(59,130,246,.18);background:var(--bg-card,#fff);color:var(--text-main,#0f172a)
+}
+/* Flecha propia: evita el triángulo/fondo blanco del control nativo al pasar el cursor. */
+.tp-shell select,.tp-shell .tp-field select,.tp-shell .tp-company-wrap select{
+  appearance:none;-webkit-appearance:none;-moz-appearance:none;padding-right:38px!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;background-size:15px 15px;cursor:pointer
+}
+.tp-shell select:disabled,.tp-shell input:disabled,.tp-shell textarea:disabled{opacity:.62;cursor:not-allowed}
+.tp-shell option{background:var(--bg-card,#fff);color:var(--text-main,#0f172a)}
+.tp-shell .tp-form-grid{gap:14px;padding:18px;background:transparent}
+.tp-shell .tp-modal-card{box-shadow:0 24px 75px rgba(0,0,0,.32)}
+.tp-shell .tp-modal-head,.tp-shell .tp-modal-foot{background:var(--bg-card,#fff);border-color:var(--border-color,#dbe2ea)}
+.tp-shell .tp-modal-head strong{color:var(--text-main)}
+.tp-shell .tp-actions button{background:var(--bg-subtle,#f8fafc);border-color:var(--border-color,#cbd5e1)}
+.tp-shell .tp-actions button:hover{background:rgba(59,130,246,.12);border-color:var(--primary-accent,#2563eb)}
+.tp-shell .tp-table th{color:var(--text-main);background:rgba(148,163,184,.13)}
+.tp-shell .tp-table td{color:var(--text-main)}
+.tp-shell .tp-seat{border-width:1px}
+/* Los desplegables y sus flechas permanecen contrastados en tema oscuro. */
+html[data-bs-theme="dark"] .tp-shell,
+body.dark-mode .tp-shell,body[data-theme="dark"] .tp-shell,.dark-theme .tp-shell{color:#f1f5f9}
+html[data-bs-theme="dark"] .tp-shell .tp-panel,
+html[data-bs-theme="dark"] .tp-shell .tp-kpi,
+html[data-bs-theme="dark"] .tp-shell .tp-trip-card,
+html[data-bs-theme="dark"] .tp-shell .tp-modal-card{background:#172334;color:#f1f5f9;border-color:#3b4b61}
+html[data-bs-theme="dark"] .tp-shell .tp-field>span,
+html[data-bs-theme="dark"] .tp-shell .tp-company-wrap label{color:#e2eaf5}
+html[data-bs-theme="dark"] .tp-shell .tp-field input,
+html[data-bs-theme="dark"] .tp-shell .tp-field select,
+html[data-bs-theme="dark"] .tp-shell .tp-field textarea,
+html[data-bs-theme="dark"] .tp-shell .tp-company-wrap select,
+html[data-bs-theme="dark"] .tp-shell input:not([type="checkbox"]):not([type="radio"]),
+html[data-bs-theme="dark"] .tp-shell select,
+html[data-bs-theme="dark"] .tp-shell textarea{
+  color:#f8fafc!important;background-color:#0d1726!important;border-color:#465a73!important;color-scheme:dark
+}
+html[data-bs-theme="dark"] .tp-shell .tp-field input:hover,
+html[data-bs-theme="dark"] .tp-shell .tp-field select:hover,
+html[data-bs-theme="dark"] .tp-shell .tp-field textarea:hover,
+html[data-bs-theme="dark"] .tp-shell .tp-company-wrap select:hover,
+html[data-bs-theme="dark"] .tp-shell select:hover{
+  color:#fff!important;background-color:#17263a!important;border-color:#60a5fa!important
+}
+html[data-bs-theme="dark"] .tp-shell .tp-field input:focus,
+html[data-bs-theme="dark"] .tp-shell .tp-field select:focus,
+html[data-bs-theme="dark"] .tp-shell .tp-field textarea:focus,
+html[data-bs-theme="dark"] .tp-shell .tp-company-wrap select:focus,
+html[data-bs-theme="dark"] .tp-shell select:focus,
+html[data-bs-theme="dark"] .tp-shell input:focus,
+html[data-bs-theme="dark"] .tp-shell textarea:focus{background-color:#17263a!important;border-color:#60a5fa!important;box-shadow:0 0 0 3px rgba(96,165,250,.22)!important}
+html[data-bs-theme="dark"] .tp-shell select,
+html[data-bs-theme="dark"] .tp-shell .tp-field select,
+html[data-bs-theme="dark"] .tp-shell .tp-company-wrap select{
+  appearance:auto!important;-webkit-appearance:menulist!important;
+  background-image:none!important;background-color:#0d1726!important;
+  color:#f8fafc!important;color-scheme:dark!important;
+}
+html[data-bs-theme="dark"] .tp-shell select:hover,
+html[data-bs-theme="dark"] .tp-shell .tp-field select:hover,
+html[data-bs-theme="dark"] .tp-shell .tp-company-wrap select:hover{
+  background-image:none!important;background-color:#17263a!important;color:#fff!important;
+}
+html[data-bs-theme="dark"] .tp-shell option{background:#172334;color:#f8fafc}
+html[data-bs-theme="dark"] .tp-shell .tp-modal-head,
+html[data-bs-theme="dark"] .tp-shell .tp-modal-foot{background:#172334;border-color:#3b4b61}
+html[data-bs-theme="dark"] .tp-shell .tp-table th{background:#223249;color:#e2eaf5}
+html[data-bs-theme="dark"] .tp-shell .tp-table td{color:#e5edf7}
+
+/* Transporte Público: contornos de formularios claramente visibles en ambos temas.
+   No altera el indicador/flecha nativa de los selectores. */
+#sec-transporte_publico .tp-shell .tp-field input,
+#sec-transporte_publico .tp-shell .tp-field select,
+#sec-transporte_publico .tp-shell .tp-field textarea,
+#sec-transporte_publico .tp-shell .tp-company-wrap select,
+#sec-transporte_publico .tp-shell .tp-filter input,
+#sec-transporte_publico .tp-shell input:not([type="checkbox"]):not([type="radio"]),
+#sec-transporte_publico .tp-shell select,
+#sec-transporte_publico .tp-shell textarea{
+  border:1.5px solid #8795a8!important;
+  border-radius:9px!important;
+  background-color:#ffffff!important;
+  color:#172033!important;
+  box-shadow:inset 0 1px 2px rgba(15,23,42,.07)!important;
+  outline:none;
+}
+#sec-transporte_publico .tp-shell .tp-field input:hover,
+#sec-transporte_publico .tp-shell .tp-field select:hover,
+#sec-transporte_publico .tp-shell .tp-field textarea:hover,
+#sec-transporte_publico .tp-shell .tp-company-wrap select:hover,
+#sec-transporte_publico .tp-shell .tp-filter input:hover,
+#sec-transporte_publico .tp-shell input:not([type="checkbox"]):not([type="radio"]):hover,
+#sec-transporte_publico .tp-shell select:hover,
+#sec-transporte_publico .tp-shell textarea:hover{
+  border-color:#3979d8!important;
+  background-color:#f8fbff!important;
+  color:#172033!important;
+}
+#sec-transporte_publico .tp-shell .tp-field input:focus,
+#sec-transporte_publico .tp-shell .tp-field select:focus,
+#sec-transporte_publico .tp-shell .tp-field textarea:focus,
+#sec-transporte_publico .tp-shell .tp-company-wrap select:focus,
+#sec-transporte_publico .tp-shell .tp-filter input:focus,
+#sec-transporte_publico .tp-shell input:not([type="checkbox"]):not([type="radio"]):focus,
+#sec-transporte_publico .tp-shell select:focus,
+#sec-transporte_publico .tp-shell textarea:focus{
+  border:1.5px solid #2878e8!important;
+  box-shadow:0 0 0 3px rgba(40,120,232,.2)!important;
+  background-color:#fff!important;
+  color:#172033!important;
+}
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-field input,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-field select,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-field textarea,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-company-wrap select,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-filter input,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell input:not([type="checkbox"]):not([type="radio"]),
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell select,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell textarea{
+  border:1.5px solid #657991!important;
+  background-color:#101d2e!important;
+  color:#f3f7fc!important;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.28)!important;
+  color-scheme:dark;
+}
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-field input:hover,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-field select:hover,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-field textarea:hover,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-company-wrap select:hover,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-filter input:hover,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell input:not([type="checkbox"]):not([type="radio"]):hover,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell select:hover,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell textarea:hover{
+  border-color:#8bbcff!important;
+  background-color:#172a41!important;
+  color:#fff!important;
+}
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-field input:focus,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-field select:focus,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-field textarea:focus,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-company-wrap select:focus,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell .tp-filter input:focus,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell input:not([type="checkbox"]):not([type="radio"]):focus,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell select:focus,
+html[data-bs-theme="dark"] #sec-transporte_publico .tp-shell textarea:focus{
+  border:1.5px solid #78b2ff!important;
+  box-shadow:0 0 0 3px rgba(96,165,250,.26)!important;
+  background-color:#172a41!important;
+  color:#fff!important;
+}
+#sec-transporte_publico .tp-shell .tp-field>span,
+#sec-transporte_publico .tp-shell .tp-company-wrap label{font-weight:800;letter-spacing:.015em}
+html[data-bs-theme="dark"] .tp-shell .tp-actions button{background:#223249;color:#e5edf7;border-color:#465a73}
+html[data-bs-theme="dark"] .tp-shell .tp-actions button:hover{background:#29466a;border-color:#60a5fa}
+html[data-bs-theme="dark"] .tp-shell input::placeholder,html[data-bs-theme="dark"] .tp-shell textarea::placeholder{color:#9fb0c5}
+/* No aplicar fondos globales al hover: solo botones propios del módulo. */
+html[data-bs-theme="dark"] .tp-shell .tp-actions button:hover,
+html[data-bs-theme="dark"] .tp-shell .tp-trip-card button:hover,
+html[data-bs-theme="dark"] .tp-shell .tp-seat:hover{background-color:#263b55!important;color:#f8fafc!important}
+html[data-bs-theme="dark"] .tp-shell select:focus-visible{outline:2px solid #60a5fa;outline-offset:1px}
+@media(max-width:575px){.tp-shell .tp-form-grid{gap:12px;padding:13px}.tp-shell .tp-field input,.tp-shell .tp-field select,.tp-shell .tp-field textarea{min-height:43px}}
+
+.tp-bus-visual{margin-top:14px;padding:14px;border:1px solid var(--tp-line);border-radius:18px;background:var(--tp-card)}
+.tp-bus-front{width:min(100%,430px);margin:0 auto 10px;padding:9px 14px;border:2px solid var(--tp-line);border-bottom:0;border-radius:30px 30px 8px 8px;text-align:center;color:var(--tp-muted);font-size:.68rem;font-weight:800;letter-spacing:.08em}
+.tp-bus-body{width:min(100%,430px);margin:auto;padding:12px 12px 18px;border:2px solid var(--tp-line);border-radius:12px 12px 28px 28px;background:rgba(148,163,184,.07)}
+.tp-bus-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;align-items:center}
+.tp-bus-aisle{grid-column:3;grid-row:1/-1;min-height:100%;border-left:1px dashed var(--tp-line);border-right:1px dashed var(--tp-line);display:flex;align-items:center;justify-content:center;color:var(--tp-muted);font-size:.55rem;writing-mode:vertical-rl;letter-spacing:.12em}
+.tp-bus-seat{min-height:42px;border:1px solid #16a34a;border-radius:9px 9px 5px 5px;background:#dcfce7;color:#166534;font-size:.7rem;font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;box-shadow:inset 0 -4px 0 rgba(22,101,52,.12)}
+.tp-bus-seat i{font-size:.8rem}.tp-bus-seat.reservado{background:#fef3c7;border-color:#d97706;color:#92400e}.tp-bus-seat.ocupado{background:#fee2e2;border-color:#dc2626;color:#991b1b}.tp-bus-seat.bloqueado{background:#e2e8f0;border-color:#64748b;color:#475569}.tp-bus-seat:disabled{opacity:1;cursor:not-allowed}
+.tp-deck-tabs{display:flex;justify-content:center;gap:8px;margin:8px auto 12px}.tp-deck-tabs button{border:1px solid var(--tp-line);border-radius:9px;padding:7px 14px;background:transparent;color:var(--tp-text);font-weight:800}.tp-deck-tabs button.active{background:#2563eb;color:white;border-color:#2563eb}
+html[data-bs-theme="dark"] .tp-shell .tp-bus-visual{background:#111e2e;border-color:#465a73}html[data-bs-theme="dark"] .tp-shell .tp-bus-front,html[data-bs-theme="dark"] .tp-shell .tp-bus-body{border-color:#52657c}html[data-bs-theme="dark"] .tp-shell .tp-bus-seat.bloqueado{background:#334155;color:#e2e8f0}
+.tp-model-presets{grid-column:1/-1;padding:12px;border:1px solid var(--tp-line);border-radius:12px;background:rgba(37,99,235,.06);display:grid;grid-template-columns:1fr 1fr;gap:10px}.tp-model-presets label{font-size:.72rem;font-weight:800;color:var(--tp-muted)}.tp-model-presets select{width:100%;margin-top:5px;padding:9px;border:1px solid var(--tp-line);border-radius:8px;background:var(--tp-card);color:var(--tp-text)}.tp-model-note{grid-column:1/-1;font-size:.68rem;color:var(--tp-muted)}
+@media(max-width:575px){.tp-bus-body{padding:8px}.tp-bus-grid{gap:5px}.tp-bus-seat{min-height:36px;font-size:.62rem}.tp-model-presets{grid-template-columns:1fr}}
+
+</style>
+<script id="tp-module-script">
+(function(){
+'use strict';
+const TP_TABLES=['TP_Rutas','TP_Paradas','TP_RutaParadas','TP_Tarifas','TP_Horarios','TP_Unidades','TP_Asientos','TP_Personal','TP_Turnos','TP_Viajes','TP_ViajeParadas','TP_ViajeAsientos','TP_Pasajeros','TP_Reservas','TP_Boletos','TP_Listines','TP_Abordajes','TP_Equipajes','TP_Despachos','TP_Incidencias','TP_Pagos','TP_Caja','TP_Gastos','TP_Auditoria'];
+const TP_SECTIONS=[
+ {id:'resumen',label:'Resumen',icon:'fa-chart-pie'},
+ {id:'TP_Rutas',label:'Rutas',icon:'fa-route'},
+ {id:'TP_Paradas',label:'Paradas',icon:'fa-location-dot'},
+ {id:'TP_Tarifas',label:'Tarifas',icon:'fa-tags'},
+ {id:'TP_Horarios',label:'Horarios',icon:'fa-clock'},
+ {id:'TP_Unidades',label:'Unidades y asientos',icon:'fa-bus'},
+ {id:'TP_Personal',label:'Personal',icon:'fa-id-badge'},
+ {id:'TP_Turnos',label:'Turnos',icon:'fa-calendar-days'},
+ {id:'TP_Viajes',label:'Viajes y salidas',icon:'fa-road'},
+ {id:'TP_Pasajeros',label:'Pasajeros',icon:'fa-users'},
+ {id:'TP_Reservas',label:'Reservas',icon:'fa-bookmark'},
+ {id:'TP_Boletos',label:'Boletos',icon:'fa-ticket'},
+ {id:'TP_Listines',label:'Listines y abordaje',icon:'fa-clipboard-check'},
+ {id:'TP_Equipajes',label:'Equipajes',icon:'fa-suitcase'},
+ {id:'TP_Despachos',label:'Despachos',icon:'fa-truck-fast'},
+ {id:'TP_Incidencias',label:'Incidencias',icon:'fa-triangle-exclamation'},
+ {id:'TP_Pagos',label:'Pagos',icon:'fa-money-bill-wave'},
+ {id:'TP_Caja',label:'Caja',icon:'fa-cash-register'},
+ {id:'TP_Gastos',label:'Gastos',icon:'fa-receipt'},
+ {id:'TP_Auditoria',label:'Auditoría',icon:'fa-shield-halved'}
+];
+const TP_CFG={
+TP_Rutas:{label:'Rutas',fields:[['codigo','Código','text',1],['nombre','Nombre de la ruta','text',1],['descripcion','Descripción','textarea'],['origen','Origen','text',1],['destino','Destino','text',1],['terminal_origen','Terminal de origen','text'],['terminal_destino','Terminal de destino','text'],['distancia_km','Distancia (km)','number'],['duracion_minutos','Duración estimada (min)','number'],['dias_operacion','Días de operación','json'],['estado','Estado','select',0,['activa','inactiva']],['observaciones','Observaciones','textarea']],cols:['codigo','nombre','origen','destino','distancia_km','estado']},
+TP_Paradas:{label:'Paradas y terminales',fields:[['nombre','Nombre','text',1],['tipo','Tipo','select',0,['terminal','parada','punto_control']],['direccion','Dirección','text'],['municipio','Municipio','text'],['estado_region','Estado / región','text'],['latitud','Latitud','number'],['longitud','Longitud','number'],['activa','Activa','bool']],cols:['nombre','tipo','municipio','estado_region','activa']},
+TP_RutaParadas:{label:'Paradas por ruta',fields:[['ruta_id','Ruta','rel',1,'TP_Rutas'],['parada_id','Parada','rel',1,'TP_Paradas'],['orden','Orden de paso','number',1],['minutos_desde_origen','Minutos desde origen','number'],['distancia_desde_origen_km','Distancia desde origen (km)','number'],['permite_subida','Permite subir','bool'],['permite_bajada','Permite bajar','bool']],cols:['ruta_id','parada_id','orden','minutos_desde_origen','distancia_desde_origen_km']},
+TP_Tarifas:{label:'Tarifas',fields:[['ruta_id','Ruta','rel',1,'TP_Rutas'],['parada_origen_id','Origen','rel',0,'TP_Paradas'],['parada_destino_id','Destino','rel',0,'TP_Paradas'],['categoria','Categoría','text'],['moneda','Moneda','select',0,['USD','VES','COP','USDT']],['monto','Monto','number',1],['vigencia_desde','Vigente desde','date'],['vigencia_hasta','Vigente hasta','date'],['activa','Activa','bool']],cols:['ruta_id','parada_origen_id','parada_destino_id','categoria','monto','moneda','activa']},
+TP_Horarios:{label:'Horarios',fields:[['ruta_id','Ruta','rel',1,'TP_Rutas'],['hora_salida','Hora de salida','time',1],['hora_llegada','Hora estimada de llegada','time'],['turno','Turno','text'],['dias','Días','json'],['vigente_desde','Vigente desde','date'],['vigente_hasta','Vigente hasta','date'],['activo','Activo','bool']],cols:['ruta_id','hora_salida','hora_llegada','turno','activo']},
+TP_Unidades:{label:'Unidades',fields:[['codigo_interno','Código interno','text'],['placa','Placa','text',1],['marca','Marca','text'],['modelo','Modelo','text'],['anio','Año','number'],['tipo_unidad','Tipo de unidad','select',0,['autobus','autobus_doble_piso','microbus','minibus','expreso','otro']],['capacidad_pasajeros','Capacidad de pasajeros','number',1],['filas','Filas del plano','number'],['columnas','Asientos por fila','number'],['configuracion_asientos','Plano personalizado (JSON opcional)','json'],['accesible','Accesible','bool'],['aire_acondicionado','Aire acondicionado','bool'],['estado','Estado','select',0,['operativa','mantenimiento','inactiva']],['seguro_hasta','Seguro hasta','date'],['permiso_hasta','Permiso hasta','date'],['revision_hasta','Revisión hasta','date'],['observaciones','Observaciones','textarea']],cols:['placa','codigo_interno','tipo_unidad','capacidad_pasajeros','estado']},
+TP_Asientos:{label:'Asientos por unidad',fields:[['unidad_id','Unidad','rel',1,'TP_Unidades'],['codigo','Código del asiento','text',1],['fila','Fila','number'],['columna','Columna','number'],['piso','Piso / nivel','select',0,['1','2']],['lado','Lado','select',0,['izquierdo','derecho','centro']],['tipo','Tipo','select',0,['regular','preferencial','pasillo','ventana']],['accesible','Accesible','bool'],['activo','Activo','bool']],cols:['unidad_id','codigo','fila','columna','lado','tipo','activo']},
+TP_Personal:{label:'Personal operativo',fields:[['nombres','Nombres','text',1],['apellidos','Apellidos','text',1],['documento_tipo','Tipo de documento','text'],['documento_numero','Documento','text',1],['telefono','Teléfono','text'],['correo','Correo','email'],['cargo','Cargo','select',1,['conductor','auxiliar','despachador','taquillero','supervisor','mecánico','otro']],['licencia_numero','N.º de licencia','text'],['licencia_categoria','Categoría de licencia','text'],['licencia_vencimiento','Vencimiento de licencia','date'],['estado','Estado','select',0,['activo','inactivo','suspendido']],['observaciones','Observaciones','textarea']],cols:['nombres','apellidos','documento_numero','cargo','licencia_vencimiento','estado']},
+TP_Turnos:{label:'Turnos',fields:[['nombre','Nombre','text',1],['hora_inicio','Hora de inicio','time',1],['hora_fin','Hora de fin','time',1],['dias','Días','json'],['descripcion','Descripción','textarea'],['activo','Activo','bool']],cols:['nombre','hora_inicio','hora_fin','activo']},
+TP_Viajes:{label:'Viajes y salidas',fields:[['codigo','Código del viaje','text',1],['ruta_id','Ruta','rel',1,'TP_Rutas'],['horario_id','Horario','rel',0,'TP_Horarios'],['turno_id','Turno','rel',0,'TP_Turnos'],['unidad_id','Unidad','rel',1,'TP_Unidades'],['conductor_id','Conductor','rel',1,'TP_Personal'],['auxiliar_id','Auxiliar','rel',0,'TP_Personal'],['fecha_salida','Fecha de salida','date',1],['hora_salida','Hora de salida','time',1],['hora_llegada_estimada','Llegada estimada','datetime'],['capacidad','Capacidad','number',1],['estado','Estado','select',0,['programado','abordando','en_salida','en_ruta','retrasado','finalizado','cancelado']],['anden','Andén','text'],['observaciones','Observaciones','textarea']],cols:['codigo','ruta_id','unidad_id','fecha_salida','hora_salida','capacidad','estado']},
+TP_ViajeParadas:{label:'Itinerario de viaje',fields:[['viaje_id','Viaje','rel',1,'TP_Viajes'],['parada_id','Parada','rel',1,'TP_Paradas'],['orden','Orden','number',1],['llegada_estimada','Llegada estimada','datetime'],['salida_estimada','Salida estimada','datetime'],['permite_subida','Permite subir','bool'],['permite_bajada','Permite bajar','bool']],cols:['viaje_id','parada_id','orden','llegada_estimada','salida_estimada']},
+TP_ViajeAsientos:{label:'Inventario de asientos por viaje',readonly:true,cols:['viaje_id','asiento_id','estado']},
+TP_Pasajeros:{label:'Pasajeros',fields:[['nombres','Nombres','text',1],['apellidos','Apellidos','text',1],['documento_tipo','Tipo documento','text'],['documento_numero','Documento','text'],['telefono','Teléfono','text'],['correo','Correo','email'],['fecha_nacimiento','Fecha de nacimiento','date'],['contacto_emergencia','Contacto de emergencia','text']],cols:['nombres','apellidos','documento_tipo','documento_numero','telefono','correo']},
+TP_Reservas:{label:'Reservas',readonly:true,cols:['codigo','viaje_id','pasajero_id','asiento_id','canal','estado','vence_en','monto','moneda']},
+TP_Boletos:{label:'Boletos',readonly:true,cols:['codigo','viaje_id','pasajero_id','asiento_id','canal','estado','monto','moneda','fecha_emision']},
+TP_Listines:{label:'Listines de pasajeros',cols:['viaje_id','boleto_id','pasajero_id','asiento_id','estado_abordaje'],fields:[['viaje_id','Viaje','rel',1,'TP_Viajes'],['boleto_id','Boleto','rel',1,'TP_Boletos'],['pasajero_id','Pasajero','rel',1,'TP_Pasajeros'],['asiento_id','Asiento','rel',1,'TP_Asientos'],['estado_abordaje','Estado de abordaje','select',0,['pendiente','abordo','no_se_presento','bajado']],['observaciones','Observaciones','textarea']]},
+TP_Abordajes:{label:'Registro de abordajes',fields:[['listin_id','Registro de listín','rel',1,'TP_Listines'],['punto','Punto de control','text'],['resultado','Resultado','select',0,['abordo','no_se_presento','incidencia']],['observaciones','Observaciones','textarea']],cols:['listin_id','fecha_hora','punto','resultado']},
+TP_Equipajes:{label:'Equipajes',fields:[['boleto_id','Boleto','rel',1,'TP_Boletos'],['etiqueta','Etiqueta de equipaje','text',1],['descripcion','Descripción','textarea'],['cantidad','Cantidad','number'],['peso_kg','Peso (kg)','number'],['estado','Estado','text']],cols:['boleto_id','etiqueta','cantidad','peso_kg','estado']},
+TP_Despachos:{label:'Despachos y llegadas',fields:[['viaje_id','Viaje','rel',1,'TP_Viajes'],['tipo','Tipo','select',1,['salida','llegada','control']],['fecha_hora','Fecha y hora','datetime'],['kilometraje','Kilometraje','number'],['combustible','Combustible','number'],['verificacion_documentos','Documentos verificados','bool'],['verificacion_unidad','Unidad verificada','bool'],['responsable','Responsable (ID personal)','text'],['observaciones','Observaciones','textarea']],cols:['viaje_id','tipo','fecha_hora','kilometraje','verificacion_documentos','verificacion_unidad']},
+TP_Incidencias:{label:'Incidencias',fields:[['viaje_id','Viaje','rel',1,'TP_Viajes'],['tipo','Tipo de incidencia','text',1],['severidad','Severidad','select',0,['baja','media','alta','critica']],['fecha_hora','Fecha y hora','datetime'],['ubicacion','Ubicación','text'],['descripcion','Descripción','textarea',1],['acciones_tomadas','Acciones tomadas','textarea'],['estado','Estado','select',0,['abierta','en_proceso','resuelta','cerrada']]],cols:['viaje_id','tipo','severidad','fecha_hora','estado']},
+TP_Pagos:{label:'Pagos',readonly:true,cols:['boleto_id','reserva_id','monto','moneda','metodo','estado','canal','fecha_pago']},
+TP_Caja:{label:'Caja y movimientos',fields:[['tipo','Tipo','select',1,['ingreso','egreso','apertura','cierre']],['concepto','Concepto','text',1],['monto','Monto','number',1],['moneda','Moneda','select',0,['USD','VES','COP','USDT']],['metodo_pago','Método de pago','text'],['viaje_id','Viaje','rel',0,'TP_Viajes'],['observaciones','Observaciones','textarea']],cols:['tipo','concepto','monto','moneda','metodo_pago','fecha_hora']},
+TP_Gastos:{label:'Gastos operativos',fields:[['viaje_id','Viaje','rel',0,'TP_Viajes'],['unidad_id','Unidad','rel',0,'TP_Unidades'],['categoria','Categoría','text',1],['descripcion','Descripción','textarea'],['monto','Monto','number',1],['moneda','Moneda','select',0,['USD','VES','COP','USDT']],['proveedor','Proveedor','text'],['fecha','Fecha','date',1],['comprobante','Comprobante / referencia','text']],cols:['fecha','categoria','descripcion','monto','moneda','proveedor']},
+TP_Auditoria:{label:'Auditoría del transporte',readonly:true,cols:['entidad','registro_id','accion','fecha_hora','usuario_id']}
+};
+let tpData={},tpActive='resumen',tpCompany='',tpLoaded=false,tpBusy=false,tpEditing=null;
+const tpEsc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tpLabel=(t,id)=>{const row=(tpData[t]||[]).find(x=>String(x.row_id)===String(id));if(!row)return id||'—';return row.nombre||row.codigo||row.placa||[row.nombres,row.apellidos].filter(Boolean).join(' ')||row.etiqueta||row.concepto||[row.marca,row.modelo].filter(Boolean).join(' ')||row.row_id;};
+function tpUserCompany(){const u=window.currentUser||{};return String(u.empresa_row_id||u.empresa?.row_id||'').trim();}
+function tpIsSuper(){const u=window.getCurrentPortalUser?.()||window.currentUser||{};return (typeof esCuentaSuperMasterUsuario_==='function'&&esCuentaSuperMasterUsuario_(u))|| (u.es_supermaster===true&&u.cuenta_protegida===true);}
+function tpCompanyId(){return tpIsSuper()?tpCompany:tpUserCompany();}
+function tpNotify(msg,type='warning'){const el=document.getElementById('tp-alert');if(!el)return;el.textContent=msg;el.className='tp-alert';el.style.borderColor=type==='danger'?'#ef444455':type==='success'?'#22c55e55':'#f59e0b55';el.style.background=type==='danger'?'#ef444412':type==='success'?'rgba(34,197,94,.08)':'#f59e0b12';}
+function tpClearNotify(){const el=document.getElementById('tp-alert');if(el){el.className='tp-alert d-none';el.textContent='';}}
+function tpPermission(action='leer'){if(tpIsSuper())return true;const check=window.permisosUsuarioTieneModulo;if(typeof check==='function'&&!check('transporte_publico',action)){tpNotify('No tiene permiso para realizar esta acción en Transporte Público.');return false;}return typeof check==='function'&&check('transporte_publico',action);}
+function tpNav(){const el=document.getElementById('tp-nav');if(!el)return;el.innerHTML=TP_SECTIONS.map(x=>`<button type="button" class="${tpActive===x.id?'active':''}" onclick="tpGo('${x.id}')"><i class="fa-solid ${x.icon} me-1"></i>${x.label}</button>`).join('');}
+function tpGo(id){tpActive=id;tpNav();tpRender();}
+function tpInit(){if(!document.getElementById('tp-view'))return;const wrap=document.getElementById('tp-company-wrap');if(tpIsSuper()){wrap.classList.remove('d-none');const sel=document.getElementById('tp-company');const companies=Array.isArray(db?.empresas)?db.empresas:[];const old=tpCompany;sel.innerHTML='<option value="">Seleccione empresa operadora…</option>'+companies.map(c=>`<option value="${tpEsc(c.row_id)}">${tpEsc(c.nombre_empresa||c.razon_social||c.id_empresa||c.row_id)}</option>`).join('');if(old)sel.value=old;else if(companies.length===1){tpCompany=String(companies[0].row_id);sel.value=tpCompany;}}else{wrap.classList.add('d-none');}
+tpNav();if(!tpCompanyId()){document.getElementById('tp-view').innerHTML='<div class="tp-panel tp-empty"><i class="fa-solid fa-building fa-2x mb-2"></i><br>Seleccione una empresa operadora para administrar sus rutas, unidades y viajes.</div>';return;}if(!tpLoaded)tpLoad();else tpRender();}
+function tpChangeCompany(){tpCompany=document.getElementById('tp-company')?.value||'';tpLoaded=false;tpData={};tpInit();if(tpCompany)tpLoad();}
+async function tpLoad(force=false){if(tpBusy)return;if(!tpCompanyId()){tpInit();return;}tpBusy=true;tpClearNotify();document.getElementById('tp-view').innerHTML='<div class="tp-panel tp-empty"><i class="fa-solid fa-spinner fa-spin fa-2x mb-2"></i><br>Cargando información de transporte…</div>';try{const out=await Promise.all(TP_TABLES.map(async t=>[t,await sbSelect(t,{limit:5000})]));const cid=tpCompanyId();out.forEach(([t,rows])=>tpData[t]=(Array.isArray(rows)?rows:[]).filter(r=>String(r.empresa_row_id||'')===cid));tpLoaded=true;tpRender();}catch(e){tpNotify('No se pudo cargar el módulo: '+(e?.message||e),'danger');document.getElementById('tp-view').innerHTML='<div class="tp-panel tp-empty">No fue posible cargar los datos. Verifique la sesión y los permisos de la empresa.</div>';}finally{tpBusy=false;}}
+function tpCount(t){return (tpData[t]||[]).length;}
+function tpRender(){const root=document.getElementById('tp-view');if(!root)return;if(!tpCompanyId()){root.innerHTML='<div class="tp-panel tp-empty">Seleccione una empresa operadora.</div>';return;}if(tpActive==='resumen'){tpRenderDashboard(root);return;}if(tpActive==='TP_Viajes'){tpRenderTrips(root);return;}tpRenderEntity(root,tpActive);}
+function tpRenderDashboard(root){const today=new Date().toISOString().slice(0,10);const trips=(tpData.TP_Viajes||[]).filter(x=>x.fecha_salida===today);const tickets=tpData.TP_Boletos||[];const income=(tpData.TP_Pagos||[]).filter(x=>x.estado==='confirmado').reduce((a,x)=>a+Number(x.monto||0),0);root.innerHTML=`<div class="tp-kpis">
+<div class="tp-kpi"><i class="fa-solid fa-route"></i><div class="k">Rutas activas</div><div class="v">${tpCount('TP_Rutas')}</div></div>
+<div class="tp-kpi"><i class="fa-solid fa-bus"></i><div class="k">Unidades registradas</div><div class="v">${tpCount('TP_Unidades')}</div></div>
+<div class="tp-kpi"><i class="fa-solid fa-calendar-check"></i><div class="k">Viajes de hoy</div><div class="v">${trips.length}</div></div>
+<div class="tp-kpi"><i class="fa-solid fa-ticket"></i><div class="k">Boletos emitidos</div><div class="v">${tickets.length}</div></div></div>
+<div class="tp-panel"><div class="tp-panel-head"><div><h3>Operación de hoy</h3><p>Salidas programadas para ${tpEsc(today)}</p></div><button class="btn btn-sm btn-primary" onclick="tpGo('TP_Viajes')"><i class="fa-solid fa-arrow-right me-1"></i>Ver viajes</button></div>${trips.length?`<div class="tp-table-wrap"><table class="tp-table"><thead><tr><th>Viaje</th><th>Ruta</th><th>Unidad</th><th>Hora</th><th>Estado</th></tr></thead><tbody>${trips.map(x=>`<tr><td>${tpEsc(x.codigo)}</td><td>${tpEsc(tpLabel('TP_Rutas',x.ruta_id))}</td><td>${tpEsc(tpLabel('TP_Unidades',x.unidad_id))}</td><td>${tpEsc(x.hora_salida)}</td><td><span class="tp-pill">${tpEsc(x.estado)}</span></td></tr>`).join('')}</tbody></table></div>`:'<div class="tp-empty">No hay viajes registrados para hoy.</div>'}</div>
+<div class="tp-kpis"><div class="tp-kpi"><i class="fa-solid fa-user-group"></i><div class="k">Pasajeros</div><div class="v">${tpCount('TP_Pasajeros')}</div></div><div class="tp-kpi"><i class="fa-solid fa-bookmark"></i><div class="k">Reservas</div><div class="v">${tpCount('TP_Reservas')}</div></div><div class="tp-kpi"><i class="fa-solid fa-clipboard-list"></i><div class="k">Listines</div><div class="v">${tpCount('TP_Listines')}</div></div><div class="tp-kpi"><i class="fa-solid fa-sack-dollar"></i><div class="k">Pagos confirmados</div><div class="v">${tpEsc(income.toFixed(2))}</div></div></div>
+<div class="tp-panel"><div class="tp-panel-head"><div><h3>Accesos rápidos</h3><p>Configure la operación antes de programar salidas.</p></div></div><div class="d-flex gap-2 flex-wrap">${[['TP_Rutas','Crear ruta'],['TP_Unidades','Registrar unidad'],['TP_Personal','Registrar personal'],['TP_Viajes','Programar viaje'],['TP_Pasajeros','Registrar pasajero']].map(([k,l])=>`<button class="btn btn-sm btn-outline-primary" onclick="tpGo('${k}')"><i class="fa-solid fa-plus me-1"></i>${l}</button>`).join('')}</div></div>`;}
+function tpRenderEntity(root,t){const cfg=TP_CFG[t];if(!cfg){root.innerHTML='<div class="tp-empty">Sección no disponible.</div>';return;}const rows=tpData[t]||[];const cols=cfg.cols||[];const addAllowed=!cfg.readonly&&tpPermission('agregar');root.innerHTML=`<div class="tp-panel"><div class="tp-panel-head"><div><h3>${cfg.label}</h3><p>${rows.length} registro(s) en esta empresa</p></div><div class="d-flex gap-2 flex-wrap"><input class="form-control form-control-sm" style="max-width:220px" id="tp-filter" placeholder="Buscar…" oninput="tpFilterRows()">${addAllowed?`<button class="btn btn-sm btn-primary" onclick="tpOpenForm('${t}')"><i class="fa-solid fa-plus me-1"></i>Nuevo</button>`:''}</div></div><div class="tp-table-wrap"><table class="tp-table"><thead><tr>${cols.map(c=>`<th>${tpEsc(c.replaceAll('_',' '))}</th>`).join('')}<th>Acciones</th></tr></thead><tbody id="tp-table-body">${tpRowsHtml(t,rows)}</tbody></table></div>${rows.length?'':'<div class="tp-empty">Todavía no hay registros en esta sección.</div>'}</div>`;}
+function tpRowsHtml(t,rows){const cfg=TP_CFG[t],cols=cfg.cols||[];return rows.map(r=>`<tr data-search="${tpEsc(JSON.stringify(r).toLowerCase())}">${cols.map(c=>`<td>${tpCell(t,c,r[c])}</td>`).join('')}<td><div class="tp-actions">${cfg.readonly?'':`<button title="Editar" onclick="tpOpenForm('${t}','${r.row_id}')"><i class="fa-solid fa-pen"></i></button><button class="danger" title="Eliminar" onclick="tpDelete('${t}','${r.row_id}')"><i class="fa-solid fa-trash"></i></button>`}${t==='TP_Reservas'&&r.estado==='pendiente'?`<button title="Convertir en boleto" onclick="tpConvertReservation('${r.row_id}')"><i class="fa-solid fa-ticket"></i></button><button class="danger" title="Cancelar reserva" onclick="tpCancelReservation('${r.row_id}')"><i class="fa-solid fa-ban"></i></button>`:''}${t==='TP_Listines'?`<button title="Abordaje" onclick="tpMarkBoarding('${r.row_id}')"><i class="fa-solid fa-clipboard-check"></i></button>`:''}</div></td></tr>`).join('');}
+function tpCell(t,c,v){if(v===null||v===undefined||v==='')return '<span class="text-muted">—</span>';const rel={vehiculo_row_id:'Vehiculos',ruta_id:'TP_Rutas',parada_id:'TP_Paradas',parada_origen_id:'TP_Paradas',parada_destino_id:'TP_Paradas',unidad_id:'TP_Unidades',viaje_id:'TP_Viajes',pasajero_id:'TP_Pasajeros',asiento_id:'TP_Asientos',boleto_id:'TP_Boletos',reserva_id:'TP_Reservas',listin_id:'TP_Listines',horario_id:'TP_Horarios',turno_id:'TP_Turnos',conductor_id:'TP_Personal',auxiliar_id:'TP_Personal'};if(rel[c])return tpEsc(tpLabel(rel[c],v));if(typeof v==='boolean')return v?'Sí':'No';if(c==='monto'||c==='peso_kg'||c==='distancia_km')return tpEsc(Number(v).toLocaleString('es-VE',{maximumFractionDigits:2}));return tpEsc(Array.isArray(v)?v.join(', '):v);}
+function tpFilterRows(){const q=String(document.getElementById('tp-filter')?.value||'').toLowerCase();document.querySelectorAll('#tp-table-body tr').forEach(r=>r.classList.toggle('d-none',!String(r.dataset.search||'').includes(q)));}
+function tpOpenForm(t,id=''){if(!tpPermission(id?'modificar':'agregar'))return;const cfg=TP_CFG[t];if(!cfg||cfg.readonly)return;tpEditing={table:t,id};const row=id?(tpData[t]||[]).find(x=>String(x.row_id)===String(id)):null;document.getElementById('tp-form-title').textContent=(row?'Editar ':'Registrar ')+cfg.label;document.getElementById('tp-form-subtitle').textContent='Los datos se guardarán en la empresa operadora seleccionada.';const fields=document.getElementById('tp-form-fields');fields.innerHTML=(cfg.fields||[]).map(([k,label,type,required,extra])=>{const val=row?.[k];const req=required?'required':'';let control='';if(type==='rel'){const opts=extra==='Vehiculos'?(db?.vehiculos||[]):(tpData[extra]||[]);control=`<select name="${k}" ${req}><option value="">Seleccione…</option>${opts.map(x=>`<option value="${x.row_id}" ${String(val||'')===String(x.row_id)?'selected':''}>${tpEsc(tpLabel(extra,x.row_id))}</option>`).join('')}</select>`;}else if(type==='select'){control=`<select name="${k}" ${req}>${(extra||[]).map(x=>`<option value="${tpEsc(x)}" ${String(val??'')===x?'selected':''}>${tpEsc(x.replaceAll('_',' '))}</option>`).join('')}</select>`;}else if(type==='bool'){control=`<select name="${k}"><option value="true" ${(val===undefined?true:!!val)?'selected':''}>Sí</option><option value="false" ${val===false?'selected':''}>No</option></select>`;}else if(type==='textarea'){control=`<textarea name="${k}" ${req}>${tpEsc(val??'')}</textarea>`;}else if(type==='json'){control=`<input name="${k}" data-json="1" value="${tpEsc(JSON.stringify(val??(k==='dias_operacion'?['lunes','martes','miercoles','jueves','viernes','sabado','domingo']:[])))}" placeholder='["lunes","martes"]' ${req}>`;}else{const inputType=type==='datetime'?'datetime-local':type==='email'?'email':type;const v=type==='datetime'&&val?String(val).slice(0,16):val??'';control=`<input name="${k}" type="${inputType}" value="${tpEsc(v)}" ${req} ${type==='number'?'step="any"':''}>`;}return `<label class="tp-field"><span>${tpEsc(label)}${required?' *':''}</span>${control}</label>`;}).join('');if(t==='TP_Unidades'){const preset=document.createElement('div');preset.className='tp-model-presets';preset.innerHTML=`<label>Modelo de unidad de referencia<select id="tp-unit-preset"><option value="">Seleccionar modelo / capacidad sugerida</option><option value="coaster29">Toyota Coaster — 29 puestos</option><option value="sprinter19">Mercedes-Benz Sprinter — 19 puestos</option><option value="daily18">Iveco Daily — 18 puestos</option><option value="daily24">Iveco Daily Eurobus — 24 puestos</option><option value="lo914">Mercedes-Benz LO 914 — 25 puestos</option><option value="lo915">Mercedes-Benz LO 915 — 25 puestos</option><option value="mb800">Mercedes-Benz MB 800 — 22 puestos</option><option value="piso1_44">Autobús interurbano 1 piso — 44 puestos</option><option value="piso1_56">Autobús interurbano 1 piso — 56 puestos</option><option value="piso2_70">Autobús doble piso — 70 puestos (configurable)</option><option value="piso2_80">Autobús doble piso — 80 puestos (configurable)</option></select></label><div class="tp-model-note">Capacidades orientativas: pueden variar según carrocería, distribución, normativa y configuración real. El plano se puede ajustar antes de poner la unidad en servicio.</div>`;fields.prepend(preset);preset.querySelector('select').addEventListener('change',ev=>{const v=ev.target.value;const map={coaster29:['Toyota','Coaster',29,8,4,1],sprinter19:['Mercedes-Benz','Sprinter',19,5,4,1],daily18:['Iveco','Daily',18,5,4,1],daily24:['Iveco','Daily Eurobus',24,6,4,1],lo914:['Mercedes-Benz','LO 914',25,7,4,1],lo915:['Mercedes-Benz','LO 915',25,7,4,1],mb800:['Mercedes-Benz','MB 800',22,6,4,1],piso1_44:['Interurbano','Autobús 1 piso',44,11,4,1],piso1_56:['Interurbano','Autobús 1 piso',56,14,4,1],piso2_70:['Doble piso','Autobús 2 pisos',70,9,4,2],piso2_80:['Doble piso','Autobús 2 pisos',80,10,4,2]};const a=map[v];if(!a)return;const set=(name,val)=>{const el=fields.querySelector(`[name="${name}"]`);if(el)el.value=val;};set('marca',a[0]);set('modelo',a[1]);set('capacidad_pasajeros',a[2]);set('filas',a[3]);set('columnas',a[4]);set('tipo_unidad',a[5]===2?'autobus_doble_piso':'autobus');});}if(t==='TP_Viajes'){const unitSel=document.querySelector('#tp-form select[name="unidad_id"]');if(unitSel)unitSel.addEventListener('change',()=>{const unit=(tpData.TP_Unidades||[]).find(x=>String(x.row_id)===unitSel.value);const cap=document.querySelector('#tp-form [name="capacidad"]');if(cap&&unit)cap.value=unit.capacidad_pasajeros||'';});}document.getElementById('tp-form-modal').classList.add('show');document.getElementById('tp-form-modal').setAttribute('aria-hidden','false');}
+function tpCloseForm(){document.getElementById('tp-form-modal')?.classList.remove('show');document.getElementById('tp-form-modal')?.setAttribute('aria-hidden','true');tpEditing=null;}
+async function tpSaveForm(e){e.preventDefault();if(!tpEditing)return;const {table,id}=tpEditing;const cfg=TP_CFG[table];if(!tpPermission(id?'modificar':'agregar'))return;const form=e.currentTarget;const payload={empresa_row_id:tpCompanyId()};for(const f of cfg.fields){const [k,label,type]=f;const el=form.elements.namedItem(k);if(!el)continue;let v=el.value;if(type==='number')v=v===''?null:Number(v);else if(type==='bool')v=v==='true';else if(type==='json'){try{v=JSON.parse(v||'[]');}catch(_){tpNotify('El campo '+label+' debe contener JSON válido.');return;}}else if(type==='datetime')v=v?new Date(v).toISOString():null;else if(v==='')v=null;payload[k]=v;}try{let saved;if(id)saved=await sbUpdate(table,id,payload);else saved=await sbInsert(table,payload);if(table==='TP_Unidades')await tpEnsureUnitSeats(saved);if(table==='TP_Viajes'&&!id)await tpBuildTrip(saved);await tpAudit(table,id?'UPDATE':'CREATE',saved?.row_id,payload);tpCloseForm();await tpLoad(true);tpNotify('Registro guardado correctamente.','success');}catch(err){tpNotify('No se pudo guardar: '+(err?.message||err),'danger');}}
+async function tpDelete(t,id){if(!tpPermission('eliminar'))return;if(!await confirmarAccionModal('Eliminar registro','¿Confirma que desea eliminar este registro? Esta acción puede estar bloqueada si existen operaciones relacionadas.'))return;try{await sbDelete(t,id);await tpAudit(t,'DELETE',id,null);await tpLoad(true);tpNotify('Registro eliminado.','success');}catch(e){tpNotify('No se pudo eliminar: '+(e?.message||e),'danger');}}
+async function tpAudit(entidad,accion,id,data){try{await sbInsert('TP_Auditoria',{empresa_row_id:tpCompanyId(),usuario_id:window.currentUser?.row_id||null,entidad,registro_id:id||null,accion,datos_nuevos:data||null,user_agent:navigator.userAgent});}catch(e){console.warn('[TP] Auditoría no registrada:',e?.message||e);}}
+async function tpEnsureUnitSeats(unitOrId){const unit=typeof unitOrId==='object'?unitOrId:(tpData.TP_Unidades||[]).find(x=>String(x.row_id)===String(unitOrId));if(!unit)return;const unitId=unit.row_id;const existing=await sbSelect('TP_Asientos',{limit:1000,filter:'unidad_id=eq.'+encodeURIComponent(unitId)});if(existing.length)return;const rows=[],capacity=Math.max(1,Number(unit.capacidad_pasajeros||0)),decks=unit.tipo_unidad==='autobus_doble_piso'?2:1,c=Math.max(2,Math.min(4,Number(unit.columnas||4))),perDeck=Math.ceil(capacity/decks),r=Math.max(1,Math.ceil(perDeck/c));let custom=[];try{custom=Array.isArray(unit.configuracion_asientos)?unit.configuracion_asientos:JSON.parse(unit.configuracion_asientos||'[]');}catch(_){custom=[];}if(Array.isArray(custom)&&custom.length){custom.forEach((x,i)=>{if(!x||!String(x.codigo||'').trim())return;rows.push({empresa_row_id:tpCompanyId(),unidad_id:unitId,codigo:String(x.codigo),fila:Number(x.fila||Math.ceil((i+1)/c)),columna:Number(x.columna||((i%c)+1)),piso:Number(x.piso||1),lado:x.lado||'izquierdo',tipo:x.tipo||'regular',accesible:!!x.accesible,activo:x.activo!==false});});}else{for(let floor=1;floor<=decks;floor++){let n=0;for(let i=1;i<=r&&n<perDeck;i++){for(let j=1;j<=c&&n<perDeck;j++){n++;const prefix=decks===2?(floor===1?'PB':'PA'):'';rows.push({empresa_row_id:tpCompanyId(),unidad_id:unitId,codigo:prefix+String.fromCharCode(64+i)+j,fila:i,columna:j,piso:floor,lado:j<=Math.ceil(c/2)?'izquierdo':'derecho',tipo:'regular',activo:true});}}}}for(const row of rows)await sbInsert('TP_Asientos',row);}
+async function tpBuildTrip(trip){const cid=tpCompanyId();const routeStops=(tpData.TP_RutaParadas||[]).filter(x=>String(x.ruta_id)===String(trip.ruta_id)).sort((a,b)=>Number(a.orden)-Number(b.orden));for(const rs of routeStops){await sbInsert('TP_ViajeParadas',{empresa_row_id:cid,viaje_id:trip.row_id,parada_id:rs.parada_id,orden:rs.orden,permite_subida:rs.permite_subida!==false,permite_bajada:rs.permite_bajada!==false});}let seats=await sbSelect('TP_Asientos',{limit:1000,filter:'unidad_id=eq.'+encodeURIComponent(trip.unidad_id)});seats=seats.filter(x=>x.activo!==false);for(const seat of seats)await sbInsert('TP_ViajeAsientos',{empresa_row_id:cid,viaje_id:trip.row_id,asiento_id:seat.row_id,estado:'disponible'});}
+function tpRenderTrips(root){const trips=tpData.TP_Viajes||[];root.innerHTML=`<div class="tp-panel"><div class="tp-panel-head"><div><h3>Viajes y salidas</h3><p>Programe salidas, consulte disponibilidad y emita boletos desde el plano de asientos.</p></div><button class="btn btn-sm btn-primary" onclick="tpOpenForm('TP_Viajes')"><i class="fa-solid fa-plus me-1"></i>Programar viaje</button></div>${trips.length?`<div class="tp-trip-grid">${trips.map(x=>`<div class="tp-trip-card"><div class="d-flex justify-content-between gap-2"><h4>${tpEsc(x.codigo||'Viaje')}</h4><span class="tp-pill">${tpEsc(x.estado)}</span></div><div class="tp-trip-meta"><b>${tpEsc(tpLabel('TP_Rutas',x.ruta_id))}</b><br>${tpEsc(x.fecha_salida)} · ${tpEsc(x.hora_salida)}<br>Unidad: ${tpEsc(tpLabel('TP_Unidades',x.unidad_id))}<br>Conductor: ${tpEsc(tpLabel('TP_Personal',x.conductor_id))}<br>Capacidad: ${tpEsc(x.capacidad)}</div><div class="d-flex gap-2 mt-2"><button class="btn btn-sm btn-outline-primary" onclick="tpShowSeats('${x.row_id}')"><i class="fa-solid fa-chair me-1"></i>Ver asientos</button><button class="btn btn-sm btn-outline-secondary" onclick="tpOpenForm('TP_Viajes','${x.row_id}')"><i class="fa-solid fa-pen me-1"></i>Editar</button></div><div id="tp-seats-${x.row_id}"></div></div>`).join('')}</div>`:'<div class="tp-empty">No hay viajes programados.</div>'}</div>`;}
+async function tpShowSeats(tripId){const box=document.getElementById('tp-seats-'+tripId);if(!box)return;box.innerHTML='<div class="tp-empty"><i class="fa-solid fa-spinner fa-spin"></i> Cargando plano de la unidad…</div>';try{let inventory=await sbSelect('TP_ViajeAsientos',{limit:1000,filter:'viaje_id=eq.'+encodeURIComponent(tripId)});const trip=(tpData.TP_Viajes||[]).find(x=>String(x.row_id)===String(tripId));const unit=(tpData.TP_Unidades||[]).find(x=>String(x.row_id)===String(trip?.unidad_id));const unitSeats=(tpData.TP_Asientos||[]).filter(x=>String(x.unidad_id)===String(trip?.unidad_id)&&x.activo!==false);const have=new Set(inventory.map(x=>String(x.asiento_id)));for(const seat of unitSeats.filter(x=>!have.has(String(x.row_id)))){const row=await sbInsert('TP_ViajeAsientos',{empresa_row_id:tpCompanyId(),viaje_id:tripId,asiento_id:seat.row_id,estado:'disponible'});inventory.push(row);}const decks=Number(unit?.tipo_unidad==='autobus_doble_piso'?2:Math.max(1,...unitSeats.map(x=>Number(x.piso||1))));let activeDeck=1;const draw=()=>{const rows=unitSeats.filter(x=>Number(x.piso||1)===activeDeck).sort((a,b)=>Number(a.fila||0)-Number(b.fila||0)||Number(a.columna||0)-Number(b.columna||0));const maxRow=Math.max(1,...rows.map(x=>Number(x.fila||1)));const maxCol=Math.max(4,Number(unit?.columnas||4));const byKey=new Map(inventory.map(x=>[String(x.asiento_id),x]));let html='';for(let r=1;r<=maxRow;r++){html+=`<div class="tp-bus-grid" style="grid-row:${r}">`;for(let c=1;c<=4;c++){if(c===3)html+='<div class="tp-bus-aisle">PASILLO</div>';const seat=rows.find(x=>Number(x.fila||1)===r&&Number(x.columna||1)===c);if(!seat){html+='<span></span>';continue;}const inv=byKey.get(String(seat.row_id));const state=inv?.estado||'disponible';html+=`<button class="tp-bus-seat ${tpEsc(state)}" style="grid-column:${c<=2?c:c+1}" ${state==='disponible'?'':'disabled'} title="Asiento ${tpEsc(seat.codigo)} · ${tpEsc(state)}" onclick="tpOpenSale('${tripId}','${seat.row_id}')"><i class="fa-solid fa-chair"></i><span>${tpEsc(seat.codigo)}</span></button>`;}html+='</div>';}return `<div class="tp-bus-visual"><div class="tp-bus-front"><i class="fa-solid fa-steering-wheel"></i> FRENTE · CONDUCTOR</div><div class="tp-bus-body">${html}</div></div>`;};const render=()=>{const tabs=decks===2?`<div class="tp-deck-tabs"><button type="button" class="${activeDeck===1?'active':''}" onclick="tpSetDeck('${tripId}',1)">Piso inferior</button><button type="button" class="${activeDeck===2?'active':''}" onclick="tpSetDeck('${tripId}',2)">Piso superior</button></div>`:'';box.innerHTML=`${tabs}${draw()}<div class="tp-legend"><span><i class="tp-dot"></i>Disponible · clic para vender</span><span><i class="tp-dot amber"></i>Reservado</span><span><i class="tp-dot red"></i>Ocupado</span><span><i class="tp-dot gray"></i>Bloqueado</span></div>`;};window.tpDeckRender=(floor)=>{activeDeck=floor;render();};window.tpDeckTrip=tripId;render();}catch(e){box.innerHTML='<div class="tp-empty">No se pudo cargar el plano: '+tpEsc(e.message||e)+'</div>';}}
+function tpSetDeck(tripId,floor){if(String(window.tpDeckTrip)!==String(tripId)||typeof window.tpDeckRender!=='function')return;window.tpDeckRender(Number(floor));}
+
+async function tpOpenSale(tripId,seatId){if(!tpPermission('agregar'))return;const stops=(tpData.TP_ViajeParadas||[]).filter(x=>String(x.viaje_id)===String(tripId)).sort((a,b)=>Number(a.orden)-Number(b.orden));if(stops.length<2){tpNotify('Este viaje no tiene al menos dos paradas configuradas. Verifique el itinerario de la ruta.');return;}document.getElementById('tp-sale-form').reset();document.getElementById('tp-sale-trip').value=tripId;document.getElementById('tp-sale-seat').value=seatId;const fill=(id,items)=>document.getElementById(id).innerHTML=items.map(x=>`<option value="${x.parada_id}">${tpEsc(tpLabel('TP_Paradas',x.parada_id))}</option>`).join('');fill('tp-sale-origin',stops.filter(x=>x.permite_subida!==false&&Number(x.orden)<Math.max(...stops.map(y=>Number(y.orden)))));fill('tp-sale-dest',stops.filter(x=>x.permite_bajada!==false&&Number(x.orden)>Math.min(...stops.map(y=>Number(y.orden)))));document.getElementById('tp-sale-amount').value='';document.getElementById('tp-sale-origin').onchange=tpApplyFare;document.getElementById('tp-sale-dest').onchange=tpApplyFare;tpApplyFare();document.getElementById('tp-sale-modal').classList.add('show');document.getElementById('tp-sale-modal').setAttribute('aria-hidden','false');}
+function tpApplyFare(){const trip=(tpData.TP_Viajes||[]).find(x=>String(x.row_id)===String(document.getElementById('tp-sale-trip')?.value||''));if(!trip)return;const origin=document.getElementById('tp-sale-origin')?.value,dest=document.getElementById('tp-sale-dest')?.value;if(!origin||!dest)return;const fares=(tpData.TP_Tarifas||[]).filter(x=>String(x.ruta_id)===String(trip.ruta_id)&&x.activa!==false);const exact=fares.find(x=>String(x.parada_origen_id||'')===String(origin)&&String(x.parada_destino_id||'')===String(dest));const general=fares.find(x=>!x.parada_origen_id&&!x.parada_destino_id);const fare=exact||general;if(fare){document.getElementById('tp-sale-amount').value=Number(fare.monto||0);document.getElementById('tp-sale-currency').value=fare.moneda||'USD';}}
+function tpCloseSale(){document.getElementById('tp-sale-modal')?.classList.remove('show');document.getElementById('tp-sale-modal')?.setAttribute('aria-hidden','true');}
+async function tpCreateReservation(){const form=document.getElementById('tp-sale-form');if(!form.reportValidity())return;if(!tpPermission('agregar'))return;const tripId=document.getElementById('tp-sale-trip').value,seatId=document.getElementById('tp-sale-seat').value;const val=id=>String(document.getElementById(id)?.value||'').trim();try{let passenger=(tpData.TP_Pasajeros||[]).find(x=>val('tp-sale-doc')&&String(x.documento_numero||'')===val('tp-sale-doc'));if(!passenger){passenger=await sbInsert('TP_Pasajeros',{empresa_row_id:tpCompanyId(),nombres:val('tp-sale-nombres'),apellidos:val('tp-sale-apellidos'),documento_tipo:val('tp-sale-doc-type'),documento_numero:val('tp-sale-doc')||null,telefono:val('tp-sale-phone')||null,correo:val('tp-sale-email')||null});}const result=await sbRpc('tp_reservar_asiento_empresa',{p_empresa_row_id:tpCompanyId(),p_viaje_id:tripId,p_asiento_id:seatId,p_pasajero_id:passenger.row_id,p_parada_origen_id:val('tp-sale-origin'),p_parada_destino_id:val('tp-sale-dest'),p_monto:Number(val('tp-sale-amount')),p_moneda:val('tp-sale-currency'),p_canal:'taquilla',p_minutos_vigencia:15});tpCloseSale();await tpLoad(true);tpNotify('Reserva creada correctamente. El asiento queda retenido durante 15 minutos; confirme el pago y emita el boleto antes del vencimiento.','success');}catch(err){tpNotify('No se pudo crear la reserva: '+(err?.message||err),'danger');}}
+async function tpCompleteSale(e){e.preventDefault();if(!tpPermission('agregar'))return;const tripId=document.getElementById('tp-sale-trip').value,seatId=document.getElementById('tp-sale-seat').value;const val=id=>String(document.getElementById(id)?.value||'').trim();try{let passenger=(tpData.TP_Pasajeros||[]).find(x=>val('tp-sale-doc')&&String(x.documento_numero||'')===val('tp-sale-doc'));if(!passenger){passenger=await sbInsert('TP_Pasajeros',{empresa_row_id:tpCompanyId(),nombres:val('tp-sale-nombres'),apellidos:val('tp-sale-apellidos'),documento_tipo:val('tp-sale-doc-type'),documento_numero:val('tp-sale-doc')||null,telefono:val('tp-sale-phone')||null,correo:val('tp-sale-email')||null});}const result=await sbRpc('tp_emitir_boleto',{p_empresa_row_id:tpCompanyId(),p_viaje_id:tripId,p_asiento_id:seatId,p_pasajero_id:passenger.row_id,p_parada_origen_id:val('tp-sale-origin'),p_parada_destino_id:val('tp-sale-dest'),p_monto:Number(val('tp-sale-amount')),p_moneda:val('tp-sale-currency'),p_canal:'taquilla',p_metodo:val('tp-sale-method'),p_referencia:val('tp-sale-reference')||null});tpCloseSale();await tpLoad(true);tpNotify('Boleto emitido: '+(result?.boleto?.codigo||'operación confirmada')+'. Pago y listín creados automáticamente.','success');}catch(err){tpNotify('No se pudo emitir el boleto: '+(err?.message||err),'danger');}}
+function tpConvertReservation(id){if(!tpPermission('modificar'))return;document.getElementById('tp-reservation-id').value=id;document.getElementById('tp-reservation-reference').value='';document.getElementById('tp-reservation-modal').classList.add('show');document.getElementById('tp-reservation-modal').setAttribute('aria-hidden','false');}
+function tpCloseReservation(){document.getElementById('tp-reservation-modal')?.classList.remove('show');document.getElementById('tp-reservation-modal')?.setAttribute('aria-hidden','true');}
+async function tpCompleteReservationConversion(e){e.preventDefault();if(!tpPermission('modificar'))return;try{const result=await sbRpc('tp_convertir_reserva_boleto',{p_empresa_row_id:tpCompanyId(),p_reserva_id:document.getElementById('tp-reservation-id').value,p_metodo:document.getElementById('tp-reservation-method').value,p_referencia:document.getElementById('tp-reservation-reference').value||null});tpCloseReservation();await tpLoad(true);tpNotify('Reserva convertida en boleto '+(result?.boleto?.codigo||'correctamente')+'. Pago y listín registrados.','success');}catch(err){tpNotify('No se pudo convertir la reserva: '+(err?.message||err),'danger');}}
+async function tpCancelReservation(id){if(!tpPermission('modificar'))return;if(!await confirmarAccionModal('Cancelar reserva','¿Desea cancelar esta reserva y liberar el asiento?'))return;try{await sbRpc('tp_cancelar_reserva_empresa',{p_empresa_row_id:tpCompanyId(),p_reserva_id:id});await tpLoad(true);tpNotify('Reserva cancelada y asiento liberado.','success');}catch(err){tpNotify('No se pudo cancelar la reserva: '+(err?.message||err),'danger');}}
+async function tpMarkBoarding(listinId){if(!tpPermission('modificar'))return;try{await sbUpdate('TP_Listines',listinId,{estado_abordaje:'abordo'});await sbInsert('TP_Abordajes',{empresa_row_id:tpCompanyId(),listin_id:listinId,punto:'Control de abordaje',resultado:'abordo',registrado_por:window.currentUser?.row_id||null});await tpLoad(true);tpNotify('Pasajero marcado a bordo.','success');}catch(e){tpNotify('No se pudo registrar el abordaje: '+(e.message||e),'danger');}}
+Object.assign(window,{tpInit,tpLoad,tpGo,tpChangeCompany,tpOpenForm,tpCloseForm,tpSaveForm,tpDelete,tpFilterRows,tpShowSeats,tpSetDeck,tpOpenSale,tpApplyFare,tpCloseSale,tpCreateReservation,tpCompleteSale,tpConvertReservation,tpCloseReservation,tpCompleteReservationConversion,tpCancelReservation,tpMarkBoarding});
+})();
+</script>
+
+
+<script id="lc-session-close-and-sidebar-clock">
+(function(){
+ 'use strict';
+ function updateSidebarClock(){const now=new Date(),d=document.getElementById('lc-sidebar-date'),t=document.getElementById('lc-sidebar-time');if(!d||!t)return;const p=n=>String(n).padStart(2,'0'),h=now.getHours();d.textContent=p(now.getDate())+'/'+p(now.getMonth()+1)+'/'+now.getFullYear();t.textContent=((h%12)||12)+':'+p(now.getMinutes())+':'+p(now.getSeconds())+' '+(h>=12?'PM':'AM');}
+ updateSidebarClock();window.setInterval(updateSidebarClock,1000);
+ // Al abandonar la pestaña se retira la sesión local; la expiración por inactividad
+ // continúa usando el mecanismo central del portal y su limpieza de modales.
+ window.addEventListener('pagehide',function(){
+  try{['erp_session_user','erp_session_last_activity','erp_current_module','portal_auth_session'].forEach(k=>localStorage.removeItem(k));}catch(e){}
+ },{capture:true});
 })();
 </script>
 </body>
