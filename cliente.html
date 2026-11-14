@@ -94,6 +94,7 @@ body:not(.erp-authenticated){ position: fixed !important; inset: 0 !important; w
 #sidebar .nav-link:hover, #sidebar .nav-link.active{ color: #ffffff; background: linear-gradient(135deg, #2563eb, #1d4ed8); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
 .sidebar-backdrop{ position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 999; display: none; }
 #main-content{ margin-left: var(--sidebar-width); padding: 24px; min-height: 100vh; transition: margin-left 0.3s ease; }
+#main-content>header{ position:sticky; top:0; z-index:1040; display:flex; width:100%; box-sizing:border-box; margin:0 0 1.25rem; }
 .kpi-card{ background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; transition: all 0.3s ease; position: relative; overflow: hidden; }
 .kpi-card::before{ content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; border-radius: 16px 0 0 16px; }
 .kpi-card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-lg); }
@@ -4138,32 +4139,11 @@ html[data-bs-theme="dark"] #tp-view .tp-field input::placeholder,html[data-bs-th
 html[data-bs-theme="dark"] .lc-sidebar-datetime,body.dark-mode .lc-sidebar-datetime{color:#cbd5e1;border-bottom-color:rgba(148,163,184,.22)}
 </style>
 
-<style id="lc-sidebar-clock-inline-and-sticky-header">
+<style id="lc-sidebar-clock-inline">
 /* Fecha y hora en una sola línea debajo del logotipo */
 #lc-sidebar-datetime{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:0!important;white-space:nowrap!important;padding:7px 8px 10px!important;margin:0 10px 10px!important;font-size:.74rem!important;line-height:1.25!important;font-variant-numeric:tabular-nums!important;}
 #lc-sidebar-date,#lc-sidebar-time{display:inline!important;font-size:inherit!important;font-weight:750!important;letter-spacing:0!important;}
 #lc-sidebar-date::after{content:",\00a0";}
-/* Barra superior persistente: título del módulo, notificaciones y usuario */
-#main-content>header{
-  position:fixed!important;
-  top:0!important;
-  left:calc(var(--sidebar-width,260px) + 1rem)!important;
-  right:1rem!important;
-  width:auto!important;
-  z-index:1040!important;
-  margin:0!important;
-  border-radius:0 0 12px 12px!important;
-  box-sizing:border-box!important;
-  isolation:isolate!important;
-  box-shadow:0 5px 18px rgba(15,23,42,.12)!important;
-}
-/* Reserva espacio para que el contenido no quede debajo de la barra fija */
-#main-content{padding-top:112px!important;}
-body.sidebar-collapsed #main-content>header{left:1rem!important;right:1rem!important;}
-@media(max-width:991.98px){
-  #main-content>header{left:1rem!important;right:1rem!important;}
-  #main-content{padding-top:112px!important;}
-}
 </style>
 </head>
 <!-- VERSION Servidor 2026.1.2 — V39.8 filtros OPERACIONES TÉCNICAS unificados -->
@@ -6686,7 +6666,7 @@ html[data-bs-theme="dark"] .sports-management-table, body.dark-mode .sports-mana
 <div class="col-md-6"><label class="form-label small fw-semibold">Teléfono del representante</label><input class="form-control form-control-pro" id="emp_representante_tel" maxlength="40"/></div>
 <div class="col-md-6"><label class="form-label small fw-semibold">Correo del representante</label><input class="form-control form-control-pro" id="emp_representante_email" type="email" maxlength="160"/></div>
 <div class="col-12" id="emp-alias-section"><hr/><h6 class="fw-bold text-primary mb-1">Acceso empresarial</h6><div class="row g-3">
-<div class="col-md-6"><label class="form-label small fw-semibold">Alias / dominio de acceso *</label><div class="input-group"><span class="input-group-text">@</span><input class="form-control form-control-pro" id="emp_slug" required pattern="[a-z0-9][a-z0-9\-]{1,39}" minlength="2" maxlength="40" placeholder="miempresa"/></div><small class="text-muted">Se utilizará para iniciar sesión: usuario@dominio.</small></div>
+<div class="col-md-6"><label class="form-label small fw-semibold">Alias / dominio de acceso *</label><div class="input-group"><span class="input-group-text">@</span><input class="form-control form-control-pro" id="emp_slug" required pattern="[a-z0-9][a-z0-9\-]{1,39}" minlength="2" maxlength="40" placeholder="miempresa" autocomplete="off" autocapitalize="none" spellcheck="false" oninput="this.value=this.value.toLowerCase();actualizarAliasMasterEmpresa_()"/></div><small class="text-muted">Se utilizará para iniciar sesión: usuario@dominio.</small></div>
 <div class="col-md-6"><label class="form-label small fw-semibold">Estado de suscripción</label><select class="form-select form-select-pro" id="emp_estado_suscripcion"><option value="activa">Activa</option><option value="proxima_vencer">Próxima a vencer</option><option value="pendiente_confirmacion">Pendiente de confirmación</option><option value="suspendida">Suspendida</option></select></div>
 </div></div>
 <div class="col-12" id="emp-master-section"><hr/><h6 class="fw-bold text-primary mb-1">Usuario Master inicial</h6><p class="small text-muted mb-2">Se crea junto con la empresa y queda vinculado como administrador principal.</p><div class="row g-3">
@@ -20748,6 +20728,12 @@ input[type="password"], input[autocomplete="username"], #loginUser, #loginPasswo
     if (!(el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement)) return;
     const type = (el.getAttribute('type') || 'text').toLowerCase();
     if (['button','submit','reset','password','hidden','checkbox','radio','file','color','range','date','datetime-local','month','week','time','number'].includes(type)) return;
+    // El alias empresarial es un identificador técnico y debe permanecer en minúsculas.
+    if (el.id === 'emp_slug') {
+      const lower = el.value.toLowerCase();
+      if (lower !== el.value) el.value = lower;
+      return;
+    }
     const original = el.value;
     const inicio = el.selectionStart, fin = el.selectionEnd;
     const nuevo = original.toLocaleUpperCase('es-VE');
