@@ -1,0 +1,21 @@
+{
+  "id": "./cliente.html",
+  "name": "LC Soluciones Tecnológicas",
+  "short_name": "LC Soluciones",
+  "description": "Portal de gestión de LC Soluciones Tecnológicas",
+  "lang": "es-VE",
+  "start_url": "./cliente.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f4f7fb",
+  "theme_color": "#123b60",
+  "icons": [
+    {
+      "src": "./img/favicon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
