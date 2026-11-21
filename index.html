@@ -225,7 +225,46 @@ html[data-theme="dark"] footer .footer-socials .social-facebook:hover,html[data-
 .topline,.utility-bar,main,footer{position:relative;z-index:1}
 header{z-index:50}
 .skip,.to-top,.floating-whatsapp{z-index:60}
-@media(prefers-reduced-motion:reduce){#lc-neural-bg{opacity:.52}}</style>
+@media(prefers-reduced-motion:reduce){#lc-neural-bg{opacity:.52}}
+/* Carrusel publicitario LC: sección independiente y adaptable. */
+#lc-publicidad{position:relative;z-index:1;padding:34px 0 42px;background:transparent;border:0;overflow:hidden}
+#lc-publicidad .lc-ads-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:18px}
+#lc-publicidad .lc-ads-kicker{display:block;margin-bottom:5px;color:var(--accent);font-size:.68rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+#lc-publicidad .lc-ads-title{margin:0;color:var(--ink);font-size:clamp(1.25rem,2.4vw,1.8rem);line-height:1.15;letter-spacing:-.035em}
+#lc-publicidad .lc-ads-subtitle{margin:6px 0 0;color:var(--muted);font-size:.82rem}
+#lc-publicidad .lc-ads-window{position:relative;overflow:hidden;padding:12px 0 20px;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
+#lc-publicidad .lc-ads-track{display:flex;width:max-content;gap:0;will-change:transform;animation:lcAdsConveyor 26s linear infinite}
+#lc-publicidad .lc-ads-window:hover .lc-ads-track,#lc-publicidad .lc-ads-window:focus-within .lc-ads-track{animation-play-state:paused}
+#lc-publicidad .lc-ad-card{position:relative;display:block;flex:0 0 clamp(220px,25vw,290px);width:clamp(220px,25vw,290px);height:158px;overflow:hidden;padding:0;border:1px solid var(--line);border-radius:17px;background:var(--surface);color:var(--ink);box-shadow:0 9px 25px rgba(15,35,55,.10);cursor:pointer;text-align:left;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+#lc-publicidad .lc-ad-card:hover,#lc-publicidad .lc-ad-card:focus-visible{z-index:3;transform:translateY(-3px) scale(1.07);border-color:color-mix(in srgb,var(--accent2) 65%,var(--line));box-shadow:0 18px 38px rgba(15,35,55,.24);outline:none}
+#lc-ad-hover-preview{position:fixed;z-index:1100;display:none;pointer-events:none;padding:7px;border:1px solid rgba(34,211,238,.8);border-radius:15px;background:rgba(3,12,28,.94);box-shadow:0 22px 65px rgba(0,0,0,.55);backdrop-filter:blur(8px);max-width:min(82vw,640px);max-height:80vh}
+#lc-ad-hover-preview.is-visible{display:block}
+#lc-ad-hover-preview img{display:block;width:auto;height:auto;max-width:min(80vw,620px);max-height:76vh;object-fit:contain;border-radius:9px}
+#lc-publicidad .lc-ad-card img{display:block;width:100%;height:100%;object-fit:cover}
+#lc-publicidad .lc-ad-card:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(4,12,22,.82))}
+#lc-publicidad .lc-ad-caption{position:absolute;z-index:1;left:14px;right:14px;bottom:11px;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.35)}
+#lc-publicidad .lc-ad-caption strong{display:block;font-size:.9rem;line-height:1.2}
+#lc-publicidad .lc-ad-caption small{display:block;margin-top:3px;font-size:.68rem;opacity:.9}
+#lc-publicidad .lc-ad-empty{padding:19px;border:1px dashed var(--line);border-radius:15px;color:var(--muted);font-size:.82rem;text-align:center;background:var(--surface)}
+#lc-ad-info-modal{position:fixed;z-index:1000;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(2,8,18,.72);backdrop-filter:blur(7px)}
+#lc-ad-info-modal.is-open{display:flex}
+#lc-ad-info-modal{z-index:1200;overflow-y:auto}
+#lc-ad-info-modal .lc-ad-dialog{position:relative;width:min(100%,760px);max-height:92vh;overflow-y:auto;padding:clamp(17px,3vw,28px);border:1px solid color-mix(in srgb,var(--accent2) 45%,var(--line));border-radius:24px;background:var(--surface);color:var(--ink);box-shadow:0 28px 90px rgba(0,0,0,.48)}
+#lc-ad-info-modal .lc-ad-modal-image{display:block;width:100%;max-height:48vh;object-fit:contain;border-radius:15px;background:rgba(2,8,18,.08);margin:4px 0 18px}
+#lc-ad-info-modal .lc-ad-modal-tag{display:inline-flex;margin:0 0 8px;padding:6px 10px;border-radius:999px;background:color-mix(in srgb,var(--accent2) 14%,transparent);color:var(--accent2);font-size:.72rem;font-weight:850}
+#lc-ad-info-modal h3{margin:0 42px 9px 0;font-size:clamp(1.25rem,3vw,1.7rem);line-height:1.2}
+#lc-ad-info-modal p{margin:0;color:var(--muted);font-size:.94rem;line-height:1.65;white-space:pre-line}
+#lc-ad-info-modal .lc-ad-extra{margin-top:12px;color:var(--ink);font-size:.84rem;line-height:1.5}
+#lc-ad-info-modal .lc-ad-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+#lc-ad-info-modal .lc-ad-contact{display:inline-flex;align-items:center;justify-content:center;padding:10px 15px;border-radius:12px;background:var(--accent2);color:#04111f;font-weight:850;font-size:.84rem;text-decoration:none}
+#lc-ad-info-modal .lc-ad-contact[hidden]{display:none}
+#lc-ad-info-modal .lc-ad-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);color:var(--ink);font-size:1.35rem;cursor:pointer}
+#lc-publicidad .lc-ads-group{display:flex;flex:none;align-items:center;gap:18px;padding-right:18px}
+@keyframes lcAdsConveyor{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:600px){#lc-ad-hover-preview{display:none!important}#lc-ad-info-modal{padding:10px}#lc-ad-info-modal .lc-ad-dialog{max-height:94vh;border-radius:18px}#lc-publicidad{padding:27px 0 32px}#lc-publicidad .lc-ads-head{align-items:flex-start;flex-direction:column;gap:5px}#lc-publicidad .lc-ads-track{animation-duration:22s}#lc-publicidad .lc-ads-group{gap:12px;padding-right:12px}#lc-publicidad .lc-ad-card{flex-basis:224px;width:224px;height:132px;border-radius:14px}}
+@media(prefers-reduced-motion:reduce){#lc-publicidad .lc-ads-track{animation:none}#lc-publicidad .lc-ad-card{transition:none}}
+
+</style>
 </head>
 <body>
 <canvas aria-hidden="true" id="lc-neural-bg"></canvas>
@@ -319,6 +358,22 @@ header{z-index:50}
 <section class="section" id="contacto"><div class="container contact-grid"><div class="contact-copy reveal"><div class="section-kicker">Hablemos</div><h2>Cuéntame qué necesitas.</h2><p>Cuéntame si necesitas conectividad, soporte, una página web, una tienda digital o una plataforma para tu restaurante o evento.</p><div class="contact-detail"><span class="contact-icon">⌁</span><div><strong>LC Soluciones Tecnológicas</strong><small>Tecnología * Automatización * Soluciones</small></div></div><div class="contact-detail"><span class="contact-icon">◉</span><div><strong>Contacto directo</strong><small><a href="https://wa.me/584245134562" rel="noopener" target="_blank">Conversar por WhatsApp ↗</a></small></div></div></div>
 <div class="contact-card reveal"><div class="form-head"><strong>Cuéntame sobre tu proyecto</strong><p>Los campos se utilizan para construir una consulta y abrir WhatsApp con el mensaje preparado.</p></div><form class="contact-form" id="contactForm"><div class="field"><label for="name">Nombre</label><input autocomplete="name" id="name" name="name" placeholder="Tu nombre" required=""/></div><div class="field"><label for="company">Empresa <span style="color:var(--muted);font-weight:500">(opcional)</span></label><input autocomplete="organization" id="company" name="company" placeholder="Nombre de la empresa"/></div><div class="field"><label for="interest">Servicio de interés</label><select id="interest" name="interest" required=""><option value="">Selecciona una opción</option><option>Arquitectura de redes</option><option>Fibra óptica y conectividad</option><option>Soporte técnico</option><option>Monitoreo y continuidad</option><option>Portal de gestión digital</option><option>Jornadas laborales y marcaciones</option><option>Solución personalizada</option></select></div><div class="field"><label for="reply">¿Cómo contactarte?</label><input id="reply" name="reply" placeholder="Teléfono o correo (opcional)"/></div><div class="field full"><label for="details">Cuéntame brevemente qué necesitas</label><textarea id="details" name="details" placeholder="Describe tu proyecto, situación o consulta..." required=""></textarea></div><div class="field full"><button class="btn btn-primary btn-blue-action" type="submit">Preparar mensaje en WhatsApp ↗</button><p class="form-note" id="formNote">No se guardan datos en esta página. Antes de enviar, podrás revisar el mensaje en WhatsApp.</p></div></form></div></div></section>
 </main>
+
+<section aria-label="Publicidad y aliados" id="lc-publicidad">
+  <div class="container">
+    <div class="lc-ads-head">
+      <div>
+        <h2 class="lc-ads-title">Publicidad y aliados</h2>
+        <p class="lc-ads-subtitle">¿Tienes un negocio, producto o servicio que quieres dar a conocer? Anúnciate en este espacio y conecta con nuevas personas junto a LC Soluciones Tecnológicas. ¡Conversemos y hagamos crecer tu marca!</p>
+      </div>
+    </div>
+    <div aria-label="Carrusel de publicidades" class="lc-ads-window" id="lc-ads-window">
+      <div class="lc-ads-track" id="lc-ads-track"></div>
+    </div>
+    <div class="lc-ad-empty" id="lc-ads-empty">Próximamente encontrarás aquí anuncios de nuestros aliados y anunciantes.</div>
+  </div>
+</section>
+
 <footer><div class="container"><div class="foot-top"><div class="foot-brand"><a aria-label="LC Soluciones Tecnológicas, inicio" class="brand" href="#inicio"><div aria-label="LC Soluciones Tecnológicas — Tecnología * Automatización * Soluciones" class="lc-text-logo" role="img"><div class="lc-text-logo-mark"><span class="lc-text-logo-initials">L<span class="c">C</span></span></div><div class="lc-text-logo-copy"><div class="lc-text-logo-main"><span class="lc-text-logo-lc">LC</span><span class="lc-text-logo-title">SOLUCIONES</span></div><div class="lc-text-logo-tech">TECNOLÓGICAS</div><div class="lc-text-logo-line"></div><div class="lc-text-logo-sub">TECNOLOGÍA * AUTOMATIZACIÓN * SOLUCIONES</div></div></div></a><p class="foot-description">Tecnología y soluciones digitales para negocios y personas: conectividad, soporte, plataformas web y sistemas que facilitan la organización cotidiana.</p></div><nav aria-label="Navegación de pie" class="foot-links"><a href="#servicios">Servicios</a><a href="#perfil-profesional">Perfil profesional</a><a href="#portal">Portal de gestión</a><a href="#metodo">Cómo trabajo</a><a href="#nosotros">Por qué LC</a><a href="#contacto">Contacto</a><a href="cliente.html" rel="noopener" target="_blank">Portal ↗</a></nav></div><div class="foot-bottom">
 <div class="footer-credits"><span>© <span id="year"></span> LC Soluciones Tecnológicas. Todos los derechos reservados.</span><span class="developer-credit">DESARROLLADO POR: <strong>ING. JOSE CORDERO</strong></span></div>
 <nav aria-label="Redes sociales de LC Soluciones Tecnológicas" class="footer-socials">
@@ -523,6 +578,153 @@ const profileFilters=[...document.querySelectorAll('[data-profile-filter]')];con
  window.addEventListener('resize',resize,{passive:true});
  document.addEventListener('visibilitychange',()=>{paused=document.hidden;if(paused)stop();else start()});
  resize();start();
+})();
+</script>
+
+
+<script>
+/* Configura aquí los anuncios. Puedes agregar tantos objetos como necesites.
+   imagen: ruta o URL de la imagen; url: página que abrirá al pulsar (opcional).
+   Si url está vacío, se mostrará la descripción en una ventana informativa. */
+window.LC_PUBLICIDADES = window.LC_PUBLICIDADES || [
+  {
+    titulo: 'MikroTik',
+    imagen: 'img/mikrotik.webp',
+    alt: 'Publicidad de soluciones MikroTik',
+    etiqueta: 'Redes y conectividad',
+    descripcion: 'Soluciones de conectividad, administración de redes y equipos MikroTik.'
+  },
+  {
+    titulo: 'Monitoreo',
+    imagen: 'img/monitor.webp',
+    alt: 'Publicidad de monitoreo de redes',
+    etiqueta: 'Supervisión y control',
+    descripcion: 'Herramientas y servicios para supervisar el estado y rendimiento de redes y servicios tecnológicos.'
+  },
+  {
+    titulo: 'Redes',
+    imagen: 'img/red.webp',
+    alt: 'Publicidad de infraestructura de redes',
+    etiqueta: 'Infraestructura tecnológica',
+    descripcion: 'Diseño, implementación y soporte de infraestructura de redes y telecomunicaciones.'
+  },
+  {
+    titulo: 'Profesional',
+    imagen: 'img/banerlc.webp',
+    alt: 'Llevemos tu proyecto al siguiente nivel',
+    etiqueta: 'Diseños e innovacion digital',
+    descripcion: 'Tienes una idea en mente, llevemosla a la era digital y sube de nivel'
+  },
+  {
+    titulo: 'Ola Telecom C.A.',
+    imagen: 'img/olatelecom.webp',
+    alt: 'Internet por fibra óptica de alta velocidad',
+    etiqueta: 'Internet por fibra óptica e inalámbrico',
+    descripcion: 'Ofrecemos internet de alta velocidad, sin interrupciones, sin intermitencias, y lo mejor aun precio insuperable'
+  },
+  {
+    titulo: 'Hotel Montaña',
+    imagen: 'img/hotelmontaña.webp',
+    alt: 'Un paraiso en la montaña',
+    etiqueta: 'Servicios hoteleros, restaurante y diversión',
+    descripcion: 'Visitanos, estamos ubicados en la grita estado tachira, sector campo alegre.'
+  },
+  {
+    titulo: 'Licda. Noris Cordero',
+    imagen: 'img/lcdanoris.webp',
+    alt: 'Contadora Pública',
+    etiqueta: 'Todo lo relacionado a tus finanzas en buenas manos y profesionales',
+    descripcion: 'Centro Comercial Hamilton Plaza, La Grita, Estado Táchira'
+  }
+];
+(()=>{
+  'use strict';
+  const ads=Array.isArray(window.LC_PUBLICIDADES)?window.LC_PUBLICIDADES.filter(a=>a&&a.titulo&&a.imagen):[];
+  const track=document.getElementById('lc-ads-track');
+  const empty=document.getElementById('lc-ads-empty');
+  const windowEl=document.getElementById('lc-ads-window');
+  if(!track||!empty||!windowEl)return;
+  if(!ads.length){windowEl.hidden=true;empty.hidden=false;return;}
+  empty.hidden=true;windowEl.hidden=false;
+
+  // Vista ampliada al pasar el cursor: aproximadamente el doble del tamaño de la tarjeta.
+  const hoverPreview=document.createElement('div');
+  hoverPreview.id='lc-ad-hover-preview';
+  hoverPreview.setAttribute('aria-hidden','true');
+  const hoverImage=document.createElement('img');
+  hoverPreview.appendChild(hoverImage);
+  document.body.appendChild(hoverPreview);
+
+  // Modal propio de LC: imagen grande, descripción y campos opcionales por anunciante.
+  const modal=document.createElement('div');
+  modal.id='lc-ad-info-modal';
+  modal.setAttribute('role','dialog');
+  modal.setAttribute('aria-modal','true');
+  modal.setAttribute('aria-labelledby','lc-ad-modal-title');
+  modal.innerHTML='<div class="lc-ad-dialog"><button class="lc-ad-close" type="button" aria-label="Cerrar ventana">×</button><img class="lc-ad-modal-image" id="lc-ad-modal-image" alt=""><span class="lc-ad-modal-tag" id="lc-ad-modal-tag" hidden></span><h3 id="lc-ad-modal-title"></h3><p id="lc-ad-modal-description"></p><div class="lc-ad-extra" id="lc-ad-modal-extra" hidden></div><div class="lc-ad-actions"><a class="lc-ad-contact" id="lc-ad-modal-contact" hidden></a><a class="lc-ad-contact" id="lc-ad-modal-website" target="_blank" rel="noopener noreferrer" hidden>Visitar sitio web</a></div></div>';
+  document.body.appendChild(modal);
+  const close=()=>{modal.classList.remove('is-open');};
+  modal.querySelector('.lc-ad-close').addEventListener('click',close);
+  modal.addEventListener('click',e=>{if(e.target===modal)close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){close();hidePreview();}});
+  function hidePreview(){hoverPreview.classList.remove('is-visible');}
+  function showPreview(ad){
+    if(window.matchMedia('(hover: none)').matches)return;
+    hoverImage.src=ad.imagen;
+    hoverImage.alt=ad.alt||ad.titulo;
+    hoverPreview.classList.add('is-visible');
+    const cardWidth=Math.min(620,Math.max(300,(window.innerWidth||1200)*.5));
+    hoverImage.style.maxWidth='min(80vw,'+cardWidth+'px)';
+    const rect=hoverPreview.getBoundingClientRect();
+    const left=Math.max(10,Math.min((window.innerWidth-rect.width)/2,window.innerWidth-rect.width-10));
+    const top=Math.max(10,Math.min((window.innerHeight-rect.height)/2,window.innerHeight-rect.height-10));
+    hoverPreview.style.left=left+'px';hoverPreview.style.top=top+'px';
+  }
+  function showInfo(ad){
+    hidePreview();
+    const image=modal.querySelector('#lc-ad-modal-image');
+    image.src=ad.imagen;image.alt=ad.alt||ad.titulo;
+    modal.querySelector('#lc-ad-modal-title').textContent=ad.titulo;
+    modal.querySelector('#lc-ad-modal-description').textContent=ad.descripcion||'Conoce más sobre este anunciante y sus servicios.';
+    const tag=modal.querySelector('#lc-ad-modal-tag');
+    tag.textContent=ad.etiqueta||'';tag.hidden=!ad.etiqueta;
+    const extra=modal.querySelector('#lc-ad-modal-extra');
+    const extraParts=[ad.detalles,ad.direccion,ad.horario].filter(Boolean);
+    extra.textContent=extraParts.join('\n');extra.hidden=!extraParts.length;
+    const contact=modal.querySelector('#lc-ad-modal-contact');
+    if(ad.contacto){contact.textContent=ad.contacto;contact.hidden=false;if(ad.contactoUrl){contact.href=ad.contactoUrl;contact.target='_blank';contact.rel='noopener noreferrer';}else{contact.removeAttribute('href');contact.removeAttribute('target');}}
+    else{contact.hidden=true;contact.removeAttribute('href');contact.removeAttribute('target');}
+    const website=modal.querySelector('#lc-ad-modal-website');
+    if(ad.url){website.href=ad.url;website.hidden=false;}else{website.hidden=true;website.removeAttribute('href');}
+    modal.classList.add('is-open');
+    modal.querySelector('.lc-ad-close').focus();
+  }
+  function createCard(ad){
+    const card=document.createElement('button');
+    card.className='lc-ad-card';card.type='button';
+    card.setAttribute('aria-label','Ver publicidad e información de: '+ad.titulo);
+    const img=document.createElement('img');
+    img.src=ad.imagen;img.alt=ad.alt||ad.titulo;img.loading='lazy';img.decoding='async';
+    img.addEventListener('error',()=>{card.hidden=true;});
+    const caption=document.createElement('span');caption.className='lc-ad-caption';
+    const title=document.createElement('strong');title.textContent=ad.titulo;caption.appendChild(title);
+    if(ad.etiqueta){const sub=document.createElement('small');sub.textContent=ad.etiqueta;caption.appendChild(sub);}
+    card.append(img,caption);
+    card.addEventListener('click',()=>showInfo(ad));
+    card.addEventListener('pointerenter',()=>showPreview(ad));
+    card.addEventListener('pointerleave',hidePreview);
+    card.addEventListener('focus',()=>showPreview(ad));
+    card.addEventListener('blur',hidePreview);
+    return card;
+  }
+  function buildGroup(){
+    const group=document.createElement('div');group.className='lc-ads-group';
+    ads.forEach(ad=>group.appendChild(createCard(ad)));
+    return group;
+  }
+  // Dos grupos idénticos para que el desplazamiento del 50% sea continuo y sin saltos.
+  track.replaceChildren(buildGroup(),buildGroup());
+  if(ads.length===1)track.style.animationDuration='14s';
 })();
 </script>
 
