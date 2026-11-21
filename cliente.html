@@ -22867,8 +22867,15 @@ window.redDisenoEditarNodo=function(id){const n=nodes.find(x=>x.row_id===id);if(
 @media(max-width:800px){#sec-academia_mikrotik{padding:12px}.lca-hero{padding:18px;display:block}.lca-version{margin-top:15px}.lca-sim-layout{grid-template-columns:1fr}.lca-side{padding:13px}.lca-side #lca-area-list{grid-template-columns:repeat(2,minmax(0,1fr))}.lca-terminal-output{height:230px}.lca-chr-card{display:block}.lca-chr-icon{margin-bottom:15px}}
 </style>
 
-<style id="lc-pwa-install-style">#lc-pwa-install{position:fixed;right:18px;bottom:18px;z-index:1050;display:inline-flex;align-items:center;gap:9px;padding:12px 16px;border:0;border-radius:999px;background:#123b60;color:#fff;box-shadow:0 8px 26px rgba(10,45,75,.28);font:700 13px system-ui;cursor:pointer}#lc-pwa-install[hidden]{display:none!important}#lc-pwa-install i{font-size:17px}@media(max-width:600px){#lc-pwa-install{right:12px;bottom:12px;padding:12px 14px;font-size:12px}}</style>
-<button id="lc-pwa-install" type="button" hidden aria-label="Instalar aplicación LC Soluciones"><i class="fa-solid fa-mobile-screen-button"></i><span>Instalar aplicación</span></button>
+<style id="lc-pwa-install-style">
+#lc-pwa-install{position:fixed;right:18px;bottom:18px;z-index:1050;display:inline-flex;align-items:center;gap:9px;padding:12px 42px 12px 16px;border:0;border-radius:999px;background:#123b60;color:#fff;box-shadow:0 8px 26px rgba(10,45,75,.28);font:700 13px system-ui;cursor:pointer}
+#lc-pwa-install[hidden]{display:none!important}
+#lc-pwa-install>i{font-size:17px}
+#lc-pwa-install .lc-pwa-dismiss{position:absolute;right:7px;top:50%;transform:translateY(-50%);width:27px;height:27px;display:grid;place-items:center;border-radius:50%;color:#fff;background:rgba(255,255,255,.16);font-size:13px;cursor:pointer}
+#lc-pwa-install .lc-pwa-dismiss:hover,#lc-pwa-install .lc-pwa-dismiss:focus{background:rgba(255,255,255,.3);outline:2px solid rgba(255,255,255,.65);outline-offset:1px}
+@media(max-width:600px){#lc-pwa-install{right:12px;bottom:12px;padding:12px 40px 12px 14px;font-size:12px}}
+</style>
+<button id="lc-pwa-install" type="button" hidden aria-label="Instalar aplicación LC Soluciones"><i class="fa-solid fa-mobile-screen-button"></i><span>Instalar aplicación</span><span class="lc-pwa-dismiss" role="button" tabindex="0" aria-label="Cerrar aviso de instalación" title="Cerrar"><i class="fa-solid fa-xmark" aria-hidden="true"></i></span></button>
 <script id="lc-pwa-runtime">
 (()=>{
  'use strict';
@@ -22876,7 +22883,9 @@ window.redDisenoEditarNodo=function(id){const n=nodes.find(x=>x.row_id===id);if(
  const btn=document.getElementById('lc-pwa-install');
  const isStandalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
  const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
- const show=()=>{if(btn)btn.hidden=isStandalone();};
+ const wasDismissed=()=>{try{return sessionStorage.getItem('lc-pwa-install-dismissed')==='1';}catch(_){return false;}};
+ const dismiss=()=>{if(!btn)return;btn.hidden=true;try{sessionStorage.setItem('lc-pwa-install-dismissed','1');}catch(_){}};
+ const show=()=>{if(btn)btn.hidden=isStandalone()||wasDismissed();};
  const explainInstall=()=>{
   const msg=isIOS()
    ?'Para instalar LC Soluciones en iPhone/iPad:\n1. Abra esta página en Safari.\n2. Pulse Compartir (cuadro con flecha hacia arriba).\n3. Seleccione “Añadir a pantalla de inicio”.\n4. Confirme con “Añadir”.'
@@ -22885,11 +22894,15 @@ window.redDisenoEditarNodo=function(id){const n=nodes.find(x=>x.row_id===id);if(
  };
  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;show();});
  window.addEventListener('appinstalled',()=>{installPrompt=null;show();if(typeof showSystemNotification==='function')showSystemNotification('Aplicación instalada','LC Soluciones se instaló correctamente.','success');});
- if(btn)btn.addEventListener('click',async()=>{
+ if(btn)btn.addEventListener('click',async(event)=>{
+  const closeControl=event.target.closest('.lc-pwa-dismiss');
+  if(closeControl){event.preventDefault();event.stopPropagation();dismiss();return;}
   if(isStandalone())return;
   if(installPrompt){const promptEvent=installPrompt;installPrompt=null;try{await promptEvent.prompt();const choice=await promptEvent.userChoice;if(choice&&choice.outcome==='accepted'&&typeof showSystemNotification==='function')showSystemNotification('Instalación iniciada','Siga las indicaciones del dispositivo para finalizar.','success');}catch(_){explainInstall();}show();return;}
   explainInstall();
  });
+ const dismissControl=btn?.querySelector('.lc-pwa-dismiss');
+ if(dismissControl)dismissControl.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();event.stopPropagation();dismiss();}});
  if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{scope:'./'}).then(()=>{document.documentElement.dataset.lcSw='ready';}).catch(e=>{console.warn('PWA: no se pudo registrar el service worker',e);document.documentElement.dataset.lcSw='error';}));}
  show();
 })();
